@@ -1,0 +1,36 @@
+set $my_flag '';
+if ($uri = /)
+{
+set $my_flag "${my_flag}U";
+}
+if ($host ~* ^tester.com){
+set $my_flag "${my_flag}H";
+}
+if ( $my_flag = UH){
+rewrite      /  /seller-websites/testercom/  last;
+proxy_pass    http://mongrel_reimatcher_local;
+}
+set $my_flag '';
+if ($uri = /)
+{
+set $my_flag "${my_flag}U";
+}
+if ($host ~* ^www.htace.com){
+set $my_flag "${my_flag}H";
+}
+if ( $my_flag = UH){
+rewrite      /  /seller-websites/wwwhtacecom/  last;
+proxy_pass    http://mongrel_reimatcher_local;
+}
+set $my_flag '';
+if ($uri = /)
+{
+set $my_flag "${my_flag}U";
+}
+if ($host ~* ^www.testplay.com){
+set $my_flag "${my_flag}H";
+}
+if ( $my_flag = UH){
+rewrite      /  /seller-websites/wwwtestplaycom/  last;
+proxy_pass    http://mongrel_reimatcher_local;
+}

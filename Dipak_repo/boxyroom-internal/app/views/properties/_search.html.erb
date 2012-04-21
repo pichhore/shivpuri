@@ -1,0 +1,11 @@
+<h3>Search Again</h3>
+<div class="side-search">
+  <%- form_tag properties_path, :method => :get do %>
+    <div class="side-search-input">
+      <%= text_field_tag 'input', params[:input] %>
+    </div>
+    <div class="side-search-btn">
+      <%= submit_tag "Search" %>
+    </div>
+  <%- end %>
+</div>

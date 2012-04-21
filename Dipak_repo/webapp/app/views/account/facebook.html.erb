@@ -1,0 +1,10 @@
+<div class='page_title'>
+  <h2>You are already Connected to Facebook</h2>
+</div>
+
+<% form_tag 'fb_reconnect', :method=>:delete do %>
+<%=submit_tag "Disconnect" %>
+or
+<%=submit_tag "Reconnect" %>
+if you experienced a problem.
+<% end %>

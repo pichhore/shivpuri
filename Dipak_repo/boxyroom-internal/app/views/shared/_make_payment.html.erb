@@ -1,0 +1,98 @@
+<div id="content">
+    <div class="container">
+        <div class="primary" id="make_payment_primary">
+            <h1>Make a Payment</h1>
+            <%- form_for(:credit_card_information, :url =>"/payments/call_credit_card", :html => {:class => "complex-form"}) do |f| %>
+                    <%= render :partial=>"shared/property_details" , :locals => {:application => @application}%>
+               <fieldset id="trip-details">
+                  <%= f.error_messages :header_message => "Opps! There are problems with your information." , :message => ""%>
+                    <legend>Rental Details</legend>
+                    <table>
+                        <tr class="firsttr">
+                            <th><%= f.label (:move_in , "Move In") %></th>
+                            <td><%= move_in_date(@application.expected_arrival)%></td>
+                        </tr>
+                        <tr>
+                            <th><%= f.label (:move_out , "Move Out") %></th>
+                            <td><%=move_out_date(@application.expected_arrival, @application.duration_of_stay)%></td>
+                        </tr>
+                        <tr>
+                            <th><%= f.label (:duration , "Duration (Months)") %></th>
+                            <td><%= @application.property.rental_period%></td>
+                        </tr>
+                        <tr class="lasttr">
+                            <th><%= f.label (:duration , "Occupants") %></th>
+                            <td><%= @application.property.occupancy %></td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr class="firsttr">
+                            <th><%= f.label (:duration , "Rent (per month)") %></th>
+                            <td><%= @application.property.monthly_rental.to_i %></td>
+                        </tr>
+                    </table>
+                    <table class="total">
+                        <tr>
+                            <th>Total</th>
+                            <td><%= @application.property.monthly_rental.to_i %></td>
+                        </tr>
+                    </table>
+                </fieldset>
+                <%= f.hidden_field :received_amount ,:value =>@application.property.monthly_rental %>
+                <%= f.hidden_field :application_id ,:value =>@application.id %>
+                <%= f.hidden_field :property_id ,:value =>@application.property.id %>
+		  <%str= flash_helper%>
+		  <%unless str.blank?%>
+		    <%- content_tag :div, :id => "errorExplanation" do %>
+		      <%= str %>
+		    <%- end %>
+		  <%end%>
+                <div class="tabs">
+                    <div class="navigation2">
+                        <span>Payment Information</span>
+                        <ul>
+                            <li class="paypal"><a href="#paypal">Paypal</a></li>
+                        </ul>
+                    </div>
+                    <fieldset id="paypal">
+                      <span> 
+                        <div id="ct-rt">
+                          <% if @application.approved? %>
+                            <p class="width_p_checkout_button">
+                              <%= link_to image_tag("btn_xpressCheckout.gif"), "/payments/checkout/#{@application.id}" %>
+                            </p>
+                        <% end %>
+                      </div>
+                    </span>
+                  </fieldset>
+                </div>
+            <% end %>
+        </div>
+        <div class="secondary">
+            <div class="section" style="height: 50px;margin-bottom: 0px;">
+                <h3>Tips & Tricks</h3>
+            </div>
+        </div>
+	  <div class="secondary">
+            <div class="money_back" >
+            </div>
+        </div>
+        <div class="secondary">
+          <div class="section2" >
+            <p class="amount_field" style="font-size: 140%;text-align: left;margin-left: 9px;font-weight: 400;padding: 8px;">We are happy to refund you the full advance rent paid if you are unable to move into your rental property under circumstances beyond your control.</p>
+          </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+  function check_agreement(check_status)
+  {
+      if(check_status == 'Yes')
+      {
+        document.getElementById('agreement').value = 'No'
+	return
+      }
+      document.getElementById('agreement').value = 'Yes'
+   }
+</script>

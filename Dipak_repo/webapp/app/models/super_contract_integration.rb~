@@ -1,0 +1,2 @@
+class SuperContractIntegration < ActiveRecord::Base
+end

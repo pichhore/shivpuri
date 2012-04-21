@@ -1,0 +1,64 @@
+<%- content_for :page_scripts do -%>
+
+Event.observe(window, 'load', function() {
+  account_settings_controller = new NL.AccountSettingsController();
+});
+
+  function show_bankruptcy_in_coulmn()
+    {
+      $('show_on_bankruptcy_in').show();
+    }
+
+  function hide_bankruptcy_in_coulmn()
+    {
+      $('show_on_bankruptcy_in').hide();
+    }
+
+
+  function show_divorce_coulmn()
+    {
+      $('show_on_filed_divorce').show();
+    }
+
+  function hide_divorce_coulmn()
+    {
+      $('show_on_filed_divorce').hide();
+    }
+
+   function show_if_seller_is_not_owner()
+    {
+      $('display_owner_detail').show();
+    }
+
+   function hide_if_seller_is_owner()
+    {
+      $('display_owner_detail').hide();
+    }
+
+    function show_on_onclick_one()
+    {
+      $('link_one').hide();
+      $('owner_two').show();
+    }
+
+    function show_on_onclick_two()
+    {
+      $('link_two').hide();
+      $('owner_three').show();
+    }
+
+    function show_on_onclick_three()
+    {
+      $('link_three').hide();
+      $('owner_four').show();
+    }
+<%- end -%>
+<%= javascript_include_tag :epoch_seller_website_classes %>
+<script type="text/javascript">
+
+	var dp_cal;
+window.onload = function () {
+	dp_cal  = new EpochSellerWebsite('epoch_popup','popup',document.getElementById('seller_profile_bankruptcy_expiration'));
+};
+
+</script>

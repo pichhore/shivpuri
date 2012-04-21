@@ -1,0 +1,17 @@
+class CreateUserFocusInvestors < ActiveRecord::Migration
+  def self.up
+    create_table :user_focus_investors do |t|
+      t.string :user_id,:limit => 36, :null => false, :references =>:users
+      t.boolean :additional_territory,:default=>false
+      t.boolean :basic_subscription,:default=>false
+      t.boolean :plus_subscription,:default=>false
+      t.boolean :is_lines_and_notes,:default=>false
+
+      t.timestamps
+    end
+  end
+
+  def self.down
+    drop_table :user_focus_investors
+  end
+end

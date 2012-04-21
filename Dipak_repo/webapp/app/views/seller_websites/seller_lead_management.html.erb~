@@ -1,0 +1,78 @@
+<%- @page_title = "My Seller Leads" -%>
+<%- content_for :page_scripts do -%>
+
+/*Event.observe(window, 'load', function() {
+    
+    $('responder_sequence').observe('change', function(){
+        responder_sequence = $('responder_sequence').value
+        if ( responder_sequence.toString() != ''") {
+          new Ajax.Request('/account/profile_inbox?filter_by='+filter_by,
+              {
+              method:'get',
+              onSuccess: function(transport){
+              var response = transport.responseText || "no response text";
+              $('ajax_update_div').innerHTML = response
+              },
+              onFailure: function(){ alert('Something went wrong...') },
+              onLoading: function(){ $('spinner').style.display = 'block';},
+              onComplete: function(){$('spinner').style.display = 'none';}
+            });
+        }
+     });
+  });*/
+
+ function go_to_seller_full_page_view(full_page_view_path)
+      {
+          document.location.href = full_page_view_path
+      }
+  function filter_by_sequence(sequence_type)
+  {
+          new Ajax.Request('/seller_websites/seller_lead_management',
+            {
+            method:'POST',
+            parameters: {sequence_type:sequence_type},
+            onSuccess: function(transport){
+            var response = transport.responseText || "no response text";
+            $('ajax_update_div').innerHTML = response
+            },
+            onFailure: function(){ alert('Something went wrong...') },
+            onLoading: function(){ $('spinner').style.display = 'block';},
+            onComplete: function(){$('spinner').style.display = 'none';}
+          });
+    }
+  function filter_by_all_sequence(sequence_type)
+  {
+          new Ajax.Request('/seller_websites/seller_lead_management',
+            {
+            method:'POST',
+            parameters: {sequence_type:sequence_type},
+            onSuccess: function(transport){
+            var response = transport.responseText || "no response text";
+            $('ajax_update_div').innerHTML = response
+            },
+            onFailure: function(){ alert('Something went wrong...') },
+            onLoading: function(){ $('spinner').style.display = 'block';},
+            onComplete: function(){$('spinner').style.display = 'none';}
+          });
+    }
+<% end %>
+<div class="full">
+  <div class="left">
+    <% if params[:seller_profile_search].nil? %>
+      <input type="radio" name="sequence_type" <%= @sequence_type.blank? || @sequence_type == "all" ? 'checked' : ''%> value="all" onclick="filter_by_all_sequence('all');"/>All
+    <% else %>
+      <input type="radio" name="sequence_type" <%= @sequence_type.blank? || @sequence_type == "all" %> value="all" onclick="filter_by_all_sequence('all');"/>All
+    <% end %>
+    <input type="radio" name="sequence_type" <%= @sequence_type == "sequence_one" ? 'checked' : ''%> value="sequence_one" onclick="filter_by_sequence('sequence_one');"/>New Lead
+    <input type="radio" name="sequence_type" <%= @sequence_type == "sequence_two" ? 'checked' : ''%> value="sequence_two" onclick="filter_by_sequence('sequence_two');"/>Trying to Reach
+    <input type="radio" name="sequence_type" <%= @sequence_type == "sequence_three" ? 'checked' : ''%> value="sequence_three" onclick="filter_by_sequence('sequence_three');"/>Next Steps
+    <input type="radio" name="sequence_type" <%= @sequence_type == "sequence_four" ? 'checked' : ''%> value="sequence_four" onclick="filter_by_sequence('sequence_four');"/>Not Now
+    <input type="radio" name="sequence_type" <%= @sequence_type == "do_not_call" ? 'checked' : ''%> value="do_not_call" onclick="filter_by_sequence('do_not_call');"/>Do Not Call
+  </div>
+  <fieldset>
+ <div style="display:none;margin-left:205px;" class="loading" id="spinner"><span class="text">Loading...</span></div>
+  <div id="ajax_update_div">
+    <%= render :partial=>"seller_lead_management"%>
+  </div>
+  </fieldset>
+</div>

@@ -1,0 +1,5 @@
+<fieldset id="email_intro">
+<%= render :partial => "seller_responder_links" %>
+
+<h1>View for sequence one</h1>
+</fieldset>

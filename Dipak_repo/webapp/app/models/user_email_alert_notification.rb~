@@ -1,0 +1,2 @@
+class UserEmailAlertNotification < ActiveRecord::Base
+end

@@ -1,0 +1,14 @@
+<h2>You've chosen to cancel this application</h2>
+Why!
+<p>
+
+<% form_tag '/applications/remove' do -%>
+<%= radio_button_tag 'cancel_reason', 'changedplans' %> My plans has changed (tenant only)*<br>
+<%= radio_button_tag 'cancel_reason', 'mutual' %> We mutually agree to cancel this rental (landlord/tenant)
+<%= hidden_field_tag 'id', @app.id %>
+</p>
+<p><b>*Please note that you'll be charged a cancellation fee of 5% of your deposit if you choose the cancel an existing confirmed application (tenants only)</b></p>
+
+  <%= submit_tag 'Cancel!' %><br>
+  Changed your mind? Just click outside of the box
+<% end -%>

@@ -1,0 +1,29 @@
+2011-10-05 15:11:48 DEBUG --- !map:HashWithIndifferentAccess 
+prodname: abc
+action: index
+method: :post
+Email: rkapil@systematixtechnocrates.com
+controller: infusion
+
+2011-10-05 15:12:23 DEBUG --- !map:HashWithIndifferentAccess 
+prodname: abc
+action: index
+method: :post
+Email: rajiv224@mailinator.com
+controller: infusion
+
+2011-10-05 15:13:36 DEBUG --- !map:HashWithIndifferentAccess 
+prodname: abc
+action: index
+method: :post
+Email: rajiv224@mailinator.com
+controller: infusion
+
+2011-10-05 15:13:36 INFO User have account in REIM: rajiv224@mailinator.com
+2011-10-05 15:13:52 DEBUG --- !map:HashWithIndifferentAccess 
+prodname: abc
+action: index
+method: :post
+Email: rkapil@systematixtechnocrates.com
+controller: infusion
+

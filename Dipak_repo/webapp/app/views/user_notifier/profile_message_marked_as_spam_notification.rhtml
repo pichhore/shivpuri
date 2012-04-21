@@ -1,0 +1,29 @@
+The following profile message was marked as spam by: <%=@spam_claim.user.full_name if @spam_claim.user%>:
+
+<%- if @from_profile -%>
+From: <%=@from_profile.display_name%>
+
+Owned By: <%=@from_profile.user.full_name%>
+<%- end -%>
+Subject: <%=@profile_message.subject%>
+
+Created At: <%=@profile_message.created_at.strftime("%Y-%m-%d")%>
+
+Reason Given: <%=@profile_message.spam_reason%>
+
+<%=@profile_message.body%>
+
+<%- if @from_profile -%>
+Click the link below to view their public profile:
+
+<%- if @from_profile.buyer? -%>
+<%=url_for :controller=>"home", :action=>"preview_buyer", :id=>@from_profile.id, :type=>"owner", :only_path=>false %>
+<%- else -%>
+<%=url_for :controller=>"home", :action=>"preview_owner", :id=>@from_profile.id, :type=>"buyer", :only_path=>false %>
+<%- end -%>
+<%- end -%>
+
+Click the link below to visit the admin area to take further action:
+
+<%=url_for :controller=>"/admin/start", :action=>"index", :only_path=>false %>
+

@@ -1,0 +1,11 @@
+<script>
+  $('notice').update("<%=flash[:notice]%>");
+  the_dashboard = $('dashboard');
+  the_dashboard_subcontent = $('dashboard_subcontent');
+  //new Effect.Fade(the_dashboard_subcontent);
+  the_dashboard_subcontent.hide();
+  //new Effect.Appear(the_dashboard, { queue: 'end'});
+  the_dashboard.show();
+  new Effect.Appear($('notice'));
+  new Effect.Fade($('notice'), { duration: 4.0,queue: 'end'} );
+</script>

@@ -1,0 +1,10 @@
+<script>
+fav_icons = $$('div.profile[profile_id=<%=@profile_favorite.target_profile_id%>] img.favorite_icon');
+for (var i = 0, length = fav_icons.length; i < length; i++) {
+  fav_icon = fav_icons[i];
+  fav_icon.removeClassName('selected');
+  fav_icon.addClassName('unselected');
+  fav_icon.src = '/images/favorite_star_unselected.gif';
+}
+<%=render_total_count_update_js%>
+</script>

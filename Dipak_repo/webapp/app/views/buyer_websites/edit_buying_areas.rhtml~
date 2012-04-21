@@ -1,0 +1,271 @@
+<script type="text/Javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<%= javascript_include_tag "add_buyer" %>
+<script type="text/javascript">
+jQuery.noConflict();
+jQuery(document).ready(function(){
+  var action_is_post = false;
+  jQuery("form").submit(function () {
+    action_is_post = true;
+  });
+
+  window.onbeforeunload = confirmExit;
+  function confirmExit()
+  {
+    if (!action_is_post && formIsDirty(document.forms[0]))
+      return 'You are trying to leave this page without saving the data back.';
+  }
+
+  function formIsDirty(form)
+{
+    for (var i = 0; i < form.elements.length; i++)
+    {
+        var element = form.elements[i];
+        var type = element.type;
+        if (type == "checkbox" || type == "radio")
+        {
+            if (element.checked != element.defaultChecked)
+            {
+                return true;
+            }
+        }
+        else if (type == "hidden" || type == "password" || type == "text" ||
+                 type == "textarea")
+        {
+          if(element.name != "buyer_engagement_info[description]")
+           {
+            if (element.value != element.defaultValue)
+            {
+                return true;
+            }
+           }
+        }
+        else if (type == "select-one" || type == "select-multiple")
+        {
+            for (var j = 0; j < element.options.length; j++)
+            {
+                if (element.options[j].selected !=
+                    element.options[j].defaultSelected)
+                {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+});
+</script>
+<%- @page_title = "Update Buying Areas - #{@profile.private_display_name}" -%>
+<% require_js_controllers :tab, :profile_notification, :profile_update,:lightbox -%>
+<%- @include_gmap_header = true -%>
+<%- content_for :page_scripts do -%>
+
+Event.observe(window, 'load', function() {
+  profile_update_zipcode_controller = new NL.ProfileUpdateZipCodeController();
+});
+
+<%- end -%>
+<%= render :partial => "partial_for_meta_tag"%>
+<%= render :partial => "page_script_content_full_page_view"%>
+<%= render :partial => "scratch_pad_lightbox" %>
+
+<div class="full">
+    <div class="tabset larger">
+        <ul>
+           <li onclick="navigate_buyer_tab('<%=url_for(:action => 'buyer_lead_full_page_view', :controller => 'buyer_websites', :id => @profile.id) %>')">
+                Buyer Profile
+            </li>
+            <li class="active" onclick="navigate_buyer_tab('<%=url_for(:action => 'edit_buying_areas', :controller => 'buyer_websites', :id => @profile.id)%>')">
+                Buying Areas
+            </li>
+            <li onclick="navigate_buyer_tab('<%=url_for(:action => 'edit_buying_criteria', :controller => 'buyer_websites', :id => @profile.id) %>')">
+                Buying Criteria
+            </li>
+            <li onclick="navigate_buyer_tab('<%=url_for(:action => 'buyer_lead_match', :controller => 'buyer_websites', :id => @profile.id) %>')">
+                Matches
+            </li>
+            <li onclick="navigate_buyer_tab('<%=url_for(:action => 'buyer_lead_engagement', :controller => 'buyer_websites', :id => @profile.id) %>')">
+                Engagement
+            </li>
+        </ul>
+    </div>
+    <div class="clear">
+ </div>
+
+  <fieldset>
+
+  <div class="full" style="padding-bottom: 0; margin-bottom:0;">
+    <% if( (params.has_key?(:coun) && params[:coun]== "CA" ) || @profile.country == 'CA') %>
+      <h4 style="font-size: 1.2em">Please select the area where you wish to buy property</h4>
+    <% else %>
+      <h4 style="font-size: 1.2em"><span id="msg_block" <% if @wholesale_flag %>style="display:none;"<% end %>>Click on the map to select areas where you wish to buy property</span></h4>
+    <% end %>
+  </div>
+
+<% form_tag( {:controller=>'buyer_websites', :action=>'update_buying_areas', :id=>params[:id]},{:onSubmit=>"return validate()"}) do -%>
+
+  <div class="full" style="padding-bottom: 10px;">
+     <div>
+          <table>
+                  <tr>
+                      <th class="label_required expand_label">
+                          Country:
+                      </th>
+                      <td align="left">
+                        <% params[:coun] = @profile.country if params[:coun].blank? %>
+                        <select id="country_country" name="country" onchange="update_map();">
+                            <%= options_for_select( County::COUNTRY_NAME,params[:coun]) %>
+                        </select>
+                      </td>
+                  </tr>
+                </table>
+       </div>
+       <div>
+        <span class="investment_type">
+          Investment Type:
+        </span>
+        <%=check_box_tag 'wholesale', InvestmentType.find_by_code('WS').id, @wholesale_flag , :onclick=>"get_wholesale_owner_finance_value_for_buyer_profile();"%>Wholesale &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=check_box_tag 'owner_finance', InvestmentType.find_by_code('OF').id, @owner_finance_flag, :onclick=>"get_wholesale_owner_finance_value_for_buyer_profile();"%>Owner Finance
+      </div>
+    <% unless params[:coun] == "CA" %>
+      <div><%#= text_field_tag "zip_code", @zip_code, :size=>88, :class=>"required zipcodes" %>
+        <%zipp = @zip_code.scan(/\w+\s*\w*/) %>
+        <%coun = Zip.find_by_zip(zipp[0]).country %>
+        <%if coun == "us"%>
+          <%zipp = @zip_code%>
+        <%else%>
+          <%zipp = ""%>
+        <%end%>
+        <div id="owner_finance_section" <% if @wholesale_flag %>style="display:none;" <% end %> ><span class="investment_type">Zip Codes:</span><img title="The areas you select on the map will appear as zip codes here. You may also enter zip codes manually where you wish to buy. if entered manually, separate zip codes by a comma, e.x. 78704,78702,78723" src="/images/reimatcher_images/help_icon.png" alt="Help_icon"><input id="zip_code" name="zip_code" size="85" type="text" value="<%=zipp%>" /></div>
+          <div id="wholesale_section" <% if !@wholesale_flag and @owner_finance_flag %>style="display:none;"<% end %>>
+                <table>
+                      <tr>
+                          <th class="label_required expand_label">
+                              State:
+                          </th>
+                          <td align="left">
+                            <select id="county_state" class="move_select_dropdown" name="state" onchange="get_state_county();">
+                            <%= options_for_select([[ "Select a State", "" ]] + State::NAMES, @state) %>
+                            </select>
+                          </td>
+                      </tr>
+                      <th class="label_required expand_label">
+                              County:
+                          </th>
+                          <td align="left">
+                            <span id="ajax_county_update_div" class="move_select_dropdown">
+                             <%= select_tag "county[county][]", options_for_select(@counties,@profile_counties_array), {:multiple => true, :style => "height:250px;width:200px"} %>  <img title="To update the counties press CTRL before selecting any other county to store previous selection" src="/images/reimatcher_images/help_icon.png" alt="Help_icon">
+                            </span>
+                          </td>
+                      </tr>
+                     </table>
+              </div>
+      </div>
+   <% else %>
+      <div>
+        <table>
+                      <tr>
+                          <th class="label_required expand_label">
+                              Province:
+                          </th>
+                          <td align="left">
+                            <select id="profile_state" name="state" <% if !(error_message_on :seller_property,:state).blank? %> style="border:1px solid #FF3300; width:105px;color:#FF3300;"<% end %> onchange="get_province_city();">
+                              <%= options_for_select(State::CANADA_NAMES,@state) %>
+                            </select>
+                          </td>
+                      </tr>
+                      <th class="label_required expand_label">
+                              City:
+                          </th>
+                          <td align="left">
+                            <span id="ajax_update_div">
+                              <%=select("city","city",@cities.map { |city| [city, city]  },{:selected => @profile.city })%>
+                            </span>
+                          </td>
+                      </tr>
+                     </table>
+      </div>
+    <% end %>
+
+ <%=submit_tag "Update", :class=>"submit"%>
+  </div>
+    <% unless params[:coun] == "CA" %>
+        <div <% if @wholesale_flag %>style="display:none;"<% end %> id="map_block">
+          <div id="direction_links" style="padding-bottom: 10px;">
+            <% if(!@directions_available.blank? and @directions_available!=0) %>
+              <%= render :partial => 'directional_links' %>
+            <% end %>
+          </div>
+          <div id="map" style="clear:both; height: 450px; width: 100%; text-align: center; background: #CCCCCC; padding: 0; margin: 0; margin-bottom: 10px; color: white; border: 1px solid black;">
+            <%= @map.div(:width => 749, :height => 450 ) %>
+          </div>
+        <div class="ie_fix">
+          <%- @boundary_overlays.each do |overlay| -%>
+          <%- js = overlay.to_javascript() -%>
+          <%- @map.record_init( "map.addOverlay( overlay = #{ js } );" ) -%>
+          <%- if @js -%>
+            <%- @map.record_init( "GEvent.addListener( overlay, 'click', #{ @js } );" ) -%>
+          <%- end -%>
+        <%- end -%>
+        <%= @map.to_html({:proto_load=>true}) %>
+        </div>
+      </div>
+    <% end %>
+
+
+</fieldset>
+<% end -%>
+
+</div>
+
+<div class="loading" style="display:none">
+  <span class="text">Loading...</span>
+</div>
+<script type="text/javascript"
+    src="http://maps.googleapis.com/maps/api/js?sensor=true">
+</script>
+<script>
+    function update_map(){
+        country = $('country_country').value;
+        window.location.href = '/buyer_websites/edit_buying_areas/<%= params[:id] %>?coun='+country;
+  }
+
+function get_province_city(){
+      profile_state = $('profile_state').value
+      new Ajax.Request('/profiles/get_city_for_province?state_id='+profile_state,
+      {
+          method:'get',
+          onSuccess: function(transport){
+             var response = transport.responseText || "no response text";
+             $('ajax_update_div').innerHTML = response
+          },
+          onFailure: function(){ alert('Something went wrong...') }
+      });
+   }
+function load_map()  {
+  <% @owner_flag = @wholesale_flag ? true : false  %>
+   var owner_flag = <%= @owner_flag %>;
+  if(owner_flag && owner_finance.checked && !wholesale.checked){
+  document.getElementById("zip_code").value = '';
+  var latlng = new google.maps.LatLng(40.8619, -99.9921);
+    var myOptions = {
+      zoom: 4,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    map = new google.maps.Map(document.getElementById("map"), myOptions);
+    
+    google.maps.event.addListener(map, 'mousemove', function(event) {
+      map.setOptions({ draggableCursor: 'pointer' });
+    });
+    
+    google.maps.event.addListener(map, 'click', function(event) {
+       if(event){
+         new Ajax.Request('<%= @map_params[:click_route] %>', { asynchronous:true, evalScripts:true, parameters:'lat='+event.latLng.lat()+'&long='+event.latLng.lng()+'&zipcodes='+ <%= @map_params[:zipcodes_js_source] %>});
+         
+       }
+       return false;
+    });
+  }
+ }
+</script>

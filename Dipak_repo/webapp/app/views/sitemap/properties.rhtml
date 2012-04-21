@@ -1,0 +1,17 @@
+<%- @page_title = "Austin’s Open Real Estate Marketplace...where Property and Buyers Meet" -%>
+<%- @page_heading = "All public properties" -%>
+<%- @meta_robots = "NOINDEX, NOFOLLOW" -%>
+
+<%- content_for :page_styles do -%>
+<style>
+h2 {
+  font-size: 1.0em;
+}
+</style>
+<%- end -%>
+
+<%- @profiles.each do |profile| -%>
+  <%- if profile.public_profile? -%>
+  <h2><%=link_to(profile.display_name, :controller => 'home', :action => 'property', :id => profile.permalink)%></h2>
+  <%- end -%>
+<%- end -%>

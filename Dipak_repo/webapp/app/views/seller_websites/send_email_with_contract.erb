@@ -1,0 +1,76 @@
+ 
+  <div id="email_block">
+   <%= error_messages_for('sent_contract') %>
+  <%= form_remote_tag :url => {:controller => "seller_websites",:action => "download_contract_pdf", :id => @seller_profile, :email_flag => "email"},:method => "post",:update => { :success => "ibox_content"},:loading => "$('wait').show();$('email_block').hide();" %>
+  <table cellspacing="3" cellpadding="0" border="0" width="430">
+       <tr>
+	<td align="right"><span class="text_form">Email<span class="text_form_red">*</span>:</span></td>
+	   <td>
+           <%= text_area 'report', 'email', :rows => 3, :cols => 40, :value => @input_emails %>
+		 <span class="text_info"><br>Use multiple email addresses with comma (,) separated.</span>
+           <%=error_message_on :sent_report, :email%>
+          </td>
+      </tr>
+      <tr></tr>	
+      <tr></tr>
+      <tr></tr>
+      <tr>
+	<td colspan="2" align="left" style="padding-left:75px;">
+            <input name="return" class="submit" type="submit" value="Send" />
+        </td>
+      </tr>		
+  </table>
+</form>
+</div>
+<div id="wait" style="display:none;padding-top:50px;" align="center">
+<%= image_tag "/images/processing.gif" %>
+</div>
+<style>
+#errorExplanation {
+   margin: 0 0 0 18px !important;
+}
+#ibox_wrapper {
+  height:284px !important;
+  background-color:#088FC9;
+  border:1px solid #088FC9;
+  -moz-border-radius:10px;
+}
+#ibox_content {
+  height:225px !important;
+  background-color: white !important;
+}
+
+#ibox_footer_wrapper a {
+background: url('/images/closelabel.gif') !important;
+border: 0px;
+}
+
+input.submit {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+-x-system-font:none;
+background:#E0691A url(/images/submit.gif) no-repeat scroll 0 0;
+border:0 none;
+color:#FFFFFF;
+cursor:pointer;
+font-family:Arial,Sans-Serif;
+font-size:1em;
+font-size-adjust:none;
+font-stretch:normal;
+font-style:normal;
+font-variant:normal;
+font-weight:bold;
+height:24px;
+line-height:normal;
+margin:0 15px 1px 0;
+padding:4px 0;
+width:65px;
+}
+
+</style>
+  <script>
+    if ('<%=@reload%>' == 'true') {
+        window.location.href = ' /seller_websites/<%= @seller_profile.id %>/step3_for_generate_contract'
+      }
+</script>

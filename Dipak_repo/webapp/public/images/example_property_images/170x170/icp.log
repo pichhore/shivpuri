@@ -1,0 +1,1417 @@
+Start at Monday, October 01, 2007    13:56:14
+=========================================
+
+Registration Info : 
+
+Windows Version:
+Microsoft Windows XP Professional Service Pack 2 (Build 2600)
+
+Module Info:
+Company: fCoder, Ltd.
+Product Name: ImageConverter Plus
+Product Version: 7.1.0.70504
+
+CPU Info:
+Vendor: AuthenticAMD
+Vendor ID: Advanced Micro Devices
+Extended Processor Name: AMD Athlon(tm) 
+Procesor Clock Frequecy: 1099
+Logical processors per physical: 0
+Stepping code: 0
+MMX support: yes
+MMX+ support: yes
+SSE support: yes
+SSE2 support: no
+3DNow suppor: yes
+3DNow+ suppor: yes
+AI64 support: no
+Hyperthreading support: no
+L1 cache size: 128
+L2 cache size: 512
+L3 cache size: -1
+
+Monitor info:
+Color depth: 16 Bits per pixel.
+Pixel Width: 1280
+Pixel Height: 1024
+Refresh frequency: 60 Hz
+
+Internet Explorer Version: 6.0
+Build Number: 2900
+
+Printers list: 
+QuickBooks PDF Converter
+Microsoft XPS Document Writer
+Microsoft Office Document Image Writer
+Canon MP530 Series Printer
+Canon MP530 FAX
+Adobe PDF
+
+Default printer: 
+Canon MP530 Series Printer
+
+
+Script settings:
+
+Operations:
+    new size : 170 170 
+    size units : pixels
+    Horizontal resolution : 72.000000
+    Vertical resolution : 72.000000
+    Resolution units : inches
+    keep original image proportions : yes
+    rescale method : bilinear
+    don't zoom, if source image size smaller : no
+    use original image resolution, in case it is supported : yes
+    fit mode : fill_in_size
+    fit alignment : center
+
+Format properties:
+    Extension: jpg
+    bits per pixel : 24
+    compression quality : 75
+    compression mode : baseline
+    compression sample : 111
+    create thumbnail : No
+    save exif information : No
+    save iptc information : No
+
+Save properties:
+    Destination path: C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170
+    convert with subfolders : yes
+    restore subfolder structure in target folder : yes
+    open target folder after conversion : yes
+    create log file in target folder : yes
+
+Target file name properties:
+    Name template: {Title}.{Type}
+    what to do, if file exists : auto_rename
+    delete source images : no
+
+Processing files...
+
+=====================================================================
+
+File 1 of 63
+
+RAM free    :     178.3 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.7 of   19445.8 Mb
+Temp free disk space   :    8380.7 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\bath_1.jpg
+jpg, 161x240px, 24bpp, 1 page(s), 300.000000x300.000000 dpi, 14565 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\bath_1.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 300.000000x300.000000 dpi, 7287 bytes
+
+=====================================================================
+
+File 2 of 63
+
+RAM free    :     178.2 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.7 of   19445.8 Mb
+Temp free disk space   :    8380.7 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\bath_2.jpg
+jpg, 240x161px, 24bpp, 1 page(s), 300.000000x300.000000 dpi, 9907 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\bath_2.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 300.000000x300.000000 dpi, 6685 bytes
+
+=====================================================================
+
+File 3 of 63
+
+RAM free    :     178.2 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.7 of   19445.8 Mb
+Temp free disk space   :    8380.7 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\bath_3.jpg
+jpg, 240x180px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 18109 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\bath_3.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 7983 bytes
+
+=====================================================================
+
+File 4 of 63
+
+RAM free    :     178.1 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.7 of   19445.8 Mb
+Temp free disk space   :    8380.7 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\bath_4.jpg
+jpg, 240x180px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 16803 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\bath_4.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 8141 bytes
+
+=====================================================================
+
+File 5 of 63
+
+RAM free    :     178.1 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.7 of   19445.8 Mb
+Temp free disk space   :    8380.7 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\dining_1.jpg
+jpg, 240x180px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 16127 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\dining_1.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 7760 bytes
+
+=====================================================================
+
+File 6 of 63
+
+RAM free    :     178.1 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.7 of   19445.8 Mb
+Temp free disk space   :    8380.7 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\house_1.jpg
+jpg, 240x161px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 22451 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\house_1.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 9947 bytes
+
+=====================================================================
+
+File 7 of 63
+
+RAM free    :     178.0 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.7 of   19445.8 Mb
+Temp free disk space   :    8380.7 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\house_2.jpg
+jpg, 240x161px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 23251 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\house_2.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 9516 bytes
+
+=====================================================================
+
+File 8 of 63
+
+RAM free    :     177.4 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.6 of   19445.8 Mb
+Temp free disk space   :    8380.6 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\house_3.jpg
+jpg, 240x160px, 24bpp, 1 page(s), 300.000000x300.000000 dpi, 19831 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\house_3.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 300.000000x300.000000 dpi, 9943 bytes
+
+=====================================================================
+
+File 9 of 63
+
+RAM free    :     177.8 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.6 of   19445.8 Mb
+Temp free disk space   :    8380.6 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\house_4.jpg
+jpg, 240x180px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 16255 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\house_4.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 8176 bytes
+
+=====================================================================
+
+File 10 of 63
+
+RAM free    :     177.8 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.6 of   19445.8 Mb
+Temp free disk space   :    8380.6 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\house_5.jpg
+jpg, 240x169px, 24bpp, 1 page(s), 180.000000x180.000000 dpi, 28125 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\house_5.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 180.000000x180.000000 dpi, 9826 bytes
+
+=====================================================================
+
+File 11 of 63
+
+RAM free    :     177.9 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.6 of   19445.8 Mb
+Temp free disk space   :    8380.6 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\house_6.jpg
+jpg, 240x182px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 35294 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\house_6.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 14546 bytes
+
+=====================================================================
+
+File 12 of 63
+
+RAM free    :     177.9 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.6 of   19445.8 Mb
+Temp free disk space   :    8380.6 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\house_7.jpg
+jpg, 240x184px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 24980 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\house_7.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 10390 bytes
+
+=====================================================================
+
+File 13 of 63
+
+RAM free    :     177.9 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.6 of   19445.8 Mb
+Temp free disk space   :    8380.6 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\house_8.jpg
+jpg, 240x160px, 24bpp, 1 page(s), 96.000000x96.000000 dpi, 21051 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\house_8.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 96.000000x96.000000 dpi, 9074 bytes
+
+=====================================================================
+
+File 14 of 63
+
+RAM free    :     177.8 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.6 of   19445.8 Mb
+Temp free disk space   :    8380.6 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\house_9.jpg
+jpg, 240x180px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 27743 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\house_9.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 11276 bytes
+
+=====================================================================
+
+File 15 of 63
+
+RAM free    :     177.8 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.6 of   19445.8 Mb
+Temp free disk space   :    8380.6 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\house_10.jpg
+jpg, 240x168px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 23434 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\house_10.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 9509 bytes
+
+=====================================================================
+
+File 16 of 63
+
+RAM free    :     177.8 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.5 of   19445.8 Mb
+Temp free disk space   :    8380.5 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\house_11.jpg
+jpg, 240x233px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 24171 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\house_11.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 9630 bytes
+
+=====================================================================
+
+File 17 of 63
+
+RAM free    :     177.8 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.5 of   19445.8 Mb
+Temp free disk space   :    8380.5 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\house_12.jpg
+jpg, 240x180px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 30525 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\house_12.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 12054 bytes
+
+=====================================================================
+
+File 18 of 63
+
+RAM free    :     178.4 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.5 of   19445.8 Mb
+Temp free disk space   :    8380.5 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\house_13.jpg
+jpg, 240x201px, 24bpp, 1 page(s), 300.000000x300.000000 dpi, 38922 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\house_13.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 300.000000x300.000000 dpi, 13062 bytes
+
+=====================================================================
+
+File 19 of 63
+
+RAM free    :     178.4 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.5 of   19445.8 Mb
+Temp free disk space   :    8380.5 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\kitchen_1.jpg
+jpg, 180x240px, 24bpp, 1 page(s), 180.000000x180.000000 dpi, 19681 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\kitchen_1.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 180.000000x180.000000 dpi, 9268 bytes
+
+=====================================================================
+
+File 20 of 63
+
+RAM free    :     178.4 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.5 of   19445.8 Mb
+Temp free disk space   :    8380.5 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\kitchen_2.jpg
+jpg, 240x180px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 24525 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\kitchen_2.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 11208 bytes
+
+=====================================================================
+
+File 21 of 63
+
+RAM free    :     178.4 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.5 of   19445.8 Mb
+Temp free disk space   :    8380.5 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\kitchen_3.jpg
+jpg, 240x180px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 22114 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\kitchen_3.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 9506 bytes
+
+=====================================================================
+
+File 22 of 63
+
+RAM free    :     178.4 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.5 of   19445.8 Mb
+Temp free disk space   :    8380.5 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\kitchen_4.jpg
+jpg, 180x240px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 21931 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\kitchen_4.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 10174 bytes
+
+=====================================================================
+
+File 23 of 63
+
+RAM free    :     178.4 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.4 of   19445.8 Mb
+Temp free disk space   :    8380.4 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\kitchen_5.jpg
+jpg, 180x240px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 16065 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\kitchen_5.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 8243 bytes
+
+=====================================================================
+
+File 24 of 63
+
+RAM free    :     178.4 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.4 of   19445.8 Mb
+Temp free disk space   :    8380.4 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\kitchen_6.jpg
+jpg, 240x180px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 21262 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\kitchen_6.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 10083 bytes
+
+=====================================================================
+
+File 25 of 63
+
+RAM free    :     178.4 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.4 of   19445.8 Mb
+Temp free disk space   :    8380.4 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\kitchen_7.jpg
+jpg, 160x240px, 24bpp, 1 page(s), 100.000000x100.000000 dpi, 17911 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\kitchen_7.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 100.000000x100.000000 dpi, 9937 bytes
+
+=====================================================================
+
+File 26 of 63
+
+RAM free    :     178.4 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.4 of   19445.8 Mb
+Temp free disk space   :    8380.4 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\kitchen_8.jpg
+jpg, 240x159px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 19238 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\kitchen_8.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 9141 bytes
+
+=====================================================================
+
+File 27 of 63
+
+RAM free    :     178.4 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.4 of   19445.8 Mb
+Temp free disk space   :    8380.4 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\kitchen_9.jpg
+jpg, 180x240px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 16611 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\kitchen_9.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 8795 bytes
+
+=====================================================================
+
+File 28 of 63
+
+RAM free    :     178.4 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.4 of   19445.8 Mb
+Temp free disk space   :    8380.4 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\kitchen_10.jpg
+jpg, 240x180px, 24bpp, 1 page(s), 96.000000x96.000000 dpi, 23843 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\kitchen_10.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 96.000000x96.000000 dpi, 11141 bytes
+
+=====================================================================
+
+File 29 of 63
+
+RAM free    :     177.8 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.4 of   19445.8 Mb
+Temp free disk space   :    8380.4 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\kitchen_11.jpg
+jpg, 240x180px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 20433 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\kitchen_11.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 9406 bytes
+
+=====================================================================
+
+File 30 of 63
+
+RAM free    :     178.4 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.4 of   19445.8 Mb
+Temp free disk space   :    8380.4 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\kitchen_12.jpg
+jpg, 240x180px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 19958 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\kitchen_12.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 8852 bytes
+
+=====================================================================
+
+File 31 of 63
+
+RAM free    :     178.3 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.4 of   19445.8 Mb
+Temp free disk space   :    8380.4 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\land_1.jpg
+jpg, 240x180px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 19769 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\land_1.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 8163 bytes
+
+=====================================================================
+
+File 32 of 63
+
+RAM free    :     178.4 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.3 of   19445.8 Mb
+Temp free disk space   :    8380.3 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\land_2.jpg
+jpg, 240x180px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 24631 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\land_2.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 10029 bytes
+
+=====================================================================
+
+File 33 of 63
+
+RAM free    :     177.9 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.3 of   19445.8 Mb
+Temp free disk space   :    8380.3 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\land_3.jpg
+jpg, 240x176px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 21265 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\land_3.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 8896 bytes
+
+=====================================================================
+
+File 34 of 63
+
+RAM free    :     177.7 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.3 of   19445.8 Mb
+Temp free disk space   :    8380.3 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\land_4.jpg
+jpg, 240x200px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 31785 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\land_4.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 12007 bytes
+
+=====================================================================
+
+File 35 of 63
+
+RAM free    :     178.3 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.3 of   19445.8 Mb
+Temp free disk space   :    8380.3 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\land_5.jpg
+jpg, 240x180px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 25871 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\land_5.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 10766 bytes
+
+=====================================================================
+
+File 36 of 63
+
+RAM free    :     178.4 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.3 of   19445.8 Mb
+Temp free disk space   :    8380.3 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\land_6.jpg
+jpg, 240x120px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 19388 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\land_6.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 9654 bytes
+
+=====================================================================
+
+File 37 of 63
+
+RAM free    :     178.3 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.3 of   19445.8 Mb
+Temp free disk space   :    8380.3 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\land_7.jpg
+jpg, 240x161px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 25348 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\land_7.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 11054 bytes
+
+=====================================================================
+
+File 38 of 63
+
+RAM free    :     178.4 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.3 of   19445.8 Mb
+Temp free disk space   :    8380.3 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\land_8.jpg
+jpg, 240x180px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 18977 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\land_8.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 8884 bytes
+
+=====================================================================
+
+File 39 of 63
+
+RAM free    :     178.3 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.3 of   19445.8 Mb
+Temp free disk space   :    8380.3 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\land_9.jpg
+jpg, 240x180px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 20807 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\land_9.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 8447 bytes
+
+=====================================================================
+
+File 40 of 63
+
+RAM free    :     178.3 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.3 of   19445.8 Mb
+Temp free disk space   :    8380.3 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\lot_1.jpg
+jpg, 240x180px, 24bpp, 1 page(s), 120.000000x120.000000 dpi, 18304 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\lot_1.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 120.000000x120.000000 dpi, 8058 bytes
+
+=====================================================================
+
+File 41 of 63
+
+RAM free    :     178.3 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.2 of   19445.8 Mb
+Temp free disk space   :    8380.2 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\lot_2.jpg
+jpg, 240x180px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 31155 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\lot_2.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 11980 bytes
+
+=====================================================================
+
+File 42 of 63
+
+RAM free    :     178.2 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.2 of   19445.8 Mb
+Temp free disk space   :    8380.2 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\lot_3.jpg
+jpg, 240x238px, 24bpp, 1 page(s), 600.000000x600.000000 dpi, 21130 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\lot_3.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 600.000000x600.000000 dpi, 7447 bytes
+
+=====================================================================
+
+File 43 of 63
+
+RAM free    :     178.3 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.2 of   19445.8 Mb
+Temp free disk space   :    8380.2 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\lot_4.jpg
+jpg, 175x240px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 19310 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\lot_4.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 9021 bytes
+
+=====================================================================
+
+File 44 of 63
+
+RAM free    :     178.2 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.2 of   19445.8 Mb
+Temp free disk space   :    8380.2 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\lot_5.jpg
+jpg, 180x240px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 18009 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\lot_5.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 9024 bytes
+
+=====================================================================
+
+File 45 of 63
+
+RAM free    :     178.2 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.2 of   19445.8 Mb
+Temp free disk space   :    8380.2 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\lot_6.jpg
+jpg, 180x240px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 23238 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\lot_6.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 10334 bytes
+
+=====================================================================
+
+File 46 of 63
+
+RAM free    :     178.2 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.2 of   19445.8 Mb
+Temp free disk space   :    8380.2 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\lot_7.jpg
+jpg, 240x180px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 37103 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\lot_7.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 14179 bytes
+
+=====================================================================
+
+File 47 of 63
+
+RAM free    :     178.2 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.1 of   19445.8 Mb
+Temp free disk space   :    8380.1 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\lot_8.jpg
+jpg, 240x240px, 24bpp, 1 page(s), 96.000000x96.000000 dpi, 26561 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\lot_8.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 96.000000x96.000000 dpi, 11275 bytes
+
+=====================================================================
+
+File 48 of 63
+
+RAM free    :     178.2 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.1 of   19445.8 Mb
+Temp free disk space   :    8380.1 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\remodel_1.jpg
+jpg, 240x180px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 23782 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\remodel_1.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 10060 bytes
+
+=====================================================================
+
+File 49 of 63
+
+RAM free    :     178.2 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.1 of   19445.8 Mb
+Temp free disk space   :    8380.1 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\room_1.jpg
+jpg, 240x180px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 21209 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\room_1.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 9400 bytes
+
+=====================================================================
+
+File 50 of 63
+
+RAM free    :     178.1 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.1 of   19445.8 Mb
+Temp free disk space   :    8380.1 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\room_2.jpg
+jpg, 240x180px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 23467 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\room_2.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 10688 bytes
+
+=====================================================================
+
+File 51 of 63
+
+RAM free    :     178.4 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.1 of   19445.8 Mb
+Temp free disk space   :    8380.1 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\room_3.jpg
+jpg, 240x135px, 24bpp, 1 page(s), 240.000000x240.000000 dpi, 14032 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\room_3.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 240.000000x240.000000 dpi, 8463 bytes
+
+=====================================================================
+
+File 52 of 63
+
+RAM free    :     178.4 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.1 of   19445.8 Mb
+Temp free disk space   :    8380.1 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\room_4.jpg
+jpg, 240x160px, 24bpp, 1 page(s), 96.000000x96.000000 dpi, 15437 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\room_4.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 96.000000x96.000000 dpi, 9461 bytes
+
+=====================================================================
+
+File 53 of 63
+
+RAM free    :     178.4 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.1 of   19445.8 Mb
+Temp free disk space   :    8380.1 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\room_5.jpg
+jpg, 180x240px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 16333 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\room_5.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 8674 bytes
+
+=====================================================================
+
+File 54 of 63
+
+RAM free    :     178.3 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.1 of   19445.8 Mb
+Temp free disk space   :    8380.1 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\room_6.jpg
+jpg, 180x240px, 24bpp, 1 page(s), 150.000000x150.000000 dpi, 20376 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\room_6.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 150.000000x150.000000 dpi, 7089 bytes
+
+=====================================================================
+
+File 55 of 63
+
+RAM free    :     178.4 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.1 of   19445.8 Mb
+Temp free disk space   :    8380.1 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\room_7.jpg
+jpg, 240x180px, 24bpp, 1 page(s), 180.000000x180.000000 dpi, 25678 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\room_7.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 180.000000x180.000000 dpi, 11894 bytes
+
+=====================================================================
+
+File 56 of 63
+
+RAM free    :     178.0 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.0 of   19445.8 Mb
+Temp free disk space   :    8380.0 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\room_8.jpg
+jpg, 240x180px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 21947 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\room_8.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 9290 bytes
+
+=====================================================================
+
+File 57 of 63
+
+RAM free    :     178.1 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.0 of   19445.8 Mb
+Temp free disk space   :    8380.0 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\room_9.jpg
+jpg, 240x180px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 14957 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\room_9.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 7253 bytes
+
+=====================================================================
+
+File 58 of 63
+
+RAM free    :     178.0 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.0 of   19445.8 Mb
+Temp free disk space   :    8380.0 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\room_10.jpg
+jpg, 240x180px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 20417 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\room_10.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 9006 bytes
+
+=====================================================================
+
+File 59 of 63
+
+RAM free    :     178.0 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.0 of   19445.8 Mb
+Temp free disk space   :    8380.0 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\room_11.jpg
+jpg, 180x240px, 24bpp, 1 page(s), 180.000000x180.000000 dpi, 15831 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\room_11.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 180.000000x180.000000 dpi, 8855 bytes
+
+=====================================================================
+
+File 60 of 63
+
+RAM free    :     177.9 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.0 of   19445.8 Mb
+Temp free disk space   :    8380.0 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\room_12.jpg
+jpg, 240x180px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 21909 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\room_12.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 11517 bytes
+
+=====================================================================
+
+File 61 of 63
+
+RAM free    :     177.7 of     991.5 Mb
+Virtual free:    1929.4 of    2047.9 Mb
+Target free disk space :    8380.0 of   19445.8 Mb
+Temp free disk space   :    8380.0 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\room_13.jpg
+jpg, 240x180px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 21433 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\room_13.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 10605 bytes
+
+=====================================================================
+
+File 62 of 63
+
+RAM free    :     177.1 of     991.5 Mb
+Virtual free:    1930.4 of    2047.9 Mb
+Target free disk space :    8380.0 of   19445.8 Mb
+Temp free disk space   :    8380.0 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\view_1.jpg
+jpg, 240x180px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 30197 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\view_1.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 12514 bytes
+
+=====================================================================
+
+File 63 of 63
+
+RAM free    :     177.5 of     991.5 Mb
+Virtual free:    1930.4 of    2047.9 Mb
+Target free disk space :    8380.0 of   19445.8 Mb
+Temp free disk space   :    8380.0 of   19445.8 Mb
+
+Src info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\before\view_2.jpg
+jpg, 240x180px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 25624 bytes
+Load all pages :  ok
+
+Operations:
+Resize :  ok
+
+Save :  ok
+
+Dest info : C:\Documents and Settings\Damon\Desktop\dwellgo_pics\properties\170x170\view_2.jpg
+jpg, 170x170px, 24bpp, 1 page(s), 72.000000x72.000000 dpi, 9958 bytes
+
+Complete at Monday, October 01, 2007    13:56:52
+=========================================

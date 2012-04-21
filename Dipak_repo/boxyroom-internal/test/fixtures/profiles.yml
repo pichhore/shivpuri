@@ -1,0 +1,49 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  fullname: MyString
+  country: MyString
+  address: MyText
+  hometel: MyString
+  worktel: MyString
+  mobiletel: MyString
+  dateofbirth: 2009-10-22
+  lengthatcurrentaddress: 2009-10-22
+  currentlandlordname: MyString
+  currentlandlordtel: MyString
+  reasonsforleaving: MyText
+  petsno: 1
+  petsbreed: MyString
+  workstudyname: MyString
+  workstudystartdate: 2009-10-22
+  workstudyenddate: 2009-10-22
+  workstudyadminname: MyString
+  workstudyadmintel: MyString
+  workstudyadminemail: MyString
+  referencename: MyString
+  referencerelationship: MyString
+  referencetel: MyString
+
+two:
+  fullname: MyString
+  country: MyString
+  address: MyText
+  hometel: MyString
+  worktel: MyString
+  mobiletel: MyString
+  dateofbirth: 2009-10-22
+  lengthatcurrentaddress: 2009-10-22
+  currentlandlordname: MyString
+  currentlandlordtel: MyString
+  reasonsforleaving: MyText
+  petsno: 1
+  petsbreed: MyString
+  workstudyname: MyString
+  workstudystartdate: 2009-10-22
+  workstudyenddate: 2009-10-22
+  workstudyadminname: MyString
+  workstudyadmintel: MyString
+  workstudyadminemail: MyString
+  referencename: MyString
+  referencerelationship: MyString
+  referencetel: MyString

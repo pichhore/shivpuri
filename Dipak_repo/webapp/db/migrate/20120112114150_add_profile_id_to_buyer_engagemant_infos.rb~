@@ -1,0 +1,15 @@
+class AddProfileIdToBuyerEngagemantInfos < ActiveRecord::Migration
+  def self.up
+    add_column :buyer_engagement_infos, :profile_id, :string
+    BuyerEngagementInfo.reset_column_information
+    @buyer_engagements = BuyerEngagementInfo.all
+    @buyer_engagements.each do |f|
+      f.profile_id = f.retail_buyer_profile.profile_id
+      f.save!
+     end
+  end
+
+  def self.down
+    remove_column :buyer_engagement_infos, :profile_id
+  end
+end

@@ -1,0 +1,315 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>REI Matcher</title>
+<%= stylesheet_link_tag "reim_home_style" %>
+<%= javascript_include_tag "jquery/jquery-1.4.2", "jquery/jquery.cycle.lite.min", "jquery/jquery.galleriffic"  %>
+<%= get_clicky_code %>
+<script type="text/javascript">
+  <%= ga_code_for_reim %>
+</script>
+</head>
+
+<body>
+<div id="wrap">
+	<div id="top">
+		<%- if logged_in? -%>
+		<a href="/account/profiles"><img src="/images/home_images/logo.png" alt="Logo" class="logo" /></a>
+		<div class="login" style="margin-right: 0px;font-size:14px;">
+		<%=link_to "logged in as #{current_user.login}", :controller=>'account', :action=>'profiles' %>  &middot; <%=link_to "Sign out", :controller=>'sessions', :action=>'destroy'%>
+                </div>
+		<%- else -%>
+		<a href="/"><img src="/images/home_images/logo.png" alt="Logo" class="logo" /></a>
+		<div class="login" style="margin-right: 118px;">
+                  <% form_tag sessions_path do -%>
+		  <input type="text" name="login" id="email" class="field" value="Email" style="font-style:normal;"/>
+		  <input type="password" name="password" id="password" class="field" style="font-style:normal; position: absolute;" />
+		  <input type="submit" name="btn_submit" class="btn_login" style="right: -118px;cursor: pointer;"value=" " />
+		  <p>
+		    <%= check_box_tag 'remember_me', '1', true %> Keep me logged in
+		    <span class="padding_85"></span>
+		    <%= link_to "Forgot your password?", :controller=>'account', :action=>'forgot_password' %>
+		  </p>
+		  <%- end -%>
+		</div>
+		<%- end -%>
+	</div>
+	
+	<div id="middle">
+		<h1 class="blue center" style="padding:10px 0;"><span class="green">TODAY....</span>Successful Investors Buy and Sell with <u>Owner Finance</u></h1>
+		<p class="center">Join the community of successful investors across the US who are using Owner Finance and a Next Generation Marketplace to make money in this economy...  Investors connected in our network are finding success, while helping the largest group of<br /> consumers...Sellers who need to sell, but can't...and Buyers who want to buy, but can't get a loan!</p>
+		
+		<div id="slider">
+			
+			<div class="actv_img" id="slideshow"></div>
+			
+			
+			<div id="controls"></div>
+			
+			
+			<div class="thumb_wrapper">
+				<div class="thumbnails" id="gal_thumbs">
+					<ul class="thumbs noscript">
+						<li><a class="thumb" href="/images/home_images/slides/slide1.jpg"><img src="/images/home_images/slides/slide1-thumb.jpg" width="94" height="56" /></a></li>
+						<li><a class="thumb" href="/images/home_images/slides/slide2.jpg"><img src="/images/home_images/slides/slide2-thumb.jpg" width="94" height="56" /></a></li>
+						<li><a class="thumb" href="/images/home_images/slides/slide3.jpg"><img src="/images/home_images/slides/slide3-thumb.jpg" width="94" height="56" /></a></li>
+						<li><a class="thumb" href="/images/home_images/slides/slide4.jpg"><img src="/images/home_images/slides/slide4-thumb.jpg" width="94" height="56" /></a></li>
+						<li><a class="thumb" href="/images/home_images/slides/slide5.jpg"><img src="/images/home_images/slides/slide5-thumb.jpg" width="94" height="56" /></a></li>
+						<li><a class="thumb" href="/images/home_images/slides/slide6.jpg"><img src="/images/home_images/slides/slide6-thumb.jpg" width="94" height="56" /></a></li>
+						<li><a class="thumb" href="/images/home_images/slides/slide7.jpg"><img src="/images/home_images/slides/slide7-thumb.jpg" width="94" height="56" /></a></li>
+						<li><a class="thumb" href="/images/home_images/slides/slide8.jpg"><img src="/images/home_images/slides/slide8-thumb.jpg" width="94" height="56" /></a></li>
+						<li><a class="thumb" href="/images/home_images/slides/slide1.jpg"><img src="/images/home_images/slides/slide1-thumb.jpg" width="94" height="56" /></a></li>
+						<li><a class="thumb" href="/images/home_images/slides/slide2.jpg"><img src="/images/home_images/slides/slide2-thumb.jpg" width="94" height="56" /></a></li>
+						<li><a class="thumb" href="/images/home_images/slides/slide3.jpg"><img src="/images/home_images/slides/slide3-thumb.jpg" width="94" height="56" /></a></li>
+						<li><a class="thumb" href="/images/home_images/slides/slide4.jpg"><img src="/images/home_images/slides/slide4-thumb.jpg" width="94" height="56" /></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		<div id="signup_wrap">
+			<div class="signup">
+				<img src="/images/home_images/signup_arrow.png" class="signup_arrow" />
+				<h1 class="darkgreen"><strong>Sign Up Below</strong></h1>
+				<p class="blue"><strong>Access the Largest Database of Owner Finance Buyers in the US...<br />for <big class="darkgreen">FREE</big></strong></p>
+				<span class="center"><img src="/images/home_images/signup_head_shadow.png" /></span>
+				
+				<%- form_tag users_path, :id => 'signup_form' do -%>
+				        <input type="text" name="user[first_name]" id="signup_name" class="field" value="First Name" />
+					
+				        <input type="text" name="user[email]" class="field" id="signup_email" value="Your Email" />
+					<div style="font-size: 14px; color: red; height: 16px;"><%= error_message_on :user, :email %></div>
+              				<input type="submit" name="submit_signup" class="btn_signup" value=" " style="margin: 10px 0 5px 0; cursor: pointer;"/>
+					<p class="font15"><strong>The Community is Free and Always Will Be...</strong></p>
+				<%- end -%>
+
+			</div>
+		</div>
+		
+	</div>
+	
+	
+	<div id="content">
+		<div id="activity">
+			<h1>What's Happening Right Now...</h1>
+			<ul>
+	  <% unless @feeds.empty? %>
+	  <% @feeds.each do |feed| %>
+          <% user = feed.user%>
+	  <li>
+
+<div style="margin-bottom: 5px;">
+             <% if user.buyer_user_image.blank? || user.buyer_user_image.find_medium_thumbnail.blank? %>
+             <img src="/images/home_images/person.png" width="55" height="55" alt="Human" />
+             <% else %>
+             <img src="<%= user.buyer_user_image.public_filename(:profile) %>" width="55" style="min-height: 55px; max-height: 70px; padding-top: 10px; max-width: 55px;"/>
+             <% end %>
+             </div>
+	    <%= reim_home_feeds(feed) %>
+            <span class="time"><%= time_in_words(feed.created_at)%> ago</span>
+	  </li>
+	  <% end %>
+	  <% end %>
+			</ul>
+		</div>
+		
+		<div id="testimonials">
+			<h1>What Investors are Saying…</h1>
+			
+			
+			<ul class="testimonials">
+				<li>
+					<img src="/images/testimonials/George_Glumac.jpg" class="author" />
+					<div class="text"><img src="/images/home_images/q1.png" alt="&ldquo;" align="top" /> I have checked out at least a dozen real estate investing systems in the past 16 months and spent a ton of money looking for integrity, value, and automation. MAPS/AMPS is by far the best for providing a real service, a sophisticated platform and fast cash. <img src="/images/home_images/q2.png" alt="&rdquo;" align="top" />
+<div style="font-weight:bold; text-align: right;">George Glumac</div>
+</div>
+					<div class="clear"></div>
+				</li>
+				<li>
+					<img src="/images/testimonials/buyer-60.jpg" class="author" />
+					<div class="text"><img src="/images/home_images/q1.png" alt="&ldquo;" align="top" />This is a Game / Life Changer. Thank you Phill and Damon for being sincere and straight to the point. You both are great Teachers and explain everything very well. Thank You for that. <img src="/images/home_images/q2.png" alt="&rdquo;" align="top" /><div style="font-weight:bold; text-align: right;">Harold Paul-Emile</div></div>
+					<div class="clear"></div>
+				</li>
+				<li>
+					<img src="/images/testimonials/buyer-60.jpg" class="author" />
+					<div class="text"><img src="/images/home_images/q1.png" alt="&ldquo;" align="top" />Looks like a solid program and network database for matching of buyers and sellers and very uniquely being able to work with other investors to the benefit of all. I am ready to put the concept to work and be part of the network!<img src="/images/home_images/q2.png" alt="&rdquo;" align="top" /><div style="font-weight:bold; text-align: right;">John Eden</div></div>
+					<div class="clear"></div>
+				</li>
+				<li>
+					<img src="/images/testimonials/Melody_Balk.jpg" class="author" />
+					<div class="text"><img src="/images/home_images/q1.png" alt="&ldquo;" align="top" />You guys have done a stellar job! Thanks! I'm thrilled to be a part of this! <img src="/images/home_images/q2.png" alt="&rdquo;" align="top" /> <div style="font-weight:bold; text-align: right;"> Melody Balk</div></div>
+					<div class="clear"></div>
+				</li>
+				<li>
+					<img src="/images/testimonials/buyer-60.jpg" class="author" />
+					<div class="text"><img src="/images/home_images/q1.png" alt="&ldquo;" align="top" />Wow! I love this site, it seems so powerful. I'm looking forward to learning and earning w/this system. Tks Phill & Team!<img src="/images/home_images/q2.png" alt="&rdquo;" align="top" /><div style="font-weight:bold; text-align: right;">Joe Riddell</div></div>
+					<div class="clear"></div>
+				</li>
+				<li>
+					<img src="/images/testimonials/Rose_Robinson.jpg" class="author" />
+					<div class="text"><img src="/images/home_images/q1.png" alt="&ldquo;" align="top" />I have tried different systems and have yet to find one that fits my personality and is easy to do...this seems like it might fit the bill perfectly.<img src="/images/home_images/q2.png" alt="&rdquo;" align="top" /><div style="font-weight:bold; text-align: right;">Rose Robinson</div></div>
+					<div class="clear"></div>
+				</li>
+				<li>
+					<img src="/images/testimonials/buyer-60.jpg" class="author" />
+					<div class="text"><img src="/images/home_images/q1.png" alt="&ldquo;" align="top" />This is awesome. I am not a computer savvy person but I can learn fast. Thank you for the opportunity to finally work with something that makes a lot of sense<img src="/images/home_images/q2.png" alt="&rdquo;" align="top" /><div style="font-weight:bold; text-align: right;">Faleilelagi Foster</div></div>
+					<div class="clear"></div>
+				</li>
+				<li>
+					<img src="/images/testimonials/Jenanah_W._Amatullah-muqsit.jpg" class="author" />
+					<div class="text"><img src="/images/home_images/q1.png" alt="&ldquo;" align="top" />Great beginning, I am very pleased with what I have seen about this program so far. I look forward to learning more, and generating a good income by helping to provide what is needed in the real estate market today.<img src="/images/home_images/q2.png" alt="&rdquo;" align="top" /><div style="font-weight:bold; text-align: right;">Jenanah W. Amatullah-muqsit</div></div>
+					<div class="clear"></div>
+				</li>
+				<li>
+					<img src="/images/testimonials/Janice_Nagao.jpg" width="60" height="60" class="author" />
+					<div class="text"><img src="/images/home_images/q1.png" alt="&ldquo;" align="top" />REI Matcher & the MAPS/AMPS Program is brilliant.<img src="/images/home_images/q2.png" alt="&rdquo;" align="top" /><div style="font-weight:bold; text-align: right;">Janice Nagao</div></div>
+					<div class="clear"></div>
+				</li>
+			</ul>
+		</div>
+		
+		<div class="clear"></div>
+	</div>
+	
+	
+	<div id="bottom">
+		<h2>Our Mission</h2>
+		<p>We had one mission when we created REIMatcher, and that was...To Build the System we wished we'd had when we first began investing...with Rich, Powerful Tools that will put your business on Autopilot & <u><strong>Fuel Faster Success in a Shorter Period of Time</strong></u>.</p>
+
+		<p>REIMatcher is an Investing platform that was developed from the ground up by Real Estate Investors...for Real Estate Investors. We love Investing...we love Technology...and we love Helping People Succeed. If you want to take it to the next level, using "plug it in and it works" automation...this is the system for you.</p>
+	</div>
+</div>
+
+<div id="footer">
+	<div class="footer_inner">
+		<div class="footer_menu">
+        <%=link_to "Privacy",:controller=>"home", :action=>"privacy" %> |
+        <%=link_to "Terms of Use",:controller=>"home", :action=>"terms_of_use"%>
+		<%- if logged_in? -%>
+        <%- if logged_in? -%> | <%=link_to "Dashboard", '/account/profiles' %><% else %><%=link_to "Dashboard", '/login' %><% end %> |
+        <%=link_to "Support", :controller=>"home", :action=>"support" %>
+		<% end %>
+
+
+</div>
+		
+		<div class="copyrights">REI Technologies LLC &copy; 2012</div>
+		
+		<div class="clear"></div>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+var arr = ['signup_name', 'signup_email'];
+jQuery.each(arr, function(){
+  $("#" + this).click(function(){
+    var text = $(this).val(); 
+    if(text == 'First Name' || text == 'Your Email'){
+      $(this).val('');
+    }
+  })
+})
+
+var arr = ['email', 'password'];
+jQuery.each(arr, function(){
+  $("#" + this).click(function(){
+    var text = $(this).val(); 
+    if(text == 'Email' || text == 'Password'){
+      $(this).val('');
+    }
+  })
+})
+
+$("#signup_name").focusout(function(){
+  if($(this).val() == '')
+    $(this).val('First Name');
+})
+
+$("#signup_email").focusout(function(){
+  if($(this).val() == '')
+    $(this).val('Your Email');
+})
+
+$("#email").focusout(function(){
+  if($(this).val() == '')
+    $(this).val('Email');
+})
+
+
+$('#signup_form').submit(function(){
+    if($('#signup_name').val() == "" || $('#signup_name').val() == "First Name"){
+      alert("Firstname can't be empty");
+      return false;
+    }
+    else if($('#signup_email').val() == "" || $('#signup_email').val() == "Your Email"){
+      alert("Email can't be empty");
+      return false;
+    }
+})
+
+$(function() {
+	
+	$('#testimonials_slider').cycle({ 
+		fx:     'fade', 
+		speed:  'fast', 
+		timeout: 0, 
+		next:   '.slider_left', 
+		prev:   '.slider_right' 
+	});  
+  
+   var gallery = $('#gal_thumbs').galleriffic({
+        delay:                     10000, // in milliseconds
+        numThumbs:                 6, // The number of thumbnails to show page
+        preloadAhead:              6, // Set to -1 to preload all images
+        enableTopPager:            false,
+        enableBottomPager:         false,
+        maxPagesToShow:            7,  // The maximum number of pages to display in either the top or bottom pager
+        imageContainerSel:         '#slideshow', // The CSS selector for the element within which the main slideshow image should be rendered
+        controlsContainerSel:      '#controls', // The CSS selector for the element within which the slideshow controls should be rendered
+        captionContainerSel:       '', // The CSS selector for the element within which the captions should be rendered
+        loadingContainerSel:       '', // The CSS selector for the element within which should be shown when an image is loading
+        renderSSControls:          true, // Specifies whether the slideshow's Play and Pause links should be rendered
+        renderNavControls:         true, // Specifies whether the slideshow's Next and Previous links should be rendered
+        playLinkText:              '',
+        pauseLinkText:             '',
+        prevLinkText:              '',
+        nextLinkText:              '',
+        nextPageLinkText:          'Next &rsaquo;',
+        prevPageLinkText:          '&lsaquo; Prev',
+        enableHistory:             false, // Specifies whether the url's hash and the browser's history cache should update when the current slideshow image changes
+        enableKeyboardNavigation:  true, // Specifies whether keyboard navigation is enabled
+        autoStart:                 true, // Specifies whether the slideshow should be playing or paused when the page first loads
+        syncTransitions:           false, // Specifies whether the out and in transitions occur simultaneously or distinctly
+        defaultTransitionDuration: 1000, // If using the default transitions, specifies the duration of the transitions
+        onSlideChange:             undefined, // accepts a delegate like such: function(prevIndex, nextIndex) { ... }
+        onTransitionOut:           undefined, // accepts a delegate like such: function(slide, caption, isSync, callback) { ... }
+        onTransitionIn:            undefined, // accepts a delegate like such: function(slide, caption, isSync) { ... }
+        onPageTransitionOut:       undefined, // accepts a delegate like such: function(callback) { ... }
+        onPageTransitionIn:        undefined, // accepts a delegate like such: function() { ... }
+        onImageAdded:              undefined, // accepts a delegate like such: function(imageData, $li) { ... }
+        onImageRemoved:            undefined  // accepts a delegate like such: function(imageData, $li) { ... }
+    });
+});
+</script>
+
+<!--[if IE]>
+<style type="text/css">
+		a.advance-link img{
+			margin-top:0px;
+		}
+</style>
+<![endif]-->
+
+<!--[if lte IE 7]>
+<style type="text/css">
+		#activity ul li{
+			padding-bottom: 20px;
+		}
+</style>
+<![endif]-->
+
+
+</body>
+</html>

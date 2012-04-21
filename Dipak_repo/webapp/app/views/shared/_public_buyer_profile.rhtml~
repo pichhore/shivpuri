@@ -1,0 +1,212 @@
+  <div id="profile_view" class="full" style="margin-bottom: 10px; position:relative; top:-70px; left:520px;">
+    <%- if @profile and (@target_profile.id == @profile.id) -%>
+    <div style="float:left; width: 90px; padding-left:0px;" class="icon_contact">
+			<div class="button">
+				<a class="orange"  href="#">
+					<span>
+                                            <%=image_tag "icons/icon_contact.gif", :alt=>"Send a private message to the owner", :title=>"Send a private message to the owner", :class=>"image"%>Contact
+                                        </span>
+				</a>
+			</div>
+    </div>
+    <%- else -%>
+    <div style="float:left; width: 90px; padding-left:0px;" class="icon_contact">
+			<div class="button">
+				<a class="orange"  href="#">
+					<span>
+                                              <%=image_tag "icons/icon_contact.gif", :alt=>"Send a private message to the owner", :title=>"Send a private message to the owner", :class=>"image"%>Contact
+                                        </span>
+				</a>
+			</div>
+    </div>
+
+    <%- end %>
+   
+  </div>
+
+  <div id="dashboard_subcontent" class="public" style="display:none"></div>
+
+  <div id="dashboard" class="public">
+
+    <div class="loading" style="display:none"><span class="text">Loading...</span></div>
+
+  <div id="profile_view" class="full" style="margin-bottom: 15px">
+
+    <h3 class="large">
+      <% if params[:own_buyer] and is_your_own_buyer_profile?(@target_profile.user_id) %>
+        My Buyer: <%=@target_profile.private_display_name%>
+      <% else %>
+        <%=@target_profile.display_name%>
+      <% end %>
+    </h3>
+    <p class="rich_text"><b><%=  @target_profile.user.user_company_info.business_phone unless @target_profile.user.user_company_info.blank? %></b></p>
+  </div>
+  
+
+    <div class="thumbnail">
+      <%=render_photo_fullsize(@target_profile)%>
+    </div>
+
+    <div class="thumbnail_right">
+
+      <h3 class="normal">What I'm looking for</h3>
+
+      <p class="rich_text"><%= customize_embedcode(@target_profile.display_description) %></p>
+
+
+    </div>
+
+<%
+  search = params[:ref] == 'search'
+  conversation = params[:ref] == 'conv'
+  home = (! search and ! conversation and @profile.nil?)
+  dashboard = (! search and ! conversation and ! home)
+  show_previous = @prev_profile_id and (@profile.nil? or @profile.id != @target_profile.id)
+  show_next = @next_profile_id and (@profile.nil? or @profile.id != @target_profile.id)
+  prev_url = url_for(:controller=>'search', :action=>'preview_buyer', :id=>@prev_profile_id, :method=>'get')+"&ref=search&#{encode_return_dashboard_variables(@previous_profile_page)}" if search
+  next_url = url_for(:controller=>'search', :action=>'preview_buyer', :id=>@next_profile_id, :method=>'get')+"&ref=search&#{encode_return_dashboard_variables(@next_profile_page)}" if search
+%>
+    <div class="clear" style="text-align: center; margin-top: 15px; ">
+     
+      
+      <%- if show_previous -%>
+        <div style="float: left; margin-right: 5px;">
+        <%- if search %>
+          <% form_tag prev_url, :onSubmit=>"document.location='#{prev_url}'; return false;" do %>
+            <%=submit_tag "< Prev", :class=>"submit"%>
+            <%=encode_return_dashboard_params_hidden(@previous_profile_page)%>
+          <% end -%>
+        <%  else %>
+          <% form_tag profile_profile_view_path(:profile_id=>@profile.id, :id=>@prev_profile_id), :method=>:get, :onSubmit=>"document.location='#{profile_profile_view_path(:profile_id=>@profile.id, :id=>@prev_profile_id)}?#{encode_return_dashboard_params(@previous_profile_page)}'; return false;" do %>
+            <%=submit_tag "< Prev", :class=>"submit"%>
+            <%=encode_return_dashboard_params_hidden(@previous_profile_page)%>
+          <% end -%>
+        <%  end -%>
+        </div>
+      <% end -%>
+      <div style="float: left; margin: 0;">
+        <%- if dashboard %>
+          <% form_tag profile_path(@profile), :method=>:get, :onSubmit=>"document.location='#{profile_path(@profile)}?#{encode_return_dashboard_params}'; return false;" do %>
+            <%=submit_tag "Back to Dashboard", :class=>"submit_xl"%>
+            <%=encode_return_dashboard_params_hidden%>
+          <% end -%>
+        <% elsif home %>
+         <% form_tag url_for(:controller=>"home", :action=>"preview", :id=>params[:type] || "owner"), :method=>"get" do %>
+            <%=submit_tag "< Return", :class=>"submit_l"%>
+            <%=encode_return_dashboard_params_hidden%>
+          <% end -%>
+        <% elsif conversation %>
+
+          <% if params[:not_show_link].blank? %>
+          <div class="link_button_xl"><%=link_to "< Back to Conversation", profile_conversation_url(@profile, @target_profile) %></div>
+          <%else%>
+          <% query_string ="?conversation=#{params[:conversation]}&profile_inbox_message=#{params[:profile_inbox_message]}&profile_message_recipient_id=#{params[:profile_message_recipient_id]}&profile_inbox_message_id=#{params[:profile_inbox_message_id]}" %>
+          
+          <div class="link_button_xl"><a href="<%=url_for({:controller=>'account', :action=>'profile_inbox'})+query_string%>">< Back to Conversation</a></div>
+          <%end%>
+
+        <% elsif search %>
+          <% form_tag url_for(:controller=>"search", :action=>"show"), :method=>"get" do %>
+            <%=submit_tag "Back to Results", :class=>"submit_l"%>
+            <%=encode_return_dashboard_params_hidden%>
+          <% end -%>
+        <% end -%>
+      </div>
+
+      <%- if show_next -%>
+        <div style="float: left; margin-left: 5px;">
+          <%- if search %>
+            <% form_tag next_url, :onSubmit=>"document.location='#{next_url}'; return false;" do %>
+              <%=submit_tag "Next >", :class=>"submit"%>
+              <%=encode_return_dashboard_params_hidden(@previous_profile_page)%>
+            <% end -%>
+          <%  else %>
+            <% form_tag profile_profile_view_path(:profile_id=>@profile.id, :id=>@next_profile_id), :method=>:get, :onSubmit=>"document.location='#{profile_profile_view_path(:profile_id=>@profile.id, :id=>@next_profile_id)}?#{encode_return_dashboard_params(@next_profile_page)}'; return false;" do %>
+              <%=submit_tag "Next >", :class=>"submit"%>
+              <%=encode_return_dashboard_params_hidden(@next_profile_page)%>
+            <% end -%>
+          <% end -%>
+        </div>
+      <% end -%>
+        
+    </div>
+  </div>
+</div>
+
+<div class="right expand_right_width" >
+
+  <div class="details">
+
+    <h3>Buyer's Criteria</h3>
+
+    <div class="right_articles" style="text-align: center; margin-bottom: 10px;">
+
+    <table width="100%" cellspacing="0" cellpadding="0" style="margin-top: 5px;">
+                <tr>
+                        <td width="60%"><b>Type:</b></td>
+                        <td><b><%=@target_profile.display_short_name_property_type%></b></td>
+                </tr>
+                <tr>
+                        <td width="40%"><b>Price Range:</b></td>
+                        <td><b><%=@target_profile.display_price_range%></b></td>
+                </tr>
+
+      <%- if @target_profile.property_type_single_family? or @target_profile.property_type_multi_family? -%>
+      <tr>
+        <td width="40%">Bedrooms: </td>
+        <td><%=@target_profile.display_bedrooms%></td>
+      </tr>
+      <%- end -%>
+
+      <%- if @target_profile.property_type_single_family? -%>
+      <tr>
+        <td>Bathrooms: </td>
+        <td><%=@target_profile.display_bathrooms%></td>
+      </tr>
+      <%- end -%>
+
+      <%- if @target_profile.property_type_single_family? or @target_profile.property_type_multi_family? or @target_profile.property_type_condo_townhome? -%>
+      <tr>
+        <td>Sq Ft Range: </td>
+        <td><%=@target_profile.display_square_feet_range%></td>
+      </tr>
+      <%- end -%>
+      <% if @target_profile.investment_type_id == 1 or @target_profile.investment_type_id == 3%>
+      <tr>
+        <td>Monthly (Max): </td>
+        <td>$<%=@target_profile.display_max_mon_pay%></td>
+      </tr>
+      <tr>
+        <td>Downpaymt (Max): </td>
+        <td>$<%=@target_profile.display_max_dow_pay%></td>
+      </tr>
+      <% end %>
+      <% if @target_profile.investment_type_id == 2 or @target_profile.investment_type_id == 3%>
+      <tr>
+        <td>Purchase Value: </td>
+        <td>$<%=@profile_view.profile.profile_field_engine_index.max_purchase_value %></td>
+      </tr>
+      <tr>
+        <td> Arv Repairs Value: </td>
+        <td>
+          <%=@profile_view.profile.profile_field_engine_index.arv_repairs_value %>%
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">&nbsp;</td>
+      </tr>
+      <% end %>
+    </table>
+
+        </div>
+    <div style="float:left; width: 255px; margin-top: 0.5em;" id="marked_as_spam" title="Flag as spam/inappropriate"><%=link_to_remote(image_tag("icons/icon_spam.gif", :alt=>"Flag as spam profile or inappropriate", :title=>"Flag as spam/inappropriate", :class=>"image")+" Flag Report", :update => "scratch", :url=>mark_as_spam_for_profile_profile_path({:id=>@target_profile.id}))%></div>
+    <div style="margin:0; margin-top: 10px;">
+
+    <%=render_ad :width=>240, :height=>150, :name=>"gambrell", :target_page=>"view_buyer" %>
+
+    </div>
+
+    <p><!--<%=link_to image_tag("rss-feed-icon-16.png", :border=>0)+ "  Subscribe using RSS", :action=>'subscribe'%>--></p>
+
+
+  </div>

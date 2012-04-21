@@ -1,0 +1,8 @@
+The following investor message was marked as spam by: <%= @from_user.full_name%>:<br/><br/>
+Message Body: <%=@investor_message.body%><br/><br/>
+Message Sent From: <%= @spam_claim.user.full_name if @spam_claim.user%><br/><br/>
+Message Date/Time:  <%=@investor_message.created_at.strftime("%m/%d/%Y %I:%M %p %Z")%><br/><br/>
+Reason Given: <%=@investor_message.spam_reason%><br/><br/>
+Click the link below to access Admin and check out the Investor’s Message Center<br/><br/>
+<a href="<%= REIMATCHER_URL %>admin/admin_users/?search=<%= @spam_claim.user.first_name %>"><%= REIMATCHER_URL %>admin/admin_users/?search=<%= @spam_claim.user.first_name %></a>
+

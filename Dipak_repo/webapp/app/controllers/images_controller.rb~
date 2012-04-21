@@ -1,0 +1,86 @@
+class ImagesController < ApplicationController
+
+  def profile
+    profile = Profile.find(params[:profile_id])
+    image_path = profile.thumbnail_url(1)
+   begin
+      profile.profile_images.each_with_index do |photo,index|
+        if photo.default_photo 
+          i = (index/4)+1
+          image_path = profile.thumbnail_url(i)
+        end
+      end
+    rescue
+     image_path = profile.thumbnail_url(1)
+    end
+    @filename = RAILS_ROOT.to_s + "/public/" + image_path.to_s
+    if File.readable?(@filename)
+      send_file(@filename ,
+              :filename      =>  "test",
+              :disposition  =>  'inline',
+              :type          =>  'image/jpg')
+    else
+      @default_filename = RAILS_ROOT.to_s + "/public/images/property-60.jpg"
+      send_file(@default_filename ,
+              :filename      =>  "test",
+              :disposition  =>  'inline',
+              :type          =>  'image/jpg')
+    end
+  end
+
+  def user_company_image
+    user_company_image = UserCompanyImage.find_by_user_id(params[:user_id])
+    unless user_company_image.nil?
+      image_path = user_company_image.public_filename(:profile)
+      @filename = RAILS_ROOT.to_s + "/public/" + image_path.to_s
+      if File.readable?(@filename)
+        send_file(@filename ,
+                :filename      =>  "test",
+                :disposition   =>  'inline',
+                :type          =>  'image/jpg')
+      else
+        @filename = RAILS_ROOT.to_s + "/public/images/spacer.gif"
+        send_file(@filename ,
+                :filename      =>  "test",
+                :disposition   =>  'inline',
+                :type          =>  'image/jpg')
+      end
+    else
+      @filename = RAILS_ROOT.to_s + "/public/images/spacer.gif"
+      send_file(@filename ,
+              :filename      =>  "test",
+              :disposition  =>  'inline',
+              :type          =>  'image/jpg')
+    end
+  end
+  
+  def property_profile_image
+    profile = Profile.find(params[:profile_id])
+    index = params[:index]
+    return render :file => "#{RAILS_ROOT}/public/404.html" if profile.profile_images[index.to_i].blank?
+    image_path = profile.profile_images[index.to_i].public_filename(:profile)
+    @filename = RAILS_ROOT.to_s + "/public/" + image_path.to_s
+    if File.readable?(@filename)
+      send_file(@filename ,
+              :filename      =>  "test",
+              :disposition  =>  'inline',
+              :type          =>  'image/jpg')
+    else
+      @default_filename = RAILS_ROOT.to_s + "/public/images/spacer.gif"
+      send_file(@default_filename ,
+              :filename      =>  "test",
+              :disposition  =>  'inline',
+              :type          =>  'image/jpg')
+    end
+  end
+
+  def ads
+#      @filename = RAILS_ROOT.to_s + "/public/images/ads" + params[:id]+"."+params[:format]
+#      send_file(@filename ,
+#              :filename      =>  "test",
+#              :disposition  =>  'inline',
+#              :type          =>  'image/jpg')
+render :text => "jay"
+   end
+
+end

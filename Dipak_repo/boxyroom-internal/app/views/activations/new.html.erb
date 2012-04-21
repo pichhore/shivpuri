@@ -1,0 +1,25 @@
+
+<div id="content">
+    <div class="container">
+      <div class="activation_heading_txt">Activate your account!<p>Hey <%= @user.first_name %>, thanks for signing up.<br>If you are not <%= @user.first_name %>, please <span><%= link_to "register", register_path %></span> your own account.</p>
+      </div>
+      <%- form_tag url_for(:controller => :activations, :action => :create), :method => :post do %>
+	<%= hidden_field_tag :code, @user.perishable_token %>
+	  <div class="activate_account_bttn_row">
+             <button class="activate_account_bttn" name="commit" type="submit"></button>
+	  </div>
+	<%- end %>
+    </div>
+  </div>
+</div>
+<style>
+#main_s
+{
+   background: url('/new_images/homepage_bgs.jpg') no-repeat scroll center top transparent;
+    text-align: center;
+}
+#content
+{
+    min-height: 557px!important; 
+}
+</style> 

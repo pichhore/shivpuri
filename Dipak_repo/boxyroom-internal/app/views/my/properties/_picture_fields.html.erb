@@ -1,0 +1,32 @@
+<ul class="pictures-fields">
+  <% if !form.object.previous_upload.blank? %>
+    <li class="previous_upload"><b>Files already uploaded:</b><br>
+    <% form.object.previous_upload.split(' ').each do |s| %>
+      <%= s %><br>
+<% end %>
+  </li>
+  <% end %>
+  <%- if form.object.pictures.empty? %>
+    <li class="empty"><p>Pictures are worth a thousand words, click '+' to add one.</p></li>
+  <%- end %>
+
+  <%- form.fields_for :pictures do |pictures| %>
+    <li class="<%= pictures.object.new_record? ? "new item" : "existing item" %>">
+
+      <%- if pictures.object.new_record? %>
+        <%= pictures.label :image, "Upload an image" %>
+        <input type="text" name="fakeupload" class="fake-upload" readonly="true" value="Click to select an image"/>
+        <%= pictures.file_field :image, :size => 16, :onchange => "$(this).closest('li').children('.fake-upload').val($(this).val());" %>
+      <%- else %>
+        <%= image_tag(pictures.object.image.url(:thumb)) %>
+      <%- end %>
+
+      <%= pictures.link_to_remove("-") %>
+    <%- end %>
+  </li>
+
+  <li class="add item">
+    <%= form.link_to_add "+", :pictures %>
+  </li>
+
+</ul>

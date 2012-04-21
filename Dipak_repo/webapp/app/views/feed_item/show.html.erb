@@ -1,0 +1,11 @@
+<%- @page_title = @feed_item.title -%>
+<%- @hide_page_title = true %>
+<%- @meta_description = "Dwellgo is the best way to post your home or property for sale and reach buyers in the Austin Metro area enabling communication with buyers directly" -%>
+<%- @meta_keywords = "sell austin real estate, austin fsbo, austin for sale by owner, real estate in Austin, dwellgo" -%>
+<div class="page_title">
+  <h2><%= link_to @feed_item.title, @feed_item.link, :target=>"_new" %></h2>
+  <h1 class='smaller'>Craigslist FSBO</h1>
+</div>
+<div class="feed_summary">
+ <%= @feed_item.description %>
+</div>

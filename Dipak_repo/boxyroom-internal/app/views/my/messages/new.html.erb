@@ -1,0 +1,50 @@
+<%= javascript_include_tag :defaults %>
+<div class="container">
+  <div class="primary">
+    <p class="intro">Message to <%= @message.recipient.full_name rescue "" %></p>
+<div id="ct-lt">
+  <%- form_for [:my, @message] , :class=>"complex-form" do |f| %>
+      <%= f.hidden_field :recipient_id %>
+      <%= f.error_messages :header_message => "Opps! There are problems with your information." , :message => ""%>
+      <fieldset>
+	<div>
+	  <div class="fld">
+	  </div>
+	  <div class="fld">
+	     <div class="msg_label"><%= f.label :subject %></div>
+	    <div class="fld-info"><%= f.text_field :subject %></div>
+	  </div>
+	  <div class="fld">
+	    <div class="msg_label"><%= f.label :body %></div>
+	    <div class="fld-info"><%= f.text_area :body %></div>
+	  </div>
+	</div>
+      </fieldset>
+      <div><button id="" class="send_new_messages" name="commit" type="submit"></button><%= link_to "Back to property details", :back , :id => "messages_back_link"%></div>
+  <%- end %>
+</div>
+  </div>
+  <div class="secondary">
+    <h2>People you talk to.</h2>
+            <% current_user.owned_threads.each do |thread, message|%>
+	     <ul class="navigation">
+	       <li>
+	         <div class="pic"><%= image_tag thread.participant.avatar.url(:thumb) %></div>
+                 <span id="change_width_link" ><%= link_to thread.participant.full_name, my_message_path(thread.code), :id=>"color_link_messages"%></span>
+                 <span id="change_position_count"><%=thread.messages.count %></span>
+	       </li>
+	      <ul>
+            <% end %>
+            <% current_user.participating_threads.each do |thread, message|%>
+	     <% if  thread.owner != current_user%>
+	     <ul class="navigation">
+	     <li>
+	      <div class="pic"><%= image_tag thread.owner.avatar.url(:thumb) %></div>
+              <span id="change_width_link" ><%= link_to thread.owner.full_name, my_message_path(thread.code), :id=>"color_link_messages"%></span>
+              <span id="change_position_count" ><%=thread.messages.count %></span>
+              </li>
+             </ul>
+	     <% end %>
+            <% end %>
+  </div>
+</div>

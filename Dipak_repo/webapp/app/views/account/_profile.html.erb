@@ -1,0 +1,76 @@
+<div class="profile <%= (profile.buyer? or profile.buyer_agent?) ? 'profile_buyer_border' : 'profile_owner_border' %>" uri="<%= url_for profile_path(profile)%>">
+  <div class="thumbnail">
+    <%default_photo_parent = profile.profile_images.find_by_default_photo(1)%>
+    <% if (!default_photo_parent.blank?) %>
+    <% image_path = profile.medium_thumbnail(default_photo_parent.id).property_image_filename if !profile.medium_thumbnail(default_photo_parent.id).blank? %>
+    <%=image_tag(image_path , :class=>"image", :width=>"60")%>
+    <% else %>
+    <%= render_thumbnail(profile, {:class=>"image"}) %>
+    <% end %>
+  </div>
+
+  <div class="summary">
+    <div class="subtitle">       
+      <% if profile.buyer? %> Buyer: <% end %>
+      <%=link_to( truncate((profile.buyer? || profile.buyer_agent?) ? profile.private_display_name : profile.display_name, 50), profile_path(profile)) %>
+    </div>
+
+    <% if profile.buyer? %>
+    <div>
+      <%= truncate(profile.display_zip_code,50) %>
+    </div>
+    <% end %>
+
+    <% if profile.owner? %>
+      <div class="<%=(profile.public_profile?) ? 'public' : 'private'%>" style="padding-bottom: 2px;">
+         <%=render_privacy_icon(profile) %><%=profile.display_privacy %>
+      </div>
+    <% end %>
+
+    <div class="option_bar" style="padding: 0; margin: 0; font-size: 1.2em;">
+      <div style="float: left; width: 90px;">
+        <%=link_to "Update Profile", edit_profile_path(profile) %>
+      </div>
+      <div style="float: left; width: 90px;">
+        <%=link_to "Delete Profile", delete_confirm_profile_path(profile) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="label">
+      <%=link_to "Matches:", profile_path(:id=> profile.id, :result_filter=>"all") %>
+    </div>
+    <div class="value">
+      &nbsp;<%=link_to "#{profile.display_match_total_near_count(@listing_type)}", profile_path(:id=>profile.id, :result_filter=>"all") %>
+    </div>
+
+    <div class="label">
+      <%=link_to "New:", profile_path(:id=>profile.id, :result_filter=>"new") %>
+    </div>
+    <div class="value">
+      &nbsp;<%=link_to "#{profile.display_match_total_near_new_count}", profile_path(:id=>profile.id, :result_filter=>"new") %>
+    </div>
+
+    <div class="label">
+      <%=link_to "Views:", profile_path(:id=>profile.id, :result_filter=>"viewed_me") %>
+    </div>
+    <div class="value">
+      &nbsp;<%=link_to "#{profile.display_match_count_views}", profile_path(:id=>profile.id, :result_filter=>"viewed_me") %>
+    </div>
+
+    <div class="label">
+      <%=link_to "New Messages:", profile_path(:id=>profile.id, :result_filter=>"messages") %>
+    </div>
+    <div class="value">
+      &nbsp;<%=link_to "#{profile.display_message_count_new}", profile_path(:id=>profile.id, :result_filter=>"messages") %>
+    </div>
+  </div>
+
+  <%- if !profile.deleted_at.blank? %>
+  <div style="position:absolute; text-align:center; z-index:300;  width:460px;">
+    <IMG src="/images/sold.png">
+  </div><%end %>
+  <div class="clear">
+  </div>
+</div>

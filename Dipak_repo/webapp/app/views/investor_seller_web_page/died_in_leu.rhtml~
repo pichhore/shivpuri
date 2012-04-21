@@ -1,0 +1,21 @@
+ <%= render :partial => "show_navigation_link" %>
+<div id="seller_page_main_div">
+  <h1><b>Deed-in-lieu</b></h1><br>
+  <%= render :partial => "lead_magnet" %>
+
+<p>The best way to possibly avoid foreclosure after all else fails is to offer the lender a deed-in-lieu of foreclosure. A deed-in-lieu involves signing your deed over to your lender in exchange for the lender agreeing not to foreclose on the home. </p>
+<p class="style_para_seller_website">Although this sounds ideal for many distressed homeowners, the truth is that lenders typically will not accept a deed in lieu until after you’ve tried a short sale.  They want you to try and solve the problem first because they don’t want the house back and don’t want to have to resale the property themselves because REO’s typically sell for less than what short sales sell for.  So basically, it would take as long to do a deed-in-lieu as it would to do a short sale since typically most lenders won’t accept that option until after the short sale has run its course.</p>
+<p class="style_para_seller_website">In addition, from a credit standpoint most credit reporting agencies treat a deed-in-lieu the same way they treat a short sale.  So there’s absolutely no difference between a deed-in-lieu and a short sale from both a time needed standpoint and from a credit standpoint.  However, if the short sale doesn’t work and foreclosure is the ONLY option, a seller should definitely explore a deed-in-lieu.</p>
+
+<p class="style_para_seller_website"><b>Advantages and Disadvantages</b></p>
+<p class="style_para_seller_website">The advantage to a deed-in-lieu is that it may cause less of a credit impact than a foreclosure. </p>
+<p class="style_para_seller_website">The disadvantage of a deed-in-lieu is that most mainstream lenders will not accept a deed-in-lieu unless a homeowner tries to do a short sale first. In other words, the lenders don’t want to get the home back. They really want the seller to solve the problem. Generally this means they encourage the seller to explore all traditional options (like a short sale), and then only after all else fails, they MAY accept a deed-in-lieu. Or they may at that point decide to simply go ahead and foreclose.  </p>
+<p class="style_para_seller_website">This is a specialized area of law. We recommend the national law service The Torok Law Firm (www.TorokLaw.com) to help with this.</p>
+<p class="style_para_seller_website">A Deed-in-lieu is usually the very last alternative. Before  (or in conjunction with) exploring this option, make sure you talk to a creative real estate investing professional about all of your options! Regardless of your situation, income, or equity, if you would like to discuss all of your options for selling your home quickly to avoid foreclosure, please CLICK HERE.</p>
+
+<p class="style_para_seller_website"><b>Common Questions About a Deed-In-Lieu</b></p>
+<p class="style_para_seller_website"><b>Question:</b> Can I just give my home back to the lender? </p>
+<p class="style_para_seller_website"><b>Answer:</b> Probably not. The lenders don’t want to take the homes back as the first alternative. They are in the lending business and not the home buying and selling business. They really want the seller to solve the problem, and generally this means they encourage the seller to explore all traditional options, like a short sale before they will even consider a deed-in-lieu. Then only after all else fails, they MAY accept a deed-in-lieu.  Or they may decide to move forward with a foreclosure.  </p>
+<p class="style_para_seller_website"><b>Question:</b> Is a Deed-In-Lieu better than a Foreclosure? </p>
+<p class="style_para_seller_website"><b>Answer:</b> Maybe yes, maybe no. It depends on how the lender reports this to the credit bureaus.  You can ask the lender how they are going to report it to see how it will affect your credit.  However, before the lender even considers a deed-in-lieu of foreclosure, the homeowner will have had to miss multiple payments.  So those missed payments alone will have a negative impact on the homeowner’s credit.</p>
+<br>

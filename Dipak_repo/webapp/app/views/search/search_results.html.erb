@@ -1,0 +1,188 @@
+<%- @page_title = "Matching Buyers to Real Estate Properties in Austin Metro Area" if @search_profile_type == "property" -%>
+<%- @page_title = "Create an Owner Profile and Gain Access to Buyers Matching Your Property" unless @search_profile_type == "property" -%>
+
+<%- @meta_description = "Create a buyer profile and have a property find you in the Austin Metro area with the exclusive dwellgo real estate matching system" if @search_profile_type == "property" -%>
+<%- @meta_description = "An open real estate community for owners and buyers.  Create an owner profile and see buyers matched to your real estate property in the Austin Texas area" unless @search_profile_type == "property" -%>
+
+<%- @meta_keywords = "Austin Metro, Texas, dwellgo, austin texas" if @search_profile_type == "property" -%>
+<%- @meta_keywords = "Austin metro real estate, Austin metro, texas, dwellgo" unless @search_profile_type == "property" -%>
+
+
+<%
+  word = "Buyers" if @search_profile_type == "buyer"
+  word = "Properties" if @search_profile_type == "property"
+  word = "Buyers and Properties" unless word
+%>
+<%- @page_heading = "#{word} matching <span style=\"color: red\">#{params[:q]}</span>" -%>
+
+<%- @hide_page_title = false -%>
+<%- @include_gmap_header = true if @search_profile_type == "property" -%>
+
+<% content_for :page_links do -%>
+<%=render :partial=>'/home/page_links'%>
+<% end -%>
+
+<% require_js_controllers :pagination, :profile_list, :preview_results, :sortable, :zip_selection, :lightbox_image -%>
+
+<% content_for :page_scripts do -%>
+
+    /** Controller setup **/
+
+ <%- if @search_profile_type == "property" -%>
+      var map;
+ <%- end -%>
+    Event.observe(window, 'load', function() {
+      zip_selection_controller = new NL.ZipSelectionController("<%=@zip_code%>");
+      preview_results_controller = new NL.PreviewResultsController("<%=url_for :controller=>'home', :action=>'preview', :id=>params[:id]%>",
+                                                                   "<%=@page_number%>", "<%=@property_type%>",
+                                                                   zip_selection_controller,
+                                                                   "<%= url_for :controller=>'search', :action=>'show', :id=>params[:id]%>");
+      lightbox_image_controller = new NL.LightboxImageController();
+      
+ <%- if @search_profile_type == "property" and ! @profiles.empty? -%>
+      if( GBrowserIsCompatible() ) {
+              map = new GMap2( document.getElementById( 'map' ) );
+              map.setCenter( new GLatLng( <%= @center_latlng %> ), 9 );
+              map.addControl( new GSmallMapControl() );
+
+              <% @profiles.each_with_index do |profile, index| %>
+                      <% if !profile.nil? && profile.latlng %>
+                        map.addOverlay( marker = new GMarker( new GLatLng( <%= profile.latlng %> ), { title: '<%= profile.name %>',  icon: new GIcon( G_DEFAULT_ICON, '/images/<%= ZipCodeMap.get_icon_path( profile.property_type, profile.display_privacy.downcase, index+1 ) %>' ) } ) );
+                        GEvent.addListener( marker, 'click', function() { this.openInfoWindowHtml( '<%= ZipCodeMap.info_window( profile, "search", encode_return_dashboard_params(@page_number)) %>' ); } );
+                      <% end %>
+              <% end %>
+              window.onunload = GUnload;
+      }
+<%- end -%>
+
+    });
+
+<% end -%>
+
+  <div class="left">
+
+
+<%- if @profiles.length > 0 && !@profiles.include?(nil) %>
+    <fieldset>
+
+      <%- if @search_profile_type == "property" -%>
+      <div class="property_type_selectors">
+        <div class="label">Filter:</div>
+        <div class="property_type_button <%="selected" if @property_type == "all"%>" property_type="all">All</div>
+        <div class="property_type_button <%="selected" if @property_type == "single_family"%> profile_single_family" property_type="single_family">Single Family</div>
+        <div class="property_type_button <%="selected" if @property_type == "multi_family"%> profile_multi_family" property_type="multi_family">Multi-Family</div>
+        <div class="property_type_button <%="selected" if @property_type == "condo_townhome"%> profile_condo_townhome" property_type="condo_townhome">Condo/Townhome</div>
+        <div class="property_type_button <%="selected" if @property_type == "vacant_lot"%> profile_vacant_lot" property_type="vacant_lot">Vacant Lot</div>
+        <div class="property_type_button <%="selected" if @property_type == "acreage"%> profile_acreage" property_type="acreage">Acreage</div>
+      </div>
+      <% end -%>
+
+      <%- if @search_profile_type == "property" -%>
+      <div id="map" style="clear:both; height: 290px; width: 100%; text-align: center; background: #CCCCCC; padding: 0; margin: 0; margin-bottom: 10px; color: white; border: 1px solid black;">
+      </div>
+      <%- end -%>
+
+      <div class="loading" style="display:none"><span class="text">Loading...</span></div>
+
+      <div id="profile_list">
+
+        <div id="tab_content">
+
+        <%=render :partial=>"search_results" %>
+
+        </div>
+
+      </div>
+    </fieldset>
+<%- else -%>
+    <div id="profile_list" class="profile_summary">
+        <h4>No matches found</h4>
+    </div>
+    <div class="buttonbar" page_number="<%=@page_number%>" total_pages="<%=@total_pages%>">
+    </div>
+<%- end -%>
+
+  </div>
+
+
+  <div class="right">
+
+  <% form_tag search_path, :method => :get do %>
+    <%= text_field_tag :q, params[:q] %>
+    <%= submit_tag "Search", :name => nil  %>
+    <br/>
+    <%  
+      buyer_selected, property_selected = {}, {}
+      property_selected = "checked=\"checked\"" if @search_profile_type == "property"
+      buyer_selected = "checked=\"checked\"" if @search_profile_type == "buyer"
+    %>
+    <input type="radio" name="search_profile_type_choice" value="buyer" <%= buyer_selected %>/>Buyer
+    <input type="radio" name="search_profile_type_choice" value="property" <%= property_selected %>/>Property
+  <% end %>
+  <br/>
+  
+    <h3>Community</h3>
+    <div class="right_articles legend">
+      <table width="100%">
+
+        <%- if @search_profile_type == "buyer" -%>
+        <tr>
+          <td width="20px"><%=@community_stats.active_buyers%></td>
+          <td>Active Buyers</td>
+        </tr>
+        <tr>
+          <td colspan="2"><hr/></td>
+        </tr>
+        <%- end -%>
+        <tr>
+          <td><%=@community_stats.property_count%></td>
+          <td>Unlisted Properties</td>
+        </tr>
+
+        <tr>
+          <td>&nbsp;</td>
+          <td><%=@community_stats.public_property_count%> Public
+          <% if @search_profile_type == "property" %>
+          <%=render_public_icon("single_family")%><%=render_public_icon("multi_family")%><%=render_public_icon("condo_townhome")%><%=render_public_icon("vacant_lot")%><%=render_public_icon("acreage")%>
+          <% end %></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td><%=@community_stats.private_property_count%> Private
+          <% if @search_profile_type == "property" %>           
+           <%=render_private_icon("single_family")%><%=render_private_icon("multi_family")%><%=render_private_icon("condo_townhome")%><%=render_private_icon("vacant_lot")%><%=render_private_icon("acreage")%>
+          <% end %></td>
+        </tr>
+
+        <%- if @search_profile_type == "property" -%>
+        <tr>
+          <td colspan="2"><hr/></td>
+        </tr>
+        <tr>
+          <td><%=@community_stats.active_buyers%></td>
+          <td>Active Buyers</td>
+        </tr>
+        <%- end -%>
+
+        <%- if @messaging_stats.private_message_count.to_i > 99 -%>
+        <tr>
+          <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+          <td><%=@messaging_stats.private_message_count%></td>
+          <td>Messages sent</td>
+        </tr>
+        <%- end -%>
+      </table>
+
+    </div>
+
+    <div style="margin-top: 10px">
+      <%=render_ad :width=>240, :height=>150, :name=>"manana", :target_page=>"preview_owners" if @search_profile_type == "property" %>
+      <%=render_ad :width=>240, :height=>150, :name=>"homefixers", :target_page=>"preview_buyers" if @search_profile_type == "buyer" %>
+    </div>
+
+  </div>
+  
+<input type="hidden" id="query_string" name="query_string" value="<%= h @query_string%>"/>
+<input type="hidden" id="search_profile_type" name="search_profile_type" value="<%= @search_profile_type %>"/>

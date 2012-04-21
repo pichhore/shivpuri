@@ -1,0 +1,45 @@
+<%- @page_title = "REIMatcher-Fast Cash Sale" -%>
+<%- @meta_title = @seller_website.meta_title -%>
+<%- @meta_description = @seller_website.meta_description -%>
+ <%= render :partial => "show_navigation_link" %>
+<div id="seller_page_main_div">
+  <h1><b>Fast Cash Sale</b></h1>
+  <div style="margin-right:390px;"><%= render :partial => "fb_like_twitter_tweet" %></div><div style="clear:both"></div>
+  <%= render :partial => "lead_magnet" %>
+
+<div class="subpage_content_div_1">
+  <p class="top_style_para_seller_website">The fastest way to sell any property is to sell it to a CASH buyer. This is because the cash buyer does not need to get qualified and approved for a loan, wait for inspections, or wait for loan documents to be drawn up (which can take 45 days or more). Cash buyers can make decisions quickly. Cash buyers can also take care of all closing costs, back payments, liens, or taxes, or whatever it takes to get the deal closed. A non-cash buyer typically requires 30-60 days or more to close on a property - most of that time is spent waiting for the lender to approve everything. Additionally, lenders always require inspections, surveys, an appraisal, and possibly even repairs that cash buyers do not require. A cash buyer can close virtually immediately.</p>
+  <p class="style_para_seller_website">Virtually 100% of cash buyers are investors that are buying the property so that it can eventually be resold. This "flipping" of the property means that the cash buyer has certain overhead expenses that must be covered in the transaction.</p>
+  <p class="style_para_seller_website">For example, the cash buyer will have to pay the following expenses:</p>
+      <p class="style_para_seller_website">* Closing costs on the purchase (~2% of sales price)</p>
+      <p class="style_para_seller_website">* Commissions on the resale (~6% of sales price)</p>
+</div>
+<div class="subpage_content_div_2">
+      <p class="style_para_seller_website">* Closing costs on the resale (~3% of sales price)</p>
+      <p class="style_para_seller_website">* Monthly carrying costs until the property is resold (~4-5% of sales price, total)</p>
+      <p class="style_para_seller_website">* Necessary repairs/remodeling ($5-10K to $100K+)</p>
+  
+  <p class="style_para_seller_website">These costs typically total to ~15% or more of the resale value of the property, which means that cash buyers can only afford to buy the property at 60% to 70% of its full market value in order to make a modest profit of typically 15% (of the resale price)</p>
+  <p class="style_para_seller_website">When you see a sign saying "I Buy Houses For Cash" it means "I'll pay you up to 70% of the property’s value, and do it fast". For some people, such as sellers with lots of equity that need or want money quickly, this is a great deal. For others with little or no equity, this is not an option. For those with modest equity, or that want or need to make more money selling the property (and have the time to explore other options), this is probably not the best option. <b><%= company_name%></b> will buy your property for cash and offer you several other options. <%=link_to 'Contact Us',:controller=>"investor_seller_web_page", :action=>"new_seller"%> if you would like to explore this further.</p>
+  <p class="style_para_seller_website"><b>Fast Cash Sale Example</b></p>
+  <p class="style_para_seller_website">- Current Appraised Property Value: $100,000</p>
+  <p class="style_para_seller_website">- Existing loan(s) payoff: $45,000</p>
+  <p class="style_para_seller_website">- Repairs needed: $5,000 (good condition)</p>
+  <p class="style_para_seller_website">- Sales price: $65,000  (70% x $100K minus $5K)</p>
+  <p class="style_para_seller_website">- Note: Seller does not have to pay commissions, most closing costs, etc. Close in <7 days.</p>
+  
+  <p class="style_para_seller_website"><b>Fast Cash Sale Advantages and Disadvantages</b></p>
+  <p class="style_para_seller_website">The advantage of a cash sale is if SPEED and no hassles, closing costs, repairs, and no banks to get in the way and slow the process down. The property sells FAST and in it’s as-is condition. </p>
+  <p class="style_para_seller_website">The disadvantage of a cash sale is a lower sales price. Of course, this is somewhat offset by the fact that the seller is not paying commissions and closing cost, and because it sells fast, the seller is immediately relieved of having to pay the monthly mortgage, which may be very significant. This is the property selling equivalent to winning the lottery and taking the lump sum cash payment up front. </p>
+  
+  <p class="style_para_seller_website"><b>Common Questions About Fast Cash Sales</b></p>
+  <p class="style_para_seller_website"><b>Question:</b> How quickly can I sell a property?</p>
+  <p class="style_para_seller_website"><b>Answer:</b> In as little as 2-3 days. Typically a week. It can be as little as 1 day in cases where the property is scheduled for foreclosure. It can take longer, in cases where there are title (ownership) issues.</p>
+  <p class="style_para_seller_website"><b>Question:</b> Does everyone on the deed have to agree to the sale?</p>
+  <p class="style_para_seller_website"><b>Answer:</b> Yes, unless one party has a divorce decree or other agreement allowing them to sell the property unilaterally.</p>
+  <p class="style_para_seller_website"><b>Question:</b> Is the price negotiable?</p>
+  <p class="style_para_seller_website"><b>Answer:</b> Everything is negotiable…..</p>
+  <p class="style_para_seller_website">However, <b><%= company_name %></b>, like all other cash buyers, is not going to pay more for the property than what they can afford – in other words for more than we could buy, renovate, and resell it for with a reasonable profit to cover risks and expenses.</p>
+  <p class="style_para_seller_website"><b>Question:</b> Why sell to <b><%= company_name %></b>?</p>
+  <p class="style_para_seller_website"><b>Answer:</b> <b><%= company_name %></b> uses standard Real Estate contracts, closes with title companies, and/or real estate attorneys, and adheres to the highest ethical standards when conducting real estate transactions. If you want to do something illegal - don't bother to call. If you want to SELL FAST for a FAIR PRICE.<!--, "<a href="#"><b>Contact Today</b></a>".--></p><br>
+</div>

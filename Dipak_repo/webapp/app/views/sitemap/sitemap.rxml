@@ -1,0 +1,193 @@
+xml.instruct!
+
+xml.urlset "xmlns" => "http://www.google.com/schemas/sitemap/0.84" do
+  xml.url do
+    xml.loc    "http://www.dwellgo.com/"
+    xml.lastmod  "2008-03-07T05:58:12+00:00"
+    xml.changefreq  "daily"
+    xml.priority  1.00
+  end
+
+  xml.url do
+    xml.loc     "http://www.dwellgo.com/properties"
+    xml.lastmod     w3c_date(1.hour.ago)
+    xml.changefreq  "daily"
+    xml.priority    0.75
+  end
+
+  xml.url do
+    xml.loc    "http://www.dwellgo.com/images/header.gif"
+    xml.lastmod  "2008-02-22T00:56:31+00:00"
+    xml.changefreq  "yearly"
+    xml.priority  0.50
+  end
+
+  xml.url do
+    xml.loc    "http://www.dwellgo.com/tour"
+    xml.lastmod  "2008-03-07T05:58:15+00:00"
+    xml.changefreq  "monthly"
+    xml.priority  0.50
+  end
+
+  xml.url do
+    xml.loc    "http://www.dwellgo.com/home/support"
+    xml.lastmod  "2008-03-07T05:58:16+00:00"
+    xml.changefreq  "monthly"
+    xml.priority  0.50
+  end
+
+  xml.url do
+    xml.loc    "http://www.dwellgo.com/images/header-experience.gif"
+    xml.lastmod  "2008-02-22T00:56:31+00:00"
+    xml.changefreq  "yearly"
+    xml.priority  0.50
+  end
+
+  xml.url do
+    xml.loc    "http://www.dwellgo.com/how_it_works"
+    xml.lastmod  "2008-03-07T05:58:18+00:00"
+    xml.changefreq  "weekly"
+    xml.priority  "0.75"
+  end
+
+  xml.url do
+    xml.loc    "http://www.dwellgo.com/images/button-how-it-works.gif"
+    xml.lastmod  "2008-02-22T00:56:31+00:00"
+    xml.changefreq  "yearly"
+    xml.priority  0.50
+  end
+
+  xml.url do
+    xml.loc    "http://www.dwellgo.com/home/contact_us"
+    xml.lastmod  "2008-03-07T05:58:19+00:00"
+    xml.changefreq  "monthly"
+    xml.priority  0.50
+  end
+
+  xml.url do
+    xml.loc    "http://www.dwellgo.com/home/privacy"
+    xml.lastmod  "2008-03-07T05:58:20+00:00"
+    xml.changefreq  "monthly"
+    xml.priority  0.50
+  end
+
+  xml.url do
+    xml.loc    "http://www.dwellgo.com/home/terms_of_use"
+    xml.lastmod  "2008-03-07T05:58:21+00:00"
+    xml.changefreq  "monthly"
+    xml.priority  0.50
+  end
+
+  xml.url do
+    xml.loc    "http://www.dwellgo.com/account/forgot_password"
+    xml.lastmod  "2008-03-07T05:58:21+00:00"
+    xml.changefreq  "monthly"
+    xml.priority  0.50
+  end
+
+  xml.url do
+    xml.loc    "http://www.dwellgo.com/images/header-subpage.gif"
+    xml.lastmod  "2008-02-22T00:56:31+00:00"
+    xml.changefreq  "yearly"
+    xml.priority  0.50
+  end
+
+  xml.url do
+    xml.loc    "http://www.dwellgo.com/images/owner-dashboard.jpg"
+    xml.lastmod  "2008-02-22T00:56:31+00:00"
+    xml.changefreq  "yearly"
+    xml.priority  0.50
+  end
+
+  xml.url do
+    xml.loc    "http://www.dwellgo.com/images/owner-message.jpg"
+    xml.lastmod  "2008-02-22T00:56:31+00:00"
+    xml.changefreq  "yearly"
+    xml.priority  0.50
+  end
+
+  xml.url do
+    xml.loc    "http://www.dwellgo.com/images/buyer-dashboard.jpg"
+    xml.lastmod  "2008-02-22T00:56:31+00:00"
+    xml.changefreq  "yearly"
+    xml.priority  0.50
+  end
+
+  xml.url do
+    xml.loc    "http://www.dwellgo.com/images/buyer-message-center.jpg"
+    xml.lastmod  "2008-02-22T00:56:31+00:00"
+    xml.changefreq  "yearly"
+    xml.priority  0.50
+  end
+
+  xml.url do
+    xml.loc    "http://www.dwellgo.com/images/my-dwellgo.jpg"
+    xml.lastmod  "2008-02-22T00:56:31+00:00"
+    xml.changefreq  "yearly"
+    xml.priority  0.50
+  end
+
+  xml.url do
+    xml.loc    "http://www.dwellgo.com/images/email-alerts.jpg"
+    xml.lastmod  "2008-02-22T00:56:31+00:00"
+    xml.changefreq  "yearly"
+    xml.priority  0.50
+  end
+
+  xml.url do
+    xml.loc    "http://www.dwellgo.com/home/faq"
+    xml.lastmod  "2008-03-07T05:58:26+00:00"
+    xml.changefreq  "daily"
+    xml.priority  0.50
+  end
+
+  xml.url do
+    xml.loc    "http://www.dwellgo.com/images/intelligent-matching.jpg"
+    xml.lastmod  "2008-02-22T00:56:31+00:00"
+    xml.changefreq  "yearly"
+    xml.priority  0.50
+  end
+
+  xml.url do
+    xml.loc    "http://www.dwellgo.com/how_it_works/private_communication"
+    xml.lastmod  "2008-03-07T05:58:27+00:00"
+    xml.changefreq  "weekly"
+    xml.priority  0.75
+  end
+
+  xml.url do
+    xml.loc    "http://www.dwellgo.com/images/private-communication.jpg"
+    xml.lastmod  "2008-02-22T00:56:31+00:00"
+    xml.changefreq  "weekly"
+    xml.priority  0.50
+  end
+
+  xml.url do
+    xml.loc    "http://www.dwellgo.com/how_it_works/public_private"
+    xml.lastmod  "2008-03-07T05:58:28+00:00"
+    xml.changefreq  "weekly"
+    xml.priority  0.75
+  end
+
+  xml.url do
+    xml.loc    "http://www.dwellgo.com/images/public-private.jpg"
+    xml.lastmod  "2008-02-22T00:56:31+00:00"
+    xml.changefreq  "weekly"
+    xml.priority  0.50
+  end
+
+  xml.url do
+    xml.loc    "http://www.dwellgo.com/how_it_works/unlisted_properties"
+    xml.lastmod  "2008-03-07T05:58:30+00:00"
+    xml.changefreq  "weekly"
+    xml.priority  0.75
+  end
+
+  xml.url do
+    xml.loc    "http://www.dwellgo.com/images/unlisted-property.jpg"
+    xml.lastmod  "2008-02-22T00:56:31+00:00"
+    xml.changefreq  "weekly"
+    xml.priority  0.50
+  end
+
+end

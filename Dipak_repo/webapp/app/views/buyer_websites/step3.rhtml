@@ -1,0 +1,13 @@
+<%- @page_title = "Buyer Website Setup" -%>
+
+<%=javascript_include_tag "territory_name"%>
+  
+<div class="full">
+  <fieldset>
+     <legend>Step 3 of 3</legend>
+     <%- form_for(@buyer_web_page, :url => {:action=>'create'} , :html => { :method => :post, :multipart => true }) do |f| -%>
+        <%= render :partial => 'buyer_site_fields', :locals => {:f => f} %> 
+     <%- end -%>
+  </fieldset>
+</div>
+

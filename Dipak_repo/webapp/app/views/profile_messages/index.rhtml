@@ -1,0 +1,28 @@
+<h1>Listing profile_messages</h1>
+
+<table>
+  <tr>
+    <th>From profile</th>
+    <th>To profile</th>
+    <th>Body</th>
+    <th>Created at</th>
+    <th>Viewed at</th>
+  </tr>
+  
+<% for profile_message in @profile_messages %>
+  <tr>
+    <td><%=h profile_message.from_profile_id %></td>
+    <td><%=h profile_message.to_profile_id %></td>
+    <td><%=h profile_message.body %></td>
+    <td><%=h profile_message.created_at %></td>
+    <td><%=h profile_message.viewed_at %></td>
+    <td><%= link_to 'Show', profile_profile_message_path(profile_message) %></td>
+    <td><%= link_to 'Edit', edit_profile_profile_message_path(profile_message) %></td>
+    <td><%= link_to 'Destroy', profile_profile_message_path(profile_message), :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New profile_message', new_profile_profile_message_path %>

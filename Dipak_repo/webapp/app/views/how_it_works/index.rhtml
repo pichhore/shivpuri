@@ -1,0 +1,55 @@
+<%- @page_title = "How Dwellgo Works to match Owners & Buyers, Austin Real Estate" -%>
+<%- @page_heading = "How Dwellgo Works" -%>
+<%- @page_heading_class = "larger" -%>
+<%- @meta_description = "Learn how dwellgo brings Property Owners and Buyers together in a free matching community for Real Estate in Austin and Central Texas" -%>
+<%- @meta_keywords = "Austin metro area, Austin metro real estate, Austin metro, Texas, dwellgo" -%>
+
+<%- content_for :page_styles do -%>
+<style>
+</style>
+<%- end -%>
+
+<div class="islandLeftBody">
+  <embed id="VideoPlayback" src="http://video.google.com/googleplayer.swf?docid=-5309824907972142747&hl=en&fs=true" style="width:400px;height:326px" allowFullScreen="true" allowScriptAccess="always" type="application/x-shockwave-flash"> </embed>
+</div>
+
+<div class="islandRightBody">
+	
+  <p><span class="islandBigText">Not on Dwellgo Yet?</span><br />
+    <%- if logged_in? -%>
+	    <%=link_to "Add a Property", :controller=>"profiles", :action=>"new", :id=>"owner"%>
+		or
+	    <%=link_to "Become a Buyer", :controller=>"profiles", :action=>"new", :id=>"buyer"%>
+	   </p>
+    <%- else -%>
+    	<%=link_to "Add a Property", :controller=>"home", :action=>"preview", :id=>"owner"%>
+		or
+	    <%=link_to "Add a Buyer Profile", :controller=>"home", :action=>"preview", :id=>"buyer"%>
+    <%- end -%>
+   <p>(It’s Free)</p>
+
+
+
+
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+
+  <p><span class="islandBigText">Want to Learn More?</span><br />
+    Click on one of the four topics below:
+    </p>
+
+
+</div>
+
+<p style="clear:both">&nbsp;</p>
+
+<div id="islandHow">
+  <div id="subNav" style="background: transparent;">
+    <ul id="islandNav">
+      <li class="islandNav-matching"><%=link_to "", :controller=>"how_it_works", :action=>"intelligent_matching"%></li>
+      <li class="islandNav-communication"><%=link_to "", :controller=>"how_it_works", :action=>"private_communication"%></li>
+      <li class="islandNav-marketing"><%=link_to "", :controller=>"how_it_works", :action=>"public_private"%></li>
+      <li class="islandNav-unlisted"><%=link_to "", :controller=>"how_it_works", :action=>"unlisted_properties"%></li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<h1>Editing buyer_user_image</h1>
+
+<%= error_messages_for :buyer_user_image %>
+
+<% form_for(@buyer_user_image) do |f| %>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @buyer_user_image %> |
+<%= link_to 'Back', buyer_user_images_path %>

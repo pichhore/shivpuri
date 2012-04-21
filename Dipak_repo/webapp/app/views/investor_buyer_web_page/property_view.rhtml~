@@ -1,0 +1,349 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+   <title><%=@page_title%></title>
+   <META NAME="robots" CONTENT="noindex,nofollow">
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+         <%=stylesheet_link_tag "main" %>
+         <%=stylesheet_link_tag "investor_web_page" %>
+        <%=stylesheet_link_tag "legacy" %>
+        <%=stylesheet_link_tag "lightbox" %>
+        <%=javascript_include_tag "prototype"%>
+        <%= include_yui_editor_if_used %>
+        <%= include_yui_lightbox_if_used %>
+        <%=javascript_include_tag "scriptaculous"%>
+        <%=javascript_include_tag "object.event.js"%>
+        <%=javascript_include_tag "application"%>
+
+        <%=javascript_include_tag "base_controller"%>
+        <%=javascript_include_tag "streetview_controller"%>
+        <%=javascript_include_tag "profile_image_view_controller"%>
+        <%=javascript_include_tag "lightbox_controller"%>
+        <script type="text/javascript" >
+          Event.observe(window, 'load', function() {
+                    profile_image_view_controller = new NL.ProfileImageViewController($$('#propertyPhotoBig img')[0], $$('#photoThumbList ul li img.micro'));
+                    lightbox_controller = new NL.LightboxController();
+          });
+                function open_pop_up(path){
+                window.open(path,"Window1","menubar=no,width=500,height=500,toolbar=no,scrollbars=yes");
+              }
+        </script>
+
+	<script type="text/javascript">
+	  setTimeout("new Effect.Fade('notice');", 10000)
+	</script>
+	
+        <%= GMap.header %>
+
+</head>
+<body>
+  <% if RAILS_ENV == 'production' %>
+  <%= clicktale_top %>
+  <% end %>
+<div class="full">
+  <div id="container" class="clearfix">
+
+<!-- Header-->
+
+  	<div id="header" <% if !@buyer_web_page.dynamic_css.blank? %> style="border-top:8px solid <%=@buyer_web_page.dynamic_css%>;" <% end%> >
+  	
+  		<div class="col1">	
+  			<div id="logo">
+                    <a href="/<%=@territory_param_name%>/<%=@business_name%>">
+  				<%=image_tag @user_company_image.public_filename(:profile), :alt=>"thumbnail" if (!@user_company_image.nil?) && (!@user_company_image.find_profile_thumbnail.blank?) %>
+                    </a>
+  			</div>
+  			<div id="tagline">
+  				<%=@buyer_web_page.tag_line%>
+  			</div>  			
+  		</div>
+  		
+  		<div class="col2">
+  			<div id="address">
+                    <%=@user_company_info.business_name unless @user_company_info.nil?  %><br />
+  				<%=@user_company_info.business_address unless @user_company_info.nil?  %>
+                    <br/>
+                    <%=@user_company_info.city.to_s + ", "+ @user_company_info.state.to_s + " " + @user_company_info.zipcode.to_s unless @user_company_info.nil?  %>
+  			</div>
+  			<div id="contact">
+  				<b class="phone_size_bold"><% unless @user_company_info.nil? %><%= !@buyer_web_page.local_phone.blank? ? @buyer_web_page.local_phone : @user_company_info.business_phone %><% end %></b><br /><br />
+				<%=link_to_remote("Contact Us",{:url => {:action => 'contact_us',:id=>@business_name, :territory_name=>@territory_param_name},
+                                                                                :method => :get,
+                                                                                :update         => "lightbox_contents",
+                                                                                :loading        => "lightbox_controller.loading()",
+                                                                                :loaded         => "lightbox_controller.loaded()"},{
+                                                                                :title=>"Contact to Investor" }) %>
+  			</div>  	
+  	  	</div> 
+  	
+  	</div>
+
+	<div style="clear:both"></div>
+	<div id="subHeader1" <% if !@buyer_web_page.dynamic_css.blank? %> style="color: <%=@buyer_web_page.dynamic_css%>;" <% end%> >
+           <%@zips = Zip.find(:all, :conditions=>["zip = ? " ,@profile.display_zip_code.to_s])%>
+            <%if @zips.size == 1%>
+                  <% @city_state = @zips[0].city.to_s + ", " + @zips[0].state.to_s + " "%>
+            <%end %>
+                 <% if @profile.public_profile? %>
+	  	<%=@profile.display_property_address_without_zip.to_s  + ", " +@city_state.to_s + @profile.display_zip_code.to_s %>
+                <% else %>
+                <%= @profile.display_name %>
+                <% end %>
+	</div>
+	<div id="subHeader2">
+	  	Owner Financed Homes For Sale	
+	  	<span class="breadCrumb">Owner Finance / <%=@territory_param_name%></span>
+	</div>
+
+	<div style="clear:both"></div>
+  	 <div class="content">
+
+    <div class="widecontent">
+
+      <div id="notice" class="notice" <%="style=\"display:none\"" if !flash[:request_notice]%>><%=flash[:request_notice]%></div>
+
+    </div>
+
+   
+
+  
+
+    <div class="widecontent">
+
+  <div class="left_propertyProfile">
+
+    <fieldset>
+    <div id="contact">
+    </div>
+      <div id="propertyPhotoBig">
+            	<% if(!@profile.profile_images.find_by_default_photo(1).blank?) %>
+                      <% @profile.profile_images.each_with_index do |photo,index| %>						
+                          <%if photo.default_photo %>
+                                    <%=render_photo_bigsize(@profile, {:id=>"image0",:width=>320}, (index/4)+1) %>
+                            <% end %>
+                      <% end %>
+              <% else %>
+                      <%=render_photo_bigsize(@profile, {:id=>"image0",:width=>320}) %>
+              <% end %>
+      </div>
+      
+      <div id="propertyDetails">
+    
+    <table width="170" cellspacing="0" cellpadding="0">
+     <tr>
+        <td valign="top" width="40%"><strong>Property:</strong></td>
+        <td valign="top"><strong>Home</strong></td>
+
+      </tr>
+     <tr>
+        <td valign="top" width="55%" class="big_font_size"><strong>Price:</strong></td>
+        <td valign="top" class="big_font_size"><%=@profile.display_price%></td>
+
+      </tr>
+      <%- if @profile.property_type_single_family? or @profile.property_type_condo_townhome? -%>
+      <tr>
+        <td valign="top" width="40%"><strong>Bedrooms: </strong></td>
+        <td valign="top"><%=@profile.display_bedrooms %></td>
+      </tr>
+      <%- end -%>
+
+      <%- if @profile.property_type_single_family? or @profile.property_type_condo_townhome?-%>
+      <tr>
+        <td valign="top"><strong>Bathrooms: </strong></td>
+        <td valign="top"><%=@profile.display_bathrooms%></td>
+      </tr>
+      <%- end -%>
+
+      <%- if @profile.property_type_multi_family? -%>
+      <tr>
+        <td valign="top"><strong>Units: </strong></td>
+        <td valign="top"><%=@profile.display_units%></td>
+      </tr>
+      <%- end -%>
+
+      <%- if @profile.property_type_single_family? or @profile.property_type_multi_family? or @profile.property_type_condo_townhome? -%>
+      <tr>
+        <td valign="top"><strong>Approx Sq Ft:</strong></td>
+        <td valign="top"><%=@profile.display_square_feet%></td>
+      </tr>
+
+      <tr>
+        <td valign="top"><strong>Price/Sqft: </strong></td>
+        <td valign="top"><%=@profile.display_price_per_square_foot%></td>
+      </tr>
+      <%- end -%>
+
+      <%- if !@profile.property_type_acreage? and !@profile.property_type_other? and !@profile.display_neighborhood.nil? and !@profile.display_neighborhood.empty? -%>
+      <tr>
+        <td valign="top"><strong>Neighborhood:</strong></td>
+        <td valign="top"><%=@profile.display_neighborhood%></td>
+      </tr>
+      <%- end -%>
+
+
+      <tr>
+
+        <td colspan="2">&nbsp;</td>
+
+      </tr>
+
+    </table>
+
+        
+        
+        
+      </div>
+      
+      
+   
+
+	<div style="clear: both"></div>
+    <div id="photoThumbList">
+    	<ul>
+        	<li><%=render_property_thumbnail_micro(@profile, {:class=>"micro", :id=>"image1"}, 1)%></li>
+        	<li><%=render_property_thumbnail_micro(@profile, {:class=>"micro", :id=>"image2"}, 2)%></li>
+        	<li><%=render_property_thumbnail_micro(@profile, {:class=>"micro", :id=>"image3"}, 3)%></li>
+        	<li><%=render_property_thumbnail_micro(@profile, {:class=>"micro", :id=>"image4"}, 4)%></li>
+        	<li><%=render_property_thumbnail_micro(@profile, {:class=>"micro", :id=>"image5"}, 5)%></li>
+        	<li><%=render_property_thumbnail_micro(@profile, {:class=>"micro", :id=>"image6"}, 6)%></li>
+        	<li><%=render_property_thumbnail_micro(@profile, {:class=>"micro", :id=>"image7"}, 7)%></li>
+        	<li><%=render_property_thumbnail_micro(@profile, {:class=>"micro", :id=>"image8"}, 8)%></li>
+        	<li><%=render_property_thumbnail_micro(@profile, {:class=>"micro", :id=>"image9"}, 9)%></li>
+        </ul>
+    </div>
+           
+    
+    
+	<div style="clear: both"></div>
+    
+
+	<p><strong>Property Features</strong><br />
+    <%=@profile.display_features %></p>
+    <p><strong>Property Description</strong><br />
+    <%= customize_embedcode(@profile.display_description) %></p>
+    <p><strong>Video Tour</strong><br />
+      <% if(!@profile.display_embed_video.blank?) %>
+	    <%= customize_embedcode(@profile.display_embed_video) %>
+	  <% elsif(!@profile.display_video_tour.blank?) %>
+      <% video_id = @profile.display_video_tour.split('=')[-1] %>
+	    <object width="480" height="385"><param name="movie" value="http://www.youtube.com/v/<%=video_id%>&amp;hl=en_US&amp;fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/<%=video_id%>&amp;hl=en_US&amp;fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="480" height="385"></embed></object>
+	  <% else %>
+	    (not provided)
+	  <% end %>
+
+    </p>
+
+<%=button_to_function "< Return","document.location='/#{@territory_param_name}/#{@business_name}';", :class=>"submit_l" %>
+
+ </fieldset>
+  </div>
+ 
+ 
+<!--Left Block 1-->
+  <div class="right">
+    <h3>Request Information</h3>
+    <div class="right_requestInformation legend">
+    <div id="profileThumb">
+      <%=medium_thumbnail_image%>
+    </div>
+    <div id="profileContact">
+    	<strong><%=@current_user.first_name%> <%=@current_user.last_name%></strong><br />	
+     <span class="phone_font_size"><% unless @user_company_info.nil? %><%= !@buyer_web_page.local_phone.blank? ? @buyer_web_page.local_phone : @user_company_info.business_phone %><% end %></span>
+    </div>
+    
+    			<div style="clear: both; height: 6px;"></div>
+    
+    		<%- form_for(:request_information, :url=>request.path, :html => { :method => :post }) do |f| -%>
+             <input type="hidden" value="<%=@business_name%>" name="id" id="id"/>
+            <input type="hidden" value="<%=@territory_param_name%>" name="territory_name" id="territory_name"/>
+             <input type="hidden" value="<%=request.path.to_s%>" name="buyer_website_link" id="buyer_website_link"/>
+            <%=radio_button("request_information", "reason", "0", { :class=>"request_info_radio_button", :checked=>true})%>
+            <strong> Want to View?</strong>
+          	<div style="clear: both"></div>
+             <%=radio_button("request_information", "reason", "1", {:class=>"request_info_radio_button"})%>
+            <strong> Have a Question? </strong>
+    	    <div style="clear: both; height: 6px;"></div>
+	    <% if params[:request_information].nil? || @no_error %>
+	    <font color="#ff0000" size="2">*</font><%=f.text_field "name", :size=>30, :maxlength=>40, :class=>"txtField" , :value=>"Name",:onblur=>"if(this.value=='') this.value='Name';",  :onfocus=>"if(this.value=='Name') this.value='';"%><%=error_message_on :request_information, :name%>
+	    <font color="#ff0000" size="2">*</font><%=f.text_field "phone", :size=>30, :maxlength=>40, :value=>"Phone" ,  :class=>"txtField" ,:onblur=>"if(this.value=='') this.value='Phone';",  :onfocus=>"if(this.value=='Phone') this.value='';"%><%=error_message_on :request_information, :phone%>
+	    <font color="#ff0000" size="2">*</font><%=f.text_field "email", :size=>30, :maxlength=>40, :value=>"Email" ,  :class=>"txtField" ,:onblur=>"if(this.value=='') this.value='Email';",  :onfocus=>"if(this.value=='Email') this.value='';"%><%=error_message_on :request_information, :email%>
+	    &nbsp<%=f.text_area "message", :cols=>44,:rows=>4, :value=>"Message (optional)" ,  :class=>"txtField" ,:onblur=>"if(this.value=='') this.value='Message (optional)';",  :onfocus=>"if(this.value=='Message (optional)') this.value='';"%><%=error_message_on :request_information, :message%>
+	    <% else %>
+	    <font color="#ff0000" size="2">*</font><%=f.text_field "name", :size=>30, :maxlength=>40, :class=>"txtField" , :value=>get_value(params[:request_information], "name"),:onblur=>"if(this.value=='') this.value='Name';",  :onfocus=>"if(this.value=='Name') this.value='';"%><%=error_message_on :request_information, :name%>
+	    <font color="#ff0000" size="2">*</font><%=f.text_field "phone", :size=>30, :maxlength=>40, :value=>get_value(params[:request_information], "phone"),  :class=>"txtField" ,:onblur=>"if(this.value=='') this.value='Phone';",  :onfocus=>"if(this.value=='Phone') this.value='';"%><%=error_message_on :request_information, :phone%>
+	    <font color="#ff0000" size="2">*</font><%=f.text_field "email", :size=>30, :maxlength=>40, :value=>get_value(params[:request_information], "email"),  :class=>"txtField" ,:onblur=>"if(this.value=='') this.value='Email';",  :onfocus=>"if(this.value=='Email') this.value='';"%><%=error_message_on :request_information, :email%>
+	    <%=f.text_area "message", :cols=>44,:rows=>4, :value=>get_value(params[:request_information], "message"),  :class=>"txtField" ,:onblur=>"if(this.value=='') this.value='Message (optional)';", :onfocus=>"if(this.value=='Message (optional)') this.value='';"%><%=error_message_on :request_information, :message%>
+	    <% end %>
+         
+       <div style="clear: both"></div>     
+      <input class="submit_m" name="commit" type="submit" value=" Submit " /><br />
+      <div><font color="#ff0000" size="2">*</font>&nbsp Required Field</div>
+    	<%- end -%>
+    </div>
+          <%- if @profile.public_profile? and @map -%>
+              <div style="overflow:hidden">
+                    <%= @map.div(:width => 265, :height => 180 ) %>
+            </div>
+            <div class="ie_fix">
+                        <%- @boundary_overlays.each do |overlay| -%>
+                        <%- js = overlay.to_javascript() -%>
+                        <%- @map.record_init( "map.addOverlay( overlay = #{ js } );" ) -%>
+                <%- end unless @boundary_overlays == nil -%>
+                <%- @marker_overlays.each do |overlay| -%>
+                        <%- js = overlay.to_javascript() -%>
+                        <%- @map.record_init( "map.addOverlay( overlay = #{ js } );" ) -%>
+                <%- end unless @marker_overlays == nil -%>
+
+                        <%= @map.to_html({:proto_load=>true, :streetview=>true}) %>
+            </div>
+            <div style="text-align: center; margin-top: 5px; ">
+                <input type="button" id="streetview_button" class="submit_l" value="Street View" style="display: none;"/>
+            </div>
+    <%- end -%>
+    <br />
+
+  </div>
+  
+    </div>
+    
+
+    </div>
+        
+    
+
+    <div class="divider"></div>
+
+    <div id="scratch" style="display:none;"></div>
+
+  </div><!--end container-->
+</div>
+<div id="footer" style="margin:auto;text-align:center;width:960px; height:auto;padding:5px 0px;">
+<%=@user_company_info.business_name unless @user_company_info.nil?  %><br/>
+<%=@user_company_info.business_address unless @user_company_info.nil?  %>, <%=@user_company_info.city unless @user_company_info.nil?  %>, <%=@user_company_info.state unless @user_company_info.nil?  %> <%=@user_company_info.zipcode unless @user_company_info.nil?  %> <br/>
+<% unless @user_company_info.nil? %><%= !@buyer_web_page.local_phone.blank? ? @buyer_web_page.local_phone : @user_company_info.business_phone %><% end %> | <b><%=link_to "Create a Buyer Profile (FREE)", {:controller=>'investor_buyer_web_page', :action=>'new_retail_buyer_zipselect',:id=>@business_name,:territory_name=>@territory_param_name}%></b> <br/>
+<%= link_to "Privacy Policy", "/#{@territory_param_name}/#{@business_name}?privacy_policy=true" %> |
+<%= link_to "Terms of Use", "/#{@territory_param_name}/#{@business_name}/terms_of_use" %><br/>
+<!-- <a href="/home/privacy">Privacy Policy</a> | <a href="/home/terms_of_use">Terms of Use</a><br/> -->
+	REI Technologies LLC &copy; 2012
+  </div>
+<!--///////////////////////////////////////////////////////////////////////////////////////////////-->
+<div style="display:none;" id="overlay_Lightbox">
+
+</div>
+
+<div style="display:none;" id="lightbox_contents" style="width: 60%;">Lightbox</div>
+
+<div style="display:none;" id="overlay_Streetview"/>
+<div style="display:none;" id="lightbox_Streetview" style="width: 60%;">
+    <div id="streetview_header">
+        <a href="#" id="streetview_close"><img src="/images/active_scaffold/default/close.gif"/></a>
+    </div>
+    <div id="streetview_contents"/>
+</div>
+<!--////////////////////////////////////////////////////////////////////////////////////////////////-->
+<% if RAILS_ENV == 'production' %>
+<%= clicktale_bottom %>
+<% end %>
+</body>
+</html>

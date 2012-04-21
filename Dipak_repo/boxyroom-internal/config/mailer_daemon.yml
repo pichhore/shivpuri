@@ -1,0 +1,21 @@
+development:
+  type: pop
+  server: pop.gmail.com
+  port: 995
+  ssl: yes
+  username: fetcher-dev@boxyroom.com
+  password: 0vb49onS
+  
+test:
+  type: pop
+  server: localhost
+  username: username
+  password: password
+  
+production:
+  type: pop
+  server: pop.gmail.com
+  port: 995
+  ssl: yes
+  username: fetcher@boxyroom.com
+  password: 0vb49onS

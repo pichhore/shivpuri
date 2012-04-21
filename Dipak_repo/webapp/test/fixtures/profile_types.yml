@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+buyer:
+  id: ce5c2320-4131-11dc-b431-009096fa4c28
+  name: buyer
+  permalink: buyer
+owner:
+  id: ce5c2320-4131-11dc-b432-009096fa4c28
+  name: owner
+  permalink: owner
+buyer_agent:
+  id: ce5c2320-4131-11dc-b433-009096fa4c28
+  name: buyer_agent
+  permalink: buyer-agent
+seller_agent:
+  id: ce5c2320-4131-11dc-b434-009096fa4c28
+  name: seller_agent
+  permalink: seller-agent
+service_provider:
+  id: ce5c2320-4131-11dc-b435-009096fa4c28
+  name: service_provider
+  permalink: service-provider

@@ -1,0 +1,22 @@
+*** [err :: 67.207.151.142] /usr/lib64/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:636:in `call'
+*** [err :: 67.207.151.142] /usr/lib64/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:636:in `execute'
+*** [err :: 67.207.151.142] /usr/lib64/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:631:in `each'
+*** [err :: 67.207.151.142] /usr
+*** [deploy:update_code] rolling back
+  * executing "rm -rf /var/www/apps/reimatcher/releases/20120221090420; true"
+    servers: ["67.207.151.142"]
+ ** [deploy:update_code] exception while rolling back: IOError, closed stream
+/usr/lib/ruby/gems/1.8/gems/net-ssh-2.0.24/lib/net/ssh/buffered_io.rb:65:in `recv': Connection reset by peer - recvfrom(2) (Errno::ECONNRESET)
+	from /usr/lib/ruby/gems/1.8/gems/net-ssh-2.0.24/lib/net/ssh/buffered_io.rb:65:in `fill'
+	from /usr/lib/ruby/gems/1.8/gems/net-ssh-2.0.24/lib/net/ssh/connection/session.rb:228:in `postprocess'
+	from /usr/lib/ruby/gems/1.8/gems/net-ssh-2.0.24/lib/net/ssh/connection/session.rb:224:in `each'
+	from /usr/lib/ruby/gems/1.8/gems/net-ssh-2.0.24/lib/net/ssh/connection/session.rb:224:in `postprocess'
+	from /usr/lib/ruby/gems/1.8/gems/capistrano-2.5.19/lib/capistrano/processable.rb:31:in `process_iteration'
+	from /usr/lib/ruby/gems/1.8/gems/capistrano-2.5.19/lib/capistrano/processable.rb:43:in `ensure_each_session'
+	from /usr/lib/ruby/gems/1.8/gems/capistrano-2.5.19/lib/capistrano/processable.rb:41:in `each'
+	from /usr/lib/ruby/gems/1.8/gems/capistrano-2.5.19/lib/capistrano/processable.rb:41:in `ensure_each_session'
+	 ... 102 levels...
+	from /usr/lib/ruby/gems/1.8/gems/capistrano-2.5.19/lib/capistrano/cli/execute.rb:14:in `execute'
+	from /usr/lib/ruby/gems/1.8/gems/capistrano-2.5.19/bin/cap:4
+	from /usr/bin/cap:19:in `load'
+	from /usr/bin/cap:19

@@ -1,0 +1,23 @@
+sold_dwellgo:
+  id: sold_dwellgo
+  profile_type_id: ce5c2320-4131-11dc-b432-009096fa4c28
+  name: Sold through Dwellgo
+  created_at: <%= 5.days.ago.to_s :db %>
+
+sold_elsewhere:
+  id: sold_elsewhere
+  profile_type_id: ce5c2320-4131-11dc-b432-009096fa4c28
+  name: Sold elsewhere
+  created_at: <%= 5.days.ago.to_s :db %>
+
+bought_dwellgo:
+  id: bought_dwellgo
+  profile_type_id: ce5c2320-4131-11dc-b431-009096fa4c28
+  name: Bought through Dwellgo
+  created_at: <%= 5.days.ago.to_s :db %>
+
+bought_elsewhere:
+  id: bought_elsewhere
+  profile_type_id: ce5c2320-4131-11dc-b431-009096fa4c28
+  name: Bought elsewhere
+  created_at: <%= 5.days.ago.to_s :db %>

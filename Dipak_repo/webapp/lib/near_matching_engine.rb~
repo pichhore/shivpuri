@@ -1,0 +1,588 @@
+class NearMatchingEngine
+  #
+  # Returns an array of Profiles that match for a given profile
+  #
+  # Arguments:
+  #
+  #  :profile          required    Profile to find matches for
+  #  :use_cache        optional    true (default) to support using cached results, or false to skip cache and force a recalc
+  #  :mode             optional    :paginated (default), :all, :count (where matching profile instances are not needed),
+  #                                or :ids (for the profile_ids only - doesn't fetch profile instances)
+  #  :result_filter    optional    The result filter for getting matches :all (default), :new, :viewed_me, :favorites
+  #                                (supports tabbing in the UI or profile messaging), :new_email (uses last_login
+  #                                instead of previous_login used by the UI)
+  #  :offset           optional    the starting index of the results to return (default start with the first)
+  #  :number_to_fetch  optional    the number of records to fetch (default 10)
+  #
+  def self.get_matches(*args)     
+    options           = args.last.is_a?(Hash) ? args.pop : {}
+    profile           = options[:profile]
+    offset            = options[:offset].blank? ? nil : options[:offset]
+    number_to_fetch   = options[:number_to_fetch].blank? ? 10 : options[:number_to_fetch]
+    result_filter     = options[:result_filter].blank? ? :all : options[:result_filter]
+    mode              = options[:mode].blank? ? :paginated : options[:mode]
+    sort              = options[:sort].blank? ? "privacy desc" : options[:sort]
+    listing_type      = options[:listing_type].blank? ? :all : options[:listing_type]
+    include_inactive  = options[:inactive]
+    created_date     =  options[:created_date]
+    from_date         =  options[:from_date]
+    to_date            =  options[:to_date]
+    results           = Array.new
+    count             = 0
+    previous_login_at = nil
+    join_clause       = nil
+
+    # Set limit and offset if we are not asking for all of them
+    limit_and_sort_hash = (mode == :paginated or mode == :ids) ? { :limit=>number_to_fetch, :offset=>offset,:order=>"#{sort}, property_type_sort_order asc" } : { }
+    limit_hash = (mode == :paginated or mode == :ids) ? { :limit=>number_to_fetch, :offset=>offset } : { }
+
+    if listing_type == 'fsbo'
+      listing_where = " profiles.profile_type_id = '#{ProfileType.get_guid('owner')}' "
+    elsif listing_type == 'listed'
+      listing_where = " profiles.profile_type_id = '#{ProfileType.get_guid('seller_agent')}' "
+    elsif listing_type == 'buyer'
+      listing_where = " profiles.profile_type_id = '#{ProfileType.get_guid('buyer')}' "
+    elsif listing_type == 'buyer_agent'
+      listing_where = " profiles.profile_type_id = '#{ProfileType.get_guid('buyer_agent')}' "
+    end
+    
+    # special case: favorites
+    if result_filter == :favorites || result_filter == 'favorites' then
+      where = "profile_favorites.profile_id = ?"
+      where += " and users.activation_code is null" unless include_inactive
+      where += " && " + listing_where unless listing_where.nil?
+      conditions = [ where, profile.id ]
+      if !include_inactive
+        user_join = [:target_profile=>:user]
+      elsif listing_where
+        user_join = [:target_profile]
+      end
+      
+      count = ProfileFavorite.count( :all, :select => "DISTINCT target_profile_id", :conditions => conditions, :joins=>user_join)
+      return count if(mode == :count) # support rapid query for getting the # of favorites
+      matches = ProfileFavorite.find( :all, { :select => "DISTINCT target_profile_id", :conditions => conditions, :joins=>user_join}.merge(limit_hash) )
+
+      matches.each do |match|
+        if (mode == :ids || mode == "ids")
+          results << match.target_profile.id
+        else
+          results << match.target_profile
+        end
+      end
+
+      total_pages = (count / number_to_fetch)
+      total_pages += 1 if (count % number_to_fetch) != 0
+      total_pages = 1 if total_pages == 0
+      
+      return results, count, total_pages
+    end
+
+    # special case: viewed_me
+    if result_filter == :viewed_me || result_filter == 'viewed_me' then
+      # Nobody who is inactive should have been able to view me so no point in filtering inactive users out for this one
+      where = "profile_views.profile_id = ?"
+      where += " && " + listing_where unless listing_where.nil?
+
+      if listing_where
+        join = [:viewed_by_profile]
+      end
+        
+      count = ProfileView.count( :all, :select => "DISTINCT viewed_by_profile_id", :conditions => [where , profile.id ], :joins=>join)
+      return count if(mode == :count) # support rapid query for getting the count only
+      matches = ProfileView.find( :all,{ :select => "DISTINCT viewed_by_profile_id", :joins=>join, :conditions => [ where, profile.id ]}.merge(limit_hash))
+
+      matches.each do |match|
+        if (mode == :ids)
+          results << match.viewed_by_profile.id
+        else
+          results << match.viewed_by_profile
+        end
+      end
+
+      total_pages = (count / number_to_fetch)
+      total_pages += 1 if (count % number_to_fetch) != 0
+      total_pages = 1 if total_pages == 0
+      
+      return results, count, total_pages
+    end
+
+    # check if only interested in profiles that have changed since previous login (for UI purposes)
+    if result_filter == :new || result_filter == 'new' then
+      user = User.find( profile.user_id ) unless profile.user_id == nil
+      previous_login_at = user.previous_login_at unless user == nil
+    end
+
+    # check if only interested in profiles that have changed since last login (for email purposes)
+    if result_filter == :new_email || result_filter == 'new_email' then
+      user = User.find( profile.user_id ) unless profile.user_id == nil
+      previous_login_at = user.last_login_at unless user == nil
+    end
+
+    targets = ProfileFieldEngineIndex.find( :all, :conditions => [ "profile_id = ? && LENGTH(zip_code) = 5", profile.id ] )
+
+    # safety valve: should always find at least one zip_code (self)
+    return [], 0, "" if targets.size == 0
+
+    # build zip_code portion of query template
+    template = "("
+
+    # build zip_code criteria
+    targets.each do |target|
+
+      zips_latlongs = Zip.find(:first, :conditions=>["zip=?",target.zip_code])
+
+      if !zips_latlongs.nil? && !target.is_owner
+  #       zips_latlongs = ZipCodeMap.lookup_latlng(profile.permalink).split(",") if !ZipCodeMap.lookup_latlng(profile.permalink).nil?
+  #       zips_latlongs = Zip.find(:first, :conditions=>["zip=?",target.zip_code]) if ZipCodeMap.lookup_latlng(profile.permalink).nil?
+          near_matches = ZipCodeMap.find_adjacent_zips_for_coords( zips_latlongs.lat, zips_latlongs.lng, 3, 3 )
+          near_matches.each do |i|
+          template += " || " unless template == "("
+          template += "zip_code = " + i.zip
+          end
+        else
+          template += " || " unless template == "("
+          template += "zip_code = " + target.zip_code
+        end
+    end
+
+    target = targets.first
+    sfmfct = target.property_type == 'single_family' || target.property_type == 'multi_family' || target.property_type == 'condo_townhome'
+
+    # build rest of where clause
+    if target.is_owner then      
+      template += ") && (is_owner = false) && (property_type = ?) && (status = 'active')"
+#      template += " && (beds <= ?) && (baths <= ?) && (square_feet_min <= ?) && (min_mon_pay <= ?) && (min_dow_pay <= ?)" if sfmfct
+      template += " && (beds <= ?) && (baths <= ?) && (square_feet_min <= ?) && (max_mon_pay >= ?) && (max_dow_pay >= ?)" if sfmfct
+
+      target_sqft = target.square_feet
+
+      if target.price > 0 then
+        template += " && (price_max = 0 || (price_min <= " + target.price.to_s + " && " + target.price.to_s + " <= price_max))"
+      end
+
+      template += " && (units_max = 0 || (units_min <= " + target.units.to_s + " && " + target.units.to_s + " <= units_max))" if target.property_type == 'multi_family'
+      template += " && (acres_min <= " + target.acres.to_s + ")" if target.property_type == 'acreage'
+    else
+      template += ") && (is_owner = true) && (property_type = ?)  && status='active'"
+      template += " && (beds >= ?) && (baths >= ?) && (square_feet >= ?) && (square_feet <= ?) && (min_mon_pay <= ?) && (min_dow_pay <= ?)" if sfmfct
+
+      target_sqft = target.square_feet_min
+      target_sqft_max = (target.square_feet_max + ((20*target.square_feet_max)/100))
+      target_max_mon_pay = (target.max_mon_pay + ((25*target.max_mon_pay)/100))
+      target_max_down_pay = (target.max_dow_pay + ((20*target.max_dow_pay)/100) + 4000)
+
+      if target.price_max > 0 then
+        template += " && (price = 0 || (" + target.price_min.to_s + " <= price && price <= " + target.price_max.to_s + "))"
+      end
+
+      template += " && (" + target.units_min.to_s + " <= units && units <= " + target.units_max.to_s + ")" if target.property_type == 'multi_family'
+      template += " && (acres >= " + target.acres_min.to_s + ")" if target.property_type == 'acreage'
+    end
+
+    # add optional join to restrict to newly modified profiles (since previous login)
+    unless previous_login_at == nil
+      template += " && (profiles.created_at > '" + previous_login_at.strftime("%Y-%m-%d %H:%M:%S") + "')"
+      join_clause = "INNER JOIN profiles ON profiles.id = profile_field_engine_indices.profile_id"
+    end
+  
+    unless include_inactive
+      template += " && (users.activation_code is null) "
+      join_clause = "INNER JOIN profiles ON profiles.id = profile_field_engine_indices.profile_id" if join_clause.nil?
+      join_clause += " INNER JOIN users ON users.id = profiles.user_id "
+      if created_date.is_a?(Date)  # This is for cron job of daily buyer responder email
+          creation_date_of_profile = profile.created_at.to_date.to_s(:db) if profile.created_at.is_a?(Time)
+          unless creation_date_of_profile.blank?
+             join_clause += " and ( date(profiles.created_at) = '#{created_date}' or date(profiles.updated_at) ='#{created_date}' or date(profiles.deleted_at) =  '#{created_date + 11 }'  )  " if !(creation_date_of_profile == created_date.to_s(:db)) 
+          end
+      end
+      join_clause += " and date(profile_created_at) <= '#{to_date}'" if !from_date.nil? and !to_date.nil?
+    end
+    
+    
+    if listing_type == 'fsbo'
+      listing_where = " profile_field_engine_indices.profile_type_id = '#{ProfileType.get_guid('owner')}' "
+    elsif listing_type == 'listed'
+      listing_where = " profile_field_engine_indices.profile_type_id = '#{ProfileType.get_guid('seller_agent')}' "
+    elsif listing_type == 'buyer'
+      listing_where = " profile_field_engine_indices.profile_type_id = '#{ProfileType.get_guid('buyer')}' "
+    elsif listing_type == 'buyer_agent'
+      listing_where = " profile_field_engine_indices.profile_type_id = '#{ProfileType.get_guid('buyer_agent')}' "
+    end
+    
+    template += " && " + listing_where unless listing_where.nil?
+
+    if sfmfct then
+      count = ProfileFieldEngineIndex.count( :all, :conditions => [ template, target.property_type, target.beds, target.baths, target_sqft, target.min_mon_pay, target.min_dow_pay ], :joins => join_clause ) if target.is_owner
+      count = ProfileFieldEngineIndex.count( :all, :conditions => [ template, target.property_type, target.beds, target.baths, target_sqft, target_sqft_max, target_max_mon_pay, target_max_down_pay], :joins => join_clause ) if !target.is_owner
+      return count if(mode == :count) # support rapid query for getting the count only
+      matches = ProfileFieldEngineIndex.find( :all, { :conditions => [ template, target.property_type, target.beds, target.baths, target_sqft, target.min_mon_pay, target.min_dow_pay ], :joins => join_clause, :order=>"profile_field_engine_indices.id" }.merge(limit_and_sort_hash) ) if target.is_owner
+      matches = ProfileFieldEngineIndex.find( :all, { :conditions => [ template, target.property_type, target.beds, target.baths, target_sqft, target_sqft_max, target_max_mon_pay, target_max_down_pay ], :joins => join_clause, :order=>"profile_field_engine_indices.id" }.merge(limit_and_sort_hash) ) if !target.is_owner
+    else
+      count = ProfileFieldEngineIndex.count( :all, :conditions => [ template, target.property_type ], :joins => join_clause )
+      return count if(mode == :count) # support rapid query for getting the count only
+      matches = ProfileFieldEngineIndex.find( :all, { :conditions => [ template, target.property_type ], :joins => join_clause, :order=>"profile_field_engine_indices.id"}.merge(limit_and_sort_hash) )
+    end
+
+    unless number_to_fetch == 0
+      total_pages = (count / number_to_fetch)
+      total_pages += 1 if (count % number_to_fetch) != 0
+      total_pages = 1 if total_pages == 0
+    else
+      total_pages = 1
+    end
+
+    if mode == :ids
+      profile_ids = matches.collect { |match| match.profile_id }
+      return profile_ids, count, total_pages
+    end
+
+
+    matches.each do |match|
+      # optimization note: cannot replace with IN clause as we can't guarantee the order of the profiles returned,
+      # which will mess up the sorting and create random order changes during pagination
+      results << match.profile if !match.profile.nil?
+    end
+    return results, count, total_pages
+  end
+
+  def self.get_near_matches(*args)
+    # This returns ONLY the near matches .
+    options           = args.last.is_a?(Hash) ? args.pop : {}
+    profile           = options[:profile]
+    offset            = options[:offset].blank? ? nil : options[:offset]
+    number_to_fetch   = options[:number_to_fetch].blank? ? 10 : options[:number_to_fetch]
+    result_filter     = options[:result_filter].blank? ? :all : options[:result_filter]
+    mode              = options[:mode].blank? ? :paginated : options[:mode]
+    sort              = options[:sort].blank? ? "privacy desc" : options[:sort]
+    listing_type      = options[:listing_type].blank? ? :all : options[:listing_type]
+    include_inactive  = options[:inactive]
+    created_date     =  options[:created_date]
+    from_date         =  options[:from_date]
+    to_date            =  options[:to_date]
+    results           = Array.new
+    count             = 0
+    previous_login_at = nil
+    join_clause       = nil
+    exact_zips = Array.new
+    matches    = Array.new
+    daily_summary     = options[:daily_summary] ? options[:daily_summary] : false
+
+    # Set limit and offset if we are not asking for all of them
+    limit_and_sort_hash = (mode == :paginated or mode == :ids) ? { :limit=>number_to_fetch, :offset=>offset,:order=>"#{sort}, property_type_sort_order asc" } : { }
+    limit_hash = (mode == :paginated or mode == :ids) ? { :limit=>number_to_fetch, :offset=>offset } : { }
+    sort_hash = (mode == :paginated or mode == :ids) ? { :order=>"#{sort}, property_type_sort_order asc" } : { }
+
+
+    if listing_type == 'fsbo'
+      listing_where = " profiles.profile_type_id = '#{ProfileType.get_guid('owner')}' "
+    elsif listing_type == 'listed'
+      listing_where = " profiles.profile_type_id = '#{ProfileType.get_guid('seller_agent')}' "
+    elsif listing_type == 'buyer'
+      listing_where = " profiles.profile_type_id = '#{ProfileType.get_guid('buyer')}' "
+    elsif listing_type == 'buyer_agent'
+      listing_where = " profiles.profile_type_id = '#{ProfileType.get_guid('buyer_agent')}' "
+    end
+
+    if result_filter == :favorites || result_filter == 'favorites' then
+
+      where = "profile_favorites.profile_id = ?"
+      where += " && is_near is true "
+      where += " and users.activation_code is null" unless include_inactive
+      where += " && " + listing_where unless listing_where.nil?
+
+      conditions = [ where, profile.id ]
+      if !include_inactive
+        user_join = [:target_profile=>:user]
+      elsif listing_where
+        user_join = [:target_profile]
+      end
+
+      count = ProfileFavorite.count( :all, :select => "DISTINCT target_profile_id", :conditions => conditions, :joins=>user_join)
+      return count if(mode == :count) # support rapid query for getting the # of favorites
+      matches = ProfileFavorite.find( :all, { :select => "DISTINCT target_profile_id", :conditions => conditions, :joins=>user_join} )
+
+      matches = matches[offset.to_i,number_to_fetch.to_i]
+
+      matches.each do |match|
+        if (mode == :ids || mode == "ids")
+          results << match.target_profile.id
+        else
+          results << match.target_profile
+        end
+      end
+
+    unless number_to_fetch == 0
+      total_pages = (count / number_to_fetch)
+      total_pages += 1 if (count % number_to_fetch) != 0
+      total_pages = 1 if total_pages == 0
+    else
+      total_pages = 1
+    end
+
+      return results, count, total_pages
+    end
+
+    # check if only interested in profiles that have changed since previous login (for UI purposes)
+    if result_filter == :new || result_filter == 'new' then
+      user = User.find( profile.user_id ) unless profile.user_id == nil
+      previous_login_at = user.previous_login_at unless user == nil
+    end
+
+    # check if only interested in profiles that have changed since last login (for email purposes)
+    if result_filter == :new_email || result_filter == 'new_email' then
+      user = User.find( profile.user_id ) unless profile.user_id == nil
+      previous_login_at = user.last_login_at unless user == nil
+    end
+
+    targets = ProfileFieldEngineIndex.find( :all, :conditions => [ "profile_id = ? ", profile.id ] )
+
+    # safety valve: should always find at least one zip_code (self)
+    return [], 0, "" if targets.size == 0
+
+    # build zip_code portion of query template
+    template = "("
+
+    # build zip_code criteria
+    targets.each do |target|
+      template += " || " unless template == "("
+      template += "zip_code = " + "'" + target.zip_code + "'"
+      exact_zips << target.zip_code
+    end
+
+    target = targets.first
+    sfmfct = target.property_type == 'single_family' || target.property_type == 'multi_family' || target.property_type == 'condo_townhome'
+    vlacot = target.property_type=='other'  || target.property_type=='acreage' || target.property_type=='vacant_lot'
+
+  if !(target.property_type=='other' || target.property_type=='vacant_lot')
+    # build rest of where clause
+    if target.is_owner then
+      template += ") && (is_owner = false) && (property_type = ?) && (status = 'active')"
+#      template += " && (beds <= ?) && (baths <= ?) && (square_feet_min <= ?) && (min_mon_pay <= ?) && (min_dow_pay <= ?)" if sfmfct
+#       template += " && (beds <= ?) && (baths <= ?) && (square_feet_max BETWEEN ? AND ?) && (max_mon_pay BETWEEN ? AND ?) && (max_dow_pay BETWEEN ? AND ?) && ((square_feet_max < ?) or (max_mon_pay < ?) or (max_dow_pay < ?))" if sfmfct
+
+      template += " && (beds <= ?) && (baths <= ?) && (square_feet_min <= ?) && (square_feet_max >= ?) && (max_mon_pay >= ?) && (max_dow_pay >= ?) && !((square_feet_min <= ?) && (square_feet_max >= ?) && (max_mon_pay >= ?) && (max_dow_pay >= ?))" if sfmfct
+
+      target_sqft = ((target.square_feet/1.20))
+
+      target_min_mon_pay = (target.min_mon_pay/1.25)
+      target_min_dow_pay = !(target.min_dow_pay==0) ? ((target.min_dow_pay - 4000)/1.20) : 0
+
+      if target.price > 0 then
+        template += " && (price_max = 0 || (price_min <= " + target.price.to_s + " && " + target.price.to_s + " <= price_max))"
+      end
+
+      template += " && (units_max = 0 || (units_min <= " + target.units.to_s + " && " + target.units.to_s + " <= units_max))" if target.property_type == 'multi_family'
+#       template += " && (acres_min <= " + target.acres.to_s + ")" if target.property_type == 'acreage'
+      template += " && (acres_min <= " + target.acres.to_s + " && acres_max >= " + target.acres.to_s + ")" if target.property_type == 'acreage'
+      template += " && (max_mon_pay >= ?) && (max_dow_pay >= ?) && !((max_mon_pay >= ?) && (max_dow_pay >= ?))" if vlacot
+    else
+      template += ") && (is_owner = true) && (property_type = ?)  && status='active'"
+#       template += " && (beds >= ?) && (baths >= ?) && (square_feet BETWEEN ? AND ?) && (min_mon_pay BETWEEN ? AND ?) && (min_dow_pay BETWEEN ? AND ?) && ((min_mon_pay > ?) or (min_dow_pay > ?) or (square_feet > ?) )" if sfmfct
+
+
+      template += " && (beds >= ?) && (baths >= ?) && (square_feet BETWEEN ? AND ? ) && (min_mon_pay <= ?) && (min_dow_pay <= ?) && !((square_feet BETWEEN ? AND ? ) && (min_mon_pay <= ?) && (min_dow_pay <= ?) )" if sfmfct
+
+
+      target_sqft = target.square_feet_min
+      target_sqft_max = (target.square_feet_max + ((20*target.square_feet_max)/100))
+      target_max_mon_pay = (target.max_mon_pay + ((25*target.max_mon_pay)/100))
+      target_max_down_pay = (target.max_dow_pay + ((20*target.max_dow_pay)/100) + 4000)
+
+      if target.price_max > 0 then
+        template += " && (price = 0 || (" + target.price_min.to_s + " <= price && price <= " + target.price_max.to_s + "))"
+      end
+
+      template += " && (" + target.units_min.to_s + " <= units && units <= " + target.units_max.to_s + ")" if target.property_type == 'multi_family'
+#       template += " && (acres >= " + target.acres_min.to_s + ")" if target.property_type == 'acreage'
+      template += " && (acres >= " + target.acres_min.to_s + " && acres <= " + target.acres_max.to_s + ")" if target.property_type == 'acreage'
+      template += " && (min_mon_pay <= ?) && (min_dow_pay <= ?) && !((min_mon_pay <= ?) && (min_dow_pay <= ?))" if vlacot
+    end
+
+    # add optional join to restrict to newly modified profiles (since previous login)
+    unless previous_login_at == nil
+      template += " && (profiles.created_at > '" + previous_login_at.strftime("%Y-%m-%d %H:%M:%S") + "')"
+      join_clause = "INNER JOIN profiles ON profiles.id = profile_field_engine_indices.profile_id"
+    end
+  
+    unless include_inactive
+      template += " && (users.activation_code is null) "
+      join_clause = "INNER JOIN profiles ON profiles.id = profile_field_engine_indices.profile_id" if join_clause.nil?
+      join_clause += " INNER JOIN users ON users.id = profiles.user_id "
+      if created_date.is_a?(Date)  # This is for cron job of daily buyer responder email
+          creation_date_of_profile = profile.created_at.to_date.to_s(:db) if profile.created_at.is_a?(Time)
+          unless creation_date_of_profile.blank?
+             join_clause += " and ( date(profiles.created_at) = '#{created_date}' or date(profiles.updated_at) ='#{created_date}' or date(profiles.deleted_at) =  '#{created_date + 11 }'  )  " if !(creation_date_of_profile == created_date.to_s(:db)) 
+          end
+      end
+      join_clause += " and date(profile_created_at) <= '#{to_date}'" if !from_date.nil? and !to_date.nil?
+      join_clause += " and date(profile_created_at) = '#{created_date}'" if daily_summary
+    end
+        
+    if listing_type == 'fsbo'
+      listing_where = " profile_field_engine_indices.profile_type_id = '#{ProfileType.get_guid('owner')}' "
+    elsif listing_type == 'listed'
+      listing_where = " profile_field_engine_indices.profile_type_id = '#{ProfileType.get_guid('seller_agent')}' "
+    elsif listing_type == 'buyer'
+      listing_where = " profile_field_engine_indices.profile_type_id = '#{ProfileType.get_guid('buyer')}' "
+    elsif listing_type == 'buyer_agent'
+      listing_where = " profile_field_engine_indices.profile_type_id = '#{ProfileType.get_guid('buyer_agent')}' "
+    end
+
+   
+
+    template += " && " + listing_where unless listing_where.nil?
+    if sfmfct then
+
+       count = ProfileFieldEngineIndex.count( :all, :conditions => [ template, target.property_type, target.beds, target.baths, target.square_feet, target_sqft,target_min_mon_pay, target_min_dow_pay, target.square_feet,target.square_feet, target.min_mon_pay, target.min_dow_pay ], :joins => join_clause ) if target.is_owner
+      count = ProfileFieldEngineIndex.count( :all, :conditions => [ template, target.property_type, target.beds, target.baths, target_sqft, target_sqft_max, target_max_mon_pay, target_max_down_pay, target_sqft, target.square_feet_max, target.max_mon_pay, target.max_dow_pay ], :joins => join_clause ) if !target.is_owner
+
+      matches = ProfileFieldEngineIndex.find( :all, { :conditions => [ template, target.property_type, target.beds, target.baths, target.square_feet, target_sqft,target_min_mon_pay, target_min_dow_pay, target.square_feet,target.square_feet, target.min_mon_pay, target.min_dow_pay ], :joins => join_clause, :order=>"profile_field_engine_indices.id" }.merge(sort_hash) ) if target.is_owner
+      matches = ProfileFieldEngineIndex.find( :all, { :conditions => [ template, target.property_type, target.beds, target.baths, target_sqft, target_sqft_max, target_max_mon_pay, target_max_down_pay, target_sqft, target.square_feet_max, target.max_mon_pay, target.max_dow_pay ], :joins => join_clause, :order=>"profile_field_engine_indices.id" }.merge(sort_hash) ) if !target.is_owner
+    else
+      count = ProfileFieldEngineIndex.count( :all, :conditions => [ template, target.property_type,target_min_mon_pay,target_min_dow_pay, target.min_mon_pay, target.min_dow_pay ], :joins => join_clause ) if target.is_owner
+      count = ProfileFieldEngineIndex.count( :all, :conditions => [ template, target.property_type, target_max_mon_pay, target_max_down_pay, target.max_mon_pay, target.max_dow_pay ], :joins => join_clause ) if !target.is_owner
+
+      matches = ProfileFieldEngineIndex.find( :all, { :conditions => [ template, target.property_type,target_min_mon_pay,target_min_dow_pay, target.min_mon_pay, target.min_dow_pay ], :joins => join_clause, :order=>"profile_field_engine_indices.id"}.merge(limit_and_sort_hash) ) if target.is_owner
+      matches = ProfileFieldEngineIndex.find( :all, { :conditions => [ template, target.property_type, target_max_mon_pay, target_max_down_pay, target.max_mon_pay, target.max_dow_pay ], :joins => join_clause, :order=>"profile_field_engine_indices.id"}.merge(limit_and_sort_hash) ) if !target.is_owner
+    end
+
+
+  end
+    # build a code for the near zipcodes and match the criteria
+    # build zip_code portion of query template
+    near_template = "("
+
+    # build zip_code criteria
+
+  near_matched_zipcodes=Array.new
+  targets.each do |targt|
+
+   zips_latlongs = Zip.find(:first, :conditions=>["zip=?",targt.zip_code])
+
+    if !zips_latlongs.nil?
+#       zips_latlongs = ZipCodeMap.lookup_latlng(profile.permalink).split(",") if !ZipCodeMap.lookup_latlng(profile.permalink).nil?
+#       zips_latlongs = Zip.find(:first, :conditions=>["zip=?",target.zip_code]) if ZipCodeMap.lookup_latlng(profile.permalink).nil?
+        near_matches = ZipCodeMap.find_adjacent_zips_for_coords( zips_latlongs.lat, zips_latlongs.lng, 3, 3 )
+        unless near_matches.blank?
+          near_matches = near_matches.map(&:zip) - exact_zips
+          #@near_matches = near_matches
+          near_matches.each do |i|
+            near_template += " || " unless near_template == "("
+#             near_template += "zip_code = " + i
+            near_template += "zip_code = " + "'" + i + "'"
+            near_matched_zipcodes << i
+          end
+        end
+    end
+  end
+    # build rest of where clause
+    if !near_matched_zipcodes.empty?
+
+      if target.is_owner then
+        near_template += ") && (is_owner = false) && (property_type = ?)  && (status = 'active')"
+        near_template += " && (beds <= ?) && (baths <= ?) && (square_feet_min <= ?) && (square_feet_max >= ?) && (max_mon_pay >= ?) && (max_dow_pay >= ?)" if sfmfct
+        target_sqft = ((target.square_feet/1.20))
+        target_min_mon_pay = (target.min_mon_pay/1.25)
+        target_min_dow_pay = !(target.min_dow_pay==0) ? ((target.min_dow_pay - 4000)/1.20) : 0
+
+        if target.price > 0 then
+          near_template += " && (price_max = 0 || (price_min <= " + target.price.to_s + " && " + target.price.to_s + " <= price_max))"
+        end
+
+        near_template += " && (units_max = 0 || (units_min <= " + target.units.to_s + " && " + target.units.to_s + " <= units_max))" if target.property_type == 'multi_family'
+#         near_template += " && (acres_min <= " + target.acres.to_s + ")" if target.property_type == 'acreage'
+        near_template += " && (acres_min <= " + target.acres.to_s + " && acres_max >= " + target.acres.to_s + ")" if target.property_type == 'acreage'
+        near_template += " && (max_mon_pay >= ?) && (max_dow_pay >= ?)" if vlacot
+      else
+        near_template += ") && (is_owner = true) && (property_type = ?)  && status='active'"
+        near_template += " && (beds >= ?) && (baths >= ?) && (square_feet >= ?) && (square_feet <= ?) && (min_mon_pay <= ?) && (min_dow_pay <= ?)" if sfmfct
+
+        target_sqft = target.square_feet_min
+        target_sqft_max = (target.square_feet_max + ((20*target.square_feet_max)/100))
+        target_max_mon_pay = (target.max_mon_pay + ((25*target.max_mon_pay)/100))
+        target_max_down_pay = (target.max_dow_pay + ((20*target.max_dow_pay)/100) + 4000)
+
+        if target.price_max > 0 then
+          near_template += " && (price = 0 || (" + target.price_min.to_s + " <= price && price <= " + target.price_max.to_s + "))"
+        end
+
+        near_template += " && (" + target.units_min.to_s + " <= units && units <= " + target.units_max.to_s + ")" if target.property_type == 'multi_family'
+#         near_template += " && (acres >= " + target.acres_min.to_s + ")" if target.property_type == 'acreage'
+        near_template += " && (acres >= " + target.acres_min.to_s + " && acres <= " + target.acres_max.to_s + ")" if target.property_type == 'acreage'
+        near_template += " && (min_mon_pay <= ?) && (min_dow_pay <= ?)" if vlacot
+      end
+
+      # add optional join to restrict to newly modified profiles (since previous login)
+      unless previous_login_at == nil
+        near_template += " && (profiles.created_at > '" + previous_login_at.strftime("%Y-%m-%d %H:%M:%S") + "')"
+        near_join_clause = "INNER JOIN profiles ON profiles.id = profile_field_engine_indices.profile_id"
+      end
+      
+      unless include_inactive
+        near_template += " && (users.activation_code is null) "
+        near_join_clause = "INNER JOIN profiles ON profiles.id = profile_field_engine_indices.profile_id" if near_join_clause.nil?
+        near_join_clause += " INNER JOIN users ON users.id = profiles.user_id "
+        if created_date.is_a?(Date)  # This is for cron job of daily buyer responder email
+            creation_date_of_profile = profile.created_at.to_date.to_s(:db) if profile.created_at.is_a?(Time)
+            unless creation_date_of_profile.blank?
+              near_join_clause += " and ( date(profiles.created_at) = '#{created_date}' or date(profiles.updated_at) ='#{created_date}' or date(profiles.deleted_at) =  '#{created_date + 11 }'  )  " if !(creation_date_of_profile == created_date.to_s(:db))
+            end
+        end
+        near_join_clause += " and date(profile_created_at) <= '#{to_date}'" if !from_date.nil? and !to_date.nil?
+        join_clause += " and date(profile_created_at) = '#{created_date}'" if daily_summary
+      end
+
+      if listing_type == 'fsbo'
+        listing_where = " profile_field_engine_indices.profile_type_id = '#{ProfileType.get_guid('owner')}' "
+      elsif listing_type == 'listed'
+        listing_where = " profile_field_engine_indices.profile_type_id = '#{ProfileType.get_guid('seller_agent')}' "
+      elsif listing_type == 'buyer'
+        listing_where = " profile_field_engine_indices.profile_type_id = '#{ProfileType.get_guid('buyer')}' "
+      elsif listing_type == 'buyer_agent'
+        listing_where = " profile_field_engine_indices.profile_type_id = '#{ProfileType.get_guid('buyer_agent')}' "
+      end
+
+
+      near_template += " && " + listing_where unless listing_where.nil?
+      if sfmfct then
+        near_count = ProfileFieldEngineIndex.count( :all, :conditions => [ near_template, target.property_type, target.beds, target.baths, target.square_feet, target_sqft, target_min_mon_pay, target_min_dow_pay], :joins => near_join_clause ) if target.is_owner
+        near_count = ProfileFieldEngineIndex.count( :all, :conditions => [ near_template, target.property_type, target.beds, target.baths, target_sqft, target_sqft_max, target_max_mon_pay, target_max_down_pay], :joins => near_join_clause ) if !target.is_owner
+        count=count+near_count
+        return count if(mode == :count) # support rapid query for getting the count only
+        near_matches = ProfileFieldEngineIndex.find( :all, { :conditions => [ near_template, target.property_type, target.beds, target.baths, target.square_feet, target_sqft, target_min_mon_pay, target_min_dow_pay], :joins => near_join_clause, :order=>"profile_field_engine_indices.id" }.merge(sort_hash) ) if target.is_owner
+        near_matches = ProfileFieldEngineIndex.find( :all, { :conditions => [ near_template, target.property_type, target.beds, target.baths, target_sqft, target_sqft_max, target_max_mon_pay, target_max_down_pay], :joins => near_join_clause, :order=>"profile_field_engine_indices.id" }.merge(sort_hash) ) if !target.is_owner
+      else
+        near_count = ProfileFieldEngineIndex.count( :all, :conditions => [ near_template, target.property_type, target_min_mon_pay, target_min_dow_pay], :joins => near_join_clause ) if target.is_owner
+        near_count = ProfileFieldEngineIndex.count( :all, :conditions => [ near_template, target.property_type, target_max_mon_pay, target_max_down_pay], :joins => near_join_clause ) if !target.is_owner
+        count=count+near_count
+        return count if(mode == :count) # support rapid query for getting the count only
+        near_matches = ProfileFieldEngineIndex.find( :all, { :conditions => [ near_template, target.property_type, target_min_mon_pay, target_min_dow_pay], :joins => near_join_clause, :order=>"profile_field_engine_indices.id"}.merge(sort_hash) ) if target.is_owner
+        near_matches = ProfileFieldEngineIndex.find( :all, { :conditions => [ near_template, target.property_type, target_max_mon_pay, target_max_down_pay], :joins => near_join_clause, :order=>"profile_field_engine_indices.id"}.merge(sort_hash) ) if !target.is_owner
+      end
+
+      matches = matches | near_matches
+    end
+
+    unless number_to_fetch == 0
+      total_pages = (count / number_to_fetch)
+      total_pages += 1 if (count % number_to_fetch) != 0
+      total_pages = 1 if total_pages == 0
+    else
+      total_pages = 1
+    end
+
+    if mode == :ids
+      profile_ids = matches.collect { |match| match.profile_id if !match.profile.nil? }
+      return profile_ids, count, total_pages
+    end
+
+    matches.each do |match|
+      # optimization note: cannot replace with IN clause as we can't guarantee the order of the profiles returned,
+      # which will mess up the sorting and create random order changes during pagination
+      results << match.profile if !match.profile.nil?
+    end
+
+
+    return results, count, total_pages
+  end
+end

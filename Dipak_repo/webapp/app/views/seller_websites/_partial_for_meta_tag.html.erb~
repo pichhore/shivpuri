@@ -1,0 +1,6 @@
+<%- @page_title = "Post a Property For Sale" -%>
+<%- @page_heading = "Seller Lead: #{@seller_profile.first_name.to_s + " " + @seller_profile.last_name.to_s}" %>
+<%- @meta_description = "Create a Property Owner Profile on Dwellgo’s Austin Real Estate Community and instantly access buyers interested in the Austin Real Estate Market, Texas" -%>
+<%- @meta_keywords = "austin real estate, austin real estate community, Texas, dwellgo" -%>
+<% require_js_controllers :tab, :account_settings, :profile_setup, :expand_collapse -%>
+<% require_js_helpers :currency_field, :integer_field , :date_field -%>

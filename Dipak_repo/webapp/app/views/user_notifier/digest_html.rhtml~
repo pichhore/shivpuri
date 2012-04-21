@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title><%=@title%></title>
+</head>
+<body style="background: #FFFFFF; color: #000000;">
+
+<div>
+
+<p>Hello <%=@user.first_name%>,</p>
+
+<p>Here is  your <%=@interval.capitalize%> Activity  on your REIMatcher profile(s). A number next to "New" or "New Messages" shows new activity since your last visit.</p>
+
+<h2>My Properties</h2>
+
+<%= "<p>None</p>" if @owner_profiles.empty? -%>
+<%- @owner_profiles.each_with_index do |profile,index| -%>
+<div class="profile" style="color: #5cc003; font-size: 1.2em;">
+<div class="property" style="border: 1px solid #f9b902; padding: 5px;">
+<table width="100%" cellpadding="2" cellspacing="2" border="0">
+  <thead>
+  </thead>
+  <tbody>
+  <tr>
+    <td valign="middle" width="100px" rowspan="4"><%=image_tag("http://assets.reimatcher.com/#{profile.thumbnail_url(1)}", :width=>60, :alt=>"thumbnail")%></td>
+    <td valign="middle" width="300px" style="color: #000000"><%=truncate(profile.display_name, :length => 100)%></td>
+    <td valign="middle" width="100px" align="right" style="font-size: 0.9em; color: #000000" nowrap="true">Matches:</td>
+    <td valign="middle" width="40px" style="font-size: 1.0em; color: #000000"><%=profile.display_match_total_near_count("all")%></td>
+  </tr>
+  <tr>
+    <td valign="middle" width="300px" class="privacy" style="color: #9C9AC5;"><%=profile.public_profile? ? (image_tag("http://assets.reimatcher.com/images/icons/icon_public.gif", :alt=>"")) : (image_tag("http://assets.reimatcher.com/images/icons/icon_private.gif", :alt=>"")) %> <%=profile.display_privacy%></td>
+    <td valign="middle" width="100px" align="right" style="font-size: 0.9em; color: <%=profile.display_match_count_new.to_s == "0" ? "#000000" : "#333399"%>" nowrap="true">New:</td>
+    <td valign="middle" width="40px" style="font-size: 0.9em; color: <%=profile.display_match_total_near_new_count.to_s == "0" ? "#000000" : "#333399"%>"><%=profile.display_match_total_near_new_count%></td>
+  </tr>
+  <tr>
+    <td valign="middle" width="300px"><%=link_to "Visit this profile", url_for( hash_for_profile_url({:id=>profile.id}).merge( { :only_path => false, :protocol => 'http'}) ), :style=>"color: #5cc003"%></td>
+    <td valign="middle" width="100px" align="right" style="font-size: 0.9em; color: #000000" nowrap="true">Views:</td>
+    <td valign="middle" width="40px" style="font-size: 0.9em; color: #000000"><%=profile.display_match_count_views%></td>
+  </tr>
+  <tr>
+    <td valign="middle" width="300px">&nbsp;</td>
+    <td valign="middle" width="100px" align="right" style="font-size: 0.9em; color: <%=profile.display_message_count_new.to_s == "0" ? "#000000" : "#333399"%>" nowrap="true">New Messages:</td>
+    <td valign="middle" width="40px" style="font-size: 0.9em; color: <%=profile.display_message_count_new.to_s == "0" ? "#000000" : "#333399"%>"><%=profile.display_message_count_new%></td>
+  </tr>
+  </tbody>
+  <tfoot>
+  </tfoot>
+</table>
+</div>
+</div>
+<p>&nbsp;</p>
+<%- end -%>
+
+
+<h2>My Buyer Profile(s)</h2>
+
+<%= "<p>None</p>" if @buyer_profiles.empty? -%>
+<%- @buyer_profiles.each_with_index do |profile,index| -%>
+<div class="profile" style="color: #5cc003; font-size: 1.2em;">
+<div class="buyer" style="border: 1px solid #CEEEFB; padding: 5px;">
+<table width="100%" cellpadding="2" cellspacing="2" border="0">
+  <thead>
+  </thead>
+  <tbody>
+  <tr>
+    <td valign="middle" width="100px" rowspan="4"><%=image_tag("http://assets.reimatcher.com/#{profile.thumbnail_url(1)}", :width=>60, :alt=>"thumbnail")%></td>
+    <td valign="middle" width="300px" style="color: #000000"><%=truncate(profile.private_display_name, :length => 100)%></td>
+    <td valign="middle" width="100px" align="right" style="font-size: 0.9em; color: #000000">Matches:</td>
+    <td valign="middle" width="40px" style="font-size: 0.9em; color: #000000"><%=profile.display_match_total_near_count("all")%></td>
+  </tr>
+  <tr>
+    <td valign="middle" width="300px" class="privacy" style="color: #9C9AC5;">&nbsp;</td>
+    <td valign="middle" width="100px" align="right" style="font-size: 0.9em; color: <%=profile.display_match_count_new.to_s == "0" ? "#000000" : "#333399"%>">New:</td>
+    <td valign="middle" width="40px" style="font-size: 0.9em; color: <%=profile.display_match_total_near_new_count.to_s == "0" ? "#000000" : "#333399"%>"><%=profile.display_match_total_near_new_count%></td>
+  </tr>
+  <tr>
+    <td valign="middle" width="300px"><%=link_to "Visit this profile", url_for( hash_for_profile_url({:id=>profile.id}).merge( { :only_path => false, :protocol => 'http'}) ), :style=>"color: #5cc003"%></td>
+    <td valign="middle" width="100px" align="right" style="font-size: 0.9em; color: #000000">Views:</td>
+    <td valign="middle" width="40px" style="font-size: 0.9em; color: #000000"><%=profile.display_match_count_views%></td>
+  </tr>
+  <tr>
+    <td valign="middle" width="300px">&nbsp;</td>
+    <td valign="middle" width="100px" align="right" nowrap="true" style="font-size: 0.9em;  color: <%=profile.display_message_count_new.to_s == "0" ? "#000000" : "#333399"%>">New Messages:</td>
+    <td valign="middle" width="40px" style="font-size: 0.9em; color: <%=profile.display_message_count_new.to_s == "0" ? "#000000" : "#333399"%>"><%=profile.display_message_count_new%></td>
+  </tr>
+  </tbody>
+  <tfoot>
+  </tfoot>
+</table>
+</div>
+</div>
+<%- end -%>
+
+<p>&nbsp;</p>
+
+<p>Your Email Summary is currently sent <%=@interval%>. To change your subscription options, click the link below:<br/>
+<%=link_to @change_frequency_link, @change_frequency_link%></p>
+
+</div>
+
+
+
+</body>

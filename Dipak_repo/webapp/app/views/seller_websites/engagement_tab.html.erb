@@ -1,0 +1,56 @@
+<%= render :partial => "partial_for_meta_tag"%>
+<%=stylesheet_link_tag "lightbox"%>
+<% require_js_controllers :tab, :account_settings, :profile_setup, :expand_collapse, :lightbox  -%>
+<%- content_for :page_scripts do -%>
+
+Event.observe(window, 'load', function() {
+  account_settings_controller = new NL.AccountSettingsController();
+lightbox_controller = new NL.LightboxController();
+});
+
+ function go_to_seller_note_full_page_view(full_page_view_path)
+{
+        document.location.href = full_page_view_path
+    }
+<%- end -%>
+
+  <%= render :partial => "scratch_pad_lightbox" %>
+
+  <div class="tabset larger">
+      <%=render :partial=>"seller_lead_full_page_tab", :locals=>{:active_class_engagement_tab=>"active"}%>
+  </div><br><br>
+<div class="full">
+  <h3>Engagement</h3>
+  <fieldset>
+ <div style="display:none;margin-left:205px;" class="loading" id="spinner"><span class="text">Loading...</span></div>
+<div id="ajax_update_div">
+    <% if !@seller_engagement_infos.blank? %>
+    <table  border="0" cellspacing="0" class="investor_inbox_grid">
+    <tr>
+      <th>Date</th>
+      <th>Note Type</th>
+      <th>Description</th>
+    </tr>
+      <% @seller_engagement_infos.each do |seller_engagement_info| %>
+        <tr class="hover_change">
+            <td class="investor_inbox_seperator" onclick="go_to_seller_note_full_page_view('/seller_websites/seller_note_full_page_view/<%= params[:id] %>?seller_note_id=<%= seller_engagement_info.id%>');" >
+              <%= seller_engagement_info.created_at.strftime("%m/%d/%y")%>
+            </td>
+
+            <td class="investor_inbox_seperator" onclick="go_to_seller_note_full_page_view('/seller_websites/seller_note_full_page_view/<%= params[:id] %>?seller_note_id=<%= seller_engagement_info.id%>');">
+                <% if is_note_type_is_email(seller_engagement_info.note_type) and is_email_is_bouced_email(@seller_profile.email.to_s) %><b class="bounce_email_exclamation_mark" title="Bounced Email">! </b><% end %><%= seller_engagement_info.note_type%>
+            </td>
+            
+            <td class="investor_inbox_seperator" onclick="go_to_seller_note_full_page_view('/seller_websites/seller_note_full_page_view/<%= params[:id] %>?seller_note_id=<%= seller_engagement_info.id%>');">
+              <%= display_email_with_assign_values_for_seller_responder(truncate(seller_engagement_info.subject,40), @seller_profile, seller_engagement_info.note_type) %>
+            </td>
+         </tr>
+      <%end%>
+    </table>
+    <div align="right"><%= will_paginate @seller_engagement_infos %></div>
+  <%else%>
+    No Seller Note Found
+  <%end%>
+</div>
+  </fieldset>
+</div>

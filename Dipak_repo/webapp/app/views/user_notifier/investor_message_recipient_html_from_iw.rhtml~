@@ -1,0 +1,18 @@
+
+<% url = REIMATCHER_URL %>
+
+<br/>
+A user has left a message through the Contact Us link on
+your REIMatcher Investor Website.  Here's the details:
+<br/>
+Name: <b><%=@profile_message_recipient.name%></b><br/>
+Email: <b><%=@profile_message_recipient.email%></b><br/>
+Phone: <b><%=@profile_message_recipient.phone%></b><br/>
+Message: <%=@profile_message_recipient.message%><br/><br/>
+
+Received From: <br />
+<%= create_investor_website_url(@investor_website_id) %>
+<br/><br/>
+Thanks,<br/>
+
+REIMatcher

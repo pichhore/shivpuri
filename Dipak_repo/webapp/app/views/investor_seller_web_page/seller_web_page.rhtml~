@@ -1,0 +1,77 @@
+<%- @page_title = "REIMatcher11-" + @seller_website.header.to_s -%>
+<%- @meta_title = @seller_website.meta_title -%>
+<%- @meta_description = @seller_website.meta_description -%>
+ <%= render :partial => "show_navigation_link" %>
+  <div align="center" id="seller_web_page_header">
+    <%= @seller_website.header%>
+  </div>
+
+<div id="seller_page_main_page_div">
+  <%= render :partial => "lead_magnet" %>
+
+      <div class="welcome_video_tour">
+        <% if(!@seller_website.home_page_embed_video.blank?) %>
+              <%= customize_embedcode(@seller_website.home_page_embed_video) %>
+        <% elsif(!@seller_website.home_page_video_tour.blank?) %>
+              <% video_id = @seller_website.home_page_video_tour.split('=')[-1] %>
+              <object width="400px" height="300px"><param name="movie" value="http://www.youtube.com/v/<%=video_id%>&amp;hl=en_US&amp;fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/<%=video_id%>&amp;hl=en_US&amp;fs=1;&autoplay=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="400px" height="300px" wmode="opaque"></embed></object>
+        <% else %>
+              <center>
+                  <div id="evp-e90c4c631f131f5f3463dc84ad5166dd-wrap" class="evp-video-wrap"></div>
+                  <script type="text/javascript"    src="http://www.damonflowers.com/evp/framework.php?div_id=evp-e90c4c631f131f5f3463dc84ad5166dd&id=c2VsbGVyLXdlYnNpdGUtSFAtdjEubTR2&v=1307139772&profile=default">
+                  </script>
+                  <script type="text/javascript"><!--
+                  _evpInit('c2VsbGVyLXdlYnNpdGUtSFAtdjEubTR2[evp-e90c4c631f131f5f3463dc84ad5166dd]');//--></script>
+              </center>
+        <% end %>
+      </div>
+
+<div style="margin-top:340px;margin-right:0px;">
+
+  <%= @seller_website.home_page_main_text_1%><br><br>
+  <table border="1" style="border-right:medium none; border-bottom:medium none;width: 100%;">
+    <tr><td style="border-top:0 none;border-left:0 none;">
+      <% if !@seller_lead_testimonials.nil? %>
+        <% @seller_lead_testimonials.each do |seller_lead_testimonail|%>
+          <%= seller_lead_testimonail.subject %>
+          <img src="/images/large_quote_symbol.gif" class="seller_lead_testimonail_image" >
+          <div class="seller_lead_testimonail" ><%= seller_lead_testimonail.testimonial %></div>
+        <% end %>
+     <% end %></td>
+   </tr>
+  </table><br>
+
+  <%= @seller_website.home_page_main_text_2%><br><br>
+
+</div>
+</div>
+<script type="text/javascript">
+    function custom_auto_play(){
+        var pp = $f('evp-e90c4c631f131f5f3463dc84ad5166dd');
+        pp.play();
+    }
+    setTimeout("custom_auto_play()" , 12000) ;
+
+        function fields_get_states(){
+          var country_id = $('fields_country').value;
+          if(country_id == "CA"){
+            $('zip_block').innerHTML = "Postal Code:";
+            $('state_block').innerHTML = "Province:";
+          }
+        else{
+            $('zip_block').innerHTML = "Zip Code:";
+            $('state_block').innerHTML = "State:";
+          }
+          new Ajax.Request('/states',
+            {
+              method:'get',
+              parameters: {country_id: country_id},
+              onSuccess: function(transport){
+              var response = transport.responseText;
+              $('fields_state').innerHTML = response;
+            },
+          onFailure: function(){ alert('Something went wrong...') }
+      });
+}
+  </script>
+

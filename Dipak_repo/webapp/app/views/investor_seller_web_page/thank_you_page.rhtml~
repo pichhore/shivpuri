@@ -1,0 +1,51 @@
+<div style="margin-top:162px;">
+
+<%= render :partial => "not_show_navigation_link" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<%- @page_title = "REIMatcher-Thank You" -%>
+<%- @page_heading = "Thank You" -%>
+<%- @meta_title = @seller_website.meta_title -%>
+<%- @meta_description = @seller_website.meta_description -%>
+<title>REI</title>
+
+    <link href="lightbox.css" media="screen" rel="stylesheet" type="text/css" />
+	<script src="lightbox_controller.js" type="text/javascript"></script>
+  <SCRIPT type="text/javascript" language="JavaScript">
+
+     window.onload = function timeMsg()
+       {
+       var t=setTimeout("alertMsg()",10000);
+       }
+       function alertMsg()
+       {
+       window.location.href="/s/<%= params['permalink_text'] %>";
+       }
+       timeMsg()
+
+        window.onload = function window_onload()
+        {
+        lightbox_controller = new NL.LightboxController();
+        }
+
+  </SCRIPT>
+  
+</head>
+
+<body style="font-family: helvetica, arial, sanserif">
+
+  <div id="overlay_Lightbox"></div>
+  <div id="lightbox_contents" style="height:300px; width: 550px;"  >
+  <div id="lightboxHeader">Thank You</div>
+  <h3 style="margin:40px;">Your information has been received! We will be back in touch with you shortly…</h3><br>
+  <h3 style="margin-top:-46px;">Thank You for Contacting Us!</h3>
+  <h3><%=link_to  "Go To Homepage" , {:controller=>"investor_seller_web_page", :action=>"seller_web_page", :permalink_text => params[:permalink_text]},:style=>"text-decoration:none;" %></h3>
+  <div id="lightboxFooter_thank"></div>
+
+</body>
+</html>
+  </div>

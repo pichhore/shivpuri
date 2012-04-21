@@ -1,0 +1,59 @@
+class AlertsController < ApplicationController
+  
+  before_filter :login_required
+  before_filter :admin_required, :only=>:process
+  
+  def dismiss
+    begin
+      alert = Alert.find(params[:id])
+      if alert
+        if alert.user != current_user
+          raise "User/Alert mismatch"
+        end
+        alert.dismissed = true
+        alert.save!
+      end
+    
+    #Resque.enqueue(ExpiredAlertsDismissedWorker)
+    
+    
+    rescue  Exception => exp
+      ExceptionNotifier.deliver_exception_notification( exp,self, request, params)
+      logger.error("Error dismissing alert #{exp.message}")
+      handle_error("Error dismissing alert",exp) and return
+    end
+    render :text=>"success" and return
+  end
+  
+  # This is so we can display the output directly to the browser and have it look ok
+  class MyFormatter < Logger::Formatter
+    MyFormat = "%s<br/>"
+    def call(severity, time, progname, msg)
+      MyFormat % [msg2str(msg)]
+    end
+  end
+    
+  def process_alerts
+    render :text => lambda { |response, out| 
+      logger = Logger.new(out)
+      logger.formatter = MyFormatter.new
+      AlertEngine.process(logger);
+    }
+  end
+  
+  def process_email_alerts
+    render :text => lambda { |response, out| 
+      logger = Logger.new(out)
+      logger.formatter = MyFormatter.new
+      EmailAlertEngine.process(logger);
+    }
+  end
+
+  def process_user_email_alerts
+    render :text => lambda { |response, out| 
+      logger = Logger.new(out)
+      logger.formatter = MyFormatter.new
+      UserEmailAlertEngine.process(logger);
+    }
+  end
+end

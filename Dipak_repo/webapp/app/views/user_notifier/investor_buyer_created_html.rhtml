@@ -1,0 +1,53 @@
+Hey <%=@investor_first_name%>,<br/>
+<br/>
+The following Buyer Profile was just received from
+<br/>
+<% if @new_format_url %>
+<%=@new_format_url %>.
+<% else %>
+<%=@investor_url.to_s + "/" + @url_parameter.to_s + "/"  + @permalink_text.to_s %>.
+<% end %>
+<br/>
+
+<br/>
+
+<br/>
+First Name:<%=@retail_buyer_info.first_name%>
+<br/>
+Last Name: <%=@retail_buyer_info.last_name%>
+<br/>
+Phone: <%=@retail_buyer_info.phone%>
+
+<br/>
+Email: <%=@retail_buyer_info.email_address%>
+<br/>
+
+<br/>
+<b>Buyer Details</b>
+<br/>
+Max Monthly Paymt: <%=@profile_retail_buyer['max_mon_pay']%>
+<br/>
+Max Down Paymt: <%=@profile_retail_buyer['max_dow_pay']%>
+<br/>
+Beds: <%=display_beds_when_retail_buyer_created(@profile_retail_buyer['beds']) %>
+
+<br/>
+Baths: <%= display_baths_when_retail_buyer_created(@profile_retail_buyer['baths'])%>
+
+<br/>
+SQFT: <%=@profile_retail_buyer['square_feet_min']%>-<%=@profile_retail_buyer['square_feet_max']%><br/>
+<% if @profile_retail_buyer['zip_code'].blank? %>
+  City: <%= @city %>
+<% else %>
+  Zip code: <%= @profile_retail_buyer['zip_code'] %>
+<% end %>
+<br/>
+Looking For: <%=@profile_retail_buyer['description']%>
+<br/>
+
+<br/>
+Thanks,
+<br/>
+
+<br/>
+REIMatcher<br/>

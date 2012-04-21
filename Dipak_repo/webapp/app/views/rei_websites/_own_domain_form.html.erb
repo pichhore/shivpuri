@@ -1,0 +1,24 @@
+<div class="seller_domain_margin">
+  <div>Enter Your Domain Name</div>
+  <div><%= f.text_field "having_domain_name",:size=>30%></div>
+  <div><%=error_message_on :my_website_form,:having_domain_name %></div>
+</div>
+<div class="seller_having_instruction"> 
+  Instructions To Use
+  <fieldset style="margin:0px;">
+    <p>
+      In order to use your own domain for your <%= @website_type.capitalize %> Website, you will need to make a small change
+      to the DNS records where your domain is registered…
+    </p>
+    
+    <p>You will need to point the “A” record of your domain to this IP address : <b>67.207.151.142</b></p>
+    
+    <p>
+       If you need help, check out <a href="http://www.reimatcher.com/faq/buyer-marketing/redirecting-ur-vanity-domain/" target="_blank">Instructions For Using Your Own Domain</a>
+    </p>
+    
+    <p>
+       <b>Note:</b> After you have made the DNS change above, please allow 24-48 hrs for your domain to be linked to your <%= @website_type.capitalize %> Website
+    </p>
+  </fieldset>
+</div>

@@ -1,0 +1,27 @@
+<head>
+  <!--[if IE 7]>
+    <style type="text/css">
+     .nonselecteddashboard{position: absolute!important;}
+     .selecteddashboard{position: absolute!important;}
+     .selectedproperties{position: absolute!important; top: 86px;}
+     .nonselectedproperties{position: absolute!important; top: 86px;}
+     .nonselectedapplications{position: absolute!important; top: 86px;}
+     .selectedapplications{position: absolute!important; top: 86px;}
+     .nonselectedmessages{position: absolute!important; top: 86px;}
+     .selectedmessages{position: absolute!important; top: 86px;}
+     .nonselectedaccount{position: absolute!important; top: 86px;}
+     .selectedaccount{position: absolute!important; top: 86px;}
+     .nonselectedprofile{position: absolute!important; top: 86px;}
+     .selectedprofile{position: absolute!important; top: 86px;}
+    </style>
+  <![endif]-->
+</head>
+
+<ul style="position:relative; top:18px;right: 78px;" class="tabs_for_7" >
+  <li ><a href="/my/dashboard/my_dashboard" class ='<%= selected_method("MyDashboard", @selected_tab) %><%= "dashboard" %>' ></a></li>
+  <li ><a href="/my/dashboard/my_properties" class=<%= selected_method("Properties", @selected_tab)%><%= "properties"%>></a></li>
+  <li ><a href="/my/applications/my_applications" class=<%= selected_method("Applications", @selected_tab)%><%= "applications"%>></a></li>
+  <li ><a href="/my/messages" class='<%= selected_method("Messages", @selected_tab)%><%= "messages"%>'></a></li>
+  <li ><a href="/my/dashboard/my_account" class='<%=selected_method("Account", @selected_tab)%><%= "account"%>'></a></li>
+  <li><a href="/my/dashboard/my_profile" class='<%= selected_method("profile", @selected_tab)%><%= "profile"%>'></a></li>
+ </ul>

@@ -1,0 +1,134 @@
+<%- @page_title = "Create a Property Profile and instantly Access Austin Buyers at Your Doorstep" -%>
+<%- @page_heading = "Create a Property Profile and<br/>...Instantly Access Buyers <b>at Your Client's Doorstep</b>" -%>
+<%- @meta_description = "Create a Property Owner Profile on Dwellgo’s Austin Real Estate Community and instantly access buyers interested in the Austin Real Estate Market, Texas" -%>
+<%- @meta_keywords = "austin real estate, austin real estate community, Texas, dwellgo" -%>
+
+<% require_js_controllers :profile_setup, :expand_collapse -%>
+<% require_js_helpers :currency_field, :integer_field -%>
+<%= javascript_include_tag "wholesale" %>
+
+<%- content_for :page_scripts do -%>
+
+Event.observe(window, 'load', function() {
+  profile_setup_controller = new NL.ProfileSetupController($('fields_property_type'),$('fields_privacy_public'),$('fields_privacy_private'));
+  optional_expand_collapse = new NL.ExpandCollapseController($$('#optional h3')[0],$$('#optional div.optional_content')[0]);
+  currency_field_helper = new NL.CurrencyFieldHelper($('fields_price'));
+  integer_field_helper_sqft = new NL.IntegerFieldHelper($('fields_square_feet'));
+  integer_field_helper_units = new NL.IntegerFieldHelper($('fields_units'));
+  integer_field_helper_acres = new NL.IntegerFieldHelper($('fields_acres'));
+});
+
+<%- end -%>
+
+<div>
+
+  <%- if logged_in? -%>
+  <p class="note">Note: This new profile will be attached to your user account, <%=current_user.login%>. If you want to create a separate user account with a different email address, please <%=link_to "sign out", :controller=>'sessions', :action=>'destroy' if logged_in?%> first.</p>
+  <%- end -%>
+
+</div>
+
+<div class="form">
+
+<%= error_messages_for :criteria %>
+
+</div>
+
+<% form_for(:fields, :url => profiles_path) do |f| %>
+
+<%=hidden_field_tag "id",@profile_type.permalink%>
+
+<div class="form">
+
+  <h3>Step 1: Marketing Status & Investment Type</h3>
+
+  <%=render :partial=>"/shared/owner_fields", :locals=> {:f=>f}%>
+
+</div>
+
+<div class="form">
+
+  <%- if !logged_in? -%>
+
+  <h3>Step 3: Create an Account</h3>
+
+  <fieldset>
+
+    <table>
+
+      <tr>
+        <th class="label_required">First Name:</th>
+        <td><%=text_field "user", "first_name" %><%=error_message_on :user,:first_name%></td>
+      </tr>
+
+      <tr>
+        <th class="label_required">Last Name:</th>
+        <td><%=text_field "user", "last_name" %><%=error_message_on :user,:last_name%></td>
+      </tr>
+
+      <tr>
+        <th class="label_required">Real Estate License #:</th>
+        <td><%=text_field "user", "license_number" %><br/><%=error_message_on :user,:license_number%></td>
+      </tr>
+      
+      <tr>
+        <th class="label">Phone Number:</th>
+        <td><%=text_field "user", "business_phone" %><br/><%=error_message_on :user,:business_phone%></td>
+      </tr>
+      
+      <tr>
+        <th class="label_required">Email:</th>
+        <td><%=text_field "user", "email" %><%=error_message_on :user,:email%> (Never revealed to dwellgo members)</td>
+      </tr>
+<!--
+      <tr>
+        <th class="label">Home Phone:</th>
+        <td><%=text_field "user", "home_phone" %><%=error_message_on :user,:home_phone%></td>
+      </tr>
+
+      <tr>
+        <th class="label">Business Phone:</th>
+        <td><%=text_field "user", "business_phone" %><%=error_message_on :user,:business_phone%></td>
+      </tr>
+
+      <tr>
+        <th class="label">Mobile Phone:</th>
+        <td><%=text_field "user", "mobile_phone" %><%=error_message_on :user,:mobile_phone%></td>
+      </tr>
+-->
+      <tr>
+        <th class="label_required">Password:</th>
+        <td><%=password_field "user", "password" %> (See <%=link_to "Privacy Policy", {:controller=>"home", :action=>"privacy"}, :target=>"_new", :tabindex=>99%>)<br/><%=error_message_on :user,:password%></td>
+      </tr>
+
+      <tr>
+        <th class="label_required">Password (verify):</th>
+        <td><%=password_field "user", "password_confirmation" %><%=error_message_on :user,:password_confirmation%></td>
+      </tr>
+      
+      <tr>
+        <td colspan="2" align="center">I agree to the <%=link_to "Terms of Use", {:controller=>"home", :action=>"terms_of_use"}, :target=>"_new", :tabindex=>99%> <%=check_box "user", "terms_of_use" %><%=error_message_on :user,:terms_of_use%></td>
+      </tr>
+      
+    </table>
+
+  </fieldset>
+
+  <%- end -%>
+
+  <fieldset>
+  <p style="text-align: center; font-size: 0.9em;">
+    <b>Note:</b> Have another property you want to add? You may add as many as you want by clicking on 'Add a Property' from your My dwellgo page.
+  </p>
+  </fieldset>
+
+  <p> <%=image_tag "required.gif"%> Required Field </p>
+
+  <p style="text-align: center">
+    <%=submit_tag "Create", :class=>"submit"%>
+  </p>
+
+</div>
+
+<% end %>
+

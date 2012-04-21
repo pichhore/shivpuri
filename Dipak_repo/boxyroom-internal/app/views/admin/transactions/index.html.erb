@@ -1,0 +1,110 @@
+<head>
+  <!--[if IE 7]>
+   <style type="text/css">
+    table {
+    border: 1px solid #CCCCCC!important;
+    margin-bottom: 16px!important;
+    width: 100%!important;
+    }
+    table tbody td{ border-bottom :1px solid #CCCCCC!important;}
+   </style>
+  <![endif]-->
+</head>
+<div class="container" style="overflow: visible;">
+  <%= flash_message %>
+  <div id="header-wp" class="header_admin_transaction_bottom_margin">
+    <h1>Transactions</h1>
+  </div>
+    <div class="">
+    <ul>
+      <li><a id="closing" href="/admin/transactions?queue=closing" class ='<%= selected_method("closing", @selected_sub_tab) %><%= "closing" %>'></a></li>
+      <li><a id="refunds" href="/admin/transactions?queue=refunds" class ='<%= selected_method("refunds", @selected_sub_tab) %><%= "refunds" %>'></a></li>
+      <li><a id="open" href="/admin/transactions?queue=open" class ='<%= selected_method("open", @selected_sub_tab) %><%= "open" %>'></a></li>
+      <!--<li><%#= link_to "Archives", archive_admin_transactions_path %></li>-->
+    </ul>
+  </div>
+
+    <table cellspacing="0" class="listings">
+      <caption>Users Transactions</caption>
+      <colgroup>
+        <col class="description" />
+	<col class="description" />
+        <col class="description" />
+        <col class="amount" />
+        <col class="description" />
+        <col class="status" />
+        <col class="actions" />
+      </colgroup>
+      <thead>
+        <tr>
+          <th></th>
+	  <th>Landlord</th>
+	  <th>TrasactionId</th>
+	  <th>AdminFee</th>
+          <th>Amount</th>
+	  <th>PaymentDate</th>
+          <th class="centralign" >Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+       <%if !@applications.empty?%>
+        <%- @applications.each do |application| %>
+          <tr >
+            <td>
+              <a class="link" href="#">
+                <div >
+                  <%- if application.property.pictures.empty? %>
+                    <%= image_tag("/images/missing/missing_properties_thumb.png") %>
+                  <%- else %>
+                    <%= image_tag(application.property.pictures.first.image.url(:small), :alt=>"Missing") %>
+                  <%- end %>
+                </div>
+              </a>
+            </td>
+	    <td class="font_size_admin_transation_td"><%= link_to application.property.owner.full_name,  admin_user_path(application.property.owner)%></td>
+	    <td class="font_size_admin_transation_td"><%= application.transaction_id.upcase %></td>
+	    <td class="font_size_admin_transation_td"><%= return_currency_abbrebiation(application.property.currency_type.nil? ? 'USD' : application.property.currency_type)%><%= ISO4217::Currency.from_code(application.property.currency_type.nil? ? 'USD' : application.property.currency_type).symbol%><%= (application.property.monthly_rental * BOXYROOM_ADMIN_FEE).to_i %></td>
+            <td class="font_size_admin_transation_td"><%= return_currency_abbrebiation(application.property.currency_type.nil? ? 'USD' : application.property.currency_type)%><%= ISO4217::Currency.from_code(application.property.currency_type.nil? ? 'USD' : application.property.currency_type).symbol%><%= (application.property.monthly_rental * (1 - BOXYROOM_ADMIN_FEE)).to_i %><br/>
+            </td>
+	    <td class="font_size_admin_transation_td" id="admin_tran_date"><%= application.updated_at.to_s(:long) %></td>
+            <td>
+	     <%if application.property.paid?%>
+	       <%= "<span class='status blue advance'></span>" %>
+	     <% elsif application.property.occupied? %>
+	       <%= "<span class='status green payout'></span>" %>
+	     <% elsif application.property.withdraw_pending? %>
+	       <%= "<span class='orange status widthrawl_pending'></span>" %>
+	     <%end%>
+            </td>
+            <td>
+              <div class="manage">
+                      <strong></strong>
+                      <ul class="menu" id="admin_transaction" style="position:absolute;">
+                        <li><%# link_to "Close Transaction", close_admin_transaction_path(application), :method => :put %></li>
+                        <li><%= link_to "View Details", property_path(application.property)%></li>
+                        <li><%= link_to "Inspect Applicant", admin_user_path(application.user)%></li>
+                        <li><%= link_to "Inspect Owner", admin_user_path(application.property.owner) %></li>
+			<%if application.property.can_transfer?%>
+			   <li><%= link_to "Payment Transferred", widthraw_done_admin_transaction_path(current_user.id, :property_id => application.property.id), :method=>:put, :confirm => "Please make sure, payment has been transferred to Landlord!"  %></li>
+	                <%end%>
+                      </ul>
+              </div>
+            </td>
+          </tr>
+        <%- end %>
+       <%else%>
+          <tr><td>Nothing to show you.</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+       <%end%>
+      </tbody>
+      <tfoot>
+       <tr>
+	    <td></td><td></td><td></td><td></td>
+	    <td colspan="4">
+		    <%= will_paginate @applications, :previous_label => "Previous", :next_label => "Next"%></li>
+	    </td>
+       </tr>
+     </tfoot>
+    </table>
+  </div>
+</div>

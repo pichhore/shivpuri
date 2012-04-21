@@ -1,0 +1,11 @@
+class AlertDefinition < ActiveRecord::Base
+	uses_guid
+	acts_as_paranoid
+  belongs_to :alert_trigger_type
+
+	validates_presence_of			:title
+	validates_presence_of			:message
+	validates_presence_of			:alert_trigger_type_id
+  has_many :alerts, :dependent=>:destroy
+
+end

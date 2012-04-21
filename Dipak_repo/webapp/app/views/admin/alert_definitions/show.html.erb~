@@ -1,0 +1,14 @@
+<h3>Alert Definition</h3>
+<span class="formError"><%= "DISABLED<br/><br/>" if @alert_definition.disabled %></span>
+<div style="margin-bottom: 10px;"><b>Title:</b> <%= h @alert_definition.title %></div>
+<div style="margin-bottom: 10px;"><b>Trigger Type:</b> <%= h @alert_definition.alert_trigger_type.name %></div>
+<div style="margin-bottom: 10px;"><b>Trigger Parameter:</b> <%= h @alert_definition.trigger_parameter_value %></div>
+<div style="margin-bottom: 10px;"><b>User Class:</b> <%=h @alert_definition.user_class.user_type_name unless @alert_definition.user_class.blank? %></div>
+<div style="margin-bottom: 10px;"><b>Message:</b> <%=h @alert_definition.message %></div>
+<div style="margin-bottom: 10px;"><b>Details:</b> <%=h @alert_definition.details %></div>
+<div style="margin-bottom: 10px;"><b>Trigger Delay Days:</b> <%=h @alert_definition.trigger_delay_days %></div>
+<div style="margin-bottom: 10px;"><b>Trigger Cutoff Days:</b> <%=h @alert_definition.trigger_cutoff_days %></div>
+<br/>
+<span><%= link_to 'Edit', edit_admin_alert_definition_path(@alert_definition) %></span> |
+<span><%= link_to 'Destroy', admin_alert_definition_path(@alert_definition), :confirm => 'Are you sure?', :method => :delete %></span> |
+<span><%= link_to 'Back', admin_alert_definitions_path %></span>

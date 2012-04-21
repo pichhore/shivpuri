@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  investor_message_id: 1
+  reciever_id: MyString
+
+two:
+  investor_message_id: 1
+  reciever_id: MyString

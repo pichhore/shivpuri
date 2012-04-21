@@ -1,0 +1,874 @@
+#header {
+	background: url('/new_images/header-bg.png') repeat-x;
+}
+
+#content {
+	background-color: #f4f8fa;
+	padding: 24px 0;
+}
+
+.primary > h1 {
+	border: 1px solid #88b4cb;
+	background-color: #dbecf5;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), color-stop(0.04, #dbecf5), to(#bedceb));
+	background: -moz-linear-gradient(top, #fff 0%, #dbecf5 4%, #bedceb 100%);
+	border-radius: 6px 6px 0 0;
+	-webkit-border-radius: 6px 6px 0 0;
+	-moz-border-radius: 6px 6px 0 0;
+	color: #153e52;
+	text-shadow: 1px 2px 2px #e6f1f7;
+	padding: 8px 12px;
+	text-align: left;
+	font-weight: bold;
+	position: relative;
+}
+
+.primary > strong {
+	border: 1px solid #88b4cb;
+	border-top: 0;
+	background-color: #dbecf5;
+	background: -webkit-gradient(linear, left top, left bottom, from(#eaf8ff), color-stop(0.04, #dbecf5), to(#bedceb));
+	background: -moz-linear-gradient(top, #eaf8ff 0%, #dbecf5 4%, #bedceb 100%);
+	color: #153e52;
+	text-shadow: 1px 2px 2px #e6f1f7;
+	padding: 6px 12px;
+	text-align: left;
+	font-weight: 500;
+	font-size: 70%;
+	display: block;
+}
+
+.primary p.highlight {
+	background-color: #f0f0f0;
+	padding: 6px;
+	border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	overflow: hidden;
+}
+
+/* Buttons */
+
+.buttons {
+	float: right;
+}
+
+.buttons .blue {
+	border: 1px solid #37708a;
+	color: #153e52;
+	text-shadow: 1px 1px 1px #3fb0e6;
+	background-color: #338fbb;
+	background: -webkit-gradient(linear, left top, left bottom, from(#7bdfff), color-stop(0.05, #61b1d8), to(#2383b1));
+	background: -moz-linear-gradient(top, #7bdfff 0%, #61b1d8 5%,  #2383b1 100%);
+}
+.buttons .red {
+	text-shadow: 1px 1px 1px #b32a2a;
+	background: url("/new_images/buttons-sprite.png") no-repeat scroll -2px -185px transparent;
+}
+
+.margin_left_ten {
+  margin-left: 10px;
+}
+
+/* Forms */
+
+.primary .form fieldset {
+	background-color: #fefefe;
+	border: 1px solid #d0d0d0;
+	border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	font-size: 90%;
+	line-height: 1.4;
+	margin-bottom: 16px;
+	position: relative;
+	padding-bottom: 16px;
+	width: 657px;
+}
+
+.primary .form fieldset p {
+	position: relative;
+	float: left;
+	width: 287px;
+}
+
+.primary .form fieldset p.full {
+	position: relative;
+	float: left;
+	width: 600px;
+}
+
+.primary .form fieldset p label {
+	position: absolute;
+	top: 23px;
+	left: 26px;
+	font-weight: 500;
+}
+
+.primary .form fieldset p.normal label {
+	position: relative;
+	top: 0;
+	left: 0;
+	float: left;
+	padding-right: 8px;
+}
+
+.primary .form fieldset p.formatted {
+	width: 600px;
+}
+
+.primary .form fieldset p.formatted label {
+	float: left;
+	position: relative;
+	top: 0;
+	left: 0;
+	padding: 8px 16px 8px 0;
+}
+
+.primary .form fieldset p.formatted select {
+	width: 64px;
+	float: left;
+}
+
+.primary .form fieldset p.formatted input[type="text"] {
+	width: 300px;
+	float: left;
+}
+
+.primary .form fieldset legend {
+	border: 1px solid #88b4cb;
+	background-color: #dbecf5;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), color-stop(0.04, #dbecf5), to(#bedceb));
+	background: -moz-linear-gradient(top, #fff 0%, #dbecf5 4%, #bedceb 100%);
+	border-radius: 6px 6px 0 0;
+	-webkit-border-radius: 6px 6px 0 0;
+	-moz-border-radius: 6px 6px 0 0;
+	color: #153e52;
+	text-shadow: 1px 2px 2px #e6f1f7;
+	padding: 8px 12px;
+	text-align: left;
+	font-weight: bold;
+	width: 632px;
+        font-size: 16px;
+	position: absolute;
+	left: 0px;
+}
+
+.primary .form legend {
+	border: 1px solid #88b4cb;
+	background-color: #dbecf5;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), color-stop(0.04, #dbecf5), to(#bedceb));
+	background: -moz-linear-gradient(top, #fff 0%, #dbecf5 4%, #bedceb 100%);
+	border-radius: 6px 6px 0 0;
+	-webkit-border-radius: 6px 6px 0 0;
+	-moz-border-radius: 6px 6px 0 0;
+	color: #153e52;
+	text-shadow: 1px 2px 2px #e6f1f7;
+	padding: 8px 12px;
+	text-align: left;
+	font-weight: bold;
+	width: 632px;
+        font-size: 16px;
+}
+
+
+.primary .form fieldset .errors {
+	border-left: 1px solid #ef8282;
+	border-right: 1px solid #ef8282;
+	background-color: #ee9898;
+	color: #ce6161;
+	/*text-shadow: 1px 1px 2px #913636;*/
+	padding: 8px 12px;
+	text-align: left;
+	font-weight: 200;
+	font-size: 80%;
+	position: relative;
+	margin-bottom: 8px;
+}
+
+.primary .form fieldset input[type="text"],.primary .form fieldset input[type="password"], .primary fieldset textarea {
+	padding: 8px;
+	outline: medium none;
+	border: 1px solid #bebebe;
+	background: -webkit-gradient(linear, left top, left bottom, from(#e4e4e4), color-stop(0.12, #fff), to(#fff));
+	background: -moz-linear-gradient(top, #e4e4e4 0%, #fff 12%, #fff 100%);
+	float: left;
+	width: 100%;
+}
+
+.primary .form fieldset  div.description {
+	width: 626px;
+	padding: 16px 16px 0;
+	clear: both;
+}
+
+.primary .form fieldset  div.description .profile {
+	float: left;
+	margin-right: 14px;
+	position: relative;
+	width: 146px;
+	height: 130px;
+}
+
+.primary .form fieldset  div.description .profile a.cancel {
+	position: absolute;
+	top: -4px;
+	right: -4px;
+	width: 25px;
+	height: 26px;
+	background: url('/new_images/photo-cancel.png') repeat-x;
+	opacity: 0.8;
+	filter: alpha(opacity = 80);
+	text-indent: -9999px;
+}
+
+.primary .form fieldset  div.description .profile a.cancel:hover {
+	opacity: 1;
+	filter: alpha(opacity = 100);
+}
+
+.primary .form fieldset div.description textarea {
+	width: 448px;
+	float: right;
+}
+
+.primary .form fieldset  div.change-password {
+	width: 658px;
+	height: 48px;
+	clear: both;
+}
+
+.primary .form fieldset  div.change-password p {
+	float: left;
+	width: 181px;
+}
+
+.primary .form fieldset p {
+	padding: 16px 16px 8px;
+}
+
+.primary .form .buttons {
+	/*padding: 14px 14px 0;*/
+	padding: 14px;
+}
+
+/* Photos */
+
+#listing-photos ul {
+	padding: 7px;
+}
+
+#listing-photos ul li {
+	float: left;
+	margin-right: 14px;
+	position: relative;
+}
+
+#listing-photos ul li:nth-child(4n) {
+	margin-right: 10px;
+}
+
+#listing-photos ul li a.cancel {
+	position: absolute;
+	top: -4px;
+	right: -4px;
+	width: 25px;
+	height: 26px;
+	background: url('/new_images/photo-cancel.png') repeat-x;
+	opacity: 0.8;
+	filter: alpha(opacity = 80);
+	text-indent: -9999px;
+}
+
+#listing-photos ul li a.cancel:hover {
+	opacity: 1;
+	filter: alpha(opacity = 100);
+}
+
+
+.color_font_in_link_Paid
+{
+    color: white;
+}
+
+
+.color_font_in_link_payout
+{
+    color: white;
+}
+
+.color_font_in_link_cancelled
+{
+    color: white;
+}
+
+.color_font_in_link_Rejected
+{
+    color: white;
+}
+
+.color_font_in_link_Advance
+{
+    color: white;
+}
+
+.color_font_in_link_Approved
+{
+    color: white;
+}
+
+.color_font_in_link_Pending1
+{
+    color: white;
+}
+
+.color_font_in_link_New_Application
+{
+    color: white;
+}
+
+#button-position
+{
+    margin-left: 540px;
+}
+
+.width_photo_area
+{
+  width: 636px;
+}
+
+
+#property_monthly_rental
+{
+  width: 210px;
+  margin: 0;
+}
+
+#property_address_attributes_country_id-menu{
+  width:270px !important;
+  height: 200px
+}
+#property_address_attributes_country_id-button{
+  width:300px !important;
+}
+
+#property_category-button
+{
+  width:250px !important;
+}
+
+#user_birth_date_1i-button
+{
+    width:85px !important;
+    float:left !important;
+}
+
+#user_birth_date_2i-button
+{
+    width:135px !important;
+    float: left  !important;
+}
+#user_birth_date_3i-button
+{
+   width:70px !important;
+   float: left !important;
+}
+
+
+#property_available_at_1i-button
+{
+    width:101px !important;
+    float:left !important;
+}
+
+#property_available_at_2i-button
+{
+   width: 149px !important;
+    float: left  !important;
+
+}
+
+#property_available_at_3i-button
+{
+   width:84px !important;
+   float: left !important;
+}
+
+.position_up_always
+{
+  position:relative !important;
+}
+#photos-slider{
+  z-index:1;
+  width: 651px;
+  height: 450px;
+}
+.arrows{
+  z-index:999;
+}
+#prev
+{    background: url("/new_images/arrows.png") repeat scroll 1px 1px #666666;
+    display: inline-block;
+    height: 35px;
+    text-indent: -9999px;
+    width: 36px;
+    float:left;
+}
+#next1
+{
+     background: url("/new_images/arrows.png") repeat scroll -33px 1px #666666;
+    display: inline-block;
+    height: 35px;
+    text-indent: -9999px;
+    width: 36px;
+    float:left;
+}
+#photos-next-prev{ 
+    left: 564px;
+    position: absolute;
+    top: 10px;
+    width: 72px;
+    z-index: 999;
+}
+
+#property_unit-button
+{
+
+ float:left !important;
+ width: 100px !important;
+}
+
+
+#listing-photos
+{
+    width: 658px;
+    bottom: 0px;
+}
+.amount_field{
+  text-align: center;
+  padding:0px 8px !important;
+  font-size:  44px;
+  font-weight:  bold;
+  margin-bottom: 0 !important;
+  padding-bottom: 0px !important;
+}
+
+.amount_field span{
+  font:bold 16px arial;
+  margin:0px;
+  padding:0px;
+} 
+
+
+.advance_rent_paid
+{
+  margin-left: 58px;
+  color: #308CB8;
+}
+
+.token_for_landlord
+{
+   margin-left: 23px;
+   color: #308CB8;
+}
+
+.duration_of_stay_field
+{
+   margin-left: 14px;
+   color: #308CB8;
+}
+
+.street_name_field
+{
+   margin-left: 37px;
+   color: #308CB8;
+}
+
+.postal_code_field
+{
+   margin-left: 38px;
+   color: #308CB8;
+}
+
+.city_field
+{
+   margin-left: 91px;
+   color: #308CB8;
+}
+
+.state_field
+{
+   margin-left: 79px;
+   color: #308CB8;
+}
+
+.monthly_rental_field
+{
+   margin-left: 29px;
+   color: #308CB8;
+}
+
+#ui-selectmenu-status
+{
+  width:200px !important;
+
+}
+
+.clear{
+  clear:both;
+}
+
+#user_prefers_currency-button
+{
+   width: 257px !important;
+}
+
+#user_birth_date_1i-button
+{
+  width: 104px !important;
+  float: left;
+}
+
+#user_birth_date_2i-button
+{
+  width: 152px !important;
+  float: left;
+}
+
+#user_birth_date_3i-button
+{
+  width: 83px !important;
+  float: left;
+}
+
+#user-nv li.admin { position: relative; padding: 2px; }
+#user-nv li.admin > ul { display: none; position: absolute; left: 00px; padding: 4px 0px; border: 1px solid #8ACBE8; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; width: 140px; background-color: #fff; width: 20px; z-index: 100; }
+#user-nv li.admin:hover > ul { display: block; }
+#user-nv li.admin:hover > ul > li { float: left; clear: both; }
+#user-nv li.admin:hover > ul > li > a { font-size: 90%; padding: 2px; }
+#user-nv li.admin:hover > ul > li > a:hover { text-decoration: underline; }
+
+
+
+#change_width_link
+{
+    margin-right: 10px;
+}
+
+#color_link_messages
+{
+    color: #000000 !important;
+}
+
+
+#payment_token
+{
+    width: 250px;
+    height: 25px;
+    margin-left: 5px;
+}
+
+#change_position_count
+{
+    width: 30px;;
+    height: 24px;
+    float: right;
+    background: url("/new_images/circle.png") no-repeat ;
+    text-align: center;
+    color: #FFFFFF;
+    padding-top: 9px;
+}
+
+#blue_color_link
+{
+        color: #0000CC !important;
+}
+
+.search_page {
+	margin: 32px auto;
+          background: url("/new_images/search-bg.png") no-repeat;
+	width: 471px;
+	height: 55px;
+	position: relative;
+}
+
+.search_page input[type="text"] {
+	width: 335px;
+	height: 48px;
+	padding-left: 16px;
+	line-height: 48px;
+	border: 0;
+	position: absolute;
+	left: 5px;
+	top: 2px;
+	font-size: 120%;
+	font-weight: 600;
+	color: #3a3a3a;
+}
+
+.search_page input[type="submit"] {
+	background: none;
+	border: 0;
+	position: absolute;
+	right: 0;
+	width: 110px;
+	height: 54px;
+	cursor: pointer;
+	text-indent: -9999px;
+}
+
+#application_profile_attributes_income_source 
+{
+  top:21px;
+}
+
+#application_profile_attributes_nature_of_employment
+{
+left:-12px !important;
+position:relative !important;
+top:21px;
+width:310px !important;
+}
+
+#date_month-button
+{
+    float: left;
+}
+
+#date_year-button
+{
+    float: left;
+}
+
+#country-button
+{
+  width: 306px !important;
+  margin-top: 4px;
+}
+
+#cardtype-button
+{
+  width: 306px !important;
+}
+
+.row_header_width
+{
+  height: 30px;
+  
+}
+
+.payment_transaction
+{
+  font-style: 14px bold;
+  color: black;
+  margin-bottom: 10px;
+}
+
+#table_invoice
+{
+   border-collapse: none important;
+}
+
+
+#message-payment
+{
+  margin-left: 31px;position: relative;float: left;display: block;top: -17px;
+}
+
+.message_payment
+{
+  border: 1px solid #c9d7b6; width: 960px;height:30px;padding: 12px;margin-bottom:20px;color: #153E52;background: #F0F0F0;font-size:18px!important;font-weight: normal;margin-top:27px
+}
+
+.btn
+{
+  display: block;position: relative; bottom: 200px; left: 800px
+}
+
+
+.position.receive
+{
+  height: 36px; 
+  margin-left: 347px;
+}
+
+#about_me_area
+{
+    height: 111px;
+    width: 395px;
+}
+
+.data
+{
+    float: right !important;
+}
+#months
+{
+    float: left; position: relative; top: 20px;margin-left:  10px;
+}
+
+.position_status
+{
+    padding: 8px 10px !important;padding-bottom: 9px !important;
+}
+
+.label.property
+{
+  font-weight: 600 !important;
+}
+
+#link_with_sm
+{
+    width: 154px !important;
+    text-align: left !important;
+}
+
+#header-wp {
+    background: url("/new_images/h1-bg.png") repeat-x scroll left bottom transparent;
+    margin-bottom: 26px;
+    padding-bottom: 14px;
+    font-size: 20px;
+}
+
+#index_page_listing
+{
+  top: 20px !important;
+}
+
+#equal_font_size
+{
+  font-size: 110% !important;
+}
+
+#list_a_property_header
+{
+    left: 223px;
+}
+#logout_header
+{
+    left: 248px;
+    font-size: 120%;
+    position: absolute;
+}
+
+#dashboard_header
+{
+    left: 158px;
+    font-size: 120%;
+    position: relative;
+}
+
+#button_list_property_external
+{
+  height: 29px !important;width: 200px !important;bottom: 41px !important;left: 780px !important;
+}
+
+.position.receive.review
+{
+    right: -203px !important;
+}
+
+#min_height_property_image_descrption
+{
+   min-height: 131px!important;
+   margin-top: 0px!important;
+   width: 663px;
+}
+
+.home_page_messages
+{
+  margin-bottom: 0px !important; position: absolute !important;left: 420px !important;
+}
+
+
+#amount_field
+{
+font-size: 165%; width: 112px; padding: 8px 10px;font-weight: bold;
+}
+
+#amount_field_property_admin
+{
+font-size: 165%; width: 112px;font-weight: bold;
+}
+#radio_width
+{
+      padding: 0 10px 4px;
+      width:250px !important;
+}
+
+#radio_width label
+{
+  width:210px !important;
+  float: right !important;
+}
+
+#check_width
+{
+    padding: 0 10px 4px;
+    width:250px !important;
+}
+
+
+#check_width label
+{
+  width:217px !important;
+  float: right !important;
+}
+
+
+#new_normal_label label
+{
+  width:200px !important;
+}
+
+#property_floor_area
+{
+    width: 132px;
+    margin: 0;
+}
+
+#check_width_rental label
+{
+  width:566px !important;
+  float: right !important;
+}
+
+#user_payment_transfer_mail
+{
+    width: 217% !important;
+}
+
+#submit_and_back
+{
+    height: 40px;
+    margin-top: 3px;
+    position: relative;
+    width: auto;}
+
+#submit_and_back a
+{
+  float: right !important;
+}
+
+#submit_and_back a.back
+{
+  right: 0px;
+  bottom: 0px;
+}
+
+#thubm_show_property
+{
+width: 64px; Height: 48px;
+}
+#thubm_show_property img
+{
+    position: relative !important;
+}
+
+#photo_div
+{
+  padding: 6px;
+}
+
+
+

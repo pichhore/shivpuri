@@ -1,0 +1,40 @@
+<%- @page_title = "Social Media Links" -%>
+<% require_js_controllers :tab, :account_settings -%>
+
+<%- content_for :page_scripts do -%>
+
+Event.observe(window, 'load', function() {
+account_settings_controller = new NL.AccountSettingsController();
+});
+
+<%- end -%>
+<div class="full">
+  
+  <div class="tabset larger">
+    <%=render :partial=>"account_tab", :locals=>{:active_class_social_media=>"active"}%>
+  </div>
+  <fieldset>
+    <% form_tag ('/account/save_social_media_accounts') do %>
+    <table >  
+      <p>Use the space below to add Social Media to your Investor Profile and marketing websites.  By adding a URL next to each social media account you have, REIMatcher will display these icons for you and link them to the URL's that you provide.<p/>
+      
+      If you need more help, see <a href="http://www.reimatcher.com/faq/uncategorized/setting-up-your-social-media-links/" target="_blank">How Do I Add Social Media to Websites</a>  
+      <th>Investor Profile</th>
+      <tr><th style="padding-left: 15px" width="40%"><%= image_tag("social_media/buttonFacebook.png")%></th><td><%= text_field_tag "buyer_website[#{SocialMediaAccount::URL_TYPE[:FACEBOOK]}]", @buyer_url[SocialMediaAccount::URL_TYPE[:FACEBOOK]], :size => 50 %></td></tr>
+      <tr><th style="padding-left: 15px"><%= image_tag("social_media/buttonLinkedIn.png")%></th><td><%= text_field_tag "buyer_website[#{SocialMediaAccount::URL_TYPE[:LINKEDIN]}]", @buyer_url[SocialMediaAccount::URL_TYPE[:LINKEDIN]], :size => 50 %></td></tr>
+      <tr><th style="padding-left: 15px"><%= image_tag("social_media/buttonYouTube.png")%></th><td><%= text_field_tag "buyer_website[#{SocialMediaAccount::URL_TYPE[:YOUTUBE]}]", @buyer_url[SocialMediaAccount::URL_TYPE[:YOUTUBE]], :size => 50 %></td></tr>
+      <tr><th style="padding-left: 15px"><%= image_tag("social_media/buttonTwitter.png")%></th><td><%= text_field_tag "buyer_website[#{SocialMediaAccount::URL_TYPE[:TWITTER]}]", @buyer_url[SocialMediaAccount::URL_TYPE[:TWITTER]], :size => 50 %></td></tr>
+      <th>Seller Website</th>
+      <tr><th style="padding-left: 15px"><%= image_tag("social_media/buttonFacebook.png")%></th><td><%= text_field_tag "seller_website[#{SocialMediaAccount::URL_TYPE[:FACEBOOK]}]", @seller_url[SocialMediaAccount::URL_TYPE[:FACEBOOK]], :size => 50 %></td></tr>
+      <tr><th style="padding-left: 15px"><%= image_tag("social_media/buttonLinkedIn.png")%></th><td><%= text_field_tag "seller_website[#{SocialMediaAccount::URL_TYPE[:LINKEDIN]}]", @seller_url[SocialMediaAccount::URL_TYPE[:LINKEDIN]], :size => 50 %></td></tr>
+      <tr><th style="padding-left: 15px"><%= image_tag("social_media/buttonYouTube.png")%></th><td><%= text_field_tag "seller_website[#{SocialMediaAccount::URL_TYPE[:YOUTUBE]}]", @seller_url[SocialMediaAccount::URL_TYPE[:YOUTUBE]], :size => 50 %></td></tr>
+      <tr><th style="padding-left: 15px"><%= image_tag("social_media/buttonTwitter.png")%></th><td><%= text_field_tag "seller_website[#{SocialMediaAccount::URL_TYPE[:TWITTER]}]", @seller_url[SocialMediaAccount::URL_TYPE[:TWITTER]], :size => 50 %></td></tr>
+      <tr><td colspan="2" align="center">&nbsp;</td></tr>
+      <tr><td colspan="2" align="center"><%= submit_tag "Update", :class => "submit_xl" %></td></tr>
+    </table>
+    
+    <% end %>
+</div>
+
+
+

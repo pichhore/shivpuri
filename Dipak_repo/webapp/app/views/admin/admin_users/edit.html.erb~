@@ -1,0 +1,237 @@
+ <script type="text/javascript"> 
+  <% if @user.test_comp =="test" or @user.test_comp.blank? %>
+    window.onload= $('show_on_home_listed').hide();
+  <% else %>
+    window.onload= $('show_on_home_listed').show();
+  <% end %>
+ </script> 
+ 
+<div class="edit-view admin/admin_users-view" id="edit-view admin/admin_users-view" style="background-image: none; background-color: rgb(218, 255, 205);">
+<%- form_remote_tag(:update => "edit-view admin/admin_users-view", :url=>"/admin/admin_users/update/#{params[:id]}",:html=>{:mehtod=>:post},:loading=>"$('as_admin__admin_users').style.visibility = 'visible';Form.disable('inline-adapter');return false;")  do -%>
+<div style="margin: 0pt; padding: 0pt; display: inline;"><input type="hidden" value="put" name="_method"></div>
+
+  <h4>Update <%= @user.first_name %> <%= @user.last_name%></h4>
+
+<a href="#" class="transaction_history">Transaction History</a>
+
+<div style="height:300px;width:800px;overflow:scroll;display:none;" id="transaction_histories_detail">
+<table>
+<% @user_transaction_histories.each do |user_transaction_history| %>
+<tr><td><%= user_transaction_history.created_at.strftime("%m/%d/%y %I:%M%p") + "  " + user_transaction_history.transanction_detail %></td><tr>
+<% end %>
+</table>
+
+</div>
+  <div class="messages-container" id="as_admin__admin_users">
+    
+  </div>
+  <ol class="form">
+      <li class="form-element  ">
+    
+<dl>
+  <dt>
+    <span style="color:red;">*</span> <label>First name</label>
+  </dt>
+  <dd>
+    <%= text_field "user", "first_name", :size => "30" %>
+    <%=error_message_on :user,:first_name %>
+              <span class="description"></span>
+      </dd>
+</dl>  </li>
+        <li class="form-element  ">
+    
+<dl>
+  <dt>
+    <span style="color:red;">*</span> <label>Last name</label>
+  </dt>
+  <dd>
+    <%= text_field "user", "last_name", :size => "30" %>
+<%=error_message_on :user,:last_name %>
+              <span class="description"></span>
+      </dd>
+</dl>  </li>
+        <li class="form-element  ">
+    
+<dl>
+  <dt>
+    <span style="color:red;">*</span> <label>Login</label>
+  </dt>
+  <dd>
+    <%= text_field "user", "login", :size => "30" %>
+<%=error_message_on :user,:login %>
+              <span class="description"></span>
+      </dd>
+</dl>  </li>
+        <li class="form-element  ">
+    
+<dl>
+  <dt>
+    <span style="color:red;">*</span> <label>Email</label>
+  </dt>
+  <dd>
+    <%= text_field "user", "email", :size => "30" %>
+<%=error_message_on :user, :email %>
+              <span class="description"></span>
+      </dd>
+</dl>  </li>
+        <li class="form-element  ">
+    
+<dl>
+  <dt>
+    <label>Activated at</label>
+  </dt>
+  <dd>
+    <%= text_field "user", "activated_at", :size => "30" %>
+<%=error_message_on :user,:activated_at %>
+              <span class="description">Any non-empty value is considered activated</span>
+      </dd>
+</dl>  </li>
+        <li class="form-element  ">
+    
+<dl>
+  <dt>
+    <span style="color:red;">*</span> <label>User class</label>
+  </dt>
+  <dd>
+      <%=select("user", "user_class_id", UserClass.find(:all).collect {|p| [ p.user_type_name, p.id ] }, {:include_blank => '- Select -'})%>
+<%=error_message_on :user,:user_class_id %>
+              <span class="description"></span>
+      </dd>
+</dl>  </li>
+        <li class="form-element  ">
+    
+<dl>
+  <dt>
+    <label>Territories</label>
+  </dt>
+  <dd>
+    <%= text_field "user", "number_of_territory", :size => "3", :maxlength => 3 %>
+<%=error_message_on :user,:number_of_territory %>
+              <span class="description"></span>
+      </dd>
+</dl>  </li>
+
+        <li class="form-element  ">
+
+<dl>
+  <dt>
+    <label>Training</label>
+  </dt>
+  <dd style="margin-top:6px;">
+    <%= check_box "user_pro_purchase", "amps" %> AMPS <%= check_box "user_pro_purchase", "amps_gold" %> AMPS Gold <%= check_box "user_pro_purchase", "top1" %> Top 1% Coaching <%= check_box "user_pro_purchase", "re_volution" %> RE-Volution <%= check_box "user_pro_purchase", "rei_mkt_dept" %> My REI Marketing Department <%= check_box "user_pro_purchase", "wholesaling" %> Wholesaling <%= check_box "user_pro_purchase", "blueprint" %> Blueprint <%= check_box "user_pro_purchase", "allinone" %> All In One
+              <span class="description"></span>
+      </dd>
+</dl>  </li>
+
+<% @shopping_cart_user_details.each do |shopping_cart_user_detail|%>
+        <li class="form-element  ">
+    
+<dl>
+  <dt>
+    <label>Shoppping Cart Customer Id</label>
+  </dt>
+  <dd style="margin-top: 5px;">
+    <%= text_field "shopping_cart_user_detail", "shopping_cart_customer_id_detail", :value => shopping_cart_user_detail.shopping_cart_customer_id_detail, :size => "30" %>
+              <span class="description"></span>
+      </dd>
+</dl>  </li>
+
+        <li class="form-element  ">
+    
+<dl>
+  <dt>
+    <label>Shoppping Cart Name</label>
+  </dt>
+  <dd style="margin-top: 5px;">
+    <%= text_field "shopping_cart_user_detail", "shopping_cart_name", :value => shopping_cart_user_detail.shopping_cart_name, :size => "30" %>
+              <span class="description"></span>
+      </dd>
+</dl>  </li>
+<% end %>
+
+<li class="form-element  ">
+
+<dl>
+  <dt>
+    <label>Failed Payment:</label>
+  </dt>
+  <dd style="margin-top:10px;">
+    <% is_disable = (@user.is_user_have_access_to_reim and @user.is_user_have_failed_payment) ? true : false %>
+    <%= check_box "user", "is_user_have_failed_payment", :disabled => is_disable %> <span style="margin-left:20px;">Failed Payment Date: <%= failed_payment_date_for_user %></span>
+              <span class="description"></span>
+  </dd>
+</dl>  </li>
+
+       <li class="form-element  ">
+<dl>
+  <dt>
+    <label>Add Comment</label>
+  </dt>
+  <dd style="margin-top:10px;">
+    <%=text_area "user", "add_user_comment", :rows=>5, :cols=>75 %>
+              <span class="description"></span>
+      </dd>
+</dl>  </li>
+
+<li class="form-element  ">
+    
+<dl>
+  <dt>
+    <label>Manage Users</label>
+  </dt>
+  <dd>
+        <% test_checked = @user.test_comp =="test" %>
+          <input type="radio" value="test" name="user[test_comp]" id="user_test_comp" onclick="$('show_on_home_listed').hide();" <% if test_checked %>checked="true"<%end%> > Test
+        <% comp_checked = @user.test_comp =="comp" %>
+          <input type="radio" value="comp" name="user[test_comp]" id="user_test_comp" onclick="$('show_on_home_listed').show();" <% if comp_checked %>checked="true"<%end%> > Complimentary
+        <% comp_checked = @user.test_comp == nil %>
+          <input type="radio" value="" name="user[test_comp]" id="user_test_comp" onclick="$('show_on_home_listed').hide();" <% if comp_checked %>checked="true"<%end%> > Normal User
+              <span class="description"></span>
+      </dd>
+</dl>  </li>
+
+<div id="show_on_home_listed">
+  <li class="form-element ">
+  <dl>
+    <dt>
+      <span style="color:red;">*</span> <label>Complimentary Reason</label>
+    </dt>
+    <dd style="margin-top:10px;">
+      <%=text_area "user", "complimentary_reason", :rows=>3, :cols=>30, :maxlength => 100 %>
+      <%=error_message_on :user, :complimentary_reason %>
+                <span class="description"></span>
+        </dd>
+  </dl>  </li>
+</div>
+
+<li class="form-element  ">
+    
+<dl>
+  <dt>
+    <label>Admin</label>
+  </dt>
+  <dd>
+        <%= select("user", "admin_flag", [["True", true], ["False", false]]) %>
+<%=error_message_on :user,:admin_flag %>
+              <span class="description"></span>
+      </dd>
+</dl>  </li>
+    </ol>
+
+  <p class="form-footer">
+    <input type="submit" value="Update" name="commit" class="submit">
+    <a class="cancel" href="/admin/admin_users">Cancel</a>
+    <img style="visibility: hidden;" src="/images/active_scaffold/default/indicator.gif?1306757338" id="as_admin__admin_users" class="loading-indicator" alt="loading indicator">
+  </p>
+
+<% end %>
+</div>
+
+<script>
+$$('.transaction_history').each(function(ele){
+  $(ele).observe('click', function() {
+    this.next('#transaction_histories_detail').toggle();
+  })
+})
+</script>
+

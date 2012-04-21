@@ -1,0 +1,27 @@
+<h2>Listing Alert Definitions</h2>
+<%=link_to "Alert Triggers", admin_alert_trigger_types_path %> | 
+<%= link_to 'Create New Alert', new_admin_alert_definition_path %> |
+<%= link_to 'Process Alerts (this will not create duplicates)', :controller=>"/alerts",:action=>:process_alerts %>
+<div style="margin-left: 20px;">
+<% for alert_definition in @alert_definitions %>
+  <h3><%= h alert_definition.title %></h3>
+  <div class="formError"><%= "DISABLED" if alert_definition.disabled %></div>
+  <span>Message: <%=h alert_definition.message %></span>
+  <br/>
+  <span>Details: <%=h alert_definition.details %></span>
+  <br/>
+  <span>Trigger Type: <%= h alert_definition.alert_trigger_type.name %>
+  <br/>
+  <span>Trigger Parameter: <%= h alert_definition.trigger_parameter_value %>
+  <br/>
+  <span>Trigger Delay Days: <%=h alert_definition.trigger_delay_days %></span>
+  <br/>
+  <span>Trigger Cutoff Days: <%=h alert_definition.trigger_cutoff_days %></span>
+  <br/>
+  <span><%= link_to 'Show', admin_alert_definition_path(alert_definition) %></span> |
+  <span><%= link_to 'Edit', edit_admin_alert_definition_path(alert_definition) %></span> |
+  <span><%= link_to 'Destroy',admin_alert_definition_path(alert_definition) , :confirm => 'Are you sure?', :method => :delete %></span>
+  <hr/>
+<% end %>
+</div>
+

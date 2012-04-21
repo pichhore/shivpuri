@@ -1,0 +1,157 @@
+<div class="container">
+<div style="float: right;margin-bottom: 5px;color: blue !important;"> <%= link_to "Back", :back %></div>
+  <div class="primary view_application_form">
+      <h1 style="font-size: 17px;">Application Form for <%= @property.address.location %></h1>
+      <form method="post" class="complex-form readonly " id="view_application_form"   onsubmit="return false;">
+       <div class="content legand_profile_width" id="min_height_content">
+              <div >
+                <div class="thumbnail large">
+                  <%- if @application.property.pictures.empty? %>
+                    <%= image_tag("/images/missing/missing_properties_thumb.png") %>
+                  <%- else %>
+                    <%= image_tag(@application.property.pictures.first.image.url(:middle)) %>
+                  <%- end %>
+                <div class="overlay"></div>
+              </div>
+              <p style="float:left; padding-left:20px; width:765px;">
+	       <div class="title view_property_description"><%= @application.property.title%><%= payment_status_view(@application.status)%>
+	       <br>
+	       <div class="app-pro-dis"><%= @application.property.description%></div></p>
+              </div>
+	       </div>
+              <div class="clear"> </div>
+             </div>
+        <fieldset id="application_details">
+          <legend class="legand_profile_width">Application Details</legend>
+          <div class="clr"></div>
+          <div class="select-list-view_app">
+            <label>Expected Arrival: </label>
+            <p class="r" style="width: 350px;">
+                <input type="text"  value="<%= @application.expected_arrival.day%>" name="expecteda_rrival" id="expecteda_rrival" class="small"  />
+                <input type="text"  value="<%= @application.expected_arrival.strftime("%B").upcase%>" name="period_from_month" id="period_from_month" class="small"   />
+                <input type="text"  value="<%= @application.expected_arrival.year%>" name="period_from_year" id="period_from_year" class="small"  />
+            </p>
+          </div>
+          <div class="clr"></div>
+          <div class="select-list-view_app">
+            <label>Duration of Stay: </label>
+            <p class="r">
+                <input type="text" value="<%=@application.duration_of_stay%>" name="stay_duration" id="stay_duration"  />
+            </p>
+            <span style="float: left; position: relative; top: 20px;margin-left:  10px;">months</span>
+          </div>
+          <div class="clr"></div>
+          <div class="select-list-view_app">
+            <label>Reason for Moving:</label>
+            <p class="r" >
+                <input type="text" value="<%= @application.reason_for_leaving%>" name="moving_reason" id="moving_reason" />
+            </p>
+          </div>
+          <div class="clr"></div>
+        </fieldset>
+        <fieldset id="personal_details">
+          <legend class="legand_profile_width">Personal Details</legend>
+          <div class="clr"></div>
+	  <div class="pd-container">
+	    <div class="select-list-view_app">
+	      <label>First Name:</label>
+	      <p class="r">
+		  <input value="<%= @application.card.first_name %>" type="text" name="first_name" id="first_name" />
+	      </p>
+	    </div>
+	    <div class="clr"></div>
+	    <div class="select-list-view_app">
+	      <label>Last Name:</label>
+	      <p class="r">
+		  <input value="<%= @application.card.last_name %>"  type="text" name="last_name" id="last_name" />
+	      </p>
+	    </div>
+	    <div class="clr"></div>
+	    <div class="select-list-view_app">
+	      <label>E-Mail Address:</label>
+	      <p class="r">
+		  <input value="<%=@application.card.email%>" type="text" name="email" id="email" />
+	      </p>
+	    </div>
+	    <div class="clr"></div>
+	    <div class="select-list-view_app">
+	      <label>Phone Number:</label>
+	      <p class="r">
+		  <input value=" <%= @application.card.phone_no %>" type="text" name="Phone" id="Phone" />
+	      </p>
+	    </div>
+	    <div class="clr"></div>
+	    <div class="select-list-view_app">
+	      <label>Mobile Number:</label>
+	      <p class="r">
+		  <input value="<%= @application.card.mobile_no %>" type="text" name="mobile" id="mobile" />
+	      </p>
+	    </div>
+	    <div class="clr"></div>
+	    <div class="select-list-view_app">
+	      <label>Fax Number:</label>
+	      <p class="r">
+		  <input value="<%= @application.card.fax_no %>"  type="text" name="Fax" id="Fax" />
+	      </p>
+	    </div>
+	  </div>
+	  <div class="thumbnail large" style="align: center; border-style:solid; border-width:13px; border-color:white;" >
+	    <%= image_tag @application.user.avatar.url(:medium)%>
+            <div class="overlay"></div>
+	  </div>
+        </fieldset>
+        <div class="tabs">
+        <div class="navigation legand_profile_width">
+          <span>Profile</span>
+          <ul>
+            <% if @application.profile.study_profile_type? %>
+              <li class="study"><a href="#study">Study</a></li>
+            <% end %>
+            <% if @application.profile.business_profile_type? %>
+              <li class="business"><a href="#business">Business</a></li>
+            <% end %>
+            <% if @application.profile.travel_profile_type? %>
+              <li class="travel"><a href="#travel">Travel</a></li>
+            <% end %>
+          </ul>
+        </div>
+          <%= render :partial=>"study_profile" if @application.profile.study_profile_type?  %>
+          <%= render :partial=>"business_profile" if @application.profile.business_profile_type? %>
+          <%= render :partial=>"travel_profile" if @application.profile.travel_profile_type? %>
+        </div>
+	 <span >
+          <%= link_to "", reject_my_property_application_path(@property, @application), :method => :put, :class => "reject application" if @application.can_reject? %>
+	 </span>
+	<span >
+          <%= link_to "", approve_my_property_application_path(@property, @application), :method => :put, :class=>"approve application" if @application.can_approve? %>
+	 </span>
+          <span >
+            <%= link_to "", new_my_message_path(:to => @application.user.id) , :class => "contact_applicant" if @application.can_reject? %>
+	 </span>
+      </form>
+  </div>
+ </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(
+    function (){
+      for(var i=0;$('input[type="text"]').length>i;i++){
+        $('input[type="text"]')[i].readOnly="true";
+      }
+    }
+  );
+</script>
+<style>
+.primary .complex-form fieldset legend 
+{
+    width: 935px !important;
+}
+.select_list {
+    padding: 0px !important;
+}
+#employment_nature
+{ 
+    width: 290px!important;
+}
+</style> 

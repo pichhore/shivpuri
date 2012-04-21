@@ -1,0 +1,180 @@
+<%- content_for :page_scripts do -%>
+
+  function SelectAll(id)
+  {
+      document.getElementById(id).focus();
+      document.getElementById(id).select();
+  }
+
+  function set_css_color(this_id)
+  {
+      $$('table.table_class tr td div').each(function(item) {
+                                   $(item).removeClassName("set_class_css");
+                                    $(item).addClassName("select_css");
+                               });
+      $(this_id).addClassName("set_class_css");
+      $('buyer_web_page_dynamic_css').value = this_id.getStyle('backgroundColor') ;
+   }
+ 
+<%- end -%>
+
+
+<style type="text/css">
+ table th {
+   width: 150px;
+ }
+ fieldset table td textarea {
+   margin-left: 0px;
+ }
+</style>
+
+<table>
+     <tr>
+        <th>Tagline</th>
+        <td>
+          <%=text_field "buyer_web_page", "tag_line"%>
+        </td>
+     </tr>
+      <tr>
+        <th>
+          Header
+        </th>
+        <td>
+          <%=text_field "buyer_web_page", "header" %>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Opening Text
+        </th>
+        <td>
+          <%=text_area "buyer_web_page", "opening_text", :rows => 10 %>
+          <%=hidden_field "buyer_web_page", "dynamic_css"%>
+        </td>
+      </tr>
+      <tr>
+	
+        <% local_phone = @buyer_web_page.local_phone  %>
+
+        <th>
+          Local Phone
+        </th>
+        <td>
+          <%=text_field "buyer_web_page", "local_phone", :value => local_phone %>
+	  <%=error_message_on :buyer_web_page,:local_phone %>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Choose color for your website
+        </th>
+        <td>
+          <table class="table_class">
+            <TR class="fix_height_tr" align="center">
+              <TD class="fix_width_td" ><div id="div1" onclick="set_css_color(this)" class="select_css <% if @buyer_web_page.dynamic_css.to_s.gsub(' ' ,"") == "rgb(51,102,255)"%><%="set_class_css"%> <%end%>" style="background-color:rgb(51, 102, 255);"></div></TD>
+              <TD class="fix_width_td"><div id="div2"  onclick="set_css_color(this)" class="select_css <% if @buyer_web_page.dynamic_css.to_s.gsub(' ' ,"") == "rgb(102,102,153)"%><%="set_class_css"%> <%end%>" style="background-color:rgb(102 ,102 ,153);"></div></TD>
+              <TD class="fix_width_td"> <div id="div3"  onclick="set_css_color(this)" class="select_css <% if @buyer_web_page.dynamic_css.to_s.gsub(' ' ,"") == "rgb(150,150,150)"%><%="set_class_css"%> <%end%>" style="background-color:rgb(150 ,150, 150);"></div></TD>
+              <TD class="fix_width_td"><div id="div4"  onclick="set_css_color(this)" class="select_css <% if @buyer_web_page.dynamic_css.to_s.gsub(' ' ,"") == "rgb(0,51,102)"%><%="set_class_css"%> <%end%>" style="background-color:rgb(0 ,51 ,102);"></div></TD>
+              <TD class="fix_width_td"><div id="div5"  onclick="set_css_color(this)" class="select_css <% if @buyer_web_page.dynamic_css.to_s.gsub(' ' ,"") == "rgb(0,51,0)"%><%="set_class_css"%> <%end%>" style="background-color:rgb(0 ,51, 0);"></div></TD>
+              <TD class="fix_width_td"><div id="div6"  onclick="set_css_color(this)" class="select_css <% if @buyer_web_page.dynamic_css.to_s.gsub(' ' ,"") == "rgb(51,51,0)"%><%="set_class_css"%> <%end%>" style="background-color:rgb(51 ,51, 0);"></div></TD>
+              <TD class="fix_width_td"><div id="div7"  onclick="set_css_color(this)" class="select_css <% if @buyer_web_page.dynamic_css.to_s.gsub(' ' ,"") == "rgb(153,51,0)"%><%="set_class_css"%> <%end%>" style="background-color:rgb(153, 51, 0);"></div></TD>
+              <TD class="fix_width_td"><div id="div8"  onclick="set_css_color(this)" class="select_css <% if @buyer_web_page.dynamic_css.to_s.gsub(' ' ,"") == "rgb(0,0,0)"%><%="set_class_css"%> <%end%>" style="background-color:rgb(0, 0, 0);"></div></TD>
+            </TR>
+          </table>
+        </td>
+      </tr>
+      <tr class="right_row_div" style="clear:left;">
+        <th>
+          Website URL
+        </th>
+      <td>
+        http://<%= @buyer_web_page.having? ? @domain_name : (@domain_name + "/" + @buyer_web_page.domain_permalink_text) %>
+        <%=error_message_on :buyer_web_page, :domain_permalink_text %>
+        <% if @buyer_web_page.my_website %>
+        <span style="padding-left: 10px">
+          <%= link_to 'Change', "", {:id => "change_domain", :title => "Click Here To Change Site URL"} %>
+        </span>
+        <% end %>
+	</td>
+      </tr>
+     <tr class="right_row_div" style="clear:left;">
+       <th>
+         Google Analytics <img alt="Help_icon" src="/images/reimatcher_images/help_icon.png" title="Enter your UA Tracking Number in this field to begin tracking your traffic result in Google Analytics. Your UA number will look something like UA-XXXXXXXX-X and can be found in your Google Analytics tracking code" style="cursor:pointer;"/>
+       </th>
+       <td>
+         <%=text_field "buyer_web_page", "ua_number", :size=>10 %>
+         <%=error_message_on :buyer_web_page, :ua_number %>
+       </td>
+     </tr>
+
+     <tr class="right_row_div" style="clear:left;">
+       <th>
+         Map Center
+       </th>
+       <td>
+	 <%= select("buyer_web_page", "map_location", map_locations(@buyer_web_page,params[:user_territory])) %>
+         <%=error_message_on :buyer_web_page, :map_location %>
+       </td>
+     </tr>
+
+      <tr>
+        <th>
+          Active:
+        </th>
+        <td>
+          <%=check_box "buyer_web_page", "active" %>
+        </td>
+      </tr>
+<!--
+      <tr>
+        <th>
+          Paste Link for Marketing (Homepage):
+        </th>
+
+      <td>
+          <input id="paste_permalink" type="text" readonly="true" size="40" value="<%= buyer_webpage_link %>" onClick="SelectAll('paste_permalink');" />
+          <% if @buyer_web_page.my_website %>
+          <%= link_to 'Preview', "/investor_buyer_web_page/investor_buyer_web_page_latest/#{@buyer_web_page.domain_permalink_text.downcase}?preview=true&domain_name=#{@buyer_web_page.my_website.domain_name}", :target => '_blank' %>
+          <% else %>
+          <% end %>
+        </td>
+
+      </tr>
+
+
+      <tr>
+          <th>Paste Link for Marketing (Squeeze Page):</th>
+      <td>
+          <% squeeze_url = buyer_webpage_link + "/2" %>
+          <input id="paste_permalink2" type="text" readonly="true" size="40" value="<%= squeeze_url %>" onClick="SelectAll('paste_permalink2');" >
+          <% if @buyer_web_page.my_website %>
+          <%= link_to 'Preview', "/investor_buyer_web_page/property_view_latest/#{@buyer_web_page.domain_permalink_text.downcase}?preview=true&type=2&domain_name=#{@buyer_web_page.my_website.domain_name}", :target => '_blank' %>
+          <% else %>
+          <% end %>
+        </td>
+      </tr>
+-->
+</table>
+        <div class="left_float_left" style="text-align:left; margin: 10px 0;">
+          <span class="note_in_red">Note:</span> Once you Mark Active and click Finish, your Buyer Website and Squeeze Page will be LIVE
+        </div>
+      <div class="right_row_div">
+        <div class="left_float_left">
+          <%= submit_tag "Finish", :class=>'submit_xl' %>
+        </div>
+        <div class="left_float_left">	  
+        </div>
+
+        <%= hidden_field "buyer_web_page","domain_permalink_text", :value => @buyer_web_page.domain_permalink_text %>
+
+        <% if !params[:user_territory].blank? %>
+          <%= hidden_field "user_territory","territory_id",:value => params[:user_territory][:territory_id]%> 
+        <% end %>
+
+        <%- if !params[:my_website_form].blank? -%>
+          <%= hidden_field_tag "domain_name", @domain_name %>
+          <%= hidden_field "buyer_web_page", "domain_type", :value => params[:my_website_form][:domain]%>
+        <%- end -%>
+
+      </div>
+

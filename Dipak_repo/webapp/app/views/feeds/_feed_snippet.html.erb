@@ -1,0 +1,14 @@
+<div class="feeds">
+    <h3>
+      <%  feed_link = @link_remote ? @feed.link : feed_path(@feed.id) %>
+      <%= link_to @feed.title, feed_link, :style=>"color: white;" %>
+    </h3>
+    <% @feed.items[0, @number_to_show].each_with_index { |feed_item, index| 
+        link = @link_remote ? feed_item.link : feed_feed_item_path(@feed.id, feed_item.id)
+    %>
+      <div class="feed_item feed_item_<%= index % 2 == 0 ? 'odd' : 'even' %>">
+         <%= link_to "<span>#{feed_item.title}</span>", link %></span>
+     </div>
+   <% } %>
+   <%= link_to "View All", feed_link %>
+</div>

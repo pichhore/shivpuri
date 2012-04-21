@@ -1,0 +1,391 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+        <META name="y_key" content="40cb663d1dd0917f">
+        <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+        <%- if @meta_keywords -%>
+        <meta name="keywords" content="<%=@meta_keywords%>"/>
+        <%- end -%>
+        <%- if @meta_description -%>
+        <meta name="description" content="<%=@meta_description%>"/>
+        <%- end -%>
+        <%- if @meta_robots -%>
+        <meta name="robots" content="<%=@meta_robots%>">
+        <%- end -%>
+	<%= yield :meta %>
+
+        <%=stylesheet_link_tag "home" if @controller.controller_name == "home" and (@action_name == "index" or @action_name == "show_image")%>
+        <%=stylesheet_link_tag "style" unless @controller.controller_name == "home" and (@action_name == "index" or @action_name == "show_image")%>
+        <%=stylesheet_link_tag "top_nav_style" unless @controller.controller_name == "home" and (@action_name == "index" or @action_name == "show_image")%>
+	<!--[if IE 7]>
+	<link href="/stylesheets/top_nav_style_ie7.css" rel="stylesheet" type="text/css" media="screen" />
+	<![endif]-->
+	
+
+
+        <% if @content_for_page_styles -%>
+        <%= @content_for_page_styles %>
+        <% end -%>
+<%#= javascript_include_tag :defaults %>
+<%#= javascript_include_tag "calendar_date_select" %>
+<%= javascript_include_tag "scratch_pad" %>
+<%= javascript_include_tag "dom-drag.js" %>
+<%= javascript_include_tag "ibox.js" %>
+<%= javascript_include_tag "datetimepicker_css"%>
+<%= javascript_include_tag :defaults, "scriptaculous", "object.event.js", "calendar_date_select", "validation", "reimatcher/epoch_classes",  :cache => "cached/reim_app_layout_js" %>
+<%= javascript_include_tag "epoch_seller_website_classes" %>
+<%#= stylesheet_link_tag "calendar_date_select" %>
+<%#= stylesheet_link_tag "reimatcher/epoch_styles" %>
+<%= stylesheet_link_tag "calendar_date_select", "reimatcher/epoch_styles", "lightbox", :cache => "cached/reim_app_layout_css"%>
+
+
+        <%#=javascript_include_tag "prototype"%>
+		    <%= include_yui_editor_if_used %>
+		    <%= include_yui_lightbox_if_used %>
+        <%#=javascript_include_tag "scriptaculous"%>
+        <%#=javascript_include_tag "object.event.js"%>
+        <%=javascript_include_tag "base_controller"%>
+        <%=javascript_include_tag "utils-debug" if RAILS_ENV != "production"%>
+        <%=javascript_include_tag "utils" if RAILS_ENV == "production"%>
+        <%#=javascript_include_tag "application"%>
+        <%#=javascript_include_tag "validation"%>
+		<%#=javascript_include_tag "reimatcher/epoch_classes"%>
+        <%=add_js_requires%>
+
+         <% if @content_for_page_scripts -%>
+         <script type="text/javascript">
+         // <![CDATA[
+         <%= @content_for_page_scripts %>
+         // ]]>
+         </script>
+         <% end -%>
+
+        <%- if @include_gmap_header -%>
+                        <%= GMap.header %>
+        <%- end -%>
+
+        <%= auto_discovery_link_tag(:rss, @auto_discovery_link_hash) if @auto_discovery_link_hash %>
+        <title>REIMatcher - <%=@page_title || "" %></title>
+        <link rel="icon" href="/favicon.png" type="image/png"/>
+
+</head>
+<body>
+   <% if RAILS_ENV == 'production' %>
+  <%= clicktale_top %>
+  <% end %>
+ 
+  <div id="container">
+
+  	<div id="header">
+
+    <%- if logged_in? -%>
+
+    <div id="user">
+       <%=link_to "logged in as #{current_user.login}", :controller=>'account', :action=>'settings' %>  &middot; <%=link_to "Sign out", :controller=>'sessions', :action=>'destroy'%>
+    </div>
+
+    <%- else -%>
+
+     <div id="user">
+    	<%=link_to "Sign in", :controller=>'sessions', :action=>'new'%>
+     </div>
+
+    <%- end -%>
+<% if @controller.controller_name == "testimonials" %>
+			<div id="logo">
+				<a href="/account/profiles"><img src=<%= @partner_logo %> alt="REI Matcher" width="211" height="49" /></a>
+			</div>
+<% else %>
+			<div id="logo">
+				<a href="/account/profiles"><img src="/images/reiLogo.png" alt="REI Matcher" width="211" height="49" /></a>
+			</div>
+<% end %>
+	<ul id="menu">
+<%- if !logged_in? || logged_in? && @controller.controller_name != "testimonials"  -%>
+		<li class="<%=render_nav_class_name('nav-dashboard')%>" ><%=link_to "Dashboard", :controller=>"account", :action=>"profiles"%></li>
+<%- end -%>
+    <%- if logged_in? && @controller.controller_name != "testimonials" -%>
+		<li class="<%=render_nav_class_name('nav-seller')%>"><a href="#">Sellers&nbsp;<img src="/images/arrow-expanded.gif" alt="" width="10" height="10" /></a>
+		  <ul>
+			<li><%=link_to "Manage Leads", :controller=>"seller_websites", :action=>"seller_lead_management"%></li>
+
+			<li><%=link_to "Seller Websites", :controller => "seller_websites", :action => "index" %></li>
+
+			<li><a href="/seller_responder_system/seller_responder_sequence_series?email_number=1&sequence_name=sequence_one">Responders</a></li>
+			<li><a href="/seller_websites/add_new_seller">Add Seller</a></li>
+			<li><%=link_to "Add Property", :controller=>"profiles", :action=>"new", :id=>(current_user.license_number.blank? ? "owner" : "seller_agent")%></li>
+		  </ul>
+		</li>
+		<li class="<%=render_nav_class_name('nav-buyer')%>"><a href="#">Buyers&nbsp;<img src="/images/arrow-expanded.gif" alt="" width="10" height="10" /></a>
+		  <ul>
+			<!-- <li><a href="#">Manage Buyers</a></li> -->
+			<li><%=link_to "Manage Leads", :controller=>"buyer_websites", :action=>"buyer_lead_management"%></li>
+			<li><%=link_to "Buyer Websites", :controller => "buyer_websites", :action => "index" %></li>
+			<li><%=link_to "Responders", :controller => "account_marketing", :action => "welcome_email" %></li>
+			<li><%=link_to "Add Buyer", :controller => "profiles", :action => "new", :id => (current_user.license_number.blank? ? "buyer" : "buyer_agent")%></li>
+		  </ul>
+		</li>
+		<li class="<%=render_nav_class_name('nav-network')%>"><a href="#">Network&nbsp;<img src="/images/arrow-expanded.gif" alt="" width="10" height="10" /></a>
+		  <ul>
+			<li><%=link_to "Investor Network", :controller=>"account", :action=>"investor_directory_page"%></li>
+			<li><%=link_to "Messaging", :controller=>"account", :action=>"investor_inbox"%></li>
+		  </ul>
+		</li>
+<% end %>
+
+<% if !logged_in? || logged_in? && @controller.controller_name != "testimonials" %>
+
+		<li class="<%=render_nav_class_name('nav-training')%>"><a href="#">Training&nbsp;<img src="/images/arrow-expanded.gif" alt="" width="10" height="10" /></a>
+		  <ul>
+			<li><%=link_to "AMPS", "http://www.reimatcher.com/training/amps" %></li>
+			<li><%=link_to "Gold Coaching &nbsp;&nbsp;&nbsp;&nbsp;", "http://www.reimatcher.com/training/goldcoaching" %></li>
+			<li><%=link_to "Re-Volution &nbsp;&nbsp;&nbsp;&nbsp;", "http://www.reimatcher.com/training/RE-Volution" %></li>
+      <li><%=link_to "Top 1% Coaching &nbsp;&nbsp;&nbsp;&nbsp;", "http://www.reimatcher.com/training/top1" %></li>
+			<li><%=link_to "My REI Marketing Machine &nbsp;&nbsp;&nbsp;&nbsp;", "http://www.reimatcher.com/training/myreimarketingmachine" %></li>
+      <li><%=link_to "Blueprint", "http://www.reimatcher.com/training/blueprint" %></li>
+      <li><%=link_to "All in One", "http://www.reimatcher.com/training/allinone" %></li>
+      <li><%=link_to "Live Events", "http://www.loveamericanhomes.com/rsvp/" %></li>
+		  </ul>
+		<li class="<%=render_nav_class_name('nav-howto')%>"><a href="#">How To&nbsp;<img src="/images/arrow-expanded.gif" alt="" width="10" height="10" /></a>
+		  <ul>
+			<li><%=link_to "REIM How To", "http://www.reimatcher.com/faq" %></li>
+
+
+<!--			<li><%#=link_to "News/Updates", "http://blog.reimatcher.com/", {:target => "_blank"} %></li> -->
+<!--			<li><%#=link_to "Forum", "http://forum.reimatcher.com/", {:target => "_blank"} %></li>-->
+		  </ul>
+<% end %>
+    <%- if logged_in? && @controller.controller_name != "testimonials" -%>
+		<li class="<%=render_nav_class_name('nav-admin')%>"><a href="#" class="<%=render_nav_class_name('nav-admin')%>">Admin&nbsp;<img src="/images/arrow-expanded.gif" alt="" width="10" height="10" /></a>
+		<ul>
+		        <li><%=link_to "My Profile", :controller=>"account", :action=>"settings"%></li>
+		        <li><%=link_to "Company Info", :controller=>"account", :action=>"company_info"%></li>
+                        <li><%=link_to "Social Media", :controller=>"account", :action=>"social_media"%></li>
+                        <li><%=link_to "My Investor Website", :controller=>"investor_websites", :action=>"index"%></li>
+			<li><%=link_to "Property Syndication", :controller=>"account", :action=>"property-syndication"%></li>
+                        <li><%=link_to "Alerts", :controller=>"account", :action=>"digest_frequency"%></li>
+		</ul>
+<% end %>
+	</ul>
+			
+  	</div>
+	
+  
+<!--
+
+      <div id="subNavProfile">
+        <%#- if !@profile.nil? -%>
+        <%#=link_to "My Profiles", :controller=>"account", :action=>"profiles"%> Â» <%#=truncate((@profile.buyer? or @profile.buyer_agent?) ? @profile.private_display_name : @profile.display_name,20)%>
+        <%#- end -%>
+      </div>
+
+    </div>
+ -->
+ 
+  <div class="content">
+
+    <div class="widecontent">
+
+        <% if ( params[:controller] == "seller_websites" || "buyer_websites" and params[:action]=="seller_lead_full_page_view" || params[:action]=="buyer_lead_full_page_view" ) and @is_profile_has_bounced_email_address %>
+
+        <div class="error">This email address has bounced, please check</div>
+
+        <% end %>
+
+      <div id="notice" class="notice" <%="style=\"display:none\"" if !flash[:notice]%>><%=flash[:notice]%></div>
+
+      <%- if flash[:warning] -%>
+
+      <div class="warning"><%=flash[:warning]%></div>
+
+      <%- end -%>
+
+      <%- if flash[:error] -%>
+
+      <div class="error"><%=flash[:error]%></div>
+
+      <%- end -%>
+
+    </div>
+
+    <div>
+      <% if params[:controller] == "seller_websites" || "buyer_websites"  and params[:action] == "engagement_tab" || params[:action] == "buyer_lead_engagement" || params[:action]=="seller_lead_full_page_view" || params[:action]=="buyer_lead_full_page_view" || params[:action]== "edit_buying_areas" || params[:action]=="property" || params[:action]=="repairs" || params[:action]=="financial_tab" || params[:action]== "edit_buying_criteria"  || params[:action]== "buyer_lead_match" || params[:action]==  "buyer_note_full_page_view" || params[:action]== "seller_note_full_page_view"%>
+        <% if params[:controller] == "buyer_websites"%>
+          <a href="/buyer_websites/buyer_lead_management"><< Back to Buyer Leads</a>
+        <%else%>
+          <a href="/seller_websites/seller_lead_management"><< Back to Seller Leads</a>
+        <%end%>
+      <%end%>
+    </div>
+
+    <%- if !@hide_page_title -%>
+      <div class="left">
+        <%- if @controller.controller_name == "account" and @controller.action_name == "investor_full_page" -%>
+          <div>
+            <% if (!@state_selected.blank? && !@territory_selected.blank?) || !@search_string.blank?%>
+              <% form_tag "/account/investor_network",:method=>"post" do%>
+                <%=hidden_field_tag "state_code[state_code]", @state_selected %>
+                <%=hidden_field_tag "user_territory[territory_id]", @territory_selected %>
+                <% if !@page_number.blank?%>
+                  <%=hidden_field_tag "page", @page_number %>
+                <% end %>
+                <%=hidden_field_tag "search_investor", @search_investor %>
+            <a href="/account/investor_directory_page"><< Back to Network</a>
+                <% end %>
+            <% else %>
+              <div class="link_button_xl" style="width:60px;">   
+                <%= link_to '< Back',"/account/profiles"%>
+              </div>
+            <% end %>
+         </div>
+      <%- end -%>
+
+      <div class="page_title <%=@page_icon_style || ''%>">
+      <% if !@profile_title_name.nil? %>
+          <%- unless @ignore_h2 -%>
+          <h2 <%="class='#{@page_heading_class}'" if @page_heading_class%>><%=@page_heading || @profile_title_name%></h2>
+          <%- end -%>
+        <% else %>
+          <%- unless @ignore_h2 -%>
+          <h2 <%="class='#{@page_heading_class}'" if @page_heading_class%>><%=@page_heading || @page_title%></h2>
+          <%- end -%>
+        <% end %>
+        <%- if @page_title_line_2 -%>
+        <h2 <%="class='#{@page_heading_line_2_class}'" if @page_heading_line_2_class%>><%=@page_title_line_2%></h2>
+        <%- end -%>
+        <%- if @page_title_h1 -%>
+        <h1 <%="class='#{@page_title_h1_class}'" if @page_title_h1_class%>><%=@page_title_h1%></h1>
+        <%- end -%>
+
+        <p class="tip"><%=@tip || '' %></p>
+      <% if !params[:id].nil? %>
+        <% if params[:controller] == "seller_websites" || "buyer_websites"  and params[:action] == "engagement_tab" || params[:action] == "buyer_lead_engagement" || params[:action]=="seller_lead_full_page_view" || params[:action]=="buyer_lead_full_page_view" || params[:action]== "edit_buying_areas" || params[:action]=="property" || params[:action]=="repairs" || params[:action]=="financial_tab" || params[:action]== "edit_buying_criteria"  || params[:action]== "buyer_lead_match" || params[:action]==  "buyer_note_full_page_view" %>
+          <div class="right_scrach_pad">
+            <br/>
+            <%=link_to_remote(image_tag('icons/edit.png') + "Scratch Pad",  :url=>{:controller=> params[:controller], :action=>:scratch_pad, :id=>params[:id]},
+                                                                        :method => :get,
+                                                                        :update         => "lightbox_contents",
+                                                                        :loading        => "lightbox_controller.loading()",
+                                                                        :loaded         => "lightbox_controller.loaded()") %>
+           <% if params[:controller] == "seller_websites"%>
+           <%#= link_to image_tag('icons/paste.png') +"Generate Contract",step1_for_generate_contract_seller_website_path(@seller_profile) %>
+           <%end%>
+
+          </div>
+        <%end%>
+      <%end%>
+
+      </div>
+    </div>
+
+    <div class="right_for_link_seller_note">
+      <% if params[:controller] == "seller_websites" and params[:action] == "engagement_tab" %>
+       <a href='/seller_websites/add_seller_notes?id=<%= params[:id] %>' style='float:left;' ><h4 style="margin:2px;"><%= image_tag 'icons/add.png' %> Add Seller Note</h4></a>
+      <% end %>
+       <% if params[:controller] == "buyer_websites" and params[:action] == "buyer_lead_engagement" %>
+       <a href='/buyer_websites/add_buyer_notes/<%= params[:id] %>' style='float:left;' ><h4 style="margin:2px;"><%= image_tag 'icons/add.png' %> Add Buyer Note</h4></a>
+      <% end %>
+      <% if params[:controller] == "seller_websites" and (params[:action] == "step2" || params[:action] == "edit")%>
+        <% if @seller_website && @seller_website.seller_magnet %>
+        <%= link_to  "<b>See Examples</b>", {:controller=>:amps_magnet, :action=>:seller_magnet_example},:style=>"float:right;",:target=>"_blank"%>
+        <% else %>
+        <%#= link_to  "<b>See Example</b>", {:controller=>:seller_websites, :action=>:seller_website_example},:style=>"float:right;",:target=>"_blank"%>
+        <%= link_to  "<b>See Example</b>", "http://www.reimatcher.com/faq/seller-mktg/customize-the-content-of-your-seller-websites/", :style=>"float:right;",:target=>"_blank"%>
+        <% end %>
+      <% end %>
+      <% if params[:controller] == "seller_websites" and params[:action] == "seller_lead_management" %>
+        <% form_tag '/seller_websites/seller_lead_management', :method => :get do %>
+        <%= text_field_tag :seller_profile_search, params[:seller_profile_search] %>
+        <%= submit_tag "Search", :name => nil %>
+        <% end %>
+	<p><a href='/seller_websites/add_new_seller' style='float:left;' ><h4 style="margin:2px;"><%= image_tag 'icons/add.png' %> Add Seller Lead</h4></a></p>
+      <% end %>
+  <% if params[:controller] == "buyer_websites" and params[:action] == "buyer_lead_management" %>
+        <% form_tag '/buyer_websites/buyer_lead_management', :method => :get do %>
+        <%= text_field_tag :buyer_search_param, params[:buyer_search_param] %>
+        <%= submit_tag "Search", :name => nil %>
+        <% end %>
+	<p><a href='/profiles/new_buyer_zipselect/buyer' style='float:left;' ><h4 style="margin:2px;"><%= image_tag 'icons/add.png' %> Add Buyer Lead</h4></a></p>
+      <% end %>
+    
+      <% if params[:controller] == "seller_websites" and params[:action] == "seller_lead_full_page_view" %>
+        <b>Assign responder sequence</b>
+        <% form_for :seller_notification, :url => "/seller_websites/update_seller_sequence/#{params[:id]}", :method => :post do |f| %>
+        <% @seller_notification.sequence_name = "do_not_call" if !@seller_property.responder_sequence_subscription%>
+        <%= f.select("sequence_name", [["--Select Sequence--", "none"], ["New Lead", "sequence_one"], ["Trying to Reach You", "sequence_two"], ["After Call: Next Steps", "sequence_three"], ["After Call: Not Now", "sequence_four"],["No Sequence", "no_sequence"], ["Do Not Call", "do_not_call"], ["AMPS Cold Lead", "amps_cold"], ["AMPS Hot Lead", "amps_new"]]) %>
+        <%= submit_tag "Update", :name => nil %>
+        <% end %>
+      <% end %>
+      <%- if @content_for_title_ad -%>
+
+        <%= yield :title_ad %>
+
+      <%- end -%>
+    </div>
+    <%- end -%>
+   
+    <div class="widecontent">
+
+      <%=@content_for_layout%>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <div id="scratch" style="display:none;"></div>
+
+  </div>
+
+  <div id="footer">
+	REI Technologies LLC &copy; 2012 <br />
+       <%#- if !logged_in? || (logged_in? && @controller.controller_name != "testimonials") -%>
+	<%=link_to "Privacy",:controller=>"home", :action=>"privacy" %> |
+	<%=link_to "Terms of Use",:controller=>"home", :action=>"terms_of_use"%> |
+	<%- if logged_in? -%>
+           <%=link_to "Dashboard", '/account/profiles' %> |
+        <% elsif !logged_in? %>
+           <%=link_to "Dashboard", '/login' %> |
+        <% end %>
+	<%=link_to "Support", :controller=>"home", :action=>"support"%>
+       <%#- end -%>
+    <!--<div id="footerLeft">
+      <div style="text-align: left;">&copy; Copyright 2008</div>
+      <div style="text-align: left;">Dwellgo is a service of Jaymon Inc.</div>
+    </div>
+    <div id="footerRight">
+      <div style="text-align: left;">
+        <a href="http://dwellgo.com/blog/about">About Us</a> &middot;
+        <a href="http://www.dwellgo.com/blog/our-team/">Our Team</a> &middot;
+        <%#=link_to "Contact Us",:controller=>"home", :action=>"contact_us"%> &middot;
+        <a href="http://dwellgo.com/faq">Support</a> &middot;
+        <a href="http://dwellgo.com/blog">Blog</a> &middot;
+        <%#=link_to "Give Us Feedback", new_feedback_path %>
+      </div>
+      <div style="text-align: left;">
+        <%#=link_to "Tour",:controller=>"home", :action=>"tour"%>  &middot;
+        <%#=link_to "Terms of Use",:controller=>"home", :action=>"terms_of_use"%>  &middot;
+        <%#=link_to "Privacy Policy",:controller=>"home", :action=>"privacy"%> &middot;
+        <a href="http://www.dwellgo.com/properties">Homes for Sale</a>
+        <a style="display: none;" href="http://www.coopdesign.com" target="_blank">Design by Cooper</a>
+        <%#=" &middot; "+@custom_footer_link if @custom_footer_link%>
+      </div>
+    </div>-->
+  </div>
+  </div>
+
+  <script type="text/javascript">
+    <%= ga_code_for_reim %>
+  </script>
+
+  <%- if @controller.controller_name == "home" and @action_name == "index" -%>
+  <script type="text/javascript" src="http://cetrk.com/pages/scripts/0007/4869.js"> </script>
+  <%- end -%>
+
+
+  <%= get_clicky_code %>
+<% if RAILS_ENV == 'production' %>
+<%= clicktale_bottom %>
+<% end %>
+</body>
+
+</html>

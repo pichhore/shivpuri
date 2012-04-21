@@ -1,0 +1,7 @@
+    <h1>About Us</h1><br>
+    <% business_name = @investor_website.user.user_company_info.business_name unless @investor_website.user.user_company_info.blank?%>
+    <% unless business_name.blank? %>
+      <%= @investor_website.about_us_page_text.to_s.gsub("{Subscriber Company name}",business_name).gsub("Company name",business_name).gsub("Business Name",business_name)%>
+    <% else %>
+      <%= @investor_website.about_us_page_text%>
+    <% end %>

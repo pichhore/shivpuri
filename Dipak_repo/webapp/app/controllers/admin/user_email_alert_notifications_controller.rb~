@@ -1,0 +1,85 @@
+class Admin::UserEmailAlertNotificationsController < ApplicationController
+  # GET /admin_user_email_alert_notifications
+  # GET /admin_user_email_alert_notifications.xml
+  def index
+    @user_email_alert_notification = UserEmailAlertNotification.all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @admin_user_email_alert_notifications }
+    end
+  end
+
+  # GET /admin_user_email_alert_notifications/1
+  # GET /admin_user_email_alert_notifications/1.xml
+  def show
+    @user_email_alert_notification = UserEmailAlertNotification.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @user_email_alert_notification }
+    end
+  end
+
+  # GET /admin_user_email_alert_notifications/new
+  # GET /admin_user_email_alert_notifications/new.xml
+  def new
+    @user_email_alert_notification = UserEmailAlertNotification.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render :xml => @user_email_alert_notification }
+    end
+  end
+
+  # GET /admin_user_email_alert_notifications/1/edit
+  def edit
+    @user_email_alert_notification = UserEmailAlertNotification.find(params[:id])
+  end
+
+  # POST /admin_user_email_alert_notifications
+  # POST /admin_user_email_alert_notifications.xml
+  def create
+    @user_email_alert_notification = UserEmailAlertNotification.new(params[:user_email_alert_notification])
+
+    respond_to do |format|
+      if @user_email_alert_notification.save
+        flash[:notice] = 'Admin::UserEmailAlertNotification was successfully created.'
+        format.html { redirect_to(@user_email_alert_notification) }
+        format.xml  { render :xml => @user_email_alert_notification, :status => :created, :location => @user_email_alert_notification }
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @user_email_alert_notification.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  # PUT /admin_user_email_alert_notifications/1
+  # PUT /admin_user_email_alert_notifications/1.xml
+  def update
+    @user_email_alert_notification = UserEmailAlertNotification.find(params[:id])
+
+    respond_to do |format|
+      if @user_email_alert_notification.update_attributes(params[:user_email_alert_notification])
+        flash[:notice] = 'Admin::UserEmailAlertNotification was successfully updated.'
+        format.html { redirect_to(@user_email_alert_notification) }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @user_email_alert_notification.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /admin_user_email_alert_notifications/1
+  # DELETE /admin_user_email_alert_notifications/1.xml
+  def destroy
+    @user_email_alert_notification = UserEmailAlertNotification.find(params[:id])
+    @user_email_alert_notification.destroy
+
+    respond_to do |format|
+      format.html { redirect_to(admin_user_email_alert_notifications_url) }
+      format.xml  { head :ok }
+    end
+  end
+end

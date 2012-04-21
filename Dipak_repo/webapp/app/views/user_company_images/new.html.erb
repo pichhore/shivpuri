@@ -1,0 +1,158 @@
+<%= error_messages_for :user_company_image %>
+<% temp = (params[:action] == 'step2') ? "step2" : "companyinfo" %>
+<%- form_for(@user_company_image, :url => {:controller=>'account', :action=>'company_info', :temp => temp } ,
+:html => { :multipart => true,:method => :post }) do |f| -%>
+<table>
+    <tr>
+        <%- business_name, business_address, business_phone, business_email, city, state, zipcode,country  =UserCompanyInfo.find_value(session[:business_params], current_user.id, @user_company_info) -%>
+        <th class="<% if(params[:action]!='step2') %> label_required<% end %>">
+            Business Name:
+        </th>
+        <td>
+            <input type="hidden"  value="1" name="check_enter" id="check_enter" />
+            <%=text_field "user_company_info", "business_name",:value=>business_name, :onkeyup => "values_after_change();" %><%=error_message_on :user_company_info,:business_name %>
+        </td>
+    </tr>
+    <tr>
+        <th class="<% if(params[:action]!='step2') %> label_required<% end %>">
+            Business Address:
+        </th>
+        <td>
+            <%=text_field "user_company_info", "business_address", :value=>business_address, :onkeyup => "values_after_change();" %><%=error_message_on :user_company_info,:business_address %>
+        </td>
+    </tr>
+	
+	<tr>
+      <td>
+        <div style="display:none;margin-left:205px;" class="loading" id="spinner"><span class="text">Loading...</span></div>
+    </td>
+	<td>
+	<div style="float:left;width:555px;">
+	         <div style="margin-top:5px; clear:both; float:left;">	 
+            <div style="float:left;">
+				<div class="<% if(params[:action]!='step2') %> city_state_zip_label_required<% end %>" style="float:left;"> City: </div>
+				<div style="float:left;">
+				  <%=text_field "user_company_info", "city", :value=> city,:size=>20 %><%=error_message_on :user_company_info,:city %>
+				 </div>
+			</div>
+			
+			  <div style="float:left; margin-left:10px;">
+				<div class="<% if(params[:action]!='step2') %> city_state_zip_label_required<% end %>" style="float:left;">  Country: </div>
+				<div style="float:left;">
+				<select id="user_company_info_country" name="user_company_info[country]" <% if !(error_message_on :user_company_info,:country).blank? %> style="border:1px solid #FF3300; width:105px;color:#FF3300;"<% end %> style="width:150px;" onchange="get_states();">
+				  <%= options_for_select([[ "Select a Country", "" ]] + County::COUNTRY_NAME, country) %>
+				</select>
+                     <%=error_message_on :user_company_info,:country %>
+				 </div>
+			</div>
+			
+			 </div>
+		
+		 
+			 <div style="margin-top:5px; clear:both; float:left;">	 
+                <% if country == "CA" %>
+                        <div style="float:left;">
+                          <div class="<% if(params[:action]!='step2') %> city_state_zip_label_required<% end %>" style="float:left;" id="state_block"> Province: </div>
+                          <div style="float:left;" id="user_company_info_state_block">
+                          <select id="user_company_info_state" name="user_company_info[state]" <% if !(error_message_on :user_company_info,:state).blank? %> style="border:1px solid #FF3300; width:105px;color:#FF3300;"<% end %>>
+                            <%= options_for_select([[ "Select a Province", "" ]] + State::CANADA_NAMES, state) %>
+                          </select>
+                          <%=error_message_on :user_company_info,:state %>
+                          </div>
+                    </div>
+                    
+                      <div style="float:left; margin-left:10px;">
+                          <div class="<% if(params[:action]!='step2') %> city_state_zip_label_required<% end %>" style="float:left;" id="zip_block"> Postal Code: </div>
+                          <div style="float:left;">
+                          <%=text_field "user_company_info", "zipcode", :value=>  zipcode,:size=>15 %><%=error_message_on :user_company_info,:zipcode %>
+                          </div>
+                    </div>
+                    
+                      </div>
+            <% else %>
+                    <div style="float:left;">
+                          <div class="<% if(params[:action]!='step2') %> city_state_zip_label_required<% end %>" style="float:left;" id="state_block"> State: </div>
+                          <div style="float:left;" id="user_company_info_state_block">
+                          <select id="user_company_info_state" name="user_company_info[state]" <% if !(error_message_on :user_company_info,:state).blank? %> style="border:1px solid #FF3300; width:105px;color:#FF3300;"<% end %>>
+                            <%= options_for_select([[ "Select a State", "" ]] + State::NAMES, state) %>
+                          </select>
+                          <%=error_message_on :user_company_info,:state %>
+                          </div>
+                    </div>
+                    
+                      <div style="float:left; margin-left:10px;">
+                          <div class="<% if(params[:action]!='step2') %> city_state_zip_label_required<% end %>" style="float:left;" id="zip_block"> Zip Code: </div>
+                          <div style="float:left;">
+                          <%=text_field "user_company_info", "zipcode", :value=>  zipcode,:size=>15 %><%=error_message_on :user_company_info,:zipcode %>
+                          </div>
+                    </div>
+                    
+                      </div>
+		 <% end %>
+	</div>
+	
+	</td></tr>
+	
+    <tr>
+        <th class="label_required">
+            Business Phone:
+        </th>
+        <td>
+            <%=text_field "user_company_info", "business_phone", :value=>business_phone, :onkeyup => "values_after_change();" %>
+			<br /><span style="color:red;"><%= flash[:business_phone] %></span>
+			<%=error_message_on :user_company_info,:business_phone %>
+        </td>
+    </tr>
+    <tr>
+        <th class="label_required">
+            Business Email:
+        </th>
+        <td>
+            <%=text_field "user_company_info", "business_email", :value=>business_email, :onkeyup => "values_after_change();" %>
+			<%=error_message_on :user_company_info,:business_email %><br />
+			<span style="color:red;"><%= flash[:business_email] %></span><br />
+			<span style="color:red;">Note:&nbsp;</span>Buyer Notification Emails are sent FROM this address
+        </td>
+    </tr>
+    <%= render :partial=>"user_company_images/image_upload" %>
+    <tr>
+        <td colspan="2" align="center">
+        	<% unless params[:action]== "step2" %>
+            <%=submit_tag "Update Settings", :class=>'submit_xl' %>
+            <%=button_to_function "Cancel","document.location='#{url_for({:controller=>'account', :action=>'settings'})}';", :class=>"submit_l" %>
+			<% else %>
+			<%=button_to_function "Back","document.location='#{url_for({:controller=>'account', :action=>'step1'})}';", :class=>"submit_l" %>
+			<%=submit_tag "Next", :class=>'submit_l' %>
+			<% end %>
+        </td>
+    </tr>
+</table>
+<% end %>
+<%- session[:business_params] = nil -%>
+
+
+<script>
+        function get_states(){
+          var country_id = $('user_company_info_country').value;
+          if(country_id == "CA"){
+            $('zip_block').innerHTML = "Postal Code:";
+            $('state_block').innerHTML = "Province:";
+          }
+        else{
+            $('zip_block').innerHTML = "Zip Code:";
+            $('state_block').innerHTML = "State:";
+          }
+          new Ajax.Request('/states/get_user_states/',
+            {
+              method:'get',
+              parameters: {id: country_id},
+              onSuccess: function(transport){
+              var response = transport.responseText;
+              $('user_company_info_state_block').innerHTML = response;
+            },
+          onFailure: function(){ alert('Something went wrong...') },
+          onLoading: function(){ $('spinner').style.display = 'block';},
+          onComplete: function(){$('spinner').style.display = 'none';}
+      });
+}
+</script>

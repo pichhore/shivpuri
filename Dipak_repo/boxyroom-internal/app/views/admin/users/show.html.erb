@@ -1,0 +1,168 @@
+<div id="content">
+        <div class="container">
+                <div class="primary">
+                        <h1><%=@user.full_name_profile%>'s Profile</h1>
+                        <div class="main profile">
+                                <div class="thumbnail large">
+                                        <%= image_tag @user.avatar.url(:medium)%>
+                                        <div class="overlay"></div>
+                                </div>
+                                <strong>About User</strong>
+                                <p class="highlight"><%= @user.about%></p>
+                        </div>
+                        <table cellspacing="0" class="listings">
+                                <caption><%=@user.full_name_profile%>'s Properties</caption>
+                                <colgroup>
+                                        <col class="description" />
+                                        <col class="amount" />
+                                        <col class="actions" />
+                                </colgroup>
+                                <thead>
+                                  <tr>
+                                      <th>Description</th>
+                                      <th>Amount</th>
+                                      <th>Status</th>
+                                      <th></th>
+                                  </tr>
+                                </thead>
+                                 <tbody>
+                                  <%- @properties.each do |property| %>
+                                    <tr class="extended">
+                                        <td>
+                                            <a class="link" href="/properties/<%=property.id%>?input=<%=property.address.city%>">
+                                                <div class="thumbnail">
+                                                    <%- if property.pictures.empty? %>
+                                                      <%= image_tag("/images/missing/missing_properties_thumb.png" ) %>
+                                                    <%- else %>
+                                                      <%= image_tag(property.pictures.first.image.url(:thumb)) %>
+                                                    <%- end %>
+                                                </div>
+                                                <div >
+                                                  <p class="description" style="margin-left: 82px;"><%= property.title.slice(0..50)%><%= "..." if property.title.size>50%><div style="margin-top: 2px;margin-left: 82px;"><strong class="location"  ><%= truncate property.address.location %></strong></div></p>
+                                                </div>
+                                            </a>
+                                            </td>
+                                            <td id="amount_field"><%=number_to_currency(property.monthly_rental, :precision=> 0)%></td>
+					      <%if property.occupied? %>
+						<td><span class="blue status occupied"></span></td>
+					      <%elsif property.paid? %>
+						<td><span class="blue status advance"></span></td>
+					      <%elsif property.listed?%>
+						  <td><span class="orange status listed"></span></td>
+					      <%elsif property.status=="approved"%>
+						  <td><span class="blue status approved"></span></td>
+					      <%elsif property.pending?%>
+						  <td><span class="orange status pending"></span></td>
+					      <%elsif property.status=="cancelled"%>
+						  <td><span class="red status cancelled"></span></td>
+					      <%elsif property.delisted?%>
+						  <td><span class="red status delisted"></span></td>
+					      <%elsif property.rejected?%>
+						<td><span class="red status rejected"></span></td>
+					      <% end %>                                         <td>
+					      <div class="stats">
+						  <ul style="display: block;top: 30px">
+						      <li class="likes"><%= property_likes_count(property) %> likes</li>
+						      <li class="reviews"><%= property_review_count(property) %> reviews</li>
+						      <%if verified_property(property)%>
+							<li class="verified last-child">Verified</li>
+						      <% end %>
+						  </ul>
+					      </div>
+                                        </td>
+                                    </tr>
+                                  <%- end %>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                  <tr>
+                                    <td colspan="4">
+                                    </td>
+                                  </tr>
+                                </tfoot>
+                        </table>
+
+                        <table cellspacing="0" class="listings">
+                                <caption><%=@user.full_name_profile%>'s Applications</caption>
+                                <colgroup>
+                                        <col class="description" />
+                                        <col class="amount" />
+                                        <col class="status" />
+                                        <col class="actions" />
+                                </colgroup>
+                                <thead>
+                                        <tr>
+                                                <th>Description</th>
+                                                <th>Amount</th>
+                                                <th>Status</th>
+                                                <th></th>
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                <%- @applications.each do |application| %>
+                                        <tr>
+                                                <td>
+                                                    <div class="thumbnail">
+                                                      <%- if application.property.pictures.empty? %>
+                                                        <%= image_tag("/images/missing/missing_properties_thumb.png") %>
+                                                      <%- else %>
+                                                        <%= image_tag(application.property.pictures.first.image.url(:thumb)) %>
+                                                      <%- end %>
+                                                    </div>
+                                                    <div >
+                                                      <p class="description" style="margin-left: 82px;"><%=application.property.title.slice(0..50)%><%= "..." if application.property.title.size>50%><div style="margin-top: 2px;margin-left: 82px;"><strong class="location"  ><%= truncate application.property.address.location %></strong></div></p>
+                                                    </div>
+                                                </td>
+                                                <td id="amount_field"><%=number_to_currency(application.property.monthly_rental, :precision=> 0)%></td>
+                                                 <%if application.approved?%>
+                                                  <td style="width: 112px;"><span class="green status approved"></span></td>
+                                                 <%elsif application.pending?%>
+                                                   <td style="width: 112px;"><span class="orange status pending"></span></td>
+                                                 <%elsif application.rejected?%>
+                                                    <td style="width: 112px;"><span class="red status rejected"></span></td>
+                                                 <%elsif application.paid?%>
+                                                    <td style="width: 112px;"><span class="blue status paid"></span></td>
+                                                 <%elsif application.cancelled?%>
+                                                    <td style="width: 112px;"><span class="red status cancelled"></span></td>
+                                                 <%elsif application.moved_in?%>
+                                                    <td style="width: 112px;"><span class="red status moved_in"></span></td>
+                                                 <% end %>
+                                                <td>
+                                                </td>
+                                        </tr>
+                                <%- end %>
+                                </tbody>
+                                <tfoot>
+                                        <tr>
+                                                <td colspan="4">
+                                                </td>
+                                        </tr>
+                                </tfoot>
+                        </table>
+
+                </div>
+                <div class="secondary">
+                        <div class="section" style="height: 50px">
+                                <h3>Summary</h3>
+                        </div>
+                </div>
+                <div class="secondary">
+                  <div class="section1" style="padding: 8px;color: #000000;">
+                    <p class="amount_field"><%= member_since(@user.created_at)%></p>
+                    <p style="padding-top: 0px;text-align: center;color: #000000;">MEMBER SINCE</p>
+                  </div>
+                </div>
+                <div class="secondary">
+                  <div class="section1" style="padding: 8px;color: #000000;">
+                    <p class="amount_field"><%= @user.properties.listed.count%></p>
+                    <p style="padding-top: 0px;text-align: center;color: #000000;">PROPERTIES LISTED</p>
+                  </div>
+                </div>
+                <div class="secondary">
+                  <div class="section1" style="padding: 8px;color: #000000;">
+                    <p class="amount_field"><%= @user.prefers_currency %></p>
+                    <p style="padding-top: 0px;text-align: center;color: #000000;">PREFERRED CURRENCY</p>
+                  </div>
+                </div>
+        </div>
+</div>

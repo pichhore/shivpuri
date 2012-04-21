@@ -1,0 +1,49 @@
+namespace :wholesale_buyer do
+task :update_counties_for_wholesale_buyer_profile => :environment do
+  #wholesale_buyer_profiles = Profile.find_all_active_wholesale_type_buyers
+  wholesale_buyer_profiles = Profile.find("f58d2346-78d0-11e1-ab54-002618c30c0a")
+  wholesale_buyer_profiles.each do |profile|
+    
+    pfeis = ProfileFieldEngineIndex.find( :all, :conditions => [ "profile_id = ?", profile.id ] )
+    pfeis.each do |pfei|
+      zip_obj = Zip.find(:first, :conditions => ["zip = ?", pfei.zip_code])
+      next if zip_obj.blank? or zip_obj.county_id.blank?
+      county_obj = County.find(:first, :conditions => ["id = ?", zip_obj.county_id])
+      next if county_obj.blank?
+      pfei.update_attribute(:county,county_obj.name)
+    end unless pfeis == nil
+
+    county_string = Array.new
+    zips_string = profile.zip_code
+    unless zips_string.blank?
+      zips_string.split(",").each do |zip|
+        next if zip.blank?
+        zip_obj = Zip.find(:first, :conditions => ["zip = ?", zip])
+        next if zip_obj.blank? or zip_obj.county_id.blank?
+        county_obj = County.find(:first, :conditions => ["id = ?", zip_obj.county_id])
+        next if county_obj.blank?
+        next if county_string.split(",").include?(county_obj.name)
+        county_string = county_obj.name.to_s if county_string.blank?
+        county_string = county_string+","+county_obj.name.to_s   
+      end
+      unless county_string.blank?
+        top_county = county_string.spilt(",").first
+        county_obj = County.find(:first, :conditions => ["name = ?", top_county])
+        zip_obj = Zip.find(:first, :conditions => ["county_id = ?", county_obj.id])
+        profile.state = zip_obj.state
+        profile.save
+      end
+      profile.profile_fields.each do |pf|
+        if( pf.key.eql? 'county' ) then
+          county_string = nil if county_string.blank?
+          pf.value_text = county_string
+          pf.value = county_string
+          pf.save!
+          break
+        end
+      end
+    end
+puts "jsb"
+  end
+end
+end

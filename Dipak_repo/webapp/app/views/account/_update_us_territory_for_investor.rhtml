@@ -1,0 +1,12 @@
+  <div class="investro_dir_inner_right_div">
+      <select name="state_code[state_code]" id="state_code_state_code" onchange="get_us_territories_for_investors();" style="margin-left:15px;">
+        <option value="">--- Select State --- </option>
+          <% @states.each do |state|%>
+              <option value="<%=state.id%>"><%if !state.name.blank?%> <%=state.name%> <%else%> <%=state.state_code%> <%end%> </option>
+            <%end%>
+      </select>
+      </div>
+      <div class="investro_dir_inner_right_territory_div" id="ajax_update_div">
+        <%=select("user_territory","territory_id",@territories.map { |territory| [territory.territory_name, territory.id]  },{ :include_blank => "--- Select Territories --- " })%>
+        <%=error_message_on :user_territory,:territory_id %>
+  </div>

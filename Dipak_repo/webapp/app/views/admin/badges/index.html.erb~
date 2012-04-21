@@ -1,0 +1,57 @@
+<h2>Listing badges</h2>
+<%= link_to 'Create New badge', new_admin_badge_path %>
+
+<div style="margin-left: 20px;">
+<% unless @badges.blank? %>
+  <% for badge in @badges %>
+    <h3><%= h badge.name %></h3>
+    <span><b>Total Users: </b><%=h badge.users.count unless badge.users.blank? %></span>
+    <br/>
+    <span><b>Buyer Profiles added: </b><%=h badge.profiles_added %></span>
+    <br/>
+    <span><b>Properties added: </b><%=h badge.properties_added %></span>
+    <br/>
+    <span><b>Profile completeness: </b><%=h badge.profile_completeness %></span>
+    <br/>
+    <span><b>Properties sold: </b><%=h badge.properties_sold %></span>
+    <br/>
+    <span><b>Sellers added: </b><%=h badge.sellers_added %></span>
+    <br/>
+    <span><b>Deals completed: </b><%=h badge.deals_completed %></span>
+    <br/>
+    <span><b>Investor messages sent: </b><%=h badge.investor_messages_sent %></span>
+    <br/>
+    <span><b>Certification: </b><%=h badge.certification %></span>
+    <br/>
+    <span><b>Email subject: </b><%=h badge.email_subject %></span>
+    <br/>
+    <span><b>Email header: </b><%=h badge.email_header %></span>
+    <br/>
+    <span><b>Email body: </b><%=h badge.email_body %></span>
+    <br/>
+    <span><b>Email footer: </b><%=h badge.email_footer %></span>
+    <br/>
+    <span><b>Membership time: </b><%=h badge.membership_time %></span>
+    <br/>
+    <span>
+      <b>Badge Image: </b>
+      <% unless badge.badge_image.blank? %>
+      <%= image_tag badge.badge_image.public_filename, :width => "50px",:alt => badge.name  %>
+      <% else %>
+
+      <% end %>
+    </span>
+    <br/>
+      <span><%= link_to 'Show', admin_badge_path(badge) %> |</span>
+      <span><%= link_to 'Edit', edit_admin_badge_path(badge) %> |</span>
+      <span><%= link_to 'Destroy', admin_badge_path(badge), :confirm => 'Are you sure?', :method => :delete %></span>
+    <hr/>
+  <% end %>
+<%else%>
+   There is no badges.
+<%end%>
+
+</div>
+
+
+

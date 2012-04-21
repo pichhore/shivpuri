@@ -1,0 +1,47 @@
+<head>
+<!--[if IE 7]>
+  <style type="text/css">
+    .already_m{left: 240px;bottom:40px;position: relative;line-height: 19px;}
+    .login_snup{left: 238px;bottom:40px;position: relative;line-height: 19px;}
+  </style>
+<![endif]-->
+</head>
+<div class="container">
+    <div class="login">
+        <%- form_for @user, :url => users_path do |f| %>
+            <%= f.error_messages :header_message => "Opps! There are problems with your information." , :message => ""%>
+            <fieldset class="signup">
+                <legend>Create an Account</legend>
+                <p style="margin-right: 10px;">
+                    <%= f.label :first_name %>
+                    <%= f.text_field :first_name, :size=>"24", :class=>"half" %>
+                </p>
+                <p >
+                    <%= f.label :last_name %>
+                    <%= f.text_field :last_name, :size=>"24", :class=>"half end" %>
+                </p>
+                <p>
+                    <%= f.label :email,"Email address" %>
+                    <%= f.text_field :email, :size=>"24" %>
+                </p>
+                <p>
+                    <%= f.label :password, f.object.new_record? ? nil : "Change password" %>
+                    <%= f.password_field :password, :size=>"24"  %>
+                </p>
+                <p>
+                    <%= f.label :password_confirmation%>
+                    <%= f.password_field :password_confirmation, :size=>"24"  %>
+                </p>
+                <p class="terms_and_policy">
+                  <div id="chk_terms_and_policy"><%=f.check_box :terms_and_policy%></div>
+                  <div id="text_terms_and_policy">Accept the <%= link_to "Terms of Use", terms_of_use_path %> and <%= link_to "Privacy Policy", privacy_policy_path %>. We will never rent or sell your email to third parties.</div>
+                  <div class="clear"> </div>
+                </p>                
+                <div class="button" style="width: 100%;margin-left: 80px; margin-top:8px;">
+                    <button id="user_submit_signup" name="commit" type="submit" style="width: 151px;"></button>
+                </div>
+                <p style="margin-top: 10px;margin-left: 6px;color: #09384E;" class="already_m">Already member?</p><p style="margin-top: 10px;margin-left: 6px;"><a id="Login" href="/login" style="color: #3300FF !important;margin-left: 2px;" class="login_snup">Log in</a></p>
+            </fieldset>
+        <%- end %>
+    </div>
+</div>

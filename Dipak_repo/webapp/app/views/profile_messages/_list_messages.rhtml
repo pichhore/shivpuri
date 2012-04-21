@@ -1,0 +1,57 @@
+
+<fieldset>
+
+<h4 style="float: left;">Message Center</h4>
+  <%- if @profile_type.buyer? or @profile_type.buyer_agent? -%>
+    <h4 style="float: right;">
+      Show: <%= select_tag("choose_message_filter", options_for_select(%w{All Unread Archived}, @message_filter.titlecase)) %>
+    </h4>
+  <%- end -%>
+</h4>
+<div class="clear"></div>
+<%- if @profile_message_recipients.empty? -%>
+<h4><%- if @message_filter == "All" -%> No messages received from other members of the community.<%- end -%></h4>
+<h4><%- if @message_filter == "Unread" -%> There are no more unread messages to display.<%- end -%></h4>
+<h4><%- if @message_filter == "Archived" -%> There are no archived messages to display.<%- end -%></h4>
+<%- end -%>
+
+<div class="message_summary">
+
+  <%- if !@profile_message_recipients.empty? -%>
+  <div class="headings">
+
+    <div class="column1">&nbsp;</div>
+    <div class="column2">From</div>
+    <%- if @profile_type.buyer? or @profile_type.buyer_agent? -%>
+    <div class="column3 heading">Seller</div>
+    <%- else -%>
+    <div class="column3 heading">Buyer</div>
+    <%- end -%>
+    <div class="column4 heading <%=@sort_order if @sort_type == 'created_at'%>" sort="created_at">Received On</div>
+
+    <div class="clear"></div>
+  </div>
+  <%-end-%>
+
+  <div id="message_list">
+
+<%=render :partial=>"/shared/profile_message_recipient", :collection=> @profile_message_recipients%>
+
+  </div>
+
+</div>
+
+  <div class="buttonbar" page_number="<%=@page_number%>" total_pages="<%=@total_pages%>">
+    <div class="center">
+      <%- if !@profile_message_recipients.empty? -%>
+      <p><%=link_to(" < Prev",{:action=>'oops'}, :class=>"prev_page") if @page_number > 1 %>&nbsp;&nbsp;Page <span id="current_page_number"><%=@page_number%></span> of <span id="total_pages"><%=@total_pages%></span>&nbsp;&nbsp;
+        <%=link_to(" Next > ",{:action=>'oops'}, :class=>"next_page") if @page_number < @total_pages %></p>
+      <%-end-%>
+    </div>
+  </div>
+
+</fieldset>
+
+<script>
+<%=render_total_count_update_js%>
+</script>

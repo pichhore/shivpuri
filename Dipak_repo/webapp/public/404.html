@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>WELCOME TO ::: REIMATCHER.COM :::</title>
+<link rel="stylesheet" media="" type="text/css" href="/style.css"/>
+<script type="text/javascript">
+function validate_required(field, email)
+{
+with (field, email)
+  {
+  if (field.value==null||field.value==""||field.value=="Message")
+    {
+    field.style.borderColor = 'red';
+    field.focus();
+    document.getElementById('notice').style.display = 'block';
+    return false;
+    }
+
+  else if (email.value != 'Email' && echeck(email.value)==false){
+		email.value="";
+                field.style.borderColor = '#117DC0';
+                email.style.borderColor = 'red';
+                document.getElementById('notice').style.display = 'none';
+                document.getElementById('emailNotice').style.display = 'block'; 
+                email.focus() 
+                return false 
+                } 
+  else { 
+               return true; 
+       }
+              }
+            }
+
+function echeck(str) {
+
+		var at="@"
+		var dot="."
+		var lat=str.indexOf(at)
+		var lstr=str.length
+		var ldot=str.indexOf(dot)
+		if (str.indexOf(at)==-1){
+                return false
+		}
+
+		if (str.indexOf(at)==-1 || str.indexOf(at)==0 || str.indexOf(at)==lstr){
+                return false
+		}
+
+		if (str.indexOf(dot)==-1 || str.indexOf(dot)==0 || str.indexOf(dot)==lstr){
+                return false
+		}
+
+		 if (str.indexOf(at,(lat+1))!=-1){
+                 return false
+		 }
+
+		 if (str.substring(lat-1,lat)==dot || str.substring(lat+1,lat+2)==dot){
+                 return false
+		 }
+
+		 if (str.indexOf(dot,(lat+2))==-1){
+                 return false
+		 }
+		
+		 if (str.indexOf(" ")!=-1){
+                 return false
+		 }
+
+ 		 return true					
+	}
+
+window.onload = function() {
+  applyDefaultValue(document.getElementById('textEmail'), 'Email');
+  applyDefaultValue(document.getElementById('text'), 'Message');
+  document.getElementById('current_path').value = document.location.href;
+}
+
+function applyDefaultValue(elem, val) {
+  elem.style.color = '#777';
+  elem.value = val;
+  elem.onfocus = function() {
+    this.style.color = 'black';
+    if(this.value == val) {
+      this.style.color = '#777';
+      this.value = ''; //On focus, make blank
+    }
+  }
+  elem.onblur = function() {
+    if(this.value == '') {
+      this.value = val; //If it's not in focus, use declared value
+    }
+  }
+}
+
+</script>
+
+</head>
+
+<body>
+	<div id="maincontainer">
+		<h2>Uh Oh! ( 404 Error)</h2>
+		
+		<div class="lefbar">
+		  <div class="content_img"><img src="/images/paperflow.gif"></div>
+		  <div style="clear:both; "></div>
+		  <div class="sendmesage">
+                           <form name="myform" action="/send_mail" onsubmit="return validate_required(document.getElementById('text'), document.getElementById('textEmail'))"  method="POST">
+			    <div class="sendmesage">
+			      <h1>Tell us what you were doing...</h1>
+                              <textarea name="text" id="text" cols="160" rows="" style="margin-top: 6px;"></textarea><br /><br /><br />
+			      <div id="notice" name="text" style="color:red; margin-left:20px; font-weight:bold; display:none">Message cannot be blank.</div>
+			      <div id="emailNotice" name="text" style="color:red; margin-left:20px; font-weight:bold; display:none">Invalid E-mail ID.</div>
+                              <div  style= "margin-left:20px; font-weight:bold; font-size:17px;"><b>Your email address</b></div><br />
+                              <input type="text" name="textEmail" id="textEmail" style="margin-left: 20px; border:1px solid #117dc0; padding-left:5px; padding-top:2px; padding-bottom:2px;" size="30"/><br />
+                              <input id="current_path" name="current_path" type="hidden" value="" />
+                              <font style="margin-left: 20px;"><b style="color: red;">DON'T FORGET,</b> if you want a response back include your email address.</font>
+			      <br><br>
+			      <button>Submit</button>
+			    </div>
+			  </form>
+		    </div>
+		</div>
+		
+		<div class="rightbar">
+				<div class="menus">
+					<ul class="menu">
+						<li><a href="http://reimatcher.com/home">Home</a></li>
+						<li><a href="http://reimatcher.com/account/profiles">Dashboard</a></li>
+						<li><a href="https://loveamericanhomes.tenderapp.com/home">Support</a></li>
+					</ul>
+				</div>
+				<div class="logo"><a href="#"><img src="/images/reim_logo.gif"></a></div>
+		</div>		
+	<div style="clear:both;"></div>
+	</div>
+</body>
+</html>

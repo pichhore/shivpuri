@@ -1,0 +1,28 @@
+<h1>Refund</h1>
+<table>
+  <thead>
+    <th>Property ID</th>
+    <th>User to refund</th>
+    <th>Email on record</th>
+    <th>Type of Cancellation</th>
+    <th>Monthly Rental Amount</th>
+  </thead>
+  <tbody>
+    <% @apps.each do |t| %>
+      <tr>
+        <td><%= link_to t.property.id, {:controller => :properties, :action => :show, :id => t.property.id}%></td>
+      <td><%= t.user.firstname %> <%= t.user.lastname %> </td>
+      <td><%= t.user.email %></td>
+      <td>
+        <% if t.landlordcancel? && t.tenantcancel? %>
+          Full refund
+        <% else %>
+          Non-mutual
+        <% end %>
+      </td>
+      <td><%= t.property.monthlyrental %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+

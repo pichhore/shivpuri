@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>Welcome to REIMatcher</title>
+</head>
+<body>
+<%=image_tag "#{@env.to_s}images/logoSub.png", :alt=>"REIMatcher"%>
+
+<div style="padding: 10px 5px"><br />Hi <%=@user.first_name %> </div>
+
+<div style="padding: 10px 5px">Hey, we’ve noticed you haven’t logged into REIMatcher yet…we’re sending your login info again!</div>
+
+<div style="padding: 10px 5px">We are so excited about what this platform can do for you and your success.  REIMatcher is the system that we use in our own businesses...and we're not holding anything back!</div>
+
+<div style="padding: 10px 5px">IMPORTANT: Be sure to keep the information below in a safe place, as it contains your login information to REIMatcher.</div>
+
+<div style="padding: 10px 5px">Login URL: <a href="http://reimatcher.com/login">http://reimatcher.com/login</a></div>
+
+<div style="padding: 10px 5px">Username: <a href="mailto:<%= @user.login %>"><%= @user.login %></a></div>
+
+<div style="padding: 10px 5px">Please click the link below to activate your account</div>
+
+<div style="padding: 10px 5px"><%= @url %></div>
+
+<div style="padding: 10px 5px">We appreciate your decision to invest with us and we will continue to work hard to ensure you have the most cutting edge tools available for maximizing your time and income.</div>
+
+<div style="padding: 10px 5px">We're glad you're on board,</div>
+
+<div style="padding: 10px 5px">Damon Flowers & Phill Grove</div>
+
+<div style="padding: 10px 5px">P.S. Don't forget to click the activation link and get started...</div>
+
+<div style="padding: 10px 5px"><%= @url %></div>
+
+<div style="padding: 10px 5px">REI Technologies LLC, 5114 Balcones Woods Dr, Suite 307 #294, Austin, TX, 78759</div>
+</body>

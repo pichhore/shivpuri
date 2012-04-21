@@ -1,0 +1,128 @@
+ <div id="status" style="margin: 5px;">    
+	<% flash[:messages].each do |message| %>
+	<%= message %><br />
+	<% end unless flash[:messages].blank? %>
+    <div style="position:relative;float: right;left: 265px;position: relative;top: -60px;width: 237px;">
+    <h3>Community Search</h3>
+      <%form_remote_tag (:update=>"territoy_Investor",:url=>{ :controller => "account", :action => "investor_directory_page"},:html=>{:method=>:post}, :loading => "$('spinner').style.visibility = 'visible'", :complete => "$('spinner').style.visibility = 'hidden'") do%>
+        <%= hidden_field_tag "user_territory[territory_id]", @territory_selected_id %>
+        <%= hidden_field_tag "state_code[state_code]", @state_selected %>
+        <%= text_field_tag :q, params[:q] %>
+        <%= submit_tag "Search", :name => nil %>
+      <% end %>
+    </div>
+  </div>
+  <%if !@investors.blank?%>
+    <div id="my_profiles">
+      <h3>Investors in <%= @current_territory.territory_name unless @current_territory.blank?%> territory</h3>
+        <%- @investors.each do |investor| -%>
+        <div class="investor_dir_border"></div>
+        <div class="profile">
+            
+            <div class="thumbnail">
+            	<% image_path = !investor.buyer_user_image.blank? ? (!investor.buyer_user_image.find_medium_thumbnail.blank? ? investor.buyer_user_image.find_medium_thumbnail.public_filename : "/images/buyer-60.jpg") : "/images/buyer-60.jpg" %>
+        
+                <a href='/account/investor_full_page/<%= "#{investor.id}" %>?state_code=<%=@state_selected%>&user_territory_id=<%=@territory_selected_id%>&q=<%=@search_string%>' ><%=image_tag(image_path , :class=>"image" )%></a>
+            </div>
+            <div class="summary">
+                <div class="subtitle">
+                     <!--Need to give the right path-->
+                    <%#=link_to(truncate(investor.full_name,50), user_path(investor)) %>
+                    <a href='/account/investor_full_page/<%= "#{investor.id}" %>?state_code=<%=@state_selected%>&user_territory_id=<%=@territory_selected_id%>&q=<%=@search_string%>' ><%= truncate(investor.full_name,50)%></a>
+                </div>
+                <div style="font-size: 1.2em;">
+                    <%if !investor.user_company_info.blank?%>
+                      <%= investor.user_company_info.city.strip%><% if !investor.user_company_info.city.blank? && !investor.user_company_info.state.blank?%>, <%end%><%= investor.user_company_info.state.strip%>
+                  <%end%>
+		 
+                </div>
+            </div>
+            <div class="stats">
+                <div class="investor_dir_label">
+
+                    <%=link_to_remote("<img title='Send Message' src='/images/icons/icon_mail.gif' onmouseover=\"this.src='/images/icons/icon_mail_hover.jpg'\" onmouseout=\"this.src='/images/icons/icon_mail.gif'\" class='image' alt='Send Message'/>",{:url => {:action => :send_message_to_investor, :reciever_id=>investor.id, :controller=>:account},
+                                                                                :method => :get,
+                                                                                :update         => "lightbox_contents",
+                                                                                :loading        => "lightbox_controller.loading()",
+                                                                                :loaded         => "lightbox_controller.loaded()"},{
+                                                                                :title=>"Send Message" }) %>
+						 
+			 </div>
+       
+                <div class="value">
+                    &nbsp;
+                </div>
+             </div>
+	      <div>
+	       <div class="value">
+                    &nbsp;
+                </div>
+	      	<%= show_badges(investor.id) %>
+		</div>
+            <div class="clear">
+            </div>
+	   
+        </div>
+        <%- end -%>
+      </div>
+    <% if @search_string.blank? %>
+      <%= will_paginate @investors, :params=>{:territory_selected_id=>@territory_selected_id, :state_selected=>@state_selected} %>
+    <% end %>
+<%else%>
+<%= "No Result Found." if @other_investors.blank?%>
+<%end%>
+
+  <%if !@other_investors.blank?%>
+    <div id="my_profiles">
+      <h3>REIMatcher Investors</h3>
+        <%- @other_investors.each do |investor| -%>
+        <div class="investor_dir_border"></div>
+        <div class="profile">
+            
+            <div class="thumbnail">
+            	<% image_path = !investor.buyer_user_image.blank? ? (!investor.buyer_user_image.find_medium_thumbnail.blank? ? investor.buyer_user_image.find_medium_thumbnail.public_filename : "/images/buyer-60.jpg") : "/images/buyer-60.jpg" %>
+        
+                <a href='/account/investor_full_page/<%= "#{investor.id}" %>?state_code=<%=@state_selected%>&user_territory_id=<%=@territory_selected_id%>&q=<%=@search_string%>' ><%=image_tag(image_path , :class=>"image" )%></a>
+            </div>
+            <div class="summary">
+                <div class="subtitle">
+                     <!--Need to give the right path-->
+                    <%#=link_to(truncate(investor.full_name,50), user_path(investor)) %>
+                    <a href='/account/investor_full_page/<%= "#{investor.id}" %>?state_code=<%=@state_selected%>&user_territory_id=<%=@territory_selected_id%>&q=<%=@search_string%>' ><%= truncate(investor.full_name,50)%></a>
+                </div>
+                <div style="font-size: 1.2em;">
+                    <%if !investor.user_company_info.blank?%>
+                      <%= investor.user_company_info.city.strip%><% if !investor.user_company_info.city.blank? && !investor.user_company_info.state.blank?%>, <%end%><%= investor.user_company_info.state.strip%>
+                  <%end%>
+		 
+                </div>
+            </div>
+            <div class="stats">
+                <div class="investor_dir_label">
+
+                    <%=link_to_remote("<img title='Send Message' src='/images/icons/icon_mail.gif' onmouseover=\"this.src='/images/icons/icon_mail_hover.jpg'\" onmouseout=\"this.src='/images/icons/icon_mail.gif'\" class='image' alt='Send Message'/>",{:url => {:action => :send_message_to_investor, :reciever_id=>investor.id, :controller=>:account},
+                                                                                :method => :get,
+                                                                                :update         => "lightbox_contents",
+                                                                                :loading        => "lightbox_controller.loading()",
+                                                                                :loaded         => "lightbox_controller.loaded()"},{
+                                                                                :title=>"Send Message" }) %>
+						 
+			 </div>
+       
+                <div class="value">
+                    &nbsp;
+                </div>
+             </div>
+	      <div>
+	       <div class="value">
+                    &nbsp;
+                </div>
+	      	<%= show_badges(investor.id) %>
+		</div>
+            <div class="clear">
+            </div>
+	   
+        </div>
+        <%- end -%>
+      </div>
+<% end %>

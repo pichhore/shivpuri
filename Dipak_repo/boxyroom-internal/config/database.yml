@@ -1,0 +1,8 @@
+development:
+  host: localhost
+  adapter: mysql
+  database: boxy_room_database
+  username: root
+  password:
+
+

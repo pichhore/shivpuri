@@ -1,0 +1,28 @@
+<%= render :partial => "tabs_for_preview"%>
+  <fieldset> 
+  <h2><i>Email Preview</i></h2>
+  <%=image_tag @user_company_image.public_filename(:profile), :alt=>"thumbnail" if (!@user_company_image.nil?) && (!@user_company_image.find_profile_thumbnail.blank?) %>
+  <div style="clear:both;">
+  <table>
+    <tr>
+      <td>
+        <%= display_email_description(params[:buyer_notification][:email_intro]) %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <% if params[:buyer_notification][:summary_type]!="welcome" %>
+          <%= params[:buyer_notification][:summary_type]!="daily" ? image_tag("example_email.PNG") : image_tag("example_1_property.png") %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= display_email_description(params[:buyer_notification][:email_closing]) %>
+      </td>
+    </tr>
+  </table>
+  <%=button_to_function "Back","document.location='#{url_for({:controller=>'account_marketing', :action=>'return_to_previous_page', :summary_type => params[:buyer_notification][:summary_type] })}';", :class=>"submit_l" %>
+  </div> 
+   </fieldset> 
+</div>

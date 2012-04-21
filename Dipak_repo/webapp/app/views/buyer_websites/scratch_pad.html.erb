@@ -1,0 +1,33 @@
+<style>
+.size{
+   width:35%;
+}
+</style>
+<div>
+      <div style="text-align:right;">
+          <a onclick="set_scratch_pad();lightbox_controller.close();" id="streetview_close" href="#"><img src="/images/active_scaffold/default/close.gif"/></a>
+       </div>
+        <% if !session[:scratch_pad_note].blank? %>
+          <div style="margin-top:-17px;"><h3> Unsaved note</h3>(click <b>Save</b> to submit this note to the server,or <b>Discard</b> to dispose of it )</div>
+        <% else %>
+          <b>Click Save to add note on buyer lead</b>
+        <%end%>
+    	<div style="clear: both;"/>
+	<%- form_remote_tag(:update => "lightbox_contents", :url=>{ :controller => :buyer_websites, :action => :save_scratch_pad_info, :id => params[:id]}, :html=>{:mehtod=>:post})  do -%>
+        <%= hidden_field_tag "buyer_lead_id", params[:id]%>
+        <div style="clear: both;"/>
+              <table style="text-align:left;margin-top:6px;" cellspacing="10">
+              <tr><td align="left"> Title: </td><td><%=text_field  "buyer_engagement_info", "subject", :value=> "Notes- #{@buyer_lead.private_display_name}", :class => "scratch_pad_textinput"%><%=error_message_on :buyer_engagement_info, :subject %></td></tr>
+              <tr><td align="left"> Note: </td><td><%=text_area  "buyer_engagement_info", "description",:value=> session[:scratch_pad_note], :class => "scratch_pad_textarea" %> <%=error_message_on :buyer_engagement_info, :description%></td></tr>
+              <tr>
+              <td colspan="2" align="center" style="margin:0;">
+                     &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <input type="submit" value=" Save " name="commit" class="submit_ll" onclick="lightbox_controller.close();"/>
+                    <%- if request.xhr? -%>
+                      <%#= button_to_function 'Discard', 'lightbox_controller.close()', :class=>"submit_l", :onclick=>(session[:scratch_pad_note],session[:scratch_pad_tag],session[:scratch_pad_subject] = nil) %>
+                      <%= button_to_function 'Discard', 'lightbox_controller.close()', :class=>"submit_l", :onclick=>"discard_scratch_pad_lightbox();" %>
+                    <%- end -%>
+               </td>
+          </tr>
+      </table>
+    	<%- end -%> 
+</div>

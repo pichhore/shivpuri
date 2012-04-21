@@ -1,0 +1,26 @@
+<%- @page_title = "Buyer Profile for  "+@target_profile.display_name -%>
+<%- @page_icon_style = 'icon_buyer_profile' -%>
+<%- @tip = render_tip("show_buyer") -%>
+
+<% require_js_controllers :preview_profile, :profile_image_view, :public_profile -%>
+
+<% content_for :page_scripts do -%>
+    Event.observe(window, 'load', function() {
+      <%- if @profile -%>
+        public_profile_controller = new NL.PublicProfileController("<%=url_for new_profile_profile_message_path(@profile)%>?target_profile_type=<%= @target_profile_type.permalink %>&profile_message_form[send_to][]=indiv&profile_message_form[indiv_profile_id]=<%=@target_profile.id%>&<%=encode_return_dashboard_params%>");
+      <%- elsif logged_in? -%>
+        public_profile_controller = new NL.PublicProfileController("<%=url_for new_community_profile_profile_message_path('ask')%>?ref=<%= params[:ref] %>&target_profile_type=<%= @target_profile_type.permalink %>&profile_message_form[send_to][]=indiv&profile_message_form[indiv_profile_id]=<%=@target_profile.id%>&<%=encode_return_dashboard_params%>");
+      <%- else -%>
+        public_profile_controller = new NL.PreviewProfileController("<%=url_for(:controller=>'profiles', :action=>'new', :id=>params[:type])%>");
+      <%- end -%>
+      profile_image_view_controller = new NL.ProfileImageViewController($$('#dashboard div.thumbnail img')[0], $$('#dashboard div.thumbnail_selector img.micro'));
+    });
+
+<% end -%>
+
+<div class="left">
+
+<%=render :partial=>'/shared/public_buyer_profile'%>
+
+</div>
+

@@ -1,0 +1,19 @@
+<% url = REIMATCHER_URL %>
+<br/>
+<b><%=@request_information_message.name%></b> <%= @request_information_message.reason == "0" ?  "wishes to view"  :  "has requested more information on"  %>  the following property:<br/>
+<br/>
+Property for Sale: <b><%=@show_property_address%></b><br/>
+Email: <b><%=@request_information_message.email%></b><br/>
+Phone: <b><%=@request_information_message.phone%></b><br/>
+Message: <%=@request_information_message.message%><br/><br/>
+
+Received From: <br />
+<% if @new_format_url %>
+<a href="<%=@new_format_url%>"><%= @new_format_url %></a><br /><br />
+<% else %>
+<% url_link =  url.to_s.chomp('/') + @buyer_website_link.to_s %>
+<a href="<%=url_link%>"><%= url_link %></a><br /><br />
+<% end %>
+Thanks,<br/><br/>
+
+REIMatcher

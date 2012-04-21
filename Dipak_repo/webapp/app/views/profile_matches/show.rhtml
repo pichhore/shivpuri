@@ -1,0 +1,18 @@
+<p>
+  <b>Source profile:</b>
+  <%=h @profile_match.source_profile_id %>
+</p>
+
+<p>
+  <b>Target profile:</b>
+  <%=h @profile_match.target_profile_id %>
+</p>
+
+<p>
+  <b>Created at:</b>
+  <%=h @profile_match.created_at %>
+</p>
+
+
+<%= link_to 'Edit', edit_profile_profile_match_path(@profile_match) %> |
+<%= link_to 'Back', profile_profile_matches_path %>

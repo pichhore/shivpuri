@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  event_time: 2008-11-03 16:08:35
+  dismissed: false
+  user_id: MyString
+  alert_definition_id: MyString
+
+two:
+  event_time: 2008-11-03 16:08:35
+  dismissed: false
+  user_id: MyString
+  alert_definition_id: MyString

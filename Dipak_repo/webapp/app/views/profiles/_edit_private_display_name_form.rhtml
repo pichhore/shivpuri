@@ -1,0 +1,31 @@
+  <fieldset>
+
+    <table>
+
+      <tr>
+        <th class="label_required">New Profile Name: <%= f.text_field :private_display_name %><br/><%=error_message_on :target_profile,:private_display_name%></th>
+      </tr>
+
+      <tr>
+        <td>Note: Renaming helps you organize multiple profiles better.  The profile name is for you only and will not be seen by others.</td>
+      </tr>
+
+      <tr>
+        <td align="center"><br/><br/>
+          <div style="text-align: center">
+          <%= submit_tag 'Update', :class=>"submit_xl" %>
+          <%- if request.xhr? -%>
+          <%= button_to_function 'Cancel', 'lightbox_controller.close()', :class=>"submit_xl" %>
+          <%- end -%>
+          </div>
+        </td>
+      </tr>
+
+    </table>
+
+  </fieldset>
+
+  <script>
+    $('target_profile_private_display_name').focus();
+    $('target_profile_private_display_name').select();
+  </script>

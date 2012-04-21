@@ -1,0 +1,42 @@
+<%- @page_title = "Import Buyer Profiles"-%>
+
+<input type="hidden" id="refreshed" value="no">
+<div class="full">
+
+  <div id="status" style="margin: 5px;">    
+	<% flash[:messages].each do |message| %>
+	<%= message %><br />
+	<% end unless flash[:messages].blank? %>	
+  </div>
+  
+  <div class="profile_images">
+
+  <div class="form">
+
+    <fieldset>
+
+        <% form_tag({:action => 'import'}, :multipart => true) do %>
+
+        <p><%= file_field 'uploaded_data', 'datafile' %><%= submit_tag "Upload File", :onclick=>"$('uploading').show(); return true;" %></p>
+
+        <p><b>Note: Only .xls, .txt file types are accepted and files are limited to 50 records.</b></p>
+       
+	    <p><div style="text-align: right; margin-top: 15px;">
+              <%=button_to_function "OK","if (confirm('Hmm, did you want to upload file now? If Yes, click Cancel to return to File Upload.  If you\\'d rather do it later, click Ok to Finish.')) document.location='/account/profiles';", :class=>"submit_l"%>
+			  <%=button_to_function "Cancel","document.location='/account/profiles';", :class=>"submit_l"%>
+           </div>
+        </p>
+        <% end -%>     
+    
+    </fieldset>
+
+  </div>
+
+
+  </div>
+
+</div>
+
+<div id="uploading" class="loading" style="display:none"><span class="text">Uploading...</span></div>
+
+

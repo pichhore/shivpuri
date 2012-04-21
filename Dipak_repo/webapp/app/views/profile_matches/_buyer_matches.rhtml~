@@ -1,0 +1,63 @@
+<script>
+$$('div.loading').each(function(item) { item.hide(); }.bindAsEventListener(this));
+</script>
+
+    <fieldset>
+
+      <div class="left" style="margin:0;">
+        <h4><%=@profile.display_match_text_string(@result_filter)%></h4>
+      </div>
+
+      <div class="right" style="margin:0;">
+        <%=link_to "Contact Owners", new_profile_profile_message_path(@profile)+"?profile_message_form[send_to][]="+@result_filter+"&#{encode_return_dashboard_params}", :class=>"submit_l" if current_user.can_view? %>
+      </div>
+          <div id="map" style="clear:both; height: 290px; width: 100%; text-align: center; background: #CCCCCC; padding: 0; margin: 0; margin-bottom: 10px; color: white; border: 1px solid black;">
+            <%= @map.div(:width => 484, :height => 290 ) %>
+          </div>
+          <div class="ie_fix">
+            <%- @boundary_overlays.each do |overlay| -%>
+              <%- js = overlay.to_javascript() -%>
+              <%- @map.record_init( "map.addOverlay( #{ js } );" ) -%>
+            <%- end -%>
+            <%- @marker_overlays.each do |overlay| -%>
+              <%- js = overlay.to_javascript() -%>
+              <%- @map.record_init( "map.addOverlay( #{ js } );" ) -%>
+            <%- end -%>
+            <%= @map.to_html(:no_load => true) if request.xhr?%>
+            <%= @map.to_html({:proto_load=>true}) unless request.xhr?%>
+            <%= "<script>lightbox_image_controller = new NL.LightboxImageController();</script>" if request.xhr? %>
+          </div>
+
+      <div class="clear"></div>
+
+      <div id="profile_list" class="profile_summary">
+
+        <div class="headings" <%="style='display:none'" if @profiles.empty? && @near_profiles.empty? %> >
+
+          <div class="column1">Sort By:</div>
+          <div class="column2">&nbsp;</div>
+          <div class="column3 heading sortable <%=@sort_order if @sort_type == 'is_owner'%>" sort="is_owner">&nbsp;Seller</div>
+          <div class="column4 heading sortable <%=sort_order if @sort_type == 'price'%>" sort="price">&nbsp;Price</div>
+          <div class="column5 heading sortable <%=@sort_order if @sort_type == 'privacy'%>" sort="privacy">&nbsp;Privacy</div>
+
+          <div class="clear"></div>
+        </div>
+
+        <%=render :partial=>"/shared/profile_summary", :collection=>@profiles, :locals=>{:use_numbered_icons=>false, :exact_profiles=>@exact_profiles} %>
+        <%=render :partial=>"/shared/near_profile_summary", :collection=>@near_profiles, :locals=>{:use_numbered_icons=>false} if !@prof_target.is_owner && (@result_filter=='all' || @result_filter=='new' || @result_filter=='favorites') %>
+        <%- if @profiles.empty? && @near_profiles.empty? -%>
+        <h4>No matches found</h4>
+        <%-end-%>
+
+    </div>
+
+    <div class="buttonbar" page_number="<%=@page_number%>" total_pages="<%=@total_pages %>">
+      <div class="center">
+        <%- if !@profiles.empty? || !@near_profiles.empty? -%>
+        <p><%=link_to(" < Prev",{:action=>'oops'}, :class=>"prev_page") if @page_number > 1%>&nbsp;&nbsp;Page <span id="current_page_number"><%=@page_number%></span> of <span id="total_pages"><%=@total_pages %></span>&nbsp;&nbsp;
+          <%=link_to(" Next > ",{:action=>'oops'}, :class=>"next_page") if @page_number < @total_pages %></p>
+        <%-end-%>
+      </div>
+    </div>
+
+  </fieldset>

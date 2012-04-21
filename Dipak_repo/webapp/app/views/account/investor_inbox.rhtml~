@@ -1,0 +1,79 @@
+<%- @page_title = "Investor Inbox " -%>
+<% require_js_controllers :tab, :account_settings -%>
+<%- content_for :page_scripts do -%>
+function go_to_investor_conversation(is_read,user_id,subject_span_id,investor_message_id) 
+{
+         subject = $(subject_span_id).innerHTML;
+         new Ajax.Request('/account/investor_conversation',
+          {
+          method:'POST',
+          parameters: { is_read: is_read, user_id: user_id, subject: subject,investor_message_id: investor_message_id},
+          onSuccess: function(transport){
+          var response = transport.responseText || "no response text";
+          $('investor_inbox').show();
+          $('ajax_update_div').innerHTML = response
+          },
+        onFailure: function(){ alert('Something went wrong...') }
+        });
+   }
+
+Event.observe(window, 'load', function() {
+  account_settings_controller = new NL.AccountSettingsController();
+});
+
+<% end %>
+<div class="full">
+
+  <div class="tabset larger">
+    <ul>
+      <li class="active" uri="<%=url_for({:controller=>'account', :action=>'investor_inbox'})%>">Investor Inbox</li>
+      <li uri="<%=url_for({:controller=>'account', :action=>'profile_inbox'})%>">Profile Inbox</li>
+	</ul>
+  </div>
+
+  <fieldset>
+<div>
+  <%=link_to "« Back to Inbox<br/><br/>", {:controller=>'account', :action=>'investor_inbox' },:id=>'investor_inbox',:style=>'display:none;' %>
+</div>
+<div id="ajax_update_div">
+<% if @subject.blank?%>
+  <%if !@investor_message_recieved.blank? && !current_user.blank?%>
+  
+  <%form_tag ({ :controller => "account", :action => "delete_investor_inbox_message"},:method=>:post) do%>
+  <div> <%=submit_tag "Delete", :class=>'submit_s' %></div>
+  <table  border="0" cellspacing="0" class="investor_inbox_grid">
+  <tr>
+    <th>Select&nbsp;</th>
+    <th>My Conversation w/</th>
+    <th>Subject: Message</th>
+    <th>Date/Time</th>
+  </tr>
+  <% @investor_message_recieved.each_with_index do |message, index| %>
+    <tr  <% if !message.is_read%>class ='investor_inbox_grid_row'<%end%>>
+      <td class="investor_inbox_selector">
+        <%= check_box_tag 'investor_message[]', "#{message.subject}#user_id##{message.user_id}"%>
+      </td>
+      <td class="investor_inbox_seperator" onclick="go_to_investor_conversation('<%=message.is_read%>','<%=message.user_id%>','messge_suject_display_none_<%=index.to_s%>','<%=message.id%>');" ><%= message.first_name%> <%= message.last_name%> (<% message_content = no_of_investor_message(message.subject,current_user.id,message.user_id)%><%= message_content[0]%>)</td>
+      <td class="investor_inbox_seperator" onclick="go_to_investor_conversation('<%=message.is_read%>','<%=message.user_id%>','messge_suject_display_none_<%=index.to_s%>','<%=message.id%>');"><%= truncate(message.subject,50)%> - <span style ="font-size:0.8em;"><%= message_content[1]%></span>
+      <div id="messge_suject_display_none_<%=index.to_s%>" style="display:none;" ><%=message.subject %></div>
+      </td>
+      <td class="investor_inbox_seperator" onclick="go_to_investor_conversation('<%=message.is_read%>','<%=message.user_id%>','messge_suject_display_none_<%=index.to_s%>','<%=message.id%>');"><%= message.created_at.strftime("%m/%d/%y")%></td>
+    </tr>
+  <%end%>
+  </table>
+  <%= will_paginate @investor_message_recieved %>
+  <%end%>
+  
+  <%else%>
+    Empty Inbox.
+  <%end%>
+<%else%>
+   <div id="messge_suject_display_none_email" style="display:none;" ><%=@subject %></div>
+   <script type="text/javascript">
+      go_to_investor_conversation('<%= @is_read%>','<%= @user_id%>','<%= @subject%>','<%= @investor_message_id%>');
+  </script>
+<%end%>
+</div>
+  </fieldset>
+
+</div>

@@ -1,0 +1,39 @@
+      <div style="margin-top:10px">
+
+        <% form_remote_tag :url => hash_for_profile_conversations_path(:id=>@profile.id),
+                       :failure     => "$('conversation_create_form').update(request.responseText)",
+                       :success     => "new Insertion.Top('conversation_messages', request.responseText); new Effect.Highlight($('conversation_messages').down()); toggleCreateMessageForm();"  do %>
+
+        <fieldset>
+
+          <table>
+
+            <tr>
+              <th class="label">Subject:</th>
+              <td><%= text_field "profile_message_form","subject", :size => "50" %><%=error_message_on :profile_message_form,:subject%></td>
+            </tr>
+
+            <tr>
+              <th class="label" colspan="2">Your Message:</th>
+            </tr>
+
+            <tr>
+              <td colspan="2"><%= text_area "profile_message_form","body", :size => "60x4" %><%=error_message_on :profile_message_form,:body%></td>
+            </tr>
+
+            <tr>
+              <td colspan="2" align="center"><%=submit_tag "Send Message", :class=>"submit_l"%><%=button_to_function "Cancel", "toggleCreateMessageForm()", :class=>"submit_l"%></td>
+            </tr>
+
+          </table>
+
+        </fieldset>
+
+        <%=hidden_field_tag "profile_message_form[indiv_profile_id]", @target_profile.id%>
+        <%=hidden_field_tag "profile_message_form[from_profile_id]", @profile.id%>
+
+        <%- end -%>
+
+      </div>
+
+      &nbsp;

@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>REIMatcher Profile Notification</title>
+</head>
+<% url = REIMATCHER_URL %>
+<%=image_tag permalink_user_company_image_url(@user.id) %>
+
+<body style="background: #FFFFFF; color: #000000; padding-top:10px;">
+<div> <%= @email_intro %> <br/><br /><br />
+  <%= "There are currently no homes for sale that match your Buying Criteria.<br /><br /><br />" if @owner_profiles.empty? -%>
+  <%- @owner_profiles.each_with_index do |profile,index| -%>
+  <% next if skip_profile_itration(profile) %>
+  <div class="profile" style="color: #5cc003; font-size: 1.2em;">
+    <div class="property" style="border: 1px solid #f9b902; padding: 5px; background-color:#fbf1d6;"> 
+ 	   <table width="100%" border="0">
+	   	  <thead></thead>
+		  <tbody>
+		  	<tr>
+				<%# url = (RAILS_ENV=='development') ? 'http://localhost:3000' : 'http://assets.reimatcher.com' %>
+				<td valign="top" width="100px" rowspan="4" style="padding-top:7px;">
+					<%=image_tag permalink_profile_image_url(profile.id) , :width=>60, :alt=>"thumbnail" %>
+				</td>
+				<td>
+					<table cellpadding="2">
+						<tr>
+							<td valign="middle" style="color: #5CC003; width:70%; font-size:1.2em;" colspan="2">
+							<%=truncate(profile.display_name, :length => 100) %>
+							</td>
+							<td valign="middle" style="color: #000000; font-size:1.2em; width:30%;">
+							<%= number_to_currency(ProfileFieldEngineIndex.price(profile), :precision => 0) %>
+							</td>							
+						</tr>
+						<tr>
+							<td valign="middle" style="width: 72px; font-size: 0.9em; color: #000000" nowrap="true">
+								<b>Beds:</b> &nbsp;  <%= ProfileFieldEngineIndex.beds(profile) %>
+							</td>
+							<td valign="middle" style="width:72px; font-size: 0.9em; color: black;" nowrap="true">
+							    <b>Baths:</b> &nbsp; <%=profile.display_bathrooms %>
+							</td>
+							<td valign="middle" style="font-size: 0.9em; color: #000000" nowrap="true">
+								<b>Sq Ft:</b> &nbsp; <%= ProfileFieldEngineIndex.square_feet(profile) %>
+							</td>
+						</tr>
+						<tr>
+							<td valign="middle" colspan="3" style="font-size: 0.9em; color: #000000">
+								<b>Features:</b>&nbsp;&nbsp;
+								<%= ProfileFieldEngineIndex.features(profile) %>
+							</td>
+						</tr>
+						<tr>
+							<td valign="middle" colspan="3" style="color: black;">								
+								<%- profile.profile_images.each_with_index do |profile_image, index| -%>
+								<%- if profile_image.find_profile_thumbnail -%>
+                                          <%=image_tag permalink_property_profile_image_url(profile.id,index) , :width=>60, :alt=>"thumbnail" %>
+								<%- end -%>
+								<%- end -%>
+							</td>
+						</tr>
+						<%begin
+							if !@buyer_profile.retail_buyer_profile.nil?
+						%>
+						<tr>
+							<td colspan="3">
+                                                          <%= property_full_view_path_for_retail_buyer(@buyer_profile, url, profile) %>
+							</td>
+						</tr>
+                                                <% else %>
+						<tr>
+							<td colspan="3">
+                                                            <%= property_full_view_path(@user, url, profile) %>
+							</td>
+						</tr>
+						<%     end
+						rescue
+						end
+						%>		
+					</table>				
+				</td>
+                    <td>
+                            <% if profile.owner? %>
+                                  <%- if !profile.ten_days_deleted_at.blank? %>
+                                      <img  style="position:relative;left:-95%;" src="<%=url%>/images/sold.png" alt = 'sold'>
+                                    <%- end  -%>
+                            <%- end -%>
+                    </td>
+			</tr>			
+		  </tbody>
+       </table>
+	</div>
+  </div>
+  <p>&nbsp; </p>
+  <%- end -%>
+
+  <%= "<h3>More Homes that You Might Be Interested In..</h3>" if !@near_owner_profiles.empty? %>
+  <%- @near_owner_profiles.each_with_index do |profile,index| -%>
+  <div class="profile" style="color: #5cc003; font-size: 1.2em;">
+    <div class="property" style="border: 1px solid #f9b902; padding: 5px; background-color:#fbf1d6;"> 
+ 	   <table width="100%" border="0">
+	   	  <thead></thead>
+		  <tbody>
+		  	<tr>
+				<%# url = (RAILS_ENV=='development') ? 'http://localhost:3000' : 'http://assets.reimatcher.com' %>
+				<td valign="top" width="100px" rowspan="4" style="padding-top:7px;">
+					<%=image_tag permalink_profile_image_url(profile.id) , :width=>60, :alt=>"thumbnail" %>
+				</td>
+				<td>
+					<table cellpadding="2">
+						<tr>
+							<td valign="middle" style="color: #5CC003; width:70%; font-size:1.2em;" colspan="2">
+							<%=truncate(profile.display_name, 100) %>
+							</td>
+							<td valign="middle" style="color: #000000; font-size:1.2em; width:30%;">
+							<%= number_to_currency(ProfileFieldEngineIndex.price(profile), :precision => 0) %>
+							</td>							
+						</tr>
+						<tr>
+							<td valign="middle" style="width: 72px; font-size: 0.9em; color: #000000" nowrap="true">
+								<b>Beds:</b> &nbsp;  <%= ProfileFieldEngineIndex.beds(profile) %>
+							</td>
+							<td valign="middle" style="width:72px; font-size: 0.9em; color: black;" nowrap="true">
+							    <b>Baths:</b> &nbsp; <%= profile.display_bathrooms %>
+							</td>
+							<td valign="middle" style="font-size: 0.9em; color: #000000" nowrap="true">
+								<b>Sq Ft:</b> &nbsp; <%= ProfileFieldEngineIndex.square_feet(profile) %>
+							</td>
+						</tr>
+						<tr>
+							<td valign="middle" colspan="3" style="font-size: 0.9em; color: #000000">
+								<b>Features:</b>&nbsp;&nbsp;
+								<%= ProfileFieldEngineIndex.features(profile) %>
+							</td>
+						</tr>
+						<tr>
+							<td valign="middle" colspan="3" style="color: black;">								
+								<%- profile.profile_images.each_with_index do |profile_image, index| -%>
+								<%- if profile_image.find_profile_thumbnail -%>
+                                          <%=image_tag permalink_property_profile_image_url(profile.id,index) , :width=>60, :alt=>"thumbnail" %>
+								<%- end -%>
+								<%- end -%>
+							</td>
+						</tr>
+						<%begin
+							if !@buyer_profile.retail_buyer_profile.nil?
+						%>
+						<tr>
+							<td colspan="3">
+                                                          <%= property_full_view_path_for_retail_buyer(@buyer_profile, url, profile) %>
+							</td>
+						</tr>
+                                                <% else %>
+						<tr>
+							<td colspan="3">
+                                                            <%= property_full_view_path(@user, url, profile) %>
+							</td>
+						</tr>
+                                                  <%     end
+                                                  rescue
+                                                  end
+                                                  %>
+					</table>
+				</td>
+                    <td>
+                            <% if profile.owner? %>
+                                  <%- if !profile.ten_days_deleted_at.blank? %>
+                                      <img  style="position:relative;left:-95%;" src="<%=url%>/images/sold.png" alt = 'sold'>
+                                    <%- end  -%>
+                            <%- end -%>
+                    </td>
+			</tr>			
+		  </tbody>
+       </table>
+	</div>
+  </div>
+  <p>&nbsp; </p>
+  <%- end -%>
+</div>
+<p>P.S. Below is what you told us you were looking for in a home.. if any of your buying criteria has changed, please reply to this email and let us know.. Thanks! </p>
+<b>Zip Code:</b>  &nbsp; <%= profile_field_values(@profile_fields, "zip_code") %><br />
+<b># Beds:</b> &nbsp; <%= profile_field_values(@profile_fields, "beds") %><br />
+<b># Baths:</b>  &nbsp; <%= profile_field_values(@profile_fields, "baths") %><br />
+<b>Sqft Range:</b>  &nbsp; <%= profile_field_values(@profile_fields, "square_feet_min") %>  &nbsp; - &nbsp; <%= profile_field_values(@profile_fields, "square_feet_max") %><br />
+<b>Max Monthly Payment:</b>  &nbsp; $<%= profile_field_values(@profile_fields, "max_mon_pay") %><br />
+<b>Max Down Payment:</b>  &nbsp; $<%= profile_field_values(@profile_fields, "max_dow_pay") %><br />
+<% if !@buyer_profile.retail_buyer_profile.blank?%>
+      <br><br>
+        <table border="0" cellspacing="0" cellpadding="0" width="100%">
+            <tr>
+                <td width="100%" bgcolor="#ffffff">
+                  <p style="font-family:arial,helvetica,sans-serif; font-size:12px; line-height:20px; color:#5e5e5e; margin: 0px 0px 5px;">This message was sent to <%= @recipients%> from:</p>
+                  <p style="font-family:arial,helvetica,sans-serif; font-size:12px; line-height:20px; color:#5e5e5e; margin: 0px 0px 5px;">REI Technologies | 5114 Balcones Woods Ste 307 | Austin, TX 78759</p>
+                </td>
+            </tr>
+        </table>
+      
+      <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+                <td bgcolor="#FFFFFF">
+                    <% email_type = RetailBuyerProfile::EMAIL_TYPE[:weekly_notification]
+                            url_for_subscription = url + "manage_subscriptions/" + @buyer_profile.id + "/subscription_management?email_type=#{email_type}" %>
+                    <a href="<%=url_for_subscription%>" style="font-family: Arial, Helvetica, san-serif; font-size: 12px; line-height: 20px; color: #115880; font-weight: bold; text-decoration: none;">
+                              Manage Your Subscription
+                    </a>
+                </td>
+          </tr>
+      </table>
+  <%end%>
+</body>

@@ -1,0 +1,37 @@
+<style type="text/css">
+fieldset table td {padding-top:5px;}
+</style>
+
+<table  border="0" cellspacing="0" class="seller_website_grid">
+  <tr>
+    <th >&nbsp;URL</th>
+    <th >&nbsp;Type</th>
+    <th >&nbsp;Territory/Province</th>
+    <th>Activate</th>
+    <th>&nbsp;Actions</th>
+  </tr>
+  
+  <% for my_website in @my_websites %>
+  <tr class ='.seller_website_grid_row'>
+    <% url_string = buyer_webpage_url(my_website) %>
+    <td  class="investor_seller_website" id="investor_seller_website" style="text-align: left"><a href="http://<%=url_string.to_s.downcase %>" target="_blank"><%=url_string.to_s.downcase%></a></td>
+    <td  class="investor_seller_website" id="investor_seller_website" style="text-align: left">Home</td>
+    <td  class="investor_seller_website" id="investor_seller_website" style="text-align: left"><%= my_website.site.get_territory_reim_name %></td>
+    
+    <td  class="investor_seller_website" id="investor_seller_website" style="text-align: left"><input type="checkbox" value="1" name="my_website[active]" disabled="disabled"  id="my_website_active" <% if my_website.site.active%>checked="checked"<%end%>/></td>
+    
+    
+    <td  class="investor_seller_website" id="investor_seller_website" style="text-align: left"><%= link_to image_tag ("icons/edit.png")+'Edit', edit_buyer_website_path(my_website.site_id) %> / <%= link_to  image_tag ("icons/delete.png",:width=>14,:height=>14)+' Delete', {:controller => :buyer_websites, :action => :destroy, :id => my_website.site_id}, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+
+  <tr class ='.seller_website_grid_row'>
+    <td  class="investor_seller_website" id="investor_seller_website" style="text-align: left"><a href="http://<%=url_string.to_s.downcase + "/2" %>" target="_blank"><%=url_string.to_s.downcase + "/2"%></a></td>
+    <td  class="investor_seller_website" id="investor_seller_website" style="text-align: left">Squeeze</td>
+    <td  class="investor_seller_website" id="investor_seller_website" style="text-align: left"><%= my_website.site.get_territory_reim_name %></td>
+    
+    <td  class="investor_seller_website" id="investor_seller_website" style="text-align: left"><input type="checkbox" value="1" name="my_website[active]" disabled="disabled"  id="my_website_active" <% if my_website.site.active%>checked="checked"<%end%>/></td>
+    <td  class="investor_seller_website" id="investor_seller_website" style="text-align: left"></td>
+  </tr>
+  <% end %>
+  
+</table>

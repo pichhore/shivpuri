@@ -1,0 +1,277 @@
+<%- @page_title = "Buyer Website(s)" -%>
+<% require_js_controllers :tab, :account_settings -%>
+        <%=javascript_include_tag "territory_name"%>
+<%- content_for :page_scripts do -%>
+
+Event.observe(window, 'load', function() {
+  account_settings_controller = new NL.AccountSettingsController();
+});
+
+  function get_form_with_params(span_territory_name)
+  {
+     // document.forms[0].action="/account/buyer_webpage?territory_name="+span_territory_name;
+      document.forms[0].submit();
+  }
+  function SelectAll(id)
+  {
+      document.getElementById(id).focus();
+      document.getElementById(id).select();
+  }
+  function set_css_color(this_id)
+  {
+      $$('table.table_class tr td div').each(function(item) {
+                                   $(item).removeClassName("set_class_css");
+                                    $(item).addClassName("select_css");
+                               });
+      $(this_id).addClassName("set_class_css");
+      $('buyer_web_page_dynamic_css').value = this_id.getStyle('backgroundColor') ;
+   }
+
+<%- end -%>
+<iv class="full">
+
+  <div class="tabset larger">
+<<<<<<< HEAD:webapp/app/views/account/buyer_webpage.rhtml
+    <ul>
+      <li  uri="<%=url_for({:controller=>'account', :action=>'settings'})%>">Investor Profile</li>
+      <li uri="<%=url_for({:controller=>'account', :action=>'company_info'})%>">Company Info</li>
+      <li  class="active" uri="<%=url_for({:controller=>'account', :action=>'buyer_webpage'})%>">Buyer Website(s)</li>
+      <li uri="<%=url_for({:controller=>'account_marketing', :action=>'welcome_email'})%>">Buyer Responder</li>
+      <li uri="<%=url_for({:controller=>'account', :action=>'digest_frequency'})%>">Alerts</li>
+    </ul>
+=======
+      <%=render :partial=>"account_tab", :locals=>{:active_class_buyer_website=>"active"}%>
+>>>>>>> c7d100e... temp commit ticket #349:webapp/app/views/account/buyer_webpage.rhtml
+  </div>
+<%= stylesheet_link_tag "investor_buyer_page" %>
+  <fieldset>
+<%- form_for(@buyer_web_page, :url => {:controller=>'account', :action=>'save_buyer_web_page'} ,
+:html => { :multipart => true }) do |f| -%>
+
+    <% if !params[:buyer_web_page].nil? %>
+ <% @buyer_web_page.tag_line = params[:buyer_web_page][:tag_line] %>
+      <% @buyer_web_page.header = params[:buyer_web_page][:header] %>
+      <% @buyer_web_page.permalink_text = params[:buyer_web_page][:permalink_text]  %>
+      <% @buyer_web_page.opening_text = params[:buyer_web_page][:opening_text]  %>
+      <% @buyer_web_page.active = params[:buyer_web_page][:active]  %>
+      <% @buyer_web_page.dynamic_css = params[:buyer_web_page][:dynamic_css].to_s.gsub(' ', "") %>
+      <% @buyer_web_page.local_phone = params[:buyer_web_page][:local_phone]  %>
+<% end %>
+
+    <table>
+      <tr>
+        <td colspan="2">
+          My territory(s)
+        </td>
+      </tr>
+      <tr>
+        <td width="35%" valign="top">
+           <div>
+            <% unless params[:territory_name].nil?%>
+            <% @param_territory_name = params[:territory_name] %>
+             <% end %>
+            <% index = 0 %>
+           <% @user_territories.each do |user_territory| %>
+                <%if @param_territory_name.nil? && index == 0 %>
+                      <span style="font-weight:bold;" >
+                       <% @squeeze_number = index + 1%>
+               <% elsif @param_territory_name == user_territory.territory.territory_name  %>
+                    <span style="font-weight:bold;" >
+                      <% @squeeze_number = index + 1%>
+               <% else %>
+                  <span>
+                <%end %>
+                  <% if !user_territory.territory.nil? && !user_territory.territory.territory_name.blank? %>
+                          <% span_territory_name = user_territory.territory.territory_name %>
+                          <% index = index + 1 %>
+                      <span class="half">
+		     <% if !params[:commit].nil? && !params[:buyer_web_page][:user_territory_id].nil? && params[:buyer_web_page][:user_territory_id] == user_territory.id %>
+                          <a href="#" onclick="get_form_with_params('<%= span_territory_name %>');" onmouseover="full_territory(this)" onmouseout="short_territory(this)">
+			  <% else %>
+			  <a href="/account/buyer_webpage?territory_name=<%= span_territory_name %>" onmouseover="full_territory(this)" onmouseout="short_territory(this)">
+			  <% end %>
+                              <%= index.to_s + ". " +  span_territory_name.split("(")[0] %><div class="span_display_none" style="text-decoration:underline;"><%=span_territory_name.gsub(span_territory_name.split("(")[0], "") %></div>
+                          </a>
+			  
+                        </span>
+                      <br/>
+                  <% end%>
+               </span>
+            <%end%>
+            </div>
+            <div  style="margin-top:50px;">
+	    <%- if !@user_territories.nil? && !@max_no_of_territories.nil? && @user_territories.size > ( @max_no_of_territories - 1 ) %>
+	      <%= link_to "Territory Selection" , :controller=>:account, :action=>:territory_helper %>
+	      <%- else %>
+              <%= link_to "Territory Selection" , :controller=>:account, :action=>:territory_selection %>
+	      <%- end %>
+            </div>
+        </td>
+        <td align="left" valign="top">
+          <div class="right_row_div_2">
+            <div class="left_float_left" style="width:100px">
+              <b>Tagline</b>
+            </div>
+             <div class="inner_right_div" style="float:left; float:right;">
+              <%=text_field "buyer_web_page", "tag_line"%>
+            </div>
+          </div>
+          <div class="right_row_div_2">
+            <div class="left_float_left" style="width:100px">
+              <b>Header</b>
+            </div>
+             <div class="inner_right_div" style="float:left; float:right;">
+              <%=text_field "buyer_web_page", "header" %>
+            </div>
+          </div>
+           <div class="right_row_div" style="clear:left;">
+              <div class="left_float_left">
+                  <b>Opening Text</b>
+              </div>
+            </div>
+          <div style="clear:both"> </div>
+            <div class="right_row_div_3">
+              <div class="left_float_left">
+              <%=text_area "buyer_web_page", "opening_text"%>
+              <%=hidden_field "buyer_web_page", "dynamic_css"%>
+              </div>
+            </div>
+          <div style="clear:both"> </div>
+          <div style="height:50px;" class="right_row_div_2">
+              <%- if @buyer_web_page.local_phone.blank? && params  -%>
+                <% local_phone = !current_user.user_company_info.nil? ? current_user.user_company_info.business_phone : ""   %>
+              <%- else -%>
+                 <% local_phone = @buyer_web_page.local_phone  %>
+              <%- end -%>
+              <%- if !@buyer_web_page.blank?  &&  !@buyer_web_page.errors.blank? && !@buyer_web_page.errors[:local_phone].blank? && @buyer_web_page.errors[:local_phone].size > 0 -%>
+              <%- local_phone = @buyer_web_page.local_phone  -%>
+              <%- end -%>
+            <div class="left_float_left" style="width:100px">
+              <b>Local Phone</b>
+            </div>
+             <div class="inner_right_div" style="text-align:left; float:right;" >
+              <!--<input  style="width:259px;height:100px;" />-->
+              <%=text_field "buyer_web_page", "local_phone", :value=>local_phone %><%=error_message_on :buyer_web_page,:local_phone %>
+              </div>
+          </div>
+          <div class="right_row_div" style="height:60px;*height:85px;">
+            <div class="left_float_left">
+              <b>Choose color for your website</b>
+            </div>
+             <div class="inner_right_div">
+                  <table class="table_class">
+                      <TR class="fix_height_tr" align="center"> 
+                            <TD class="fix_width_td" ><div id="div1" onclick="set_css_color(this)" class="select_css <% if @buyer_web_page.dynamic_css.to_s.gsub(' ' ,"") == "rgb(51,102,255)"%><%="set_class_css"%> <%end%>" style="background-color:rgb(51, 102, 255);"></div></TD> 
+                            <TD class="fix_width_td"><div id="div2"  onclick="set_css_color(this)" class="select_css <% if @buyer_web_page.dynamic_css.to_s.gsub(' ' ,"") == "rgb(102,102,153)"%><%="set_class_css"%> <%end%>" style="background-color:rgb(102 ,102 ,153);"></div></TD> 
+                            <TD class="fix_width_td"> <div id="div3"  onclick="set_css_color(this)" class="select_css <% if @buyer_web_page.dynamic_css.to_s.gsub(' ' ,"") == "rgb(150,150,150)"%><%="set_class_css"%> <%end%>" style="background-color:rgb(150 ,150, 150);"></div></TD> 
+                            <TD class="fix_width_td"><div id="div4"  onclick="set_css_color(this)" class="select_css <% if @buyer_web_page.dynamic_css.to_s.gsub(' ' ,"") == "rgb(0,51,102)"%><%="set_class_css"%> <%end%>" style="background-color:rgb(0 ,51 ,102);"></div></TD> 
+                            <TD class="fix_width_td"><div id="div5"  onclick="set_css_color(this)" class="select_css <% if @buyer_web_page.dynamic_css.to_s.gsub(' ' ,"") == "rgb(0,51,0)"%><%="set_class_css"%> <%end%>" style="background-color:rgb(0 ,51, 0);"></div></TD> 
+                            <TD class="fix_width_td"><div id="div6"  onclick="set_css_color(this)" class="select_css <% if @buyer_web_page.dynamic_css.to_s.gsub(' ' ,"") == "rgb(51,51,0)"%><%="set_class_css"%> <%end%>" style="background-color:rgb(51 ,51, 0);"></div></TD> 
+                            <TD class="fix_width_td"><div id="div7"  onclick="set_css_color(this)" class="select_css <% if @buyer_web_page.dynamic_css.to_s.gsub(' ' ,"") == "rgb(153,51,0)"%><%="set_class_css"%> <%end%>" style="background-color:rgb(153, 51, 0);"></div></TD> 
+                            <TD class="fix_width_td"><div id="div8"  onclick="set_css_color(this)" class="select_css <% if @buyer_web_page.dynamic_css.to_s.gsub(' ' ,"") == "rgb(0,0,0)"%><%="set_class_css"%> <%end%>" style="background-color:rgb(0, 0, 0);"></div></TD> 
+                      </TR>
+                  </table>
+             </div>
+           </div>
+
+          <div class="right_row_div" style="clear:left;">
+            <div class="left_float_left">
+              <b>Permalink</b>
+            </div>
+             <div class="inner_right_div">
+             </div>
+           </div>
+          <div class="right_row_div">
+            <div class="left_float_left" style="text-align:left;">
+              <%- if @buyer_web_page.permalink_text.blank? && params  -%>
+                <% permalink_text = !current_user.user_company_info.nil? ? current_user.user_company_info.business_name.gsub(' ','_') : ""   %>
+              <%- else -%>
+                 <% permalink_text = @buyer_web_page.permalink_text  %>
+              <%- end -%>
+              <%- if !@buyer_web_page.blank?  &&  !@buyer_web_page.errors.blank? && !@buyer_web_page.errors[:permalink_text].blank? && @buyer_web_page.errors[:permalink_text].size > 0 -%>
+              <%- permalink_text = @buyer_web_page.permalink_text  -%>
+              <%- end -%>
+              <%=hidden_field "buyer_web_page", "user_territory_id"%>
+              <%=@base_url %><%=text_field "buyer_web_page", "permalink_text",:value=>permalink_text ,:size=>10%><%=error_message_on :buyer_web_page,:permalink_text %>
+            </div>
+           </div>
+            <div class="right_row_div" style="clear:left;">
+              <div class="left_float_left" style="*margin-top:15px;">
+                  Active:
+              </div>
+             <div class="inner_right_div" style="*margin-top:15px;">
+                <%=check_box "buyer_web_page", "active" %>
+             </div>
+            </div>
+            <br/>
+            <div class="right_row_div" style="clear:left;">
+              <div class="left_float_left">
+                  <b>Paste Link for Marketing (Homepage):</b>
+              </div>
+             <div class="inner_right_div">
+             </div>
+            </div>
+            <div class="right_row_div">
+              <div class="left_float_left">
+                  <input id="paste_permalink" type="text" readonly="true" size="40" value="<%=@base_url + permalink_text%>" onClick="SelectAll('paste_permalink');" >
+                  <%= link_to "Preview" ,"#{@base_url+permalink_text}", :onclick=>"if (document.getElementById('buyer_web_page_permalink_text').value.length != 0){
+document.getElementsByName('preview')[0].setAttribute('value','Preview');
+document.forms[0].submit();
+}else{alert('You need to specify a valid link to your website');} return false;" %>
+              </div>
+             <div class="inner_right_div">
+             </div>
+            </div>
+<input type="hidden" name="preview" value="" />
+            <br/>
+            <div class="right_row_div" style="clear:left;">
+              <div class="left_float_left">
+                  <b>Paste Link for Marketing (Squeeze Page):</b>
+              </div>
+             <div class="inner_right_div">
+             </div>
+            </div>
+            <div class="right_row_div">
+              <div class="left_float_left">
+                  <% if !@user_territory_object.blank? 
+                      @squeeze_number = @user_territory_object.sequeeze_page_number
+                    else
+                      @squeeze_number = @user_territory_sp_number.sequeeze_page_number unless @user_territory_sp_number.blank?
+                     end
+                  %>
+                  <% sp_number  = "/sp" + @squeeze_number.to_s %>
+                  <% squeeze_url = @base_url + permalink_text + sp_number %>
+                  <input id="paste_permalink2" type="text" readonly="true" size="40" value="<%=squeeze_url%>" onClick="SelectAll('paste_permalink2');" >
+                  <%= link_to "Preview" ,"#{squeeze_url}", :onclick=>"if (document.getElementById('buyer_web_page_permalink_text').value.length != 0){
+document.getElementsByName('preview_sp')[0].setAttribute('value','Preview_SP');
+document.forms[0].submit();}else{alert('You need to activate your buyer website before you can preview it . You can deactivate it again if needed');} return false;" %>
+              </div>
+             <div class="inner_right_div">
+             </div>
+            </div>
+<input type="hidden" name="preview_sp" value="" />
+
+
+           <br/>
+          <div class="right_row_div">
+            <div class="left_float_left" style="text-align:left;">
+              <span class="note_in_red">Note:</span> Once you Mark Active and click Update Settings, your Buyer Website and Squeeze Page will be LIVE
+            </div>
+             <div class="inner_right_div">
+             </div>
+           </div><br/><br/><br/>
+            <div class="right_row_div">
+              <div class="left_float_left">
+                <%=submit_tag "Update Settings", :class=>'submit_xl' %>
+              </div>
+             <div class="left_float_left">
+                <% if !@buyer_web_page.blank?%><%= link_to 'Delete Territory Website(s)', {:controller=>:account, :action=>:delete_user_territory,:id=>@buyer_web_page.user_territory.id}, :confirm => 'Are you sure?', :method => :delete,:class=>"note_in_red"%><%end%>
+              </div>
+             
+            </div>
+        </td>
+      </tr>
+    </table>
+<%-end-%>
+</fieldset>
+

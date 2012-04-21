@@ -1,0 +1,70 @@
+<%- @page_title = "My Seller Websites" -%>
+
+<% if @my_websites.blank? && params[:clicked].blank? %>
+    <%=stylesheet_link_tag "lightbox"%> 
+    <% require_js_controllers :lightbox -%>
+    <SCRIPT type="text/javascript" language="JavaScript">
+        window.onload = function window_onload()
+        {
+            lightbox_controller = new NL.LightboxController();
+        }
+     </SCRIPT>
+
+    <div id="overlay_Lightbox"></div>
+    <div id="lightbox_contents" style="text-align:center; height:200px; width:466px;">
+      <div id="lightboxHeader">Add Seller Website</div>
+      <br/><h3>You don't have any seller website setup.</h3><br/>
+      <h3>Would you like to activate one?</h3>
+        <div id="lightboxFooter" class="light_box_seller_webpage">
+           <div style="float:right;">
+              <div class="link_button_xl" style="width:55px;float:left;">
+                <%= link_to 'Next', {:controller=>:seller_websites, :action=>:step1} %>  
+              </div>
+              <div class="link_button_xl" style="width:60px;float:left;">
+                <%= link_to 'Cancel', {:controller=>:seller_websites, :action=>:index,:clicked=>"no"} %>  
+              </div>
+          </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+    center_align();
+    </script>
+<% else %>
+    <% if @my_websites.size < 2  %>
+      <div align="right"><%= link_to  image_tag ("icons/add.png",:width=>14,:height=>14)+" Add Website", {:controller=>:seller_websites, :action=>:step1}%></div>
+    <% end %>
+    <div>
+      <div align="center">
+         <fieldset>
+          <table  border="0" cellspacing="0" class="seller_website_grid">
+            <tr>
+              <th>&nbsp;URL</th>
+              <th>Site Type</th>
+              <th>Activate</th>
+              <th>&nbsp;Actions</th>
+            </tr>
+          
+          <% for my_website in @my_websites %>
+            <tr class ='.seller_website_grid_row'>
+              <% url_string = create_website_url(my_website) %>
+              <td  class="investor_seller_website" id="investor_seller_website"><a href="http://<%= url_string %>" target="_blank"><%= url_string %></a></td>
+              <td  class="investor_seller_website" id="investor_seller_website" style="padding-left: 0px;"><%= my_website.site.seller_magnet? ? "AMPS Magnet" : "Seller Website" %></td>
+              <td  class="investor_seller_website" id="investor_seller_website"><input type="checkbox" value="1" name="my_website[active]" disabled="disabled"  id="my_website_active" <% if my_website.site.active%>checked="checked"<%end%>/></td>
+              <td  class="investor_seller_website" id="investor_seller_website"><%= link_to image_tag ("icons/edit.png")+'Edit', edit_seller_website_path(my_website.site_id) %> / <%= link_to  image_tag ("icons/delete.png",:width=>14,:height=>14)+' Delete', {:controller=>:seller_websites, :action=>:destroy,:id=>my_website.site_id}, :confirm => 'Are you sure?', :method => :delete %></td>
+            </tr>
+          <% end %>
+          
+          </table>
+</fieldset>
+      </div>
+    </div>
+<%end%>
+
+
+<!--[if IE ]>
+<style>
+#investor_seller_website {
+ text-align:left !important;
+}
+</style>
+<![EndIf]-->

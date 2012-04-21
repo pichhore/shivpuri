@@ -1,0 +1,10 @@
+<div id="amps_web_footer">
+    <%
+       perma_link = get_seller_website_perma_link 
+#       perma_link = @seller_magnet.permalink_text
+      unless perma_link.blank? 
+    %>
+      <%=link_to 'Terms of Use', {:controller => "investor_seller_web_page", :action => "terms_of_use", :permalink_text=>perma_link} %> | <%=link_to 'Privacy Policy', {:controller => "investor_seller_web_page", :permalink_text=>perma_link, :action => "privacy_policy"} %> | <%=link_to 'Sell Your House Now', {:controller => "investor_seller_web_page", :action => "new_seller",:permalink_text=>perma_link} %><br />
+    <% end %>
+                ©Copyright 2012 <a href="http://www.reimatcher.com/"><img src="/images/poweredByREIMatcher.png" height="25" width="120"></a>
+</div>

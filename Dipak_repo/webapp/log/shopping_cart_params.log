@@ -1,0 +1,1011 @@
+
+2011-04-12 13:42:01 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+first_name: rajiv
+address: 123,test
+last_name: test
+
+2011-04-13 10:35:48 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+first_name: rajiv
+address: 123,test
+last_name: test
+
+2011-04-13 10:40:17 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-13 10:40:21 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-13 10:51:26 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-13 10:51:40 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-13 10:51:50 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+first_name: rajiv
+address: 123,test
+last_name: test
+
+2011-04-14 15:01:58 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-14 17:19:24 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-14 17:22:18 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-14 17:25:04 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-14 17:25:28 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-14 17:34:20 DEBUG --- !map:HashWithIndifferentAccess 
+abc: <NewOrder><Token>6074ecdda5524896bd14b7525d557c31</Token></NewOrder>
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-14 17:35:59 DEBUG --- !map:HashWithIndifferentAccess 
+abc: <NewOrder><Token>6074ecdda5524896bd14b7525d557c31</Token></NewOrder>
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-14 18:26:02 DEBUG --- !map:HashWithIndifferentAccess 
+abc: <NewOrder><Token>6074ecdda5524896bd14b7525d557c31</Token></NewOrder>
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-14 18:28:27 DEBUG --- !map:HashWithIndifferentAccess 
+abc: <NewOrder><Token>6074ecdda5524896bd14b7525d557c31</Token></NewOrder>
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-14 18:34:23 DEBUG --- !map:HashWithIndifferentAccess 
+abc: <NewOrder><Token>6074ecdda5524896bd14b7525d557c31</Token></NewOrder>
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-14 18:35:08 DEBUG --- !map:HashWithIndifferentAccess 
+abc: <NewOrder><Token>6074ecdda5524896bd14b7525d557c31</Token></NewOrder>
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-14 18:36:57 DEBUG --- !map:HashWithIndifferentAccess 
+abc: <NewOrder><Token>6074ecdda5524896bd14b7525d557c31</Token></NewOrder>
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-14 18:40:00 DEBUG --- !map:HashWithIndifferentAccess 
+abc: <NewOrder><Token>6074ecdda5524896bd14b7525d557c31</Token></NewOrder>
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-14 18:48:15 DEBUG --- !map:HashWithIndifferentAccess 
+abc: <NewOrder><Token>6074ecdda5524896bd14b7525d557c31</Token></NewOrder>
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-14 19:19:36 DEBUG --- !map:HashWithIndifferentAccess 
+abc: <NewOrder><Token>6074ecdda5524896bd14b7525d557c31</Token></NewOrder>
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-14 19:21:32 DEBUG --- !map:HashWithIndifferentAccess 
+abc: <NewOrder><Token>6074ecdda5524896bd14b7525d557c31</Token></NewOrder>
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-15 17:29:40 DEBUG --- !map:HashWithIndifferentAccess 
+abc: <NewOrder><Token>6074ecdda5524896bd14b7525d557c31</Token></NewOrder>
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-15 17:30:33 DEBUG --- !map:HashWithIndifferentAccess 
+abc: <NewOrder><Token>6074ecdda5524896bd14b7525d557c31</Token></NewOrder>
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-15 17:31:16 DEBUG --- !map:HashWithIndifferentAccess 
+abc: <NewOrder><Token>6074ecdda5524896bd14b7525d557c31</Token></NewOrder>
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-15 17:31:59 DEBUG --- !map:HashWithIndifferentAccess 
+abc: <NewOrder><Token>6074ecdda5524896bd14b7525d557c31</Token></NewOrder>
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-15 17:34:20 DEBUG --- !map:HashWithIndifferentAccess 
+abc: <NewOrder><Token>6074ecdda5524896bd14b7525d557c31</Token></NewOrder>
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-15 17:38:22 DEBUG --- !map:HashWithIndifferentAccess 
+abc: <NewOrder><Token>6074ecdda5524896bd14b7525d557c31</Token></NewOrder>
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-15 17:38:47 DEBUG --- !map:HashWithIndifferentAccess 
+abc: <NewOrder><Token>6074ecdda5524896bd14b7525d557c31</Token></NewOrder>
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-19 14:27:47 DEBUG --- !map:HashWithIndifferentAccess 
+abc: <NewOrder><Token>6074ecdda5524896bd14b7525d557c31</Token></NewOrder>
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-19 14:36:49 DEBUG --- !map:HashWithIndifferentAccess 
+abc: <NewOrder><Token>6074ecdda5524896bd14b7525d557c31</Token></NewOrder>
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-19 15:14:29 DEBUG --- !map:HashWithIndifferentAccess 
+abc: <NewOrder><Token>6074ecdda5524896bd14b7525d557c31</Token></NewOrder>
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-19 15:18:39 DEBUG --- !map:HashWithIndifferentAccess 
+abc: <NewOrder><Token>6074ecdda5524896bd14b7525d557c31</Token></NewOrder>
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-19 15:35:27 DEBUG --- !map:HashWithIndifferentAccess 
+abc: <NewOrder><Token>6074ecdda5524896bd14b7525d557c31</Token></NewOrder>
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-20 10:20:37 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+<NewOrder><Token>6074ecdda5524896bd14b7525d557c31</Token></NewOrder>: 
+method: :post
+controller: shopping_cart
+
+2011-04-20 10:22:23 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+<NewOrder><Token>6074ecdda5524896bd14b7525d557c31</Token></NewOrder>: 
+method: :post
+controller: shopping_cart
+
+2011-04-20 10:23:35 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+<NewOrder><Token>6074ecdda5524896bd14b7525d557c31</Token></NewOrder>: 
+method: :post
+controller: shopping_cart
+
+2011-04-20 10:27:48 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+<NewOrder><Token>6074ecdda5524896bd14b7525d557c31</Token></NewOrder>: 
+method: :post
+controller: shopping_cart
+
+2011-04-20 10:29:38 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+<NewOrder><Token>119bc51122bd417c9ab0f32bebfc5d97</Token></NewOrder>: 
+controller: shopping_cart
+
+2011-04-20 11:03:08 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+<NewOrder><Token>119bc51122bd417c9ab0f32bebfc5d97</Token></NewOrder>: 
+controller: shopping_cart
+
+2011-04-20 11:06:58 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+<NewOrder><Token>11122bd417c9ab0f32bebfc5d97</Token></NewOrder>: 
+
+2011-04-20 11:07:27 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+<NewOrder><Token>11122bd417c9ab0f32bebfc5d97</Token></NewOrder>: 
+
+2011-04-20 11:10:21 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+<NewOrder><Token>119bc51122bd417c9ab0f32bebfc5d97</Token></NewOrder>: 
+controller: shopping_cart
+
+2011-04-20 11:12:38 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+<NewOrder><Token>11bd417c9ab0f32bebfc5d97</Token></NewOrder>: 
+
+2011-04-20 11:13:58 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+<NewOrder><Token>119bc51122bd417c9ab0f32bebfc5d97</Token></NewOrder>: 
+controller: shopping_cart
+
+2011-04-20 11:16:43 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+<NewOrder><Token>119bc51122bd417c9ab0f32bebfc5d97</Token></NewOrder>: 
+controller: shopping_cart
+
+2011-04-20 11:52:42 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+<NewOrder><Token>395ea2097cf543fe88008290f10a1c81</Token></NewOrder>: 
+method: :post
+controller: shopping_cart
+
+2011-04-20 11:58:29 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+<NewOrder><Token>395ea2097cf543fe88008290f10a1c81</Token></NewOrder>: 
+method: :post
+controller: shopping_cart
+
+2011-04-20 12:25:23 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+<NewOrder><Token>395ea2097cf543fe88008290f10a1c81</Token></NewOrder>: 
+method: :post
+controller: shopping_cart
+
+User Not Found
+2011-04-20 12:26:44 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+<NewOrder><Token>395ea2097cf543fe88008290f10a1c81</Token></NewOrder>: 
+method: :post
+controller: shopping_cart
+
+2011-04-20 12:27:36 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+<NewOrder><Token>395ea2097cf543fe88008290f10a1c81</Token></NewOrder>: 
+method: :post
+controller: shopping_cart
+
+2011-04-20 12:32:12 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+<NewOrder><Token>395ea2097cf543fe88008290f10a1c81</Token></NewOrder>: 
+method: :post
+controller: shopping_cart
+
+ User Not Found
+2011-04-20 12:35:21 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+395ea2097cf543fe88008290f10a1c81</Token></NewOrder>: 
+
+========Incorrect Params========
+2011-04-20 12:35:40 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+<NewOrder><Token>395ea2097cf543fe88008290f10a1c81</Token></NewOrder>: 
+method: :post
+controller: shopping_cart
+
+========User Not Found========
+2011-04-20 12:37:47 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+<NewOrder><Token>395ea2097cf543fe88008290f10a1c81</Token></NewOrder>: 
+method: :post
+controller: shopping_cart
+
+========User Not Found========
+2011-04-20 12:39:55 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+<NewOrder><Token>395ea2097cf543fe88008290f10a1c81</Token></NewOrder>: 
+method: :post
+controller: shopping_cart
+
+========User Not Found========
+2011-04-20 12:42:31 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+<NewOrder><Token>395ea2097cf543fe88008290f10a1c81</Token></NewOrder>: 
+method: :post
+controller: shopping_cart
+
+========User Not Found========
+
+2011-04-20 12:42:45 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+<NewOrder><Token>395ea2097cf543fe88008290f10a1c81</Token></NewOrder>: 
+method: :post
+controller: shopping_cart
+
+========User Not Found========
+
+2011-04-20 12:52:47 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+<NewOrder><Token>395ea2097cf543fe88008290f10a1c81</Token></NewOrder>: 
+method: :post
+controller: shopping_cart
+
+2011-04-20 12:53:26 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+<NewOrder><Token>395ea2097cf543fe88008290f10a1c81</Token></NewOrder>: 
+method: :post
+controller: shopping_cart
+
+========User Not Found========
+
+2011-04-20 13:03:51 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+<NewOrder><Token>395ea2097cf543fe88008290f10a1c81</Token></NewOrder>: 
+method: :post
+controller: shopping_cart
+
+2011-04-20 13:04:23 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+<NewOrder><Token>395ea2097cf543fe88008290f10a1c81</Token></NewOrder>: 
+method: :post
+controller: shopping_cart
+
+2011-04-20 13:08:16 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+<NewOrder><Token>395ea2097cf543fe88008290f10a1c81</Token></NewOrder>: 
+method: :post
+controller: shopping_cart
+
+2011-04-20 13:13:44 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+<NewOrder><Token>395ea2097cf543fe88008290f10a1c81</Token></NewOrder>: 
+method: :post
+controller: shopping_cart
+
+========User Not Found========
+
+2011-04-20 17:50:23 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+<NewOrder><Token>119bc51122bd417c9ab0f32bebfc5d97</Token></NewOrder>: 
+controller: shopping_cart
+
+========User Not Found========
+
+2011-04-21 12:39:42 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-21 12:39:42 INFO ========Incorrect Params========
+2011-04-21 12:40:50 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-21 12:41:15 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-21 12:41:15 ERROR ========Incorrect Params========
+2011-04-21 12:41:16 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-21 12:41:16 ERROR ========Incorrect Params========
+2011-04-21 12:42:50 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-21 12:42:50 ERROR ========Incorrect Params========
+
+2011-04-21 12:42:59 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+
+2011-04-21 12:42:59 ERROR ========Incorrect Params========
+
+2011-04-21 12:43:29 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+<NewOrder><Token>119bc51122bd41fc5d97</Token></NewOrder>: 
+
+2011-04-21 12:43:31 ERROR ========Not a valid token_id========
+
+2011-04-21 20:14:23 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+<NewOrder><Token>119bc51122bd417c9ab0f32bebfc5d97</Token></NewOrder>: 
+controller: shopping_cart
+
+========User Not Found========
+
+2011-04-21 20:22:51 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+<NewOrder><Token>119bc51122bd417c9ab0f32bebfc5d97</Token></NewOrder>: 
+controller: shopping_cart
+
+========User Not Found========
+
+2011-04-21 20:26:12 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+<NewOrder><Token>119bc51122bd417c9ab0f32bebfc5d97</Token></NewOrder>: 
+controller: shopping_cart
+
+========User Not Found========
+
+2011-04-21 20:29:10 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+<NewOrder><Token>119bc51122bd417c9ab0f32bebfc5d97</Token></NewOrder>: 
+controller: shopping_cart
+
+========User Not Found========
+
+2011-04-21 20:37:56 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+<NewOrder><Token>119bc51122bd417c9ab0f32bebfc5d97</Token></NewOrder>: 
+controller: shopping_cart
+
+2011-04-21 20:39:21 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+<NewOrder><Token>119bc51122bd417c9ab0f32bebfc5d97</Token></NewOrder>: 
+controller: shopping_cart
+
+2011-04-21 20:40:56 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+<NewOrder><Token>119bc51122bd417c9ab0f32bebfc5d97</Token></NewOrder>: 
+controller: shopping_cart
+
+2011-04-21 20:43:06 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+<NewOrder><Token>119bc51122bd417c9ab0f32bebfc5d97</Token></NewOrder>: 
+controller: shopping_cart
+
+========User Not Found========
+
+2011-04-21 20:45:27 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+<NewOrder><Token>119bc51122bd417c9ab0f32bebfc5d97</Token></NewOrder>: 
+controller: shopping_cart
+
+========User Not Found========
+
+2011-04-21 20:47:02 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+<NewOrder><Token>119bc51122bd417c9ab0f32bebfc5d97</Token></NewOrder>: 
+controller: shopping_cart
+
+========User Not Found========
+
+2011-04-21 20:50:20 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+<NewOrder><Token>119bc51122bd417c9ab0f32bebfc5d97</Token></NewOrder>: 
+controller: shopping_cart
+
+========User Not Found========
+
+2011-04-21 20:53:36 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+<NewOrder><Token>119bc51122bd417c9ab0f32bebfc5d97</Token></NewOrder>: 
+controller: shopping_cart
+
+========User Not Found========
+
+2011-04-21 20:54:51 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+<NewOrder><Token>119bc51122bd417c9ab0f32bebfc5d97</Token></NewOrder>: 
+controller: shopping_cart
+
+========User Not Found========
+
+2011-04-21 20:56:45 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+<NewOrder><Token>119bc51122bd417c9ab0f32bebfc5d97</Token></NewOrder>: 
+controller: shopping_cart
+
+========User Not Found========
+
+2011-04-22 11:31:08 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+<NewOrder><Token>119bc51122bd417c9ab0f32bebfc5d97</Token></NewOrder>: 
+controller: shopping_cart
+
+2011-04-22 11:31:14 ERROR ========User Not Found========
+
+2011-04-29 13:15:41 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+<NewOrder><Token>119bc51122bd417c9ab0f32bebfc5d97</Token></NewOrder>: 
+controller: shopping_cart
+
+2011-04-29 13:16:17 ERROR ========User Not Found========
+
+2011-05-18 13:31:53 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+<NewOrder><Token>119bc51122bd417c9ab0f32bebfc5d97</Token></NewOrder>: 
+controller: shopping_cart
+
+2011-05-18 13:37:09 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+<NewOrder><Token>119bc51122bd417c9ab0f32bebfc5d97</Token></NewOrder>: 
+controller: shopping_cart
+
+2011-05-19 18:08:56 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+
+2011-05-19 18:08:56 ERROR ========Incorrect Params========
+
+2011-05-19 18:09:11 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+
+2011-05-19 18:09:11 ERROR ========Incorrect Params========
+
+2011-05-19 18:09:13 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+
+2011-05-19 18:09:13 ERROR ========Incorrect Params========
+
+2011-06-02 20:41:48 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+<Token>6074ecdda5524896bd14b7525d557c31</Token>: 
+
+2011-06-02 20:41:52 ERROR ========Not a valid token_id========
+
+2011-06-02 20:42:53 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+<NewOrder><Token>119bc51122bd417c9ab0f32bebfc5d97</Token></NewOrder>: 
+controller: shopping_cart
+
+2011-06-02 20:43:43 ERROR ========User Not Found========
+
+2011-06-02 20:45:25 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+<NewOrder><Token>395ea2097cf543fe88008290f10a1c81</Token></NewOrder>: 
+method: :post
+controller: shopping_cart
+
+2011-06-02 20:45:54 ERROR ========User Not Found========
+
+2011-06-02 20:49:07 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+<NewOrder><Token>395ea2097cf543fe88008290f10a1c81</Token></NewOrder>: 
+method: :post
+controller: shopping_cart
+
+2011-06-02 20:51:54 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+<NewOrder><Token>395ea2097cf543fe88008290f10a1c81</Token></NewOrder>: 
+method: :post
+controller: shopping_cart
+
+2011-06-02 21:16:08 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+<NewOrder><Token>119bc51122bd417c9ab0f32bebfc5d97</Token></NewOrder>: 
+controller: shopping_cart
+
+2011-06-09 14:09:14 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+<NewOrder><Token>119bc51122bd417c9ab0f32bebfc5d97</Token></NewOrder>: 
+controller: shopping_cart
+
+2011-06-09 14:11:47 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+<NewOrder><Token>119bc51122bd417c9ab0f32bebfc5d97</Token></NewOrder>: 
+controller: shopping_cart
+
+2011-06-09 14:12:36 ERROR ========User Not Found========
+ user_email:- reachdamonhere@gmail.com and 1sc client_id:- 139440923 
+
+2011-06-09 14:14:20 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+<NewOrder><Token>395ea2097cf543fe88008290f10a1c81</Token></NewOrder>: 
+method: :post
+controller: shopping_cart
+
+2011-06-09 14:14:30 INFO ===============
+2011-06-09 14:14:30 INFO  qasystech2@systematixtechnocrates.com purchased the product 7624361 and 1sc client_id is 139540321 
+
+2011-06-09 14:15:02 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+<NewOrder><Token>395ea2097cf543fe88008290f10a1c81</Token></NewOrder>: 
+method: :post
+controller: shopping_cart
+
+2011-06-09 14:15:09 INFO ===============
+2011-06-09 14:15:09 INFO  qasystech2@systematixtechnocrates.com purchased the product 7624361 and 1sc client_id is 139540321 
+
+2011-07-07 12:46:29 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+<NewOrder><Token>3b82a02aa1fa400a93cd74b2715b7d1d</Token></NewOrder>: 
+
+2011-07-07 12:49:52 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+<NewOrder><Token>3b82a02aa1fa400a93cd74b2715b7d1d</Token></NewOrder>: 
+
+2011-07-07 12:50:20 INFO  something went wrong 
+2011-07-07 12:50:20 INFO  Error 1 : (ActiveRecord::UnknownAttributeError) "unknown attribute: " 
+2011-07-07 12:50:20 INFO  ============================= 
+
+2011-07-07 12:52:07 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+<NewOrder><Token>3b82a02aa1fa400a93cd74b2715b7d1d</Token></NewOrder>: 
+
+2011-07-07 12:52:19 INFO  something went wrong 
+2011-07-07 12:52:19 INFO  Error 1 : (ActiveRecord::UnknownAttributeError) "unknown attribute: " 
+2011-07-07 12:52:19 INFO  ============================= 
+
+2011-07-07 12:53:39 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+<NewOrder><Token>3b82a02aa1fa400a93cd74b2715b7d1d</Token></NewOrder>: 
+
+2011-07-07 12:56:39 INFO  something went wrong 
+2011-07-07 12:56:39 INFO  Error 1 : (ActiveRecord::UnknownAttributeError) "unknown attribute: " 
+2011-07-07 12:56:39 INFO  ============================= 
+
+2011-07-07 12:57:33 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+<NewOrder><Token>3b82a02aa1fa400a93cd74b2715b7d1d</Token></NewOrder>: 
+
+2011-07-07 12:57:51 INFO ===============
+2011-07-07 12:57:51 INFO  rajiv@mailinator.com purchased the product 7624346 and Shopping Cart Customer Id is 139453848 
+
+2011-07-07 12:59:08 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+<NewOrder><Token>3b82a02aa1fa400a93cd74b2715b7d1d</Token></NewOrder>: 
+
+2011-07-07 13:01:54 INFO ===============
+2011-07-07 13:01:54 INFO  rajiv@mailinator.com purchased the product 7624346 and Shopping Cart Customer Id is 139453848 
+
+2011-07-07 13:03:53 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+<NewOrder><Token>3b82a02aa1fa400a93cd74b2715b7d1d</Token></NewOrder>: 
+
+2011-07-07 13:04:47 INFO ===============
+2011-07-07 13:04:47 INFO  rkapil@systematixtechnocrates.com purchased the product 7624346 and Shopping Cart Customer Id is 139453848 
+
+2011-07-07 13:06:23 DEBUG --- !map:HashWithIndifferentAccess 
+<NewOrder><Token>bb3c844a38314be3af1c6061ab2a8319</Token></NewOrder>: 
+action: index
+method: :post
+controller: shopping_cart
+
+2011-07-07 13:06:27 ERROR ========Not a valid token_id========
+
+2011-07-07 13:07:27 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+<NewOrder><Token>5b4d0be9b7284169bb7bba29f4ff243d</Token></NewOrder>: 
+
+2011-07-07 13:07:31 ERROR ========Not a valid token_id========
+
+2011-07-07 13:07:54 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+<NewOrder><Token>6074ecdda5524896bd14b7525d557c31</Token></NewOrder>: 
+method: :post
+controller: shopping_cart
+
+2011-07-07 13:07:57 ERROR ========Not a valid token_id========
+
+2011-07-07 13:37:23 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+<NewOrder><Token>3b82a02aa1fa400a93cd74b2715b7d1d</Token></NewOrder>: 
+
+2011-07-07 13:37:32 INFO ===============
+2011-07-07 13:37:32 INFO  rkapil@systematixtechnocrates.com purchased the product 7624346 and Shopping Cart Customer Id is 139453848 
+
+2011-07-07 13:38:53 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+<NewOrder><Token>3b82a02aa1fa400a93cd74b2715b7d1d</Token></NewOrder>: 
+
+2011-07-07 13:39:00 INFO ===============
+2011-07-07 13:39:00 INFO  rkapil123@mailinator.com purchased the product 7624346 and Shopping Cart Customer Id is 139453848 
+
+2011-07-07 13:45:20 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+<NewOrder><Token>395ea2097cf543fe88008290f10a1c81</Token></NewOrder>: 
+method: :post
+controller: shopping_cart
+
+2011-07-07 13:45:42 INFO ===============
+2011-07-07 13:45:42 INFO  qasystech2@systematixtechnocrates.com purchased the product 7624361 and Shopping Cart Customer Id is 139540321 
+
+2011-07-07 14:40:32 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+<NewOrder><Token>3b82a02aa1fa400a93cd74b2715b7d1d</Token></NewOrder>: 
+
+2011-07-07 14:40:54 INFO ===============
+2011-07-07 14:40:54 INFO  rkapil@systematixtechnocrates.com purchased the product 7624346 and Shopping Cart Customer Id is 139453848 
+
+2011-07-13 12:53:57 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+<NewOrder><Token>3b82a02aa1fa400a93cd74b2715b7d1d</Token></NewOrder>: 
+
+2011-07-13 12:55:12 INFO ===============
+2011-07-13 12:55:12 INFO  rkapil@systematixtechnocrates.com purchased the product 7624346 and Shopping Cart Customer Id is 139453848 
+
+2011-07-13 13:05:07 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+<NewOrder><Token>3b82a02aa1fa400a93cd74b2715b7d1d</Token></NewOrder>: 
+
+2011-07-13 13:05:23 INFO ===============
+2011-07-13 13:05:23 INFO  rajivkapil12@mailinator.com purchased the product 7624346 and Shopping Cart Customer Id is 139453848 
+
+2011-07-13 13:15:03 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+<NewOrder><Token>3b82a02aa1fa400a93cd74b2715b7d1d</Token></NewOrder>: 
+
+2011-07-13 13:15:40 INFO ===============
+2011-07-13 13:15:40 INFO  rkapil@systematixtechnocrates.com purchased the product 7624346 and Shopping Cart Customer Id is 139453848 
+
+2011-07-26 16:38:04 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+<NewOrder><Token>3b82a02aa1fa400a93cd74b2715b7d1d</Token></NewOrder>: 
+
+2011-07-29 19:25:35 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+<NewOrder><Token>3b82a02aa1fa400a93cd74b2715b7d1d</Token></NewOrder>: 
+
+2011-07-29 19:25:40 INFO ===============
+2011-07-29 19:25:40 INFO  rkapil@systematixtechnocrates.com purchased the product 7624346 and Shopping Cart Customer Id is 139453848 
+
+2011-07-29 19:32:26 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+<NewOrder><Token>3b82a02aa1fa400a93cd74b2715b7d1d</Token></NewOrder>: 
+
+2011-07-29 19:33:03 INFO ===============
+2011-07-29 19:33:03 INFO  rkapil@systematixtechnocrates.com purchased the product 7624346 and Shopping Cart Customer Id is 139453848 
+
+2011-08-12 13:51:36 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+<NewOrder><Token>3b82a02aa1fa400a93cd74b2715b7d1d</Token></NewOrder>: 
+
+2011-08-12 13:51:42 INFO ===============
+2011-08-12 13:51:42 INFO  rkapil@systematixtechnocrates.com purchased the product 7624346 and Shopping Cart Customer Id is 139453848 
+
+2011-08-12 13:55:19 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+"<NewOrder><Token>c397cd45c21f4fbf9408c932ecfc492d</Token></NewOrder>\\r\\n\":": 
+
+2011-08-12 13:55:27 INFO ========User successfully created========
+ user_email:- eugene@txcapitalpartners.com and Shopping Cart Customer Id:- 140818888 
+
+2011-08-29 14:24:23 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+<NewOrder><Token>c397cd45c21f4fbf9408c932ecfc492d</Token></NewOrder>: 
+
+2011-08-29 14:24:56 INFO ========User successfully created========
+ user_email:- eugene@txcapitalpartners.com and Shopping Cart Customer Id:- 140818888 
+
+2011-11-14 14:01:20 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+<NewOrder><Token>3a7771e5945f46989d9de2d5325691e1</Token></NewOrder>: 
+method: :post
+controller: shopping_cart
+
+2011-11-14 14:03:51 INFO ========User purchases the Hold Product========
+ user_email:- rajiv558899@mailinator.com and Shopping Cart Customer Id:- 141637517, Shopping Cart Product Id: 8630293 
+
+2011-11-14 15:08:00 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+<NewOrder><Token>3a7771e5945f46989d9de2d5325691e1</Token></NewOrder>: 
+method: :post
+controller: shopping_cart
+
+2011-11-14 15:09:10 INFO  something went wrong 
+2011-11-14 15:09:30 INFO  Error 1 : (ActiveRecord::UnknownAttributeError) "unknown attribute: " 
+2011-11-14 15:09:30 INFO  ============================= 
+
+2011-11-14 15:11:45 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+<NewOrder><Token>3a7771e5945f46989d9de2d5325691e1</Token></NewOrder>: 
+method: :post
+controller: shopping_cart
+
+2011-11-14 15:12:10 INFO ========User purchases the Hold Product========
+ user_email:- rajiv558899@mailinator.com and Shopping Cart Customer Id:- 141637517, Shopping Cart Product Id: 8630293 
+
+2011-11-14 15:13:36 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+<NewOrder><Token>3a7771e5945f46989d9de2d5325691e1</Token></NewOrder>: 
+method: :post
+controller: shopping_cart
+
+2011-11-14 15:13:48 INFO ========User purchase Hold Subscription product========
+ user_email:- rajiv558899@mailinator.com and Shopping Cart Customer Id:- 141637517, Shopping Cart Product Id: 8630293 
+
+2011-11-18 12:47:58 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+<NewOrder><Token>d7fded8d385d4a4cb6482f62764cc771</Token></NewOrder>: 
+
+2011-11-18 12:48:01 ERROR ========Not a valid token_id========
+
+2011-11-18 12:50:46 DEBUG --- !map:HashWithIndifferentAccess 
+<NewOrder><Token>af35e9cc1db244cca6e8b3e8ea54957f</Token></NewOrder>: 
+action: index
+method: :post
+controller: shopping_cart
+
+2011-11-18 12:51:45 INFO ========User successfully created========
+ user_email:- carlgresen@gmail.com, Shopping Cart Product Id: 8561968 and Shopping Cart Customer Id:- 141321585 
+
+2011-11-18 12:58:19 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+<NewOrder><Token>3ac57fb8a5864663b50f1f1e9cdcc989</Token></NewOrder>: 
+
+2011-11-18 12:59:08 INFO ===============
+2011-11-18 12:59:09 INFO  testusertransaction@mailinator.com purchased the product 7624350 and Shopping Cart Customer Id is 140672378 
+
+2011-11-24 12:48:16 DEBUG --- !map:HashWithIndifferentAccess 
+<NewOrder><Token>caf7d8d06648470292090769675faa79</Token></NewOrder>: 
+action: index
+method: :post
+controller: shopping_cart
+
+2011-11-24 12:48:23 INFO ========User purchase Hold Subscription product========
+ user_email:- mpatel@systematixtechnocrates.com and Shopping Cart Customer Id:- 142270107, Shopping Cart Product Id: 8630293 
+
+2011-11-29 19:44:31 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+
+2011-11-29 19:50:57 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+
+2011-11-30 12:07:11 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+
+2011-12-05 16:40:48 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+
+2012-02-17 18:20:30 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+<NewOrder><Token>190942110</Token></NewOrder>: 
+
+2012-02-17 19:35:10 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+<NewOrder><Token>190942110</Token></NewOrder>: 
+
+2012-02-17 19:35:33 INFO ===============
+2012-02-17 19:35:33 INFO  gjain@systematixtechnocrates.com purchased the product 7624350 and Shopping Cart Customer Id is 143466311 
+
+2012-02-21 13:32:36 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+<NewOrder><Token>190942110</Token></NewOrder>: 
+
+2012-02-21 13:33:10 INFO ===============
+2012-02-21 13:33:10 INFO  testrajiv@mailinator.com purchased the product 7624350 and Shopping Cart Customer Id is 143466311 
+
+2012-02-21 13:37:39 DEBUG --- !map:HashWithIndifferentAccess 
+action: index
+method: :post
+controller: shopping_cart
+<NewOrder><Token>190942110</Token></NewOrder>: 
+
+2012-02-21 13:37:53 INFO ===============
+2012-02-21 13:37:53 INFO  testrajiv@mailinator.com purchased the product 7624350 and Shopping Cart Customer Id is 143466311 
+

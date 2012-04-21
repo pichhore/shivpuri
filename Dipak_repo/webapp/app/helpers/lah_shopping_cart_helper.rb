@@ -1,0 +1,2 @@
+module LahShoppingCartHelper
+end

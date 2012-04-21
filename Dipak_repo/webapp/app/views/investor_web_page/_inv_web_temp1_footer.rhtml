@@ -1,0 +1,20 @@
+<div id="investor_website_footer">
+  <div class="copyrights" style="width:300px;" >
+           <%= business_name_and_address %><br>
+           <%=link_to 'Privacy Policy', {:controller => "investor_web_page", :permalink_text=>params[:permalink_text], :action => "privacy_policy"} %> | <%=link_to 'Terms of Use', {:controller => "investor_web_page", :action => "terms_of_use", :permalink_text=>params[:permalink_text]} %><br />
+     REI Technologies LLC &copy; 2012
+		</div>
+           <div class="buttons">
+                    <% investor_links_set1, investor_links_set2 =  investor_links_display%>
+                    <div style="float:left">
+                    <%= investor_links_set1%>
+                    </div>
+                    <div style="float:right">
+                     <%= investor_links_set2%>
+                     </div>
+         <div class="clear"></div>
+     </div>
+                  
+  <div class="clear"></div>
+</div>
+

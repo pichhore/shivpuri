@@ -1,0 +1,234 @@
+<%- content_for :page_scripts do -%>
+
+Event.observe(window, 'load', function() {                      
+  sales_price_helper = new NL.CurrencyFieldHelper($('testimonial_sales_price'));
+  date_field_helper_closing_date = new NL.DateFieldHelper($('testimonial_closing_date'));
+  gross_profit_helper = new NL.CurrencyFieldHelper($('testimonial_gross_profit'));
+  cash_flow_helper = new NL.CurrencyFieldHelper($('testimonial_cash_flow'));
+  closing_agent_closing_date = new NL.DateFieldHelper($('closing_agent_closing_date'));
+  closing_agent_sales_price = new NL.CurrencyFieldHelper($('closing_agent_sales_price'));
+});
+
+<%- end -%>
+
+<% require_js_helpers :currency_field -%>
+
+<script type="text/javascript">
+/*<![CDATA[*/
+/*You can also place this code in a separate file and link to it like epoch_classes.js*/
+	var dp_cal;      
+window.onload = function () {
+	new Epoch('epoch_popup','popup',document.getElementById('testimonial_closing_date'));
+        new Epoch('epoch_popup','popup',document.getElementById('closing_agent_closing_date'));
+};
+/*]]>*/
+</script>
+
+<%- @page_title = "Enter Your Testimonial" -%>
+
+<div class="left">
+  <%- @page_heading = "Enter Your Testimonial" -%>
+
+  <%- form_for(:testimonial, :url => {:controller=>'testimonials', :action=>'create'}, :html => { :method => :post , :multipart => true }) do |f| -%>
+
+  <%= render :partial => "investor_testimonial" %>
+
+  <span id="seller_testimonail" style="display:none">
+    <%= render :partial => "seller_testimonial" %>
+  </span>
+  <span id="buyer_testimonail" style="display:none">
+    <%= render :partial => "buyer_testimonial" %>
+  </span>
+  <span id="agent_testimonail" style="display:none">
+    <%= render :partial => "agent_testimonial" %>
+  </span>
+
+  <p>
+     <span>
+       <input type="checkbox" name="testimonial_seller" id="testimonial_seller" value="1" class="chk_box"/> Seller Testimonial
+     </span>
+     <span>
+       <input type="checkbox" name="testimonial_buyer" id="testimonial_buyer" value="1" class="chk_box"/> Buyer Testimonial
+     </span>
+     <span>
+       <input type="checkbox" name="testimonial_agent" id="testimonial_agent" value="1" class="chk_box"/> Closing Agent Testimonial
+     </span>
+  </p>
+
+  <p> <%=image_tag "required.gif"%> Required Field </p>
+  
+  <p style="text-align: center">
+    <%= submit_tag "Save", :onclick=>"return validate();", :class => "submit_l" %><img  src="/images/spinner.gif" style="display:none;" id="spinner" alt="loading indicator" />
+  </p>
+  
+</div>
+<div class="right">
+  
+  <div id="my_dwellgo">
+    
+    <h3>Toolbox</h3> 
+    <div class="right_articles" style="text-align: left; margin-bottom: 10px;">
+      <p>Coming Soon<%#=link_to image_tag("icons/icon_configure.gif", :border=>0)+" Manage Testimonials", '#' %></p>
+    </div>
+    
+  </div>
+  
+</div>
+
+<%- end -%>
+
+<style type="text/css">
+  .chk_box {margin-left: 10px;}
+  .left {width: 72%;}
+  div.right {width: 26%;}
+  .content {width: 800px; }
+  fieldset table th.label_required {width: 40%;}
+  .tm_textarea{margin-left: 100px}
+</style>
+
+<script type="text/javascript">
+
+function validate() {
+   var flag = 0;
+   var first_ele = null;
+   ['testimonial_investor_fname', 'testimonial_investor_lname', 'testimonial_email', 'testimonial_address', 'testimonial_closing_date'].each(function(ele){
+     if($(ele).value == ""){
+       $(ele).next('span').show();
+       if(first_ele == null){
+         first_ele = ele;
+       }
+       if(ele == 'testimonial_email' || ele == 'testimonial_address'){
+         $(ele).next('span.invalid').hide();
+       }
+       flag = 1;
+     }
+     else{
+       $(ele).next('span').hide();
+       if(ele == 'testimonial_email'){
+         var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+         if(reg.test($(ele).value) == false) {
+           $(ele).next('span.invalid').show();
+           first_ele = ele;
+           flag = 1;
+         }
+         else{
+           $(ele).next('span.invalid').hide();
+         }
+       }
+       if(ele == 'testimonial_address'){
+         var reg = /\d+/;
+         if(reg.test($(ele).value) == false) {
+           $(ele).next('span.invalid').show();
+           first_ele = ele;
+           flag = 1;
+         }
+         else{
+           $(ele).next('span.invalid').hide();
+         }
+       }
+     }    
+   })
+
+   if($('testimonial_seller').checked == true){
+     ['seller_testimonial_firstname', 'seller_testimonial_lastname', 'seller_testimonial_state'].each(function(ele){
+       if($(ele).value == ""){
+         $(ele).next('span').show();
+         if(first_ele == null){
+           first_ele = ele;
+         }
+         flag = 1;
+       }
+     })
+   }
+
+   if($('testimonial_buyer').checked == true){
+     ['buyer_testimonial_firstname', 'buyer_testimonial_lastname', 'buyer_testimonial_state'].each(function(ele){
+       if($(ele).value == ""){
+         $(ele).next('span').show();
+         if(first_ele == null){
+           first_ele = ele;
+         }
+         flag = 1;
+       }
+     })
+   }
+
+   if($('testimonial_agent').checked == true){
+     ['closing_agent_state', 'closing_agent_closing_date', 'closing_agent_sales_price'].each(function(ele){
+       if($(ele).value == ""){
+         $(ele).next('span').show();
+         if(first_ele == null){
+           first_ele = ele;
+         }
+         flag = 1;
+       }
+     })
+   }
+
+   if(flag == 1){
+     $(first_ele).focus();
+     return false;
+   }
+   else{
+     $('spinner').show();
+     return true;
+   }
+}
+
+function capture_text() {
+  if($('other_chkbox').checked == true){
+  $('other_tools_text').disabled = false;
+  }
+  else{
+  $('other_tools_text').clear();
+  $('other_tools_text').disabled = true;
+  }
+}
+
+$('testimonial_seller').observe( 'click', function(event){
+  $("seller_testimonail").toggle();    
+})
+
+$('testimonial_buyer').observe( 'click', function(event){
+  $("buyer_testimonail").toggle();    
+})
+
+$('testimonial_agent').observe( 'click', function(event){
+  $("agent_testimonail").toggle();    
+})
+
+$('picture_upload_btn').observe( 'click', function(event){
+   var photo = $$('#picture_upload input')[0];
+   var f = photo.files[0];
+
+   if (!f.type.match('image.*')) {
+     alert("Please upload image file");
+     $$('#picture_upload input')[0].clear();
+     return false;
+   }
+
+   if($('pictures_display').children.length == 3){
+      alert("You can upload maximum of 3 photos per testimonial");
+      $$('#picture_upload input')[0].clear();
+      return false;
+   }
+
+   var reader = new FileReader();
+
+   reader.onload = (function(theFile) {
+     return function(e) {
+       var span = document.createElement('span');
+       span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                            '" title="', theFile.name, '" width="100" height="100" style="margin-left: 20px" />'].join('');
+       document.getElementById('pictures_display').insertBefore(span, null);
+     };
+   })(f);
+   reader.readAsDataURL(f);
+   
+   $('pictures_uploaded').appendChild(photo);
+   $('picture_upload').insert('<input type="file" name="testimonial[pictures][]" size="28" id="photo">');
+});
+
+</script>
+
+

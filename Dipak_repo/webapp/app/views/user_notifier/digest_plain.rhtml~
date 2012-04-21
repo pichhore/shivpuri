@@ -1,0 +1,39 @@
+Hello <%=@user.first_name%>,
+
+See your <%=@interval.capitalize%> summary of activity on your Dwellgo profile(s). A number next to "New" or "New Messages" shows new activity since your last visit.
+
+My Properties
+=========================
+<%= "None" if @owner_profiles.empty? -%>
+<%- @owner_profiles.each_with_index do |profile,index| -%>
+<%=profile.display_name%> (<%=profile.display_privacy%>)
+Matches: <%=profile.display_match_total_near_count("all")%>
+New: <%=profile.display_match_total_near_new_count%>
+Views: <%=profile.display_match_count_views%>
+New Messages: <%=profile.display_message_count_new%>
+
+Click the link below to view this profile:
+<%=url_for( hash_for_profile_url({:id=>profile.id}).merge( { :only_path => false, :protocol => 'http'}) )%>
+--------------------------------------------------------------------------------
+<%- end -%>
+
+
+My Buyer Profile(s)
+=========================
+<%= "None" if @buyer_profiles.empty? -%>
+<%- @buyer_profiles.each_with_index do |profile,index| -%>
+<%=profile.private_display_name%>
+Matches: <%=profile.display_match_total_near_count("all")%>
+New: <%=profile.display_match_total_near_new_count%>
+Views: <%=profile.display_match_count_views%>
+New Messages: <%=profile.display_message_count_new%>
+
+Click the link below to view this profile:
+<%=url_for( hash_for_profile_url({:id=>profile.id}).merge( { :only_path => false, :protocol => 'http'}) )%>
+--------------------------------------------------------------------------------
+<%- end -%>
+
+------------------------------------------------------------------------------------------
+
+Your Email Summary is currently sent <%=@interval%>. To change your subscription options, click the link below:
+<%=@change_frequency_link%>

@@ -1,0 +1,72 @@
+<%- @page_title = "My Websites – #{@domain_name}" -%>
+<%= stylesheet_link_tag "investor_buyer_page" %>
+<%- form_for(@buyer_web_page, :url => {:action=>'update'} , :html => { :method => :put, :multipart => true }) do |f| -%>
+<fieldset>
+  <%= render :partial => 'buyer_site_fields', :locals => {:f => f} %>
+</fieldset>
+<%- end -%>
+
+
+<% require_js_controllers :lightbox -%>
+<%= stylesheet_link_tag "lightbox"%> 
+
+
+
+<div style="display:none;" id="overlay_Lightbox"></div>
+<div id="lightbox_contents" style="text-align:left; height:450px; width:600px; display:none;">
+  <div style="height: 35px; width: 20px; float: right; padding: 5px; ">
+    <a onclick="lightbox_controller.close();" id="streetview_close" href="#"><span style="color: red; font-weight: bold; font-size: 30px;">X</span></a>
+</div>
+  <div id="lightboxHeader"><%= "Change Website URL" %></div>
+  <div style="margin-left: 15px;">
+  <table>
+    <%- form_for(:my_website_form,@my_website_form, :url => {:controller => "buyer_websites", :action => 'update_domain'}, :html => { :method => :post }) do |f| -%>
+         <input type="hidden" value=<%= @buyer_web_page.id %> name="buyer_site_id" />
+         <%= render :partial => 'rei_websites/domain_selection', :locals => {:f => f} %>
+    <tr>
+      <td>
+        <div align="center" style="margin-top: 5px">
+          <%= f.submit "Save", :class=>'submit_m' %>
+          <%= button_to_function 'Cancel', 'lightbox_controller.close()', :class=>"submit_l" %>
+        </div>
+      </td>
+    </tr>
+    <% end %>	 
+  </table>
+  </div>
+
+</div>
+
+
+
+<SCRIPT type="text/javascript" language="JavaScript">
+  window.onload = function window_onload(){
+    lightbox_controller = new NL.LightboxController();
+    $('change_domain').observe('click', function(e){
+       e.preventDefault();
+       $('lightbox_contents').show();
+    })
+
+     if($('my_website_form_domain_reim').checked){
+        show_domain_info('reim_domain');
+     }
+
+     if($('my_website_form_domain_having').checked){
+        show_domain_info('having_domain');
+     }
+
+    ['my_website_form_domain_having', 'my_website_form_domain_reim', 'my_website_form_reim_domain_name_wwwownhome4us', 'my_website_form_reim_domain_name_wwwbuyhome4us'].each(function(ele){
+      $(ele).observe('click', function(e){
+       clear_elements();
+     })
+    })
+
+    function clear_elements(){
+       $('my_website_form_having_domain_name').clear();
+       $('my_website_form_reim_domain_permalink1').clear();
+       $('my_website_form_reim_domain_permalink2').clear();      
+    }
+  }
+
+
+</SCRIPT>

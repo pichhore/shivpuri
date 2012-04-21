@@ -1,0 +1,51 @@
+<%- @page_title = "Signup Confirmation Sent" -%>
+
+<%- if flash[:type] == "buyer" -%>
+  <%- content_for :track_page_view do -%>
+pageTracker._trackPageview("new_buyer_created");
+ <%- end  -%>
+<%- end  -%>
+
+<%- if flash[:type] == "owner" -%>
+  <%- content_for :track_page_view do -%>
+pageTracker._trackPageview("new_owner_created");
+  <%- end  -%>
+<%- end  -%>
+
+
+<%- if flash[:type] == "seller_agent" -%>
+  <%- content_for :track_page_view do -%>
+pageTracker._trackPageview("new_seller_agent_created");
+  <%- end  -%>
+<%- end  -%>
+
+
+<%- if flash[:type] == "buyer_agent" -%>
+  <%- content_for :track_page_view do -%>
+pageTracker._trackPageview("new_buyer_agent_created");
+  <%- end  -%>
+<%- end  -%>
+
+<div class="wide">
+
+  <p>Thanks for signing up with REIMatcher! An email has been sent <%="to "+@user.email if @user%> to confirm your email address. Click the link provided in the email to activate your account and start using REIMatcher.</p>
+
+  <%- if !production? -%>
+  <p>Dev shortcut: <%=link_to "click to activate now","/activate/#{@user.activation_code}" if @user%></p>
+  <%- end -%>
+  <br />
+<<<<<<< HEAD:webapp/app/views/users/thanks.rhtml
+<center><div id="evp-d160395f4f83d652ad16184362c4e3b0-wrap" class="evp-video-wrap"></div><script type="text/javascript" src="http://www.damonflowers.com/evp/framework.php?div_id=evp-d160395f4f83d652ad16184362c4e3b0&id=ZGFtb24tcGhpbGwtd2VsY29tZS0xLm00dg%3D%3D&v=1306991720&profile=welcome"></script><script type="text/javascript"><!--
+_evpInit('ZGFtb24tcGhpbGwtd2VsY29tZS0xLm00dg==[evp-d160395f4f83d652ad16184362c4e3b0]');//--></script></center>
+
+=======
+  <div align="center">
+
+<embed src="http://ezs3.s3.amazonaws.com/player/mediaplayer46.swf" 
+width="647" height="364"
+allowscriptaccess="always" allowfullscreen="true"
+flashvars="autostart=true&controlbar=over&type=video&abouttext=eZs3&aboutlink=http://www.ezs3.com/about/index.cfm?memref=loveamericanhome&controlbar=over&stretching=none&allowfullscreen=true&wmode=opaque&file=http://evp-4cca25f7698b5-f067263ed738e695ecebff09583f3f59.s3.amazonaws.com/new-user-welcomeH.mp4&width=647&height=364&frontcolor=ffffff&backcolor=000000&lightcolor=000099&screencolor=000000&bufferlength=10&volume=80&showicons=true" />
+
+  </div>
+>>>>>>> 7c4c89add09ac08b30a3788561b5ba402d64af0d:webapp/app/views/users/thanks.rhtml
+</div>

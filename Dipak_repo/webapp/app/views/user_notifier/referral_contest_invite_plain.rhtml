@@ -1,0 +1,22 @@
+Hello <%=@to_name%>,
+
+A friend, <%=@from_name%>, has invited you to check out a new website called Dwellgo, which can best be described as online dating for Real Estate.  Dwellgo enables Owners and Buyers to be intelligently matched based on the criteria of the property and buyer profile. Owners and Buyers are then able to communicate privately, revealing personal information only when ready.  Best of all, Dwellgo is Free.
+
+Watch a video of How Dwellgo Works: <%=url_for :controller=>"how_it_works", :action=>"index", :utm_campaign=>"RefCon_Aug08", :utm_medium=>"contest", :utm_source=> "#{@from_name}_#{@from_email}", :to_email=>"#{@to_email}", :only_path=>false%>
+
+Dwellgo currently has over 1100 profiles in the Austin Metro area and is now celebrating our official launch with an exciting contest to bring even more people into the Dwellgo community.  The friend who referred you has received great value from Dwellgo and wants to share the experience with you.  They are also receiving credit for every friend who creates a Buyer Profile or add's a Property to Dwellgo.
+
+Add Your Property to the community by simply completing a Property Profile, which takes less than 3 minutes:
+<%=url_for :controller=>"profiles", :action=>"new", :id=>"owner", :utm_campaign=>"RefCon_Aug08", :utm_medium=>"contest", :utm_source=> "#{@from_name}_#{@from_email}", :to_email=>"#{@to_email}", :only_path=>false%>
+
+* Don't want others to know you are looking to sell?  Add your property using Dwellgo's exclusive Private status to hide your property address.
+
+Become a Buyer and have unlisted property find you by simply completing a <Buyer Profile>, which takes less than 2 minutes:
+<%=url_for :controller=>"profiles", :action=>"new", :id=>"buyer", :utm_campaign=>"RefCon_Aug08", :utm_medium=>"contest", :utm_source=> "#{@from_name}_#{@from_email}", :to_email=>"#{@to_email}", :only_path=>false%>
+
+Can I add both my property and create a buyer profile?  Yes, Dwellgo makes it easy to view/add/delete property or buyer profiles all with the same login.
+
+Note: Your information has NOT been automatically added to Dwellgo's membership database and you will not receive any further communication from Dwellgo.  To enjoy the Dwellgo service (which is FREE), you must create a profile.
+
+
+We hope to see you at Dwellgo!

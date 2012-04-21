@@ -1,0 +1,55 @@
+<h3>Invite A Friend Report</h3>
+
+<div class="report_filter">
+
+<%- form_tag({:action=>"execute", :id=>@report_name}, :method=>:get) do -%>
+Starting Date: <%=text_field_tag "start_date", @start_date_string_views%> and Ending Date: <%=text_field_tag "end_date", @end_date_string_views%> <%=submit_tag "Filter"%>
+<%- end -%>
+
+</div>
+
+<div class="report_export">
+Export as: <%=link_to "CSV", :action=>"execute", :id=>@report_name, :start_date=>@start_date_string_views, :end_date=>@end_date_string_views, :format=>"csv"%>
+</div>
+
+<div class="report_results">
+
+<table>
+
+  <thead>
+
+    <th>From First Name</th>
+    <th>From Last Name</th>
+    <th>From Email</th>
+    <th>To First Name</th>
+    <th>To Last Name</th>
+    <th>To Email</th>
+    <th>Sent On</th>
+    <th>Accepted?</th>
+
+  </thead>
+
+  <tbody>
+
+    <%-@total_invitations = 0 -%>
+    <%-@results.each_with_index do |result, index| -%>
+    <%-@total_invitations += 1 -%>
+    <tr <%="class='odd'" if index % 2 == 1%>>
+      <td><%=result["from_first_name"]%></td>
+      <td><%=result["from_last_name"]%></td>
+      <td><%=result["from_email"]%></td>
+      <td><%=result["to_first_name"]%></td>
+      <td><%=result["to_last_name"]%></td>
+      <td><%=result["to_email"]%></td>
+      <td><%=result["created_at"]%></td>
+      <td><%=result["accepted_at"].nil? ? "N" : "Y"%></td>
+    </tr>
+    <%-end -%>
+
+  </tbody>
+
+</table>
+
+<p>Total Invitations: <%=@total_invitations%></p>
+
+</div>

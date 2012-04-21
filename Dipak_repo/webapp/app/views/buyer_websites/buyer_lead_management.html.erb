@@ -1,0 +1,19 @@
+<%- @page_title = "My Buyer Leads" -%>
+
+<%- content_for :page_scripts do -%>
+ function go_to_buyer_full_page_view(full_page_view_path)
+      {
+          document.location.href = full_page_view_path
+      }
+<%- end -%>
+
+<div class="full">
+  <div class="left">
+  </div>
+  <fieldset>
+ <div style="display:none;margin-left:205px;" class="loading" id="spinner"><span class="text">Loading...</span></div>
+  <div id="ajax_update_div">
+    <%= render :partial=>"buyer_leads" %>
+  </div>
+  </fieldset>
+</div>

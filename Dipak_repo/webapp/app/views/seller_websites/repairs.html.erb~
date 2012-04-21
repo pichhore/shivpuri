@@ -1,0 +1,63 @@
+<%= render :partial => "partial_for_meta_tag"%>
+<%=stylesheet_link_tag "lightbox"%>
+<% require_js_controllers :tab, :account_settings, :profile_setup, :expand_collapse, :lightbox  -%>
+<%- content_for :page_scripts do -%>
+
+Event.observe(window, 'load', function() {
+  account_settings_controller = new NL.AccountSettingsController();
+lightbox_controller = new NL.LightboxController();
+});
+<%- end -%>
+
+    <div id="drag_drop_lightbox"  style="position: relative" >
+      <div style="display:none;z-index:-1000;" id="overlay_Lightbox"></div>
+      <div style="display:none;height:450px;width:350px;" id="lightbox_contents">Lightbox</div>
+    </div>
+
+    <script type="text/javascript">
+      Drag.init(document.getElementById("drag_drop_lightbox"));
+    </script>
+
+<div style="display:none;margin-left:205px;" class="loading" id="spinner"><span class="text">Loading...</span></div>
+  <div class="tabset larger">
+      <%=render :partial=>"seller_lead_full_page_tab", :locals=>{:active_class_repair=>"active"}%>
+  </div><br><br>
+    <% form_for(:seller_property, :url =>{ :controller => :seller_websites, :action => :update_seller_property_profile, :id => params[:id]}) do |f| %>
+     <%= hidden_field "seller_profile", "id" %>
+     <%= hidden_field_tag "repairs_tab", true %>
+      <div class="form">
+          <h3>Repairs</h3>
+        <fieldset>
+          <table>
+            <tr>
+                <th class="rapair_table_row">
+                    Conditions:
+                </th>
+                <td>
+                    <%=f.radio_button "property_conditions", "unlivable", :onclick => "this.focus();"%>Unlivable <%=f.radio_button "property_conditions", "needs_work", :onclick => "this.focus();"%>Needs Work <%=f.radio_button "property_conditions", "paints_carpet", :onclick => "this.focus();"%>Paint/Carpet <%=f.radio_button "property_conditions", "excellent", :onclick => "this.focus();"%>Excellent
+                    <br/>
+                </td>
+            </tr>
+            <tr>
+              <th class="rapair_table_row">
+                Repair Notes:
+              </th>
+              <td>
+                <%= f.text_area "repairs_needed", :cols => 50, :rows => 5, :style => "margin:0px;" %>
+              </td>
+            </tr>
+            <tr>
+              <th class="rapair_table_row">
+                Price Bottom Line:<img alt="Help_icon" src="/images/reimatcher_images/help_icon.png" title="If I were to buy this house today, what's the bottom line you would take for the property so that my partner and I know if this is something we can even do?"/>
+              </th>
+              <td>
+                <%= f.text_field "price_bottom", :cols => 50, :rows => 4, :style => "margin:0px;" %>
+              </td>
+            </tr>
+         </table>
+        <p style="text-align: center">
+          <div style="margin-left:300px;"><%=submit_tag "Update", :class=>"submit_xl"%></div>
+        </p>
+        </fieldset>
+    </div>
+    <% end %>

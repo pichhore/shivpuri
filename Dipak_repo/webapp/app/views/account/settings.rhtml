@@ -1,0 +1,161 @@
+<%- @page_title = "Investor Profile" -%>
+
+<% require_js_controllers :tab, :account_settings -%>
+<% require_js_helpers :currency_field, :integer_field , :date_field -%>
+<%- content_for :page_scripts do -%>
+
+Event.observe(window, 'load', function() {
+  account_settings_controller = new NL.AccountSettingsController();
+  $("user_first_name").focus();
+});
+
+<%- end -%>
+<script>
+window.onload = function() {
+  setTimeout(function() {  document.getElementById('<%= params[:id] %>').focus();}, 1000);
+  
+  }
+</script>
+
+<%= javascript_include_tag "calendar_date_select" %>
+<% CalendarDateSelect.format=(:american )%><%= calendar_date_select_includes %>
+<div class="full">
+
+  <div class="tabset larger">
+      <%=render :partial=>"account_tab", :locals=>{:active_class_investor_profile=>"active"}%>
+  </div>
+
+  <fieldset>
+
+<%- form_for(:user, :url => {:controller=>'account', :action=>'settings'}, :html => { :method => :post , :multipart => true }) do |f| -%>
+
+    <table>
+
+      <tr>
+        <th class="label_required">First Name:</th>
+        <td><%=text_field "user", "first_name" %><%=error_message_on :user,:first_name%></td>
+      </tr>
+
+      <tr>
+        <th class="label_required">Last Name:</th>
+        <td><%=text_field "user", "last_name" %><%=error_message_on :user,:last_name%></td>
+      </tr>
+
+      <tr>
+        <th style="padding-left:18px">Mobile Phone:</th>
+        <td><%=text_field "user", "business_phone" %>
+		<%=error_message_on :user,:business_phone%>
+		<br />
+		<span style="color:#FF0000;">Note:</span> While we do not offer TXT messaging alerts at this time, we may be adding them in the future.If you'd like to be contacted via email to opt-into this feature, please include your mobile phone number.</td>
+      </tr>
+      <tr>
+        <th class="label_required">Email:</th>
+        <td><%=text_field "user", "email" %><%=error_message_on :user,:email%></td>
+      </tr>
+        <tr>
+        <th style="padding-left:18px">Profile Image:</th>
+          <td>
+            <div>
+              <%- if @buyer_user_image.find_medium_thumbnail -%>
+                    <%=image_tag @buyer_user_image.public_filename(:medium), :class=>"thumbnail"%>
+              <%- else -%>
+                    <%=image_tag("/images/buyer-60.jpg",:width=>60 )%>
+              <%- end -%>
+            </div>
+            <div>
+              <input type="file" size="30" name="buyer_user_image[uploaded_data]" id="buyer_user_image_uploaded_data"/>
+              <%= f.submit "Upload Image" %>
+             </div>
+             <div>
+                  <p>Note: Only .png, .jpg, and .gif image types are accepted and images are limited to 3MB in size.</p>
+             </div>
+	       </td>
+	       </tr>
+
+                <tr>
+                      <div>
+                         <ul>
+                          <th><li style="list-style-type:none; padding:0px 0px 5px 5px; padding-left: 18px;">Investor Focus:</li><%=hidden_field_tag "user_focus_investor[user_id]",@user.id%></th>
+                                <td>
+                                  <%
+                                    is_longterm_hold = false
+                                    is_fix_and_flip = false
+                                    is_wholesale = false
+                                    is_lines_and_notes =false
+                                    if !@user.user_focus_investor.nil?
+                                      is_longterm_hold = true if @user.user_focus_investor.is_longterm_hold
+                                      is_fix_and_flip = true if @user.user_focus_investor.is_fix_and_flip
+                                      is_wholesale = true if @user.user_focus_investor.is_wholesale
+                                      is_lines_and_notes = true if @user.user_focus_investor.is_lines_and_notes
+                                    end%>
+                                 <li style="list-style-type:none;">
+                                   <input type="checkbox" name="user_focus_investor[is_longterm_hold]" value="1" id="user_focus_investor_is_longterm_hold" <% if is_longterm_hold %>checked="true"<%end%>/>&nbsp;&nbsp;Longterm Hold   (Landlord)</li>
+                                 <li style="list-style-type:none;">
+                                   <input type="checkbox" name="user_focus_investor[is_fix_and_flip]" value="1" id="user_focus_investor_is_fix_and_flip" <% if is_fix_and_flip %>checked="true"<%end%>/>&nbsp;&nbsp;Fix & Flip (Rehabber)</li>
+                                 <li style="list-style-type:none;">
+                                   <input type="checkbox" name="user_focus_investor[is_wholesale]" value="1" id="user_focus_investor_is_wholesale" <% if is_wholesale %>checked="true"<%end%>/>&nbsp;&nbsp;Wholesale </li>
+                                 <li style="list-style-type:none;">
+                                    <input type="checkbox" name="user_focus_investor[is_lines_and_notes]" value="1" id="user_focus_investor_is_lines_and_notes" <% if is_lines_and_notes %>checked="true"<%end%>/>&nbsp;&nbsp;Liens & Notes </li>
+                          </ul>
+                  </td>
+                      </div>
+                  </tr>
+
+		 <tr>
+		 <th style="padding-left:18px">Investing Since:</th> 
+                 <td><%= calendar_date_select_tag "user[investing_since]", @user.investing_since %> (mm/dd/yyyy) </td>
+		 </tr>
+		 <tr>
+		 <th style="padding-left:18px;">About me:</th>
+		 <td><div style="margin-left: -18px;"><%= f.text_area "about_me", {:rows => 5} %></div></td>
+		 <div>
+		 </tr>
+		 <tr>
+ 		 <th style="padding-left:18px">Real Estate Experience:</th>
+		 <td><div style="margin-left: -18px;"><%= f.text_area "real_estate_experience", {:rows => 5} %></div></td>
+		 </tr>
+		 <tr>
+              <div>
+                  <ul>
+                    <%=hidden_field_tag :inv_type, ''%>
+                   <th><li style="list-style-type:none; padding:0px 0px 5px 5px; padding-left: 18px;">I am a... (Mark all that apply)</li></th>
+		   <td>
+                    <li style="list-style-type:none;"><%= check_box_tag 'cash_buyer','Cash Buyer',@investor_type_cb,{:onclick => "document.getElementById('inv_type').value = 'CB'; "} %>&nbsp;&nbsp;Cash Buyer <img alt="Help_icon" src="/images/reimatcher_images/help_icon.png" title="A Cash Buyer is someone who has access to immediate funds for the purchase of Real Estate. Immediate funds may be your own cash or access to Hard money, Private Funding." /></li>
+                        <li style="list-style-type:none;"><%= check_box_tag 'private_lender', 'Private Lender', @investor_type_pl, {:onclick => "document.getElementById('inv_type').value = 'PL'; "} %>&nbsp;&nbsp;Private Lender <img alt="Help_icon" src="/images/reimatcher_images/help_icon.png" title="A Private Lender is an individual who lends their own funds for the purchase and/or fixup of Real Estate." /></li>
+                        <li style="list-style-type:none;"><%= check_box_tag 'licened_agent','Licenced Agent', @investor_type_la, {:onclick => "document.getElementById('inv_type').value = 'LA'; "} %>&nbsp;&nbsp;Licenced Agent <img alt="Help_icon" src="/images/reimatcher_images/help_icon.png" title="Licensed Agents hold an active Real estate license as either an Agent or Broker." /></li>
+                  </ul>
+		  </td>
+              </div>
+	      </tr>
+         
+	  
+      <tr>
+        <td colspan="2">Change your password by entering it here (twice) ↓</td>
+      </tr>
+
+      <tr>
+        <th class="label_required">Password:</th>
+        <td><%=password_field_tag "change_password", "", {:autocomplete=>"off"} %> (See <%=link_to "Privacy Policy", {:controller=>"home", :action=>"privacy"}, :target=>"_new"%>)<br/><%=error_message_on :user,:password%></td>
+      </tr>
+
+      <tr>
+        <th class="label_required">Password (verify):</th>
+        <td><%=password_field_tag "change_password_confirmation", "", {:autocomplete=>"off"} %><%=error_message_on :user,:password_confirmation%></td>
+      </tr>
+
+      <tr>
+        <td colspan="2" align="center">&nbsp;</td>
+      </tr>
+
+      <tr>
+        <td colspan="2" align="center"><%=submit_tag "Update Settings", :class=>'submit_xl'%></td>
+      </tr>
+
+    </table>
+
+<%- end -%>
+
+  </fieldset>
+
+</div>
+

@@ -1,0 +1,74 @@
+<%- @page_title = "Update Buyer Profile - #{@profile.private_display_name}" -%>
+
+<% require_js_controllers :tab, :profile_update -%>
+<% require_js_helpers :currency_field, :integer_field -%>
+<%= javascript_include_tag "add_buyer" %>
+
+<%- content_for :page_scripts do -%>
+
+Event.observe(window, 'load', function() {
+  profile_update_controller = new NL.ProfileUpdateController("<%=@profile.property_type%>");
+  currency_field_helper_after_repair_value = new NL.CurrencyFieldHelper($('fields_max_purchase_value'));
+  currency_field_helper_avr_repairs_value = new NL.CurrencyFieldHelper($('fields_arv_repairs_value'));
+  currency_field_helper_min_mon_pay = new NL.CurrencyFieldHelper($('fields_max_mon_pay'));
+  currency_field_helper_min_dow_pay = new NL.CurrencyFieldHelper($('fields_max_dow_pay'));
+  integer_field_helper_sqft_min = new NL.IntegerFieldHelper($('fields_square_feet_min'));
+  integer_field_helper_sqft_max = new NL.IntegerFieldHelper($('fields_square_feet_max'));
+  integer_field_helper_units_min = new NL.IntegerFieldHelper($('fields_units_min'));
+  integer_field_helper_units_max = new NL.IntegerFieldHelper($('fields_units_max'));
+  integer_field_helper_acres_min = new NL.IntegerFieldHelper($('fields_acres_min'));
+  integer_field_helper_acres_max = new NL.IntegerFieldHelper($('fields_acres_max'));
+});
+
+<%- end -%>
+
+<script type="text/javascript">
+window.onload = function() {
+  wholesale = document.getElementById("wholesale").checked
+  owner_finance = document.getElementById("owner_finance").checked
+  prop_type = '<%=@profile.property_type%>'
+  if(!wholesale)
+  {
+   document.getElementById("maxpv").style.display = 'none'
+   document.getElementById("arvr").style.display = 'none'
+  }
+  if(!owner_finance)
+  {
+   document.getElementById("maxmp").style.display = 'none'
+   document.getElementById("maxdp").style.display = 'none'
+  }
+};
+</script>
+
+<div class="form">
+
+<%= error_messages_for :criteria %>
+
+</div>
+
+<%- form_for(:fields, :url => profile_path(@profile), :html => { :method => :put }) do |f| -%>
+
+<div class="form">
+
+    <div class="tabset larger">
+      <ul>
+        <li class="active" uri="<%=url_for edit_profile_path(@profile)%>">Buying Criteria</li>
+        <li uri="<%=url_for edit_zipcodes_profile_path(@profile)%>">Buying Areas</li>
+		<li uri="<%=url_for edit_notification_profile_path(@profile) %>">Contact</li>
+      </ul>
+    </div>
+
+    <div class="clear"></div>
+
+  <%=render :partial=>"/shared/buyer_fields", :locals=> {:f=>f}%>
+
+</div>
+
+<p style="text-align: center">
+  <%=submit_tag "Update", :class=>"submit"%>
+  <%=link_to 'Delete Profile', delete_confirm_profile_path(@profile)+'?update=true', :class=>'destructive' %>
+</p>
+
+<%- end -%>
+
+

@@ -1,0 +1,40 @@
+60403:
+  zip: 60403
+  state: IL
+  city: Crest Hill
+  lat: 41.56964
+  lng: -88.112957
+  territory: South_of_Chicago
+  county: Will
+  country: us
+
+60434:
+  zip: 60434
+  state: IL
+  city: JOLIET
+  lat: 41.5252
+  lng: -88.0819
+  territory: South_of_Chicago
+  county: Will
+  country: us
+
+
+60527:
+  zip: 60527
+  state: IL
+  city: Willowbrook
+  lat: 41.742901
+  lng: -87.934676
+  territory: West_Central_Cook_County
+  county: Cook
+  country: us
+
+95391:
+  zip: 95391
+  state: CA
+  city: TRACY
+  lat: 37.759412
+  lng: -121.59902
+  territory: Yosemite
+  county: San Joaquin
+  country: us

@@ -1,0 +1,22 @@
+<%- unless @profile.nil?
+  count_all = @profile.display_match_total_near_count(@listing_type)
+  @page_title = "Hi #{@profile.user.first_name}, You're matched to #{@profile.match_count_text(count_all, @listing_type)}"
+  end
+-%>
+<% require_js_controllers :new_message_form -%>
+
+<script>
+$$('div.loading').each(function(item) { item.hide(); }.bindAsEventListener(this));
+</script>
+
+<div id="sending" class="loading" style="display:none"><span class="text">Sending...</span></div>
+
+<%- path = profile_profile_messages_path(@profile) if @profile -%>
+<%- path = community_message_path if ! @profile -%>
+<% form_tag(path,:id=>"profile_message_form", 
+      :onsubmit=>"$$('.submit_l').each(function(item) { item.disabled = true; }); $('sending').show();") do %>
+      
+<%=render :partial=>"new_form", :locals => { :req_uri_for_mp => @req_uri_for_mp }%>
+
+<% end -%>
+

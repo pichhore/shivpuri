@@ -1,0 +1,23 @@
+17/04/2010
+--------------------
+- Amount ($) stored in properties are in the currency type observed in
+  Property.currency_type
+- Migration script will change all existing properties currency_type to SGD
+- All users' default currency is SGD until otherwise noted
+- Some work may be required on app/views/my/properties/new for the monthly
+  rental part to ensure that the textfield shrinks in size
+  (david's notes: I didn't edit your css because I'm not sure how you intend to
+  modify the css)
+- currency_type on my/properties/new automatically selects the value based on
+  the owner's prefer_currency setting
+- To convert values use
+  CurrencyExchange.currency_exchange(amt,frm_currency,to_currency)
+- http://github.com/jasonfranklin-stokes/currencyexchange
+- rake db:migrate is needed
+
+15/04/2010
+--------------------
+- All amounts ($) stored in the database are in USD. Conversion to local
+  currency is based on stored amount.
+- Available currencies can be found at /app/config/currency.yml
+- rake db:migrate

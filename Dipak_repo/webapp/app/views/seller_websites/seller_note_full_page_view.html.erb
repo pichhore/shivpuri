@@ -1,0 +1,77 @@
+<%= render :partial => "partial_for_meta_tag"%>
+<%- content_for :page_scripts do -%>
+
+Event.observe(window, 'load', function() {
+  account_settings_controller = new NL.AccountSettingsController();
+});
+<%- end -%>
+
+<div class="tabset larger">
+    <%=render :partial=>"seller_lead_full_page_tab", :locals=>{:active_class_engagement_tab=>"active"}%>
+</div><br><br>
+<div class="form">
+  <h3><%= @seller_engagement_note.note_type == "Email" ? "Email Conversation" : "Phone Conversation"%></h3>
+  <fieldset>
+    <a href='#' style="margin-left:700px;" title="Delete Note" onclick="show_confirm();"><img src="/images/icons/delete.png" alt="Delete"></a>
+    <table>
+    <% if @seller_engagement_note.note_type == "Email" %>
+      <tr>
+        <th class="rapair_table_row">
+          From:
+        </th>
+        <td>
+          <%= investor_business_name %>
+        </td>
+      </tr>
+      <tr>
+        <th class="rapair_table_row">
+          To:
+        </th>
+        <td>
+          <% if is_email_is_bouced_email(@seller_profile.email.to_s) %><b class="bounce_email_exclamation_mark" title="Bounced Email">! </b><% end %><%= @seller_profile.email %>
+        </td>
+      </tr>
+      <tr>
+        <th class="rapair_table_row">
+          Date:
+        </th>
+        <td>
+          <%= @seller_engagement_note.created_at.strftime('%m/%d/%y') %>
+        </td>
+      </tr>
+    <% end %>
+      <tr>
+        <th class="rapair_table_row">
+          Subject:
+        </th>
+        <td>
+          <%= @seller_engagement_note.subject %>
+        </td>
+      </tr>
+      <tr>
+        <th class="rapair_table_row" style="width:30px;">
+          Description:
+        </th>
+        <td>
+          <%= display_email_with_assign_values_for_seller_responder(@seller_engagement_note.description,@seller_profile, @seller_engagement_note.note_type)%>
+        </td>
+      </tr>
+    </table>
+    <%=link_to "« Back<br/><br/>", {:controller=>'seller_websites', :action=>'engagement_tab', :id=>params[:id]} %>
+  </fieldset>
+</div>
+
+<script type="text/javascript">
+function show_confirm()
+{
+var r=confirm("Are you sure, you want to delete your note");
+if (r==true)
+  {
+    window.location = "<%= REIMATCHER_URL %>seller_websites/delete_seller_note?id=<%= params[:id]%>&seller_note_id=<%= @seller_engagement_note.id %>";
+  }
+else
+  {
+    window.close
+  }
+}
+</script>

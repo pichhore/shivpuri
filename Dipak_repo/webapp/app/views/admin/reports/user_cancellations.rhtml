@@ -1,0 +1,48 @@
+<h3>Total Cancellations</h3>
+Export as: <%=link_to "CSV", :action=>"total_user_cancellations_csv", :format=>"csv"%>
+<div class="report_results">
+
+<table>
+
+  <thead>
+
+    <th width="10%">First Name</th>
+    <th width="10%">Last Name</th>
+    <th width="15%">Email Login</th>
+    <th width="10%">Date Created</th>
+    <th width="10%">Date Cancelled</th>
+    <th width="5%">Member level</th>
+    <th width="25%">Reason For Cancellation</th>
+    <th width="5%">Hold Offer</th>
+    <th width="5%">Stick Rate</th>
+  </thead>
+
+  <tbody>
+    <%-@users.each do |user|-%>
+    <tr>
+      <td><%= user.first_name %></td>
+      <td><%= user.last_name %></td>
+      <td><%= user.login %></td>
+      <td><%= user.created_at.strftime("%m/%d/%Y") %></td>
+      <td><%= user.date_of_cancellation.strftime("%m/%d/%Y") %></td>
+      <td><%= user.user_class_before_cancellation %></td>
+      <td><%= user.cancellation_reason %></td>
+      <td><%= user.hold_offer ? "Y" : "N" %></td>
+      <td><%= get_individual_stick_rate(user) %></td>
+    </tr>
+    <%-end-%>
+  </tbody>
+
+</table>
+</br>
+<div>
+  <b>
+    Total Cancellation: <%= get_total_cancel_users %><br />
+    Average Stick Rate:<%= get_total_stick_rate %> months<br />
+    Hold Offer Conversion:<%= get_percent_of_hold_users.to_s+"%" %>
+  </b>
+</div>
+<span style="margin-top:10px;float:right;">
+  <%= will_paginate @users %>
+</span>
+</div>

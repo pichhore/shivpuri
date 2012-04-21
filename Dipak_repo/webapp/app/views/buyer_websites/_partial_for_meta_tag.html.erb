@@ -1,0 +1,6 @@
+<%- @page_title = "Post Property Requirements For Buying" -%>
+<%#- @page_heading = "Buyer Lead: #{get_buyer_lead_name}" %>
+<%- @page_heading = "Buyer Lead: #{@profile.private_display_name}" %>
+<% require_js_controllers :tab, :account_settings, :profile_setup, :expand_collapse, :lightbox  -%>
+<% require_js_helpers :currency_field, :integer_field , :date_field -%>
+<%= stylesheet_link_tag "lightbox" %>

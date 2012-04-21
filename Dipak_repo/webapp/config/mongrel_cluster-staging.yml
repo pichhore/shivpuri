@@ -1,0 +1,9 @@
+---
+cwd: /var/apps/reimatcher_staging/current
+port: "8930"
+environment: production_test
+address: 127.0.0.1
+pid_file: log/mongrel.pid
+servers: 1
+
+

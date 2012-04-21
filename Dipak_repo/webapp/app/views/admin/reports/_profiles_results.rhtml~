@@ -1,0 +1,52 @@
+<h3>Profiles Report</h3>
+
+<div class="report_filter">
+
+<%- form_tag({:action=>"execute", :id=>@report_name}, :method=>:get) do -%>
+<%-
+   user_options = [["------- All -------",""]]
+   user_options += @users.collect {|u| [u.full_name, u.id.to_s]}
+-%>
+Profiles for User:  <%=select_tag "user_id", options_for_select(user_options, @user_id)%> <%=submit_tag "Filter"%>
+<%- end -%>
+
+</div>
+
+<div class="report_export">
+Export as: <%=link_to "CSV", :action=>"execute", :id=>@report_name, :end_date=>@end_date_string_views, :format=>"csv"%>
+</div>
+
+<div class="report_results">
+
+<table>
+
+  <thead>
+
+    <th>Owned By</th>
+    <th>Profile Nickname</th>
+    <th>Created At</th>
+    <th>Last Updated At</th>
+
+  </thead>
+
+  <tbody>
+
+    <%-@profiles.each_with_index do |profile, index| -%>
+    <tr <%="class='odd'" if index % 2 == 1%>>
+      <td><%=profile.user.full_name unless profile.user.blank?%></td>
+      <td><%= profile.buyer? ? (profile.private_display_name.include?("Individual") ?  profile.display_name : profile.private_display_name) : profile.display_name %></td>
+      <td><%=profile.created_at.strftime("%m-%d-%Y")%></td>
+      <td><%=profile.updated_at.strftime("%m-%d-%Y")%></td>
+    </tr>
+    <%-end -%>
+
+  </tbody>
+
+</table>
+<span style="display:none;">
+<p>Total Profiles Found: <%=@profiles.length%></p>
+</span>
+<span style="margin-top:10px;float:right;">
+  <%= will_paginate @profiles %>
+</span>
+</div>

@@ -1,0 +1,25 @@
+<h1>Listing profile_matches</h1>
+
+<table>
+  <tr>
+    <th>Source profile</th>
+    <th>Target profile</th>
+    <th>Created at</th>
+  </tr>
+<% unless @profile_matches.nil?%>
+  <% for profile_match in @profile_matches %>
+    <tr>
+      <td><%=h profile_match.source_profile_id %></td>
+      <td><%=h profile_match.target_profile_id %></td>
+      <td><%=h profile_match.created_at %></td>
+      <td><%= link_to 'Show', profile_profile_match_path(profile_match) %></td>
+      <td><%= link_to 'Edit', edit_profile_profile_match_path(profile_match) %></td>
+      <td><%= link_to 'Destroy', profile_profile_match_path(profile_match), :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+<% end %>
+</table>
+
+<br />
+
+<%#= link_to 'New profile_match', new_profile_profile_match_path %>

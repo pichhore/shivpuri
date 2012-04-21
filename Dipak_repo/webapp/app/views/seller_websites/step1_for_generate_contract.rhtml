@@ -1,0 +1,110 @@
+<%- @page_title = "Generate Contract - Step 1 of 3" -%>
+
+
+<div class="form">
+
+  <h3>Step 1:</h3>
+<% form_for(:profile_contract, :url => step2_for_generate_contract_seller_website_path(@seller_profile)) do |f| %>
+  <fieldset>
+  <table>
+		<tr>
+			<th class="label expand_label" style="width:25%;">
+	            Property:
+	        </th>
+                <% unless @seller_property.property_address.blank? %>
+			<td>
+				<%= f.text_field 'seller_property_profile_id', :value => @seller_property.property_address, :readonly => true %><%=error_message_on :profile_contract, :seller_property_profile_id%>
+			</td>
+                <% end %>
+		</tr>
+          <tr>
+			<th class="label expand_label" style="width:25%;">
+	            Seller:
+	        </th>		
+			<td>
+                <%
+                   checked_seller = !@seller.blank? ? @seller : "ME" 
+                    checked_buyer = !@buyer.blank? ? @buyer : "ME"
+                %>
+		      <input type="radio" id="profile_contract_contract_seller_type_id" name="profile_contract[contract_seller_type_id]" value="ME" onclick="display_other_seller_block('me');" <% if checked_seller == "ME" %>checked="checked"<% end %> />Me &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" id="profile_contract_contract_seller_type_id" name="profile_contract[contract_seller_type_id]" value="OWN" onclick="display_other_seller_block('own');"  <% if checked_seller == "OWN" %>checked="checked"<% end %>  />Owner &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" id="profile_contract_contract_seller_type_id" name="profile_contract[contract_seller_type_id]" value="WI" onclick="display_other_seller_block('write_in');" <% if checked_seller == "WI" %>checked="checked"<% end %> />Write-In<%=error_message_on :profile_contract, :contract_seller_type_id%>
+			</td>	
+		</tr>
+          <tr <% if @seller != "WI" %>style="display:none;"<% end %> id="seller_write_in_block">
+			<th class="label expand_label" style="width:25%;">
+	            &nbsp;
+	        </th>		
+			<td>
+		      Write-in <%= f.text_field 'seller_write_in',:size => 23 %><%=error_message_on :profile_contract, :seller_write_in%>
+			</td>	
+		</tr>
+		<tr>
+			<th class="label expand_label" style="width:25%;">
+	            Buyer:
+	        </th>		
+			<td>
+		      <input type="radio" id="profile_contract_contract_buyer_type_id" name="profile_contract[contract_buyer_type_id]" value="ME" onclick="display_other_buyer_block('me');" <% if checked_buyer == "ME" %>checked="checked"<% end %> />Me &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" id="profile_contract_contract_buyer_type_id" name="profile_contract[contract_buyer_type_id]" value="MB" onclick="display_other_buyer_block('my_buyer');" <% if checked_buyer == "MB" %>checked="checked"<% end %> />My Buyer &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" id="profile_contract_contract_buyer_type_id" name="profile_contract[contract_buyer_type_id]" value="WI" onclick="display_other_buyer_block('write_in');" <% if checked_buyer == "WI" %>checked="checked"<% end %> />Write-In<%=error_message_on :profile_contract, :contract_buyer_type_id%>
+			</td>	
+		</tr>
+          <tr <% if @buyer != "WI" %>style="display:none;"<% end %> id="write_in_block">
+			<th class="label expand_label" style="width:25%;">
+	            &nbsp;
+	        </th>		
+			<td>
+		      Write-in <%= f.text_field 'buyer_write_in',:size => 23 %><%=error_message_on :profile_contract, :buyer_write_in%>
+			</td>	
+		</tr>
+          <tr <% if @buyer != "MB" %>style="display:none;"<% end %> id="my_buyer_block">
+			<th class="label expand_label" style="width:25%;"  id="my_buyer_block_th" >
+	           &nbsp;
+	        </th>		
+			<td>
+		      My Buyer <%= text_field_with_auto_complete :profile_contract, :my_buyer, { :size => 22, :value => @search } %><%=error_message_on :profile_contract, :my_buyer%>
+			</td>	
+		</tr>
+          <tr>
+			<th class="label expand_label" style="width:25%;"  id="my_buyer_block_th" >
+	           &nbsp;
+	        </th>		
+			<td>
+		      <input type="submit" value="Next" class="submit">
+			</td>	
+		</tr>
+	</table>
+
+  </fieldset>
+
+  <% end %>
+
+</div>
+
+<script>
+function display_other_buyer_block(cond){
+    if (cond == "my_buyer"){
+      $('my_buyer_block').style.display = "";
+      $('write_in_block').style.display = "none";    
+     }
+    else if (cond == "write_in"){
+      $('my_buyer_block').style.display = "none";
+      $('write_in_block').style.display = "";    
+    }
+    else{
+      $('write_in_block').style.display = "none";
+      $('my_buyer_block').style.display = "none";
+    }
+}
+
+function display_other_seller_block(cond){
+    if (cond == "write_in"){
+      $('seller_write_in_block').style.display = "";    
+     }
+    else{
+      $('seller_write_in_block').style.display = "none";
+    }
+}
+
+</script>
+

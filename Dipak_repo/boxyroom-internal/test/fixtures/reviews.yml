@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: MyString
+  review_text: MyText
+  rental_from: 2011-05-19
+  rental_to: 2011-05-19
+  application: 
+  property: 
+
+two:
+  title: MyString
+  review_text: MyText
+  rental_from: 2011-05-19
+  rental_to: 2011-05-19
+  application: 
+  property: 

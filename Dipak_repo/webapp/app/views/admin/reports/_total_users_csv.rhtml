@@ -1,0 +1,12 @@
+<%-
+   csv_string = FasterCSV.generate do |csv|
+      csv << ["first","last","email","# of Property Profiles","# of Buyer Profiles"]
+      @users.each do |u|
+        csv << [u.first_name,u.last_name,u.email,@user_owner_count_hash[u.id] || "0",@user_buyer_count_hash[u.id] || "0"]
+      end
+   end
+   stream_csv("total_users_report-#{@end_date.strftime("%Y-%m-%d")}.csv", csv_string)
+
+-%>
+
+

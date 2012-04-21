@@ -1,0 +1,23 @@
+
+<h2>Account Activity - Deleted Property & Buyer Profiles</h2><br/>
+<table>
+  <tr>
+    <th width="5%" align="left"></th>
+    <th width="20%" align="left">Profile</th>
+    <th width="15%" align="left">Deleted At</th>
+    <th width="23%" align="left">Reason</th>
+    <th width="30%" align="left">Comment</th>
+    <th width="5%" align="left"></th>
+  </tr>
+  <% @deleted_profiles.each do |profile| %>
+  <tr>
+    <td><%- unless profile.owner? or profile.seller_agent? -%> <%= image_tag "icons/icon_buyer_profile.gif",:size=>'20x20' %><% else %><%= image_tag "icons/icon_seller_profile.gif",:size=>'20x20' %> <%- end -%></td>
+    <td><%= truncate((profile.owner? or profile.seller_agent?) ? profile.name : profile.private_display_name,50) %></td>
+    <td><%= profile.updated_at.to_date %></td>
+    <td><%= profile.profile_delete_reason.name unless profile.profile_delete_reason.blank? %></td>
+    <td><%= truncate(profile.delete_reason, 50) %></td>
+    <td><%= link_to "Manage", {:controller => "account", :action => "manage_deal", :id => profile.id} %></td>
+  </tr>
+  <% end %>
+</table>
+<p><%= will_paginate @deleted_profiles %></p>

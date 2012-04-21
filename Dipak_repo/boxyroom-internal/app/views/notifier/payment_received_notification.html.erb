@@ -1,0 +1,57 @@
+<html>
+  <div style="margin-bottom:10px"><span >Transaction ID:</span> <%= @application.transaction_id.upcase %></div>
+  <div style="margin-bottom:10px"><span>Hi <span><%= @application.user.first_name %>,</div>
+  <div style="margin-bottom:10px"><span>We have successfully received your deposit to secure the rental property successfully.<span></div>
+  <div style="padding: 8px 12px;;margin-bottom:20px">
+    <div class="invoice_title" style="color:green;font:18px arial; margin-bottom:10px;">Tax Invoice</div>
+      <table cellspacing="0"  class="listings" id="table_invoice" style="width: 960px;"> 
+        <colgroup>
+          <col class="description" />
+          <col class="description" />
+          <col class="description" />
+          <col class="description" />
+        </colgroup>
+        <thead >
+          <tr class="row_header_width" style="border-top: 1px solid #88B4CB;">
+          <th class="th_payment_notification" style="padding:8px 12px;background:#EAF8FF;">Description</th>
+		  <th style="padding:8px 12px;background:#EAF8FF;"></th><th style="padding:8px 12px;background:#EAF8FF;"></th>
+          <th class="th_payment_notification" style="padding:8px 12px;background:#EAF8FF;">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row_header_width" style="border: none;background: #F0F0F0;">
+             <td  width="350px;padding:8px 12px;">Deposit for <%= @application.property.title%></td>
+             <td style="padding:8px 12px;"></td>
+             <td style="padding:8px 12px;"></td>
+			 <td style="padding:8px 12px;"><%= @application.property.currency_type.nil? ? 'US' : (@application.property.currency_type == 'USD' ? 'US' : (@application.property.currency_type == 'SGD' ?  'S'  : (@application.property.currency_type == 'AUD' ?  'A'  : (@application.property.currency_type == 'CAD' ? 'C' : ""))))%><%= @application.property.monthly_rental.to_i%></td>
+          </tr>
+        </tbody>
+		<tbody>
+		  <tr class="row_header_width" style="border: none;background:none repeat scroll 0 0 transparent;">
+			 <td style="padding:8px 12px;"></td>
+			 <td style="padding:8px 12px;"></td>
+			 <td style="float: right;padding:8px 12px;">Total</td>
+			 <td style="border-bottom: 1px solid gray;padding:8px 12px;"><%= @application.property.currency_type.nil? ? 'US' : (@application.property.currency_type == 'USD' ? 'US' : (@application.property.currency_type == 'SGD' ?  'S'  : (@application.property.currency_type == 'AUD' ?  'A'  : (@application.property.currency_type == 'CAD' ? 'C' : ""))))%><%= ISO4217::Currency.from_code(@application.property.currency_type.nil? ? 'USD' : @application.property.currency_type).symbol%><%= @application.property.monthly_rental.to_i %></td>
+		  </tr>
+		</tbody>
+        <tbody>
+		  <tr class="row_header_width" style="border: none;background:none repeat scroll 0 0 transparent;">
+		     <td style="padding:8px 12px;"></td>
+			 <td style="padding:8px 12px;"></td>
+			 <td style="float: right;padding:8px 12px;">Amount Paid</td>
+			 <td  style="border-bottom: 1px solid gray;padding:8px 12px;"><%= @application.property.currency_type.nil? ? 'US' : (@application.property.currency_type == 'USD' ? 'US' : (@application.property.currency_type == 'SGD' ?  'S'  : (@application.property.currency_type == 'AUD' ?  'A'  : (@application.property.currency_type == 'CAD' ? 'C' : ""))))%><%= ISO4217::Currency.from_code(@application.property.currency_type.nil? ? 'USD' : @application.property.currency_type).symbol%><%= @application.property.monthly_rental.to_i%></td>
+		  </tr>
+		</tbody>
+      </table>
+  </div>
+  <div style="margin-bottom:10px"><span >The Payment Code for your reservation:</span><%= @payment_token %></div> 
+
+  <div style="margin-bottom:5px"><span >What to do next:</span></div> 
+  <div style="margin-bottom:5px"><span >1.View your Dashboard for more details:</span><%= @my_dashboard_my_account_url%></  div>
+  <div style="margin-bottom:5px"><span >2. Contact your landlord and inform her/him if you’ll arrive on the date indicated in the application form or on another day</span></div>
+  <div style="margin-bottom:5px"><span >3. Ask your landlord how to get to your property by public transport or by car</span></div>
+  <div style="margin-bottom:5px"><span >4. Ask your landlord regarding the rental agreement, checklists and any other documentation to comply with local laws</span></div> 
+  <div style="margin-bottom:10px"><span >5. Hand the Payment Code <%= @payment_token %> to the landlord after you’ve signed the rental agreement and happily moved into your new rental space</span></div>
+  <div style="margin-bottom:12px"><span >All the best in your new rented home!</span></div>
+  <div style=""><span >The Boxyroom Team</span></div>
+</html>

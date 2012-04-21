@@ -1,0 +1,44 @@
+<%= render :partial => "marketing_links" %>
+<fieldset id="email_intro">
+  <div id="left_navigation" style="float:left; width:222px;">
+    <%= render :partial => "responder_links" %>
+  </div>
+  <%- form_for(:trust_responder_notification, :url => {:controller=>'account_marketing', :action=>'update_trust_responder_notification', :email_number => params[:email_number]}, :html => { :method => :post }) do |f| -%>
+    <div id="right_navigation" style=" float:right; width:527px;">
+      <table>
+        <%= f.hidden_field "trust_responder_summary_type", :value => @trust_responder_summary_type %>
+        <%= hidden_field "buyer_notification", "summary_type", :value => @summary_type %>
+          <tr>
+            <td><h3><%= @page_heading %></h3></td></tr>
+          <tr>
+            <td>
+              <br><b>Subject:</b>
+              <br/>
+              <%= f.text_field "email_subject", :value => @trust_responder_notification.email_subject, :size => "70", :style => "margin-left: 0px;" %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Email Body:</b>
+              <%= render :partial => "display_personalize_variable", :locals => { :id => "email_body_editor"}%>
+              <%= f.text_area "email_body", :value => @trust_responder_notification.email_body, :class=>"rich_text_editor", :size => "50x4", :style => "margin-left: 0px;" %>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <%= display_note_for_trust_responder %>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" align="center">
+              <%=submit_tag "Preview", :class=>'submit_xl' %>
+              <%=submit_tag "Update Settings", :class=>'submit_xl' %>
+            </td>
+          </tr>
+      </table>
+    </div>
+<div style="clear:both"></div>
+  <% end %>
+</fieldset>
+
+<%= display_trust_responder_example("trust_responder_email#{params[:email_number].to_s}") %>

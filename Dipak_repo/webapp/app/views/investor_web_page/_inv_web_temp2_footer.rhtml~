@@ -1,0 +1,15 @@
+		<div id="footer" style="background:<%= set_css_for_header_footer_in_temp2 %>">
+          <div class="address_footer">
+        <%= business_name_and_address %><br>
+        <%=link_to 'Privacy Policy', {:controller => "investor_web_page", :permalink_text=>params[:permalink_text], :action => "privacy_policy"}, :class=>"footer_anchor_tag" %> | <%=link_to 'Terms of Use', {:controller => "investor_web_page", :action => "terms_of_use", :permalink_text=>params[:permalink_text]}, :class=>"footer_anchor_tag" %><br />
+       REI Technologies LLC &copy; 2012
+            </div>
+            <div class="buyer_links_footer">
+        <%= active_buyer_web_page %>
+      </div>
+      <div class="seller_links_footer">
+        <%= active_seller_website %>
+            </div>
+            <div class="clear"></div>
+			</div>
+		</div>

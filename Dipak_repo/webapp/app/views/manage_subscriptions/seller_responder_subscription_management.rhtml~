@@ -1,0 +1,28 @@
+<%- @page_title = "Manage Your Subscriptions" -%>
+<div>
+  <form method="post" action="/manage_subscriptions/update_seller_responder_subscription">
+    <input type="hidden" name="id" value="<%= params[:id].to_s%>"/>
+    <label >
+                    <b>Email Address</b> <span>(required)</span>
+    </label><br/>
+    <input type="text" style="width:250px;" value="<%= @seller_property.seller_profile.email %>" name="buyer_email" />
+    <br/><br/>
+    <label ><b>Profile Details</b></label>
+    <div>
+        <div>Property Type : <%= @seller_property.property_type %></div>
+          <div>Zip Code: <%= @seller_property.zip_code%></div>
+            <div># Beds: <%= @seller_property.beds %></div>
+            <div># Baths: <%= @seller_property.baths %></div>
+            <div>Square Feet: <%= @seller_property.square_feet %></div>
+    </div><br/>
+    <label ><b>Do Not Contact</b></label>
+    <div>
+      <input type="checkbox" name="remove_subscription" value="1" <% if @seller_property.responder_sequence_subscription %> checked="checked" <% end %> />
+      <label>
+          Add me to your "Do Not Contact" list <br/><span> This will stop all emails from this sender, regardless of your subscription status above.</span>
+      </label>
+    </div>
+    <br/>
+    <input type="submit" value="Submit" id="submit" name="submit"/>		
+  </form>
+</div>

@@ -1,0 +1,6 @@
+<%- str = flash_helper%>
+<%unless str.blank?%>
+  <%- content_tag :div, :id => "payment_notification",:style=>"text-align: center;" do %>
+      <div class="message_payment"  id="messg_pay"><span ><%= str %></span></div>
+  <%- end %>
+<%end%>

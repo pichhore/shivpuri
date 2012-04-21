@@ -1,0 +1,35 @@
+<%- @page_title = "Company Info " -%>
+<% require_js_controllers :tab, :account_settings -%>
+
+<%- content_for :page_scripts do -%>
+
+Event.observe(window, 'load', function() {
+  account_settings_controller = new NL.AccountSettingsController();
+  business_name_bc = business_name_ac = $('user_company_info_business_name').value;
+  business_address_bc = business_address_ac = $('user_company_info_business_address').value;
+  business_phone_bc = business_phone_ac = $('user_company_info_business_phone').value;
+  business_email_bc = business_email_ac = $('user_company_info_business_email').value;  
+});
+
+<%- end -%>
+<div class="full">
+
+  <div class="tabset larger">
+<<<<<<< HEAD:webapp/app/views/account/company_info.rhtml
+    <ul>
+      <li><%= link_to "Investor Profile", {:controller=>'account', :action=>'settings'}, {:onclick => "return show_confirmation();"} %></li>
+      <li class="active" uri="<%=url_for({:controller=>'account', :action=>'company_info'})%>">Company Info</li>
+      <li><%= link_to "Buyer Websites", {:controller=>'account', :action=>'buyer_webpage'}, {:onclick => "return show_confirmation();"} %></li>
+      <li><%= link_to "Buyer Responder", {:controller=>'account_marketing', :action=>'welcome_email'}, {:onclick => "return show_confirmation();"} %></li>
+      <li><%= link_to "Alerts", {:controller=>'account', :action=>'digest_frequency'}, {:onclick => "return show_confirmation();"} %></li>
+	</ul>
+=======
+      <%=render :partial=>"account_tab_company_info", :locals=>{:active_class_company_info=>"active"}%>
+>>>>>>> c7d100e... temp commit ticket #349:webapp/app/views/account/company_info.rhtml
+  </div>
+
+  <fieldset>
+        <%= render :file=>"/user_company_images/new"%>
+  </fieldset>
+
+</div>

@@ -1,0 +1,93 @@
+class ManageSubscriptionsController < ApplicationController
+  layout "login_ui"
+  
+  def subscription_management
+    @retail_buyer = create_retail_buyer (params[:email_type], params[:id])
+    handle_error("Your buyer profile no longer exists") and return if @retail_buyer.blank?
+    @user_company_image = @retail_buyer.user_territory.user.user_company_image
+    if params[:email_type] == RetailBuyerProfile::EMAIL_TYPE[:squeeze_trust_responder]
+      @investor_company = @retail_buyer.user_territory.user.user_company_info
+    else
+      @investor_company = @retail_buyer.profile.user.user_company_info
+    end
+  end
+
+  def update_subscription
+      begin
+        subscription = true
+        if !params[:email_type].blank?
+          @retail_buyer = create_retail_buyer (params[:email_type],params[:id])
+          subscription = false if !params[:remove_subscription].blank?
+          
+        subscription_name = set_subscription_name(params[:email_type])
+  
+          if @retail_buyer.update_attribute(subscription_name,subscription)
+              if !params[:remove_subscription].blank?
+                flash[:notice] = "You will no longer receive email from this sender only for this profile."
+              else 
+                flash[:notice] = "You are now able to receive email from this sender only for this profile."
+              end
+          else
+              flash[:error] = "Couldn't update your subscription."
+          end
+        end
+      rescue Exception => exp
+            ExceptionNotifier.deliver_exception_notification( exp,self, request, params)
+      end
+      redirect_to :back and return
+
+  end
+
+  def create_retail_buyer (email_type, id)
+   retail_buyer = ""
+    if email_type == RetailBuyerProfile::EMAIL_TYPE[:squeeze_trust_responder]
+      retail_buyer = SqueezePageOptIn.find_by_id(id)
+    else
+      profile = Profile.find_by_id(id)
+      retail_buyer = profile.retail_buyer_profile if !profile.blank?
+    end
+    return retail_buyer
+  end
+
+  def set_subscription_name(email_type)
+    if email_type == RetailBuyerProfile::EMAIL_TYPE[:daily_notification]
+        subscription_name = RetailBuyerProfile::SUBSCRIPTION_COLUMN_NAME[:daily_email_subscription]
+    elsif email_type == RetailBuyerProfile::EMAIL_TYPE[:weekly_notification]
+        subscription_name = RetailBuyerProfile::SUBSCRIPTION_COLUMN_NAME[:weekly_email_subscription]
+    elsif email_type == RetailBuyerProfile::EMAIL_TYPE[:retail_trust_responder]
+        subscription_name = RetailBuyerProfile::SUBSCRIPTION_COLUMN_NAME[:trust_responder_subscription]
+    elsif email_type == RetailBuyerProfile::EMAIL_TYPE[:squeeze_trust_responder]
+        subscription_name = RetailBuyerProfile::SUBSCRIPTION_COLUMN_NAME[:trust_responder_subscription]
+    elsif email_type == RetailBuyerProfile::EMAIL_TYPE[:welcome_notification]
+        subscription_name = RetailBuyerProfile::SUBSCRIPTION_COLUMN_NAME[:welcome_email_subscription]
+    end
+    return subscription_name
+  end
+
+  def seller_responder_subscription_management
+    @seller_property = SellerPropertyProfile.find_by_id(params[:id])
+    handle_error("Your property profile no longer exists") and return if @seller_property.blank?
+    @user_company_image = @seller_property.seller_profile.user.user_company_image
+    @investor_company = @seller_property.seller_profile.user.user_company_info
+  end
+
+  def update_seller_responder_subscription
+    begin
+
+      @seller_property = SellerPropertyProfile.find_by_id(params[:id])
+      if @seller_property.blank?
+        render :file => "#{RAILS_ROOT}/public/404.html"
+        return false
+      end
+      if !params[:remove_subscription].blank?
+        @seller_property.update_attribute(:responder_sequence_subscription, false)
+      else
+        @seller_property.update_attribute(:responder_sequence_subscription, true)
+      end
+    rescue Exception => exp
+      ExceptionNotifier.deliver_exception_notification( exp,self, request, params)
+    end
+    redirect_to :back and return
+  end
+
+end

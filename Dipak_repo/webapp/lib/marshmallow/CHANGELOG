@@ -1,0 +1,18 @@
+0.3.1 Bugfix
+  Fix exception notifier, so that it actually works now.
+
+0.3 Initial public release
+  Cleanup code  
+  Add examples
+  Make plugin
+
+0.2 Private release
+  Moved to a Marshmallow class
+  Made compatible with Ruby 1.8.2
+  Allow username/password login
+  Allow SSL
+
+
+0.1 Private Release (see http://blog.caboo.se/articles/2006/04/06/haxoring-campfire-or-roll-your-own-api)
+  Initial import. Logs in with secret URL.
+

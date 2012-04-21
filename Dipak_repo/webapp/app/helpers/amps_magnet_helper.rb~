@@ -1,0 +1,6 @@
+module AmpsMagnetHelper
+  def get_seller_website_perma_link
+    seller_site = SellerWebsite.find(:first, :conditions => ["user_id = ? and active = ? and seller_magnet = ?", current_user.id, true, false])
+    seller_site.blank? ? nil : seller_site.permalink_text
+  end 
+end

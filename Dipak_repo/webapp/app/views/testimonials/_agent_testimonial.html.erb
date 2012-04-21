@@ -1,0 +1,40 @@
+  <div class="form">
+    <h3>Closing Agent Testimonial</h3>
+    <fieldset>
+       <p style="font-size: 14px;">
+<b>Note:</b> The information from this form will be combined with the information released by the investor for this deal
+(and possibly information from the buyer(s)/Seller(s) - if available) and used for marketing purposes.
+       </p>
+       <p style="margin: 15px 0; font-size: 14px;">
+If the investor refuses to release any information about this transaction, then only the brief information on this
+form will be shared publicly in marketing materials.
+       </p>
+       <table>
+	<tr>
+          <th class="label_required">Property:US State Sale occurred in:</th>
+           <td><%= select("closing_agent", "state", State.find(:all,:order=>:state_code).map { |state| [state.name, state.id]  }, { :include_blank => "--------- Select State ---------" }, { :class => "wide" })%><br/><span style="display:none; color: #FF3300;">State can't be empty</span><%=error_message_on :seller_testimonial,:state %></td>
+	</tr>
+	<tr>
+          <th class="label_required">Approximate Closing Date:</th>
+          <td><%=text_field "closing_agent", "closing_date", {:size => 12, :readonly => true} %>(Format as mm/dd/yy) <%#= calendar_date_select_tag "testimonial[closing_date]", @testimonial.closing_date %><br/><span style="display:none; color: red;">Closing date can't be empty</span><%=error_message_on :testimonial,:closing_date%></td>
+	</tr>
+	<tr>
+          <th class="label_required">Final Sales Price</th>
+          <td><%=text_field "closing_agent", "sales_price", {:autocomplete=>"off", :size => 13} %><%=error_message_on :user,:password_confirmation%> </td>
+	</tr>
+      </table>
+
+      <div style="font-weight: bold; margin: 10px 0 0 7px">Any additional comments to share publicly about this transaction:</div>
+      <div class="tm_textarea"> 
+        <%= text_area "closing_agent", "tx_comments", :cols => 50, :rows => 4  %><%=error_message_on :user,:password_confirmation%>
+      </div>
+      
+      <div style="margin:5px 0 0 5px; padding: 0 10px; text-align: justify;"> 
+      <p style="text-align: center; margin-top: 20px">
+	<%= check_box_tag 'seller_testimonial[mkt_release]', @testimonial.market_release, true %>
+	Agreed to Marketing Release <span style="display:none">| Date <%= calendar_date_select_tag "testimonials", "" %><br/></span>
+      </p>
+      </div>
+         
+    </fieldset>
+  </div>

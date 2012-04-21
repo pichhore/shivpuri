@@ -1,0 +1,166 @@
+<head>
+  <!--[if IE 7]>
+   <style type="text/css">
+     .td_propp_des{width: 400px;}
+     .number_box_text{top: -20px;}
+    table {
+    border: 1px solid #CCCCCC!important;
+    margin-bottom: 16px!important;
+    width: 100%!important;
+    }
+    table tbody td{ border-bottom :1px solid #CCCCCC!important;}
+   </style>
+  <![endif]-->
+</head>
+<div id="content">
+  <div style="width: 990px; margin: 0pt auto;">
+    <div class="number_box_main">
+	    <div class="number_box">
+		    <%= all_listed_property %>
+		      <div style="clear: both;"></div>
+		        <span class="number_box_text">Total property listings</span>
+	    </div>
+	  </div>
+  </div>
+  <div class="container">
+    <div id="header-wp">
+	    <%= flash_message%>
+	    <h1>Admin Dashboard</h1>
+    </div>
+    <div class="">
+    <ul>
+      <li><a id="listing-pending" href="/admin/properties?queue=listing-pending" class ='<%= selected_method("listing-pending", @selected_sub_tab_property) %><%= "_listing_pending" %>'></a></li>
+      <li><a id="pending-verification" href="/admin/properties?queue=pending-verification" class ='<%= selected_method("pending-verification", @selected_sub_tab_property) %><%= "_pending_verification" %>'></a></li>
+      <li><a id="approved-listing" href="/admin/properties?queue=approved-listing" class ='<%= selected_method("approved-listing", @selected_sub_tab_property) %><%= "_approved_listing" %>'></a></li>
+      <!--<li><%#= link_to "Archives", archive_admin_transactions_path %></li>-->
+    </ul>
+  </div>
+    <div class="primary"  id="admin_listings">
+      <table cellspacing="0" class="listings">
+        <caption><%= @selected_sub_tab_property.gsub('-','_').titleize %></caption>
+        <colgroup>
+          <col class="description"/>
+          <col class="actions"/>
+		      <col class="description"/>
+          <col class="actions"/>
+		      <col class="description"/>
+          <col class="actions"/>
+        </colgroup>
+        <thead>
+          <tr>
+            <th>Description</th>
+		        <th>Type</th>
+		        <th>Landlord</th>
+		        <th>Submitted/Updated</th>
+		        <th>Amount</th>
+		        <th>Currency</th>
+		        <th></th>
+          </tr>
+        </thead>
+        <%if !@properties.empty?%>
+	        <%- @properties.each do |property| %>
+            <tbody>
+              <tr class="extended">
+                <td class="td_propp_des">
+                  <a class="link" href="/properties/<%=property.id%>?input=<%=property.address.city%>">
+                    <div class="thumbnail">
+                      <%- if property.pictures.empty? %>
+                        <%= image_tag("/images/missing/missing_properties_thumb.png" ) %>
+                      <%- else %>
+                        <%= image_tag(property.pictures.first.image.url(:thumb)) %>
+                      <%- end %>
+                      <div class="overlay"></div>
+                    </div>
+                    <div class="description"  style="width: 200px;font: bold; margin-left:100px;">
+                      <div>
+                        <%= property.title.slice(0..70)%><%= "..." if property.title.length>70%>
+                      </div>
+                      <div id="property_address_location">
+                          <%= property.address.location %>
+                      </div>
+                    </div>                                            
+                  </a>           
+                </td>
+			          <td>
+			            <div style="font-size: 95%; ">
+                    <p class="description" style="margin-bottom: 10px;"><strong><%= link_to property.display_category, property_path(property) %></strong>
+                    </p>
+                  <div>
+		            </td>
+      			    <td >
+      			      <strong><div style="font-size: 95%; "><%= link_to property.owner.full_name,  admin_user_path(property.owner)%></div></strong>
+      			    </td>
+      			    <td class="duration_width"><span> <strong  class="description" ><%= time_ago_in_words property.updated_at %> ago</strong></span>
+                </td>
+      			    <td  id="amount_field_property_admin"><%= return_currency_abbrebiation(property.currency_type.nil? ? 'USD' : property.currency_type)%><%= ISO4217::Currency.from_code(property.currency_type.nil? ? 'USD' : property.currency_type).symbol%><%=property.monthly_rental.to_i%>
+      			    </td>
+      			    <td id="amount_field_property_admin">
+      			      <%= property.currency_type%>
+      			    </td>
+                <td style="padding: 8px 10px;">
+                  <div class="manage" style="position: relative;">
+    			          <strong></strong>
+                    <ul class="menu" id="admin_transaction" style="position: absolute;">
+<!--		             Property Options for listing pending tab-->
+             			  <% if @selected_sub_tab_property=="listing-pending" %>
+             			    <li>
+	   			               <%= link_to "Approve Listing", approve_admin_property_path(property), :method => :put, :class => "approve"%>
+				              </li>
+ 				              <li>
+    		                 <%= link_to "Reject Listing", reject_admin_property_path(property), :method => :put, :class => "reject" %>
+				              </li>
+				            <%end%>				            
+<!--		             Property Options for document pending verification tab-->
+                     <% if @selected_sub_tab_property == "pending-verification" %>
+          				     <li>
+          				       <%= link_to "View Document", property_path(property), :class => "view" %>
+              			   </li>             			     
+             			   <%end%>
+<!--		             Property Options for approved listing tab-->
+                     <% if @selected_sub_tab_property == "approved-listing" %>
+          				     <li>
+          				       <%= link_to "View Property", property_path(property), :class => "view" %>
+              			   </li>
+             			     <li>
+    		                 <%= link_to "Suspend Listing", reject_admin_property_path(property), :method => :put, :class => "reject" %>
+				               </li>
+             			   <%end%>
+                    </ul>
+                  </div>
+                  <%if @selected_sub_tab_property=="approved-listing" %>
+                  <div class="stats">
+                    <ul>
+                      <li class="likes"><%= property_likes_count(property) %> likes</li>
+                      <li class="reviews"><%= property_review_count(property) %> reviews</li>
+                      <%if verified_property(property)%>
+                      <li class="verified last-child">Verified</li>
+                      <% end %>
+                    </ul>
+                  </div>                
+                  <%end%>
+                </td>  
+              </tr>
+            </tbody>
+          <%-end %>
+        <%else%>
+          <tr>
+            <td colspan="7">Nothing to show you.</td>
+          </tr>
+        <%end%>
+		    <tfoot>
+		      <tr>			    
+			      <td colspan="7">
+				      <%= will_paginate @applications, :previous_label => "Previous", :next_label => "Next"%></li>
+			      </td>
+		      </tr>
+		    </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+<!--<script type="text/javascript">-->
+<!--      window.onload = firstLoad;-->
+<!--        function firstLoad() {-->
+<!--	 document.getElementById("messg_pay").style.marginTop  = '30px';-->
+<!--        }-->
+<!--</script>-->

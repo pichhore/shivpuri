@@ -1,0 +1,189 @@
+<%- @page_title = "Seller Web Site Setup" -%>
+
+<%- content_for :page_scripts do -%>
+  function show_domain_info(this_id)
+  {
+      if(this_id=='buying_domain')
+        {
+            $('buying_domain').show();
+            $('having_domain').hide();
+            $('reim_domain').hide();
+          }
+      else if (this_id=='having_domain')
+        {
+            $('buying_domain').hide();
+            $('having_domain').show();
+            $('reim_domain').hide();
+          }
+      else if(this_id=='reim_domain')
+        {
+            $('buying_domain').hide();
+            $('having_domain').hide();
+            $('reim_domain').show();
+          }
+   }
+
+    function check_availablity(selected_domain,permalink_id) 
+    {
+            var domain_name ;
+            $('ajax_update_div_1').innerHTML ="";
+            $('ajax_update_div_2').innerHTML = "";
+            if ($(selected_domain).checked)
+              domain_name = $(selected_domain).value;
+            permalink = $(permalink_id).value;
+            new Ajax.Request('/seller_websites/check_permalink',
+              {
+              method:'POST',
+              parameters: { domain_name: domain_name, permalink: permalink},
+              onSuccess: function(transport){
+              var response = transport.responseText || "no response text";
+              if (permalink_id=="my_website_form_reim_domain_permalink1") {
+                $('ajax_update_div_1').innerHTML = response; 
+                $('ajax_update_div_2').innerHTML = "";
+              }
+              else if (permalink_id=="my_website_form_reim_domain_permalink2"){
+                $('ajax_update_div_2').innerHTML = response; 
+                $('ajax_update_div_1').innerHTML = "";
+                }
+              },
+            onFailure: function(){ alert('Something went wrong...') },
+            onLoading: function(){ 
+               if (permalink_id=="my_website_form_reim_domain_permalink2")
+                { 
+                   $('feeds_spinner_2').show(); 
+                 }
+               else if (permalink_id=="my_website_form_reim_domain_permalink1")
+                {
+                    $('feeds_spinner_1').show();
+                 }
+              },
+            onComplete: function()
+              {
+                $('feeds_spinner_2').hide();
+                $('feeds_spinner_1').hide();
+              }
+            });
+      }
+
+    function checked_radio_button_1(){
+      document.getElementById('my_website_form_reim_domain_name_wwwneed2sellus').checked = true;
+    }
+
+    function checked_radio_button_2(){
+      document.getElementById('my_website_form_reim_domain_name_wwwsellhouse2us').checked = true;
+    }
+    function select_website(e,ele_id)
+    {
+alert(window.event);
+          var KeyID = (window.event) ? event.keyCode : e.keyCode;
+          switch(KeyID)
+          {
+            case 9:
+            if (ele_id == 'my_website_form_reim_domain_permalink2')
+              {
+                $('my_website_form_reim_domain_name_wwwsellhouse2us').checked = true;
+              }
+             else if (ele_id == 'my_website_form_reim_domain_permalink1')
+              {
+                $('my_website_form_reim_domain_name_wwwneed2sellus').checked = true;
+               }
+            break; 
+            }
+    }
+ <%- end -%>
+
+
+<fieldset>
+<legend>Step 1 of 2 </legend>
+
+    <table>
+       <%- form_for(:my_website_form,@my_website_form, :url => {:action => 'step2'}, :html => { :method => :post }) do |f| -%>
+          <input type="hidden" name="my_website_form[type]" value="seller"/>
+            <tr>
+                <td><%=error_message_on :my_website_form,:domain %></td>
+            </tr>
+           <tr>
+            <td>
+                   <div style="display:none;"><%=f.radio_button "domain", "bying",:onclick=>"show_domain_info('buying_domain')"%> Buy Domain</div>
+            </td>
+          </tr>
+          <tr id="buying_domain" style="display:none;">
+              <td>
+              <!--Content to be displayed for the ENOM-->
+             </td>
+          </tr>
+          <tr>
+            <td>
+                   <%=f.radio_button  "domain", "having",:onclick=>"show_domain_info('having_domain')"%>I have my own domain
+            </td>
+          </tr>
+          <tr id="having_domain" style="<% if (! error_message_on (:my_website_form,:having_domain_name).blank?)%>display:block;<%else%>display:none;<%end%>">
+              <td >
+                 <div class="seller_domain_margin">
+                    <div>Enter Your Domain Name</div>
+                    <div><%= f.text_field "having_domain_name",:size=>30%></div>
+                    <div><%=error_message_on :my_website_form,:having_domain_name %></div>
+                </div>
+                <div class="seller_having_instruction"> 
+                     Instructions To Use
+                    <fieldset style="margin:0px;">
+                        <p>In order to use your own domain for your Seller Website, you will need to make a small change
+                        to the DNS records where your domain is registered…</p>
+      
+                        <p>You will need to point the “A” record of your domain to this IP address : <b>67.207.151.142</b></p>
+      
+                        <p>If you need help, check out <a href="http://www.reimatcher.com/faq/buyer-marketing/redirecting-ur-vanity-domain/" target="_blank">Instructions For Using Your Own Domain</a></p>
+      
+                        <p><b>Note:</b> After you have made the DNS change above, please allow 24-48 hrs for your domain to be linked to your Seller Website</p>
+                    </fieldset>
+                </div>
+                 
+             </td>
+          </tr>
+
+          <tr>
+            <td>
+                   <%=f.radio_button  "domain", "reim",:onclick=>"show_domain_info('reim_domain')"%>Use REIMatcher Domain
+            </td>
+          </tr>
+          <tr id="reim_domain" style="<% if (! error_message_on (:my_website_form,:reim_domain_name).blank? || ! error_message_on (:my_website_form,:reim_domain_permalink1).blank? || ! error_message_on ( :my_website_form,:reim_domain_permalink2).blank?)%>display:block;<%else%>display:none;<%end%>">
+              <td >
+                <div class="seller_domain_margin">
+                  <div ><%=error_message_on :my_website_form,:reim_domain_name %><br/></div>
+                  <div>
+                    <div style="float:left;"><%=f.radio_button  "reim_domain_name", "www.need2sell.us"%> www.need2sell.us / <%= f.text_field "reim_domain_permalink1",:size=>20 ,:onclick =>"checked_radio_button_1()",:onkeyup=>"select_website(event,'my_website_form_reim_domain_permalink1');"%>  <input type="button" name="check_permalink1" value="Check Availability" onclick = "check_availablity('my_website_form_reim_domain_name_wwwneed2sellus','my_website_form_reim_domain_permalink1')">
+                    </div>
+                    <div style="float:left;padding-left:10px;">
+                      <img  src="/images/spinner.gif" id="feeds_spinner_1" style="display:none;" class="loading-indicator" alt="loading indicator" />
+                    </div>
+                  <div id="ajax_update_div_1" style="float:left;padding-left:10px;"></div>
+                </div>
+                <div class="seller_domain_margin"><%=error_message_on :my_website_form,:reim_domain_permalink1 %></div>
+                  <br/>
+                <br/>
+                <div>
+                     <div style="float:left;"> <%=f.radio_button  "reim_domain_name", "www.sellhouse2.us"%> www.sellhouse2.us / <%= f.text_field "reim_domain_permalink2",:size=>20,:onclick =>"checked_radio_button_2()",:onkeyup=>"select_website(event,'my_website_form_reim_domain_permalink2');"%>  <input type="button" name="check_permalink2" value="Check Availability" onclick = "check_availablity('my_website_form_reim_domain_name_wwwsellhouse2us','my_website_form_reim_domain_permalink2')">
+                    </div>
+                     <div style="float:left;padding-left:10px;">
+                        <img  src="/images/spinner.gif" id="feeds_spinner_2" style="display:none;" class="loading-indicator" alt="loading indicator" />
+                     </div>
+                    <div id="ajax_update_div_2" style="float:left;padding-left:10px;"></div>
+                </div>
+                <div class="seller_domain_margin"><%=error_message_on :my_website_form,:reim_domain_permalink2 %></div>
+                 </div>
+             </td>
+          </tr>
+          <tr>
+            <td>
+              <div align="center">
+                <%=f.submit "Next", :class=>'submit_s' %>
+              </div>
+            </td>
+          </tr>
+	  <% end %>
+	 
+    </table>		
+
+</fieldset>
+
+

@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+tenant:
+  firstname: "Landlord"
+  lastname: "Chua"
+  email: "zhchua@gmail.com"
+
+  active: true
+
+
+landlord:
+  firstname: "Tenant"
+  lastname: "Chua"
+  email: "zhihon.chua.2007@sis.smu.edu.sg"
+  active: true

@@ -1,0 +1,8 @@
+Hi <%= @message.recipient.first_name.capitalize%>,
+
+<%= @message.sender.full_name %> sent you the following message.
+
+<%= @message.body %>
+
+To reply or view the entire conversation, follow this link:
+<%= @link %>

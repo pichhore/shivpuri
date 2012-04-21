@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title><%= @subject %></title>
+</head>
+
+<body style="background: #FFFFFF; color: #000000; ">
+<br>
+An internal purchase just occurred with an email that matched a current customer purchased other product.
+<br><br>
+<b>Product Purchased:</b> <%= @product_name %><br>
+<b>Product Purchased Id:</b> <%= @purchase_id %><br>
+<b>Purchase Date:</b> <%= @purchase_date %><br>
+<b>Customer Name:</b> <%= @user_name %><br>
+<b>Customer Email:</b> <%= @user_email %><br>
+<b>Shopping Cart Customer Id:</b> <%= @customer_id %><br>
+<br>
+Please locate the customer and manually apply the purchase...<br><br>
+Reimatcher System
+</body>
+</html>

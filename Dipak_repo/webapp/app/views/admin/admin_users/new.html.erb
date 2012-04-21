@@ -1,0 +1,198 @@
+<script type="text/javascript">
+  if($('temp_show'))
+    {
+      $('temp_show').innerHTML="";
+    }
+</script>
+ <script type="text/javascript"> 
+  <% if @test_comp =="test" or @test_comp.blank? %>
+    window.onload= $('show_on_home_listed').hide();
+  <% else %>
+    window.onload= $('show_on_home_listed').show();
+  <% end %>
+ </script> 
+<div id="admin__admin_users-create--div">
+<%- form_remote_tag(:update => "admin__admin_users-create--div", :url=>"/admin/admin_users/create",:html=>{:mehtod=>:post},:loading=>"$('admin__admin_users-create-loading-indicator').style.visibility = 'visible';Form.disable('admin__admin_users-create--form');return false;")  do -%>
+  <h4>Create User</h4>
+
+      <div class="messages-container" id="admin__admin_users-create--messages"/>
+  
+  <ol class="form">
+      <li class="form-element ">
+    
+<dl>
+  <dt>
+    <span style="color:red;">*</span> <label for="record_first_name">First Name</label>
+  </dt>
+  <dd>
+      <%=text_field "record", "first_name", :size=>20 ,:autocomplete=>"off",:class=>"first_name-input text-input"%>
+      <%=error_message_on :record,:first_name %>
+      </dd>
+</dl>  </li>
+        <li class="form-element ">
+    
+<dl>
+  <dt>
+    <span style="color:red;">*</span> <label for="record_last_name">Last Name</label>
+  </dt>
+  <dd>
+      <%=text_field "record", "last_name", :size=>20 ,:autocomplete=>"off",:class=>"last_name-input text-input"%>
+      <%=error_message_on :record,:last_name %>
+      </dd>
+</dl>  </li>
+        <li class="form-element ">
+    
+<dl>
+  <dt>
+    <span style="color:red;">*</span> <label for="record_email">Email Address</label>
+  </dt>
+  <dd>
+      <%=text_field "record", "email", :size=>20 ,:autocomplete=>"off" ,:class=>"email-input text-input"%>
+      <%=error_message_on :record,:email %>
+      </dd>
+</dl>  </li>
+<li class="form-element ">
+<dl>
+      <dt>
+        <label for="record_user_class_id">Create User</label>
+      </dt>
+      <dd>
+          <%=select("record", "user_type",  [ ["InfusionSoft", 1],["Manually",2] ], {:include_blank => '- Select Type -'},{:onchange => "changeUserType();"})%>
+          <%=error_message_on :record,:user_type %>
+      </dd>
+</dl>
+ </li>
+
+        <li class="form-element " id="infusionsoft_contact_id" style="display:none;">
+    
+<dl>
+  <dt>
+    <label for="record_customer_record">InfusionSoft Contact Id</label>
+  </dt>
+  <dd>
+      <input type="text" size="20" name="record[contactId]" id="record_contactId" class="customer_record-input text-input" autocomplete="off"/>
+      </dd>
+</dl>  </li>
+
+        <li class="form-element ">
+    
+<dl>
+  <dt>
+    <span style="color:red;">*</span> <label for="record_user_class_id">User Class</label>
+  </dt>
+  <dd>
+      <%=select("record", "user_class_id", UserClass.find(:all).collect {|p| [ p.user_type_name, p.id ] }, {:include_blank => '- Select -'})%>
+      <%=error_message_on :record,:user_class_id %>
+      </dd>
+</dl>  </li>
+        <li class="form-element ">
+    
+<dl>
+  <dt>
+    <label for="record_activated_at">Order Date</label>
+  </dt>
+  <dd>
+       <%=text_field "record", "activated_at", :size=>20, :readonly=>true %>
+      <%=error_message_on :record,:activated_at %>
+       <span class="description">Any non-empty value is considered activated</span>
+      </dd>
+</dl>  </li>
+        <li class="form-element ">
+    
+<dl>
+  <dt>
+    <span style="color:red;">*</span> <label for="record_activated_at">Password</label>
+  </dt>
+  <dd>
+       <%=password_field "record", "password", :size=>20 %>
+      <%=error_message_on :record,:password %>
+      <span class="description">A password should only be filled in if the User Acct is being created MANUALLY</span>
+      </dd>
+</dl>  </li>
+        <li class="form-element ">
+    
+<dl>
+  <dt>
+    <span style="color:red;">*</span> <label for="record_activated_at">Password (verify)</label>
+  </dt>
+  <dd>
+       <%=password_field "record", "password_confirmation", :size=>20 %>
+      <%=error_message_on :record,:password_confirmation %>
+      </dd>
+</dl>  </li>
+
+        <li class="form-element ">
+    
+<dl>
+  <dt>
+    <label for="record_no_of_territories">No of Territories</label>
+  </dt>
+  <dd>
+       <%=text_field "record", "number_of_territory", :size=>3, :maxlength => 3 %>
+      <%=error_message_on :record, :number_of_territory %>
+      </dd>
+</dl>  </li>
+
+        <li class="form-element ">
+    
+<dl>
+  <dt>
+    <label for="record_add_user_comment">Add Comment</label>
+  </dt>
+  <dd>
+       <%=text_area "record", "add_user_comment", :rows=>5, :cols => 75 %>
+      <%=error_message_on :record, :add_user_comment %>
+      </dd>
+</dl>  </li>
+<li class="form-element  ">
+    
+<dl>
+  <dt>
+    <label>Manage Users</label>
+  </dt>
+  <dd>
+          <input type="radio" value="test" name="user[test_comp]" id="user_test_comp" onclick="$('show_on_home_listed').hide();" <% if @test_comp =="test" %>checked="true"<%end%> > Test
+          <input type="radio" value="comp" name="user[test_comp]" id="user_test_comp" onclick="$('show_on_home_listed').show();" <% if @test_comp =="comp" %>checked="true"<%end%> > Complimentary
+          <input type="radio" value="" name="user[test_comp]" id="user_test_comp" onclick="$('show_on_home_listed').hide();" <% if @test_comp == nil %>checked="true"<%end%> > Normal User
+              <span class="description"></span>
+      </dd>
+</dl>  </li>
+<div id="show_on_home_listed">
+  <li class="form-element ">
+  <dl>
+    <dt>
+      <span style="color:red;">*</span> <label>Complimentary Reason</label>
+    </dt>
+    <dd style="margin-top:10px;">
+      <%=text_area "user", "complimentary_reason",:value => @reason, :rows=>3, :cols=>30, :maxlength => 100 %>
+      <%=error_message_on :record, :complimentary_reason %>
+                <span class="description"></span>
+        </dd>
+  </dl>  </li>
+</div>
+<li class="form-element  ">
+    
+<dl>
+  <dt>
+    <label>Admin</label>
+  </dt>
+  <dd>
+        <%= select("record", "admin_flag", [["True", true], ["False", false]]) %>
+<%=error_message_on :record,:admin_flag %>
+              <span class="description"></span>
+      </dd>
+</dl>  </li>
+
+    </ol>
+
+  <p class="form-footer">
+    <input type="submit" value="Create" name="commit" class="submit"/>
+    <a class="cancel" href="/admin/admin_users/list">Cancel</a>
+    <img style="visibility: hidden;" src="/images/active_scaffold/default/indicator.gif" id="admin__admin_users-create-loading-indicator" class="loading-indicator" alt="loading indicator"/>
+  </p>
+
+    	<%- end -%>
+</div>
+<script type="text/javascript">
+	dp_cal  = new Epoch('epoch_popup','popup',document.getElementById('record_activated_at'));
+</script>

@@ -1,0 +1,68 @@
+<script type="text/javascript" src="/javascripts/tablekit.js"></script>
+<% if @buyer_leads.blank? %>
+  No Buyer Leads Found
+<% else %>
+<%form_tag({ :controller => "buyer_websites", :action => "confirm_archive_buyer_lead", :page => params[:page]},:method=>:post) do%>
+<table  border="0" cellspacing="0" class="sortable investor_inbox_grid">
+  <tr>
+    <th class="lead_space1 " width="5%%"  style="font-style: normal; font-size: 0.7em;"></th>
+    <th class="sortable lead_space1" width="5%" style="padding-left:10px;">Type</th>
+    <th class="sortable lead_space1" width="25%" style="padding-left:10px;">Buyer</th>
+    <th class="sortable lead_space1 number" width="15%" style="padding-left:10px;">Phone</th>
+    <th class="sortable lead_space1" width="30%" style="padding-left:10px;">Email</th>
+    <th class="sortable lead_space1 number" style="padding-left:10px;" width="20%">Price Max</th>
+  </tr>
+
+ <% lead_exists = false %>
+
+  <%- @buyer_leads.each do |buyer|-%>
+   <%#if buyer.is_archive == false  && buyer.profile && buyer.profile.profile_field_engine_index %>
+    <% lead_exists = true %>
+    <tr class="hover_change" style="<%= get_style_for_new_property(buyer)%>">
+      <td class="investor_inbox_seperator">
+              <%= check_box_tag 'archive_retail_buyers[]', "#{buyer.id}"%>
+         
+      </td>
+      <td class="investor_inbox_seperator" onclick="go_to_buyer_full_page_view('<%=buyer_lead_full_page_view_buyer_website_path(buyer.id)%>');" >
+        <%= buyer.is_buyer_both_type? ? "OF/WS" : buyer.investment_type.code %>
+      </td>
+      <td class="investor_inbox_seperator" onclick="go_to_buyer_full_page_view('<%=buyer_lead_full_page_view_buyer_website_path(buyer.id)%>');">
+        <%#if !buyer.field_value(:first_name).blank? && !buyer.field_value(:last_name).blank? %>
+        <%#= buyer.field_value(:first_name)%><%#=" "%><%#=buyer.field_value(:last_name)   %>
+        <%#elsif buyer.retail_buyer_profile%>
+        <%#= buyer.retail_buyer_profile.first_name.to_s + " " + buyer.retail_buyer_profile.last_name.to_s%>
+        <%#end%>
+        <%#= buyer.first_name.to_s + " " + buyer.last_name.to_s %>
+        <%#= buyer.private_display_name %>
+        <%=buyer.profile_field_engine_index.first_name.to_s + " " + buyer.profile_field_engine_index.last_name.to_s%>
+      </td>
+      <td class="investor_inbox_seperator" onclick="go_to_buyer_full_page_view('<%=buyer_lead_full_page_view_buyer_website_path(buyer.id)%>');">
+       <%#= ProfileField.find_by_key("notification_phone", :conditions => ["`profile_fields`.`profile_id` = ? ", buyer.id]).value ;%>
+        <%=buyer.profile_field_engine_index.notification_phone%>
+      </td>
+      <td class="investor_inbox_seperator" onclick="go_to_buyer_full_page_view('<%=buyer_lead_full_page_view_buyer_website_path(buyer.id)%>');">
+        <%#= buyer.email_address.to_s %>
+        <%#= buyer.field_value(:notificaton_email) %>
+        <%#= ProfileField.find_by_key("notification_email", :conditions => ["`profile_fields`.`profile_id` = ? ", buyer.id]).value ;%>
+        <% if is_email_is_bouced_email(buyer.profile_field_engine_index.notification_email.to_s) %><b class="bounce_email_exclamation_mark" title="Bounced Email">! </b><% end %><%=buyer.profile_field_engine_index.notification_email%>
+      </td>
+      <td class="investor_inbox_seperator" onclick="go_to_buyer_full_page_view('<%=buyer_lead_full_page_view_buyer_website_path(buyer.id)%>');">
+      $<%= number_with_delimiter((buyer.is_buyer_wholesale_type? ? buyer.profile_field_engine_index.max_purchase_value.to_i : buyer.profile_field_engine_index.max_dow_pay.to_i),:separator => ",") %>
+      </td>
+    </tr>
+    <%#end%>
+   <%- end -%>
+  </table>
+   <% if lead_exists %>
+      <div style="float:left"><%=submit_tag "Delete ", :class=>'submit_s' %></div>
+   <% else %>
+      <div style="margin: 20px 0 0 15px;">No Buyer Leads Found!!</div>
+   <% end %>
+   <div align="right"><%= will_paginate @buyer_leads %></div>
+<% end %>
+      
+  <% end %>
+   <style>
+     .sortcol {
+      background-position: left center !important;}
+   </style>

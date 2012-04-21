@@ -1,0 +1,9 @@
+class AddSellerProfileIdInActivityLogs < ActiveRecord::Migration
+  def self.up
+    execute "INSERT into activity_categories (id, name) VALUES ('cat_seller_prof_deleted','Seller Profile Deleted')"
+  end
+
+  def self.down
+    execute "DELETE FROM activity_categories where id ='cat_seller_prof_deleted'"
+  end
+end

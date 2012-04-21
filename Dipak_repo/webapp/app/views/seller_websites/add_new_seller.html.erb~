@@ -1,0 +1,7 @@
+<%= render :partial => "partial_for_meta_tag"%>
+
+<%= render :partial => "page_script_content_full_page_view"%>
+
+<% form_for(:seller_profile, :url =>"/seller_websites/create_new_seller_profile") do |f| %>
+    <%= render :partial => "form_for_seller_profile_fields", :locals=>{:f => f} %>
+<% end %>

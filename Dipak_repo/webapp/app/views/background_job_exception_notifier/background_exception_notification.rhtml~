@@ -1,0 +1,8 @@
+<p> A <%= @exception.class %> occurred in <%= @class_name %>:</p>
+<pre>
+  <%= @exception %>
+  <%= "" %></pre>
+
+<h3>------------------------------- Backtrace:</h3>
+
+   <pre><%= "\n" %></pre>

@@ -1,0 +1,10 @@
+<div id="amps_web_footer">
+    <% seller_site_link = get_seller_website_perma_link
+       site_link = get_amps_site_link
+    %>
+      <%=link_to 'Terms of Use', site_link+"terms_of_use", :target => "_blank" %> | <%=link_to 'Privacy Policy', site_link+"privacy_policy", :target => "_blank" %>
+     <%unless seller_site_link.blank?%>
+     | <%=link_to 'Sell Your House Now', seller_site_link+"new_seller", :target => "_blank" %>
+    <% end %>
+                <br />REI Technologies LLC &copy; 2012
+</div>

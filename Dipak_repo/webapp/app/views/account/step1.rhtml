@@ -1,0 +1,52 @@
+<%- @page_title = "Welcome #{@user.first_name}" -%>
+
+<fieldset>
+<legend>Step 1 of 2 - Investor Profile</legend>
+
+    <table>
+      <%- form_for(:user, :url => {:action => 'update_business_phone'}, :html => { :method => :post }) do |f| -%>
+      <tr>
+        <th class="">Mobile Phone:</th>
+        <td>
+        	<%=text_field "user", "business_phone" %><%=error_message_on :user,:business_phone%>
+			<%= submit_tag "Update", :class=>'submit' %>
+		</td>
+      </tr>
+	  
+	  <% end %>
+	  <tr>
+	  	<td colspan="2">Note: While we do not offer TXT messaging alerts at this time, we may be adding them in the future. If you'd like to be contacted via email to opt-in to this feature, please include your cell phone number.</td>
+	  </tr>
+	  
+	  <tr>
+	  	<td colspan="2">
+	  		<% @buyer_user_image = BuyerUserImage.find_buyer_profile_image(current_user.id) %>
+		    <%= render :file=>"/buyer_user_images/new"%>
+		    <ul>
+		    	<% form_for :investor_type, :url => {:action => 'update_profile_image', :from => 'step1'} do |f| %>
+				<%=hidden_field_tag :inv_type, ''%>
+		    	<li style="list-style-type:none; padding:0px 0px 5px 5px;">I am a... (Mark all that apply)</li>
+				<% inv_type_cb = @investor_type_cb.blank? ? false : true %>
+				<% inv_type_pl = @investor_type_pl.blank? ? false : true %>
+				<% inv_type_la = @investor_type_la.blank? ? false : true %>
+		    	<li style="list-style-type:none;"><%= check_box_tag 'cash_buyer','Cash Buyer',inv_type_cb,{:onclick => "document.getElementById('inv_type').value = 'CB'; this.form.submit()"} %>&nbsp;&nbsp;Cash Buyer <img alt="Help_icon" src="/images/reimatcher_images/help_icon.png" title="A Cash Buyer is someone who has access to immediate funds for the purchase of Real Estate. Immediate funds may be your own cash or access to Hard money, Private Funding." /></li>
+				<li style="list-style-type:none;"><%= check_box_tag 'private_lender', 'Private Lender', inv_type_pl, {:onclick => "document.getElementById('inv_type').value = 'PL'; this.form.submit()"} %>&nbsp;&nbsp;Private Lender <img alt="Help_icon" src="/images/reimatcher_images/help_icon.png" title="A Private Lender is an individual who lends their own funds for the purchase and/or fixup of Real Estate." /></li>
+				<li style="list-style-type:none;"><%= check_box_tag 'licened_agent','Licenced Agent', inv_type_la, {:onclick => "document.getElementById('inv_type').value = 'LA'; this.form.submit()"} %>&nbsp;&nbsp;Licenced Agent <img alt="Help_icon" src="/images/reimatcher_images/help_icon.png" title="Licensed Agents hold an active Real estate license as either an Agent or Broker." /></li>
+				<% end %>
+		    </ul>
+	  	</td>
+	  </tr>
+
+      <tr>
+        <td colspan="2" align="center">
+            <form action="step2" method="get">
+			<%= submit_tag "Next", :class=>'submit' %>
+			</form>
+		</td>
+      </tr>
+
+    </table>		
+
+</fieldset>
+
+

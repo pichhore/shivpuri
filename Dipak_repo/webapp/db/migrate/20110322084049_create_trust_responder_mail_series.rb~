@@ -1,0 +1,12 @@
+class CreateTrustResponderMailSeries < ActiveRecord::Migration
+  def self.up
+    create_table :trust_responder_mail_series do |t|
+
+      t.timestamps
+    end
+  end
+
+  def self.down
+    drop_table :trust_responder_mail_series
+  end
+end

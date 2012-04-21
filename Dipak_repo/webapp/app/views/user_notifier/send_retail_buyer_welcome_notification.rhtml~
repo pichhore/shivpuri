@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>Welcome to REIMatcher</title>
+</head>
+
+<% url = REIMATCHER_URL %>
+
+
+<%= display_buyer_criteria_for_profile(display_email_intro(@email_intro, @current_user, @retail_buyer_name, @url_parameter, @permalink_text, @new_format_url), @profile_id) unless @email_intro.blank?  %>
+  
+<%= display_buyer_criteria_for_profile(display_email_closing(@email_closing, @current_user, @retail_buyer_name, @url_parameter, @permalink_text, @new_format_url), @profile_id) unless @email_closing.blank?  %> 
+
+<% if check_retail_buyer(@profile_id)%>
+<br><br>
+  <table border="0" cellspacing="0" cellpadding="0" width="100%">
+      <tr>
+          <td width="100%" bgcolor="#ffffff">
+            <p style="font-family:arial,helvetica,sans-serif; font-size:12px; line-height:20px; color:#5e5e5e; margin: 0px 0px 5px;">This message was sent to <%= @recipients%> from:</p>
+            <p style="font-family:arial,helvetica,sans-serif; font-size:12px; line-height:20px; color:#5e5e5e; margin: 0px 0px 5px;">REI Technologies | 5114 Balcones Woods Ste 307 | Austin, TX 78759</p>
+          </td>
+       </tr>
+  </table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td bgcolor="#FFFFFF">
+              <% email_type = RetailBuyerProfile::EMAIL_TYPE[:welcome_notification]
+                      url_for_subscription = url + "manage_subscriptions/" + @profile_id.to_s + "/subscription_management?email_type=#{email_type}" %>
+      	 	<a href="<%=url_for_subscription%>" style="font-family: Arial, Helvetica, san-serif; font-size: 12px; line-height: 20px; color: #115880; font-weight: bold; text-decoration: none;">
+					Manage Your Subscription
+			</a>
+		</td>
+	</tr>
+</table>
+<%end%>

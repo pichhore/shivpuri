@@ -1,0 +1,18 @@
+Transaction ID: <%= @application.transaction_id.upcase %>
+
+Hi <%= @application.user.first_name %>,
+
+We have successfully received your deposit to secure the rental property successfully. 
+
+The Payment Code for your reservation: <%= @payment_token %>
+
+What to do next:
+1. View your Dashboard for more details: <%= @my_dashboard_my_account_url %>
+2. Contact your landlord and inform her/him if you’ll arrive on the date indicated in the application form or on another day
+3. Ask your landlord how to get to your property by public transport or by car
+4. Ask your landlord regarding the rental agreement, checklists and any other documentation to comply with local laws
+5. Hand the Payment Code <%= @payment_token %> to the landlord after you’ve signed the rental agreement and happily moved into your new rental space
+
+All the best in your new rented home!
+
+The Boxyroom Team

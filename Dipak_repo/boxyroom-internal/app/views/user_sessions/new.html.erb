@@ -1,0 +1,35 @@
+<head>
+<!--[if IE 7]>
+  <style type="text/css">
+    .forgot_pw{float: left!important;width: 180px; line-height: 19px;text-align: left;}
+    .not_mem_4_ie7{width: 100%!important;}
+    .sign_up_ie7{position: relative; right: 365px;bottom: 15px;line-height: 19px; }
+  </style>
+<![endif]-->
+</head>
+<div class="container">
+   <%= flash_message %>
+  <div class="login">
+    <%- form_for @user_session, :url => user_session_path do |f| %>
+    <%= f.error_messages :header_message => "Opps! There are problems with your information." , :message => ""%>
+      <fieldset class="login">
+        <legend>Login to Boxyroom</legend>
+        <p>
+            <%= f.label :email, "Email",:class => "email_l"  %>
+            <%= f.text_field :email, :size=>24, :class => "email_i"%>
+        </p>
+        <p>
+            <%= f.label :password, "Password",:class => "password_l"    %>
+            <%= f.password_field :password, :size=>24, :class => "password_i"%>
+        </p>
+	<span style="float: left;"><%= link_to "I forgot my password" , new_password_reset_path , :class =>"forgot_pw"%></span>
+        <div class="buttons"  style="float: right !important;margin-right: 74px;" id="face_bk_btn">
+          <button type="button" class="facebook"></button>
+          <button type="submit" id="smt_btn"></button>
+        </div>
+        <div style="clear: both;"></div>
+        <div style="width: 82%;" class="not_mem_4_ie7"><span style="float: left;margin-right: 7px;">Not member?</span><span style="float: left;margin-right: 10px;line-height: 9pt;"><a id="Login" href="/register" class="sign_up_ie7" >Sign up</a></div>
+      </fieldset>
+    <%- end %>
+  </div>
+</div>

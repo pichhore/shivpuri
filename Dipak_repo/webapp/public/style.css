@@ -1,0 +1,119 @@
+body{
+	font-family:verdana,helvetica,arial,sans-serif;
+	color:#000;
+	font-size:12px;
+	margin:0px;
+	padding:0px;
+}
+
+img{
+	border:0px;
+}
+
+.logo{
+	height:63px;
+	width:209px;
+	margin-top:81px;
+}
+
+.lefbar{
+	width:500px;
+	float:left;
+}
+
+.rightbar{
+	float:right;
+	width:300px;
+}
+
+#maincontainer .content_img {
+	height:313px;
+	margin-left:20px;
+	margin-top:30px;
+	width:379px;
+	float:left;
+}
+
+#maincontainer h2{
+	color:#000000;
+	font-size:28px;
+	margin:0;
+	padding-top:44px;
+	text-align:center;
+}
+
+#maincontainer{ 
+	padding:10px 10px 35px;
+	width:915px;
+	margin:0px auto; 
+	background:#fff url(images/bg.gif) repeat-x top left;
+	border-left:3px solid #EBEBEB;
+	border-right:3px solid #EBEBEB;
+	border-bottom:3px solid #EBEBEB;
+}
+
+.menus{
+	margin-top:42px;
+	width:250px;
+}
+
+ul.menu {
+	list-style-type:none;
+	margin:0;
+	padding:0;
+}
+
+
+ul.menu li {
+	list-style:none outside none;
+	margin-top:14px;
+	overflow:hidden;
+	padding:0px;
+}
+
+ul.menu li a {
+	color:#0b52a9;
+	display:block;
+	font-size:26px;
+	font-weight:normal;
+	overflow:hidden;
+	padding:17px 10px 24px;
+	text-decoration:none;
+	background:url(images/menubg.gif) no-repeat top left;
+	text-align:center;
+}
+
+ul.menu li a:hover {
+	color:#65b142;
+	text-decoration:none;
+}
+
+.sendmesage{
+	width:500px;
+}
+
+.sendmesage h1{
+	color:#000;
+	font-size:18px;
+	margin-left:18px;
+}
+
+.sendmesage textarea{
+	border:1px solid #117dc0;
+	margin-left:20px;
+	width:318px;
+	height:60px;
+	padding:5px;
+}
+
+.sendmesage button{
+	background-color:#65b142;
+	border:1px solid #65b142;
+	color:#FFFFFF;
+	font-size:12px;
+	font-weight:bold;
+	margin-left:20px;
+	margin-top:10px;
+	padding:3px;
+	cursor:pointer;
+}

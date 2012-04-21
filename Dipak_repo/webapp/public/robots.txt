@@ -1,0 +1,10 @@
+# See http://www.robotstxt.org/wc/norobots.html for documentation on how to use the robots.txt file
+User-agent: *
+Disallow: /login
+Disallow: /logout
+Disallow: /profiles/
+Disallow: /users/
+Disallow: /sessions/
+Disallow: /home/preview_owner/
+Disallow: /home/preview_buyer/
+Disallow: /home/preview/

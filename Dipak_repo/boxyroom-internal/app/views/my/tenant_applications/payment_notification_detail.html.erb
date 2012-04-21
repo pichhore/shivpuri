@@ -1,0 +1,130 @@
+
+<div id="content">
+        <div class="container">
+	<div class="invoice_title">Tax Invoice</div>
+		<%str= flash_helper %>
+		<%unless str.blank?%>
+		  <%- content_tag :div, :id => "payment_notification" do %>
+		      <div class="message_payment" ><span class="right-image"></span><span id="message-payment" ><%= str %></span></div>
+		  <%- end %>
+		<%end%>
+                <div class="primary">
+
+                        <table cellspacing="0"  class="listings" id="table_invoice" style="width: 960px;"> 
+                                <colgroup>
+                                        <col class="description" />
+                                        <col class="description" />
+                                        <col class="description" />
+                                        <col class="description" />
+                                </colgroup>
+                                <thead>
+                                        <tr class="row_header_width" style="border-top: 1px solid #88B4CB;">
+                                                <th class="th_payment_notification">Description</th>
+						<th></th><th></th>
+                                                <th class="th_payment_notification">Amount</th>
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                        <tr class="row_header_width" style="border: none;background: #F0F0F0;">
+                                                <td  width="350px;">Deposit for <%= @application.property.title%></td>
+                                                <td ></td>
+                                                <td></td>
+					        <td><%= return_currency_abbrebiation(@application.property.currency_type.nil? ? 'USD' : @application.property.currency_type)%><%= ISO4217::Currency.from_code(@application.property.currency_type.nil? ? 'USD' : @application.property.currency_type).symbol%><%= @application.property.monthly_rental.to_i%></td>
+                                        </tr>
+                                </tbody>
+				<tbody>
+				  <tr class="row_header_width" style="border: none;">
+					  <td></td>
+					  <td ></td>
+					  <td style="float: right;">Total</td>
+					  <td style="border-bottom: 1px solid gray;"><%= return_currency_abbrebiation(@application.property.currency_type.nil? ? 'USD' : @application.property.currency_type)%><%= ISO4217::Currency.from_code(@application.property.currency_type.nil? ? 'USD' : @application.property.currency_type).symbol%><%= @application.property.monthly_rental.to_i %></td>
+				  </tr>
+				</tbody>
+                                <tbody>
+				  <tr class="row_header_width" style="border: none;">
+					  <td></td>
+					  <td ></td>
+					  <td style="float: right;">Amount Paid</td>
+					  <td  style="border-bottom: 1px solid gray;"><%= return_currency_abbrebiation(@application.property.currency_type.nil? ? 'USD' : @application.property.currency_type)%><%= ISO4217::Currency.from_code(@application.property.currency_type.nil? ? 'USD' : @application.property.currency_type).symbol%><%= @application.property.monthly_rental.to_i%></td>
+				  </tr>
+				</tbody>
+                        </table>
+			
+			<div ><span class="payment_transaction">Payment History</span></div>
+			   <table cellspacing="0" class="listings" style="width: 960px;"> 
+                                <colgroup>
+                                        <col class="description" />
+                                        <col class="description" />
+                                        <col class="description" />
+                                        <col class="description" />
+					<col class="description" />
+                                </colgroup>
+                                <thead>
+                                        <tr class="row_header_width" style="border-top: 1px solid #88B4CB;" >
+                                                <th class="th_payment_notification">ID</th>
+						<th class="th_payment_notification">Payment Method</th>
+						<th class="th_payment_notification">Received</th>
+                                                <th class="th_payment_notification">Amount</th>
+						<th class="th_payment_notification">Status</th>
+                                        </tr>
+                                </thead>
+				 <% @user.applications.paid.each do|app|%>
+				  <tbody>
+					  <tr class="row_header_width" style="border: none;">
+						  <td>#<%= app.transaction_id%></td>
+						  <td ><%= payment_type(app) %></td>
+						  <td><%= boxy_date_format app.paid_at%></td>
+						  <td><%= return_currency_abbrebiation(app.property.currency_type.nil? ? 'USD' : app.property.currency_type)%><%= ISO4217::Currency.from_code(app.property.currency_type.nil? ? 'USD' : app.property.currency_type).symbol%><%= app.property.monthly_rental.to_i%></td>
+						  <td style="color: green;">Successful</td>
+					  </tr>
+				  </tbody>
+				<% end %>
+				 <% @user.applications.moved_in.each do|app|%>
+				  <tbody>
+					  <tr class="row_header_width" style="border: none;">
+						  <td>#<%= app.transaction_id%></td>
+						  <td ><%= payment_type(app) %></td>
+						  <td><%= boxy_date_format app.paid_at %></td>
+						  <td><%= return_currency_abbrebiation(app.property.currency_type.nil? ? 'USD' : app.property.currency_type)%><%= ISO4217::Currency.from_code(app.property.currency_type.nil? ? 'USD' : app.property.currency_type).symbol%><%= app.property.monthly_rental.to_i%></td>
+						  <td style="color: green;">Successful</td>
+					  </tr>
+				  </tbody>
+				<% end %>
+                        </table>
+                       <div ><span class="payment_transaction">Receive Payment History</span></div>
+			<table cellspacing="0" class="listings" style="width: 960px;"> 
+			    <colgroup>
+				    <col class="description" />
+				    <col class="description" />
+				    <col class="description" />
+				    <col class="description" />
+				    <col class="description" />
+			    </colgroup>
+			    <thead>
+				    <tr class="row_header_width" style="border-top: 1px solid #88B4CB;">
+					    <th class="th_payment_notification">ID</th>
+					    <th class="th_payment_notification">Transferred</th>
+					    <th class="th_payment_notification">Advance Rent</th>
+					    <th class="th_payment_notification">Boxyroom Fee</th>
+					    <th class="th_payment_notification">Status</th>
+				    </tr>
+			    </thead>
+			    
+			    <% @applications_for_me.each do|app|%>
+			      <tbody>
+				      <tr class="row_header_width" style="border: none;">
+					<td>#<%= app[0].transaction_id%></td>
+					<td><%= boxy_date_format app[0].paid_at%></td>
+					<td><%= return_currency_abbrebiation(app[0].property.currency_type.nil? ? 'USD' : app[0].property.currency_type)%><%= ISO4217::Currency.from_code(app[0].property.currency_type.nil? ? 'USD' : app[0].property.currency_type).symbol%><%= app[0].property.monthly_rental.to_i%></td>
+					<td><%= return_currency_abbrebiation(app[0].property.currency_type.nil? ? 'USD' : app[0].property.currency_type)%><%= ISO4217::Currency.from_code(app[0].property.currency_type.nil? ? 'USD' : app[0].property.currency_type).symbol%><%=  app[0].property.monthly_rental.to_i  * BOXYROOM_ADMIN_FEE %></td>
+					<td style="color: green;">Successful</td>
+				      </tr>
+			      </tbody>
+			    <% end %>
+		    </table>
+                </div>
+        </div>
+</div>
+
+
+

@@ -1,0 +1,44 @@
+<%- @page_title = "REIMatcher-Equity Partnering Sale" -%>
+<%- @meta_title = @seller_website.meta_title -%>
+<%- @meta_description = @seller_website.meta_description -%>
+ <%= render :partial => "show_navigation_link" %>
+<div id="seller_page_main_div">
+  <h1><b>Equity Partnering</b></h1>
+  <div style="margin-right:390px;"><%= render :partial => "fb_like_twitter_tweet" %></div><div style="clear:both"></div>
+  <%= render :partial => "lead_magnet" %>
+
+  <div class="subpage_content_div_1">
+  <p class="top_style_para_seller_website">The fairest price way to sell a property FAST, where the property has 30% equity or more, even when the seller is behind on payments and facing foreclosure, is through an Equity Partnering arrangement. </p>
+  <p class="style_para_seller_website">Equity partnering involves selling a property that has equity (where the property is owned outright or is worth more than what is owed on it) to an "investor partner" that in turn resells the property (possibly as-is or possibly after renovating it) in exchange for agreeing to share the profits with the original owner. There are many variations to this - only limited by the creativity and experience of the investor partner.</p>
+  <p class="style_para_seller_website">This can be a great program for a property owner that needs to renovate their property, but does not have the cash to do so. Note: depending on the property, location, amount of renovation, etc. an investor may or may not be willing to do equity sharing on a property. Renovating properties is high risk, and there must be enough profit to justify the transaction.</p>
+
+  <p class="style_para_seller_website">This can also be a great program for people that need to sell FAST to avoid a foreclosure, but still want to receive maximum proceeds from the sale.</p>
+  </div>
+  <div class="subpage_content_div_2">
+  <p class="style_para_seller_website">Other forms of equity partnering involve properties (generally not needing <br>renovations) in which the investor partner finds a new buyer that is willing to pay the existing mortgage payments going forward, and then refinance the property in the future, at which time the profit is shared with the original seller and the investor partner.</p>
+  
+  <p class="style_para_seller_website"><b>Equity Partnering Sale Example</b></p>
+  <p class="style_para_seller_website">-	Property Value after repairs: $200,000<>
+  <p class="style_para_seller_website">-	Renovations Needed: $30,000</p>
+  <p class="style_para_seller_website">-	Existing loan(s), taxes, etc.: $110,000</p>
+  <p class="style_para_seller_website">-	Purchase price: $110,000</p>
+  <p class="style_para_seller_website"><b>Note:</b>The investor buys the property, completes the renovation, and resells the property on the retail market to an end buyer.</p>
+  <p class="style_para_seller_website">-	Investor expenses (renovation): $30,000 (plus any purchase expenses, back payments, taxes, etc.)</p>
+  <p class="style_para_seller_website">-	Sales price to end buyer: $200,000</p>
+  <p class="style_para_seller_website">-	Costs of sale (commissions and closing costs): $15,000</p>
+  <p class="style_para_seller_website">-	Total profit: $200,000 - $15,000 - $30,000 - $110,000 = $45,000</p>
+  <p class="style_para_seller_website">-	Share of profit paid back to original owner: $20,000 or more (depends on agreement)</p>
+  <p class="style_para_seller_website">In this example the investor buys the property (generally buying it subject-to the existing financing by taking over the payments on the existing loan), completes the renovation, and resells the property on the retail market to an end buyer. Because the investor is able to purchase the property with financing and at a low price, the risks to the investor are minimized, and thus the sale can occur very quickly and with less due diligence, and the investor and seller can join into an equity partnering agreement where both parties share the common goal of quickly and cost-effectively renovating the property and then reselling it for maximum profit, which is shared. This has many advantages over the more standard process requiring the investor to do extensive calculations on resale value and repair calculations in which rough estimates have to be performed in a short time frame (if there’s a pending foreclosure), and negotiations are more complex.</p>
+  
+  <p class="style_para_seller_website"><b>Equity Partnering Sale Advantages and Disadvantages</b></p>
+  <p class="style_para_seller_website">The advantage to this strategy is that very little negotiation is needed between the investor and seller, because both share in the profits, and thus both share in the goal of ensuring that maximum profits are generated. This means that an investor can usually buy a property more quickly and with less total analysis. </p>
+  <p class="style_para_seller_website">The disadvantage of this program is that the seller does not receive their equity until the property is actually resold by the investor. </p>
+  <p class="style_para_seller_website">If you would like to explore this option further – <%=link_to 'Contact Us',:controller=>"investor_seller_web_page", :action=>"new_seller"%></p>
+  
+  <p class="style_para_seller_website"><b>Common Questions about Equity Partnering</b></p>
+  <p class="style_para_seller_website"><b>Question:</b> Can I do equity sharing on a property with no equity or that is behind on payments?</p>
+  <p class="style_para_seller_website"><b>Answer:</b> Equity sharing only makes sense on properties that have significant equity. Typically this only works for properties with at least 30% equity. If the amount owed PLUS the cost to sell a property (typically 10%) totals what the property is worth (or more), then the property has no equity, and there is no equity at all to share. </p>
+  <p class="style_para_seller_website">This strategy only works if the property has significant equity.  In many cases sellers look to this strategy because while they have equity, they don’t have the money to keep up with the payments or complete the repairs that would be required to sell it. We can CATCH UP the payments, improve the credit of the seller, and equity partner on the transaction. If you would like to explore this option further – contact us!</p>
+  <p class="style_para_seller_website"><b>Question:</b> How is the profit calculated and shared?</p>
+  <p class="style_para_seller_website"><b>Answer:</b> Profit is defined as income after expenses. The expenses include everything that was spent to buy the property, pay all of the carrying costs, renovate the property, and ultimately resell the property (closing costs and commissions). The profit is the resale price minus all of the expenses. In most cases, the investor will sign a separate agreement with the seller spelling out the agreement in more detail. For properties with a lot of equity and few expenses, a 50-50% profit split is normal. For properties with less equity, the investor will generally ask for a certain amount of “preferred profit” (the first $XX to cover their time and effort) after which the remaining profit is split 50-50%.</p><br>
+</div>

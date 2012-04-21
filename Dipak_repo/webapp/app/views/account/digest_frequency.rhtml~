@@ -1,0 +1,85 @@
+<%- @page_title = "Email Subscriptions" -%>
+
+<% require_js_controllers :click_to_uri -%>
+
+<%- content_for :page_scripts do -%>
+
+Event.observe(window, 'load', function() {
+  click_to_uri_controller = new NL.ClickToUriController(".linkable");
+  click_to_uri_controller.attachListeners($$('li.linkable'));
+<%- if flash[:notice] -%>
+new Effect.Fade($('notice'), { duration: 4.0,queue: 'end'} );
+<%- end -%>
+});
+
+<%- end -%>
+
+<div class="full">
+
+  <div class="tabset larger">
+<<<<<<< HEAD:webapp/app/views/account/digest_frequency.rhtml
+    <ul>
+      <li class="linkable" uri="<%=url_for({:controller=>'account', :action=>'settings'})%>">Investor Profile</li>
+      <li class="linkable" uri="<%=url_for({:controller=>'account', :action=>'company_info'})%>">Company Info</li>
+      <li class="linkable" uri="<%=url_for({:controller=>'account', :action=>'buyer_webpage'})%>">Buyer Websites</li>
+      <li class="linkable" uri="<%=url_for({:controller=>'account_marketing', :action=>'welcome_email'})%>">Buyer Responder</li>
+      <li class="linkable active" uri="<%=url_for({:controller=>'account', :action=>'digest_frequency'})%>">Alerts</li>
+    </ul>
+=======
+      <%=render :partial=>"account_tab", :locals=>{:active_class_investor_profile=>"linkable",:active_class_company_info=>"linkable",:active_class_buyer_website=>"linkable",:active_class_buyer_responder=>"linkable",:active_class_alert=>"linkable active"}%>
+>>>>>>> c7d100e... temp commit ticket #349:webapp/app/views/account/digest_frequency.rhtml
+  </div>
+
+  <fieldset>
+
+<%- form_for(:user, :url => {:controller=>'account', :action=>'digest_frequency'}, :html => { :method => :post }) do |f| -%>
+
+    <table>
+
+      <tr>
+        <td class="no_indent">
+
+          <p>REIMatcher can send an Email Summary to inform you of activity on your Property and/or Buyer Profile(s).</p>
+
+          <p>&nbsp;</p>
+
+          <p>Select When to Receive Your Email Summary</p>
+
+        </td>
+      </tr>
+
+      <tr>
+        <th class="label larger no_indent"><%=f.radio_button("digest_frequency","D")%> Daily</th>
+      </tr>
+      
+      <tr>
+        <th class="label larger no_indent"><%=f.radio_button("digest_frequency","W")%> Weekly</th>
+      </tr>
+
+      <tr>
+        <th class="label larger no_indent"><%=f.radio_button("digest_frequency","M")%> Monthly</th>
+      </tr>
+
+      <tr>
+        <th class="label larger no_indent"><%=f.radio_button("digest_frequency","N")%> Never</th>
+      </tr>
+
+      <tr>
+        <td class="no_indent">
+
+          <p><strong>Note: </strong>All personal messages received from other users will be sent directly to your email address.</p>
+
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" align="center"><%=submit_tag "Update Settings", :class=>'submit_xl'%></td>
+      </tr>
+
+    </table>
+
+<%- end -%>
+
+  </fieldset>
+
+</div>

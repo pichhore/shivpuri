@@ -1,0 +1,56 @@
+<head>
+  <!--[if IE 7]>
+   <style type="text/css">
+    .ie7_td_prop{width: 290px !important;}
+    .ie7_prop_des{width: 182px !important;float:left;}
+    .description{position:relative;width:180px !important; margin-left: 0px !important;}
+    .location_ie7{position:relative;width:180px !important; margin-left: 0px !important;}
+    table {
+   border: 1px solid #CCCCCC!important;
+   margin-bottom: 16px!important;
+   width: 100%!important;
+   }
+   table tbody td{ border-bottom :1px solid #CCCCCC!important;}
+   </style>
+  <![endif]-->
+</head>
+<div id="content">
+        <div class="container">
+                <div class="primary">
+                        <h1><%=current_user.full_name_profile%>'s Profile</h1>
+                        <div class="main profile">
+                                <div class="thumbnail large">
+                                        <%= image_tag current_user.avatar.url(:medium)%>
+                                        <div class="overlay"></div>
+                                </div>
+                                <strong>About me</strong>
+                                <p class="highlight"><%= current_user.about%></p>
+                                <div class="ct-rt"><a class="edit-profile-btn"  href="edit.html" style="float: right;margin-top:8px;">Edit</a></div>
+                        </div>
+          
+                </div>
+                <div class="secondary">
+                        <div class="section" id="section_height">
+                                <h3>Summary</h3>
+                        </div>
+                </div>
+                <div class="secondary">
+                  <div class="section1 ahead">
+                    <p class="amount_field"><%= member_since(current_user.created_at)%></p>
+                    <p class="notification_under_records">MEMBER SINCE</p>
+                  </div>
+                </div>
+                <div class="secondary">
+                  <div class="section1 ahead">
+                    <p class="amount_field"><%= current_user.properties.listed.count%></p>
+                    <p class="notification_under_records">PROPERTIES LISTED</p>
+                  </div>
+                </div>
+                <div class="secondary">
+                  <div class="section1 ahead">
+                    <p class="amount_field"><%= current_user.prefers_currency %></p>
+                    <p class="notification_under_records">PREFERRED CURRENCY</p>
+                  </div>
+                </div>
+        </div>
+</div>

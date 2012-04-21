@@ -1,0 +1,5 @@
+<% if @country == "CA"%>
+	<%= options_for_select([[ "Select a Province", "" ]] + @states.map { |state| [state.name, state.id]}) %>
+<% else %>
+	<%= options_for_select([[ "Select a State", "" ]] + @states.map { |state| [state.name, state.id]}) %>
+<% end %>

@@ -1,0 +1,19 @@
+<div id="main">
+	<div id="top">
+		<div id="logo">
+      <%- if !@investor_website_image.blank? && @investor_website_image.size.to_i > 0 && !@investor_website_image.find_profile_thumbnail.nil? -%>
+				      <%= link_to "#{image_tag @investor_website_image.public_filename(:profile), :class=>"thumbnail"}", :controller=>"investor_web_page", :action=>"investor_web_page" %>
+      <% elsif (!@user_company_image.nil?) && (!@user_company_image.find_profile_thumbnail.blank?) %>
+				      <%=link_to "#{image_tag @user_company_image.public_filename(:profile), :class=>"thumbnail"}", :controller=>"investor_web_page", :action=>"investor_web_page" %>
+      <% else %>
+      <%- end -%>
+    </div>
+		<div id="top_text"><%= @investor_website.tagline %></div>
+		<div id="social">
+                        <%= social_media_for_investor_website(params[:permalink_text], "investor") %>
+			<span class="phone"><div style="float:left;margin-right:10px;"><img src="/images/phone_icon.png"></div><div style="float:left;"><%= !@investor_website.phone.blank? ? @investor_website.phone : (@user_company_info.nil? ? "" : @user_company_info.business_phone) %></div></span>
+		</div>
+	  <div class="clear"></div>
+	  	<div>&nbsp;</div>
+	</div>
+</div>

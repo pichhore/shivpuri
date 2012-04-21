@@ -1,0 +1,66 @@
+      <div class="loading" style="display:none; z-index: 100; top: 50%; left: 30%; position: fixed;"><span class="text">Loading...</span></div>
+        <div class="profile_summary preview">
+
+        <div class="headings">
+
+          <div class="sortable <%=@sort_order if @sort_type == 'has_profile_image'%>" sort="has_profile_image" style="display:none">&nbsp;</div>
+          <div class="column1">Sort By:</div>
+          <div class="column2">&nbsp;</div>
+        <%- if @profile_type.buyer? or @profile_type.seller_agent? -%>
+          <div class="column3 heading sortable <%=@sort_order if @sort_type == 'is_owner'%>" sort="is_owner">&nbsp;Seller</div>
+          <div class="column4 heading sortable <%=@sort_order if @sort_type == 'price'%>" sort="price">&nbsp;Price</div>
+          <div class="column5 heading sortable <%=@sort_order if @sort_type == 'privacy'%>" sort="privacy">&nbsp;Privacy</div>
+        <%- else -%>
+          <div class="column3 heading">&nbsp;</div>
+          <div class="column4 heading sortable <%=@sort_order if @sort_type == 'is_owner'%>" sort="is_owner">&nbsp;Buyer</div>
+        <%- end -%>
+          <div class="clear"></div>
+        </div>
+
+        <%= render :partial => "/shared/profile_summary", :filter_results => @filter_results, :collection => @profiles, :locals => {:use_numbered_icons => true} %>
+
+        </div>
+
+        <div class="buttonbar" page_number="<%=@page_number%>" total_pages="<%=@total_pages%>">
+          <div class="center">
+            <%- if !@profiles.empty? -%>
+
+               <p><%='<a href="#" class="prev_page" >&nbsp; <&nbsp; Prev</a>' if @page_number > 1%>&nbsp;&nbsp;Page <span id="current_page_number"><%=@page_number%></span> of <span id="total_pages"><%=@total_pages%></span>&nbsp;&nbsp;
+
+	     <%= '<a href="#" class="next_page" >&nbsp;Next&nbsp;>&nbsp;</a>'  if @page_number < @total_pages%></p>
+            <%-end-%>
+          </div>
+        </div>
+
+        <script>
+                <%- if request.xhr? and @profile_type.buyer? -%>
+		$$('.page_title')[0].update("<h2 >REIMatcher Properties For Sale - <%= @total_profiles %> found</h2><h2 class='page_heading_line_2'> </h2><p class='tip'></p>");
+
+	   	     lightbox_image_controller = new NL.LightboxImageController();
+
+		         if( GBrowserIsCompatible() ) {
+			    var bounds = new GLatLngBounds();
+			    var location;
+			    map.clearOverlays();	
+              <% @profiles.each_with_index do |profile, index|
+               profile_latlng = @profile_latlngs[profile.id]
+              	    if profile_latlng %>
+		    	      location = new GLatLng(<%= profile_latlng %>);
+		      	      bounds.extend(location);	
+		      	      map.addOverlay( marker = new GMarker( new GLatLng( <%= profile_latlng %> ), { title: "<%= profile.name %>",  icon: new GIcon( G_DEFAULT_ICON, '/images/<%= ZipCodeMap.get_icon_path( profile.property_type, profile.display_privacy.downcase, index+1 ) %>' ) } ) );
+                      	      GEvent.addListener( marker, 'click', function() { this.openInfoWindowHtml( '<%= @profile_info_windows[profile.id] %>' ); } );	     
+                   <% end %>
+              <% end %>
+	      	 	      zoom =  map.getBoundsZoomLevel(bounds);
+	      	 	      if (zoom <= 15) {
+			      	      map.setZoom(zoom);
+				 } 
+				      else {
+				       map.setZoom(6);
+				 }
+		 	      map.setCenter(bounds.getCenter());
+                window.onunload = GUnload;
+	      }
+         <% end %>
+        </script>
+

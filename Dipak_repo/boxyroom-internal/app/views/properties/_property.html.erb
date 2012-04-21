@@ -1,0 +1,30 @@
+<tr>
+  <td style="width: 500px;">
+    <a class="link" href="/properties/<%=property.id%>?input=<%=property.address.city%>">
+      <div class="thumbnail">
+        <%= image_tag(property_picture_path(property)) %>
+        <div class="overlay"></div>
+      </div>
+      <div class="description"  style="width: 350px;font: bold; margin-left:100px;">
+        <div>
+          <%= property.title.slice(0..70)%><%= "..." if property.title.length>70%>
+        </div>
+        <div id="property_address_location">
+          <%= property.address.location %>
+        </div>
+      </div>                                            
+    </a>
+  </td>
+  <td><%= property.category.tableize.singularize.gsub('_', ' ').gsub(/\b\w/){$&.upcase}%></td>
+  <td><span class="neat"><%= property.property_style.nil? ? "Neat" : property.property_style %></span></td>
+  <td><span  id="amount_field" ><%= return_currency_abbrebiation(property.currency_type.nil? ? 'USD' : property.currency_type)%><%= ISO4217::Currency.from_code(property.currency_type.nil? ? 'USD' : property.currency_type).symbol%><%=property.monthly_rental.to_i%></span>  <div class="stats">
+    <ul style="display: block; top: 10px;">
+    <li class="likes"><%= property_likes_count(property) %> likes</li>
+    <li class="reviews"><%= property_review_count(property) %> reviews</li>
+    <%if verified_property(property)%>
+    <li class="verified last-child">Verified</li>
+    <% end %>
+    </ul>
+    </div>
+  </td>
+</tr>

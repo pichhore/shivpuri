@@ -1,0 +1,32 @@
+.right_row_div{
+  height:26px;
+  *height:auto;
+  width:85%;
+  *width:80%;
+}
+.left_float_left{
+  float:left;
+}
+.left_float_left textarea{
+  width:316px;
+  *width:316px;
+  float:left;
+  height:80px;
+}
+.inner_right_div{
+  float:left;
+  margin-left:15px;
+  *margin-left:5px;
+  }
+.note_in_red{
+  color:red;
+  }
+
+.right_row_div_2{ width:340px; height:26px; margin-right:120px; }
+
+.right_row_div_3{
+  height:100px;
+  float:left;
+  width:89%;
+  *width:80%;
+}

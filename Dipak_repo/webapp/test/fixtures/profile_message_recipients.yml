@@ -1,0 +1,31 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: message1_recipient1
+  profile_message_id: message1
+  from_profile_id: buyer2
+  to_profile_id: owner2
+  viewed_at:
+two:
+  id: message1_recipient2
+  profile_message_id: message1
+  from_profile_id: buyer2
+  to_profile_id: owner3
+  viewed_at:
+three:
+  id: message2_recipient1
+  profile_message_id: message2
+  from_profile_id: owner2
+  to_profile_id: buyer2
+  viewed_at:
+four:
+  id: message2_recipient2
+  profile_message_id: message2
+  from_profile_id: owner3
+  to_profile_id: buyer2
+  viewed_at: 2007-08-10 13:24:23
+five:
+  id: message2_recipient3
+  profile_message_id: message2
+  from_profile_id: owner3
+  to_profile_id: buyer3
+  viewed_at:

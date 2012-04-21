@@ -1,0 +1,73 @@
+<%- @page_title = "Add Buyer Note - #{@profile.private_display_name}" -%>
+<%= render :partial => "partial_for_meta_tag"%>
+<%= render :partial => "page_script_content_full_page_view"%>
+<%- content_for :page_scripts do -%>
+
+Event.observe(window, 'load', function() {
+  account_settings_controller = new NL.AccountSettingsController();
+});
+<%- end -%>
+
+<div class="full">
+    <div class="tabset larger">
+        <ul>
+            <li uri="<%=url_for(:action => 'buyer_lead_full_page_view', :controller => 'buyer_websites', :id => @profile.id) %>">
+                Contact
+            </li>
+            <li uri="<%=url_for(:action => 'edit_buying_areas', :controller => 'buyer_websites', :id => @profile.id) %>">
+                Buying Areas
+            </li>
+            <li uri="<%=url_for(:action => 'edit_buying_criteria', :controller => 'buyer_websites', :id => @profile.id) %>">
+                Buying Criteria
+            </li>
+            <li uri="<%=url_for(:action => 'buyer_lead_match', :controller => 'buyer_websites', :id => @profile.id) %>">
+                Matches
+            </li>
+            <li class="active" uri="<%=url_for(:action => 'buyer_lead_engagement', :controller => 'buyer_websites', :id => @profile.id) %>">
+                Engagement
+            </li>
+        </ul>
+    </div>
+    <div class="clear">
+ </div>
+<br/>
+
+    <% form_for(:buyer_engagement_note, :url =>{ :controller => :buyer_websites, :action => :create_buyer_engagement_note, :id => params[:id]}) do |f| %>
+       <div class="form">
+          <h3>Add Buyer Note</h3>
+        <fieldset>
+          <table>
+            <tr>
+                <th class="rapair_table_row">
+                    Note Type:
+                </th>
+                <td>
+                  <%=f.select("note_type", [["Phone", "phone"]]) %><%=error_message_on :seller_engagement_note, :note_type %>
+                </td>
+            </tr>
+            <tr>
+              <th class="rapair_table_row">
+                Subject:
+              </th>
+              <td>
+                <%=f.text_field "subject", :size => "50" %>
+              </td>
+            </tr>
+            <tr>
+              <th class="rapair_table_row">
+                Description:
+              </th>
+              <td>
+                <%= f.text_area "description", :cols => 50, :rows => 10, :style => "margin:0px;" %>
+              </td>
+            </tr>
+         </table>
+        <p style="text-align: center">
+          <div style="margin-left: 234px;"><%=submit_tag "Save", :class=>"submit_l"%>
+          <%=button_to_function "Cancel","document.location='#{url_for({:controller=>'buyer_websites', :action=>'buyer_lead_engagement', :id => params[:id]})}';", :class=>"submit_l" %>
+          </div>
+        </p>
+        </fieldset>
+    </div>
+    <% end %>
+</div>

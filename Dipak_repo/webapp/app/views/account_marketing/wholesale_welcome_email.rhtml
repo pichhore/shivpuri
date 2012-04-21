@@ -1,0 +1,21 @@
+<%= render :partial => "marketing_links" %>
+  <fieldset id="email_intro">
+
+<div id="left_navigation" style="float:left; width:222px;">
+  <%= render :partial => "responder_links" %>
+</div>
+
+<div id="right_navigation" style=" float:right; width:527px;">
+  <table>
+    <tr>
+      <td><h3>Welcome</h3></td>
+    <tr>
+      <td>
+        Use the space below to customize your Buyer Welcome Email. The Welcome Email is sent to new buyers immediately after completing a Buyer Profile and/or opting-in through your squeeze page. To see a sample email, click <a href='#' onclick="document.getElementById('<%= @summary_type %>').style.display='block';">Example</a>
+      </td>
+    </tr>
+  </table>
+</div>
+    <%= render :partial => "wholesale_email_desc" %>
+  </fieldset>
+<%= display_example_for_notification_mail(@summary_type) %>

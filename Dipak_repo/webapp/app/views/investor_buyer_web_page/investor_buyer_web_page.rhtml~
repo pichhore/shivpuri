@@ -1,0 +1,407 @@
+<% if params[:terms_of_use] == "true" %>
+<div class="content">
+    <div class="widecontent">
+    <div class="ibwp_tou" <% if !@buyer_web_page.dynamic_css.blank? %> style="color: <%=@buyer_web_page.dynamic_css%>;" <% end%>>
+    Terms of Use
+     </div>
+    <div class="widecontent">
+<%= render :partial => "/shared/terms_of_use" , :locals => { :web_page => "investor_buyer_web_page"} %>
+</div>
+</div>
+<% elsif params[:privacy_policy] == "true" %>
+<div class="content">
+    <div class="widecontent">
+    <div class="ibwp_pp">
+    Privacy Policy
+     </div>
+    <div class="widecontent">
+<%= render :partial => "/shared/privacy", :locals => { :web_page => "investor_buyer_web_page"} %>
+</div>
+</div>
+<% else %>
+<%- @buyer_web_page.header.nil? ?header="":header=@buyer_web_page.header %>
+<%- @user_company_info.nil? ?business_name="":business_name=@user_company_info.business_name %>
+<%- business_name.blank? ? (header.blank? ? @page_title = "REIMatcher" : @page_title = header) : (header.blank? ? @page_title = business_name : @page_title = header + " | " + business_name) -%>
+<%- if !@buyer_web_page.opening_text.nil? && !@buyer_web_page.opening_text.blank? -%>
+<%- @meta_description = @buyer_web_page.opening_text %>
+<% end %>
+
+<!-- Sub Header-->
+<%=stylesheet_link_tag "squeeze_style_for_buyer_page" %>
+<% require_js_controllers :zip_selection, :lightbox, :lightbox_image, :buyer_web_page_expand_profile -%>
+<% content_for :web_page_scripts do -%>
+      /** Controller setup **/
+      Event.observe(window, 'load', function() {
+      zip_selection_controller = new NL.ZipSelectionController("<%=@zip_code %>");
+      lightbox_controller = new NL.LightboxController();
+      lightbox_image_controller = new NL.LightboxImageController();
+      buyer_web_page_expand_profile_controller = new NL.BuyerWebPageExpandProfileController();
+      // insure zip_code input text field is always in sync with js-generated map
+      });
+      
+<% end -%>
+  	<div id="subHeader1" class="clear_left" <% if !@buyer_web_page.dynamic_css.blank? %> style="color: <%=@buyer_web_page.dynamic_css%>;" <% end%>>
+	  	<%=@buyer_web_page.header%>
+	</div>
+	<div id="subHeader2">
+	  	Owner Financed Homes For Sale	
+	  	<span class="breadCrumb">Owner Finance / <%=@territory_param_name%></span>
+	</div>
+
+	<div style="clear:both"></div>
+	
+	<div id="descBox" class="clearfix">
+	  		<div id="descTxt">
+	  			<p><%=@buyer_web_page.opening_text%></p>
+	  		</div>
+	  		<div id="buyerProfile">
+	  			<p><%=link_to '<img src="/images/create_buyer_web_page.jpg" style="width:251px;" alt="icon"  />', {:controller=>'investor_buyer_web_page', :action=>'new_retail_buyer_zipselect',:id=>@business_name,:territory_name=>@territory_param_name}%><a href="#"></a> </p>
+	  		</div>
+	</div>
+
+<!---End Sub Header-->
+
+
+  	 <div class="content">
+
+    <div class="widecontent">
+
+     <div id="notice" class="notice" <%="style=\"display:none\"" if !flash[:zip_code_notice]%>><%=flash[:zip_code_notice]%></div>
+
+    </div>
+
+    <div class="widecontent">
+
+  <div class="left">
+
+
+
+    <fieldset>
+ <%- if @profiles.to_a.size > 0 -%>
+ <div class="property_type_selectors">
+<!--	 <div class="property_type_button <%#="selected" if @property_type == "all"%>" property_type="all">Icon Help: </div> -->
+        <div class="property_type_button <%#="selected" if @property_type == "single_family"%> profile_single_family" property_type="single_family">Single Family</div>
+        <div class="property_type_button <%#="selected" if @property_type == "multi_family"%> profile_multi_family" property_type="multi_family">Multi-Family</div>
+        <div class="property_type_button <%#="selected" if @property_type == "condo_townhome"%> profile_condo_townhome" property_type="condo_townhome">Condo/Townhome</div>
+        <div class="property_type_button <%#="selected" if @property_type == "vacant_lot"%> profile_vacant_lot" property_type="vacant_lot">Vacant Lot</div>
+        <div class="property_type_button <%#="selected" if @property_type == "acreage"%> profile_acreage" property_type="acreage">Acreage</div>
+      </div>
+<% end %>
+      <div id="map" style="clear:both; height: 290px; width: 100%; text-align: center; background: #CCCCCC; padding: 0; margin: 0; margin-bottom: 10px; color: white; border: 1px solid black;">
+       <%= @map.div(:width => 535, :height => 290 ) if !@map.blank?  %>
+      </div>
+        <div class="ie_fix">
+            <%#- @boundary_overlays.each do |overlay| -%>
+            <%#- js = overlay.to_javascript() -%>
+            <%#- @map.record_init( "map.addOverlay( overlay = #{ js } );" ) -%>
+            <%#- if @js -%>
+            <%#- @map.record_init( "GEvent.addListener( overlay, 'click', #{ @js } );" ) -%>
+            <%#- end -%>
+            <%#- end -%>
+            <%#= @map.to_html({:proto_load=>true}) %>
+        </div>
+      <div class="loading" style="display:none"><span class="text">Loading...</span></div>
+
+      <div id="profile_list">
+
+        <div id="tab_content">
+
+                <div class="profile_summary preview">
+
+        <div class="headings">
+
+          <div class="sortable " sort="has_profile_image" style="display:none"></div>
+          <div class="column1" style="height:0px;"> Sort By: </div>
+          <div class="column2"></div>
+          <div class="column3"></div>
+          <div class="column4 heading sortable <% if @display_sort_str == "price_asc" %> desc <% else %> asc <% end %>" sort="price" id="hide"><a href="?price=<%=@display_sort_str%>" style="text-decoration:none"  >Price</a></div>
+	  
+          <div class="clear"></div>
+
+        </div>
+            <% if @profiles.to_a.size > 0%>
+            <%=render :partial=>"property_detail", :collection=>@profiles, :locals=>{:use_numbered_icons=>true}%>
+             <% else %>
+                       <h2 style="text-align:left;color:#454545;">Welcome!</h2>
+                        Are you looking for an Owner Financed Home?<br/>
+                        <br/>
+                        We are part of a rapidly growing community of real estate investors and Realtors, across North America, who specialize in buying and selling homes with Owner Financing!<br/>
+                        <br/>
+                        <b>Here’s How We Can Help...</b><br/>
+                        <br/>
+                         <div id="evp-1bb843cbda321c872de4f7e76b444833-wrap" class="evp-video-wrap"></div><script type="text/javascript" src="http://www.damonflowers.com/evp/framework.php?div_id=evp-1bb843cbda321c872de4f7e76b444833&id=QnV5LXdlYi1IUC1DVEEtMS5tcDQ%3D&v=1290209257&profile=default"></script><script type="text/javascript"><!--
+_evpInit('QnV5LXdlYi1IUC1DVEEtMS5tcDQ=');//--></script>
+                        <br/>
+                        By completing a simple Buyer Profile, indicating what sort of home you would like, where you want to live, and what you can afford, our network of members will immediately start competing with each other to find homes matching your requirements.<br/>
+                        <br/>
+                        Whenever we find a home that matches your needs, you will receive an automatic email, giving you the address, pictures and details of the home.  Remember, we only send you homes that match your criteria.  Many of our buyers move into their home within 10-16 days after seeing it for the first time!<br/>
+                        <br/>
+                        <p style="text-align:center;"><%=link_to '<img src="/images/create_buyer_web_page.jpg" style="width:251px;" alt="icon"  />', {:controller=>'investor_buyer_web_page', :action=>'new_retail_buyer_zipselect',:id=>@business_name,:territory_name=>@territory_param_name}%></p><br/>
+                        <br/>
+                        <b>Isn’t life busy enough?  Why not Have Your Dream Home Find You?</b><br/><br/>
+             <%end %>
+        </div>
+
+        <div class="buttonbar" page_number="1" total_pages="67">
+          <div class="center" style="padding-top: 10px;">
+              <%- if @profiles.to_a.size > 0 -%>
+              <p><%=link_to(" < Prev","?per_page=#{@page_number-1}&xhr=#{@xhr}&fields[beds]=#{@fields.beds}&fields[baths]=#{@fields.baths}&fields[square_feet_min]=#{@fields.square_feet_min}&fields[square_feet_max]=#{@fields.square_feet_max}&fields[max_mon_pay]=#{@fields.max_mon_pay}&fields[max_dow_pay]=#{@fields.max_dow_pay}&fields[zip_code]=#{@fields.zip_code}", :class=>"prev_page") if @page_number > 1%>&nbsp;&nbsp;Page <span id="current_page_number"><%=@page_number%></span> of <span id="total_pages"><%=@total_pages%></span>&nbsp;&nbsp;
+                <%=link_to(" Next > ","?per_page=#{@page_number+1}&xhr=#{@xhr}&fields[beds]=#{@fields.beds}&fields[baths]=#{@fields.baths}&fields[square_feet_min]=#{@fields.square_feet_min}&fields[square_feet_max]=#{@fields.square_feet_max}&fields[max_mon_pay]=#{@fields.max_mon_pay}&fields[max_dow_pay]=#{@fields.max_dow_pay}&fields[zip_code]=#{@fields.zip_code}", :class=>"next_page") if @page_number < @total_pages%></p>
+              <%-end-%>
+          </div>
+        </div>
+
+        <script>
+        </script>
+
+        </div>
+
+      </div>
+
+    </fieldset>
+
+  </div>
+
+<!--Left Block 1-->
+  <div class="right">
+    <h3>Update Match Criteria</h3>
+    <div class="right_articles legend">
+	<%- form_for(:fields, :url=>request.path, :html => { :method => :post }) do |f| -%>
+        <input type="hidden" value="<%=@business_name%>" name="id" id="id"/>
+        <input type="hidden" value="<%=@territory_param_name%>" name="territory_name" id="territory_name"/>
+        <%=f.hidden_field "zip_code" %>
+      <table width="100%">
+        <tr>
+          <td width="46%"><strong>Zip Code</strong></td>
+          <td width="54%"><a href='javascript: open_pop_up("/investor_buyer_web_page/select_zip_code/<%=@business_name%>?territory_name=<%=@territory_param_name%>","fields_zip_code"); '>Update</a>
+           <%#=error_message_on :fields, :zip_code%>
+        </td>
+        </tr>
+        <tr>
+          <td><strong># of Bedrooms</strong></td>
+          <td><%=f.select("beds", [["Any", "0"], ["1+", "1"], ["2+", "2"], ["3+", "3"], ["4+", "4"], ["5+", "5"]])%><%#=error_message_on :fields, :beds%></td>
+        </tr>
+        <tr>
+          <td><strong># of Bathrooms</strong></td>
+          <td><%=f.select("baths", [["Any", "0"], ["1+", "1"], ["2+", "3"], ["3+", "5"], ["4+", "7"]])%><%#=error_message_on :fields, :baths%></td>
+        </tr>
+       <tr>
+          <td><strong>Sq Ft Min:</strong></td>
+          <td><%=f.text_field "square_feet_min", :size=>10 %><%#=error_message_on :fields, :square_feet_min%></td>
+        </tr>
+       <tr>
+          <td><strong>Sq Ft Max:</strong></td>
+          <td><%=f.text_field "square_feet_max", :size=>10 %><%#=error_message_on :fields, :square_feet_max%></td>
+        </tr>
+          <td><strong>Monthly Max:</strong></td>
+          <td>$ 
+            <%=f.text_field "max_mon_pay", :size=>10 , :maxlength=>7 %><%#=error_message_on :fields, :max_mon_pay%></td>
+        </tr>
+          <td><strong>Downpaymt Max:</strong></td>
+          <td>$ 
+            <%=f.text_field "max_dow_pay", :size=>10, :maxlength=>7 %><%#=error_message_on :fields, :max_dow_pay%></td>
+        </tr>
+         </tr>
+          <td></td>
+          <td></td>
+        </tr>
+         </tr>
+          <td></td>
+          <td> 
+       		 <input class="submit_s" name="commit" type="submit" value=" Update " />
+      	   </td>
+        </tr>
+      </table>
+
+	<%- end -%>
+      
+    </div>
+  </div>
+    </div>
+ <%- if @profiles.to_a.size > 0 -%>
+  <div class="right">
+
+    <h3>Icon Helper</h3>
+    <div class="right_articles legend">
+<table>
+        <tr>
+          <td>&nbsp;</td>
+          <td><b>Public</b>
+	  <%=render_public_icon("single_family")%>
+	  <%=render_public_icon("multi_family")%>
+	  <%=render_public_icon("condo_townhome")%>
+	  <%=render_public_icon("vacant_lot")%>
+	  <%=render_public_icon("acreage")%>
+	</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+	  <td><b>Private</b>
+	  <%=render_private_icon("single_family")%>
+	  <%=render_private_icon("multi_family")%>
+	  <%=render_private_icon("condo_townhome")%>
+	  <%=render_private_icon("vacant_lot")%>
+	  <%=render_private_icon("acreage")%>
+	  </td>
+        </tr>
+</table>
+</div>
+    </div>
+<% end %> 
+<!--Left Block 2-->
+  <div class="right">
+    <div class="legend">
+      <!--<table width="100%">
+        <tr>
+          <td>
+          	<p><a href="#">How to Buy using Owner Finance.</a></p>
+			<p><a href="#">What is Owner Finance?</a></p>
+			<p><a href="#">How to Buy using Owner Finance.</a></p>
+			<p><a href="#">What is Owner Finance?</a></p>
+			<p><a href="#">How to Buy using Owner Finance.</a></p>
+			<p><a href="#">What is Owner Finance?</a></p></td>
+        </tr>
+      
+      </table>-->
+<div class="colomright">
+    <%- form_for(:squeeze_page_opt_in, :url=>request.path, :html => { :method => :post }) do |f| -%>
+      <!--In this hidden field we need to pass the value of squeeze page(e.g.sp1,sp2)-->
+      <table width="300" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <th height="150" scope="col">&nbsp;</th>
+      <th rowspan="2" class="" scope="col">
+          <div class="formtop">
+          <div class="formgre"> 
+          <table width="300" border="0" cellspacing="0" cellpadding="0"  class="magin">
+    <tr>
+      <th scope="col">
+            <img src="/images/FreeHomeBUYERS_Small_Best.png" width="165" height="165" alt="image" />
+        </th>
+    </tr>
+    <tr>
+      <th scope="row">&nbsp;</th>
+    </tr>
+    <tr>
+      <th scope="row" ><h2>Get Your <span class="redtext">FREE</span> Owner <br />
+        Finance Buyer's Guide<br />
+        <span class="smalltext">($12 value)</span></h2></th>
+    </tr>
+    <tr>
+      <th scope="row">&nbsp;</th>
+    </tr>
+    <tr>
+      <th scope="row"><table width="100%" border="0" cellspacing="0" cellpadding="0" class="form">
+        <tr>
+          <td width="35%" height="25" align="left" valign="top">First Name:</td>
+          <td width="65%" align="right" valign="top">
+            <%=f.text_field "retail_buyer_first_name",  :class=>"textbox" %><%=error_message_on :squeeze_page_opt_in, :retail_buyer_first_name%>
+      </td>
+        </tr>
+        <tr>
+          <td height="10" colspan="2" align="left" valign="top"></td>
+          </tr>
+        <tr>
+          <td height="25" align="left" valign="top">Email:</td>
+          <td align="right" valign="top">
+            <%=f.text_field "retail_buyer_email",  :class=>"textbox" %><%=error_message_on :squeeze_page_opt_in, :retail_buyer_email%>
+          </td>
+        </tr>
+      </table>
+  </th>
+    </tr>
+    <tr>
+      <th scope="row">&nbsp;</th>
+    </tr>
+    <tr>
+      <th scope="row"><p class="squeeze_para"><span>Plus,</span> you'll be able to create a Buyer Profile &amp; Have Your Dream Home Find You!</p></th>
+    </tr>
+    <tr>
+      <th height="20" scope="row">&nbsp;</th>
+    </tr>
+    <tr>
+      <th scope="row"><input name="commit" type="submit" class="submitbutn"  value=""/></th>
+    </tr>
+    <tr>
+      <th scope="row">&nbsp;</th>
+    </tr>
+    
+  </table>
+  <%- end -%>
+          </div>
+          </div>
+      </th>
+      <th align="left" valign="top" scope="col" class="rightarrow">&nbsp;&nbsp;&nbsp;</th>
+    </tr>
+    <tr>
+      <th scope="row">&nbsp;</th>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <th width="60" align="right" valign="top" scope="row"><!--<img src="/images/leftbottomshadow.png" width="60" height="40" alt="left" />--></th>
+      <td align="left" valign="bottom"><!--<img src="/images/formbottom.png" width="302" alt="bottom" /></td>
+      <td width="60" align="left" valign="top"><img src="/images/rightbottomshadow.png" width="60" height="40" alt="image" />--></td>
+    </tr>
+    <tr>
+      <th align="right" valign="top" scope="row">&nbsp;&nbsp;&nbsp; </th>
+      <td><!--<img src="/images/formrefl.png" width="302" height="96" alt="image" />--></td>
+      <td align="left" valign="top">&nbsp;</td>
+    </tr>
+    </table>  
+
+      </div>
+     </div>
+  </div>
+ </div>
+        
+    
+
+    <div class="divider"></div>
+
+    <div id="scratch" style="display:none;"></div>
+
+<script type="text/javascript">
+var map;
+window.onload = addCodeToFunction(window.onload,function() {
+if (GBrowserIsCompatible()) {
+map = new GMap2(document.getElementById("preview_results_map_div"), {draggableCursor: "move"});
+GEvent.addListener(map, "load", addMapLoadingReport);
+map.setCenter(new GLatLng(<%= @center_zip_code[0].lat %>, <%= @center_zip_code[0].lng %>),11);
+//map.setMapType(G_NORMAL_MAP);
+map.addControl(new GSmallMapControl());
+map.addControl(new GScaleControl());
+//map.addControl(new GMapTypeControl());setTimeout(function() {  try {   var divs = $$('div.gmnoprint');   if (divs && divs.length > 0) {     for (var i=0; i < divs.length; ++i) {       if (divs[i].innerHTML.indexOf('Terms of Use')) {         if (navigator.appVersion.match(/MSIE/))           Element.setStyle(divs[i], {'overflow':'hidden'});       }     }   }  } catch (ex) {} }, 1000);
+   var bounds = new GLatLngBounds();
+	      var location;
+	       map.clearOverlays();	
+	      <% if !@profiles.nil? && !@profiles.empty?  %>
+              <% @profiles.each_with_index do |profile, index| 
+	      	       profile_find_latlng = Zip.find_by_zip(profile.zip_code)
+                       unless profile_find_latlng.blank?
+                         profile_latlng = profile_find_latlng.latlng
+                       else
+                         profile_latlng = profile.latlng
+                       end
+             	    if profile_latlng %>
+		      location = new GLatLng(<%= profile_latlng %>);
+		      bounds.extend(location);
+		      map.addOverlay( marker = new GMarker( new GLatLng( <%= profile_latlng %> ), { title: "<%= profile.name %>",  icon: new GIcon( G_DEFAULT_ICON, '/images/<%= ZipCodeMap.get_icon_path( profile.property_type, profile.display_privacy.downcase, index+1 ) %>' ) } ) );
+      
+              	<% end %>
+              <% end %>
+	      zoom =  map.getBoundsZoomLevel(bounds);
+	      if (zoom <= 15) {
+	      map.setZoom(zoom);
+} 
+else {
+	      map.setZoom(6);
+}
+		      map.setCenter(bounds.getCenter());
+<% end %>
+              window.onunload = GUnload;
+
+}});
+</script>
+<script type="text/javascript">
+  setTimeout("new Effect.Fade('notice');", 10000)
+</script>
+<% end %>

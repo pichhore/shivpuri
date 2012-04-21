@@ -1,0 +1,311 @@
+/*-----------------------------------------------
+Author:   Jason Cooper
+Date:  Jan 1 2010
+
+Colour palette:
+#555555 / Dark Grey
+#555555 / Dark Grey
+#555555 / Dark Grey
+----------------------------------------------- */
+
+
+/* Browser Resets
+----------------------------------------------- */
+
+html, body, div, h1, h2, h3, ul, ol, li, form, fieldset,  input, textarea {  
+	margin: 0;
+	padding: 0;  
+	font-size: 100%;  
+	}  
+ul {list-style: none;}  
+img, fieldset {border: 0;}  
+h1, h2, h3 {font-weight: normal;}  
+em {font-style: italic;}  
+strong {font-weight: bold;}  
+
+
+/* Global 
+----------------------------------------------- */
+h1 {
+	font-family: helvetica, tahoma, sans-serif;
+  	font-size: 32px;
+  	line-height: 36px;	
+  	color: #000;
+  	text-align: center;
+	}
+
+h2 {
+	font-family: helvetica, tahoma, sans-serif;
+  	font-size: 21px;
+  	line-height: 24px;	
+  	color: #fff;
+  	text-align: left;
+	}
+
+a:link, 
+a:visited, 
+a:active {
+	color: #0053b1;
+    text-decoration: underline;
+	}    
+a:hover {
+	color: #5d6165;
+    text-decoration: none;
+	}  
+
+.clearfix:after {
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: " ";
+     clear: both;
+     height: 0;
+     }
+	.clearfix { display: inline-block; }
+	/* start commented backslash hack \*/
+	* html .clearfix { height: 1%; }
+	.clearfix { display: block; }
+	/* close commented backslash hack */
+
+hr {
+  border: none;
+  background-color: #ffcd61;
+  color: #ffcd61;
+  height: 1px;
+}
+
+ img, div, input { behavior: url("iepngfix.htc") }
+
+
+	
+/* Header 
+----------------------------------------------- */	
+#header {
+	height: 108px;
+	position: relative;
+	}
+	#header img {
+		margin: 20px 0 0 0;
+		}
+	#memberLogin {
+		position: absolute;
+		top: 0px; 
+		left:795px
+		}
+
+		#header .loggedin
+		{
+		float:right;
+		}
+		
+		#header .loggedin a
+		{
+		color: #ffffff;
+		}	
+
+	#logo {
+		position: absolute;
+		top: 0px; 
+		left:0px
+		}		
+	
+/* Body 
+----------------------------------------------- */
+body {
+	background: #c5c5c5 url('../../images/homepage/bodyBg.jpg') repeat-x top left;
+  	font-family: verdana, helvetica, arial, sans-serif;
+  	font-size: 15px;
+  	line-height: 18px;
+  	color: #5c5c5c;
+  	text-align: center;
+	}
+
+#container {
+	margin: 0 auto;
+	width: 960px;
+	}
+	
+#main {
+  	background-color: #fff;
+  	text-align: left;
+  	padding: 30px;
+  	
+	-moz-border-radius-topleft: 5px; /* Firefox */
+	-moz-border-radius-topright: 5px; /* Firefox */
+	-moz-border-radius-bottomleft: 5px; /* Firefox */
+	-moz-border-radius-bottomright: 5px; /* Firefox */
+	
+	-webkit-border-top-left-radius: 5px; /* Safari/WebKit */
+	-webkit-border-top-right-radius: 5px; /* Safari/WebKit */
+	-webkit-border-bottom-left-radius: 5px; /* Safari/WebKit */
+	-webkit-border-bottom-right-radius: 5px; /* Safari/WebKit */
+	
+	border-top-left-radius: 5px; /* future browsers with CSS3 support */
+	border-top-right-radius: 5px; /* future browsers with CSS3 support */
+	border-bottom-left-radius: 5px; /* future browsers with CSS3 support */
+	border-bottom-right-radius: 5px; /* future browsers with CSS3 support */   	
+  	
+	}	
+
+.altTxt {
+	color: #dd5800;
+	}
+	
+#box {
+	background-color: #5c5c5c;
+	padding: 30px;
+	margin: 20px  40px  20px  40px;
+	color: #fff;
+	
+	-moz-border-radius-topleft: 5px; /* Firefox */
+	-moz-border-radius-topright: 5px; /* Firefox */
+	-moz-border-radius-bottomleft: 5px; /* Firefox */
+	-moz-border-radius-bottomright: 5px; /* Firefox */
+	
+	-webkit-border-top-left-radius: 5px; /* Safari/WebKit */
+	-webkit-border-top-right-radius: 5px; /* Safari/WebKit */
+	-webkit-border-bottom-left-radius: 5px; /* Safari/WebKit */
+	-webkit-border-bottom-right-radius: 5px; /* Safari/WebKit */
+	
+	border-top-left-radius: 5px; /* future browsers with CSS3 support */
+	border-top-right-radius: 5px; /* future browsers with CSS3 support */
+	border-bottom-left-radius: 5px; /* future browsers with CSS3 support */
+	border-bottom-right-radius: 5px; /* future browsers with CSS3 support */ 
+	
+	}
+	
+#upper {
+	width: 600px;
+	text-align: left;
+	margin: 0 auto;
+	border: solid 1px red;
+	}
+	
+input {
+	padding: 20px 10px 20px 10px;
+	border: solid 5px #d7d7d7;
+	text-align: center;
+	font-size: 21px;
+	color: #999
+	}
+	
+/* Recent Activity
+----------------------------------------------- */
+
+#recentActivity {
+	background: #c5c5c5 url('../../images/homepage/headerBarRecentActivity.jpg') no-repeat top left;
+	float: right; 
+	width: 230px;
+	background-color: #f2f2f2;
+	padding: 30px 20px 20px 20px;
+	margin-right: 40px;
+	height: 1080px;
+	}
+	
+ .entry {
+	 	text-align: left;
+	 	font-size: 12px;
+	 	border-bottom: solid 1px #d5d5d5;
+	 	padding: 2px 0 12px 0;
+	 	height: 50px;
+	 	position: relative;
+		}	
+		
+	 .entry a:link, 
+	 .entry a:visited, 
+	 .entry a:active {
+		color: #39af05;
+		text-decoration: none;
+		}    
+	 .entry a:hover {
+		color: #5d6165;
+		text-decoration: underline;
+		}  
+		
+		.daysAgo {
+			position: absolute;
+			top: 47px;
+			right: 20px;
+			font-size: 10px;
+			}
+	
+	
+/* testimonials
+----------------------------------------------- */
+#testimonials {
+	background: #c5c5c5 url('../../images/homepage/headerBarTestimonial.jpg') no-repeat top left;
+	float: left;
+	width: 501px;
+	background-color: #f2f2f2;
+	padding: 20px;
+	margin-left: 40px;
+	padding-top: 50px;
+	height: 1060px;
+	}
+	
+	
+ .comment {
+	  background-color: #fff;
+	  margin: 0;
+	  padding: 5px;
+	  border: 1px #afafaf solid;
+	  border-bottom: none;
+	  font-weight: normal;
+	  font-family: Verdana;
+	  font-size: 11px;
+	  width: 488px;
+	  text-align: left;
+}
+
+ .comment p {
+	margin: 0 0 4px 0;
+	padding: 0;
+	color: #000;
+	font-weight: normal;
+}
+
+.comment-footer {
+    background: url('../../images/homepage/comment_footer2.gif') no-repeat;
+	  margin: -15px 0 10px 0;
+}
+
+.comment-footer p {
+	  font-family: Verdana;
+	  font-size: 11px;
+	  font-weight: normal;
+	  color: #000;
+	  margin: 15px 0 0 43px;
+	  padding: 10px 0 0 5px;
+}	
+	
+	
+	
+	
+/* Common
+----------------------------------------------- */	
+.floatLeft {
+	float: left;
+	padding: 0 20px 20px 0;
+	}
+.floatRight {
+	float: left;
+	padding: 0 20px 20px 0;
+	}
+	
+
+/* Footer 
+----------------------------------------------- */
+#footer {
+	font-size: 12px;
+	}
+	
+.testimonial {
+    text-align: left;
+}
+
+.testimonial-owner {
+    position: absolute;
+    padding-left: 10px;
+    padding-top: 15px;
+    min-height: 30px;
+}

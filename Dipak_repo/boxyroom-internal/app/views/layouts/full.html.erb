@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+  <head>
+    <title>Boxyroom</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="title" content="Boxyroom" />
+    <meta name="language" content="en" />
+    <meta name="description" content="A new way to find and book your rental property overseas from home" />
+    <link rel="image_src" href="http://" />
+    <link type="text/css" rel="stylesheet" media="screen" href="/stylesheets/style.css" />
+
+    <script type="text/javascript" src="/javascripts/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" src="/javascripts/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/javascripts/jquery.inputlabel.js"></script>
+    <script type="text/javascript" src="/javascripts/general-page-behaviours.js"></script>
+    <script type="text/javascript" src="/javascripts/jquery.cycle.all.min.js"></script>
+    <script type="text/javascript" src="/javascripts/cufon-yui.js"></script>
+    <script type="text/javascript" src="/javascripts/Helvetica_Neue_900.font.js"></script>
+    <%= javascript_include_tag 'nested_form' %>
+
+    <script type="text/javascript">
+      Cufon.replace('h1, h2 em, h3');
+    </script>
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $("#search-t").inputLabel(false,{color:"#038FC4"});
+      });
+    </script>
+  </head>
+
+  <body id="home">
+    <div id="wrapper">
+      <div id="hd-wp">
+        <div id="hd">
+          <%= link_to "Boxyroom - secure online property rental", root_path, :id => "logo" %>
+          
+          <%= render "shared/profile_bar" %>
+
+          <%= render "shared/main_navigation" %>
+        </div>
+      </div>
+      <div id="ct">
+        <%= yield %>
+      </div>
+
+      <%- content_tag :div, :id => "flash-container" do %>
+        <%= flash_helper %>
+      <%- end %>
+      
+      <div class="push"></div>
+
+      <div id="footer">
+        <%= render "shared/footer" %>
+      </div>
+    </div>
+
+    <%= render "shared/google_analytics" %>
+    
+  </body>
+
+</html>

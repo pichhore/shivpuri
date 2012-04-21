@@ -1,0 +1,40 @@
+<h2>New Alert Trigger Type</h2>
+<div style="margin: 20px 40px 20px 60px">Alert Trigger Types define the mechanism for causing an alert to be created for a user.  They are tied to a code method that is called during alert
+processing to see if the alert should be created.  That method can perform any kind of logic to make the decision.
+<br/><p><i><b>Note: Alert Trigger Types require a code change so this screen should generally not be needed as trigger types should be created in migrations.</b></i></p></div> 
+
+<%= error_messages_for :alert_trigger_type %>
+
+<% form_for(@alert_trigger_type,:url => admin_alert_trigger_types_path , :html =>{ :method => 'post' } ) do |f| %>
+
+  <div style="margin-bottom: 15px;">
+    <b>Name: </b>
+    <div class="admin_tip">This name is used to identify the trigger type and is only seen by the administrator.</div>
+    <%= f.text_field :name %>
+  </div>
+  
+  <div style="margin-bottom: 15px;">
+    <b>Description: </b>
+    <div class="admin_tip">A more detailed description of the Alert Trigger Type.</div>
+    <%= f.text_area :description, :size=>"40x4" %>
+  </div>
+
+  <div style="margin-bottom: 15px;">
+    <b>Method Name: </b>
+    <div class="admin_tip">The method name must correspond to a method in the AlertEngine class. That method must accept a User and an Alert Definition and return true if the alert should be created.  It does not need to check for duplicates.</div>
+    <%= f.text_field :method_name %>
+  </div>
+
+  <div style="margin-bottom: 15px;">
+    <b>Parameter Description: </b>
+    <div class="admin_tip">Some alert trigger methods require additional information such as a field name. The parameter is specified on the Alert Definition page, but which will display this definition.</div>
+    <div><%= f.text_area :parameter_description, :size=>"40x4"%></div>
+  </div>
+
+  <p>
+    <%= f.submit "Create", :style=>"float: left; margin-right: 10px;" %>
+    <%= button_to_function 'Cancel', "document.location='#{admin_alert_trigger_types_path}';" %>
+  </p>
+<% end %>
+
+

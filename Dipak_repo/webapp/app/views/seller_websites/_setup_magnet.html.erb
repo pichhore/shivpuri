@@ -1,0 +1,120 @@
+<%- content_for :page_scripts do -%>
+
+  function SelectAll(id)
+  {
+      document.getElementById(id).focus();
+      document.getElementById(id).select();
+  }
+
+  function set_css_color(this_id)
+  {
+      $$('table.table_class tr td div').each(function(item) {
+                                   $(item).removeClassName("set_class_css");
+                                    $(item).addClassName("select_css");
+                               });
+      $(this_id).addClassName("set_class_css");
+      $('seller_website_dynamic_css').value = this_id.getStyle('backgroundColor') ;
+   }
+   
+<%- end -%>
+<tr>
+  <th class="seller_page_header">Landing Page Headline</th>
+  <td>
+    <%= f.text_field :landing_page_headline, :size => 70 %>
+    <%= error_message_on :seller_website, :landing_page_headline %>
+  </td>
+</tr>
+
+<tr>
+  <th class="seller_page_header">Results Page Copy</th>
+  <td >
+    <%= f.text_area :results_page_copy ,:class=>"rich_text_editor", :size => "70x4",:style=>'margin-left:0px;' %><%=error_message_on :seller_website,:results_page_copy %>
+  </td>
+</tr>
+
+<tr>
+  <th class="seller_page_header">Results Page Content</th>
+  <td >
+    <%= f.text_area :results_page_content ,:class=>"rich_text_editor", :size => "70x4",:style=>'margin-left:0px;' %><%=error_message_on :seller_website,:results_page_content %>
+  </td>
+</tr>
+
+<tr>
+  <th class="seller_page_header">Thankyou Page Headline</th>
+  <td>
+    <%= f.text_field :thankyou_page_headline, :size => 70 %>
+    <%= error_message_on :seller_website, :thankyou_page_headline %>
+  </td>
+</tr>
+
+<tr>
+  <th class="seller_page_header">Thankyou Page Copy</th>
+  <td>
+    <%= f.text_area :thankyou_page_copy,:class=>"rich_text_editor", :size => "70x4",:style=>'margin-left:0px;' %><%=error_message_on :seller_website,:thankyou_page_copy %>
+  </td>
+</tr>
+
+<tr>
+  <th class="seller_page_header">Design Color</th>
+  <td>
+    <div class="inner_right_div">
+      <%#=render :partial=>"account/colors_pallate_amps" ,:locals=>{:current_object_css=>@seller_website.dynamic_css} %>
+      <%=hidden_field "seller_website", "dynamic_css"%>
+                 <table class="table_class">
+            <TR class="fix_height_tr" align="center"> 
+              <TD class="fix_width_td" ><div id="div1" onclick="set_css_color(this)" class="select_css <% if @seller_website.dynamic_css.to_s.gsub(' ' ,"") == "rgb(88,137,205)"%><%="set_class_css"%> <%end%>" style="background-color:rgb(88, 137, 205);"></div></TD>
+              <TD class="fix_width_td"><div id="div2"  onclick="set_css_color(this)" class="select_css <% if @seller_website.dynamic_css.to_s.gsub(' ' ,"") == "rgb(55,156,122)"%><%="set_class_css"%> <%end%>" style="background-color:rgb(55 ,156 ,122);"></div></TD>
+              <TD class="fix_width_td"> <div id="div3"  onclick="set_css_color(this)" class="select_css <% if @seller_website.dynamic_css.to_s.gsub(' ' ,"") == "rgb(141,60,34)"%><%="set_class_css"%> <%end%>" style="background-color:rgb(141 ,60, 34);"></div></TD>
+            </TR>
+          </table>
+    </div>
+  </td>
+</tr>
+
+<%= hidden_field "seller_website", "seller_magnet", :value => @seller_website.seller_magnet %>
+<%= hidden_field "seller_website", "permalink_text", :value => @seller_website.permalink_text %>
+
+<% if !params[:my_website_form].blank? %>  
+    <%= hidden_field_tag "domain_name", @domain_name %>
+    <%= hidden_field "seller_website","domain_type",:value=> params[:my_website_form][:domain]%>
+    <%= hidden_field "seller_website", "permalink_text"%>
+<% end %>
+
+
+<% if button_name == "Update Settings" %>
+  <% if @seller_website.domain_type == MyWebsiteForm::DOMAIN_TYPE[:reim]%>
+  <tr>
+    <th class="seller_page_header">Perma Link</th>
+    <td>
+      <%= f.text_field :permalink_text,:size => 10 %>
+      <div style="width:500px;">
+        <%=error_message_on :seller_website,:permalink_text%>
+      </div>
+    </td>
+  </tr>
+  <% elsif @seller_website.domain_type== MyWebsiteForm::DOMAIN_TYPE[:having]%>
+    <tr>
+      <th class="seller_page_header">Domain Name</th>
+    <td>
+      <% f.fields_for :my_website ,@seller_website.my_website do |my_website_form| %>
+        <%= my_website_form.text_field :domain_name %>
+        <div style="width:500px;">
+          <%=my_website_form.error_message_on :domain_name%>
+        </div>
+      <% end %>    
+    </td>
+    </tr>
+  <% end %>
+<% end %>
+
+<tr>
+  <th class="seller_page_header">Activate</th>
+  <td><%= f.check_box :active %><%=error_message_on :seller_website,:active%></td>
+</tr>
+
+<tr>
+  <%css_class_name = button_name == "Update Settings" ? "submit_xl" : "submit_s"%>
+  <td colspan="2" align="center">
+    <%= f.submit button_name, :class => css_class_name %>
+  </td>
+</tr>

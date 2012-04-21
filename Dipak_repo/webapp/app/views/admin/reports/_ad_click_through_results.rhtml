@@ -1,0 +1,56 @@
+<h3>Ad Click Report</h3>
+
+<div class="report_filter">
+
+<%- form_tag({:action=>"execute", :id=>@report_name}, :method=>:get) do -%>
+Starting Date: <%=text_field_tag "start_date", @start_date_string_views%> and Ending Date: <%=text_field_tag "end_date", @end_date_string_views%> <%=submit_tag "Filter"%>
+<%- end -%>
+
+</div>
+
+<div class="report_export">
+Export as: <%=link_to "CSV", :action=>"execute", :id=>@report_name, :start_date=>@start_date_string_views, :end_date=>@end_date_string_views, :format=>"csv"%>
+</div>
+
+<div class="report_results">
+
+<table>
+
+  <thead>
+
+    <th>Ad Name</th>
+    <th>Target Page</th>
+    <th>Link</th>
+    <th># of Views</th>
+    <th># of Clicks</th>
+    <th>Click Through Percentage</th>
+
+  </thead>
+
+  <tbody>
+
+    <%@ads.each_with_index do |ad, index|
+             click_count = @ad_click_count_hash[ad.id].to_f if @ad_click_count_hash[ad.id]
+             view_count = @ad_view_count_hash[ad.id].to_f if @ad_view_count_hash[ad.id]
+
+             percentage = (click_count / view_count) * 100 if view_count and click_count
+             percentage = 0 unless view_count and click_count
+    -%>
+    <tr <%="class='odd'" if index % 2 == 1%>>
+      <td><%=ad.name%></td>
+      <td><%=ad.target_page%></td>
+      <td><%=ad.link%></td>
+      <td><%=view_count.to_i || "0"%></td>
+      <td><%=click_count.to_i || "0"%></td>
+      <td><%=percentage.truncate%>%</td>
+
+    </tr>
+    <%-end -%>
+
+  </tbody>
+
+</table>
+
+<p>Total Ads: <%=@ads.length%></p>
+
+</div>

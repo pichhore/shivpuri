@@ -1,0 +1,99 @@
+<h1>Editing badge</h1><br />
+
+<%#= error_messages_for :badge %>
+<% form_for(@badge, :url => admin_badge_path, :html => {:multipart => true, :method => 'put' }) do |f| %>
+  <p style="padding-bottom: 7px;">
+    <b>Badge name</b>
+    <font class="admin_tip">&nbsp&nbsp(name of the badge)</font><br />
+    <%= f.text_field :name %><%= f.error_message_on "name" %>
+  </p>
+
+  <p style="padding-bottom: 7px;">
+    <b>Profiles added</b>
+    <font class="admin_tip">&nbsp&nbsp(number of buyer profiles added)</font><br />
+    <%= f.text_field :profiles_added %><%= f.error_message_on "profiles_added" %>
+  </p>
+
+  <p style="padding-bottom: 7px;">
+    <b>Properties added</b>
+    <font class="admin_tip">&nbsp&nbsp(number of properties added)</font><br />
+    <%= f.text_field :properties_added %><%= f.error_message_on "properties_added" %>
+  </p>
+
+  <p style="padding-bottom: 7px;">
+    <b>Profile completeness</b>
+    <font class="admin_tip">&nbsp&nbsp(profile completeness)</font><br />
+    <%= f.text_field :profile_completeness %>
+  </p>
+
+
+  <p style="padding-bottom: 7px;">
+    <b>Properties sold</b>
+    <font class="admin_tip">&nbsp&nbsp(number of properties sold)</font><br />
+    <%= f.text_field :properties_sold %><%= f.error_message_on "properties_sold" %>
+  </p>
+  
+  <p style="padding-bottom: 7px;">
+    <b>Sellers added</b>
+    <font class="admin_tip">&nbsp&nbsp(number of sellers added)</font><br />
+    <%= f.text_field :sellers_added %><%= f.error_message_on "sellers_added" %>
+  </p>
+  
+  <p style="padding-bottom: 7px;">
+    <b>Deals completed</b>
+    <font class="admin_tip">&nbsp&nbsp(number of deals completed)</font><br />
+    <%= f.text_field :deals_completed %><%= f.error_message_on "deals_completed" %>
+  </p>
+  
+  <p style="padding-bottom: 7px;">
+    <b>Investor messages sent</b>
+    <font class="admin_tip">&nbsp&nbsp(number of investor messages sent)</font><br />
+    <%= f.text_field :investor_messages_sent %><%= f.error_message_on "investor_messages_sent" %>
+  </p>
+
+  <p style="padding-bottom: 7px;">
+    <b>Certification</b>
+    <font class="admin_tip">&nbsp&nbsp(name of the certification, 
+      NOTE: Certification badges can only be assigned manually from admin/users)</font><br />
+    <%= f.text_field :certification %>
+  </p>
+
+  <p style="padding-bottom: 7px;">
+    <b>Email subject</b>
+    <font class="admin_tip">&nbsp&nbsp(Subject of email)</font><br />
+    <%= f.text_area :email_subject, :cols => 50, :rows =>1 %>
+  </p>
+
+  <p style="padding-bottom: 7px;">
+    <b>Email Header</b>
+    <font class="admin_tip">&nbsp&nbsp(Header of email)</font><br />
+    <%= f.text_area :email_header, :cols => 50, :rows =>2 %>
+  </p>
+  
+  <p style="padding-bottom: 7px;">
+    <b>Email body</b>
+    <font class="admin_tip">&nbsp&nbsp(Body of email)</font><br />
+    <%= f.text_area :email_body, :class=>"rich_text_editor", :size=> "80x4" %>
+  </p>
+
+  <p style="padding-bottom: 7px;">
+    <b>Email Footer</b>
+    <font class="admin_tip">&nbsp&nbsp(Footer of email)</font><br />
+    <%= f.text_area :email_footer, :cols => 50, :rows =>2 %>
+  </p>
+  
+  <p style="padding-bottom: 7px;">
+    <b>Membership time</b>
+    <font class="admin_tip">&nbsp&nbsp(please enter membership time in number of months</font><br />
+    <%= f.text_field :membership_time %><%= f.error_message_on "membership_time" %>
+  </p>
+  <div>
+    <b>Badge image</b><br />
+    <%= image_tag @user_badge.public_filename, :width => "50px" unless @user_badge.blank?%>
+    <input type="file" size="30" name="badge_image[uploaded_data]" id="badge_image_uploaded_data"/>
+  </div><br />
+  <p style="padding-bottom: 7px;">
+    <%= f.submit "Update" %>
+    <%= button_to_function 'Cancel', "document.location='#{admin_badges_path}';" %>
+  </p>
+<% end %>

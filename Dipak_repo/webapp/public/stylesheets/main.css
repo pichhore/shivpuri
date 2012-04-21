@@ -1,0 +1,343 @@
+/*-----------------------------------------------
+Author:   Jason Cooper
+Date:  May 10th 2010
+
+----------------------------------------------- */
+
+
+/* Browser Resets
+----------------------------------------------- */
+
+html, body, div, h1, h2, h3, ul, ol, li, form, fieldset,  input, textarea {  
+	margin: 0;
+	padding: 0;  
+	font-size: 100%;  
+	}  
+ul {list-style: none;}  
+img, fieldset {border: 0;}  
+h1, h2, h3 {font-weight: normal;}  
+em {font-style: italic;}  
+strong {font-weight: bold;}  
+
+
+/* Global 
+----------------------------------------------- */
+
+a:link, 
+a:visited, 
+a:active {
+	color: #009fd1;
+    text-decoration: underline;
+	}    
+a:hover {
+	color: #5d6165;
+    text-decoration: none;
+	}  
+
+.clearfix:after {
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: " ";
+     clear: both;
+     height: 0;
+     }
+	.clearfix { display: inline-block; }
+	/* start commented backslash hack \*/
+	* html .clearfix { height: 1%; }
+	.clearfix { display: block; }
+	/* close commented backslash hack */
+
+
+ img, div, input { behavior: url("iepngfix.htc") }
+
+
+	
+	
+/* Body 
+----------------------------------------------- */
+body {
+  	background-color: #f4f4f4;
+  	font-family: verdana, helvetica, arial, sans-serif;
+  	font-size: 12px;
+  	line-height: 15px;
+  	color: #363e7e;
+  	text-align: center;
+  	margin: 20px 0 0 0;
+	}
+
+#container {
+	margin: 0 auto;
+	width: 960px;
+	background-color: #fff;
+	}
+	
+
+#header {
+	border-top: solid 8px #019ed0;
+	height: 25px;
+	text-align: right;
+	line-height: 25px;
+	padding: 0 20px 0 0;
+	height: 125px;
+	font-size: 12px;
+	line-height: 16px;
+	color: #6b767b
+	}
+	#header a:link, 
+	#header a:visited, 
+	#header a:active {
+		color: #189ecf;
+		text-decoration: underline;
+		}    
+	#header a:hover {
+		color: #189ecf;
+		text-decoration: none;
+		}  
+		
+		#header .col1 {
+			float: left; 
+			width: 300px;
+			position: relative;
+			top: 20px;
+			left: 50px;
+			}
+			#logo {
+				text-align: left;
+				width: 200px;
+				}
+			#tagline {
+				text-align: center;
+				width: 200px;
+				padding: 15px 0 0 0;
+				font-size: 15px;
+				}
+			
+		#header .col2 {
+			float: right; 
+			width: 400px;
+			position: relative;
+			top: 20px;
+			left: 10px;
+			margin: 10px 20px 0 0;
+			}		
+			#address {
+				float: left;
+				width: 160px;
+				border-right: solid 1px #009fd1;
+				padding: 0 20px 0 0;
+				text-align: left;
+				}
+			#contact {
+				float: right;
+				width: 172px;
+				padding: 0 0 0 0;
+				text-align: left;
+				}
+			
+.right h3 {
+        background: #6C757A  url(/images/corner.gif) no-repeat top right;;
+        color: #FFF;
+        padding: 5px 0 5px 5px;
+        font: bold 0.9em Tahoma, Arial, Sans-Serif;
+        margin: 0 0 3px 0;
+        text-align: left
+		}
+		.right_articles p a, 
+		.right_articles p a:visited, 
+		.right_articles p a:active {
+			color: #019ed0;
+			text-decoration: underline;
+			}    
+		.right_articles p a:hover {
+			color: #5d6165;
+			text-decoration: none;
+			}  
+			
+#subHeader1 {
+	float: left;
+	width: 400px;
+	font-size: 22px;
+	text-align: left;
+	margin: 40px 0 20px 50px;
+	color: #019ed0
+	}
+#subHeader2 {
+	float: right;
+	font-size: 21px;
+	text-align: left;
+	margin: 40px  50px 5px 0;
+	color: #6b757b;
+	}
+					
+#descBox	{
+	background-color: #f5f5f5;
+	padding: 15px;
+	margin: 0 50px;
+	}
+	#descTxt {
+		float: left;
+		width: 520px;
+		text-align: left;
+		font-size: 12px;
+		padding: 0 0 0 10px;
+		}
+	#buyerProfile {
+		float: right;
+		width: 250px;
+		font-size: 18px;
+		padding: 20px 0 0 0;
+		color: #6B757B
+		}
+		#buyerProfile img {
+			float: left;
+			width: 60px;
+			position: relative;
+			top: -20px;
+			}
+	
+.breadCrumb {
+	display: block;
+	font-size: 10px;
+	text-align: right;
+	}
+			
+.widecontent .left h2 {
+	color: #189ecf;
+	font-weight: normal;
+	text-align: center;
+	}
+
+#iconCol {
+	width: 28px;
+	position: absolute;
+	left: 102px;
+	}
+	#iconCol img {
+		display: block;
+		margin: 0 0 6px 0;
+		}
+		
+.left_propertyProfile {
+        float: left;
+        width: 66%;
+        margin: 0 10px 10px 0;
+        text-align: left;
+		}		
+		.left_propertyProfile h4 {
+			font-size: 18px;
+			width: 300px;
+			}
+		.left_propertyProfile #contact {
+			float: right;
+			width: 150px;
+			text-align: right;
+			}
+	#propertyPhotoBig {
+		float: left;
+/*		width: 170px;*/
+          width:327px;
+		}
+		#propertyPhotoBig img {
+			border: solid 1px #6c757a;
+			}
+	#propertyDetails {
+/*		float: left;*/
+          float:right;
+/*		width: 300px;*/
+          width: 196px;
+		/*margin: 0 0 0 25px*/
+		}
+		.widecontent .left_propertyProfile #propertyDetails label{
+			width: 100px;
+			}
+
+#photoThumbList {
+			margin: 6px 0;
+			}
+		#photoThumbList ul {
+			margin: 0;
+			padding: 0;
+					}
+				#photoThumbList ul li {
+					list-style-type: none;
+					display: inline;
+					}
+						#photoThumbList ul li img {
+							border: solid 1px #6c757a;
+								}
+
+  .right_requestInformation {
+           background: #dff2f8;
+           color: #6b757a;
+           padding: 15px;
+           margin: 0 0 8px 0;
+           text-align: left;
+           font-size: 12px;
+        	}		
+		 .right_requestInformation .txtField {
+		 	color: #a0a0a0;
+		 	font-size: 11px;
+		 	padding: 2px 0;
+		 	margin: 0 0 6px 0;
+		 	width: 220px;
+		 	}
+	 .right_requestInformation textarea {
+		 	color: #a0a0a0;
+		 	font-size: 11px;
+		 	padding: 2px 0;
+		 	margin: 0 0 6px 0;
+		 	width: 220px;
+		 	}
+		.right_requestInformation strong {
+				font-size: 12px;
+			}
+		 	
+		 	
+		.right_requestInformation .request_info_radio_button {
+		 	width: 12px
+		 	}
+		 	
+		#profileThumb {
+			float: left;
+			width: 85px;
+			}
+			#profileThumb img {
+				border: solid 1px #009fd0;
+				padding: 2px;
+				}
+		#profileContact {
+			float: left;
+			width: 140px;
+			font-size: 12px;
+			margin: 0 0 0 6px;
+			}
+		 	#profileContact strong {
+		 		color: #009fd0;
+				font-size: 14px;
+		 		}
+.big_font_size{
+  font-size:17px;
+  }
+.phone_font_size{
+  font-size:15px;
+  }
+/* Footer 
+----------------------------------------------- */
+
+
+#footerTxt {
+	font-size: 11px;
+	margin: 8px 0 8px 0;
+	}	
+	#footer a:link, 
+	#footer a:visited, 
+	#footer a:active {
+		color: #fff;
+		text-decoration: underline;
+		}    
+	#footer a:hover {
+		color: #b9c0c8;
+		text-decoration: none;
+		}  
+	

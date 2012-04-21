@@ -1,0 +1,143 @@
+<%- @page_title = "Update Buying Criteria - #{@profile.private_display_name}" -%>
+<% require_js_controllers :tab, :profile_notification, :profile_update,:lightbox -%>
+<% require_js_helpers :currency_field, :integer_field -%>
+<%= javascript_include_tag "add_buyer" %>
+<script src="/javascripts/profile_update_controller.js?1322034177" type="text/javascript"></script>
+<script type="text/Javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<script type="text/javascript">
+jQuery.noConflict();
+jQuery(document).ready(function(){
+  var action_is_post = false;
+  jQuery("form").submit(function () {
+    action_is_post = true;
+  });
+
+  window.onbeforeunload = confirmExit;
+  function confirmExit()
+  {
+    if (!action_is_post && formIsDirty(document.forms[0]))
+      return 'You are trying to leave this page without saving the data back.';
+  }
+
+  function formIsDirty(form)
+{
+    for (var i = 0; i < form.elements.length; i++)
+    {
+        var element = form.elements[i];
+        var type = element.type;
+        if (type == "checkbox" || type == "radio")
+        {
+            if (element.checked != element.defaultChecked)
+            {
+                return true;
+            }
+        }
+        else if (type == "hidden" || type == "password" || type == "text" ||
+                 type == "textarea")
+        {
+           if(element.name != "buyer_engagement_info[description]")
+            {
+              if (element.value != element.defaultValue)
+              {
+                  return true;
+              }
+            }
+        }
+        else if (type == "select-one" || type == "select-multiple")
+        {
+            for (var j = 0; j < element.options.length; j++)
+            {
+                if (element.options[j].selected !=
+                    element.options[j].defaultSelected)
+                {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+});
+</script>
+<%- content_for :page_scripts do -%>
+
+Event.observe(window, 'load', function() {
+  profile_update_controller = new NL.ProfileUpdateController("<%=@profile.property_type%>");
+  currency_field_helper_after_repair_value = new NL.CurrencyFieldHelper($('fields_max_purchase_value'));
+  currency_field_helper_avr_repairs_value = new NL.CurrencyFieldHelper($('fields_arv_repairs_value'));
+  currency_field_helper_min_mon_pay = new NL.CurrencyFieldHelper($('fields_max_mon_pay'));
+  currency_field_helper_min_dow_pay = new NL.CurrencyFieldHelper($('fields_max_dow_pay'));
+  integer_field_helper_sqft_min = new NL.IntegerFieldHelper($('fields_square_feet_min'));
+  integer_field_helper_sqft_max = new NL.IntegerFieldHelper($('fields_square_feet_max'));
+  integer_field_helper_units_min = new NL.IntegerFieldHelper($('fields_units_min'));
+  integer_field_helper_units_max = new NL.IntegerFieldHelper($('fields_units_max'));
+  integer_field_helper_acres_min = new NL.IntegerFieldHelper($('fields_acres_min'));
+  integer_field_helper_acres_max = new NL.IntegerFieldHelper($('fields_acres_max'));
+});
+
+<%- end -%>
+
+<%= render :partial => "partial_for_meta_tag"%>
+<%= render :partial => "scratch_pad_lightbox" %>
+<%= render :partial => "page_script_content_full_page_view"%>
+
+<div class="form">
+
+<%= error_messages_for :criteria %>
+
+</div>
+
+<div class="full">
+    <div class="tabset larger">
+        <ul>
+            <li onclick="navigate_buyer_tab('<%=url_for(:action => 'buyer_lead_full_page_view', :controller => 'buyer_websites', :id => @profile.id) %>')">
+                Buyer Profile
+            </li>
+            <li onclick="navigate_buyer_tab('<%=url_for(:action => 'edit_buying_areas', :controller => 'buyer_websites', :id => @profile.id)%>')">
+                Buying Areas
+            </li>
+            <li class ="active" onclick="navigate_buyer_tab('<%=url_for(:action => 'edit_buying_criteria', :controller => 'buyer_websites', :id => @profile.id) %>')">
+                Buying Criteria
+            </li>
+            <li onclick="navigate_buyer_tab('<%=url_for(:action => 'buyer_lead_match', :controller => 'buyer_websites', :id => @profile.id) %>')">
+                Matches
+            </li>
+            <li onclick="navigate_buyer_tab('<%=url_for(:action => 'buyer_lead_engagement', :controller => 'buyer_websites', :id => @profile.id) %>')">
+                Engagement
+            </li>
+        </ul>
+    </div>
+    <div class="clear">
+ </div>
+<fieldset>
+  <%#- form_for(:fields, :url => "buyer_websites/update_buying_criteria/#{@profile.id}", :html => { :method => :put }) do |f| -%>
+  <%- form_for(:fields, :url => {:controller => 'buyer_websites', :action => 'update_buying_criteria',  :id => @profile.id }, :html => { :method => :put }) do |f| -%>
+    <%=render :partial=>"/shared/buyer_fields", :locals=> {:f=>f}%>
+  <p style="text-align: center">
+  <%=submit_tag "Update", :class=>"submit"%>
+  </p>
+  <%end%>
+</fieldset>
+</div>
+
+<div class="loading" style="display:none">
+  <span class="text">Loading...</span>
+</div>
+
+<script type="text/javascript">
+window.onload = function() {
+  wholesale = document.getElementById("wholesale").checked
+  owner_finance = document.getElementById("owner_finance").checked
+  prop_type = '<%=@profile.property_type%>'
+  if(!wholesale)
+  {
+   document.getElementById("maxpv").style.display = 'none'
+   document.getElementById("arvr").style.display = 'none'
+  }
+  if(!owner_finance)
+  {
+   document.getElementById("maxmp").style.display = 'none'
+   document.getElementById("maxdp").style.display = 'none'
+  }
+};
+</script>

@@ -1,0 +1,16 @@
+<%- @page_title = "REIMatcher-About Us" -%>
+<%- @meta_title = @seller_website.meta_title -%>
+<%- @meta_description = @seller_website.meta_description -%>
+ <%= render :partial => "show_navigation_link" %>
+ <%= render :partial => "fb_like_twitter_tweet" %>
+  <div id="seller_page_main_div">
+    <h1><b>About Us</b></h1><br>
+    <%= render :partial => "lead_magnet" %>
+    <% business_name = @seller_website.user.user_company_info.business_name unless @seller_website.user.user_company_info.blank?%>
+    <% unless business_name.blank? %>
+      <%= @seller_website.about_us_page_text.to_s.gsub("{Subscriber Company name}",business_name).gsub("Company name",business_name).gsub("Business Name",business_name)%>
+    <% else %>
+      <%= @seller_website.about_us_page_text.to_s.gsub("{Subscriber Company name}","").gsub("Company name","").gsub("Business Name","")%>
+    <% end %>
+
+  </div>

@@ -1,0 +1,4 @@
+Options +FollowSymLinks
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^boxyroom\.com$ [NC]
+RewriteRule ^(.*)$ http://www.boxyroom.com/$1 [R=301,L]

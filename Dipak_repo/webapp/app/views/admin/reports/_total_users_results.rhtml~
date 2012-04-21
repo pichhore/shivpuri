@@ -1,0 +1,68 @@
+<h3>Total Users Report</h3>
+
+<div class="report_filter">
+
+<%- form_tag({:action=>"execute", :id=>@report_name}, :method=>:get) do -%>
+Users created as of: <%=text_field_tag "end_date", @end_date_string_views%> <%=submit_tag "Filter"%>
+<%- end -%>
+
+</div>
+
+<div class="report_export">
+Export as: <%=link_to "CSV", :action=>"execute", :id=>@report_name, :end_date=>@end_date_string_views, :format=>"csv"%>
+</div>
+
+<div class="report_results">
+
+<table>
+
+  <thead>
+
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Email</th>
+    <th>Last Login at</th>
+    <th>Created at</th>
+    <th>Activated at</th>
+    <th>Updated at</th>
+    <th>Membership</th>
+    <th>Failed Payment</th>
+    <th>Activity Score</th>
+    <th># Properties</th>
+    <th># BP</th>
+    <th># SL</th>
+  </thead>
+
+  <tbody>
+<% count = 0 %>
+    <%-@users.each_with_index do |user, index| -%>
+    <tr <%="class='odd'" if index % 2 == 1%>>
+      <td><%=user.first_name%></td>
+      <td><%=user.last_name%></td>
+      <td><%=user.email%></td>
+      <td><%=set_format(user.last_login_at)%></td>
+      <td><%=set_format(user.created_at)%></td>
+      <td><%=set_format(user.activated_at)%></td>
+      <td><%=set_format(user.updated_at)%></td>
+      <td><%= user.user_class.user_type_name unless user.user_class.blank? %></td>
+      <td><%= user.is_user_have_failed_payment ? "Yes" : "" %></td>
+      <td><%= user.activity_score %></td>
+<% count=count+@user_owner_count_hash[user.id] if @user_owner_count_hash[user.id] > 0 %>
+      <td><%=@user_owner_count_hash[user.id] || "0"%></td>
+      <td><%=@user_buyer_count_hash[user.id] || "0"%></td>
+      <% leads = user.seller_profiles.count unless user.seller_profiles.blank? %>
+      <td><%= leads || "0" %></td>
+    </tr>
+    <%-end -%>
+<h1><%= count %></h1>
+  </tbody>
+
+</table>
+<div style="display:none">
+  Total Users: <%= @users.size %> 
+</div>
+</br>
+<span style="margin-top:10px;float:right;">
+  <%= will_paginate @users %>
+</span>
+</div>

@@ -1,0 +1,2 @@
+<%=select("user_territory","territory_id",@territories.map { |territory| [territory.territory_name, territory.id]  },{ :include_blank => "--- Select Territories --- " },{:onchange => "get_investors_by_territory();"})%>
+<%=error_message_on :user_territory,:territory_id %>

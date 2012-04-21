@@ -1,0 +1,36 @@
+        <div class="profile_summary preview">
+
+        <%=render :partial=>"/shared/profile_summary", :collection=>@profiles, :locals=>{:use_numbered_icons=>true} %>
+
+        </div>
+
+        <div class="buttonbar" page_number="<%=@page_number%>" total_pages="<%=@total_pages%>">
+          <div class="center">
+            <%- if !@profiles.empty? -%>
+            <p><%='<a href="#" class="prev_page" >&nbsp; <&nbsp; Prev</a>' if @page_number > 1%>&nbsp;&nbsp;Page <span id="current_page_number"><%=@page_number%></span> of <span id="total_pages"><%=@total_pages%></span>&nbsp;&nbsp;
+              	     <%= '<a href="#" class="next_page" >&nbsp;Next&nbsp;>&nbsp;</a>' if @page_number < @total_pages%></p>
+            <%-end-%>
+          </div>
+        </div>
+
+        <script>
+                <%- if request.xhr?
+                      if @search_profile_type == "property" -%>
+                        if( GBrowserIsCompatible() ) {
+                                map.clearOverlays();
+                                <% @profiles.each_with_index do |profile, index| 
+                                    if profile.latlng
+                                %>
+                                        map.addOverlay( marker = new GMarker( new GLatLng( <%= profile.latlng %> ), { title: '<%= profile.name %>',  icon: new GIcon( G_DEFAULT_ICON, '<%= "/images/"+ZipCodeMap.get_icon_path( profile.property_type, profile.display_privacy.downcase, index+1 ) %>' ) } ) );
+<%= debugger %>
+                                        GEvent.addListener( marker, 'click', function() { this.openInfoWindowHtml( '<%= ZipCodeMap.info_window( profile, "search", encode_return_dashboard_params(@page_number)) %>' ); } );
+                                <%  end
+                                  end 
+                                %>
+                                window.onunload = GUnload;
+                        }
+                        lightbox_image_controller = new NL.LightboxImageController();
+                  <%- end -%>
+                <%- end -%>
+        </script>
+

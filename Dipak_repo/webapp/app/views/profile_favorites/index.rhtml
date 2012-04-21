@@ -1,0 +1,24 @@
+<h1>Listing profile_favorites</h1>
+
+<table>
+  <tr>
+    <th>Profile</th>
+    <th>Target profile</th>
+    <th>Created at</th>
+  </tr>
+  
+<% for profile_favorite in @profile_favorites %>
+  <tr>
+    <td><%=h profile_favorite.profile_id %></td>
+    <td><%=h profile_favorite.target_profile_id %></td>
+    <td><%=h profile_favorite.created_at %></td>
+    <td><%= link_to 'Show', profile_profile_favorite_path(profile_favorite) %></td>
+    <td><%= link_to 'Edit', edit_profile_profile_favorite_path(profile_favorite) %></td>
+    <td><%= link_to 'Destroy', profile_profile_favorite_path(profile_favorite), :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New profile_favorite', new_profile_profile_favorite_path %>

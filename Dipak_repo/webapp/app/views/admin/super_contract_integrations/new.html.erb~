@@ -1,0 +1,11 @@
+<h1>New Contract</h1>
+
+<% form_for(@super_contract_integration, :url => admin_super_contract_integrations_path, :html => { :method => 'post' } ) do |f| %>
+<div>
+<%= render :partial => "super_contract_form", :locals => {:f=>f}%>
+</div>
+  <div class="widecontent">
+    <%= f.submit "Create", :style=>"float: left; margin-right: 10px;" %>
+    <%= button_to_function 'Cancel', "document.location='#{admin_user_email_alert_definitions_path}';" %>
+  </div>
+<% end %>

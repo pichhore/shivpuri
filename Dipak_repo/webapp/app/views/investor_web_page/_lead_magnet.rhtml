@@ -1,0 +1,38 @@
+<div class="lead_magnet_div">
+  <% form_for(:fields, :url => {:controller=>"investor_web_page", :action=>"create_lead_opt_in",:permalink_text=>params[:permalink_text]}) do |f| %>
+    <%= error_messages_for :criteria %>
+    <fieldset class="lead_magnet" style="width: 383px;">
+      <div align="left" style="margin-left:10px;"><b style="font-size:larger;"> Sell Property Now  </b></div><br />
+      <table  style="margin-left:10px;">
+        <tr>
+          <td class="label_required">First Name:*</td>
+        </tr>
+
+        <tr>
+          <td><%=text_field "seller_profile", "first_name" , :size=>21 %><%=error_message_on :seller_profile,:first_name%></td>
+        </tr>
+ 
+        <tr>
+          <td class="label_required">Email:*</td>
+        </tr>
+
+        <tr>
+          <td><%=text_field "seller_profile", "email", :size=>21  %><%=error_message_on :seller_profile,:email%></td>
+        </tr>
+      </table>
+      <%= hidden_field_tag "render_action", params[:action]%>
+      <div style="margin-top:30px;text-align: center;"><%=submit_tag "Get Notified of Wholesale Properties!", :class=>"submit_xl"%></div>
+    </fieldset>
+  <% end %>
+</div>
+<!--[if IE 8]>
+<style>
+#beds_margin {
+ margin:10px 0 2px 15px !important;
+}
+
+#home_margin {
+  margin-left:19px !important;
+}
+</style>
+<![EndIf]-->

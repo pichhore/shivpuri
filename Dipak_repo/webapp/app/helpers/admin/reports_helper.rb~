@@ -1,0 +1,11 @@
+module Admin::ReportsHelper
+
+  def set_format(record)
+    record.nil? ? record : record.strftime("%m/%d/%Y %I:%M %p")
+  end
+
+  def display_name_for_profile
+    return profile.buyer? ? (profile.private_display_name.include?("Individual") ?  profile.display_name : profile.private_display_name) : profile.display_name
+  end
+
+end

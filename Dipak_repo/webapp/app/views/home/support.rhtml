@@ -1,0 +1,30 @@
+<%- @page_title = "Support" -%>
+<%- @page_heading = "Member Support" -%>
+
+<p>If you want to learn more about REIMatcher, and how it could make things easier for you, check out the <a href='<%= "#{REIMATCHER_URL}faq/" %>' >How To</a> tab for videos, checklists, mindmaps, and more. It even has a search bar so you can use keywords to look up possible answers to questions or issues you might have.</p>
+<p> <a href='<%= "#{REIMATCHER_URL}faq/" %>' >How To</a> can help you get the most use out of your REIMatcher experience. So before sending out a ticket for a particular issue, make sure to check on this tab first. More often than not, you'll find the answer you need in no time.
+</p>
+<p>We understand if now is the not the best time to implement REIMatcher into your business. We would hate to see you go and have a quick video for you to watch before you decide to cancel your REIMatcher subscription.  Please watch it <a href='<%= "#{REIMATCHER_URL}home/wishtocancel/" %>' >HERE</a>. </p>
+<br/>
+<p>
+For other concern/s, click  <%= link_to "Support",{:controller => :home, :action => :email}, :rel=>"ibox&height=100" %> and then 'Start discussion' to let us know how we can further assist you.  Your ideas, comments and suggestions are valuable in the success of REIMatcher!
+</p>
+
+<!--
+<p>If you are having trouble or believe you are experiencing a problem, just click <a href="https://loveamericanhomes.tenderapp.com/home" target="_blank" >Support</a> to be taken to out Customer Support Site.</p>
+
+<p>Here, you can 'Browse discussions' to see if your question has been answered by our staff or others in the community.  If you don't see an answer to your question, just click 'Start a discussion'.</p>
+
+<p>Be sure to check out our <a href="https://loveamericanhomes.tenderapp.com/faqs" target="_blank">FAQ</a> as your question may have already been already answered.</p>
+
+<p>Have a Suggestion for a Feature?</p>
+<p>Just click <a href="https://loveamericanhomes.tenderapp.com/home" target="_blank" >Support</a> and then 'Start discussion' to tell us about a new feature you would like to see.</p>
+
+<p>To change your password, please click the 'Investor Profile' link located in the green navigation bar and follow the steps.</p>
+-->
+<% content_for :meta do %>
+<meta name="robots" content="noindex" />
+  <meta name="googlebot" content="noindex" />
+<meta name="robots" content="nofollow" />
+  <meta name="googlebot" content="nofollow" />
+<% end %>

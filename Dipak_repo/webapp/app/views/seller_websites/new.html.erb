@@ -1,0 +1,56 @@
+<%- @page_title = "Seller Website" -%>
+<% require_js_controllers :tab, :account_settings -%>
+<%= stylesheet_link_tag "investor_buyer_page" %>
+ <%- content_for :page_scripts do -%>
+
+Event.observe(window, 'load', function() {
+  account_settings_controller = new NL.AccountSettingsController();
+});
+  function set_css_color(this_id)
+  {
+      $$('table.table_class tr td div').each(function(item) {
+                                   item.classNames().remove("set_class_css");
+                                    item.classNames().add("select_css");
+                               });
+      this_id.classNames().add("set_class_css");
+      $('seller_website_dynamic_css').value = this_id.getStyle('backgroundColor') ;
+   }
+
+  function show_home_page_video()
+    {
+      $('home_page_embed_video').show();
+      $('home_page_or_tr').show();
+      $('home_page_video_link').show();
+    }
+
+  function hide_home_page_video()
+    {
+      $('home_page_embed_video').hide();
+       $('home_page_or_tr').hide();
+      $('home_page_video_link').hide();
+
+      $('seller_website_home_page_video_tour').value="";
+      $('seller_website_home_page_embed_video').value="";
+    }
+    
+     function show_lead_funnel_video()
+    {
+      $('lead_funnel_embed_video').show();
+      $('lead_funnel_or_tr').show();
+      $('lead_funnel_video_link').show();
+    }
+
+  function hide_lead_funnel_video()
+    {
+      $('lead_funnel_embed_video').hide();
+       $('lead_funnel_or_tr').hide();
+      $('lead_funnel_video_link').hide();
+
+      $('seller_website_lead_funnel_video_tour').value="";
+      $('seller_website_lead_funnel_embed_video').value="";
+    }
+
+<%- end -%>
+<fieldset>
+  <%= render :partial => "set_up",:locals => { :button_name  => "Update Settings" } %>
+</fieldset>

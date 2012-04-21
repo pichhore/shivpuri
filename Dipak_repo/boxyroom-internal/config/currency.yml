@@ -1,0 +1,30 @@
+Australia:
+  name: Australian Dollar A$
+  sym: AUD
+Britain:
+  name: Sterling Pound £
+  sym: GBP
+Canada:
+  name: Canadian Dollar C$
+  sym: CAD
+Europe:
+  name: Euro €
+  sym: EUR
+Japan:
+  name: Japanese Yen ¥
+  sym: JPY
+Singapore:
+  name: Singapore Dollar S$
+  sym: SGD
+Switzerland:
+  name: Swiss Franc CHF
+  sym: CHF
+United States:
+  name: United States Dollar US$
+  sym: USD
+
+
+
+
+
+

@@ -1,0 +1,20 @@
+<% form_remote_tag :url => {:action => 'assign_badges'},
+
+                    :after => "$('#{loading_indicator_id(:action => :show_badges, :id => params[:id])}').style.visibility = 'visible'",
+                    :complete => "$('#{element_form_id(:action => :assign_badges)}').parentNode.hide(); $('#{element_row_id(:action => :list)}').style.display='table-row'; $('#{action_link_id(:show_badges, params[:id])}').removeClassName('disabled');", 
+                    :html => {:id => element_form_id(:action => :assign_badges)} do %>
+<h4>Badges</h4>
+<table>
+  <% @badges.each do |badge| %>
+  <tr>
+    <%= check_box_tag "user_badges[#{badge.id}]", @user_id, checked = find_checked(badge.id, @user_badges) %>
+    <%= badge.name %><br />
+  </tr>
+  <% end %>
+</table>
+<%= hidden_field_tag(:user_id, @user_id) %>
+<%= submit_tag "Assign Badge"%>
+<a class="cancel" href="/admin/admin_users/list">Cancel</a>
+<img style="visibility: hidden;" src="/images/active_scaffold/default/indicator.gif" id=<%= loading_indicator_id(:action => :show_badges, :id => params[:id])%> class="loading-indicator" alt="loading indicator"/>
+<% end %>
+

@@ -1,0 +1,10 @@
+<% if @investor_website.layout=="modern" %>
+  <h1><%= @investor_website.header %> </h1>
+  <div>
+  <div style="float:right;width:400px;margin:4px 0;"><img  alt="House" width="380" align="right" hspace="10" src="<%= @investor_website.banner_image_path.blank? ? '/images/banner.jpg' : @investor_website.banner_image_path %>"></div>
+  <%= @investor_website.home_page_text%>
+  </div>
+<% else %>
+  <div id="banner"><img src="<%= @investor_website.banner_image_path.blank? ? '/images/banner.jpg' : @investor_website.banner_image_path %>" width="630" height="249"/></div>
+  <p class="center"><%= @investor_website.home_page_text%></p>
+<% end %>

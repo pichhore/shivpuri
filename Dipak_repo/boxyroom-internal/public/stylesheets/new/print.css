@@ -1,0 +1,204 @@
+h1{
+page-break-after: always;
+margin-bottom: 0px;
+}
+
+#application_details
+{
+  margin-top: 0px;
+}
+
+#your_application
+{
+  display: none;
+}
+
+.primary .complex-form fieldset {
+    margin-bottom: 0px;
+}
+
+
+.select_list {
+    padding: 2px;
+    width: 100%;
+}
+
+.primary .complex-form fieldset p {
+    display: block;
+    float: left;
+    margin-right: 21px;
+    padding: 2px 0 0;
+    position: relative;
+    width: 350px;
+}
+
+.primary .complex-form fieldset input[type="text"], .primary fieldset textarea {
+    -moz-border-radius: 0 0 0 0;
+    background: -moz-linear-gradient(center top , #E4E4E4 0%, #FFFFFF 12%, #FFFFFF 100%) repeat scroll 0 0 transparent;
+    border: 1px solid #BEBEBE;
+    float: left;
+    outline: medium none;
+    padding: 4px;
+    width: 100%;
+    }
+
+input.small {
+    margin-right: 7px;
+    width: 88px !important;
+}
+
+.readonly input {
+}
+)
+.small {
+    width: 110px;
+}
+
+input {
+    color: #454545;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 90%;
+}
+
+.small {
+    width:110px;
+}
+
+
+input.small {
+    width:88px !important;
+    margin-right: 7px;
+}
+.half {
+    width:333px;
+}
+
+.ui-widget {
+    font-family: Lucida Grande,Lucida Sans,Arial,sans-serif;
+    font-size: 1.1em;
+}
+
+.ui-corner-all {
+    -moz-border-radius: 0 0 0 0;
+}
+
+.primary .complex-form .tabs .navigation {
+    -moz-border-radius: 6px 6px 6px 6px;
+    background-color: #F0F0F0;
+    border: 1px solid #E8E8E8;
+    color: #959595;
+    font-weight: 500;
+    margin-bottom: 12px;
+    padding: 8px 12px;
+    text-align: left;
+    width: 610px;
+}
+
+.primary .complex-form .tabs .navigation ul {
+    float: right;
+}
+
+.ui-corner-all {
+    -moz-border-radius: 0 0 0 0;
+}
+
+ol, ul {
+    list-style: none outside none;
+}
+
+.primary .complex-form .tabs .navigation ul li {
+    float: left;
+}
+
+.tabs .navigation ul li.ui-tabs-selected a {
+    background-color: #D6D6D6;
+}
+
+.primary .complex-form .tabs .navigation ul a {
+  
+}
+
+a {
+    color: #308CB8;
+    text-decoration: none;
+}
+
+.primary .complex-form fieldset {
+    margin-bottom: 6px;
+}
+.secondary
+{
+    display: none;
+}
+#header
+{
+    display: none;
+}
+.amount_field{
+  text-align: left!important;
+  padding:0px 4px !important;
+  font-size:  30px;
+  font-style:  bold;
+  margin-bottom: 0 !important;
+  padding-bottom: 0px !important;
+}
+
+.amount_field span{
+  font:bold 16px arial;
+  margin:0px;
+  padding:0px;
+} 
+
+label{float: left;}
+
+#footer
+{
+    display: none;
+}
+
+#months
+{
+   float: left; position: relative; top: 20px;margin-left:  10px;
+}
+
+.primary .complex-form fieldset legend {
+    background-color: #E0EFF7;
+    border: 1px solid #D1E4EE;
+    color: #153E52;
+    float: left;
+    font-weight: 500;
+    margin-top: 3px;
+    padding: 5px 8px;
+    text-align: left;
+    width: 610px;
+}
+
+.select_list label {
+    float: left;
+    font-weight: 0;
+    margin: 7px 4px 4px;
+    width: 170px;
+      padding:5px;
+}
+
+p.r {
+    padding-top: 5px;
+}
+
+#printall
+{
+  display: none;
+}
+
+
+.clr {
+    clear: both;
+}
+
+.primary > h1 {
+    border: 1px solid #88B4CB;
+    font-weight: bold;
+    padding: 3px 5px;
+    position: relative;
+    text-align: left;
+}

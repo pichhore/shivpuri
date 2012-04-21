@@ -1,0 +1,20 @@
+<h2>Alert Trigger Types</h2>
+
+<div style="margin-left: 20px;">
+<% for alert_trigger_type in @alert_trigger_types %>
+  <h3><%= h alert_trigger_type.name %></h3>
+  <span>Description: <%= h alert_trigger_type.description %>
+  <br/>
+  <span>Parameter(s): <%=h alert_trigger_type.parameter_description %></span>
+  <br/>
+  <span>Method Name: <%=h alert_trigger_type.method_name %></span>
+  <br/>
+  <span><%= link_to 'Show', admin_alert_trigger_type_path(alert_trigger_type) %></span> |
+  <span><%= link_to 'Edit', edit_admin_alert_trigger_type_path(alert_trigger_type) %></span> |
+  <span><%= link_to 'Destroy',admin_alert_trigger_type_path(alert_trigger_type) , :confirm => 'Are you sure?', :method => :delete %></span>
+  <hr/>
+<% end %>
+</div>
+<br />
+
+<%= link_to 'Create a new Alert Trigger Type', new_admin_alert_trigger_type_path %>

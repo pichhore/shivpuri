@@ -1,0 +1,11 @@
+development:
+  base_db_path: public/xapian_db
+
+production_test:
+  base_db_path: public/xapian_db
+
+staging:
+  base_db_path: public/xapian_db
+
+production:
+  base_db_path: public/xapian_db

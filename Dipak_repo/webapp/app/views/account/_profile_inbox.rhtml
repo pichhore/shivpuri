@@ -1,0 +1,70 @@
+<% if params[:profile_inbox_message].blank?%>
+<% if !@conversation_tree.blank? && !current_user.blank?%>
+    <%form_tag ({ :controller => "account", :action => "delete_profile_inbox_message"},:method=>:post) do%>
+    <div><% if @filter_type.blank? || @filter_type == 'Current'%> <%=submit_tag "Archive ", :class=>'submit_s' %><%else%><br/><%end%></div>
+    <table  border="0" cellspacing="0" class="investor_inbox_grid">
+    <tr>
+      <% if @filter_type.blank? || @filter_type == 'Current'%><th>Select</th><%end%>
+      <th>From</th>
+      <th>Subject: Message</th>
+      <th>Date/Time</th>
+    </tr>
+      <% @conversation_tree.each_with_index do |thread,index| %>
+    
+          <% to_profile ,from_profile = get_profile_ids(thread.message.id)%>
+          <%if to_profile.nil? %>
+              <% next %>
+          <%end %>
+      
+      <%if to_profile.user_id != current_user.id
+                temp = to_profile
+                to_profile = from_profile
+                from_profile = temp
+          end%>
+        <%body_text,viewed_at,profile_message_recipient_id = current_message_in_profile(thread.message.subject,from_profile)%>
+        <tr  <% if viewed_at.blank?%>class ='investor_inbox_grid_row'<%end%>>
+       <% if @filter_type.blank? || @filter_type == 'Current'%>
+          <td class="investor_inbox_selector">
+            <%if !thread.message.profile_message_recipients.blank?%>
+                <%= check_box_tag 'profile_message[]', "#{thread.message.id}#profile_id##{ thread.message.profile_message_recipients[0].from_profile_id }"%>
+            <%else%>
+                <%= check_box_tag 'profile_message[]', "#{thread.message.id}#profile_id#nil"%>
+            <%end%>
+          </td>
+      <%end%>
+          
+    
+        <td class="investor_inbox_seperator" onclick="go_to_profile_conversation('<%=profile_conversation_path(to_profile , from_profile)%>','messge_suject_display_none_<%=index.to_s%>','<%=profile_message_recipient_id%>','<%=thread.message.id%>');" >
+        <% profile = display_profile_name(thread.message.id)%><%=(profile.buyer? or profile.buyer_agent?) ? truncate(profile.user.full_name,30) : (profile.private_display_name.blank? ? truncate(profile.private_display_name,30) : truncate(profile.display_name,30)  ) %> (<%= thread.size%>)</td>
+        
+        <td class="investor_inbox_seperator" onclick="go_to_profile_conversation('<%=profile_conversation_path(to_profile , from_profile)%>','messge_suject_display_none_<%=index.to_s%>','<%=profile_message_recipient_id%>','<%=thread.message.id%>');"><%= truncate(thread.message.subject,30)%> - <span style ="font-size:0.8em;"><%=truncate(body_text,20) %></span>
+           <div id="messge_suject_display_none_<%=index.to_s%>" style="display:none;" ><%=thread.message.subject %></div>
+        </td>
+        
+        <td class="investor_inbox_seperator" onclick="go_to_profile_conversation('<%=profile_conversation_path(to_profile , from_profile)%>','messge_suject_display_none_<%=index.to_s%>','<%=profile_message_recipient_id%>','<%=thread.message.id%>');"><%= thread.message.created_at.strftime("%m/%d/%y")%>
+        
+    </td>
+      </tr>
+    <%end%>
+    </table>
+    <%end%>
+    <%= will_paginate @conversation_tree %>
+  <%else%>
+    <div><% if @investor_filter_type.blank? || @investor_filter_type == 'Current'%> <%=submit_tag "Archive ", :class=>'submit_s' %><%else%><br/><%end%></div>
+    <table border="0" cellspacing="0" class="investor_inbox_grid">
+          <tr>
+          <th>Select</th>
+          <th>From</th>
+          <th>Subject: Message</th>
+          <th>Date/Time</th>
+          </tr>
+          <td class="investor_inbox_seperator"></td><td class="investor_inbox_seperator"></td><td class="investor_inbox_seperator"></td><td class="investor_inbox_seperator"></td>
+    </table>
+    Empty Inbox
+  <%end%>
+<%else%>
+   <div id="messge_suject_display_none_email" style="display:none;" ><%= params[:profile_inbox_message] %></div>
+   <script type="text/javascript">
+      go_to_profile_conversation('<%= params[:conversation]%>','messge_suject_display_none_email','<%= params[:profile_message_recipient_id]%>','<%= params[:profile_inbox_message_id]%>');
+  </script>
+<%end%>

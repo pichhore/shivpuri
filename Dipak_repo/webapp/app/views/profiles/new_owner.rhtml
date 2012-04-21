@@ -1,0 +1,193 @@
+<%- @page_title = "Post a Property For Sale" -%>
+<%- @page_heading = "Post a Property For Sale" -%>
+<%- @meta_description = "Create a Property Owner Profile on Dwellgo’s Austin Real Estate Community and instantly access buyers interested in the Austin Real Estate Market, Texas" -%>
+<%- @meta_keywords = "austin real estate, austin real estate community, Texas, dwellgo" -%>
+
+<% require_js_controllers :profile_setup, :expand_collapse -%>
+<% require_js_helpers :currency_field, :integer_field , :date_field -%>
+<%= javascript_include_tag "add_property" %>
+
+<%- content_for :page_scripts do -%>
+
+Event.observe(window, 'load', function() {                                                                                                        
+  profile_setup_controller = new NL.ProfileSetupController($('fields_property_type'),$('fields_privacy_public'),$('fields_privacy_private'));
+  optional_expand_collapse = new NL.ExpandCollapseController($$('#optional h3')[0],$$('#optional div.optional_content')[0]);
+  currency_field_helper_price = new NL.CurrencyFieldHelper($('fields_price'));
+  currency_field_helper_after_repair_value = new NL.CurrencyFieldHelper($('fields_after_repair_value'));
+  currency_field_helper_total_repair_needed = new NL.CurrencyFieldHelper($('fields_total_repair_needed'));
+  currency_field_helper_sqft = new NL.CurrencyFieldHelper($('fields_square_feet'));
+  currency_field_helper_min_mon_pay = new NL.CurrencyFieldHelper($('fields_min_mon_pay'));
+  currency_field_helper_min_dow_pay = new NL.CurrencyFieldHelper($('fields_min_dow_pay'));
+  date_field_helper_expiry_date = new NL.DateFieldHelper($('fields_contract_end_date]'));
+  integer_field_helper_min_mon_pay = new NL.IntegerFieldHelper($('fields_min_mon_pay'));
+  integer_field_helper_min_dow_pay = new NL.IntegerFieldHelper($('fields_min_dow_pay'));
+  integer_field_helper_sqft = new NL.IntegerFieldHelper($('fields_square_feet'));
+  integer_field_helper_units = new NL.IntegerFieldHelper($('fields_units'));
+  integer_field_helper_acres = new NL.IntegerFieldHelper($('fields_acres'));
+});
+
+<%- end -%>
+
+<script type="text/javascript">
+/*<![CDATA[*/
+/*You can also place this code in a separate file and link to it like epoch_classes.js*/
+var dp_cal;
+window.onload = function() {
+  wholesale = document.getElementById("wholesale").checked
+  owner_finance = document.getElementById("owner_finance").checked
+  if(!wholesale)
+  {
+    dp_cal  = new Epoch('epoch_popup','popup',document.getElementById('fields_contract_end_date'));
+    document.getElementById("arv").style.display = 'none'
+    document.getElementById("vbm").style.display = 'none'
+    document.getElementById("trn").style.display = 'none'
+    document.getElementById("rcb").style.display = 'none'
+  }
+  if(wholesale)
+  {
+    dp_cal  = new Epoch('epoch_popup','popup',document.getElementById('fields_contract_end_date'));
+    document.getElementById("arv").style.display = ''
+    document.getElementById("vbm").style.display = ''
+    document.getElementById("trn").style.display = ''
+    document.getElementById("rcb").style.display = ''
+  }
+  if(!owner_finance)
+  {
+   dp_cal  = new Epoch('epoch_popup','popup',document.getElementById('fields_contract_end_date'));
+   document.getElementById("minmp").style.display = 'none'
+   document.getElementById("mindp").style.display = 'none'
+  }
+  if(owner_finance)
+  {
+   dp_cal  = new Epoch('epoch_popup','popup',document.getElementById('fields_contract_end_date'));
+   document.getElementById("minmp").style.display = ''
+   document.getElementById("mindp").style.display = ''
+  }
+};
+
+
+/*]]>*/
+</script>
+
+
+<div class="form">
+
+<%= error_messages_for :criteria %>
+
+</div>
+
+<% form_for(:fields, :url => profiles_path, :id => 'owner_form') do |f| %>
+   <%=hidden_field_tag ("seller_property_profile_id",params[:seller_property_profile_id]) if !params[:seller_property_profile_id].blank? %>
+   <%=hidden_field_tag "id",@profile_type.permalink%>
+
+<div class="form">
+
+  <h3>Step 1: Marketing Status & Investment Type</h3>
+
+  <%=render :partial=>"/shared/owner_fields", :locals=> {:f=>f}%>
+
+</div>
+
+<div class="form">
+
+  <%- if !logged_in? -%>
+
+  <h3>Step 3: Create an Account</h3>
+
+  <fieldset>
+
+    <table>
+
+      <tr>
+        <th class="label_required">First Name:</th>
+        <td><%=text_field "user", "first_name" %><%=error_message_on :user,:first_name%></td>
+      </tr>
+
+      <tr>
+        <th class="label_required">Last Name:</th>
+        <td><%=text_field "user", "last_name" %><%=error_message_on :user,:last_name%></td>
+      </tr>
+
+      <tr>
+        <th class="label_required">Email:</th>
+        <td><%=text_field "user", "email" %><%=error_message_on :user,:email%> (Never revealed to REIMatcher members)</td>
+      </tr>
+<!--
+      <tr>
+        <th class="label">Home Phone:</th>
+        <td><%=text_field "user", "home_phone" %><%=error_message_on :user,:home_phone%></td>
+      </tr>
+
+      <tr>
+        <th class="label">Business Phone:</th>
+        <td><%=text_field "user", "business_phone" %><%=error_message_on :user,:business_phone%></td>
+      </tr>
+
+      <tr>
+        <th class="label">Mobile Phone:</th>
+        <td><%=text_field "user", "mobile_phone" %><%=error_message_on :user,:mobile_phone%></td>
+      </tr>
+-->
+      <tr>
+        <th class="label_required">Password:</th>
+        <td><%=password_field "user", "password" %> (See <%=link_to "Privacy Policy", {:controller=>"home", :action=>"privacy"}, :target=>"_new", :tabindex=>99%>)<br/><%=error_message_on :user,:password%></td>
+      </tr>
+
+      <tr>
+        <th class="label_required">Password (verify):</th>
+        <td><%=password_field "user", "password_confirmation" %><%=error_message_on :user,:password_confirmation%></td>
+      </tr>
+      
+      <tr>
+        <td colspan="2" align="center">I agree to the <%=link_to "Terms of Use", {:controller=>"home", :action=>"terms_of_use"}, :target=>"_new", :tabindex=>99%> <%=check_box "user", "terms_of_use" %><%=error_message_on :user,:terms_of_use%></td>
+      </tr>
+      
+    </table>
+
+  </fieldset>
+
+  <%- end -%>
+
+  <p> <%=image_tag "required.gif"%> Required Field </p>
+
+  <p style="text-align: center">
+    <%=submit_tag "Create", :class=>"submit"%>
+  </p>
+
+</div>
+
+<% end %>
+
+<script>
+        function property_profile_get_states(){
+          var country_id = $('fields_country').value;
+          if(country_id == "CA"){
+            $('zip_block').innerHTML = "Postal Code:";
+            $('state_block').innerHTML = "Province:";
+          }
+        else{
+            $('zip_block').innerHTML = "Zip Code:";
+            $('state_block').innerHTML = "State:";
+          }
+           $('fields_zip_code').value = "";
+         if (($('fields_country').value == 'US') &&  /^\d{5}(,\s*\d{5})*$/.test($F('property_zip'))){
+          $('fields_zip_code').value = $('property_zip').value;
+          }
+        if (($('fields_country').value == 'CA') &&  /^[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy]{1}\d{1}[A-Za-z]{1} *\d{1}[A-Za-z]{1}\d{1}(,\s*[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy]{1}\d{1}[A-Za-z]{1} *\d{1}[A-Za-z]{1}\d{1})*$/.test($F('property_zip'))){
+          $('fields_zip_code').value = $('property_zip').value;
+          }
+          new Ajax.Request('/states/get_property_states',
+            {
+              method:'get',
+              parameters: {country_id: country_id},
+              onSuccess: function(transport){
+              var response = transport.responseText;
+              $('field_state_update_block').innerHTML = response;
+              $('fields_state').value = $('property_province').value;
+            },
+          onLoading: function(){ $('country_spinner').show() },
+          onComplete: function(){$('country_spinner').hide()},
+          onFailure: function(){ alert('Something went wrong...') }
+      });
+}
+</script>

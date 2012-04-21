@@ -1,0 +1,18 @@
+          <table  border="0" cellspacing="0" class="seller_website_grid">
+            <tr>
+              <th >&nbsp;URL</th>
+              <th>Activate</th>
+              <th>&nbsp;Actions</th>
+            </tr>
+          
+          <% for my_website in @my_websites %>
+            <tr class ='.seller_website_grid_row'>
+              <%url_string=create_website_url(my_website)%>
+              <td  class="investor_seller_website" id="investor_seller_website"><a href="http://<%="www." + url_string.gsub(/[wW]{3}\./,"" ).to_s%>" target="_blank"><%=url_string%></a></td>
+              <td  class="investor_seller_website" id="investor_seller_website"><input type="checkbox" value="1" name="my_website[active]" disabled="disabled"  id="my_website_active" <% if my_website.site.active%>checked="checked"<%end%>/></td>
+
+              <td  class="investor_seller_website" id="investor_seller_website"><%= link_to image_tag ("icons/edit.png")+'Edit', edit_seller_website_path(my_website.site_id) %> / <%= link_to  image_tag ("icons/delete.png",:width=>14,:height=>14)+' Delete', {:controller=>:seller_websites, :action=>:destroy,:id=>my_website.site_id}, :confirm => 'Are you sure?', :method => :delete %></td>
+            </tr>
+          <% end %>
+          
+          </table>

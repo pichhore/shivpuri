@@ -1,0 +1,25 @@
+<h2>Listing User Email Alert Definitions</h2>
+<%#=link_to "Alert Triggers", admin_alert_trigger_types_path %> 
+<%= link_to 'Create New Email Alert', new_admin_user_email_alert_definition_path %> |
+<%= link_to 'Process Email Alerts (this will not create duplicates)', :controller=>"/alerts",:action=>:process_user_email_alerts %>
+<div style="margin-left: 20px;">
+<% for email_alert_definition in @email_alert_definitions %>
+  <h3><%= h email_alert_definition.title %></h3>
+  <div class="formError"><%= "DISABLED" if email_alert_definition.disabled %></div>
+  <span>Email Type: <%= h UserEmailAlertDefinition::USER_EMAIL_TYPES.find{|k,v| v == email_alert_definition.email_type}.first %>
+  <br/>
+  <span>Product ID's: <%=h email_alert_definition.product_ids %></span>
+  <br/>
+  <span>Trigger Delay Days: <%=h email_alert_definition.trigger_delay_days %></span>
+  <br/>
+  <span>Email Subject: <%=h email_alert_definition.email_subject %></span>
+  <br/>
+  <span>Message Body: <%=h email_alert_definition.message_body %></span>
+  <br/>
+  <span><%= link_to 'Show', admin_user_email_alert_definition_path(email_alert_definition) %></span> |
+  <span><%= link_to 'Edit', edit_admin_user_email_alert_definition_path(email_alert_definition) %></span> |
+  <span><%= link_to 'Destroy', admin_user_email_alert_definition_path(email_alert_definition), :confirm => 'Are you sure?', :method => :delete %></span>
+  <hr/>
+<% end %>
+</div>
+

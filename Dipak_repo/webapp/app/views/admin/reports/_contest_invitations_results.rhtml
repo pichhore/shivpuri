@@ -1,0 +1,53 @@
+<h3>Contest Invitations Report</h3>
+
+<div class="report_filter">
+
+<%- form_tag({:action=>"execute", :id=>@report_name}, :method=>:get) do -%>
+Starting Date: <%=text_field_tag "start_date", @start_date_string_views%> and Ending Date: <%=text_field_tag "end_date", @end_date_string_views%> <%=submit_tag "Filter"%>
+<%- end -%>
+
+</div>
+
+<div class="report_export">
+Export as: <%=link_to "CSV", :action=>"execute", :id=>@report_name, :start_date=>@start_date_string_views, :end_date=>@end_date_string_views, :format=>"csv"%>
+</div>
+
+<div class="report_results">
+
+<table>
+
+  <thead>
+
+    <th>Campaign Code</th>
+    <th>From Name</th>
+    <th>From Email</th>
+    <th>To Name</th>
+    <th>To Email</th>
+    <th>Sent At</th>
+    <th>URL</th>
+    <th>Accepted At</th>
+
+  </thead>
+
+  <tbody>
+
+    <%-@results.each_with_index do |result, index| -%>
+    <tr <%="class='odd'" if index % 2 == 1%>>
+      <td><%=result.campaign_code%></td>
+      <td><%=result.from_name%></td>
+      <td><%=result.from_email%></td>
+      <td><%=result.to_name%></td>
+      <td><%=result.to_email%></td>
+      <td><%=result.created_at%></td>
+      <td><%=result.first_visited_url%></td>
+      <td><%=result.accepted_at%></td>
+    </tr>
+    <%-end -%>
+
+  </tbody>
+
+</table>
+
+<p>Total Contest Invitations: <%=@results.length%></p>
+
+</div>

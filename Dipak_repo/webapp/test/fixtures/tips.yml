@@ -1,0 +1,16 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: tip_one
+  tip_text: Tip One
+  target_page: buyer_dashboard
+  created_at: 2007-10-12 20:17:19
+two:
+  id: tip_two
+  tip_text: Tip Two
+  target_page: owner_dashboard
+  created_at: 2007-10-12 20:17:19
+three:
+  id: tip_three
+  tip_text: Tip Three
+  target_page: owner_dashboard
+  created_at: 2007-10-12 20:17:19

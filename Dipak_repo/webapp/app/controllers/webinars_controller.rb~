@@ -1,0 +1,38 @@
+require "net/http"
+require "uri"
+ require "xmlsimple"
+class WebinarsController < ApplicationController
+before_filter :login_required
+layout "application"
+
+  def index
+    #get directory here
+    uri = URI.parse("http://xproshowcasex.channel-api.livestream-api.com/2.0/listplaylists")
+    response = send_request_to_livestream(uri)
+    @hash = XmlSimple.xml_in(response.body)
+    @directories_hash = @hash["channel"][0]["directory"][0]["directory"]
+  end
+
+  def show_all_clip
+    #show clip here
+    uri = URI.parse("http://xproshowcasex.channel-api.livestream-api.com/2.0/listclips?id="+params[:id])
+    response = send_request_to_livestream(uri)
+    @hash = XmlSimple.xml_in(response.body)
+    @clips_hash = @hash["channel"][0]["item"]
+  end
+
+  def show_clip
+    #show individual clip
+    @clip = params[:id]
+  end
+
+  def live
+  end
+private
+
+ def send_request_to_livestream(uri)
+  http = Net::HTTP.new(uri.host, uri.port)
+  response = http.request(Net::HTTP::Get.new(uri.request_uri))
+ end
+
+end

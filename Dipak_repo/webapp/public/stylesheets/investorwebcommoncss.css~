@@ -1,0 +1,220 @@
+.label_text_style{ color: blue;
+                   font-size: 1.2em;
+                   font-weight: bold;
+                  }
+                  
+.form h3.form_heading{
+    clear: both;
+    background: #6C757A url(/images/corner.gif) no-repeat top right;
+    color: #FFF;
+    padding: 2px 0 3px 5px;
+    font: bold 0.9em Tahoma, Arial, Sans-Serif;
+    margin: 0 0 0px 0;
+  }
+  
+/* Full width for form pages
+   ------------------------- */
+
+.form {
+        width: 100%;
+        margin: 0 10px 10px 0;
+}
+
+.form h3 {
+        clear: both;
+        background: #6C757A url(/images/corner.gif) no-repeat top right;
+        color: #FFF;
+        padding: 2px 0 3px 5px;
+        font: bold 0.9em Tahoma, Arial, Sans-Serif;
+        margin: 0 0 0px 0;
+}
+
+.form h3.collapsed {
+        color: #000000;
+        cursor: pointer;
+        padding: 2px 0 7px 15px;
+        font: bold 1.0em Tahoma, Arial, Sans-Serif;
+        margin: 0 0 0px 0;
+        background: transparent url(/images/arrow-collapsed.gif) no-repeat;
+}
+
+.form h3.expanded {
+        color: #000000;
+        cursor: pointer;
+        padding: 3px 0 7px 15px;
+        font: bold 1.0em Tahoma, Arial, Sans-Serif;
+        margin: 0 0 10px 0;
+        background: transparent url(/images/arrow-expanded.gif) no-repeat;
+        height: 10px;
+}
+
+
+/* fieldset
+   ------ */
+
+fieldset {
+    clear: both;
+    padding: 1em 1em 1em 1em;
+    margin: 12px 0;
+    border: 1px solid #ccc;
+    background: #F5F5F5;
+    margin-top: 0em;
+}
+
+fieldset.half {
+    width: 50%;
+}
+
+fieldset.flush {
+    padding: 0;
+    margin: 12px 0;
+}
+fieldset legend, fieldset h3 {
+    font-weight: bold;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 1.4em;
+    padding-left: 0px;
+    color: #222;
+    background: #F5F5F5;
+}
+fieldset fieldset {
+    background-color: #ddd;
+    border-color: #bbb;
+    margin: 1em 0;
+}
+fieldset label {
+    font-weight: bold;
+}
+fieldset label small,fieldset legend small {
+    font-weight: normal;
+}
+fieldset.nolegend {
+    padding-top: 1em;
+}
+
+fieldset table {
+    width: 100%;
+}
+
+fieldset #optional table {
+    width: 80%;
+}
+
+fieldset table tr.hover_change:hover {
+    background:blue;
+    color:white;
+}
+
+fieldset table th {
+    text-align: left;
+    vertical-align: top;
+    padding-bottom: 5px;
+    padding-right: 10px;
+}
+
+fieldset table th.lead_space {
+    text-align: left;
+    vertical-align: top;
+    padding-bottom: 5px;
+    padding-right: 150px;
+}
+
+
+/* not sure if this will be needed for the setup page */
+fieldset th.section {
+    padding-left: 18px;
+    font-weight: normal;
+    text-decoration: underline;
+}
+
+fieldset table th.label_required {
+    width: 30%;
+    background: transparent url(/images/required.gif) no-repeat;
+    padding-left: 18px;
+    font: 0.9em/1.5em Tahoma,sans-serif;
+    font-weight: bold;
+    color: #454545;
+}
+
+fieldset table th.label {
+    width: 30%;
+    padding-left: 18px;
+}
+
+fieldset table th.expand_label {
+    padding-left: 18px;
+}
+
+fieldset table td.label {
+    padding-left: 18px;
+}
+
+fieldset table th.no_indent {
+    width: 30%;
+    padding-left: 0;
+}
+
+fieldset table td.no_indent {
+    padding-left: 0;
+}
+
+fieldset table td {
+    padding-bottom: 5px;
+    padding-left: 0px;
+}
+
+fieldset table td.description {
+    font-style: italic;
+    padding-left: 18px;
+    padding-top: 0;
+    padding-bottom: 18px;
+}
+
+fieldset table td.note {
+    font-weight: bold;
+}
+
+fieldset table td .example {
+    font-style: italic;
+    margin-left: 18px;
+}
+
+fieldset table td textarea {
+    margin-left: 18px;
+}
+
+input.submit_wholesale_prop {
+    background: url("/images/submit.gif") no-repeat scroll 0 0 #E0691A;
+    border: 0 none;
+    color: #FFFFFF;
+    cursor: pointer;
+    font: bold 1em Arial,Sans-Serif;
+    height: 24px;
+    margin: 0 15px 1px 0;
+    padding: 4px 0;
+    width: 65px;
+}
+
+input.submit_inv_web {
+    background: url("/images/submit.gif") no-repeat scroll 0 0 #E0691A;
+    border: 0 none;
+    color: #FFFFFF;
+    cursor: pointer;
+    font: bold 1em Arial,Sans-Serif;
+    height: 24px;
+    margin: 0 15px 1px 0;
+    padding: 4px 0;
+    width: 65px;
+}
+
+a.inv_web_anchor_tou_tag:link, 
+a.inv_web_anchor_tou_tag:visited, 
+a.inv_web_anchor_tou_tag:active {
+	color: #009fd1;
+    text-decoration: underline;
+	}    
+a.inv_web_anchor_tou_tag:hover {
+	color: #5d6165;
+    text-decoration: none;
+	}
+

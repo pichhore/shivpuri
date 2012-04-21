@@ -1,0 +1,53 @@
+<p class="intro">Dialogue with <%= dialouge_with(@thread)%></p>
+			
+<ul class="messages">
+    <%- messages.each do |message| %>
+        <% if message.sender == current_user %>
+        <li class="me">
+                <div class="profile">
+                        <div class="pic"><%= image_tag message.sender.avatar.url(:thumb) %></div>
+                        <span class="name">Name</span>
+                </div>
+                <div class="body">
+                        <div><%= message.body %><span class="message_time_stamp"><%= message_sent_at message.sent_at
+%></span></div>
+                </div>
+        </li>
+        <% else %>
+        <li class="other">
+                <div class="profile">
+                        <div class="pic"><%= image_tag message.sender.avatar.url(:thumb) %></div>
+                        <span class="name">Name</span>
+                </div>
+                <div class="body">
+                        <div><%= message.body %><span class="message_time_stamp"><%= message_sent_at message.sent_at
+%></span></div>
+                </div>
+        </li>
+        <%- end %>
+    <%- end %>
+</ul>
+<br>
+<%- if defined? new_message %>
+  <div id="new">
+    <%- form_for [:my, new_message] do |f| %>
+      <%= f.hidden_field :recipient_id %>
+      <%= f.hidden_field :subject %>
+      <%= f.error_messages %>
+      <fieldset>
+        <div>
+          <div class="fld">
+            <div class="fld-info"><%= f.text_area :body %></div>
+          </div>
+        </div>
+      </fieldset>
+      <p class="btn">
+        <div>
+          <button type="submit" name="commit" class="send_new_messages" id=""></button>
+          <%= link_to "Back to previous page", :back , :id => "messages_back_link"%>
+        </div>
+      </p>
+      <br/><br/>
+    <%- end %>
+  </div>
+<%- end %>

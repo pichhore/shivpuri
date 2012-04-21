@@ -1,0 +1,6 @@
+class NewSellerProfileCreatedNotificationWorker
+  @queue = :investor_notification_when_new_lead_created
+    def self.perform(user_id, seller_website_id, seller_profile_id)
+      UserNotifier.deliver_send_new_seller_lead_created_notification(user_name, user_email, product_name, purchase_date)
+    end 
+end

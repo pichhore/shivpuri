@@ -1,0 +1,13 @@
+class SellerResponderSequence < ActiveRecord::Base
+  uses_guid
+  has_many :seller_responder_sequence_mappings, :dependent => :destroy
+  has_many :responder_sequence_assign_to_seller_profiles, :dependent => :destroy
+
+  SEQUENCE_NAME = { "sequence_one" => "New Lead",  "sequence_two" => "Trying To Reach", "sequence_three" => "Next Steps", "sequence_four" => "Not Now", "do_not_call" => "Do Not Call", "none" => "None"}
+
+  def self.get_seller_responder(user_id,sequence_id)
+    seller_notification = SellerResponderSequence.find(:first,:conditions => ["user_id = ? and sequence_name LIKE ?",user_id,sequence_id])
+    return seller_notification unless seller_notification.nil?
+    return seller_notification = SellerResponderSequence.new()
+  end
+end

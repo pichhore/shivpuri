@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+        <META name="y_key" content="40cb663d1dd0917f">
+        <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+        <%- if @meta_keywords -%>
+        <meta name="keywords" content="<%=@meta_keywords%>"/>
+        <%- end -%>
+        <%- if @meta_description -%>
+        <meta name="description" content="<%=@meta_description%>"/>
+        <%- end -%>
+        <%- if @meta_robots -%>
+        <meta name="robots" content="<%=@meta_robots%>">
+        <%- end -%>
+
+        <%=stylesheet_link_tag "home" if @controller.controller_name == "home" and (@action_name == "index" or @action_name == "show_image")%>
+        <%=stylesheet_link_tag "style" unless @controller.controller_name == "home" and (@action_name == "index" or @action_name == "show_image")%>
+        <% if @content_for_page_styles -%>
+        <%= @content_for_page_styles %>
+        <% end -%>
+<%= javascript_include_tag :defaults %>
+<%= javascript_include_tag "calendar_date_select" %>
+<%= stylesheet_link_tag "calendar_date_select" %>
+<%= stylesheet_link_tag "reimatcher/epoch_styles" %>  
+<%= calendar_date_select_includes %>
+
+        <%=javascript_include_tag "prototype"%>
+		    <%= include_yui_editor_if_used %>
+		    <%= include_yui_lightbox_if_used %>
+        <%=javascript_include_tag "scriptaculous"%>
+        <%=javascript_include_tag "object.event.js"%>
+        <%=javascript_include_tag "base_controller"%>
+        <%=javascript_include_tag "utils-debug" if RAILS_ENV != "production"%>
+        <%=javascript_include_tag "utils" if RAILS_ENV == "production"%>
+        <%=javascript_include_tag "application"%>
+        <%=javascript_include_tag "validation"%>
+		<%=javascript_include_tag "reimatcher/epoch_classes"%>
+        <%=add_js_requires%>
+
+         <% if @content_for_page_scripts -%>
+         <script type="text/javascript">
+         // <![CDATA[
+         <%= @content_for_page_scripts %>
+         // ]]>
+         </script>
+         <% end -%>
+
+        <%- if @include_gmap_header -%>
+                        <%= GMap.header %>
+        <%- end -%>
+
+        <%= auto_discovery_link_tag(:rss, @auto_discovery_link_hash) if @auto_discovery_link_hash %>
+        <title>REIMatcher - <%=@page_title || "" %></title>
+        <link rel="icon" href="/favicon.png" type="image/png"/>
+</head>
+<body>
+  <% if RAILS_ENV == 'production' %>
+  <%= clicktale_top %>
+  <% end%>
+
+  <div id="container">
+
+    <%- if logged_in? -%>
+
+    <div id="user"><%=link_to "logged in as #{current_user.login}", :controller=>'account', :action=>'settings' %>  &middot; <%=link_to "Sign out", :controller=>'sessions', :action=>'destroy'%></div>
+
+    <%- else -%>
+
+    <div id="user">    	
+    	<%=link_to "Sign in", :controller=>'sessions', :action=>'new'%>
+	</div>
+
+    <%- end -%>
+
+		<div id="header">
+ 		<% if @controller.controller_name == "home" and @action_name == "index" then %>
+ 				<div id="mLogo"><a href="/"><img src="/images/logoHome.gif" alt="dwellgo - an exclusive online matching system designed for property owners and buyers to meet in the Austin Metro area, Texas" width="247" height="54" border="0" /></a></div>
+	    		<div id="tagline">...where property and buyers meet</div>
+		<% else %> 	
+			<div id="mLogoSub"><a href="/"><img src="/images/logoSub.png" alt="dwellgo - an exclusive online matching system designed for property owners and buyers to meet in the Austin Metro area, Texas" border="0" /></a></div>
+	    	<div id="taglineSub"></div>
+		<% end %>
+		</div>
+		
+    <%- if @controller.controller_name == "home" and @action_name == "index" -%>
+    <div id="mainNav">
+    <%- else -%>
+    <div id="">
+    <%- end -%>
+
+    <div class="tab_block">
+        <div class="<% if(params[:action]!='welcome') %>tab1 <% else %> tab1_active <% end %>">
+            1
+        </div>
+        <div class="<% if(params[:action]!='step1') %>tab2 <% else %> tab2_active <% end %>">
+            2
+        </div>
+        <div class="<% if(params[:action]!='step2') %>tab3 <% else %> tab3_active <% end %>">
+            3
+        </div>
+        <div class="<% if(params[:action]!='step3') %>tab4 <% else %> tab4_active <% end %>">
+            4
+        </div>
+    </div>
+
+      
+
+      <div id="subNavProfile">
+        <%- if !@profile.nil? -%>
+        <%=link_to "My Profiles", :controller=>"account", :action=>"profiles"%> » <%=truncate((@profile.buyer? or @profile.buyer_agent?) ? @profile.private_display_name : @profile.display_name,:length => 20)%>
+        <%- end -%>
+      </div>
+
+    </div>
+
+
+  <div class="content">
+
+    <div class="widecontent" style="margin-top:20px; position:relative; top: 20px;">
+
+      <div id="notice" class="notice" <%="style=\"display:none\"" if !flash[:notice]%>><%=flash[:notice]%></div>
+
+      <%- if flash[:warning] -%>
+
+      <div class="warning"><%=flash[:warning]%></div>
+
+      <%- end -%>
+
+      <%- if flash[:error] -%>
+
+      <div class="error"><%=flash[:error]%></div>
+
+      <%- end -%>
+
+    </div>
+
+    <%- if !@hide_page_title -%>
+    <div class="left">
+
+      <div style="margin-top:30px;" class="page_title <%=@page_icon_style || ''%>">
+
+        <%- unless @ignore_h2 -%>
+        <h2 <%="class='#{@page_heading_class}'" if @page_heading_class%>><%=@page_heading || @page_title%></h2>
+        <%- end -%>
+
+        <%- if @page_title_line_2 -%>
+        <h2 <%="class='#{@page_heading_line_2_class}'" if @page_heading_line_2_class%>><%=@page_title_line_2%></h2>
+        <%- end -%>
+        <%- if @page_title_h1 -%>
+        <h1 <%="class='#{@page_title_h1_class}'" if @page_title_h1_class%>><%=@page_title_h1%></h1>
+        <%- end -%>
+
+        <p class="tip"><%=@tip || '' %></p>
+
+      </div>
+
+    </div>
+
+    <div class="right">
+
+      <%- if @content_for_title_ad -%>
+
+        <%= yield :title_ad %>
+
+      <%- end -%>
+
+    </div>
+
+    <%- end -%>
+
+    <div class="widecontent">
+
+      <%=@content_for_layout%>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <div id="scratch" style="display:none;"></div>
+
+  </div>
+
+  <div id="footer">
+	REI Technologies LLC &copy; 2012 <br />
+	<%=link_to "Privacy",:controller=>"home", :action=>"privacy" %> |
+	<%=link_to "Terms of Use",:controller=>"home", :action=>"terms_of_use"%> |
+	<%- if logged_in? -%><%=link_to "Dashboard", '/account/profiles' %><% else %><%=link_to "Dashboard", '/login' %><% end %> |
+	<%=link_to "Support",:controller=>"home", :action=>"support"%>
+    <!--<div id="footerLeft">
+      <div style="text-align: left;">&copy; Copyright 2008</div>
+      <div style="text-align: left;">Dwellgo is a service of Jaymon Inc.</div>
+    </div>
+    <div id="footerRight">
+      <div style="text-align: left;">
+        <a href="http://dwellgo.com/blog/about">About Us</a> &middot; 
+        <a href="http://www.dwellgo.com/blog/our-team/">Our Team</a> &middot; 
+        <%#=link_to "Contact Us",:controller=>"home", :action=>"contact_us"%> &middot; 
+        <a href="http://dwellgo.com/faq">Support</a> &middot; 
+        <a href="http://dwellgo.com/blog">Blog</a> &middot; 
+        <%#=link_to "Give Us Feedback", new_feedback_path %> 
+      </div>
+      <div style="text-align: left;">
+        <%#=link_to "Tour",:controller=>"home", :action=>"tour"%>  &middot; 
+        <%#=link_to "Terms of Use",:controller=>"home", :action=>"terms_of_use"%>  &middot; 
+        <%#=link_to "Privacy Policy",:controller=>"home", :action=>"privacy"%> &middot; 
+        <a href="http://www.dwellgo.com/properties">Homes for Sale</a>
+        <a style="display: none;" href="http://www.coopdesign.com" target="_blank">Design by Cooper</a>
+        <%#=" &middot; "+@custom_footer_link if @custom_footer_link%>
+      </div>
+    </div>-->
+  </div>
+  </div>
+
+    <script type="text/javascript">
+       <%= ga_code_for_reim %>
+    </script>
+
+  <%- if @controller.controller_name == "home" and @action_name == "index" -%>
+  <script type="text/javascript" src="http://cetrk.com/pages/scripts/0007/4869.js"> </script>
+  <%- end -%>
+
+
+  <%= get_clicky_code %>
+<% if RAILS_ENV == 'production' %>
+<%= clicktale_bottom %>
+<% end %>
+</body>
+
+</html>

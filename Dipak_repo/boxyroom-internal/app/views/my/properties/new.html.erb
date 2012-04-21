@@ -1,0 +1,1493 @@
+<head>
+<!--[if IE 7]>
+  <style type="text/css">
+    .legend_new_p{left: -8px!important;}
+    .width_photo_area{left: -8px!important;}
+    #address_tap{height: 30px;}
+    #property_tap{height: 30px;}
+    #rental_tap{height: 30px;}
+    #photos_tap{height: 30px;}
+    #right_image_rental_detail{position: relative; top: -20px;}
+    #right_image_photos{position: relative; top: -20px;}
+    #right_image_property_description{position: relative; top: -20px;}
+    #right_image_address{position: relative; top: -20px;}
+    #next_prop_addr{right: -338px!important;}
+    .next{right: 0px;}
+    .next_prop_addr{position: relative;float: left; right: -507px;top: 0px;}
+    .checkbox{float:left;}
+    .next.rental_d{right: 0px!important;}
+    .next.property_d{right: 0px!important;}
+    .back.rental_d{right: 7px!important;bottom:0px;}
+    .back.property_d{right: 7px!important;bottom:0px;}
+    .browse_buttons{right: 5px;}
+  </style>
+<![endif]-->
+ <style type="text/css">
+
+    .dynamicDiv {
+    border:1px solid gray;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    width:148px;
+    height:132px;
+    float: left;
+    position:relative;
+    margin-right: 8px !important;
+    margin-top: 8px!important;
+    }
+
+    </style>
+<script language="javascript" type="text/javascript">
+  var addr_v = true
+  var property_v = true
+  var rental_v = true
+  window.onload = firstLoad;
+  function firstLoad() {
+    document.getElementById("errorExplanation-client").style.display =  'none';
+    document.getElementById("property_details").removeAttribute("href");
+    document.getElementById("rental_details").removeAttribute("href");
+    document.getElementById("photo_details").removeAttribute("href");
+    document.getElementById("listing-photos").style.display =  'none';
+    document.getElementById("listing-doc").style.display =  'none';
+    document.getElementById("right_image_photos").style.visibility =  'hidden';
+    document.getElementById("payment_notification").style.display =  'none';
+
+    <% session[:pictures_id] = nil %>
+    <% session[:prop_doc_id] = nil %>
+    document.getElementById("refresh").value = 1
+    document.getElementById("refresh_doc").value = 1
+    document.getElementById('upload_status').value = 1
+    document.getElementById('upload_doc_status').value = 1
+    check_address();
+    check_property_details();
+    check_rental_details();
+  }
+
+  function address_click() {
+    document.getElementById("property_details").removeAttribute("href");
+    document.getElementById("rental_details").removeAttribute("href");
+    document.getElementById("photo_details").removeAttribute("href");
+    var add = check_address();
+    var prop = check_property_details();
+    var rent = check_rental_details();
+    document.getElementById("listing-photos").style.display =  'none';
+    document.getElementById("listing-doc").style.display =  'none';
+    document.getElementById("right_image_photos").style.visibility =  'hidden';
+    if (add)
+    {
+      hide_address_message();
+      document.getElementById("errorExplanation-client").style.display =  'none';
+    }
+    hide_rental_messsage();
+    hide_property_message();
+     addr_v = true;
+     property_v = true
+  }
+  function property_click() {
+    document.getElementById("rental_details").removeAttribute("href");
+    document.getElementById("photo_details").removeAttribute("href");
+    var add = check_address();
+    var prop = check_property_details();
+    var rent = check_rental_details();
+    document.getElementById("listing-photos").style.display =  'none';
+    document.getElementById("listing-doc").style.display =  'none';
+    document.getElementById("right_image_photos").style.visibility =  'hidden';
+    if (add  && addr_v)
+    {
+      hide_address_message();
+      document.getElementById("errorExplanation-client").style.display =  'none';
+      addr_v_check(addr_v);
+     }
+     if (prop && add)
+     {
+      hide_property_message();
+      document.getElementById("errorExplanation-client").style.display =  'none';
+     }
+     hide_rental_messsage();
+     property_v = true
+  }
+  function rental_click()
+  {
+    var prop = check_property_details();
+    var rent = check_rental_details();
+    var add =  check_address();
+    if (add && prop && property_v)
+    {
+      hide_address_message();
+      hide_property_message();
+      document.getElementById("errorExplanation-client").style.display =  'none';
+      property_v_check(property_v);
+    }
+    document.getElementById("photo_details").removeAttribute("href");
+    check_rental_details();
+    document.getElementById("listing-photos").style.display =  'none';
+    document.getElementById("listing-doc").style.display =  'none';
+    document.getElementById("right_image_photos").style.visibility =  'hidden';
+  }
+  
+  function photos()
+  {
+    var add =  check_address();
+    var prop = check_property_details();
+    var rental = check_rental_details()
+    if (add && prop && rental)
+    {
+      hide_address_message();
+      hide_property_message();
+      hide_rental_messsage();
+      document.getElementById("errorExplanation-client").style.display =  'none';
+    document.getElementById("listing-photos").style.display =  'block';
+    document.getElementById("listing-doc").style.display =  'block';
+      document.getElementById("right_image_photos").style.visibility =  'visible';
+     }
+  }
+  
+  // dynamic div
+
+  function createDiv()
+  {
+      var upload_sta = document.getElementById('upload_status');
+      if(upload_sta.value != 0){
+      if (load_image())
+      {  image_select();
+         var select_status = document.getElementById('picture_select');
+         if  (select_status.value == 1)
+         {
+	        $('#upload_photo').submit();
+            upload_sta.value = 0;
+	        if ( typeof createDiv.counter == 'undefined' ) {
+	          createDiv.counter = 1;
+	          x = createDiv.counter
+	        }
+	        else
+	        {
+	          x = createDiv.counter
+	        }
+  
+	        var tag_id = 'photo_div'+x
+  
+	        var divTag = document.createElement("div");
+  
+	        divTag.id = tag_id;
+  
+	        divTag.setAttribute("align","center");
+  
+	        divTag.style.margin = "0px auto";
+  
+	        ++createDiv.counter
+  
+	        divTag.className ="dynamicDiv";
+  
+	        document.getElementById("photo_div").appendChild(divTag);
+	        document.getElementById("upload_btn").style.cursor = 'default'
+	      }
+          document.getElementById("upload_photo").form.submit();
+        }
+      }
+  }
+
+  // dynamic div for property doc
+
+  function createDocDiv()
+  {
+      var upload_doc_sta = document.getElementById('upload_doc_status');
+      if(upload_doc_sta.value != 0){
+      if (load_doc())
+      {  image_select();
+         var select_status = document.getElementById('picture_select');
+         if  (select_status.value == 1)
+         {
+	        $('#upload_prop_doc').submit();
+            upload_doc_sta.value = 0;
+	        if ( typeof createDocDiv.counter == 'undefined' ) {
+	          createDocDiv.counter = 1;
+	          x = createDocDiv.counter
+	        }
+	        else
+	        {
+	          x = createDocDiv.counter
+	        }
+	        var tag_id = 'doc_photo_div'+x
+  
+	        var divTag = document.createElement("div");
+  
+	        divTag.id = tag_id;
+  
+	        divTag.setAttribute("align","center");
+  
+	        divTag.style.margin = "0px auto";
+  
+	        ++createDocDiv.counter
+  
+	        divTag.className ="dynamicDiv";
+  
+	        document.getElementById("doc_photo_div").appendChild(divTag);
+	        }
+        }
+     }
+  }
+</script>
+</head>
+
+<div id="content">
+    <div class="container">
+	<div style="text-align: center;" id="payment_notification">
+	      <div id="messg_pay" class="message_payment"><span><p class="notice" id="flash">Please upload the file of Accepted format</p></span></div>
+	</div>
+        <div class="primary" style="width:660px;margin-right:40px;margin-bottom: 0px;">
+
+		<div id="errorExplanation-client"  style="display: none;">
+		    <h2>Opps! There are problems with your information.</h2>
+		    <ul>
+		        <li id="state_in_address" style="display: none;">State must be greater than 1 character.</li>
+			<li id="city_in_address" style="display: none;">City must be greater than 1 character.</li>
+		        <li id="street_in_address" style="display: none;">Street name must be greater than 3 characters.</li>
+		        <li id="street_character_in_address" style="display: none;">Street name must be less than 64 characters.</li>
+			<li id="unit_in_address" style="display: none;">Enter unit no.</li>
+		        <li id="unit_character_in_address" style="display: none;">Unit no must be less than 9 characters.</li>
+			<li id="unit_num_in_address" style="display: none;">Unit no must be less than 9 characters.</li>
+		        <li id="postal_code_in_address" style="display: none;">Postal code must be greater than 3 digits.</li>
+		        <li id="postal_code_num_in_address" style="display: none;">Postal code must be a numeric value.</li>
+			<li id="title_in_property" style="display: none;">Title must be greater than 15 characters.</li>
+			<li id="title_character_in_property" style="display: none;">Title must be less than 97 characters.</li>
+		        <li id="description_in_property" style="display: none;">Description must be greater than 15 characters.</li>
+		        <li id="description_character_in_property" style="display: none;">Description must be less than 1200 characters.</li>
+			<li id="floor_area_in_property" style="display: none;">Floor area must be a number.</li>
+			<li id="rent_in_rental" style="display: none;">Monthly rental must be a number.</li>
+			<li id="date_in_rental" style="display: none;">Available from Date must be after <span id="date_message"></span>.</li>
+			<li id="min_max_in_rental" style="display: none;">Maximum Rental period must be greater than or equal to Minimum Rental period.</li>
+		    </ul>
+		</div>
+
+
+            <%- nested_form_for [:my, @property], :html => {:multipart => true,:class=>"form",:id=>"property-form"} do |f| %>
+                <ul class="navigation">
+                    <li id="address_tap"><a href="#listing-address" onclick="address_click()">Address<div id="right_image_address"></div></a></li>
+                    <li id="property_tap"><a href="#listing-property" id="property_details" onclick="property_click()">Property Details<div id="right_image_property_description"></div></a></li>
+                    <li id="rental_tap"><a href="#listing-rental" id="rental_details" onclick="rental_click()">Rental Details<div id="right_image_rental_detail"></div></a></li>
+                    <li id="photos_tap"><a href="#listing-photos"  id="photo_details" onclick="photos();">Photos<div id="right_image_photos"></div></a></li>
+                </ul>
+
+                <%= f.error_messages :header_message => "Opps! There are problems with your information." , :message => ""%>
+                <%- f.fields_for :address do |address| %>
+                <fieldset id="listing-address" class="section">
+                    <legend class="legend_new_p">List a Property - Address</legend>
+		    <div style="margin-top: 46px;"></div>
+                    <p>
+		    <%= address.country_select(:country_id, priority_countries = nil, options = {}, html_options = {:onchange=>"check_address();"}) %>
+                    </p>
+                    <p>
+                        <%= address.label :state %>
+                        <%= address.text_field :state, :onblur=>"check_address()" %>
+                    </p>
+                    <p>
+                          <%= address.label :city %>
+                        <%= address.text_field :city, :onblur=>"check_address()" %>
+                    </p>
+                    <p>
+                        <%= address.label :street_name %>
+                        <%= address.text_field :street_name, :onblur=>"check_address()" %>
+                    </p>
+                    <p>
+                        <%= address.label :unit_no, "Unit Number" %>
+                        <%= address.text_field :unit_no, :onblur=>"check_address()" %>
+                    </p>
+                    <p>
+                        <%= address.label :postal_code %>
+                        <%= address.text_field :postal_code , :onblur=>"check_address()"%>
+                    </p>
+		    <br />
+		    <p style="text-align:right;">
+		      <a href="javascript:void(0);" onclick="check_property_address_next();" class="next" id="next_prop_addr"  style="right: -562px;" ></a>
+		    </p>
+                </fieldset>
+                <%- end %>
+                <fieldset id="listing-property" class="section">
+                    <legend class="legend_new_p">List a Property – Property Details</legend>
+                    <div style="margin-top: 46px;"></div>
+		    <p class="full" >
+                        <%= f.label :title %>
+                        <%= f.text_field :title, :onblur=>"check_property_details();" %>
+                    </p>
+                    <p class="full" >
+                        <%= f.label :description %>
+                        <%= f.text_area :description, :onblur=>"check_property_details();" %>
+                    </p>
+                   <p class="full normal" id="new_normal_label">
+                        <%= f.label :category, "Type" %>
+                        <%= select(:property, :category, PropertiesHelper::OPTIONS_FOR_CATEGORY_SELECT, options ={:style=>"width:120px;"}, html_options={:onchange=>"check_property_details();" })%>
+                    </p>
+                    <p class="full normal" id="new_normal_label">
+                       <%= f.label :rooms, "No. of rooms to let" %></label>
+                       <%= f.select :rooms, [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],{:prompt => false}, :style=>"width: 105px;" %>
+                    </p>
+                   <p class="full normal"  id="new_normal_label">
+                        <%= f.label :floor_area1, "Floor area (optional)" %>
+                        <%= f.text_field :floor_area, :onblur=>"check_property_details();"%>
+                         <%= f.select :unit, options_for_unit%>
+                    </p>
+		   <div style="clear:both;"> </div>
+		   <div>
+		      <div class="pro-sty" >Facilities</div>
+		      <p class="full normal" id="check_width">
+			  <%= f.check_box :bathroom , :class => "checkbox"%>
+			  <%= f.label :bathroom, "Private bathrooms available" %>
+		      </p>
+			<p class="full normal" id="check_width">
+			  <%= f.check_box :parking, :class => "checkbox" %>
+			  <%= f.label :parking, "Parking Available" %>
+		      </p>
+			<p class="full normal" id="check_width">
+			  <%= f.check_box :wheelchair_accessible, :class => "checkbox"%>
+			  <%= f.label :wheelchair_accessible, "Wheelchair accessible" %>
+		      </p>
+			<p class="full normal" id="check_width">
+			  <%= f.check_box :elevator_in_building, :class => "checkbox"%>
+			  <%= f.label :elevator_in_building, "Elevator in building" %>
+		      </p>
+			<p class="full normal" id="check_width">
+			  <%= f.check_box :garden, :class => "checkbox"%>
+			  <%= f.label :garden, "Garden" %>
+		      </p>
+			<p class="full normal" id="check_width">
+			  <%= f.check_box :balcony, :class => "checkbox"%>
+			  <%= f.label :balcony, "Balcony" %>
+		      </p>
+		      <div style="clear:both;"> </div>
+		    </div>
+                    <div>
+		      <div class="pro-sty" >Amenities</div>
+		      <p class="full normal" id="check_width">
+			  <%= f.check_box :kitchen, :class => "checkbox"%>
+			  <%= f.label :kitchen, "Kitchen" %>
+		      </p>
+		      <p class="full normal" id="check_width">
+			  <%= f.check_box :freezer, :class => "checkbox"%>
+			  <%= f.label :freezer, "Fridge/freezer" %>
+		      </p>
+		      <p class="full normal" id="check_width">
+			  <%= f.check_box :dishwasher, :class => "checkbox"%>
+			  <%= f.label :dishwasher, "Dishwasher" %>
+		      </p>
+		      <p class="full normal" id="check_width">
+			  <%= f.check_box :washer, :class => "checkbox" %>
+			  <%= f.label :washer , "Washer" %>
+		      </p>
+		      <p class="full normal" id="check_width">
+			  <%= f.check_box :heating, :class => "checkbox"%>
+			  <%= f.label :heating, "Heating" %>
+		      </p>
+		      <p class="full normal" id="check_width">
+			  <%= f.check_box :shower, :class => "checkbox"%>
+			  <%= f.label :shower, "Shower/bathtub" %>
+		      </p>
+		      <p class="full normal" id="check_width">
+			  <%= f.check_box :Internet, :class => "checkbox"%>
+			  <%= f.label :Internet, "Internet" %>
+		      </p>
+		    <p class="full normal" id="check_width">
+			  <%= f.check_box :wifi, :class => "checkbox"%>
+			  <%= f.label :wifi, "Wifi (Wireless LAN)" %>
+		      </p>
+		      <p class="full normal" id="check_width">
+			  <%= f.check_box :phone, :class => "checkbox"%>
+			  <%= f.label :phone, "Phone" %>
+		      </p>
+		      <p class="full normal" id="check_width">
+			  <%= f.check_box :tv, :class => "checkbox"%>
+			  <%= f.label :tv, "TV" %>
+		      </p>
+		      <p class="full normal" id="check_width">
+			  <%= f.check_box :air_conditioning, :class => "checkbox"%>
+			  <%= f.label :air_conditioning   , "Air Conditioning" %>
+		      </p>
+		  <div style="clear:both;"> </div>
+                 </div>
+                 <div>
+		  <div class="pro-sty" >Nearby</div>
+		     <p class="full normal" id="check_width">
+			  <%= f.check_box :schools, :class => "checkbox"%>
+			  <%= f.label :schools, "Schools" %>
+		      </p>
+		      <p class="full normal" id="check_width">
+			  <%= f.check_box :bus_stops, :class => "checkbox"%>
+			  <%= f.label :bus_stops, "Bus Stops" %>
+		      </p>
+		      <p class="full normal" id="check_width">
+			  <%= f.check_box :railway_stations, :class => "checkbox"%>
+			  <%= f.label :railway_stations, " Railway Station" %>
+		      </p>
+		      <p class="full normal" id="check_width">
+			  <%= f.check_box :shopping_centres, :class => "checkbox" %>
+			  <%= f.label :shopping_centres , "Shopping Centres" %>
+		      </p>
+		      <p class="full normal" id="check_width">
+			  <%= f.check_box :parks, :class => "checkbox"%>
+			  <%= f.label :parks, "Parks" %>
+		      </p>
+		      <p class="full normal" id="check_width">
+			  <%= f.check_box :community_facilities, :class => "checkbox"%>
+			  <%= f.label :community_facilities, "Community Facilities" %>
+		      </p>
+		      <p class="full normal" id="check_width">
+			  <%= f.check_box :entertainment, :class => "checkbox"%>
+			  <%= f.label :entertainment, "Entertainment" %>
+		      </p>
+		      <p class="full normal" id="check_width">
+			  <%= f.check_box :restaurants, :class => "checkbox"%>
+			  <%= f.label :restaurants, "Restaurants" %>
+		      </p>
+		      <p class="full normal" id="check_width">
+			  <%= f.check_box :recreation_centres, :class => "checkbox"%>
+			  <%= f.label :recreation_centres, "Recreation Centres" %>
+		      </p>
+		      <p class="full normal" id="check_width">
+			  <%= f.check_box :health_care, :class => "checkbox"%>
+			  <%= f.label :health_care, "Health Care" %>
+		      </p>
+		      <p class="full normal" id="check_width">
+			  <%= f.check_box :emergency_services, :class => "checkbox"%>
+			  <%= f.label :emergency_services   , "Emergency Services" %>
+		      </p>
+		     <div style="clear:both;"> </div>
+                   </div>
+		   <div>
+		      <div class="pro-sty" >Style</div>
+		      <p class="full normal" id="radio_width">
+			  <%= f.radio_button :property_style, "Cool", :class => "checkbox" %>
+			  <%= f.label :property_style, "Cool", :value => "Cool" %>
+		      </p>
+		      <p class="full normal" id="radio_width">
+			  <%= f.radio_button :property_style, "Cozy", :class => "checkbox" %>
+			  <%= f.label :property_style, "Cozy", :value => "Cozy" %>
+		      </p>
+		      <p class="full normal" id="radio_width">
+			  <%= f.radio_button :property_style, "Modern", :class => "checkbox" %>
+			  <%= f.label :property_style, "Modern", :value => "Modern" %>
+		      </p>
+		      <p class="full normal" id="radio_width">
+			  <%= f.radio_button :property_style, "Traditional", :class => "checkbox" %>
+			  <%= f.label :property_style, "Traditional", :value => "Traditional" %>
+		      </p>
+		      <p class="full normal" id="radio_width">
+			  <%= f.radio_button :property_style, "Compact", :class => "checkbox" %>
+			  <%= f.label :property_style, "Compact", :value => "Compact" %>
+		      </p>
+		      <p class="full normal" id="radio_width">
+			  <%= f.radio_button :property_style, "Airy", :class => "checkbox" %>
+			  <%= f.label :property_style, "Airy", :value => "Airy" %>
+		      </p>
+		      <p class="full normal" id="radio_width">
+			  <%= f.radio_button :property_style, "Simple", :class => "checkbox" %>
+			  <%= f.label :property_style, "Simple", :value => "Simple" %>
+		      </p>
+		      <p class="full normal" id="radio_width">
+			  <%= f.radio_button :property_style, "Fresh", :class => "checkbox" %>
+			  <%= f.label :property_style, "Fresh", :value => "Fresh" %>
+		      </p>
+		      <p class="full normal"  id="radio_width">
+			  <%= f.radio_button :property_style, "Green", :class => "checkbox" %>
+			  <%= f.label :property_style, "Green", :value => "Green" %>
+		      </p>
+		      <p class="full normal" id="radio_width">
+			  <%= f.label :property_style, "Bright", :value => "Bright" ,:style => "width: 81px;"%>
+			  <%= f.radio_button :property_style, "Bright", :class => "checkbox" %>
+		      </p>
+                    </div>
+		    <br />
+		    <div style="clear:both"> &nbsp;</div>
+		    <div style="padding: 0px;height: 39px;padding-right: 22px;">  
+		      <a href="javascript:void(0);" onclick="check_listing_details_next();" class="next property_d" style="float: right;position: inherit;"></a>
+		      <a href="javascript:void(0);" onclick="back_to_address();" class="back property_d" style="float: right;position: inherit;"></a> 
+		    </div>
+                </fieldset>
+
+                <fieldset id="listing-rental" class="section">
+                    <legend class="legend_new_p">List a Property – Rental Details</legend>
+                    <div style="margin-top: 46px;"></div>
+                    <p class="full" >
+                        <%= f.label :house_rules, "House Rules: 5000 character free text"%>
+                        <%= f.text_area :house_rules, :onblur=>"check_rental_details();" %> 
+                    </p>
+		    <div style="margin-top: 46px;"></div>
+		        <p class="full normal" id="new_normal_label">
+                      <span id="rental_width1">
+                        <%= f.label :monthly_rental1,"Monthly Rental" %>
+                        <%= f.text_field :monthly_rental,:class=>"rental_width",:id=>"property_monthly_rental", :onblur=>"check_rental_details();"%>
+                      </span>
+                      <%= select_tag "property[currency_type]",
+                        options_for_select(options_for_currency("sym"),
+                        current_user.prefers_currency), options ={ :style=>"width:110px;" ,"margin-left"=>"10px;", :prompt=> true} %>
+                    </p>
+                     <p class="full normal" id="new_normal_label">
+                        <%= f.label :available_at, "Available from" %>
+                        <%= f.date_select( :available_at, {:start_year => Time.now.year},{:class=>:small, :onchange => "check_rental_details();"})%>
+                    </p>
+
+                    <p class="full normal" id="new_normal_label">
+                        <%= f.label :rental_period, "Minimum Rental period" %>
+                        <%= f.select :rental_period, [1,2,3,4,5,6,7,8,9,10,11,12],{:prompt => false}, :style=>"width: 105px;", :onChange => "check_rental_details();" %>
+                    </p>
+                    <p class="full normal" id="new_normal_label">
+                        <%= f.label :max_rental_period, "Maximum Rental period" %>
+                        <%= f.select :max_rental_period, [1,2,3,4,5,6,7,8,9,10,11,12],{:prompt => false}, :style=>"width: 105px;" , :onChange=>"check_rental_details();"
+                     %>
+                    </p>
+                    <p class="full normal" id="new_normal_label">
+                        <%= f.label :occupancy, "No. of occupants allowed" %>
+                        <%= f.select :occupancy, [1,2,3,4,5,6,7,8,9,10],{:prompt => false},  :style=>"width: 105px;" %>
+                    </p>
+                    <p class="full normal" id="check_width_rental">
+                        <%= f.label :sublet, "Are tenants allowed to sublet to sub-tenants" %>
+                        <%= f.check_box :sublet, {}, true, false %>
+                    </p>
+                    <p class="full normal" id="check_width_rental">
+                        <%= f.label :pets_allowed, "Are tenants allowed to keep pets" %>
+                        <%= f.check_box :pets_allowed, {}, true, false %>
+                    </p>
+                    <p class="full normal" id="check_width_rental">
+                        <%= f.label :short_notice, "Are you able to accept tenants on short notice" %>
+                        <%= f.check_box :short_notice, {}, true, false %>
+                    </p>
+                    <p class="full normal" id="check_width_rental">
+                        <%= f.label :landlord_address, "Will you be staying at the same address" %>
+                        <%= f.check_box :landlord_address, {}, true, false %>
+                    </p>
+		    <br />
+		    <div style="clear:both"> &nbsp;</div>
+		    <div style="padding: 0px;height: 39px;padding-right: 22px;" > 
+		       <a href="javascript:void(0);" onclick="check_rental_details_next();" class="next rental_d" style="float: right;position: inherit;"></a>
+		        <a href="javascript:void(0);" onclick="back_to_property();" class="back rental_d" style="float: right;position: inherit;"></a> 
+		    </div>
+                </fieldset>
+            <%- end %>
+
+		<fieldset id="listing-photos" class="section" style="padding-top: 0px;padding-right: 0px;padding-left: 0px;">
+		    <legend class="width_photo_area" id="photos_listing">List a Property – Photos</legend>
+		    <div style="margin-top: 46px;"></div>
+		<div id="upload" class="span-14 h_block">
+		    <p class="highlight upload_photo"><strong>Tip: </strong> It really helps to add the  most gorgeous photos of your property. Accepted file formets are < jpg, gif, png > </p>
+                    <div id="photo_div"></div>
+		    <div style="clear:both"> &nbsp;</div>
+		    <% form_for :picture ,@picture, :url=>photos_property_my_account_path, :html => { :multipart => true,:id=>"upload_photo" , :target=>"frame",'data-remote'=>"true"} do |form| %>
+                      <div>
+		      <div class="browse_buttons">
+		      <span id="list_new_upload_photo"></span>
+		      <%= form.file_field :image ,:size=>1 ,:onchange=> "createDiv();"%>
+		      </div>
+		      <input name="page_refresh" type="hidden" value=1  id="refresh"/>
+              <input name="upload-status" type="hidden" value=1  id="upload_status"/>
+		      <input id="picture_select" type="hidden" value=0  />
+                      <div class="left_margin">
+                      </div>
+                    <% end %>
+		      <iframe id='frame' name="frame" style="display: none;">
+		      </iframe><div style="clear: both;"></div>
+                </div> 
+                </fieldset>
+
+       <div style="clear:both;"></div>
+       <br><br>
+
+	    <fieldset id="listing-doc" class="section" style="padding-top: 0px;padding-right: 0px;padding-left: 0px;">
+		<legend class="width_prop_doc_area" id="photos_listing">List a Property – Upload Proof of Property Ownership (Optional)</legend>
+		<div style="margin-top: 46px;"></div>
+		  <div id="picture_block">
+		    <p class="highlight upload_photo"><strong>Tip: </strong> Boost your credibility as a landlord by uploading a scan of the title or deed, bill of property sale, utilities or cable television bill (with your name and property address clearly shown). Once we verify your documents, your listing will have a ‘Verified’ status.</p>
+		</div>
+	    <div id="" class="">
+		<div id="doc_photo_div"></div>
+		<div style="clear:both"> &nbsp;</div>
+		<% form_for :property_doc ,@property_doc, :url=>upload_property_docs_my_account_path, :html => { :multipart => true,:id=>"upload_prop_doc" , :target=>"frame",'data-remote'=>"true"} do |form| %>
+		  <div>
+		  <div class="browse_buttons">
+		  <span id="upload_prop_doc_btn"></span>
+		  <%= form.file_field :document ,:size=>1, :onchange=> "createDocDiv();"%>
+		  </div>
+		  <input id="doc_select" type="hidden" value=0 />
+		  <input name="page_refresh" type="hidden" value=1  id="refresh_doc"/>
+          <input name="upload-status" type="hidden" value=1  id="upload_doc_status"/>
+		  <div class="left_margin">
+		  </div>
+		<% end %>
+		  <iframe id='doc_frame' name="doc_frame" style="display: none;">
+		  </iframe><div style="clear: both;"></div>
+		  <div id="submit_and_back">
+		    <button id="form_submit_new" onclick="submit_new_list();"></button>
+		    <a href="javascript:void(0);" onclick="back_to_rental();" class="back" ></a>
+		  </div>
+	    </div> 
+       </fieldset>
+        </div>
+        <div class="secondary">
+        </div>
+    </div>
+</div>
+
+
+
+<Script type="text/javascript">
+
+
+  function submit_new_list()
+  {
+    document.forms["property-form"].submit();
+  }
+  function change_tab(hide_block, show_block, hide_tap,show_tap){
+    $(hide_block).addClass("ui-tabs-hide");
+    $(show_block).removeClass("ui-tabs-hide");
+    $(show_tap).addClass("ui-state-focus ui-tabs-selected ui-state-active");
+    $(hide_tap).removeClass("ui-state-focus ui-tabs-selected ui-state-active"); 
+  }
+
+  function back_to_rental()
+  {
+    change_tab('#listing-photos','#listing-rental','#photos_tap','#rental_tap');
+    document.getElementById("listing-photos").style.display =  'none';
+    document.getElementById("listing-doc").style.display =  'none';
+    document.getElementById("right_image_photos").style.visibility =  'hidden';
+  }
+
+  function check_address()
+  { 
+      var  valid = true
+      var state = document.getElementById("property_address_attributes_state")
+      var city = document.getElementById("property_address_attributes_city")
+      var street = document.getElementById("property_address_attributes_street_name")
+      var unit = document.getElementById("property_address_attributes_unit_no")
+      var postal_code = document.getElementById("property_address_attributes_postal_code")
+      var country = document.getElementById("property_address_attributes_country_id")
+
+      if  (!test_state(state.value) ||  !test_city(city.value)  ||  !test_city(street .value)  ||  !test_unit(unit.value)  ||  !test_postal_code(postal_code.value) || !test_country(country.value))
+      {
+          valid = false
+      }
+      if (valid== true)
+      {
+          document.getElementById("right_image_address").style.visibility =  'visible';
+	  document.getElementById("property_details").href = "#listing-property";
+      }
+      else
+      {
+          document.getElementById("right_image_address").style.visibility =  'hidden';
+	  document.getElementById("property_details").removeAttribute("href");
+          document.getElementById("rental_details").removeAttribute("href");
+          document.getElementById("photo_details").removeAttribute("href");
+      }
+      return valid
+  }
+
+  function check_property_address_next()
+  {
+      var valid = true
+      var state = document.getElementById("property_address_attributes_state")
+      var city = document.getElementById("property_address_attributes_city")
+      var street = document.getElementById("property_address_attributes_street_name")
+      var unit = document.getElementById("property_address_attributes_unit_no")
+      var postal_code = document.getElementById("property_address_attributes_postal_code")
+      var country = document.getElementById("property_address_attributes_country_id")
+      if (!test_state(state.value))
+      {
+        state.style.border = '1px solid red';
+	valid = false
+      }
+      else
+      {
+        state.style.border = '1px solid #BEBEBE';
+      }
+      if (!test_city(city.value))
+      {
+        city.style.border = '1px solid red';
+	valid = false
+      }
+      else
+      {
+        city.style.border = '1px solid #BEBEBE';
+      }
+     if (!test_street(street .value))
+     {
+        street.style.border = '1px solid red';
+	valid = false
+     }
+     else
+     {
+       street.style.border = '1px solid #BEBEBE';
+     }
+     if (!test_unit(unit.value))
+     {
+        unit.style.border = '1px solid red';
+	valid = false
+     }
+     else
+     {
+        unit.style.border = '1px solid #BEBEBE';
+     }
+     if (!test_postal_code(postal_code.value))
+     {
+        postal_code.style.border = '1px solid red';
+	valid = false
+     }
+     else
+     {
+        postal_code.style.border = '1px solid #BEBEBE';
+     }
+     if (valid==true)
+     { 
+        change_tab('#listing-address','#listing-property','#address_tap','#property_tap');
+     }
+     error_messages_address()
+  }
+   function test_country(country)
+  {
+    if (country=="")
+    {
+      return false
+    }
+    return true
+  }
+  function test_state(state)
+  {
+    if (state.length < 2)
+    {
+      return false
+    }
+    return true
+  }
+  function test_city(city)
+  {
+    if (city.length < 2)
+    {
+      return false
+    }
+    return true
+  }
+  function test_street(street)
+  {
+    if (street.length < 4 || !test_street_max_length(street))
+    {
+      return false
+    }
+    return true
+  }
+
+  function test_street_max_length(street)
+  {
+    if (street.length >63)
+    {
+      return false
+    }
+    return true
+  }
+  function test_unit(unit)
+  {
+      if ( unit == "" || !unit_minimum_length(unit))
+      {
+        return false
+      }
+      return true
+  }
+
+  function unit_minimum_length(unit)
+  {
+    if  (unit.length > 8)
+    {
+        return false
+    }
+    return true
+  }
+
+  function test_postal_code(postal)
+  {
+      if ( (postal != parseInt(postal) ) ||  postal =="" || postal.length < 4)
+      {
+        return false
+      }
+      return true
+  }
+
+  //check property
+  function check_property_details()
+  {
+      var valid = true
+      var p_title = document.getElementById("property_title")
+      var p_description = document.getElementById("property_description")
+      var p_floor_area = document.getElementById("property_floor_area")
+      var p_type = document.getElementById("property_category")
+
+      if (!test_property_title(p_title.value ) || !test_property_description(p_description.value) || !test_property_floor_area(p_floor_area.value) )
+      {
+          valid = false
+      }
+       if (valid== true)
+      {
+          document.getElementById("right_image_property_description").style.visibility =  'visible';
+	  document.getElementById("rental_details").href = "#listing-rental";
+      }
+      else
+      {
+          document.getElementById("right_image_property_description").style.visibility =  'hidden';
+          document.getElementById("rental_details").removeAttribute("href");
+          document.getElementById("photo_details").removeAttribute("href");
+      }
+      return valid
+  }
+  
+  function check_listing_details_next()
+  {
+      var valid = true
+      var p_title = document.getElementById("property_title")
+      var p_description = document.getElementById("property_description")
+      var p_floor_area = document.getElementById("property_floor_area")
+      var p_type = document.getElementById("property_category")
+      var p_type_border = document.getElementById("property_category-button")
+      if (!test_property_title(p_title.value))
+      {
+         p_title.style.border = '1px solid red';
+         valid = false
+      }
+      else
+      {
+        p_title.style.border = '1px solid #BEBEBE';
+      }
+      if (!test_property_description(p_description.value))
+      {
+        p_description.style.border = '1px solid red';
+	valid = false
+      }
+      else
+      {
+        p_description.style.border = '1px solid #BEBEBE';
+      }
+      if (!test_property_floor_area(p_floor_area.value))
+      {
+        p_floor_area.style.border = '1px solid red';
+	valid = false
+      }
+      else
+      {
+        p_floor_area.style.border = '1px solid #BEBEBE';
+      }
+
+     if (valid==true)
+     {
+        change_tab('#listing-property','#listing-rental','#property_tap','#rental_tap');
+     }
+     error_messages_property()
+  }
+   function test_p_type(p_type)
+  {
+    if (p_type=="")
+    {
+      return false
+    }
+    return true
+  }
+  function test_property_title(p_title )
+  {
+      if (p_title.length < 16 || !test_max_property_title(p_title ))
+      {
+        return false
+      }
+      return true
+  }
+  
+  function test_max_property_title(p_title )
+  {
+      if (p_title.length > 96)
+      {
+        return false
+      }
+      return true
+  }
+  function test_property_description(p_description )
+  {
+      if ( p_description.length < 16 || !test_max_property_description(p_description ))
+      {
+        return false
+      }
+      return true
+  }
+  function test_max_property_description(p_description )
+  {
+      if ( p_description.length > 1200)
+      {
+        return false
+      }
+      return true
+  }
+  function test_property_floor_area(p_floor_area)
+  {
+       if ( p_floor_area != "")
+      {
+         if ( isNaN(p_floor_area))
+	 {
+            return false
+	 }
+      }
+      return true
+  }
+
+  //Rental Details
+  function check_rental_details()
+  {
+      var valid = true
+      var monthly_rent = document.getElementById("property_monthly_rental")
+      var min_period     = document.getElementById("property_rental_period")
+      var max_period    = document.getElementById("property_max_rental_period")
+      var available_year = document.getElementById("property_available_at_1i")
+      var available_month = document.getElementById("property_available_at_2i")
+      var available_day = document.getElementById("property_available_at_3i")
+      
+      if (!test_monthly_rent(monthly_rent.value) || !test_available_from_date(available_year.value, available_month.value, available_day.value) || !compare_min_max_p(min_period.value, max_period.value ))
+      {
+          valid = false
+      }
+      if (valid == true)
+      {
+          document.getElementById("right_image_rental_detail").style.visibility =  'visible';
+	  if (check_property_details() && check_address())
+	  {
+          document.getElementById("photo_details").href = "#listing-photos";
+	  }
+      }
+      else
+      {
+           document.getElementById("right_image_rental_detail").style.visibility =  'hidden';
+           document.getElementById("photo_details").removeAttribute("href");
+      }
+      return valid
+  }
+
+   function check_rental_details_next()
+   {
+      var valid = true
+      var monthly_rent = document.getElementById("property_monthly_rental")
+      var min_period     = document.getElementById("property_rental_period")
+      var min_period_border  = document.getElementById("property_rental_period")
+      var max_period    = document.getElementById("property_max_rental_period")
+      var max_period_border  = document.getElementById("property_max_rental_period")
+      var available_year = document.getElementById("property_available_at_1i")
+      var available_month = document.getElementById("property_available_at_2i")
+      var available_day = document.getElementById("property_available_at_3i")
+      var available_year_border = document.getElementById("property_available_at_1i")
+      var available_month_border = document.getElementById("property_available_at_2i")
+      var available_day_border = document.getElementById("property_available_at_3i")
+
+      if (!test_monthly_rent(monthly_rent.value))
+      {
+          monthly_rent.style.border = '1px solid red';
+          valid = false
+      }
+      else
+      {
+          monthly_rent.style.border = '1px solid #BEBEBE';
+      }
+      if (!test_available_from_date(available_year.value, available_month.value, available_day.value))
+      {
+          available_year_border.style.border = '1px solid red';
+	  available_month_border.style.border = '1px solid red';
+          available_day_border.style.border = '1px solid red';
+	  valid = false
+      }
+      else
+      {
+          available_year_border.style.border = '1px solid #BEBEBE';
+	  available_month_border.style.border = '1px solid #BEBEBE';
+          available_day_border.style.border = '1px solid #BEBEBE';
+      }
+       if (!compare_min_max_p(min_period.value, max_period.value ))
+      {
+          min_period_border.style.border = '1px solid red';
+	  max_period_border.style.border = '1px solid red';
+          valid = false
+      }
+      else
+      {
+          min_period_border.style.border = '1px solid #BEBEBE';
+	  max_period_border.style.border = '1px solid #BEBEBE';
+      }
+      if (valid==true)
+	{
+	    document.getElementById("right_image_photos").style.visibility =  'visible';
+	    change_tab('#listing-rental','#listing-photos','#rental_tap','#rental_tap');
+    document.getElementById("listing-photos").style.display =  'block';
+    document.getElementById("listing-doc").style.display =  'block';
+	}
+	error_messages_rental()
+   }
+  function test_monthly_rent(rent )
+  {
+      if ( (rent != parseInt(rent)) || rent =="" )
+      {
+        return false
+      }
+      return true
+  }
+  function compare_min_max_p(min, max)
+  {
+      if ( parseInt(min) > parseInt(max))
+      {
+        return false
+      }
+      return true
+  }
+
+  function test_available_from_date(year_a, month_a, day_a)
+  {
+      var k=new Date();
+      k.setFullYear(year_a,month_a-1,day_a);
+      var today = new Date();
+      today.setDate(today.getDate()+1);
+      if (k<today)
+      {
+         return false
+      }
+      return true
+  }
+  // Error Messages functionality Beginning
+  //For Property Address Begin
+  function state_address_test()
+  { 
+     var state = document.getElementById("property_address_attributes_state")
+     if (!test_state(state.value))
+     {
+        document.getElementById("state_in_address").style.display =  'block';
+	return true
+     }
+    document.getElementById("state_in_address").style.display =  'none';
+    return false
+  }
+
+  function city_address_test()
+  { 
+     var city = document.getElementById("property_address_attributes_city")
+     if (!test_city(city.value))
+     {
+        document.getElementById("city_in_address").style.display =  'block';
+	return true
+     }
+    document.getElementById("city_in_address").style.display =  'none';
+    return false
+  }
+
+  function street_address_test()
+  { 
+      var street = document.getElementById("property_address_attributes_street_name")
+     if (!test_street(street.value))
+     {
+        document.getElementById("street_in_address").style.display =  'block';
+        document.getElementById("street_character_in_address").style.display =  'none';
+	if (!test_street_max_length(street.value))
+        {
+           document.getElementById("street_in_address").style.display =  'none';
+	   document.getElementById("street_character_in_address").style.display =  'block';
+        }
+	return true
+     }
+    document.getElementById("street_character_in_address").style.display =  'none';
+    document.getElementById("street_in_address").style.display =  'none';
+    return false
+  }
+
+  function unit_address_test()
+  { 
+     var unit = document.getElementById("property_address_attributes_unit_no")
+     if (!test_unit(unit.value))
+     {
+        document.getElementById("unit_in_address").style.display =  'block';
+	document.getElementById("unit_character_in_address").style.display =  'none';
+        document.getElementById("unit_num_in_address").style.display =  'none';
+	if (!unit_minimum_length(unit.value) && !(unit.value != parseInt(unit.value)) )
+        {
+            document.getElementById("unit_in_address").style.display =  'none';
+            document.getElementById("unit_num_in_address").style.display =  'none';
+	    document.getElementById("unit_character_in_address").style.display =  'block';
+        }
+	else
+	{
+            document.getElementById("unit_in_address").style.display =  'none';
+	    document.getElementById("unit_character_in_address").style.display =  'none';
+	    document.getElementById("unit_num_in_address").style.display =  'block';
+	}
+	return true
+     }
+    document.getElementById("unit_num_in_address").style.display =  'none';
+    document.getElementById("unit_in_address").style.display =  'none';
+    document.getElementById("unit_character_in_address").style.display =  'none';
+    return false
+  }
+
+  function postal_address_test()
+  { 
+     var postal_code = document.getElementById("property_address_attributes_postal_code")
+     if (!test_postal_code(postal_code.value))
+     {
+        document.getElementById("postal_code_in_address").style.display =  'block';
+	document.getElementById("postal_code_num_in_address").style.display =  'none';
+	if (postal_code.value != parseInt(postal_code.value) )
+	{
+          document.getElementById("postal_code_in_address").style.display =  'none';
+	  document.getElementById("postal_code_num_in_address").style.display =  'block';
+	}
+	return true
+     }
+    document.getElementById("postal_code_num_in_address").style.display =  'none';
+    document.getElementById("postal_code_in_address").style.display =  'none';
+    return false
+  }
+
+  function error_messages_address()
+  {
+      var state = state_address_test()
+      var city = city_address_test()
+      var street = street_address_test()
+      var unit = unit_address_test()
+      var postal = postal_address_test()
+      if(state || city || street || unit || postal)
+      {
+           document.getElementById("errorExplanation-client").style.display =  'block';
+      }
+      else
+      {
+           document.getElementById("errorExplanation-client").style.display =  'none';
+      }
+  }
+  //For Property Address Last
+
+  //For Property details Begin
+  function title_property_test()
+  {
+    var p_title = document.getElementById("property_title")
+    if (!test_property_title(p_title.value ))
+    {
+        document.getElementById("title_in_property").style.display =  'block';
+	document.getElementById("title_character_in_property").style.display =  'none';
+	if (!test_max_property_title(p_title.value))
+        {
+            document.getElementById("title_in_property").style.display =  'none';
+	   document.getElementById("title_character_in_property").style.display =  'block';
+        }
+	return true
+     }
+    document.getElementById("title_in_property").style.display =  'none';
+    document.getElementById("title_character_in_property").style.display =  'none';
+    return false
+  }
+
+  function description_property_test()
+  {
+    var p_description = document.getElementById("property_description")
+    if (!test_property_description(p_description.value ))
+    {
+        document.getElementById("description_in_property").style.display =  'block';
+	document.getElementById("description_character_in_property").style.display =  'none';
+	if (!test_max_property_description(p_description.value))
+        {
+            document.getElementById("description_in_property").style.display =  'none';
+	   document.getElementById("description_character_in_property").style.display =  'block';
+        }
+	return true
+     }
+    document.getElementById("description_in_property").style.display =  'none';
+    document.getElementById("description_character_in_property").style.display =  'none';
+    return false
+  }
+
+  function floor_area_property_test()
+  {
+      var p_floor_area = document.getElementById("property_floor_area")
+      if (!test_property_floor_area(p_floor_area.value))
+      {
+          document.getElementById("floor_area_in_property").style.display =  'block';
+	  return true
+      }
+      document.getElementById("floor_area_in_property").style.display =  'none';
+      return false
+  }
+
+  function error_messages_property()
+  {
+      var p_title = title_property_test()
+      var p_description = description_property_test()
+      var p_floor_area = floor_area_property_test()
+      if(p_title || p_description || p_floor_area )
+      {
+           document.getElementById("errorExplanation-client").style.display =  'block';
+      }
+      else
+      {
+           document.getElementById("errorExplanation-client").style.display =  'none';
+      }
+  }
+  //For Property details Last
+
+  //For Rental details Begin
+  function monthly_rent_rental_test()
+  {
+      var monthly_rent = document.getElementById("property_monthly_rental")
+     if (!test_monthly_rent(monthly_rent.value))
+     {
+        document.getElementById("rent_in_rental").style.display =  'block';
+	return true
+     }
+    document.getElementById("rent_in_rental").style.display =  'none';
+    return false
+  }
+
+  function available_from_date_rental_test()
+  {
+      var available_year = document.getElementById("property_available_at_1i")
+      var available_month = document.getElementById("property_available_at_2i")
+      var available_day = document.getElementById("property_available_at_3i")
+      if (!test_available_from_date(available_year.value, available_month.value, available_day.value))
+      {
+      	var today = new Date();
+	var curr_date = today.getDate();
+	var curr_month = today.getMonth() + 1;
+	var curr_year =  today.getFullYear();
+         document.getElementById('date_message').innerHTML=  curr_year + "-" + curr_month+ "-"+curr_date;
+	  document.getElementById("date_in_rental").style.display =  'block';
+	  return true
+      }
+      document.getElementById("date_in_rental").style.display =  'none';
+      return false
+  }
+
+  function min_max_period_rental_test()
+  {
+      var min_period     = document.getElementById("property_rental_period")
+      var max_period    = document.getElementById("property_max_rental_period")
+      if (!compare_min_max_p(min_period.value, max_period.value ))
+      {
+	  document.getElementById("min_max_in_rental").style.display =  'block';
+	  return true
+      }
+      document.getElementById("min_max_in_rental").style.display =  'none';
+      return false
+  }
+
+  function error_messages_rental()
+  {
+      var  monthly_rent  = monthly_rent_rental_test()
+      var available_from_date = available_from_date_rental_test()
+      var min_max_period = min_max_period_rental_test()
+      if (monthly_rent || available_from_date || min_max_period)
+      {
+           document.getElementById("errorExplanation-client").style.display =  'block';
+      }
+      else
+      {
+           document.getElementById("errorExplanation-client").style.display =  'none';
+      }
+  }
+  //For Rental details Last
+
+  //back buttons
+  function back_to_address()
+{
+    var p_title = document.getElementById("property_title")
+    var p_description = document.getElementById("property_description")
+    var p_floor_area = document.getElementById("property_floor_area")
+    document.getElementById("errorExplanation-client").style.display =  'none';
+    p_title.style.border = '1px solid #BEBEBE';
+    p_description.style.border = '1px solid #BEBEBE';
+    p_floor_area.style.border = '1px solid #BEBEBE';
+    change_tab('#listing-property','#listing-address','#property_tap','#address_tap');
+  }
+
+  function back_to_property()
+  {   var monthly_rent = document.getElementById("property_monthly_rental")
+      var min_period_border  = document.getElementById("property_rental_period")
+      var max_period_border  = document.getElementById("property_max_rental_period")
+      var available_year_border = document.getElementById("property_available_at_1i")
+      var available_month_border = document.getElementById("property_available_at_2i")
+      var available_day_border = document.getElementById("property_available_at_3i")
+      monthly_rent.style.border = '1px solid #BEBEBE';
+      available_year_border.style.border = '1px solid #BEBEBE';
+      available_month_border.style.border = '1px solid #BEBEBE';
+      available_day_border.style.border = '1px solid #BEBEBE';
+      min_period_border.style.border = '1px solid #BEBEBE';
+      max_period_border.style.border = '1px solid #BEBEBE';
+      document.getElementById("errorExplanation-client").style.display =  'none';
+      change_tab('#listing-rental','#listing-property','#rental_tap','#property_tap')
+  }
+   function hide_address_message()
+   {
+      var state = document.getElementById("property_address_attributes_state")
+      var city = document.getElementById("property_address_attributes_city")
+      var street = document.getElementById("property_address_attributes_street_name")
+      var unit = document.getElementById("property_address_attributes_unit_no")
+      var postal_code = document.getElementById("property_address_attributes_postal_code")
+      state.style.border = '1px solid #BEBEBE';
+      city.style.border = '1px solid #BEBEBE';
+      street.style.border = '1px solid #BEBEBE';
+      unit.style.border = '1px solid #BEBEBE';
+      postal_code.style.border = '1px solid #BEBEBE';
+      document.getElementById("state_in_address").style.display =  'none';
+      document.getElementById("city_in_address").style.display =  'none';
+      document.getElementById("street_character_in_address").style.display =  'none';
+      document.getElementById("street_in_address").style.display =  'none';
+      document.getElementById("unit_num_in_address").style.display =  'none';
+      document.getElementById("unit_in_address").style.display =  'none';
+      document.getElementById("unit_character_in_address").style.display =  'none';
+      document.getElementById("postal_code_num_in_address").style.display =  'none';
+      document.getElementById("postal_code_in_address").style.display =  'none';
+   }
+   function hide_property_message()
+   {
+    var p_title = document.getElementById("property_title")
+    var p_description = document.getElementById("property_description")
+    var p_floor_area = document.getElementById("property_floor_area")
+    p_title.style.border = '1px solid #BEBEBE';
+    p_description.style.border = '1px solid #BEBEBE';
+    p_floor_area.style.border = '1px solid #BEBEBE';
+    document.getElementById("title_in_property").style.display =  'none';
+    document.getElementById("title_character_in_property").style.display =  'none';
+    document.getElementById("description_in_property").style.display =  'none';
+    document.getElementById("description_character_in_property").style.display =  'none';
+    document.getElementById("floor_area_in_property").style.display =  'none';
+   }
+   function hide_rental_messsage()
+   {
+      var monthly_rent = document.getElementById("property_monthly_rental")
+      var min_period_border  = document.getElementById("property_rental_period")
+      var max_period_border  = document.getElementById("property_max_rental_period")
+      var available_year_border = document.getElementById("property_available_at_1i")
+      var available_month_border = document.getElementById("property_available_at_2i")
+      var available_day_border = document.getElementById("property_available_at_3i")
+      monthly_rent.style.border = '1px solid #BEBEBE';
+      available_year_border.style.border = '1px solid #BEBEBE';
+      available_month_border.style.border = '1px solid #BEBEBE';
+      available_day_border.style.border = '1px solid #BEBEBE';
+      min_period_border.style.border = '1px solid #BEBEBE';
+      max_period_border.style.border = '1px solid #BEBEBE';
+    document.getElementById("rent_in_rental").style.display =  'none';
+    document.getElementById("date_in_rental").style.display =  'none';
+    document.getElementById("min_max_in_rental").style.display =  'none';
+   }
+
+   function addr_v_check(addr_v_d)
+   {
+      if (addr_v_d == true)
+      {
+        addr_v = false
+      }
+      else
+      {
+        addr_v = true
+      }
+   }
+   
+   function property_v_check(property_v_d)
+   {
+      if (property_v_d == true)
+      {
+        property_v = false
+      }
+      else
+      {
+        property_v = true
+      }
+   }
+  // Error Messages functionality End
+
+  function image_select()
+  {
+    var select_status = document.getElementById('picture_select');
+    select_status.value = 1
+//document.getElementById("upload_btn").style.cursor = 'pointer'
+  }
+
+  function delete_image(obj)
+  {
+    $.ajax({
+            url: '/my/dashboard/delete_image/?id=' + obj.photo_id,
+            success: function(data){
+	       $('#'+obj.div_id+'').remove();
+            }
+        });
+  }
+	
+  // property doc delete
+  function delete_prop_doc(obj)
+  {
+    $.ajax({
+            url: '/my/dashboard/delete_prop_doc/?id=' + obj.photo_id,
+            success: function(data){
+	       $('#'+obj.div_id+'').remove();
+            }
+        });
+  }
+	
+	//trial 
+  function load_image()
+  {
+
+    var imgpath = document.getElementById('picture_image').value;
+
+    if(imgpath != "")
+    {
+    // code to get File Extension..
+
+      var arr1 = new Array;
+
+      arr1 = imgpath.split("\\");
+
+      var len = arr1.length;
+
+      var img1 = arr1[len-1];
+
+      var filext = img1.substring(img1.lastIndexOf(".")+1);
+
+    // Checking Extension
+
+      if(filext == "jpg" || filext == "jpeg" || filext == "gif" ||  filext == "png" || filext == "JPG" || filext == "JPEG"    ||  filext == "GIF" ||  filext == "PNG")
+      {
+        document.getElementById("payment_notification").style.display =  'none';
+        document.getElementById('picture_image').src = imgpath;
+
+      }
+      else
+      {
+
+        document.getElementById("payment_notification").style.display =  'block';
+        document.getElementById('fupImage').value = "";
+        return false;
+      }
+      return true;
+    }
+
+  }
+
+  // check doc extention
+  function load_doc()
+  {
+    var imgpath = document.getElementById('property_doc_document').value;
+
+    if(imgpath != "")
+    {
+     // code to get File Extension..
+      var arr1 = new Array;
+      arr1 = imgpath.split("\\");
+      var len = arr1.length;
+      var img1 = arr1[len-1];
+      var filext = img1.substring(img1.lastIndexOf(".")+1);
+
+     // Checking Extension
+      if(filext == "jpg" || filext == "jpeg" || filext == "gif" ||  filext == "png" || filext == "JPG" || filext == "JPEG" || filext == "GIF" ||  filext == "PNG")
+      {
+        document.getElementById("payment_notification").style.display =  'none';
+        document.getElementById('property_doc_document').src = imgpath;
+      }
+      else
+      {
+        document.getElementById("payment_notification").style.display =  'block';
+        document.getElementById('fupImage').value = "";
+        return false;
+      }
+      return true;
+    }
+
+  }
+</script>

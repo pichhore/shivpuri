@@ -1,0 +1,330 @@
+# Logfile created on Wed Apr 27 16:30:40 +0530 2011 by logger.rb/22283
+
+ ===========send mail to seller for sequence_two=========/n --------to -first name rajiv - retail_buyer_email rajiv12@mailinator.com 
+ ================================== 
+
+ ===========send mail to seller for sequence_two=========/n --------to -first name rajiv - retail_buyer_email rajiv12@mailinator.com 
+ ================================== 
+==========send mail to seller for sequence_two==========
+ -First Name: rajiv - Seller Email: rajiv12@mailinator.com 
+ ================================== 
+==========send mail to seller for sequence_two==========
+ -First Name: rajiv - Seller Email: rajiv12@mailinator.com 
+
+
+==========send mail to seller for sequence_two==========
+ -First Name: rajiv - Seller Email: rajiv12@mailinator.com 
+
+
+Send mail to Seller for sequence_two: -----First Name: rajiv - Seller Email: rajiv12@mailinator.com 
+
+Send mail to Seller for sequence_two: -----First Name: rajiv - Seller Email: rajiv12@mailinator.com 
+
+Send mail to Seller for sequence_two: -----First Name: rajiv - Seller Email: rajiv12@mailinator.com 
+
+Send mail to Seller for sequence_two: -----First Name: rajiv - Seller Email: rajiv12@mailinator.com 
+
+Send mail to Seller for sequence_two: -----First Name: rajiv - Seller Email: rajiv12@mailinator.com 
+
+Send mail to Seller for sequence_two: -----First Name: rajiv - Seller Email: rajiv12@mailinator.com 
+
+Send mail to Seller for sequence_two: -----First Name: rajiv - Seller Email: rajiv12@mailinator.com 
+
+SellerResponderSetup error 1 : (NoMethodError) "undefined method `seller_profile' for #<ResponderSequenceAssignToSellerProfile:0xb66a6934>" 
+Send mail to Seller for sequence_one: -----First Name: test new sellerfff - Seller Email: test@mailinator.com 
+
+Send mail to Seller for sequence_two: -----First Name: test new sellerfff - Seller Email: test@mailinator.com 
+
+Send mail to Seller for sequence_two: -----First Name: test new sellerfff - Seller Email: test@mailinator.com 
+
+Send mail to Seller for sequence_three: -----First Name: test new sellerfff - Seller Email: test@mailinator.com 
+
+SellerResponderSetup error 1 : (NoMethodError) "undefined method `seller_property_profile_id=' for #<SellerEngagementInfo:0xb6a66088>" 
+SellerResponderSetup error 1 : (NoMethodError) "undefined method `seller_property_profile_id=' for #<SellerEngagementInfo:0xb69c7e88>" 
+Send mail to Seller for sequence_two: -----First Name: test new sellerfff - Seller Email: test@mailinator.com 
+
+Send mail to Seller for sequence_one: -----First Name: test new sellerfff - Seller Email: test@mailinator.com 
+
+Send mail to Seller for sequence_two: -----First Name: test new sellerfff - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_three: -----First Name: rajiv - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_two: -----First Name: test new sellerfff - Seller Email: akataria@systematixtechnocrates.com 
+
+SellerResponderSetup error 1 : (NoMethodError) "You have a nil object when you didn't expect it!\nYou might have expected an instance of ActiveRecord::Base.\nThe error occurred while evaluating nil.[]" 
+SellerResponderSetup error 1 : (NoMethodError) "You have a nil object when you didn't expect it!\nYou might have expected an instance of ActiveRecord::Base.\nThe error occurred while evaluating nil.[]" 
+Send mail to Seller for sequence_one: -----First Name: rajiv - Seller Email: akataria@systematixtechnocrates.com 
+
+yesssssssss
+Send mail to Seller for sequence_one: -----First Name: rajiv - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_three: -----First Name: test new sellerfff - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_two: -----First Name: rajiv - Seller Email: testing1222@mailinator.com 
+
+Send mail to Seller for sequence_three: -----First Name: rajiv final test - Seller Email: rajivfinaltest@mailinator.com 
+
+Send mail to Seller for sequence_one: -----First Name: test at the top - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_three: -----First Name: test new sellerfff - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_two: -----First Name: rajiv - Seller Email: testing1222@mailinator.com 
+
+Send mail to Seller for sequence_three: -----First Name: rajiv final test - Seller Email: rajivfinaltest@mailinator.com 
+
+Send mail to Seller for sequence_two: -----First Name: rajiv - Seller Email: testing1222@mailinator.com 
+
+SellerResponderSetup error 1 : (SyntaxError) "/home/rajiv_work/reim-redux/webapp/app/helpers/user_notifier_helper.rb:81: syntax error, unexpected ':', expecting kEND\n        city = zip.blank? \"\" : zip.city.to_s\n                              ^" 
+SellerResponderSetup error 1 : (SyntaxError) "/home/rajiv_work/reim-redux/webapp/app/helpers/user_notifier_helper.rb:81: syntax error, unexpected ':', expecting kEND\n        city = zip.blank? \"\" : zip.city.to_s\n                              ^" 
+SellerResponderSetup error 1 : (SyntaxError) "/home/rajiv_work/reim-redux/webapp/app/helpers/user_notifier_helper.rb:81: syntax error, unexpected ':', expecting kEND\n        city = zip.blank? \"\" : zip.city.to_s\n                              ^" 
+SellerResponderSetup error 1 : (SyntaxError) "/home/rajiv_work/reim-redux/webapp/app/helpers/user_notifier_helper.rb:81: syntax error, unexpected ':', expecting kEND\n        city = zip.blank? \"\" : zip.city.to_s\n                              ^" 
+SellerResponderSetup error 1 : (SyntaxError) "/home/rajiv_work/reim-redux/webapp/app/helpers/user_notifier_helper.rb:81: syntax error, unexpected ':', expecting kEND\n        city = zip.blank? \"\" : zip.city.to_s\n                              ^" 
+SellerResponderSetup error 1 : (SyntaxError) "/home/rajiv_work/reim-redux/webapp/app/helpers/user_notifier_helper.rb:81: syntax error, unexpected ':', expecting kEND\n        city = zip.blank? \"\" : zip.city.to_s\n                              ^" 
+SellerResponderSetup error 1 : (SyntaxError) "/home/rajiv_work/reim-redux/webapp/app/helpers/user_notifier_helper.rb:81: syntax error, unexpected ':', expecting kEND\n        city = zip.blank? \"\" : zip.city.to_s\n                              ^" 
+SellerResponderSetup error 1 : (SyntaxError) "/home/rajiv_work/reim-redux/webapp/app/helpers/user_notifier_helper.rb:81: syntax error, unexpected ':', expecting kEND\n        city = zip.blank? \"\" : zip.city.to_s\n                              ^" 
+SellerResponderSetup error 1 : (SyntaxError) "/home/rajiv_work/reim-redux/webapp/app/helpers/user_notifier_helper.rb:81: syntax error, unexpected ':', expecting kEND\n        city = zip.blank? \"\" : zip.city.to_s\n                              ^" 
+SellerResponderSetup error 1 : (SyntaxError) "/home/rajiv_work/reim-redux/webapp/app/helpers/user_notifier_helper.rb:81: syntax error, unexpected ':', expecting kEND\n        city = zip.blank? \"\" : zip.city.to_s\n                              ^" 
+SellerResponderSetup error 1 : (SyntaxError) "/home/rajiv_work/reim-redux/webapp/app/helpers/user_notifier_helper.rb:81: syntax error, unexpected ':', expecting kEND\n        city = zip.blank? \"\" : zip.city.to_s\n                              ^" 
+SellerResponderSetup error 1 : (SyntaxError) "/home/rajiv_work/reim-redux/webapp/app/helpers/user_notifier_helper.rb:81: syntax error, unexpected ':', expecting kEND\n        city = zip.blank? \"\" : zip.city.to_s\n                              ^" 
+SellerResponderSetup error 1 : (SyntaxError) "/home/rajiv_work/reim-redux/webapp/app/helpers/user_notifier_helper.rb:81: syntax error, unexpected ':', expecting kEND\n        city = zip.blank? \"\" : zip.city.to_s\n                              ^" 
+Send mail to Seller for sequence_one: -----First Name: nvbvbn - Seller Email: rajiv_test@mailinator.com 
+
+Send mail to Seller for sequence_one: -----First Name: rajiv final test - Seller Email: testing123456789@mailinator.com 
+
+Send mail to Seller for sequence_one: -----First Name: rajiv final test - Seller Email: rajivkapil43@mailinator.com 
+
+Send mail to Seller for sequence_one: -----First Name: rajiv final test - Seller Email: rajivfinaltest@mailinator.com 
+
+Send mail to Seller for sequence_one: -----First Name: rajiv final test - Seller Email: testing@mailinator.com 
+
+Send mail to Seller for sequence_one: -----First Name: rajiv final test - Seller Email: rajivfinaltest@mailinator.com 
+
+Send mail to Seller for sequence_one: -----First Name: sdad - Seller Email: aaaaaatesting@mailinator.com 
+
+Send mail to Seller for sequence_one: -----First Name: nmbm - Seller Email: testing123456789@mailinator.com 
+
+Send mail to Seller for sequence_one: -----First Name: Responder - Seller Email: responder@mailinator.com 
+
+Send mail to Seller for sequence_one: -----First Name: Rajiv Personalise test - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_one: -----First Name: rajiv final test - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_one: -----First Name: rajiv final test - Seller Email: rajivfinaltest@mailinator.com 
+
+Send mail to Seller for sequence_one: -----First Name: Rajiv Personalise test - Seller Email: akataria@systematixtechnocrates.com 
+
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined method `domain_name' for nil:NilClass" 
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined local variable or method `seller_last_name' for #<ActionView::Base:0xb69ff7d4>" 
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined local variable or method `seller_last_name' for #<ActionView::Base:0xb70a1c7c>" 
+SellerResponderSetup error 1 : (ActionView::TemplateError) "can't convert Fixnum into String" 
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined method `domain_name' for nil:NilClass" 
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined local variable or method `seller_last_name' for #<ActionView::Base:0xb6af3e88>" 
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined local variable or method `seller_last_name' for #<ActionView::Base:0xb6a27090>" 
+SellerResponderSetup error 1 : (ActionView::TemplateError) "can't convert Fixnum into String" 
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined method `domain_name' for nil:NilClass" 
+Send mail to Seller for sequence_four: -----First Name: Rajiv - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_three: -----First Name: New Test - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_two: -----First Name: rajiv final testdsfffffffffffffffffffffffffffffffffffffffffffffffffffffffff - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_four: -----First Name: rajiv final11111111111111 - Seller Email: akataria@systematixtechnocrates.com 
+
+SellerResponderSetup error 1 : (ActionView::TemplateError) "can't convert Fixnum into String" 
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined method `domain_name' for nil:NilClass" 
+SellerResponderSetup error 1 : (ActionView::TemplateError) "can't convert Bignum into String" 
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined method `domain_name' for nil:NilClass" 
+Send mail to Seller for sequence_two: -----First Name: rajiv final testdsfffffffffffffffffffffffffffffffffffffffffffffffffffffffff - Seller Email: akataria@systematixtechnocrates.com 
+
+SellerResponderSetup error 1 : (ActionView::TemplateError) "can't convert Bignum into String" 
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined local variable or method `url' for #<ActionView::Base:0xb6ccc8cc>" 
+Send mail to Seller for sequence_two: -----First Name: Noti fication test - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_two: -----First Name: rajiv final testdsfffffffffffffffffffffffffffffffffffffffffffffffffffffffff - Seller Email: akataria@systematixtechnocrates.com 
+
+SellerResponderSetup error 1 : (ActionView::TemplateError) "can't convert Bignum into String" 
+Send mail to Seller for sequence_two: -----First Name: Noti fication test - Seller Email: akataria@systematixtechnocrates.com 
+
+SellerResponderSetup error 1 : (ActionView::TemplateError) "can't convert Bignum into String" 
+SellerResponderSetup error 1 : (ActionView::TemplateError) "can't convert Bignum into String" 
+Send mail to Seller for sequence_two: -----First Name: Noti fication test - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_three: -----First Name: rajiv final test0000 - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_four: -----First Name: Rajiv - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_four: -----First Name: rajiv final11111111111111 - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_three: -----First Name: New Test - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_three: -----First Name: rajiv final test0000 - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_three: -----First Name: rajiv final11111111111111 - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_three: -----First Name: rajiv final test0000 - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_three: -----First Name: rajiv final test0000 - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_three: -----First Name: Rajiv Test - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_three: -----First Name: Rajiv Test - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_three: -----First Name: rajiv final11111111111111 - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_three: -----First Name: rajiv final11111111111111 - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_two: -----First Name: rajiv final test kkkkk - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_four: -----First Name: Rajiv - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_two: -----First Name: rajiv final test kkkkk - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_two: -----First Name: Kapil Test - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_three: -----First Name: New Test - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_two: -----First Name: rajiv final testdsfffffffffffffffffffffffffffffffffffffffffffffffffffffffff - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_two: -----First Name: rajiv final test kkkkk - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_two: -----First Name: Kapil Test - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_two: -----First Name: Kapil Test - Seller Email: akataria@systematixtechnocrates.com 
+
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined method `domain_name' for nil:NilClass" 
+Send mail to Seller for sequence_three: -----First Name: rajiv final test0000 - Seller Email: akataria@systematixtechnocrates.com 
+
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined method `domain_name' for nil:NilClass" 
+Send mail to Seller for sequence_two: -----First Name: Kapil Test - Seller Email: akataria@systematixtechnocrates.com 
+
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined method `domain_name' for nil:NilClass" 
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined method `domain_name' for nil:NilClass" 
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined method `domain_name' for nil:NilClass" 
+Send mail to Seller for sequence_three: -----First Name: Rajiv Test - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_two: -----First Name: Rajiv mmmmmm - Seller Email: akataria@systematixtechnocrates.com 
+
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined method `domain_name' for nil:NilClass" 
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined method `domain_name' for nil:NilClass" 
+Send mail to Seller for sequence_three: -----First Name: rajiv final11111111111111 - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_four: -----First Name: rajiv - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_two: -----First Name: Rajiv mmmmmm - Seller Email: akataria@systematixtechnocrates.com 
+
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined method `domain_name' for nil:NilClass" 
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined method `domain_name' for nil:NilClass" 
+Send mail to Seller for sequence_two: -----First Name: Rajiv mmmmmm - Seller Email: akataria@systematixtechnocrates.com 
+
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined method `domain_name' for nil:NilClass" 
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined method `domain_name' for nil:NilClass" 
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined method `domain_name' for nil:NilClass" 
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined method `domain_name' for nil:NilClass" 
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined method `domain_name' for nil:NilClass" 
+Send mail to Seller for sequence_two: -----First Name: Test Pers Variable - Seller Email: akataria@systematixtechnocrates.com 
+
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined method `domain_name' for nil:NilClass" 
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined method `domain_name' for nil:NilClass" 
+Send mail to Seller for sequence_three: -----First Name: rajiv final test0000 - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_two: -----First Name: Test Pers Variable - Seller Email: akataria@systematixtechnocrates.com 
+
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined method `domain_name' for nil:NilClass" 
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined method `domain_name' for nil:NilClass" 
+Send mail to Seller for sequence_four: -----First Name: rajiv - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_two: -----First Name: Test Pers Variable - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_two: -----First Name: Investor - Seller Email: akataria@systematixtechnocrates.com 
+
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined method `domain_name' for nil:NilClass" 
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined method `domain_name' for nil:NilClass" 
+Send mail to Seller for sequence_three: -----First Name: Rajiv Test - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_two: -----First Name: Investor - Seller Email: akataria@systematixtechnocrates.com 
+
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined method `domain_name' for nil:NilClass" 
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined method `domain_name' for nil:NilClass" 
+Send mail to Seller for sequence_three: -----First Name: rajiv final11111111111111 - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_two: -----First Name: rajiv final test kkkkk - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_three: -----First Name: Investor - Seller Email: akataria@systematixtechnocrates.com 
+
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined method `domain_name' for nil:NilClass" 
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined method `domain_name' for nil:NilClass" 
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined method `domain_name' for nil:NilClass" 
+Send mail to Seller for sequence_four: -----First Name: Rajiv - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_three: -----First Name: Investor - Seller Email: akataria@systematixtechnocrates.com 
+
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined method `domain_name' for nil:NilClass" 
+SellerResponderSetup error 1 : (ActionView::TemplateError) "undefined method `domain_name' for nil:NilClass" 
+Send mail to Seller for sequence_three: -----First Name: New Test - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_two: -----First Name: rajiv final testdsffff - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_two: -----First Name: Noti fication test - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_three: -----First Name: rajiv final test - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_two: -----First Name: nvbvbn - Seller Email: rajiv_test@mailinator.com 
+
+Send mail to Seller for sequence_four: -----First Name: Rajiv Test no website - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_four: -----First Name: abbbbbbbbbbbbbbbbbb - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_three: -----First Name: rajiv 621 test - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_two: -----First Name: test 621 email unsubscribe - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_four: -----First Name: nvbvbn - Seller Email: rajiv_test@mailinator.com 
+
+Send mail to Seller for sequence_four: -----First Name: rajiv - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_two: -----First Name: Rajiv mmmmmm - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_two: -----First Name: rajiv - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_three: -----First Name: Investor - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_two: -----First Name: rajiv - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_three: -----First Name: rajiv final test - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_two: -----First Name: rajiv - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_two: -----First Name: rajiv - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_four: -----First Name: rajiv final testgfhfh - Seller Email: rajivfinaltest@mailinator.com 
+
+Send mail to Seller for sequence_two: -----First Name: rajiv - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_four: -----First Name: Rajiv Test no website - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_three: -----First Name: rajiv final test - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_four: -----First Name: abbbbbbbbbbbbbbbbbb - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_two: -----First Name: Test Pers Variable - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_two: -----First Name: rajiv - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_two: -----First Name: Noti fication test - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_three: -----First Name: New Test - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_two: -----First Name: rajiv final testdsffff - Seller Email: akataria@systematixtechnocrates.com 
+
+Send mail to Seller for sequence_two: -----First Name: test - Seller Email: testtesxsasast@gmail.com 
+
+Send mail to Seller for sequence_two: -----First Name: test - Seller Email: testtesxsasast@gmail.com 
+
+SellerResponderSetup error 1 : (NameError) "undefined local variable or method `fghgfhfg' for SellerResponderSetup:Class" 
+SellerResponderSetup error 1 : (NameError) "undefined local variable or method `fghgfhfg' for SellerResponderSetup:Class" 
+SellerResponderSetup error 1 : (NameError) "undefined local variable or method `fghgfhfg' for SellerResponderSetup:Class" 
+SellerResponderSetup error 1 : (NameError) "undefined local variable or method `fghgfhfg' for SellerResponderSetup:Class" 
+Send mail to Seller for sequence_two: -----First Name: test - Seller Email: testtesxsasast@gmail.com 
+
+Send mail to Seller for sequence_two: -----First Name: test - Seller Email: testtesxsasast@gmail.com 
+

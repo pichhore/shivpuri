@@ -1,0 +1,9 @@
+<% if @country == "CA"%>
+	<select id="user_company_info_state" name="user_company_info[state]" <% if !(error_message_on :user_company_info,:state).blank? %> style="border:1px solid #FF3300; width:105px;color:#FF3300;"<% end %>>
+      <%= options_for_select([[ "Select a Province", "" ]] + State::CANADA_NAMES) %>
+    </select>
+<% else %>
+	<select id="user_company_info_state" name="user_company_info[state]" <% if !(error_message_on :user_company_info,:state).blank? %> style="border:1px solid #FF3300; width:105px;color:#FF3300;"<% end %>>
+      <%= options_for_select([[ "Select a State", "" ]] + State::NAMES) %>
+    </select>
+<% end %>

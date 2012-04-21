@@ -1,0 +1,82 @@
+<%- @page_title = "Messaging - Property/Buyers" -%>
+<%=stylesheet_link_tag "lightbox"%>
+<% require_js_controllers :tab, :account_settings,:ifp_lightbox, :lightbox_image,:lightbox -%>
+
+<%- content_for :page_scripts do -%>
+  Event.observe(window, 'load', function() {
+    lightbox_controller = new NL.LightboxController();
+    account_settings_controller = new NL.AccountSettingsController();
+    
+    $('choose_message_filter').observe('change', function(){
+        filter_by = $('choose_message_filter').value
+        new Ajax.Request('/account/profile_inbox?filter_by='+filter_by,
+          {
+          method:'get',
+          onSuccess: function(transport){
+          var response = transport.responseText || "no response text";
+          $('ajax_update_div').innerHTML = response
+          },
+           onFailure: function(){ alert('Something went wrong...') },
+           onLoading: function(){ $('spinner').style.display = 'block';},
+           onComplete: function(){$('spinner').style.display = 'none';}
+        });
+        });
+    
+  });
+  
+  function go_to_profile_conversation(conversation_url,subject_span_id,profile_message_recipient_id,profile_inbox_message_id)
+{
+        profile_inbox_message = $(subject_span_id).innerHTML;
+         new Ajax.Request(conversation_url,
+          {
+          method:'GET',
+          parameters: { profile_inbox_message: profile_inbox_message,profile_message_recipient_id: profile_message_recipient_id,profile_inbox_message_id: profile_inbox_message_id},
+          onSuccess: function(transport){
+          var response = transport.responseText || "no response text";
+          $('profile_inbox').show();
+          $('result_filter').hide();
+          $('ajax_update_div').innerHTML = response
+          },
+        onFailure: function(){ alert('Something went wrong...') },
+        onLoading: function(){ $('spinner').style.display = 'block';},
+        onComplete: function(){$('spinner').style.display = 'none';}
+        });
+   }
+
+function toggleCreateMessageForm() {
+  $('conversation_create_form').toggle();
+}
+
+function toggleReplyForm(the_parent) {
+  $(the_parent).getElementsBySelector("div.reply_form").each(function(item) { item.toggle(); });
+}
+
+function closeReplyForms() {
+  $$("div.reply_form").each(function(item) { item.hide(); });
+}
+<% end %>
+<div class="full">
+
+  <div class="tabset larger">
+    <ul>
+      <li uri="<%=url_for({:controller=>'account', :action=>'investor_inbox'})%>">Investor Inbox</li>
+      <li  class="active"  uri="<%=url_for({:controller=>'account', :action=>'profile_inbox'})%>">Profile Inbox</li>
+	</ul>
+  </div>
+
+  <fieldset>
+<div>
+  <%=link_to "« Back to Inbox<br/><br/>", {:controller=>'account', :action=>'profile_inbox' , :page => params[:page]},:id=>'profile_inbox',:style=>'display:none;' %>
+</div>
+<div id="result_filter" style="float: right;">
+      Show: <select name="choose_message_filter" id="choose_message_filter">
+          <option selected="selected" value="Current">Current</option>
+          <option value="Archived">Archived</option></select>
+ </div>
+ <div style="display:none;margin-left:205px;" class="loading" id="spinner"><span class="text">Loading...</span></div>
+<div id="ajax_update_div">
+  <%= render :partial=>"profile_inbox"%>
+</div>
+  </fieldset>
+
+</div>

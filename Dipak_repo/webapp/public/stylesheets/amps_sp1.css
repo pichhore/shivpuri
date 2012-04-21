@@ -1,0 +1,122 @@
+#wrap{
+    width:990px;
+    position:relative;
+    padding-right:38px;
+    margin:0 auto;
+}
+
+#right{
+    width:345px;
+    float:right;
+    margin-top:10px;
+}
+
+#header{
+    background:#E5ECB4 none;
+    color:#012E1F;
+    width:612px;
+    height:110px;
+    position:absolute;
+    top:0;
+    left:0;
+    padding:60px 170px 30px;
+}
+
+#header h1{
+    font-size:25px;
+    font-style:italic;
+    text-align:center;
+    line-height:35px;
+    padding:10px;
+    margin:0;
+}
+
+#bluebox{
+    background:#8ECCFE none;
+    width:344px;
+    padding:16px;
+    position:relative;
+    margin-right:-31px;
+}
+
+.form-row{
+    clear:left;
+    padding:5px 0;
+}
+
+.nice label{
+    font-size:16px;
+    font-weight:bold;
+    display:inline-block;
+    width:90px;
+}
+
+input.nice-field{
+    background:transparent url(../images/amps_magnet/field.png) no-repeat left top;
+    color:#ADADAD;
+    border:0;
+    width:204px;
+    height:24px;
+    line-height:24px;
+    padding:1px 3px 5px;
+}
+
+select.nice-select{
+    background:#F6F6F6 url(../images/amps_magnet/field.png) no-repeat left top;
+    color:#ADADAD;
+    border:0;
+    width:210px;
+    height:29px;
+    padding:5px;
+}
+
+#screen-inner{
+    background:#CCCCCC url(../images/amps_magnet/home-screen-inner.png) repeat-x left top;
+    text-align:center;
+    width:497px;
+    height:269px;
+    padding:8px;
+}
+
+#screen{
+    background:transparent url(../images/amps_magnet/home-screen.png) no-repeat left top;
+    width:513px;
+    height:285px;
+    float:left;
+    padding:4px 3px 10px;
+    margin:25px 0 0 28px;
+}
+
+#content{
+    color:#012E1F;
+    height:432px;
+    position:relative;
+    padding:200px 38px 50px 0;
+}
+
+
+#amps_web_footer {
+    color: #fff;
+    clear:both;
+    margin:auto;
+    text-align:center;
+    width:960px;
+    height:auto;
+    padding:20px 0px;
+    font-family:serif;
+}
+#amps_web_footer a{
+	color:#fff;
+	text-decoration:underline;
+}
+.content_blue{
+    background:transparent url(../images/amps_magnet/blue/home-warp-bg-blue.png) no-repeat left top;
+}
+
+.content_green{
+    background:transparent url(../images/amps_magnet/green/home-warp-bg.png) no-repeat left top;
+}
+
+.content_brown{
+    background:transparent url(../images/amps_magnet/brown/home-warp-bg-brn.png) no-repeat left top;
+}

@@ -1,0 +1,31 @@
+  <div class="profile profile_summary_property" style="position:relative;">
+	  <div class="column1" field_name="image">
+          <div id="iconCol">
+                    <%=render_property_photo_icon(property_detail,:alt=>"camera")%>
+                    <%=render_property_video_icon(property_detail,:alt=>"film")%>
+            </div>
+            	<% if(!property_detail.profile_images.find_by_default_photo(1).blank?) %>
+                        <% property_detail.profile_images.each_with_index do |photo,index| %>						
+                            <%if photo.default_photo %>
+                                <%=link_to render_thumbnail(property_detail, { :id=>"#{property_detail.id}_thumb", :class=>"image details_link", :uri=>"#", :title=>"View Full Description" }, (index/4)+1) , "#", :class=> "set_color" %>
+                              <% end %>
+                        <% end %>
+				<% else %>
+					<%=link_to render_thumbnail(property_detail, { :id=>"#{property_detail.id}_thumb", :class=>"image details_link", :uri=>"#", :title=>"View Full Description" }), "#", :class=> "set_color" %>
+				<% end %>
+          </div>
+	  <div class="columns">
+		<div class="column2"><b><span style="font-size: 1.2em;" field_name="display_name" class="details_link" uri="#"><%=link_to truncate(property_detail.display_name, :length => 20), "#", :class=> "set_color" %></span></b></div>
+		<div class="column3"></div>
+		<div class="column4"></div>
+		<div class="column5"><%=property_detail.display_price%></div>
+	  </div>
+	   <div class="description"><div class="feature_label">Beds:</div><div class="feature_value"><%=property_detail.display_bedrooms%></div> <div class="feature_label">Baths:</div><div class="feature_value_medium"><%=property_detail.display_bathrooms%></div> <div class="feature_label">Sq Ft:</div><div class="feature_value"><%=property_detail.display_square_feet%></div></div>
+	  <div class="features_short"><b>Features:</b> <span class="features_text" field_name="display_features"><%=truncate(property_detail.display_features,:length => 60)%></span><br />
+	    <span><img alt="Arrow-collapsed" class="collapsed_indicator" src="http://assets.dwellgo.com/images/arrow-collapsed.gif?1229662294"  /></span><span class="desc_margin"><b>Description</b></span><br />
+      </div>
+	  <div class="clear description_full" style="display:none;"><div class="description_full_text" field_name="display_description"><%=property_detail.display_description_longer%></div></div>
+<div style="clear:both; height:1px;">&nbsp;</div>
+<span class="view_full_desc">View Full Details</span>
+  </div>
+<br />

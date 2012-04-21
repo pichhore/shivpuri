@@ -1,0 +1,193 @@
+  <div class="form">
+    <h3>Investor Testimonial</h3>
+    <fieldset>
+      <table>
+	<tr>
+          <th class="label_required">Investor First Name:</th>
+          <td><%=text_field "testimonial", "investor_fname" %><br/><span style="display:none; color: #FF3300;">Firstname can't be empty</span><%=error_message_on :testimonial,:investor_fname %></td>
+	</tr>
+	
+	<tr>
+          <th class="label_required">Investor Last Name:</th>
+          <td><%=text_field "testimonial", "investor_lname" %><br/><span style="display:none; color: #FF3300;">Lastname can't be empty</span><%=error_message_on :testimonial,:investor_lname %></td>
+	</tr>
+       </table>
+	<div style="margin: 0 0 5px 20px; font-size: 13px;">
+          ( <span style="font-weight:bold">Note:</span>
+          By default, only First name and Last initial will be used publicly )
+        </div>
+	<div style="margin: 0 0 10px 15px; font-size: 14px;">
+          <input type="checkbox" name="testimonial[name_private]" value="1" class="chk_box"/> Please withhold even my first name and last initial publicly.          
+        </div>
+
+       <table>
+	<tr>
+          <th class="label_required">Investor Email:</th>
+          <td><%=text_field "testimonial", "email" %><br/><span style="display:none; color: #FF3300;">Email can't be empty</span><span style="display:none; color: #FF3300;" class="invalid">Invalid Email Address</span><%=error_message_on :testimonial,:email %></td>
+	</tr>
+        </table>
+	<div style="margin: 0 0 10px 20px; font-size: 13px;">
+          ( <span style="font-weight:bold">Note:</span>
+          If you are an REI Matcher user, use the email you use as your REI Matcher login )
+        </div>
+	<table>
+	<tr>
+          <th style="padding-left:18px">Phone (will not be published):</th>
+          <td><%=text_field "testimonial", "phone_number" %><%=error_message_on :testimonial,:phone_number %></td>
+	</tr>
+	<tr>
+          <th class="label_required">Property Address:</th>
+          <td><%=text_field "testimonial", "address" %><%=error_message_on :testimonial,:address %><br/><span style="display:none; color: red;">Address can't be empty</span><span style="display:none; color: #FF3300;" class="invalid">Address must have numeric assoicated to it</span></td>
+	</tr>
+        </table>
+	<div style="margin: 0 0 10px 20px; font-size: 13px;">
+          ( <span style="font-weight:bold">Note:</span>
+          Required for processing only - only State used publicly )
+        </div>
+        <table>
+	<tr>
+          <th class="label_required">Closing Date:</th>
+          <td><%=text_field "testimonial", "closing_date", {:size => 12, :readonly => true} %>(Format as mm/dd/yy) <%#= calendar_date_select_tag "testimonial[closing_date]", @testimonial.closing_date %><br/><span style="display:none; color: red;">Closing date can't be empty</span><%=error_message_on :testimonial,:closing_date%></td>
+	</tr>
+      </table>
+      <div style="font-weight: bold; margin: 10px 0 0 7px">
+	Strategies Used? (check all strategies that apply for this "deal")
+      </div>
+
+      <table>
+        <tr>
+          <td>
+	    <input type="checkbox" name="testimonial[strategies][]" value="wholesale" class="chk_box"/> wholesaling
+          </td>
+          <td>
+	    <input type="checkbox" name="testimonial[strategies][]" value="re-habbing" class="chk_box"/> re-habbing
+          </td>
+	  <td>
+	    <input type="checkbox" name="testimonial[strategies][]" value="buy+hold" class="chk_box"/> buy+hold
+	  </td>
+	</tr>
+	<tr>
+	  <td>
+	    <input type="checkbox" name="testimonial[strategies][]" value="auction" class="chk_box"/> auction/option
+          </td>
+	  <td>
+	    <input type="checkbox" name="testimonial[strategies][]" value="foreclosure" class="chk_box"/> foreclosure auction
+          </td>
+	  <td>
+	    <input type="checkbox" name="testimonial[strategies][]" value="shortsale" class="chk_box"/> short sale
+          </td>
+	</tr>
+	<tr>
+	  <td>
+	    <input type="checkbox" name="testimonial[strategies][]" value="lease" class="chk_box"/> lease/option
+          </td>
+	  <td>
+	    <input type="checkbox" name="testimonial[strategies][]" value="mortagage" class="chk_box"/> mortagage assignment
+          </td>
+	  <td>
+	    <input type="checkbox" name="testimonial[strategies][]" value="wrap" class="chk_box"/> wrap
+          </td>
+        </tr>
+        <tr>
+	  <td>
+	    <input type="checkbox" name="testimonial[strategies][]" value="house_swap" class="chk_box"/> house swap
+          </td>
+          <td>
+	    <input type="checkbox" name="testimonial[strategies][]" value="equity" class="chk_box"/> equity partnering
+          </td>
+          <td>
+	    <input type="checkbox" name="testimonial[strategies][]" value="other" class="chk_box"/> other
+          </td>
+        </tr>
+      </table>
+
+      <div style="font-weight: bold; margin: 10px 0 0 7px">
+	Final Sales Price (can be estimated) (USD)
+	<%=text_field "testimonial", "sales_price", {:autocomplete=>"off", :size => 13} %><%=error_message_on :user,:password_confirmation%> 
+      </div>
+      
+      <div style="margin-left: 10px">
+	<input type="checkbox" name="testimonial[sales_estimate]" value="1"/> check if this is an estimate because you have not yet sold the property
+      </div>
+      
+      <div style="font-weight: bold; margin: 10px 0 0 7px">
+	Approximate/Expected Gross Profit (USD)?
+	<%=text_field "testimonial", "gross_profit", {:autocomplete=>"off", :size => 13} %><%=error_message_on :user,:password_confirmation%> 
+      </div>
+      
+      <div style="margin-left: 10px">
+	Use an estimate based on estimated future sales price if you have not yet resold the property
+      </div>
+      
+      <div style="font-weight: bold; margin: 10px 0 0 7px">
+	Total Lifetime Cash Flow (USD)?
+	<%=text_field "testimonial", "cash_flow", {:autocomplete=>"off", :size => 13} %><%=error_message_on :user,:password_confirmation%>
+      </div>
+      
+      <div style="margin-left: 10px">
+	Sum of all cash flow per month X estimated length of loan or hold time for properties that generate cash flow
+      </div>
+
+      <div style="font-weight: bold; margin: 10px 0 0 7px">How did you find this deal?</div>
+      <div class="tm_textarea"> 
+        <%= text_area "testimonial", "deal_source", :cols => 50, :rows => 4  %><%=error_message_on :user,:password_confirmation%>
+      </div>
+      
+      <div style="font-weight: bold; margin: 10px 0 0 7px">What unique issues/problems did you encounter?</div>
+      <div class="tm_textarea"> 
+        <%= text_area "testimonial", "problems_faced", :cols => 50, :rows => 4  %><%=error_message_on :user,:password_confirmation%>
+      </div>
+      
+      <div style="font-weight: bold; margin: 10px 0 0 7px">What people/knowledge/tools helped you?: (check all that apply)</div>
+      <div style="margin: 5px 0 0 5px">
+	<div>
+	  <input type="checkbox" name="testimonial[tools_used][]" value="phill" class="chk_box"/> Phill Grove Training
+	</div>
+	<div>
+	  <input type="checkbox" name="testimonial[tools_used][]" value="roi" class="chk_box"/> Top One/ROI coaching
+	</div>
+	<div>
+	  <input type="checkbox" name="testimonial[tools_used][]" value="reimatcher" class="chk_box"/> REIMatcher
+	</div>
+	<div>
+	  <input type="checkbox" name="testimonial[tools_used][]" value="other" class="chk_box" id="other_chkbox" onClick="capture_text();"/> "other" - Please specify: <%= text_field "testimonial", "other_tools", :disabled => 'true', :id => "other_tools_text" %>
+	</div>	  
+      </div>
+      
+      <div style="font-weight: bold; margin: 10px 0 0 7px">Other comments?</div>
+      <div class="tm_textarea"> 
+        <%= text_area "testimonial", "comments", :cols => 50, :rows => 4  %><%=error_message_on :user,:password_confirmation%>
+      </div>
+      
+      <div style="font-weight: bold; margin: 10px 0 0 7px">Lessons learned or tips to share with other investors?</div>
+      <div class="tm_textarea"> 
+        <%= text_area "testimonial", "lessons_or_tips", :cols => 50, :rows => 4  %><%=error_message_on :user,:password_confirmation%>
+      </div>
+      
+      <div style="font-weight: bold; margin: 10px 0 0 7px">Pictures:</div>
+      <div style="margin:5px 0 0 5px"> 
+	<input type="checkbox" name="testimonial[picture_types][]" value="property" class="chk_box"/> Property
+	<input type="checkbox" name="testimonial[picture_types][]" value="investor" class="chk_box"/> Investor
+	<input type="checkbox" name="testimonial[picture_types][]" value="closing_check" class="chk_box"/> Closing check
+        <div>(NOTE: check picture can be a "marketing check")</div>
+      </div>
+
+      <div style="font-weight: bold; margin: 10px 0 0 7px">
+        <span id="picture_upload">
+	  <input type="file" name="testimonial[pictures][]" size="28" id="photo">
+        </span>
+	<button type="button" id="picture_upload_btn" class="picture_upload">Upload Picture</button>
+        <p><b>Note: Only .png, .jpg, and .gif image types are accepted and images are limited to 3MB in size.</b></p>
+        <hr>
+	<div id="pictures_display" style="display:block">
+        </div>
+        <div id="pictures_uploaded" style="display:none"></div>
+      </div>
+      <div style="margin:5px 0 0 5px; padding: 0 10px; text-align: justify;"> 
+      <p style="text-align: center; margin-top: 20px">
+	<%= check_box_tag 'testimonial[market_release]', @testimonial.market_release, true %>
+	Investor Agreed to Marketing Release <span style="display:none">| Date <%= calendar_date_select_tag "testimonials", "" %><br/></span>
+      </p>
+
+    </fieldset>
+  </div>

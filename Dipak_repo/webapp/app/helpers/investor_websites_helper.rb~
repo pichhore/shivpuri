@@ -1,0 +1,13 @@
+module InvestorWebsitesHelper
+
+  def create_website_url(my_website)
+    return "" if my_website.blank?
+    return "" if my_website.site.blank?
+    if my_website.site.domain_type == MyWebsiteForm::DOMAIN_TYPE[:reim]
+      return my_website.domain_name + "/" + my_website.site.permalink_text
+    else
+      return my_website.domain_name.to_s.downcase
+    end
+  end
+
+end

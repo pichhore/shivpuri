@@ -1,0 +1,18 @@
+class WelcomeEmailTwoForNewUser
+
+  def self.send_second_welcome_email
+    @logger = Logger.new("#{RAILS_ROOT}/log/second_welcome_email_sent_to_user.log")
+
+    users = User.find(:all, :conditions => ["activation_code is not NULL"])
+
+    return if users.blank?
+
+    for user in users
+      date_created = user.created_at.to_date + 5
+      next unless date_created.strftime("%m/%d/%y") == Date.today.strftime("%m/%d/%y")
+      #send welcome email if user is not logged in after X days
+      @logger.info " ============ \n Reminder Welcome Email Sent To :- #{user.email} \n ============ \n "
+      UserNotifier.deliver_second_email_for_new_user(user)
+    end
+  end
+end

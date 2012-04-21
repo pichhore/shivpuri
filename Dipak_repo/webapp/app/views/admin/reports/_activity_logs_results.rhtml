@@ -1,0 +1,71 @@
+<%=stylesheet_link_tag "lightbox"%>
+<%=javascript_include_tag "lightbox_controller"%>
+<%- content_for :page_scripts do -%>
+  Event.observe(window, 'load', function() {
+    lightbox_controller = new NL.LightboxController();
+  });
+<%- end -%>
+
+<h3>Activity Logs Report</h3>
+
+<div style="display:none;z-index:-1000;" id="overlay_Lightbox"></div>
+<div style="display:none;height:340px;width:340px;" id="lightbox_contents">Lightbox</div>
+<div class="report_filter">
+
+<%- form_tag({:action=>"execute", :id=>@report_name}, :method=>:get) do -%>
+Starting Date: <%=text_field_tag "start_date", @start_date_string_views%> and Ending Date: <%=text_field_tag "end_date", @end_date_string_views%> <%=submit_tag "Filter"%>
+<%- end -%>
+
+</div>
+
+<div style="margin: 5px 0 10px 0; color: red;">
+   NOTE: DO NOT RUN REPORTS OVER 5 DAYS
+</div>
+
+<div class="report_export">
+Export as: <%=link_to "CSV", :action=>"execute", :id=>@report_name, :start_date=>@start_date_string_views, :end_date=>@end_date_string_views, :format=>"csv"%>
+</div>
+
+<div class="report_results">
+
+<table>
+  <thead>
+    <th>Category</th>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Description</th>
+    <th>User Name</th>
+    <th>Profile Name</th>
+    <th>Delete Comment</th>
+    <th>Support Comment</th>
+    <th></th>
+  </thead>
+
+  <tbody>
+    <%-@activity_logs.each_with_index do |log, index| -%>
+    <tr <%="class='odd'" if index % 2 == 1%>>
+      <td><%= log.activity_category.name%></td>
+      <td><%= log.created_at.strftime("%m-%d-%Y")%></td>
+      <td><%= log.created_at.strftime("%I:%M %p")%></td>
+      <td><%= log.description%></td>
+      <td><%= log.user.full_name if log.user %></td>
+      <td><%= activity_profile_name(log) %></td>
+      <td><%= log.seller_profile.nil? ? (( !log.profile.nil? and log.activity_category.name == "Profile Deleted" ) ? log.profile.delete_reason :  "") : log.seller_profile.delete_comment %></td>
+      <td><%= log.seller_profile.nil? ? (( !log.profile.nil? and log.activity_category.name == "Profile Deleted") ? log.profile.admin_delete_comment :  "") : log.seller_profile.admin_delete_comment %></td>
+      <td>
+        <% if (!log.profile.nil? && log.activity_category.name == "Profile Deleted") || !log.seller_profile.nil? %>
+          <%= link_to_remote("Edit Comment",
+                          :url => { :controller => :reports, :action => :edit_delete_comment, :id => log.id},
+                          :method => :get,
+                          :update => "lightbox_contents",
+                          :loading => "lightbox_controller.loading()",
+                          :loaded => "lightbox_controller.loaded()") %>
+        <% end %>
+      </td>
+    </tr>
+    <%-end -%>
+  </tbody>
+</table>
+
+<p>Total Logs: <%=@activity_logs.length%></p>
+</div>

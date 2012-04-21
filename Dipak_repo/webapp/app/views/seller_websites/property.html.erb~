@@ -1,0 +1,249 @@
+<%= render :partial => "partial_for_meta_tag"%>
+<%=stylesheet_link_tag "lightbox"%>
+<% require_js_controllers :tab, :account_settings, :profile_setup, :expand_collapse, :lightbox  -%>
+<%- content_for :page_scripts do -%>
+
+Event.observe(window, 'load', function() {
+  account_settings_controller = new NL.AccountSettingsController();
+  lightbox_controller = new NL.LightboxController();
+});
+  function show_coulmn()
+    {
+      $('show_on_rental').show();
+    }
+
+  function hide_column()
+    {
+      $('show_on_rental').hide();
+    }
+
+  function show_listed_column()
+    {
+      $('show_on_home_listed').show();
+      $('estimated_home_value').hide();
+    }
+
+  function hide_listed_column()
+    {
+      $('show_on_home_listed').hide();
+      $('estimated_home_value').show();
+    }
+
+<%- end -%>
+<script type="text/javascript">
+/*<![CDATA[*/
+/*You can also place this code in a separate file and link to it like epoch_classes.js*/
+    var dp_cal;
+    window.onload = function () {
+    dp_cal  = new EpochSellerWebsite('epoch_popup','popup',document.getElementById('seller_property_home_listed_expiration_date'));
+};
+/*]]>*/
+</script>
+
+    <div id="drag_drop_lightbox"  style="position: relative" >
+      <div style="display:none;z-index:-1000;" id="overlay_Lightbox"></div>
+      <div style="display:none;height:450px;width:350px;" id="lightbox_contents">Lightbox</div>
+    </div>
+
+    <script type="text/javascript">
+      Drag.init(document.getElementById("drag_drop_lightbox"));
+    </script>
+
+<div style="display:none;margin-left:205px;" class="loading" id="spinner"><span class="text">Loading...</span></div>
+  <div class="tabset larger">
+      <%=render :partial=>"seller_lead_full_page_tab", :locals=>{:active_class_property=>"active"}%>
+  </div><br><br>
+<% form_for(:seller_property, :url =>{ :controller => :seller_websites, :action => :update_seller_property_profile, :id => params[:id]}) do |f| %>
+<%= hidden_field "seller_profile", "id" %>
+<div class="form">
+    <h3>Property</h3>
+    <fieldset>
+        <table>
+        <tr>
+            <th id="property_address_label" class="label_required">
+                Property Address:
+            </th>
+            <td>
+	         <div style="float:left;">
+                    <%=f.text_field "property_address", :size=>35 %><%=error_message_on :seller_property, :property_address %>
+		 </div>
+		 <div style="float:left;margin-left:30px;">
+		    <% if  !@seller_property.blank? && !@seller_property.new_record? %>
+		          <% if @seller_property.profile_seller_lead_mapping.blank? %>
+		            <%=link_to "Post Property For Sale", :controller=>"profiles", :action=>"new", :id=>"owner",:seller_property_profile_id=>"#{@seller_property.id}"%> <img alt="Help_icon" src="/images/reimatcher_images/help_icon.png" title="This action will post the property to the REIMatcher Marketplace, Syndicate the Posting Across the Web, and Match the Property to Buyer Profiles." />
+			   <%else%>
+			       <%=link_to "Posted", :controller=>"profiles", :action=>"show", :id=>"#{@seller_property.profile_seller_lead_mapping.profile_id}"%> - <%= @seller_property.profile_seller_lead_mapping.profile.created_at.strftime("%m/%d/%y") unless @seller_property.profile_seller_lead_mapping.profile.blank?%>
+			   <%end%>
+		     <%end%>
+		 </div>
+            </td>
+        </tr>
+
+        <tr>
+            <th class="label_required">
+                Zip Code:
+            </th>
+            <td>
+                <%=f.text_field "zip_code" %><%=error_message_on :seller_property,:zip_code %>
+            </td>
+            </td>
+        </tr>
+        <tr>
+            <th class="label_required">
+                Property Type:
+            </th>
+            <td align="left">
+                <%=f.select("property_type", [["--- Select Property Type ---", ""], ["Single Family", "single_family"]]) %><%=error_message_on :seller_property, :property_type %>
+            </td>
+        <tr>
+            <th class="label" id="pool_label">
+                Mobile/Manufactured:
+            </th>
+            <td>
+                <%=f.radio_button "mobile_or_manufactured_home", "no", :onclick => "this.focus();"%> No <%=f.radio_button "mobile_or_manufactured_home", "yes", :onclick => "this.focus();"%> Yes
+                <br/>
+            </td>
+        </tr>
+        <tr>
+            <th class="label_required">
+                Beds:
+            </th>
+            <td>
+                <%=f.select("beds", [["--- Select Bedrooms ---", ""], ["1", 1], ["2", 2], ["3", 3], ["4", 4], ["5", 5], ["6", 6], ["7", 7], ["8", 8], ["9", 9], ["10+", 10]]) %><%=error_message_on :seller_property,:beds %>
+            </td>
+        </tr>
+        <tr>
+            <th class="label_required">
+                Baths:
+            </th>
+            <td>
+                <%=f.select("baths", [["--- Select Bathrooms ---", ""], ["1", 1], ["1 1/2", 1.5], ["2", 2], ["2 1/2", 2.5], ["3", 3], ["4", 4], ["5", 5], ["6+", 6]]) %><%=error_message_on :seller_property,:baths %>
+            </td>
+        </tr>
+        <tr>
+            <th class="label_required">
+                Square Feet:
+            </th>
+            <td>
+                <%=f.text_field "square_feet", :size=> 7 %><%=error_message_on :seller_property, :square_feet %>
+            </td>
+        </tr>
+        <tr>
+            <th class="label">
+                Garage:
+            </th>
+            <td>
+                <%=f.select("garage", [["--- Select Garage Type ---", ""], ["None", "0"], ["1", "1"], ["2", "2"], ["3+", "3"], ["Carport", "carport"], ["Converted", "converted"]]) %><%=error_message_on :seller_property,:garage %>
+            </td>
+      </tr>
+        <tr>
+            <th class="label">
+                Stories:
+            </th>
+            <td>
+                <%=f.select("stories", [[" --- Select Stories --- ", ""], ["1", "1"], ["2+", "2"]]) %><%=error_message_on :seller_property,:stories %>
+            </td>
+        </tr>
+        <tr>
+            <th class="label">
+                Living:
+            </th>
+            <td>
+                <%=f.select("livingrooms", [["--- Select Living Areas ---", ""], ["1", "1"], ["2", "2"], ["3+", "3"]]) %><%=error_message_on :seller_property,:livingrooms %>
+            </td>
+        </tr>
+        <tr>
+            <th class="label" id="pool_label">
+                Pool:
+            </th>
+            <td>
+                <%=f.radio_button "pool", "no", :onclick => "this.focus();"%>No <%=f.radio_button "pool", "yes", :onclick => "this.focus();"%>Yes
+                <br/>
+            </td>
+        </tr>
+        <tr>
+            <th class="label" id="pool_label">
+                Foundation:
+            </th>
+            <td>
+                <%=f.radio_button "foundation_type", "slab", :onclick => "this.focus();"%>Slab <%=f.radio_button "foundation_type", "piel_beam", :onclick => "this.focus();"%>Pier/Beam
+                <br/>
+            </td>
+        </tr>
+        <tr>
+            <th class="label" id="pool_label">
+                Occupied:
+            </th>
+            <td>
+                <%=f.radio_button "occupied_by", "owner", :onclick=>"hide_column();"%>Owner <%=f.radio_button "occupied_by", "none", :onclick=>"hide_column();"%>None <%=f.radio_button "occupied_by", "rental", :onclick=>"show_coulmn();"%>Rental <div id="show_on_rental" style="<%= @seller_property.occupied_by=="rental" ? "display:block;" : "display:none;" %>float:right;margin-right:15px;">Rent:  <%=f.text_field "occupied_rent", {:size => 5} %>  Lease Up:  <%=f.text_field "occupied_lease_up", {:size => 5} %></div>
+            </td>
+        </tr>
+      </table>
+        <table class="property_inner_table">
+          <TR><Th class="label" colspan="2">Tax Record Info:</Th></TR>
+            <tr>
+                <th class="label">
+                    Subdivision:
+                </th>
+                <td>
+                    <%=f.text_field "subdivision" %><%=error_message_on :seller_property,:subdivision %>
+                </td>
+                </td>
+            </tr>
+            <tr>
+                <th class="label">
+                    Legal Description:
+                </th>
+                <td>
+                    <%= f.text_area "legal_description", :cols => 50, :rows => 4, :style => "margin:0px;" %>
+                </td>
+                </td>
+            </tr>
+            <tr>
+                <th class="label">
+                    Lot Size:
+                </th>
+                <td>
+                    <%=f.select("lot_size", [["--- Select Lot Size ---", ""], ["less than 1/4 acre", "less_than_one_fourth_acre"], ["1/4 - 1/2 acre", "between_one_fourth_and_half_acre"], ["1/2 - 1 acre", "between_half_and_one_acre"], ["over 1 acre", "more_than_one_acre"]]) %><%=error_message_on :seller_property,:lot_size %>
+                </td>
+            </tr>
+            <tr>
+                <th class="label">
+                    Tax Appraised Value:
+                </th>
+                <td>
+                    <%= f.text_field "tax_appraised_value", :cols => 50, :rows => 4, :style => "margin:0px;" %>
+                </td>
+                </td>
+            </tr>
+        </table>
+        <table class="property_inner_two_table">
+        <tr>
+            <th class="label" id="pool_label">
+                Listed:
+            </th>
+            <td>
+              <% home_listed_expiration_date = @seller_property.home_listed_expiration_date.blank? ? "" : @seller_property.home_listed_expiration_date.strftime("%m/%d/%y")%>
+                <%=f.radio_button "home_listed", "no", :onclick=>"hide_listed_column();"%>No <%=f.radio_button "home_listed", "yes", :onclick=>"show_listed_column();"%>Yes <div id="show_on_home_listed" style="<%= @seller_property.home_listed=="yes" ? "" : "display:none;" %>float:right;margin-right:15px;">Agent:  <%=f.text_field "home_listed_agent", {:size => 5} %>  Expiration:  <%=f.text_field "home_listed_expiration_date", :value=>home_listed_expiration_date, :size => 5 %>Last List Price:<img alt="Help_icon" src="/images/reimatcher_images/help_icon.png" title="What was the Last Price that the property was listed at with your Realtor?"/><%=f.text_field "last_list_price", {:size => 5} %></div>
+                <br/>
+            </td>
+        </tr>
+       <tr id="estimated_home_value" style="<%= @seller_property.home_listed=="no" ? "" : "display:none;" %>">
+          <th class="label">
+              Estimated Home Value:
+          </th>
+          <td>
+              <%=f.text_field "estimated_home_value" %><%=error_message_on :seller_property,:estimated_home_value %>
+          </td>
+        </tr>
+      <tr>
+        <th class="label">Additional Property Notes:</th>
+        <td><%=f.text_area "additional_property_detail", :cols => 50, :rows => 5, :style => "margin:0px;" %></td>
+      </tr>
+    </table>
+  <p style="text-align: center">
+    <div style="margin-left:300px;"><%=submit_tag "Update", :class=>"submit_xl"%></div>
+  </p>
+    </fieldset>
+   </div>
+<% end %>

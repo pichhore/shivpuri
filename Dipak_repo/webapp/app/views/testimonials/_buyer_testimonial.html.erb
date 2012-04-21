@@ -1,0 +1,41 @@
+  <div class="form">
+    <h3>Buyer Testimonial</h3>
+    <fieldset>
+       <table>
+	<tr>
+          <th class="label_required">Buyer First Name:</th>
+          <td><%=text_field "buyer_testimonial", "firstname" %><br/><span style="display:none; color: #FF3300;">Firstname can't be empty</span><%=error_message_on :seller_testimonial,:firstname %></td>
+	</tr>
+
+	<tr>
+          <th class="label_required">Buyer Last Name:</th>
+          <td><%=text_field "buyer_testimonial", "lastname" %><br/><span style="display:none; color: #FF3300;">Lastname can't be empty</span><%=error_message_on :seller_testimonial,:lastname %></td>
+	</tr>
+       </table>
+	<div style="margin: 0 0 10px 15px; font-size: 14px;">
+          <input type="checkbox" name="buyer_testimonial[name_private]" value="1" class="chk_box"/> Please withhold even my first name and last initial publicly.          
+        </div>
+       <table>
+	<tr>
+          <th class="label_required">State:</th>
+           <td><%= select("buyer_testimonial", "state", State.find(:all,:order=>:state_code).map { |state| [state.name, state.id]  }, { :include_blank => "--------- Select State ---------" }, { :class => "wide" })%><br/><span style="display:none; color: #FF3300;">State can't be empty</span><%=error_message_on :seller_testimonial,:state %></td>
+	</tr>
+      </table>
+
+      <div style="font-weight: bold; margin: 10px 0 0 7px">Briefly share what you liked about this experience selling a property:</div>
+      <div class="tm_textarea"> 
+        <%= text_area "seller_testimonial", "likes", :cols => 50, :rows => 4  %><%=error_message_on :user,:password_confirmation%>
+      </div>
+      
+      <div style="font-weight: bold; margin: 10px 0 0 7px">Briefly share any suggestions on how to improve this experience for others:</div>
+      <div class="tm_textarea"> 
+        <%= text_area "seller_testimonial", "suggestions", :cols => 50, :rows => 4  %><%=error_message_on :user,:password_confirmation%>
+      </div>
+      <div style="margin:5px 0 0 5px; padding: 0 10px; text-align: justify;"> 
+      <p style="text-align: center; margin-top: 20px">
+	<%= check_box_tag 'seller_testimonial[mkt_release]', @testimonial.market_release, true %>
+	Buyer Agreed to Marketing Release <span style="display:none">| Date <%= calendar_date_select_tag "testimonials", "" %><br/></span>
+      </p>
+      </div>
+    </fieldset>
+  </div>

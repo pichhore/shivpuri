@@ -1,0 +1,55 @@
+<div id="content">
+    <div class="container">
+        <div class="primary">
+            <h1>Receive Payment</h1>
+            <%- form_for(:application , :url =>"/payments/payment_transfer", :html => {:class => "complex-form", :id =>"receive_payment_form"}) do |f| %>
+	    <%= f.error_messages :header_message => "Opps! There are problems with your information." , :message => ""%>
+       	    <div class="margin_top_content"></div>
+            <div class="content" id="receive_payment_content">
+              <%str= flash_helper%>
+              <%unless str.blank?%>
+                <%- content_tag :div, :id => "errorExplanation" do %>
+                  <%= str %>
+                <%- end %>
+              <%end%>
+              <div >
+                <div class="thumbnail large">
+                  <%- if @application.property.pictures.empty? %>
+                    <%= image_tag("/images/missing/missing_properties_thumb.png") %>
+                  <%- else %>
+                    <%= image_tag(@application.property.pictures.first.image.url(:middle)) %>
+                  <%- end %>
+                <div class="overlay"></div>
+              </div>
+              <p class="tit_des_receive_payment" ><span class="title"><%= @application.property.title%></span><br><%= @application.property.description%>.</p>
+              <div class="receive_payment_text_field" >Enter Payment Code <span><%= text_field_tag :payment_token %></span></div>
+              </div>
+              <div class="clear"> </div>    
+             </div>
+                <div class="tabs">
+                    <fieldset id="card" class="section">
+                        <%= f.hidden_field :id ,:value => @application.id %>
+                      <div >
+                          <input type="Submit"  value="" id="form_submit_new"  class="position receive" />
+                      </div>
+                      </fieldset>
+                    <fieldset id="paypal">
+                      <span> 
+                        <div id="ct-rt">
+                      </div>
+                    </span>
+                  </fieldset>
+                </div>
+            <% end %>
+        </div>
+        <div class="secondary" >
+            <div class="section" style="height: 50px">
+                <h3>Tips & Tricks</h3>
+            </div>
+        </div>
+        <div class="secondary">
+          <div class="section1" style="padding: 8px;color: #000000;    font-size: 100%; font-weight: 400;text-align: left;"><p>After submitting your payment code, you will receive the advance first month rent, less Boxyroom fees, in your designated Paypal account within 48 hours.</p></div>
+        </div>
+    </div>
+</div>
+

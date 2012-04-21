@@ -1,0 +1,129 @@
+<head>
+<!--[if IE 7]>
+   <style type="text/css">
+     #or_home {
+     float: left !important;
+     }
+    .pointers{float: right;top: -48px;}
+    #or_home{margin-right: -22px;}
+    #bottom_margin_home{line-height: 58px;}
+  </style>
+<![endif]-->
+</head>
+ <div class="container">
+  <%str= flash_helper %>
+  <%unless str.blank?%>
+    <%- content_tag :div, :id => "payment_notification",:class=> "home_page_messages" do %>
+	<div class="message_payment"  style="margin-bottom: 0px;"></span><span ><%= str %></span></div>
+    <%- end %>
+  <%end%>
+  <h1 class="home" id="bottom_margin_home">Worry-free Renting</h1>
+  <h2 class="home" id="font_size_home_h2">Easy and safe way to reserve your rental space in foreign cities.<a href="/learn_more" >Learn more</a></h2>
+  <div class="search" style="right: 148px;margin-top: 19px;">
+    <%- form_tag properties_path, :method => :get , :id=>"search_result" do %>
+        <%= text_field_tag 'input', "Where are you moving to?", :id => "search-t", :onclick=>"nilkey();", :onchange=>"search();"%>
+        <%= submit_tag "" %>
+    <%- end %>
+  </div>
+  <div  id="or_home">or</div>
+  <div  style="float: left;"><a href="/my/properties/new"  class="list_a_property_home" >&nbsp;</a></div>
+  <div class="pointers">
+      <div class="landlords">
+	  <div class="land_head">
+	    <h3 align="center">For Landlords</h3>
+	</div>
+	<div class="land_inner_txt">
+	    <div class="icon"> <img src="new_images/set-security-question-icon.png"/></div>
+	    <div class="head"> Protection    </div>
+	    <div class="simple_txt"> Receive money if tenant cancels her booking </div>
+	</div>
+	<div class="clear"> </div>
+	<div class="land_inner_txt">
+	    <div class="icon"> <img src="new_images/safe-icon.png"/></div>
+	    <div class="head">
+	      <p align="center"><strong>Safety</strong></p>
+	  </div>
+	    <div class="simple_txt">
+	      <p align="center">Screen applications and  find the right tenant</p>
+	    </div>
+	</div>
+	<div class="clear"> </div>
+	<div class="land_inner_txt">
+	    <div class="icon"> <img src="new_images/money-delete-icon.png"/></div>
+	    <div class="head">
+	      <p align="center"><strong>No  Listing Fee</strong></p>
+	  </div>
+	    <div class="simple_txt">List properties for free. No expiry date</div>
+	</div>
+	<div class="clear"> </div>
+	<div class="land_inner_txt">
+	    <div class="icon"> <img src="new_images/cash-register-2-icon.png"/></div>
+	    <div class="head">
+	      <p align="center"><strong>Save  Money</strong></p>
+	  </div>
+	    <div class="simple_txt">
+	      <p align="center">Avoid hefty agent  fees</p>
+	    </div>
+	</div>
+	<div class="clear"> </div>
+    </div>
+
+   <div class="tenants">
+	      <div class="land_head"><strong>For Tenants</strong></div>
+	    <div class="land_inner_txt">
+		<div class="icon"> <img src="new_images/thumb-up-icon.png"/></div>
+		<div class="head">
+		  <p align="center"><strong>Money-Back  Guarantee</strong></p>
+		</div>
+		<div class="simple_txt">
+		  <p align="center">100% deposit back if  things don’t work out</p>
+		</div>
+	    </div>
+	    <div class="clear"> </div>
+	    <div class="land_inner_txt">
+		<div class="icon"> <img src="new_images/house-icon.png"/></div>
+		<div class="head">
+		  <p align="center"><strong>Move  in Immediately</strong></p>
+		</div>
+		<div class="simple_txt">
+		  <p align="center">Sort out your housing  needs before arriving</p>
+		</div>
+	    </div>
+	    <div class="clear"> </div>
+	    <div class="land_inner_txt">
+		<div class="icon"> <img src="new_images/stop-icon.png"/></div>
+		<div class="head">
+		  <p align="center"><strong>Deter  Fraud</strong></p>
+		</div>
+		<div class="simple_txt">
+		  <p align="center">Landlord gets deposit  only after you move in</p>
+		</div>
+	    </div>
+	    <div class="clear"> </div>
+	    <div class="land_inner_txt">
+		<div class="icon"> <img src="new_images/money-in-envelope-icon.png"/></div>
+		<div class="head">
+		  <p align="center"><strong>No  Booking Fee</strong></p>
+		</div>
+		<div class="simple_txt">
+		  <p align="center">Secure your property  at no charge</p>
+		</div>
+	    </div>
+	    <div class="clear"> </div>              
+	</div>
+</div>
+<script type="text/javascript">
+  function nilkey(){
+    var v1 = document.getElementById("search-t")
+    v1.value = ""
+  }
+  $('#search_result').submit(function() {
+   if ( $('#search-t').val().length === 0 || $('#search-t').val() === "Where are you moving to?"){return false;
+   }
+   return true;
+  });
+  $('#search-t').blur(function(){
+   if ( this.value.length === 0 ){
+    this.value = 'Where are you moving to?'}
+  });
+</script>

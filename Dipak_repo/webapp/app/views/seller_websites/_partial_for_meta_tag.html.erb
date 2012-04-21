@@ -1,0 +1,6 @@
+<%- @page_title = "Post a Property For Sale" -%>
+<%- @page_heading = "Seller Lead: #{get_seller_lead_name}" %>
+<% require_js_controllers :tab, :account_settings, :profile_setup, :expand_collapse, :lightbox  -%>
+<% require_js_helpers :currency_field, :integer_field , :date_field -%>
+<%=stylesheet_link_tag "lightbox"%>
+

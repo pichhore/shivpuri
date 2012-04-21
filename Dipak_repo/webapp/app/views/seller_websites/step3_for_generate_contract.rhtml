@@ -1,0 +1,18 @@
+<%- @page_title = "Generate Contract - Step 3 of 3" -%>
+
+
+<div class="form">
+
+  
+
+  <h3>Step 3:</h3>
+
+  <fieldset>
+    <p><%= link_to "Export as PDF",download_contract_pdf_seller_website_path(@seller_profile) %></p>
+    <p><%= link_to  "Email PDF" ,download_contract_pdf_seller_website_path(@seller_profile,{:email_flag => "email"}),{:rel=>"ibox&height=100"}%></p>
+  </fieldset>
+
+
+</div>
+
+

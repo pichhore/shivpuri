@@ -1,0 +1,702 @@
+/*
+ -----------------------------------------------
+ Cooper Design
+ Author:   Jason Cooper
+ Version:  October 9 2007
+ ----------------------------------------------- */
+/* Global
+ ----------------------------------------------- */
+img {
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+a:link, a:visited, a:active {
+    color: #aae019;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #aae019;
+    text-decoration: none;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: #efefef;
+    font-family: verdana, helvetica, arial, sans-serif;
+    font-size: 11px;
+    line-height: 15px;
+    color: #363e7e;
+    text-align: center;
+    background-image: url("/images/main-bg.gif");
+}
+
+#container {
+    margin: 0 auto;
+    width: 800px;
+}
+
+img, div {
+    behavior: url("/stylesheets/iepngfix.htc")
+}
+/* Header
+ ----------------------------------------------- */
+#user {
+    margin: 0px;
+    padding: 0px;
+    color: #fff;
+    height: 19px;
+    text-align: right;
+    position: relative;
+    top: 4px;
+}
+
+#user a:link, #user a:visited, #user a:active {
+    color: #76ba00;
+    text-decoration: underline;
+}
+
+#user a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+#headerBar {
+    margin: 0px;
+    padding: 0px;
+    background-image: url("/images/top-bar-bg.gif");
+    background-repeat: repeat-x;
+    color: #fff;
+    height: 19px;
+    text-align: right;
+}
+
+#headerBar a:link, #headerBar a:visited, #headerBar a:active {
+    color: #fff;
+    text-decoration: underline;
+}
+
+#headerBar a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+#header {
+    margin: 0px;
+    padding: 0px;
+    width: 800px;
+    height: 53px;
+    text-align: left;
+}
+
+#mainNav {
+    margin: 10px 0 0 0;
+    padding: 0px;
+    background: url("/images/nav/bottom.gif") bottom left no-repeat;
+    height: 31px;
+    width: 800px;
+    text-align: left;
+}
+/*Nav*/
+ul#nav {
+    float: left;
+    margin: 0 0 0 0;
+    padding: 0 !important;
+}
+
+#nav li {
+    display: inline;
+    text-indent: -9999em;
+    float: left;
+    height: 28px;
+}
+
+#nav a {
+    overflow: hidden;
+}
+
+#nav a:active {
+    margin-top: 1px;
+}
+
+#nav .on a, #nav a:hover {
+    background-position: bottom left !important;
+}
+
+.nav-home a {
+    background: url("../images/nav/home.gif") no-repeat;
+    height: 25px;
+    width: 122px;
+    display: block;
+}
+
+.nav-buyers a {
+    background: url("../images/nav/buyers.gif") no-repeat;
+    height: 25px;
+    width: 133px;
+    display: block;
+}
+
+.nav-owners a {
+    background: url("../images/nav/owners.gif") no-repeat;
+    height: 25px;
+    width: 136px;
+    display: block;
+}
+
+.nav-mydwellgo a {
+    background: url("../images/nav/mydwellgo.gif") no-repeat;
+    height: 25px;
+    width: 176px;
+    display: block;
+}
+
+.nav-howto a {
+    background: url("../images/nav/howto.gif") no-repeat;
+    height: 25px;
+    width: 111px;
+    display: block;
+}
+
+.nav-blog a {
+    background: url("../images/nav/blog.gif") no-repeat;
+    height: 25px;
+    width: 122px;
+    display: block;
+}
+
+.nav-home-selected a {
+    background: url("../images/nav/home.gif") no-repeat;
+    height: 25px;
+    width: 122px;
+    display: block;
+    background-position: bottom left;
+}
+
+.nav-buyers-selected a {
+    background: url("../images/nav/buyers.gif") no-repeat;
+    height: 25px;
+    width: 133px;
+    display: block;
+    background-position: bottom left;
+}
+
+.nav-owners-selected a {
+    background: url("../images/nav/owners.gif") no-repeat;
+    height: 25px;
+    width: 136px;
+    display: block;
+    background-position: bottom left;
+}
+
+.nav-mydwellgo-selected a {
+    background: url("../images/nav/mydwellgo.gif") no-repeat;
+    height: 25px;
+    width: 176px;
+    display: block;
+    background-position: bottom left;
+}
+
+.nav-howto-selected a {
+    background: url("../images/nav/howto.gif") no-repeat;
+    height: 25px;
+    width: 122px;
+    display: block;
+    background-position: bottom left;
+}
+
+.nav-blog-selected a {
+    background: url("../images/nav/blog.gif") no-repeat;
+    height: 25px;
+    width: 122px;
+    display: block;
+    background-position: bottom left;
+}
+
+
+/*Nav*/
+/* Body
+ ----------------------------------------------- */
+#mainHome {
+    margin: 0px;
+    padding: 0px;
+    font-size: 11px;
+    color: #c6c6c6;
+}
+
+#boxHomeLeft {
+    margin: 0 0 20px 0;
+    padding: 0 0 0 0;
+    background: url("/images/box-property-buyers.gif") top center no-repeat;
+    font-size: 11px;
+    text-align: left;
+    position: relative;
+    float: left;
+    width: 396px;
+    height: 155px;
+    color: #20407b;
+}
+
+#boxHomeLeftTxt {
+    position: relative;
+    top: 100px;
+    left: 160px;
+}
+
+#boxHomeRight {
+    margin: 0 0 20px 0;
+    padding: 0 0 0 0;
+    background: url("/images/box-property-owners.gif") top center no-repeat;
+    font-size: 11px;
+    text-align: left;
+    position: relative;
+    float: right;
+    width: 397px;
+    height: 155px;
+    color: #910000;
+}
+
+#boxHomeRightTxt {
+    position: relative;
+    top: 100px;
+    left: 160px;
+}
+
+#boxHomeLeftTxt a:link, #boxHomeLeftTxt a:visited, #boxHomeLeftTxt a:active, #boxHomeRightTxt a:link, #boxHomeRightTxt a:visited, #boxHomeRightTxt a:active {
+    color: #fff;
+    text-decoration: underline;
+}
+
+#boxHomeLeftTxt a:hover, #boxHomeRightTxt a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+#boxes {
+    margin: 0px;
+    padding: 0px;
+    width: 501px;
+    height: 300px;
+    background: url("/images/header-2boxes.png") top center no-repeat;
+    float: right;
+}
+
+.button {
+    vertical-align: bottom;
+}
+
+.homeBox1 {
+    margin: 0px;
+    padding: 40px 10px 10px 10px;
+    text-align: left;
+    font-size: 11px;
+    line-height: 20px;
+    width: 220px;
+    float: left;
+    left: -20px;
+    position: relative;
+}
+
+.homeBox2 {
+    margin: 0 0 0 8px;
+    padding: 40px 10px 10px 10px;
+    text-align: left;
+    font-size: 11px;
+    line-height: 20px;
+    width: 220px;
+    float: right;
+    left: -20px;
+    position: relative;
+}
+
+.homeBox3 {
+    margin: 0px;
+    padding: 40px 10px 10px 10px;
+    text-align: left;
+    font-size: 11px;
+    line-height: 20px;
+    width: 240px;
+    float: right;
+    left: -20px;
+    position: relative;
+}
+
+input.submit {
+    background: url(/images/submit.gif) no-repeat;
+    border: 0;
+    padding: 4px 0;
+    width: 65px;
+    height: 24px;
+    margin: 0 15px 1px 0;
+    color: #FFF;
+    font: bold 1em Arial, Sans-Serif;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+input.submit_s {
+    background: url(/images/submit-s.gif) no-repeat;
+    border: 0;
+    padding: 0px 0;
+    width: 55px;
+    height: 20px;
+    margin: 0 15px 1px 0;
+    color: #FFF;
+    font: bold 0.9em Arial, Sans-Serif;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+input.submit_m {
+    background: url(/images/submit-m.gif) no-repeat;
+    border: 0;
+    padding: 4px 0;
+    width: 100px;
+    height: 24px;
+    margin: 0 15px 1px 0;
+    color: #FFF;
+    font: bold 1em Arial, Sans-Serif;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+input.submit_l {
+    background: url(/images/submit-l.gif) no-repeat;
+    border: 0;
+    padding: 4px 0;
+    width: 120px;
+    height: 24px;
+    margin: 0 15px 1px 0;
+    color: #FFF;
+    font: bold 1em Arial, Sans-Serif;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+input.submit_xl {
+    background: url(/images/submit-xl.gif) no-repeat;
+    border: 0;
+    padding: 4px 0;
+    width: 175px;
+    height: 24px;
+    margin: 0 15px 10px 0;
+    color: #FFF;
+    font: bold 1em Arial, Sans-Serif;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.homeList li {
+    list-style: none;
+    padding-left: 10px;
+    list-style-image: url("/images/add.gif");
+    background-repeat: no-repeat;
+    background-position: 0px 4px;
+    padding-left: 6px;
+}
+
+#specializes {
+    width: 250px;
+    float: left;
+    text-align: left;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 28px;
+    padding: 0;
+    margin: 0;
+}
+
+.specialList li {
+    list-style: none;
+    list-style-image: url("/images/check.gif");
+    background-repeat: no-repeat;
+    background-position: 0px 4px;
+    padding-left: 5px;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+#openRealEstate {
+    margin: 0 0 0 0;
+    padding: 10px 0 0 120px;
+    font-size: 11px;
+    text-align: center;
+    /*position: relative;
+     float: left;*/
+    width: 680px;
+    color: #fff;
+}
+
+#promo {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: left;
+    position: relative;
+    float: right;
+    width: 130px;
+    color: #fff;
+    text-align: right;
+}
+
+#promoText {
+    margin: 0 0 0 0;
+    padding: 0px 0 0 0;
+    font-size: 12px;
+    position: relative;
+    float: right;
+    width: 270px;
+    color: #a2ecef;
+    text-align: center;
+    vertical-align: top;
+}
+
+hr {
+    border: none;
+    background-color: #cdcdcd;
+    color: #cdcdcd;
+    height: 1px;
+}
+
+#buyerHome {
+    margin: 0 0 20px 0;
+    padding: 0 0 0 0;
+    font-size: 11px;
+    text-align: left;
+    position: relative;
+    float: left;
+    width: 396px;
+    color: #fff;
+}
+
+#buyerHome td {
+    padding: 0 10px 10px 0;
+}
+
+.buyerHomeHeader {
+    color: #52b4d6;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#buyerHome a:link, #buyerHome a:visited, #buyerHome a:active {
+    color: #52b4d6;
+    text-decoration: underline;
+}
+
+#buyerHome a:hover {
+    color: #52b4d6;
+    text-decoration: none;
+}
+
+#propertyHome {
+    margin: 0 0 20px 0;
+    padding: 0 0 0 0;
+    font-size: 11px;
+    text-align: left;
+    position: relative;
+    float: right;
+    width: 397px;
+    color: #fff;
+}
+
+#propertyHome td {
+    padding: 0 10px 10px 0;
+}
+
+.propertyHomeHeader {
+    color: #ffaf00;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#propertyHome a:link, #propertyHome a:visited, #propertyHome a:active {
+    color: #ffaf00;
+    text-decoration: underline;
+}
+
+#propertyHome a:hover {
+    color: #ffaf00;
+    text-decoration: none;
+}
+
+#blogPosts {
+    margin: 0 0 20px 0;
+    padding: 0 0 0 0;
+    font-size: 11px;
+    text-align: left;
+    position: relative;
+    float: left;
+    width: 380px;
+    height: 155px;
+    color: #fff;
+}
+
+a.blogPostTitle {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#supportedCommunities {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    font-size: 13px;
+    text-align: left;
+    position: relative;
+    float: right;
+    width: 397px;
+    color: #fff;
+}
+
+.supportedList {
+    list-style: square;
+    padding-left: 15px;
+    margin-left: 0;
+    margin-top: 0;
+    padding-top: 10px;
+    line-height: 20px;
+    float: left;
+    width: 150px;
+}
+
+.mHeader {
+    font-size: 19px;
+    line-height: 26px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.mHeader2 {
+    font-size: 19px;
+    line-height: 26px;
+    font-weight: bold;
+    color: #7ca65e;
+    display: block;
+    padding: 0 0 20px 0;
+}
+
+.mHeader3 {
+    font-size: 19px;
+    line-height: 26px;
+    font-weight: bold;
+    color: #fff;
+    display: block;
+    padding: 0 0 5px 0;
+}
+
+.mHeader4 {
+    font-size: 17px;
+    line-height: 26px;
+    font-weight: bold;
+    color: #7ca65e;
+    display: block;
+    padding: 0 0 0 0;
+}
+
+#promoText .mHeader {
+    font-size: 14px;
+}
+
+#mLogo {
+    float: left;
+    width: 300px;
+}
+
+#tagline {
+    margin-top: 25px;
+    padding-bottom: 10px;
+    float: right;
+    width: 400px;
+    font-size: 20px;
+    color: #fff;
+    text-align: right;
+    vertical-align: bottom;
+}
+/* Footer
+ ----------------------------------------------- */
+#footer {
+    font-size: 12px;
+    margin: 0px 0px 0px 0px;
+    padding: 1px 0 1px 0;
+    background: url("/images/bar-footer.gif") top center no-repeat;
+    width: 800px;
+    height: 30px;
+    clear: both;
+    color: #fff;
+}
+
+#footer a:link, #footer a:visited, #footer a:active {
+    color: #fff;
+    text-decoration: underline;
+}
+
+#footer a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+#footerLeft {
+    padding: 0 0 0 10px;
+    position: relative;
+    float: left;
+}
+
+#footerRight {
+    padding: 0 10px 0 0;
+    position: relative;
+    float: right;
+}
+/* Form Validation
+ --------------- */
+input.validation-failed, textarea.validation-failed {
+    border: 1px solid #FF3300;
+    color: #FF3300;
+}
+
+input.validation-passed, textarea.validation-passed {
+}
+
+.validation-advice {
+    margin: 5px 0;
+    padding: 5px;
+    background-color: #CC3300;
+    color: #FFF;
+    font-weight: bold;
+    float: left;
+}
+
+input.fieldWithErrors, select.fieldWithErrors, textarea.fieldWithErrors {
+    border: 1px solid #FF3300;
+    color: #FF3300;
+}
+
+.formError {
+    color: #FF3300;
+}
+
+div.link_button_xl a {
+    color: #FFF;
+    border: 0;
+    padding: 4px 0 0 4px;
+    margin: 0 15px 10px 0;
+    height: 24px;
+    width: 175px;
+    white-space: nowrap;
+}
+
+div.link_button_xl {
+    background: url(/images/submit-xl.gif) no-repeat;
+    border: 0;
+    width: 175px;
+    height: 24px;
+    margin: 0 15px 10px 0;
+    padding-top: 4px;
+    color: #FFF;
+    font: bold 1em Arial, Sans-Serif;
+    cursor: pointer;
+}

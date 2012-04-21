@@ -1,0 +1,229 @@
+  <% form_for(@seller_website) do |f| %>
+      <table>
+        <tr>
+          <th class="seller_page_header">Header</th>
+          <td>
+            <%= f.text_field :header,:size => 83%>
+             <%=error_message_on :seller_website,:header%>
+          </td>
+        </tr>
+       <tr>
+          <th class="seller_page_header">Home Page Video</th>
+          <td>
+               <% home_page_default_video = false
+                 home_page_own_video = false
+                 display_none = false
+                 if @seller_website.home_page_default_video == true 
+                    home_page_default_video = true
+                 elsif  @seller_website.home_page_default_video == false
+                    home_page_own_video = true
+                 end
+                 if ( home_page_default_video == false and home_page_own_video == false ) or ( home_page_default_video )
+                      display_none = true
+                 end
+                 %>
+
+              <%=f.radio_button :home_page_default_video, "1", :checked=>home_page_default_video, :onclick=>"hide_home_page_video();"%> Use Default
+              <%=f.radio_button :home_page_default_video, "0", :checked=>home_page_own_video,  :onclick=>"show_home_page_video();"%> Use My Own
+          </td>
+        </tr>
+
+        <tr id="home_page_video_link" <% if display_none %> style="display:none;" <% end %> >
+          <th class="seller_page_header"> Home Page Video</th>
+          <td>
+                <div>
+                    http://<%= f.text_field "home_page_video_tour", :size => 48 %><%=error_message_on :seller_website,:home_page_video_tour %>
+                    <br/>
+                    <div style="font-size:12px; font-family:Arial; color:grey;">
+                        (<span style="color:red; font-weight:500;">Note:</span>
+                        Use this field for an <span style="text-decoration:underline;">external video tour only</span>. <br/> Links to other promotional or innapropriate material will be removed from the marketplace.)
+                    </div>
+                </div>
+        </tr>
+        <tr id="home_page_or_tr" <% if display_none %> style="display:none;" <% end %> ><th style="padding-left:45px;">OR</th><td></td></tr>
+        <tr id="home_page_embed_video" <% if display_none %> style="display:none;" <% end %> >
+          <th class="seller_page_header">
+            Embedded Video
+            <br/>
+            <a title='<%= title_popup %>' href="#" style="font-weight:300;">what's this?</a>
+          </th>
+          <td><%= f.text_area :home_page_embed_video,:size => "40x3",:style=>'margin-left:0px;' %><%=error_message_on :seller_website,:home_page_embed_video%></td>
+        </tr>
+        
+        <tr id="home_page_default_tr" <% if !home_page_default_video %> style="display:none;" <% end %> >
+          <th> </th>
+          <td>  
+              <left>
+                  <div id="evp-e90c4c631f131f5f3463dc84ad5166dd-wrap" class="evp-video-wrap"></div>
+                  <script type="text/javascript"    src="http://www.damonflowers.com/evp/framework.php?div_id=evp-e90c4c631f131f5f3463dc84ad5166dd&id=c2VsbGVyLXdlYnNpdGUtSFAtdjEubTR2&v=1307139772&profile=default">
+                  </script>
+                  <script type="text/javascript"><!--
+                  _evpInit('c2VsbGVyLXdlYnNpdGUtSFAtdjEubTR2[evp-e90c4c631f131f5f3463dc84ad5166dd]');//--></script>
+              </left>
+            <br/>
+          </td>
+        </tr>
+
+        <tr>
+          <th class="seller_page_header">Homepage Main Text 1</th>
+          <td >
+               <%= f.text_area :home_page_main_text_1 ,:class=>"rich_text_editor", :size => "70x4",:style=>'margin-left:0px;' %><%=error_message_on :seller_website,:home_page_main_text_1%>
+           </td>
+        </tr>
+       
+        <tr>
+          <th class="seller_page_header">Homepage Main Text 2</th>
+          <td>
+            <%= f.text_area :home_page_main_text_2,:class=>"rich_text_editor", :size => "70x4",:style=>'margin-left:0px;' %><%=error_message_on :seller_website,:home_page_main_text_2%>
+           </td>
+        </tr> 
+        <tr>
+          <th class="seller_page_header">Design Color</th>
+          <td>
+           <div class="inner_right_div">
+            <%=render :partial=>"account/color_pallate" ,:locals=>{:current_object_css=>@seller_website.dynamic_css} %>
+            <%=hidden_field "seller_website", "dynamic_css"%>
+           </div>
+          </td>
+        </tr>
+        
+         <tr>
+          <th class="seller_page_header">Lead Funnel Video</th>
+          <td>
+               <% lead_funnel_default_video = false
+                 lead_funnel_own_video = false
+                 display_none = false
+                 if @seller_website.lead_funnel_default_video == true 
+                    lead_funnel_default_video = true
+                 elsif  @seller_website.lead_funnel_default_video == false
+                    lead_funnel_own_video = true
+                 end
+                 if ( lead_funnel_default_video == false and lead_funnel_own_video == false ) or ( lead_funnel_default_video )
+                      display_none = true
+                 end
+                 %>
+
+              <%=f.radio_button :lead_funnel_default_video, "1", :checked=>lead_funnel_default_video, :onclick=>"hide_lead_funnel_video();"%> Use Default
+              <%=f.radio_button :lead_funnel_default_video, "0", :checked=>lead_funnel_own_video,  :onclick=>"show_lead_funnel_video();"%> Use My Own
+          </td>
+        </tr>
+
+        <tr id="lead_funnel_video_link" <% if display_none %> style="display:none;" <% end %> >
+          <th class="seller_page_header"> Lead Funnel Video</th>
+          <td>
+                <div>
+                    http://<%= f.text_field "lead_funnel_video_tour", :size => 48 %><%=error_message_on :seller_website,:lead_funnel_video_tour %>
+                    <br/>
+                    <div style="font-size:12px; font-family:Arial; color:grey;">
+                        (<span style="color:red; font-weight:500;">Note:</span>
+                        Use this field for an <span style="text-decoration:underline;">external video tour only</span>. <br/> Links to other promotional or innapropriate material will be removed from the marketplace.)
+                    </div>
+                </div>
+        </tr>
+        <tr id="lead_funnel_or_tr" <% if display_none %> style="display:none;" <% end %> ><th style="padding-left:45px;">OR</th><td></td></tr>
+        <tr id="lead_funnel_embed_video" <% if display_none %> style="display:none;" <% end %> >
+          <th class="seller_page_header">
+            Embedded Video
+            <br/>
+            <a title='<%= title_popup %>' href="#" style="font-weight:300;">what's this?</a>
+          </th>
+          <td><%= f.text_area :lead_funnel_embed_video,:size => "40x3",:style=>'margin-left:0px;' %><%=error_message_on :seller_website,:lead_funnel_embed_video%></td>
+        </tr>
+
+        <tr id="lead_funnel_default_tr" <% if !lead_funnel_default_video %> style="display:none;" <% end %> >
+          <th> </th>
+          <td>  
+             <left>
+                <div id="evp-1c1d07ca6a65ee015c337dd8eefaa9bb-wrap" class="evp-video-wrap"></div>
+                 <script type="text/javascript"  src="http://www.damonflowers.com/evp/framework.php?div_id=evp-1c1d07ca6a65ee015c337dd8eefaa9bb&id=c2VsbGVyLXdlYnNpdGUtbGVhZC12MS5tNHY%3D&v=1307140003&profile=default">
+                </script>
+               <script type="text/javascript"><!--
+                    _evpInit('c2VsbGVyLXdlYnNpdGUtbGVhZC12MS5tNHY=[evp-1c1d07ca6a65ee015c337dd8eefaa9bb]');//-->
+               </script>
+             </left>
+            <br/>
+          </td>
+        </tr>
+        
+        <tr>
+          <th class="seller_page_header">About Us Page Text</th>
+          <td>
+            <%if button_name != "Update Settings"%>
+                <% about_us_text =  SellerWebsite::ABOUT_TEXT.to_s%>
+                <%= f.text_area :about_us_page_text,:style=>'margin-left:0px;',:class=>"rich_text_editor", :size => "70x4",:value=>about_us_text %>
+            <%else%>
+                 <% about_us_text =  @seller_website.about_us_page_text.to_s%>
+                 <%= f.text_area :about_us_page_text,:style=>'margin-left:0px;',:class=>"rich_text_editor", :size => "70x4",:value=>about_us_text %>
+             <%end%>
+              <%=error_message_on :seller_website,:about_us_page_text%>
+              <%if !params[:my_website_form].blank?%>  
+                  <%=hidden_field_tag "domain_name", @domain_name%>
+                  <%=hidden_field "seller_website","domain_type",:value=> params[:my_website_form][:domain]%>
+                  <%=hidden_field "seller_website", "permalink_text"%>
+              <%end%>
+          </td>
+        </tr> 
+    <%if button_name == "Update Settings"%>
+        <%if @seller_website.domain_type== MyWebsiteForm::DOMAIN_TYPE[:reim]%>
+            <tr>
+              <th class="seller_page_header">Perma Link</th>
+              <td>
+                    <%= f.text_field :permalink_text,:size => 10 %>
+                      <div style="width:500px;">
+                        <%=error_message_on :seller_website,:permalink_text%>
+                      </div>
+              </td>
+            </tr>
+        <%elsif @seller_website.domain_type== MyWebsiteForm::DOMAIN_TYPE[:having]%>
+             <tr>
+              <th class="seller_page_header">Domain Name</th>
+              <td>
+                   <%f.fields_for :my_website ,@seller_website.my_website do |my_website_form| %>
+                      <%= my_website_form.text_field :domain_name %>
+                       <div style="width:500px;">
+                        <%=my_website_form.error_message_on :domain_name%>
+                      </div>
+                    <% end %>
+                    
+              </td>
+            </tr>
+        <%end%>
+   <%end%>      
+
+        <tr>
+          <th class="seller_page_header">Meta Title</th>
+          <td><%= f.text_field :meta_title,:maxlength=>70,:size => 48 %><%=error_message_on :seller_website,:meta_title%></td>
+        </tr>
+    
+         <tr>
+          <th class="seller_page_header">Meta Description</th>
+          <td>
+            <%= f.text_area :meta_description,:style=>'margin-left:0px;', :size => "70x4",:onkeypress=>"postlimit();"%><%=error_message_on :seller_website,:meta_description%>
+          </td>
+        </tr> 
+  
+        <tr>
+          <th class="seller_page_header">Google Analytics Tracking <img alt="Help_icon" src="/images/reimatcher_images/help_icon.png" title="Enter your UA Tracking Number in this field to begin tracking your traffic result in Google Analytics. Your UA number will look something like UA-XXXXXXXX-X and can be found in your Google Analytics tracking code" style="cursor:pointer;"/></th>
+          <td>
+            <%= f.text_field :ua_number, :size => "10" %>
+                      <div style="width:500px;">
+                        <%=error_message_on :seller_website,:ua_number%>
+                      </div>
+          </td>
+        </tr>
+
+         <tr>
+          <th class="seller_page_header">Activate</th>
+          <td><%= f.check_box :active %><%=error_message_on :seller_website,:active%></td>
+        </tr>
+
+        <tr>
+          <%css_class_name = button_name == "Update Settings" ? "submit_xl" : "submit_s"%>
+          <td colspan="2" align="center">
+               <%= f.submit button_name, :class=>css_class_name %></td>
+        </tr>
+
+      </table>
+  <% end %>
+
+

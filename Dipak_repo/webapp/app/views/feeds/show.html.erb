@@ -1,0 +1,119 @@
+<%- @page_title = @feed.nil? ? "Listings" : @feed.title -%>
+<%- @page_title_h1 = "Craigslist FSBO" %>
+<%- @page_title_h1_class = "smaller" -%>
+<%- @hide_page_title = false %>
+<%- @page_heading = @feed.nil? ? "Listings" : @feed.title -%>
+<%- @meta_description = "Dwellgo is the best way to post your home or property for sale and reach buyers in the Austin Metro area enabling communication with buyers directly" -%>
+<%- @meta_keywords = "sell austin real estate, austin fsbo, austin for sale by owner, real estate in Austin, dwellgo" -%>
+
+<% require_js_controllers :hover, :click_to_uri, :lightbox -%>
+
+<% content_for :page_styles do -%>
+<%=stylesheet_link_tag "lightbox"%>
+<% end -%>
+
+<%- content_for :page_scripts do -%>
+
+Event.observe(window, 'load', function() {
+  hover_controller = new NL.HoverController($$('#my_profiles div.profile'));
+  lightbox_controller = new NL.LightboxController();
+});
+
+<%- end -%>
+
+
+<div class="left reasons">
+    <% if @feed.nil? or @feed.items.empty? %>
+      No listings found.
+    <% else %>
+      <% @feed.items.each { |feed_item| %>
+        <div class="feed_item">
+           <%= link_to feed_item.title, feed_feed_item_url(@feed.id, feed_item.id) %>
+       </div>
+       <hr/>
+     <% } %>
+   <% end %>
+</div>
+
+
+<div class="right">
+  
+  <% form_tag search_path, :method => :get do %>
+    <%= text_field_tag :q, params[:q] %>
+    <%= submit_tag "Search", :name => nil  %>
+    <br/>
+    <%  
+      buyer_selected, property_selected = {}, {}
+      property_selected = "checked=\"checked\"" if @profiles.any? { |profile| profile.owner? }
+      buyer_selected = "checked=\"checked\"" if property_selected.empty? 
+    %>
+    <input type="radio" name="search_profile_type" value="buyer" <%= buyer_selected %>/>Buyer
+    <input type="radio" name="search_profile_type" value="property" <%= property_selected %>/>Property
+  <% end %>
+  <br/>
+
+  <h3>Toolbox</h3>
+
+  <div class="right_box">
+      <p><%=link_to "Add a Buyer Profile", :controller=>"profiles", :action=>"new", :id=>"buyer"%></p>
+      <p><%=link_to "Add a Property", :controller=>"profiles", :action=>"new", :id=>"owner"%></p>
+      <p><%=link_to "Update Account", :controller=>"account", :action=>"settings"%></p>
+      <p><%=link_to_remote("Invite a Friend",{
+                                                                 :url => {
+                                                                 :controller => '/invitations',
+                                                                 :action => 'new'
+                                                                 },
+                                                                 :update         => "lightbox_contents",
+                                                                 :loading        => "lightbox_controller.loading()",
+                                                                 :loaded         => "lightbox_controller.loaded()"
+
+        }) %></p>
+      <p><%=link_to "Give Us Feedback", new_feedback_path %></p>
+  </div>
+
+
+    <h3>Community</h3>
+    <div class="right_articles legend">
+      <table width="100%">
+
+        <tr>
+          <td><%=@community_stats.property_count%></td>
+          <td>Properties</td>
+        </tr>
+
+        <tr>
+          <td>&nbsp;</td>
+          <td><%=@community_stats.public_property_count%> Public
+          </td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td><%=@community_stats.private_property_count%> Private
+          </td>
+        </tr>
+
+        <tr>
+          <td><%=@community_stats.active_buyers%></td>
+          <td>Buyers</td>
+        </tr>
+
+        <tr>
+          <td><strong><%=@community_stats.total_profiles%></strong></td>
+          <td><strong>Dwellgo Profiles</strong></td>
+        </tr>
+
+      </table>
+
+    </div>
+ 
+    <div style="margin-top: 10px">
+      <%=render_ad :width=>240, :height=>150, :name=>"manana", :target_page=>"mydwellgo" %>
+    </div>
+
+</div>
+
+<div style="display:none;" id="overlay_Lightbox">
+
+</div>
+
+<div style="display:none;" id="lightbox_contents">Lightbox</div>

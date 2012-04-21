@@ -1,0 +1,158 @@
+
+<%- @page_title = "Buyer Website Setup" -%>
+
+<%=javascript_include_tag "territory_name"%>
+<%= stylesheet_link_tag "investor_buyer_page" %>
+<%- content_for :page_scripts do -%>
+
+Event.observe(window, 'load', function() {
+// account_settings_controller = new NL.AccountSettingsController();
+   $('state_code_state_code').observe('change', function(){
+      state_id = $('state_code_state_code').value
+      new Ajax.Request('/account/get_territories?state_id='+state_id,
+      {
+          method:'get',
+          onSuccess: function(transport){
+             var response = transport.responseText || "no response text";
+             $('ajax_update_div').innerHTML = response
+          },
+          onFailure: function(){ alert('Something went wrong...') }
+      });
+   });
+  $('country_country').observe('change', function(){
+      country_id = $('country_country').value
+      if(country_id == "CA"){
+            $('territory_helper_block').style.display = "none";
+          }
+        else{
+            $('territory_helper_block').style.display = "block";
+          }
+      new Ajax.Request('/buyer_websites/update_territory_block/',
+      {
+          method:'get',
+           parameters: {country_id: country_id},
+          onSuccess: function(transport){
+             var response = transport.responseText || "no response text";
+             $('territory_block').innerHTML = response
+          },
+          onFailure: function(){ alert('Something went wrong...') }
+      });
+   });
+});
+
+<%- end -%>
+
+<div class="full">
+
+<fieldset>
+  <legend>Step 2 of 3</legend>
+  <%- form_for(:my_website_form,@my_website_form, :url => {:action => 'step3'}, :html => { :method => :post }) do |f| -%>
+  <div>
+    Use the drop down menus below to  select the state, then Territory, where you want to Activate your Buyer Website(s).
+  </div>
+  <div class="right_row_div">
+    <div class="left_float_left">
+      <b>Select Country</b>
+    </div>
+    <br/><br/>
+    <div class="inner_right_div">
+          <select name="country[country]" id="country_country" value=<%= params["country"]["country"] if params["country"]%>>
+             <%= options_for_select([[ "--- Select Country ---", "" ]] + County::COUNTRY_NAME, @country) %>        
+      </select>
+    </div>
+  </div>
+<br/><br/><br/>
+  <div style="height:110px;" class="right_row_div" id="territory_block">
+    <% if !@country.blank? and @country == "CA" %>
+      <div class="left_float_left">
+      <b>Select Province</b>
+      <%= error_message_on :user_territory, :user_id %>
+    </div>
+    <br/><br/>
+    <input type="hidden" name="state_code[state_code]" id="state_code_state_code" value="">
+    <div class="inner_right_div" id="ajax_update_div">
+      <%=select("user_territory","territory_id",@territories.map { |territory| [territory.territory_name, territory.id]  },{ :include_blank => "--- Select Province --- " })%>
+      <%=error_message_on :user_territory, :territory_id %>
+    </div>    
+    <% else %>
+    <div class="left_float_left">
+      <b>Select Territory</b>
+      <%= error_message_on :user_territory, :user_id %>
+    </div>
+    <br/><br/>
+    <div class="inner_right_div">
+      <select name="state_code[state_code]" id="state_code_state_code">
+        <option value="">--- Select State --- </option>
+        <% @states.each do |state|%>
+        <option value="<%=state.id%>" <%if @state_id == state.id %> selected="true" <%end%> ><%=state.name%></option>
+        <%end%>
+      </select>
+    </div>
+    <br/><br/>
+    <div class="inner_right_div" id="ajax_update_div">
+      <%=select("user_territory","territory_id",@territories.map { |territory| [territory.territory_name, territory.id]  },{ :include_blank => "--- Select Territories --- " })%>
+      <%=error_message_on :user_territory, :territory_id %>
+    </div>
+  <% end %>
+  </div>
+  
+  <div class="right_row_div">
+    <div class="left_float_left" >    
+    </div>
+    <div class="inner_right_div">
+    </div>
+  </div>
+
+  <div>
+    <span style="font-weight:bold;" id="territory_helper_block">
+      <% unless !@country.blank? and @country == "CA" %>
+      <%= link_to_remote( "Territory Helper" , 
+	  :url => { :action => "territory_helper" },
+          :update => { 
+            :success => "territory_helper", 
+            :failure => "error" 
+          })
+      %>
+      <% end %>
+    </span>
+  </div>
+
+  <br>
+
+  <div id="territory_helper">
+  </div>
+
+  <br/>
+
+
+
+
+  <% if !params[:my_website_form].blank? %>
+    <% params[:my_website_form].each do |key,value| %>
+      <%= hidden_field "my_website_form", key, :value => value %>
+    <% end %>
+  <%end%>
+
+  <div class="right_row_div">
+    <div class="left_float_left">
+      <%=submit_tag "Next", :class=>'submit_xl' %>
+    </div>
+  </div>
+<%- end -%>  
+</fieldset>
+</div>
+
+<script>
+    function get_state_territories(){
+      state_id = $('state_code_state_code').value
+      new Ajax.Request('/account/get_territories?state_id='+state_id,
+      {
+          method:'get',
+          onSuccess: function(transport){
+             var response = transport.responseText || "no response text";
+             $('ajax_update_div').innerHTML = response
+          },
+          onFailure: function(){ alert('Something went wrong...') }
+      });
+   }
+</script>

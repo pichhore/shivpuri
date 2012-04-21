@@ -1,0 +1,17 @@
+<%- form_tag password_resets_path do %>
+
+  <div class="error_usr_pw_re"><%= reset_flash_helper%></div>
+  <fieldset class="pw_reset">
+    <legend>Reset your password</legend>
+    <div class="activate_user_inst">
+      For security purposes, we will send you instructions to reset your password to the email you used to sign up with us.
+    </div>
+    <input type="text" id="txt_email" name="email" value="Email" onfocus="set_blank(this);" onblur="set_default_value(this);" >
+
+    <div >
+      <button  class="btn_rst_passwrd" name="commit" type="submit"></button>
+    </div>
+
+  </fieldset>
+<%- end %>
+<%= javascript_include_tag 'utility.js'%>

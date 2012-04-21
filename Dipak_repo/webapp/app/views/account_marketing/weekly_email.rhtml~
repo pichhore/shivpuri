@@ -1,0 +1,21 @@
+        <%= render :partial => "marketing_links" %>
+   <fieldset id="email_intro">
+
+<div id="left_navigation" style="float:left; width:222px;">
+        <%= render :partial => "responder_links" %>
+</div>
+
+<div id="right_navigation" style=" float:right; width:527px;">
+  <table>
+    <tr>
+      <td><h3>Buyer Responder (Weekly)</h3></td>
+    <tr>
+      <td>
+        Use the fields below to customize your Buyer Update Summary Email. The Summary Email is sent once a week on Thursdays at 7am CST to each Buyer Profile and includes all property matches to date. To use this feature, you must Activate Buyer Notification within the Buyer Profile and supply a valid Email Address. To see a sample email, click  <a href='#' onclick="document.getElementById('<%= @summary_type %>').style.display='block';">Example</a>
+      </td>
+    </tr>
+  </table>
+</div>
+    <%= render :partial => "email_desc" %>
+  </fieldset>
+<%= display_example_for_notification_mail(@summary_type) %>

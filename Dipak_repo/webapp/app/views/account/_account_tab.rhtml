@@ -1,0 +1,11 @@
+<ul>
+  <li class="<%= active_class_investor_profile unless defined?(active_class_investor_profile).nil?  %>"  uri="<%=url_for({:controller=>'account', :action=>'settings'})%>">Investor Profile</li>
+  <li class="<%= active_class_company_info unless defined?(active_class_company_info).nil? %>"  uri="<%=url_for({:controller=>'account', :action=>'company_info'})%>">Company Info</li>
+  <li class="<%= active_class_social_media unless defined?(active_class_social_media).nil? %>"  uri="<%=url_for({:controller=>'account', :action=>'social_media'})%>">Social Media</li>
+<!--
+  <li class="<%#= active_class_buyer_website unless defined?(active_class_buyer_website).nil? %>"  uri="<%#=url_for({:controller=>'account', :action=>'buyer_webpage'})%>">Buyer Websites</li>
+  <li class="<%#= active_class_buyer_responder unless defined?(active_class_buyer_responder).nil? %>"  uri="<%#=url_for({:controller=>'account_marketing', :action=>'welcome_email'})%>">Buyer Responder</li>
+-->
+  <li class="<%= active_class_syndication unless defined?(active_class_syndication).nil? %>"  uri="<%=url_for({:controller=>'account', :action=>'property-syndication'})%>">Syndication</li>
+  <li class="<%= active_class_alert unless defined?(active_class_alert).nil? %>"  uri="<%=url_for({:controller=>'account', :action=>'digest_frequency'})%>">Alerts</li>
+</ul>

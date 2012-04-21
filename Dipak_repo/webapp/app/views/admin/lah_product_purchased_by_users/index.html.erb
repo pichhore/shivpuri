@@ -1,0 +1,30 @@
+  <h2>Listing Product Purchase History</h2>
+
+<div style="margin-left: 20px;">
+<table border="1" BORDERCOLOR="black">
+<tr>
+ <th class="label_required">S. No</th>
+ <th class="label_required">User Name</th>
+ <th class="label_required">User Login</th>
+ <th class="label_required">Product ID</th>
+ <th class="label_required">Product Name</th>
+ <th class="label_required">Product Type</th>
+ <th class="label_required">Amount</th>
+</tr>
+<% @lah_product_purchased_by_users.each_with_index do |lah_product_purchased_by_user,index| %>
+     <tr>  <td><%= index+1 %></td>
+       <td><%= lah_product_purchased_by_user.user.full_name %> </td>
+       <td><%= lah_product_purchased_by_user.user.login %> </td>
+       <td><%= lah_product_purchased_by_user.product_ids %> </td>
+       <td><%= lah_product_purchased_by_user.product_name %> </td>
+       <td><%= lah_product_purchased_by_user.product_type %></td>
+       <td><%= lah_product_purchased_by_user.amount %> </td>
+     </tr>
+<%end%>
+</table><br/>
+   <div align="center"><%= will_paginate @lah_product_purchased_by_users %></div>
+<%= link_to 'Back', activate_path %>
+</div>
+
+ 
+

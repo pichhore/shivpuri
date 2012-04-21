@@ -1,0 +1,223 @@
+<%- @page_title = "Buyer Profile Setup - Step 2 of 2" -%>
+
+<% require_js_controllers :profile_setup, :expand_collapse, :lightbox,:profile_update, :tab -%>
+<% require_js_helpers :currency_field, :integer_field -%>
+<%= javascript_include_tag "add_buyer" %>
+
+<%- content_for :page_scripts do -%>
+Event.observe(window, 'load', function() {
+  lightbox_controller = new NL.LightboxController();
+  profile_setup_controller = new NL.ProfileSetupController($('fields_property_type'),$('fields_privacy_public'),$('fields_privacy_private'));
+  optional_expand_collapse = new NL.ExpandCollapseController($$('#optional h3')[0],$$('#optional div.optional_content')[0]);
+  integer_field_helper_sqft_min = new NL.IntegerFieldHelper($('fields_square_feet_min'));
+  integer_field_helper_sqft_max = new NL.IntegerFieldHelper($('fields_square_feet_max'));
+
+  integer_field_helper_max_mon_pay = new NL.IntegerFieldHelper($('fields_max_mon_pay'));
+  integer_field_helper_max_dwn_pay = new NL.IntegerFieldHelper($('fields_max_dow_pay'));
+
+  integer_field_helper_units_min = new NL.IntegerFieldHelper($('fields_units_min'));
+  integer_field_helper_units_max = new NL.IntegerFieldHelper($('fields_units_max'));
+  integer_field_helper_acres_min = new NL.IntegerFieldHelper($('fields_acres_min'));
+  integer_field_helper_acres_max = new NL.IntegerFieldHelper($('fields_acres_max'));
+  currency_field_helper_after_repair_value = new NL.CurrencyFieldHelper($('fields_max_purchase_value'));
+  currency_field_helper_avr_repairs_value = new NL.CurrencyFieldHelper($('fields_arv_repairs_value'));
+  currency_field_helper_min_mon_pay = new NL.CurrencyFieldHelper($('fields_max_mon_pay'));
+  currency_field_helper_min_dow_pay = new NL.CurrencyFieldHelper($('fields_max_dow_pay'));
+});
+
+<%- end -%>
+
+<script type="text/javascript">
+/*<![CDATA[*/
+/*You can also place this code in a separate file and link to it like epoch_classes.js*/
+window.onload = function() {
+  document.getElementById("investment_type_block").style.display = "none";
+  wholesale = document.getElementById("wholesale").checked
+  owner_finance = document.getElementById("owner_finance").checked
+  if(!wholesale)
+  {
+   document.getElementById("maxpv").style.display = 'none'
+   document.getElementById("arvr").style.display = 'none'
+  }
+  if(wholesale)
+  {
+   document.getElementById("maxpv").style.display = ''
+   document.getElementById("arvr").style.display = ''
+  }
+  if(!owner_finance)
+  {
+    document.getElementById("maxmp").style.display = 'none'
+    document.getElementById("maxdp").style.display = 'none'
+  }
+  if(owner_finance)
+  {
+    document.getElementById("maxmp").style.display = ''
+    document.getElementById("maxdp").style.display = ''
+  }
+};
+/*]]>*/
+</script>
+
+
+<div class="form">
+
+<%= error_messages_for :criteria %>
+
+</div>
+
+<% form_for(:fields, :url => profiles_path) do |f| %>
+
+<%=hidden_field_tag "id",@profile_type.permalink%>
+<%=f.hidden_field "privacy" %>
+
+<div class="form">
+  <h3>Step 2: Describe What You are Looking For</h3>
+  <%=render :partial=>"/shared/buyer_fields", :locals=> {:f=>f}%>
+</div>
+
+<div class="form">
+  <h3>Step 2a: Contact</h3>
+  <fieldset>
+
+        <table>
+          <TR><th class="label expand_label" style="width:25%;">Phone:</th>
+          <TD><%= f.text_field 'notification_phone' %></TD></TR>
+          </table>
+  	<div style="padding-left:18px; margin-top:10px;">
+	Use Email Notifications to notify someone other than yourself of properties that are a match to this profile. Any email address added below will receive an email with new matches as they come into REIMatcher, plus a weekly summary email. Emails are branded with your information, which can be updated by clicking Update Account. You may turn this feature on or off at any time.
+	</div>
+	
+	<div style="padding-left:18px; padding-top:5px; padding-bottom:12px;">
+	<b>NOTE:</b> We consider this email address to be completely controlled by you and will NEVER use for any purpose other than notification of matching properties.	
+	</div>
+	<table>
+		<tr>
+			<th class="label expand_label" style="width:25%;">
+	            Active:
+	        </th>		
+			<td>
+				<%= f.check_box 'notification_active',{:checked => true} %>
+			</td>	
+		</tr>
+		<tr>
+			<th class="label expand_label" style="width:25%;">
+	            Email Address:
+	        </th>
+			<td>
+				<%= f.text_field 'notification_email' %><%=error_message_on :fields,:notification_email%>
+			</td>
+		</tr>
+		<tr>
+			<th class="label expand_label" style="width:25%;">
+	            <a href="#" onclick="document.getElementById('overlay_Streetview').style.display='block';">See Example Email</a>
+	        </th>			
+		</tr>		
+	</table>
+  </fieldset>
+</div>
+
+
+<div class="form">
+
+  <%- if !logged_in? -%>
+
+  <h3>Step 2b: Create an Account</h3>
+
+  <fieldset>
+
+    <table>
+
+      <tr>
+        <th class="label_required">First Name:</th>
+        <td><%=text_field "user", "first_name" %><%=error_message_on :user,:first_name%></td>
+      </tr>
+
+      <tr>
+        <th class="label_required">Last Name:</th>
+        <td><%=text_field "user", "last_name" %> (Never revealed to REIMatcher members)<br/><%=error_message_on :user,:last_name%></td>
+      </tr>
+
+      <tr>
+        <th class="label_required">Email:</th>
+        <td><%=text_field "user", "email" %> (Never revealed to REIMatcher members)<br/><%=error_message_on :user,:email%></td>
+      </tr>
+<!--
+      <tr>
+        <th class="label">Home Phone:</th>
+        <td><%=text_field "user", "home_phone" %><%=error_message_on :user,:home_phone%></td>
+      </tr>
+
+      <tr>
+        <th class="label">Business Phone:</th>
+        <td><%=text_field "user", "business_phone" %><%=error_message_on :user,:business_phone%></td>
+      </tr>
+
+      <tr>
+        <th class="label">Mobile Phone:</th>
+        <td><%=text_field "user", "mobile_phone" %><%=error_message_on :user,:mobile_phone%></td>
+      </tr>
+-->
+      <tr>
+        <th class="label_required">Password:</th>
+        <td><%=password_field "user", "password" %> (See <%=link_to "Privacy Policy", {:controller=>"home", :action=>"privacy"}, :target=>"_new", :tabindex=>99%>)<br/><%=error_message_on :user,:password%></td>
+      </tr>
+
+      <tr>
+        <th class="label_required">Password (verify):</th>
+        <td><%=password_field "user", "password_confirmation" %><%=error_message_on :user,:password_confirmation%></td>
+      </tr>
+      
+      <tr>
+        <td colspan="2" align="center">I agree to the <%=link_to "Terms of Use", {:controller=>"home", :action=>"terms_of_use"}, :target=>"_new", :tabindex=>99%> <%=check_box "user", "terms_of_use" %><%=error_message_on :user,:terms_of_use%></td>
+      </tr>
+      
+    </table>
+
+  </fieldset>
+
+  <%- end -%>
+
+  <p> <%=image_tag "required.gif"%> Required Field </p>
+
+  <p style="text-align: center">
+    <%=submit_tag "Create", :class=>"submit"%>
+  </p>
+
+</div>
+
+<% end %>
+
+
+
+<% content_for :page_styles do -%>
+<%=stylesheet_link_tag "lightbox"%>
+<% end -%>
+
+
+
+<div style="display:none;" id="overlay_Lightbox">
+</div>
+
+<div style="display:none;" id="overlay_Streetview"/>
+<div style="display:block; top:18%; font-family: Arial;" id="lightbox_contract_end_date" style="width: 60%;">
+    <div id="streetview_header">
+        <a href="javascript:void(0);" id="streetview_close" onclick="document.getElementById('overlay_Streetview').style.display='none';"><img src="/images/active_scaffold/default/close.gif"/></a>
+    </div>
+	<div id="contract_end_date_contents">		
+		<div style="color:black; padding-bottom:15px;"> 
+	    Hi, this is John with JSK Properties,
+        <br /><br />Once a day I search for properties that match the criteria you entered into your profile on my website. I only send an email if I find something. Today, I found one or more that match your available down payment and monthly payment, and the area(s) you specified that you are interested in. Check it out below...
+		</div>   
+    	<img src="/images/example_1_property.png" />
+		<div style="color:black; padding-top:15px;">
+			If any of these properties look interesting to you, give me a call at (512)-555-5555 so that we can talk further and I can arrange to possibly show it to you.
+            <br>Thanks,
+			<br /><br />John
+			<br />JSK Properties
+			<br />1514 Baines Rd, Suite 305, Austin, TX 78704
+			<br />(512)-555-5555
+		</div>		
+    </div>
+</div>
+
+

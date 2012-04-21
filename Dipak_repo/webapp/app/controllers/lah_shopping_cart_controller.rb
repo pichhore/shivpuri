@@ -1,0 +1,184 @@
+require "net/http"
+require "uri"
+require "xmlsimple"
+
+class LahShoppingCartController < ApplicationController
+  skip_before_filter :verify_authenticity_token
+  SHOPPING_CART_NAME_FOR_HASH = "lah_shopping_cart"
+  REIM_DEFAULT_PASS = "4reimatcher"
+  PRODUCT_FOR_NEW_USER = ["8571799", "8571801", "8572849", "7914481", "8280720", "8256586", "8566972", "8286165", "8281983", "8281987", "8285670", "7876355", "8280718", "7914489", "8394626", "7914493", "8285676", "7914484", "8233775", "8283722", "8607354", "8607368", "8607345", "119147", "120433", "8653884", "8653885", "8653888", "8653880", "8694760", "120545", "120546", "8582608", "8807645", "121318", "8869744", "8869746", "8869733", "8869738", "8634076", "8634070", "8634040", "8807660", "8978600", "8978626", "8978596", "8864500", "8963150", "121763", "9003479", "8661415", "8645449", "8661406", "119368", "119367", "119146", "121760", "9066508", "9066519", "9066525"]
+
+  PRODUCTS_FOR_EXISTING_USER = ["8571799", "8571801", "8572849", "7914481", "8280720", "8256586", "8566972", "8286165", "8281983", "8281987", "8285670", "7876355", "8280718", "7914489", "8394626", "7914493", "8285676", "7914484", "8233775", "8283722", "8607354", "8607368", "8645449", "8607345", "119147", "120433", "8661406", "8653884", "8653885", "8653888", "8653880", "8694760", "120545", "120546", "8582608", "8807645", "121318", "8869744", "8869746", "8869733", "8869738", "8634076", "8634070", "8634040", "8807660", "8978600", "8978626", "8978596", "8864500", "8963150", "121763", "9003479", "8661415", "119368", "119367", "119146", "121760", "9066508", "9066519", "9066525"]
+
+  USER_PURCHASE_REIM_PRO_SUBSCRIPTION = ["7876355", "7914489", "8394626", "7914493", "8285676", "7914484", "8233775", "8607354", "8607368", "7914481", "119147", "120433", "8653884", "8653885", "120545", "120546", "8807645", "121318", "8869733", "8978596", "8864500", "8963150", "121763", "8661415", "119368", "119367", "119146", "121760"]
+  USER_PURCHASE_FREE_SUBSCRIPTION = ["8571799", "8571801", "8572849", "8280720", "8280718", "8607345", "8653888", "8653880", "8694760", "8582608", "8869744", "8869746", "8869738", "8634076", "8634070", "8634040", "8807660", "8978600", "8978626", "9003479", "8645449", "8661406", "9066508", "9066519", "9066525"]
+  USER_PURCHASE_AMPS_PRODUCT = ["7914481", "8280720", "8256586", "8566972", "8286165", "8281983", "8281987", "8285670", "7876355", "8280718", "8283722", "119147", "120545", "120546", "8571801", "119368", "119367", "119146"]
+  USER_PURCHASE_GOLD_COACHING_PRODUCT = ["8394626", "7914489", "8572849", "8607345", "8653884", "8653885", "8653888", "8653880", "121760", "9066519"]
+  TURN_OFF_NOTIFICATION_FOR_THE_PRODUCT = ["7914484"]
+  SHOPPING_CART_NAME = "LAH 1Shopping Cart"
+  USER_PURCHASE_RE_VOLUTION_PRODUCT = ["8571799", "8694760", "8582608", "8807645"]
+  USER_PURCHASE_TOP1_COACHING_PRODUCT = ["8571801"]
+  USER_PURCHASE_REI_MARKETING_PRODUCT = ["8607354", "8645449", "120433", "8661406", "8661415"]
+  WHOLESALING_PRODUCT = ["8869733", "8869738"]
+  BLUEPRINT_PRODUCT = ["8869744", "8869746", "8634076", "8634070", "8634040"]
+  ALL_IN_ONE_PRODUCT = ["8807660", "8978600", "8978626", "8978596", "8864500", "8963150", "121318", "121763", "9003479", "9066508"]
+  NEW_PRO_BUCKET_PRODUCTS = ["8978596", "8864500", "8963150", "121318", "121763"]
+  MONTHLY_USER = ["7914484", "8233775", "7876355", "8607354", "8978596", "8864500", "8661415", "8694664", "8869733", "8807645", "8899596", "8963150", "121318", "121763", "119368", "119367", "119147", "119146", "120545", "120546", "121373", "120433"]
+  YEARLY_USER = ["8285676", "8607368", "7914493", "7914489", "8653884", "121760"]
+  BI_WEEKLY = ["8877441"]
+  FORT_NIGHT = ["8694652", "8758494"]
+
+  def index
+    begin
+      # Log the params coming from LAH 1SC
+      lah_shopping_cart_logfile = File.open("#{RAILS_ROOT}/log/lah_shopping_cart_params.log", 'a')
+      lah_shopping_cart_logfile.sync = true
+      lah_shopping_cart_logger = LahShoppingCartLogger.new(lah_shopping_cart_logfile)
+      lah_shopping_cart_logger.debug params.to_yaml
+
+      @shopping_cart_lib = ShoppingCartLib.new()
+
+      render :text => "#{lah_shopping_cart_logger.error "========Incorrect Params========\n"}" and return if params.to_s.split("<Token>")[1].nil?
+      #retrieve the token_id from params getting by the notification url of shopping cart
+      token_id = params.to_s.split("<Token>")[1].split("</Token>")[0]
+      #get the order detail
+      @order_detail = @shopping_cart_lib.get_order_by_token_id(SHOPPING_CART_NAME_FOR_HASH, token_id)
+      #retrieve the client_id from order detail
+      render :text => "#{lah_shopping_cart_logger.error "========Not a valid token_id========\n"}" and return if @order_detail["success"] == "false"
+      client_id = @order_detail["OrderInfo"][0]["ClientId"][0]["content"]
+      #get the client detail
+      @client_detail = @shopping_cart_lib.get_client_detail(SHOPPING_CART_NAME_FOR_HASH, client_id)
+      params[:email] = @client_detail["ClientInfo"][0]["Email"][0]
+      #get lah product id & product detail
+      product_name, product_id, product_price = get_lah_product_id
+      #get product type
+      product_type = MONTHLY_USER.include?(product_id.to_s) ? "monthly" : (YEARLY_USER.include?(product_id.to_s) ? "yearly" : (FORT_NIGHT.include?(product_id.to_s) ? "fort_night" :  ( BI_WEEKLY.include?(product_id.to_s) ? "bi_weekly" : "non_recurring" )))
+      #find user
+      @user = User.find(:first, :conditions => ["email = ? OR login = ?", @client_detail["ClientInfo"][0]["Email"][0], @client_detail["ClientInfo"][0]["Email"][0]])
+
+      if PRODUCTS_FOR_EXISTING_USER.include?(product_id)
+
+        shopping_cart_user_detail = ShoppingCartUserDetail.create(:user_id => @user.id, :user_email => @user.email, :shopping_cart_name => SHOPPING_CART_NAME, :user_name => @user.first_name, :shopping_cart_customer_id_detail => client_id) if @user.shopping_cart_user_detail.find_by_shopping_cart_name(SHOPPING_CART_NAME).blank?
+        product_entry_for_user = LahProductPurchasedByUser.create(:user_id => @user.id, :product_ids => product_id, :product_name => product_name,:product_type => product_type,:amount =>product_price )
+
+        #update user subscription level
+        if USER_PURCHASE_REIM_PRO_SUBSCRIPTION.include?(product_id)
+          if @user.is_basic_user?
+            user_class = UserClass.find_by_user_type(BASIC_USER_CLASS[:uc2_type])
+            is_for_new_pro_bucket = NEW_PRO_BUCKET_PRODUCTS.include?(product_id) ? true : false
+            @user.update_attributes(:user_class_id => user_class.id, :is_user_moved_to_new_pro_bucket => is_for_new_pro_bucket)
+          end
+        end
+
+        create_user_and_assign_membership_on_how_to(product_id, @user)
+
+        #Give user access to training products
+        give_access_to_training_products(@user, product_name, product_id)
+        UserTransactionHistory.create(:user_id => @user.id, :transanction_detail => "Customer purchased #{product_name} product from  #{SHOPPING_CART_NAME}")
+
+         Resque.enqueue(UserWelcomeNotificationWorker,@user.id, @user.login, product_id, true)
+        #UserEmailAlertEngine.send_email_alert_to_existing_user(@user.id, product_id)
+        render :text => "#{lah_shopping_cart_logger.info "========User Updated Successfully========\n email:- #{@user.email}, product_id:- #{product_id} and LAH Customer Id:- #{client_id}\n"}" and return
+
+      else
+        add_user_in_lah_shopping_cart_user_table(product_name, product_id, client_id, @user.id)
+        #sending notification email to support@reimatcher.com
+        Resque.enqueue(MatchedLahShoppingCartUserWorker, @user.first_name + " " + @user.last_name, @user.email, product_name, @order_detail["OrderInfo"][0]["OrderDate"][0])
+        render :text => "#{lah_shopping_cart_logger.info "========User purchase other than configured products ========\n email:- #{@user.email} and LAH shopping cart Customer id:- #{client_id}, Product ID:- #{product_id} \n"}" and return
+      end unless @user.blank?
+
+      unless PRODUCT_FOR_NEW_USER.include?(product_id)
+        Resque.enqueue(LahShoppingCartMisMatchedUserWorker, @client_detail["ClientInfo"][0]["FirstName"][0], @client_detail["ClientInfo"][0]["LastName"][0], @client_detail["ClientInfo"][0]["Email"][0], product_name, product_id, @order_detail["OrderInfo"][0]["OrderDate"][0])
+        render :text => "#{lah_shopping_cart_logger.error "========User Can't be Created========\n email:- #{@client_detail["ClientInfo"][0]["Email"][0]}  and LAH shopping cart Customer id:- #{client_id}, product_id:- #{product_id} \n"}" and return
+      end
+      #create new user
+      create_new_user_in_reim(product_id)
+
+      lah_shopping_cart_logger.info " =============User Successfuly Created In REIM================ \n"
+      lah_shopping_cart_logger.info "email= #{@new_user.email}, product_id:- #{product_id} and LAH shopping cart Customer id: #{client_id} \n"
+
+      shopping_cart_user_detail = ShoppingCartUserDetail.create(:user_id => @new_user.id, :user_email => @new_user.email, :shopping_cart_name => SHOPPING_CART_NAME, :user_name => @new_user.first_name, :shopping_cart_customer_id_detail => client_id)
+
+      create_user_and_assign_membership_on_how_to(product_id, @new_user)
+      product_entry_for_user = LahProductPurchasedByUser.create(:user_id => @new_user.id, :product_ids => product_id, :product_name => product_name,:product_type => product_type,:amount =>product_price)
+
+     #add company info for the user
+      address_one, business_phone, client_city, client_state, client_zip = @shopping_cart_lib.get_user_company_info_detail(@client_detail)
+
+      companyinfo = UserCompanyInfo.new(:business_name => 'Business Name', :business_address => address_one, :business_phone =>  business_phone, :business_email => @new_user.email, :city => client_city, :state => client_state, :zipcode => client_zip, :user_id => @new_user.id)
+      companyinfo.save(false)
+      #map lah product with user
+      give_access_to_training_products(@new_user, product_name, product_id)
+
+      UserTransactionHistory.create(:user_id => @new_user.id, :transanction_detail => "Customer purchased #{product_name} product from  #{SHOPPING_CART_NAME}")
+
+    rescue Exception => exp
+      lah_shopping_cart_logger.info " something went wrong \n"
+      lah_shopping_cart_logger.info " Error 1 : (#{exp.class}) #{exp.message.inspect} "
+      lah_shopping_cart_logger.info " ============================= \n"
+      ExceptionNotifier.deliver_exception_notification( exp,self, request, params)
+    end
+    render :text => "ok"
+  end
+
+private
+
+  def give_access_to_training_products(user, product_name, product_id)
+    if user.map_lah_product_with_user.blank?
+      map_product_with_user = MapLahProductWithUser.new(:first_name=> user.first_name, :last_name => user.last_name, :email => user.email, :product_name => product_name, :user_id => user.id)
+    else
+      map_product_with_user = user.map_lah_product_with_user
+    end
+    map_product_with_user.amps = true if USER_PURCHASE_AMPS_PRODUCT.include?(product_id)
+    map_product_with_user.amps_gold = true if USER_PURCHASE_GOLD_COACHING_PRODUCT.include?(product_id)
+    map_product_with_user.re_volution = true if USER_PURCHASE_RE_VOLUTION_PRODUCT.include?(product_id)
+    map_product_with_user.top1 = true if USER_PURCHASE_TOP1_COACHING_PRODUCT.include?(product_id)
+    map_product_with_user.rei_mkt_dept = true if USER_PURCHASE_REI_MARKETING_PRODUCT.include?(product_id)
+    map_product_with_user.wholesaling = true if WHOLESALING_PRODUCT.include?(product_id)
+    map_product_with_user.blueprint = true if BLUEPRINT_PRODUCT.include?(product_id)
+    map_product_with_user.allinone = true if ALL_IN_ONE_PRODUCT.include?(product_id)
+    map_product_with_user.save!
+  end
+
+  def create_user_and_assign_membership_on_how_to(product_id, user)
+    product_name = ""
+    product_name = "mrmm" if USER_PURCHASE_REI_MARKETING_PRODUCT.include?(product_id)
+    product_name = "allinone" if ALL_IN_ONE_PRODUCT.include?(product_id)
+    UserForumIntegration.create_user_and_assign_membersip_at_wordpress_instance(user.login, user.email, product_name) unless product_name.blank?
+  end
+
+  def create_new_user_in_reim(product_id)
+    @new_user = User.new(:login => @client_detail["ClientInfo"][0]["Email"][0], :email => @client_detail["ClientInfo"][0]["Email"][0], :first_name => @client_detail["ClientInfo"][0]["FirstName"][0], :last_name => @client_detail["ClientInfo"][0]["LastName"][0], :password => REIM_DEFAULT_PASS, :password_confirmation => REIM_DEFAULT_PASS)
+
+    @new_user.lah_product_id = product_id
+
+    if USER_PURCHASE_REIM_PRO_SUBSCRIPTION.include?(product_id)
+      user_class = UserClass.find_by_user_type(BASIC_USER_CLASS[:uc2_type])
+      @new_user.is_user_moved_to_new_pro_bucket = true if NEW_PRO_BUCKET_PRODUCTS.include?(product_id)
+      @new_user.user_class_id = user_class.id
+    else
+      user_class = UserClass.find_by_user_type(BASIC_USER_CLASS[:basic_type])
+      @new_user.user_class_id = user_class.id
+    end
+    @new_user.save!
+  end
+
+  def add_user_in_lah_shopping_cart_user_table(product_name, product_id, client_id, user_id)
+    return LahShoppingCartUser.create(:first_name=> @client_detail["ClientInfo"][0]["FirstName"][0], :last_name => @client_detail["ClientInfo"][0]["LastName"][0], :email => @client_detail["ClientInfo"][0]["Email"][0], :product_name => product_name, :product_id_detail => product_id, :customer_id_detail => client_id, :user_id => user_id)
+  end
+
+  def get_lah_product_id
+    if @order_detail["OrderInfo"][0]["LineItems"][0].blank?
+      product_name = @order_detail["OrderInfo"][0]["OrderBundles"][0]["OrderBundleInfo"][0]["BundleName"][0]
+      product_id = @order_detail["OrderInfo"][0]["OrderBundles"][0]["OrderBundleInfo"][0]["BundleId"][0]
+      product_price = @order_detail["OrderInfo"][0]["OrderBundles"][0]["OrderBundleInfo"][0]['UnitPrice'][0]
+    else
+      product_name = @order_detail["OrderInfo"][0]["LineItems"][0]["LineItemInfo"][0]["ProductName"][0]
+      product_id = @order_detail["OrderInfo"][0]["LineItems"][0]["LineItemInfo"][0]["ProductId"][0]["content"]
+      @product_detail = @shopping_cart_lib.get_product_by_product_id(SHOPPING_CART_NAME_FOR_HASH, product_id)
+      product_price = @product_detail['ProductInfo'][0]['ProductPrice'][0]
+    end
+    return product_name, product_id, product_price
+  end
+
+end

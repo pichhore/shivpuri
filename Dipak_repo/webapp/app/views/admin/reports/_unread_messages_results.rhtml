@@ -1,0 +1,57 @@
+<h3>Unread Messages Report</h3>
+
+<div class="report_filter">
+
+<%- form_tag({:action=>"execute", :id=>@report_name}, :method=>:get) do -%>
+<%=submit_tag "Filter"%>
+<%- end -%>
+
+</div>
+
+<div class="report_export">
+Export as: <%=link_to "CSV", :action=>"execute", :id=>@report_name, :end_date=>@end_date_string_views, :format=>"csv"%>
+</div>
+
+<div class="report_results">
+
+<table>
+
+  <thead>
+
+    <th>Owned By</th>
+    <th>Owner Email</th>
+    <th>Profile Name</th>
+    <th>Profile Type</th>
+    <th>Last User Login</th>
+    <th># Unread Messages</th>
+    <th># Total Received Messages</th>
+
+  </thead>
+
+  <tbody>
+
+    <%-@profiles.each_with_index do |profile, index| -%>
+    <tr <%="class='odd'" if index % 2 == 1%>>
+      <td><%=profile.user.full_name%></td>
+      <td><%=profile.user.email%></td>
+      <td><%=profile.display_name%></td>
+      <td><%=(profile.buyer? ? "Buyer" : "Owner")%></td>
+      <td><%=(profile.user.last_login_at.nil? ? "N/A" : profile.user.last_login_at.strftime("%m-%d-%Y"))%></td>
+      <td><%=@unread_counts_by_id_hash[profile.id.to_s] || "0"%></td>
+      <td><%=@total_messages_by_id_hash[profile.id.to_s] || "0"%></td>
+    </tr>
+    <%-end -%>
+
+  </tbody>
+
+</table>
+
+<span style="display:none">
+<p>Total Profiles Found: <%=@profiles.length%></p>
+</span>
+
+<span style="margin-top:10px;float:right;">
+  <%= will_paginate @profiles %>
+</span>
+
+</div>

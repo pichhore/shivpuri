@@ -1,0 +1,6 @@
+<% if @country == "CA"%>
+	<%= options_for_select([[ "Select a Province", "" ]] + State::CANADA_NAMES) %>
+<% else %>
+	<%= options_for_select([[ "Select a State", "" ]] + State::NAMES) %>
+<% end %>
+	

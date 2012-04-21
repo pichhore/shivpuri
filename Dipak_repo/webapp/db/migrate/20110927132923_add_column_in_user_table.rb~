@@ -1,0 +1,16 @@
+class AddColumnInUserTable < ActiveRecord::Migration
+  def self.up
+    add_column :users, :is_user_have_failed_payment, :boolean, :default => false
+    add_column :users, :last_billing_date, :string
+    users = User.find(:all, :conditions=>["is_user_have_access_to_reim = ?", false])
+    users.each do |user|
+      puts "user updated"
+      user.update_attribute(:is_user_have_failed_payment, true)
+    end
+  end
+
+  def self.down
+    remove_column :users, :is_user_have_failed_payment
+    remove_column :users, :last_billing_date
+  end
+end

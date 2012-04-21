@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<head>
+  <!--[if IE 7]>
+   <style type="text/css">
+   .logo {
+    float: left !important;
+    position: relative !important;
+    }
+   .int_logo .logo{margin-left: -195px;}
+   .top-nav_home{line-height: 16px;}
+   .profile{line-height: 16px;}
+   </style>
+  <![endif]-->
+</head>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <title>Boxyroom</title>
+        <%= stylesheet_link_tag 'new/template' %>
+        <%= stylesheet_link_tag 'new/full' %>
+        <%= javascript_include_tag 'new/jquery-1.4.2.min' %>
+        <%= javascript_include_tag 'new/jquery.infieldlabel.min' %>
+        <%= javascript_include_tag 'new/jquery-ui-1.8.2.custom.min' %>
+        <%= javascript_include_tag 'new/template' %>
+        <link title="Boxyroom" href="opensearch.xml" rel="search" type="application/opensearchdescription+xml" />
+    </head>
+    <body class="full">
+        <div id="main_s">
+            <% if !current_user %>
+              <div id="header">
+                  <div class="container" >
+                      <a href="/home">
+                        <div class="logo" style="margin-top: 20px">Boxyroom</div>
+                      </a>
+                      <% unless current_user %>
+			 <%if !(params[:action]=="new"  and  params[:controller]=="user_sessions")%>
+                          <%if !(params[:action]=="create"  and  params[:controller]=="users")%>
+                            <%if !(params[:action]=="new"  and  params[:controller]=="users")%>
+			      <ul class="main-nav">
+				      <li><%= link_to "", login_path, :id => "login" %></li>
+				      <li class="black"><%= link_to "", register_path, :id => "sign-up" %></li>
+			      </ul>
+                              <div class="how_work"> <a href="/how_it_works">How it works</a></div>
+		              <div class="safety"> <a href="/safe">Safety</a></div>
+		            <%end%>
+                          <% end %>
+                         <% end %>
+                       </div>
+                   </div>
+		 <% end %>
+             <% else %>
+                 <div id="header" style="background: url('/new_images/home-page-header-bg.png') repeat-x scroll 0 0 transparent;height: 96px;">
+                  <div class="container">
+                      <div class="top top-home" >
+		          <div class="pic header" ><%= image_tag current_user.avatar.url(:thumb) %></div>
+                          <b><p class="profile">Logged in as <%= current_user.full_name if current_user%></p></b>
+                          <ul class="top-nav_home">
+			    <li><%= link_to "Safety", safe_path, :id=>"font_top_nav" %></li>
+			    <li ><%= link_to "How it works", how_it_works_path, :id=>"font_top_nav"%></li>
+                            <li ><a href="/my/dashboard/my_dashboard" id="font_top_nav">Dashboard</a></li>
+                            <li ><a href="/logout" id="font_top_nav">Logout</a></li>
+                            <li ><a href="/my/properties/new" class="list_your_property_home" > &nbsp; </a></li>
+                        </ul>
+                      </div>
+                      <div>
+                      </div>
+                      <div class="int_logo">
+                        <a href="/home">
+                          <div class="logo" style="margin-top: 20px">Boxyroom</div>
+                        </a>
+                      </div>
+                  </div>
+                </div>
+              <% end %>
+            <div id="content" style="min-height: 909px;">
+              <%= yield %>
+            </div>
+        </div>
+        <div id="footer">
+            <div class="container">
+              <div class="copyright">&copy; 2012 Boxyroom</div>
+                <ul class="links">
+                  <li><%= link_to "FAQ", faq_path %></li>
+                  <li><%= link_to "Terms of Use", terms_of_use_path %></li>
+                  <li><%= link_to "Privacy Policy", privacy_policy_path %></li>
+                  <li><%= link_to "Contact Us", contact_us_path %></li>
+                  <li><%= link_to "Twitter", "http://twitter.com/boxyroomrocks" %></li>
+                  <li><%= link_to "Facebook", "http://www.facebook.com/pages/Boxyroom/280933772469" %></li>
+                  <li><%= link_to "Blog", "http://boxyroom.tumblr.com/" %></li>
+                </ul>
+              </div>
+        </div>
+    <%= render "shared/google_analytics" %>
+    </body>
+</html>

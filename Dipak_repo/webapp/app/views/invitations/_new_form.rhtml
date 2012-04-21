@@ -1,0 +1,52 @@
+  <fieldset>
+
+    <table style="line-height: 12px;">
+
+      <tr>
+        <th class="label_required">Their Email address:</th>
+        <td><%= f.text_field :to_email %><%=error_message_on :invitation,:to_email%></td>
+      </tr>
+
+      <tr>
+        <th class="label">Their First Name:</th>
+        <td><%= f.text_field :to_first_name %><%=error_message_on :invitation,:to_first_name%></td>
+      </tr>
+
+      <tr>
+        <th class="label">Their Last Name:</th>
+        <td><%= f.text_field :to_last_name %><%=error_message_on :invitation,:to_last_name%></td>
+      </tr>
+
+      <tr>
+        <th colspan="2" class="label_required">Provide a short message:</th>
+      </tr>
+
+      <tr>
+        <td colspan="2"><%= f.text_area :invitation_message, :cols=>"50", :rows=>"2" %><%=error_message_on :invitation,:invitation_message%>
+        </td>
+      </tr>
+
+      <tr>
+        <th colspan="2" class="label">-- <%=current_user.first_name%></th>
+      </tr>
+
+      <tr>
+        <td colspan="2" align="center"><br/>
+          <div style="text-align: center; margin-top: 10px;">
+          <%= submit_tag 'Send Invite', :class=>"submit_xl" %>
+          <%- if request.xhr? -%>
+          <%= button_to_function 'Cancel', 'lightbox_controller.close()', :class=>"submit_xl" %>
+          <%- end -%>
+          </div>
+        </td>
+      </tr>
+
+    </table>
+
+  </fieldset>
+
+  <%=f.hidden_field :user_id%>
+
+  <script>
+    $('invitation_to_email').focus();
+  </script>

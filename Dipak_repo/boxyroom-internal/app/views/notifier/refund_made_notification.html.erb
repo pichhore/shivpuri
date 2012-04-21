@@ -1,0 +1,6 @@
+Dear <%= @application.property.owner.first_name %>,
+
+Notification: the payment from <% @application.user.full_name %>, has been refunded. For more details, visit:
+<%= @link %>
+
+<%= render :partial => "transaction", :object => @application %>

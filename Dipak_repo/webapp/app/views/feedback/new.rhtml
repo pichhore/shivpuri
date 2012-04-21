@@ -1,0 +1,51 @@
+<%- @page_title = "Give Us Feedback" -%>
+<%- content_for :page_scripts do -%>
+Event.observe(window, 'load', function() {
+  $('feedback_first_name').focus();
+});
+<%- end -%>
+
+<div class="form">
+
+<%= error_messages_for :profile_match %>
+
+<% form_for(:feedback, :url => feedback_url) do |f| %>
+
+  <fieldset class="half">
+
+    <p>We value your feedback! Please leave your contact details and comment below:</p>
+
+    <table>
+
+      <tr>
+        <th class="label_required">First Name:</th>
+        <td><%= f.text_field 'first_name' %><%= error_message_on "feedback", "first_name" %></td>
+      </tr>
+
+      <tr>
+        <th class="label_required">Last Name:</th>
+        <td><%= f.text_field 'last_name' %><%= error_message_on "feedback", "last_name" %></td>
+      </tr>
+      <tr>
+        <th class="label_required">Email:</th>
+        <td><%= f.text_field 'email' %><%= error_message_on "feedback", "email" %></td>
+      </tr>
+      <tr>
+        <th class="label_required">Comment:</th>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td colspan="2"><%= f.text_area 'comments', :cols=>40, :rows=>6 %><%= error_message_on "feedback", "comments" %></td>
+      </tr>
+
+    </table>
+
+    <p style="text-align: center">
+      <%=submit_tag "Send Feedback", :class=>"submit_l"%>
+    </p>
+
+  </fieldset>
+
+<% end -%>
+
+</div>

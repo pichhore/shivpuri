@@ -1,0 +1,239 @@
+send_trust_responser_setup_mails:
+  cron: "0 11 * * *"
+  class: TrustResponderWorker
+  queue: trust_responder
+  args: 
+  rails_env: development, production, staging
+  description: "Send trust responser email series"
+
+destroy_profile_by_cron:
+  cron: "0 10 * * *"
+  class: ProfileDestroyWorker
+  queue: profile_destroy
+  args: 
+  rails_env: development, production, staging
+  description: "Destroy the profiles"
+
+email_alert_engine:
+  cron: "24 12 * * *"
+  class: EmailAlertEngineWorker
+  queue: email_alert_engine
+  args: 
+  rails_env: development, production, staging
+  description: "Email Alert Engine"
+
+user_email_alert_engine:
+  cron: "0 07 * * *"
+  class: UserEmailAlertEngineWorker
+  queue: user_email_alert_engine
+  args: 
+  rails_env: development, production, staging
+  description: "User Email Alert Engine"
+
+rake_db_process_user_emails:
+  cron: "0 11 * * *"
+  class: RakeDbProcessUserEmailsWorker
+  queue: rake_db_process_user_emails
+  args: 
+  rails_env: development, production, staging
+  description: "Rake task to process the user emails"
+
+buyer_profile_daily_notification:
+  cron: "05 12 * * *"
+  class: BuyerProfileDailyNotificationWorker
+  queue: buyer_profile_daily_notification
+  args: 
+  rails_env: development, production, staging
+  description: "Send daily notification to buyer for matching"
+
+buyer_profile_weekly_notification:
+  cron: "0 11 * * 4"
+  class: BuyerProfileWeeklyNotificationWorker
+  queue: buyer_profile_weekly_notification
+  args: 
+  rails_env: development, production, staging
+  description: "Send weekly notification to buyer for matching"
+
+rake_db_process_emails_worker:
+  cron: "0 11 * * *"
+  class: RakeDbProcessEmailsWorker
+  queue: rake_db_process_emails
+  args: 
+  rails_env: development, production, staging
+  description: "Rake task to process the emails"
+
+script_dwellgo_alerts_worker:
+  cron: "0 11 * * *"
+  class: ScriptDwellgoAlertsWorker
+  queue: script_dwellgo_alerts_worker
+  args: 
+  rails_env: development, production, staging
+  description: "Run alert shell script"
+
+script_dwellgo_digest_daily_worker:
+  cron: "0 11 * * *"
+  class: ScriptDwellgoDigestDailyWorker
+  queue: script_dwellgo_digest_daily_worker
+  args: 
+  rails_env: development, production, staging
+  description: "Run dwellgo digest daily shell script"
+
+script_dwellgo_digest_weekly_worker:
+  cron: "20 02 * * *"
+  class: ScriptDwellgoDigestWeeklyWorker
+  queue: script_dwellgo_digest_weekly_worker
+  args: 
+  rails_env: development, production, staging
+  description: "Run digest weekly shell script"
+
+script_dwellgo_digest_monthly_worker:
+  cron: "40 02 * * *"
+  class: ScriptDwellgoDigestMonthlyWorker
+  queue: script_dwellgo_digest_monthly_worker
+  args: 
+  rails_env: development, production, staging
+  description: "Run digest monthly shell script"
+
+script_dwellgo_refresh_featured_profiles_worker:
+  cron: "30 03 * * *"
+  class: ScriptDwellgoRefreshFeaturedProfilesWorker
+  queue: script_dwellgo_refresh_featured_profiles_worker
+  args: 
+  rails_env: development, production, staging
+  description: "Run refresh featured profiles shell script"
+
+script_dwellgo_gather_stats_worker:
+  cron: "50 23 * * *"
+  class: ScriptDwellgoGatherStatsWorker
+  queue: script_dwellgo_gather_stats_worker
+  args: 
+  rails_env: development, production, staging
+  description: "Run dwellgo gather stats shell script"
+
+xapian_profile_indexing:
+  cron: "00 01 * * *"
+  class: ScriptDwellgoGatherStatsWorker
+  queue: script_dwellgo_gather_stats_worker
+  args: 
+  rails_env: development, production, staging
+  description: "Run dwellgo gather stats shell script"
+  
+process_users_to_assign_badges:
+  cron: "00 01 * * *"
+  class: ProcessUsersToAssignBadgesWorker
+  queue: process_users_to_assign_badge
+  args: 
+  rails_env: development, production, staging
+  description: "process users to assign badges"
+  
+xapian_update_index:
+  cron: "*/60 * * * *"
+  class: XapianUpdateIndexWorker
+  queue: xapian_update_index
+  args: 
+  rails_env: development, production, staging
+  description: "Run rake task for Rebuilding Index on Profile Model"
+
+script_dwellgo_clicktale_tracking_worker:
+  cron: "*/30 * * * *"
+  class: ScriptDwellgoClicktaleTrackingWorker
+  queue: script_dwellgo_clicktale_tracking_worker
+  args: 
+  rails_env: production
+  description: "Run dwellgo clicktale tracking shell script"
+
+production_backup:
+  cron: "00 9 * * 3"
+  class: ProductionBackupWorker
+  queue: production_backup
+  args:
+  rails_env: development, production, staging
+  description: "Run s3backup shell script"
+
+send_seller_responder_emails:
+  cron: "0 11 * * *"
+  class: SellerResponderWorker
+  queue: seller_responder
+  args: 
+  rails_env: development, production, staging
+  description: "send email seller responder series"
+
+reload_nginx_worker:
+  cron: "50 23 * * *"
+  class: ReloadNginxWorker
+  queue: reload_nginx_worker
+  args: 
+  rails_env: development, production, staging
+  description: "Reloading Nginx once in a day to reflect changes"
+
+post_properties_to_syndicator:
+  cron: "*/60 * * * *"
+  class: PostPropertiesToSyndicatorWorker
+  queue: post_properties_to_syndicator
+  args: 
+  rails_env: development, production, staging
+  description: "Posting Properties to Syndicator App"
+
+send_second_welcome_email_for_new_user:
+  cron: "0 10 * * *"
+  class: SecondWelcomeEmailForNewUserWorker
+  queue: second_welcome_email_for_new_user
+  args: 
+  rails_env: development, production, staging
+  description: "send email seller responder series"
+
+add_pending_icontact_user:
+  cron: "0 22 * * *"
+  class: AddPendingIcontactUserWorker
+  queue: add_pending_icontact_user_to_list
+  args: 
+  rails_env: development, production, staging, production_test
+  description: "Add pending icontact user to list"
+  
+add_flag_to_profile_which_need_help:
+  cron: "00 03 * * *"
+  class: AddFlagToProfileWhichNeedHelpWorker
+  queue: add_flag_to_profile_that_need_help
+  args: 
+  rails_env: development, production, staging, production_test
+  description: "Add Flag To Profile Which Need Help"
+
+daily_activity_score_calculator:
+  cron: "00 8 * * *"
+  class: DailyActivityScoreWorker
+  queue: daily_activity_score
+  args: 
+  rails_env: development, production, staging, production_test
+  description: "Calculate daily activity score for all users"
+
+shopping_cart_automatic_cancellation_worker:
+  cron: "0,15,30,45 * * * *"
+  class: ShoppingCartAutomaticCancellationWorker
+  queue: shopping_cart_automatic_cancellation
+  args:
+  rails_env: production
+  description: "Handling Failed Payments"
+
+overall_activity_score_calculator:
+  cron: "50 8 * * *"
+  class: OverallActivityScoreWorker
+  queue: overall_activity_score
+  args: 
+  rails_env: development, production, staging, production_test
+  description: "Update overall activity score for all users"
+
+expired_alert_messages_deactivtion:
+  cron: "45 01 * * *"
+  class: ExpiredAlertsDismissedWorker
+  queue: alerts_queue
+  args:
+  rails_env: development, production, staging, production_test
+  description: "Remove expired alert notifications from Users Dashboard"
+
+amps_magnet_responder:
+  cron: "30 8 * * *"
+  class: AmpsMagnetResponderWorker
+  queue: amps_magnet_responder
+  args:
+  rails_env: development, production, staging, production_test
+  description: "Seller Magnet responders"

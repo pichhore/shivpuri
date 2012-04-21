@@ -1,0 +1,10 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: ad1
+  name: ad_one
+  width: 240
+  height: 150
+  image_path: /images/foo/bar.jpg
+  link: http://www.dwellgo.com
+  created_at: <%= 5.days.ago.to_s :db %>
+

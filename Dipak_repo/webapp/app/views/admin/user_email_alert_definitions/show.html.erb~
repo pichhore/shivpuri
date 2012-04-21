@@ -1,0 +1,12 @@
+<h3>Alert Definition</h3>
+<span class="formError"><%= "DISABLED<br/><br/>" if @user_email_alert_definition.disabled %></span>
+<div style="margin-bottom: 10px;"><b>Title:</b> <%= h @user_email_alert_definition.title %></div>
+<div style="margin-bottom: 10px;"><b>Email Type:</b> <%= h UserEmailAlertDefinition::USER_EMAIL_TYPES.find{|k,v| v == @user_email_alert_definition.email_type}.first %></div>
+<div style="margin-bottom: 10px;"><b>Product ID's:</b> <%=h @user_email_alert_definition.product_ids %></div>
+<div style="margin-bottom: 10px;"><b>Trigger Delay Days:</b> <%=h @user_email_alert_definition.trigger_delay_days %></div>
+<div style="margin-bottom: 10px;"><b>Email Subject:</b> <%=h @user_email_alert_definition.email_subject %></div>
+<div style="margin-bottom: 10px;"><b>Message Body:</b> <%=h @user_email_alert_definition.message_body %></div>
+<br/>
+<span><%= link_to 'Edit', edit_admin_user_email_alert_definition_path(@user_email_alert_definition) %></span> |
+<span><%= link_to 'Destroy', admin_user_email_alert_definition_path(@user_email_alert_definition), :confirm => 'Are you sure?', :method => :delete %></span> |
+<span><%= link_to 'Back', admin_user_email_alert_definitions_path %></span>

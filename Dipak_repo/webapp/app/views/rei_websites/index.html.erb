@@ -1,0 +1,89 @@
+<%- @page_title = "My #{@website_type.capitalize} Websites" -%>
+
+<% if has_old_format_webpages? %> 
+
+<%= stylesheet_link_tag "lightbox"%> 
+<% require_js_controllers :lightbox -%>
+
+<SCRIPT type="text/javascript" language="JavaScript">
+  Event.observe(window, 'load', function() {
+    lightbox_controller = new NL.LightboxController();
+  })
+</SCRIPT>
+
+<div style="display:none;" id="overlay_Lightbox"></div>
+<div id="lightbox_contents" style="text-align:center; height: auto; width:700px;">
+  <div id="lightboxHeader"><%= "Buyer Domain setup wizard" %></div>
+  <br/><h3>You have buyer websites which don't have any domain associated.</h3>
+  <h3>Please select domain name for your buyer website given below.</h3>
+  <br/>
+  <h3 style="text-align: left; margin-left: 10px;">Buyer Website Information:</h3>
+  <div style="text-align: left; margin: 20px 20px; height: auto;">
+    <% current_buyer_page = buyer_pages[0] %>
+    Territory Name: <%= buyer_territory(current_buyer_page).territory_name %><br/>
+    Current URL: <%= request.url.gsub(request.request_uri,"/") + buyer_territory(current_buyer_page).reim_name.to_s + "/" + current_buyer_page.permalink_text.to_s %><br/>
+    Header: <%= current_buyer_page.header %>
+    <div style="margin-top: 20px">
+      <fieldset>
+        <table>
+	<%- form_for(:my_website_form, @my_website_form, :url => {:controller => "buyer_websites", :action => 'update_domain'}, :html => { :method => :post }) do |f| -%>
+	<%= render :partial => 'rei_websites/domain_selection', :locals => {:f => f} %>
+        <%= hidden_field_tag "buyer_site_id", current_buyer_page.id %>
+    <tr>
+      <td>
+        <div align="center">
+          <%= f.submit "Update", :class=>'submit_s' %>
+        </div>
+      </td>
+    </tr>
+	<% end %>
+        </table>
+      </fieldset>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  //center_align();
+</script>
+
+<% elsif @my_websites.blank? && params[:clicked].blank? %>
+<%=stylesheet_link_tag "lightbox"%> 
+<% require_js_controllers :lightbox -%>
+<SCRIPT type="text/javascript" language="JavaScript">
+  window.onload = function window_onload()
+  {
+  lightbox_controller = new NL.LightboxController();
+  }
+</SCRIPT>
+
+<div id="overlay_Lightbox"></div>
+<div id="lightbox_contents" style="text-align:center; height:200px; width:466px;">
+  
+  <div id="lightboxHeader"><%= "Add #{@website_type.capitalize} Website" %></div>
+  <br/><h3>You don't have any <%= @website_type %> website setup.</h3><br/>
+  <h3>Would you like to activate one?</h3>
+  <div id="lightboxFooter" class="light_box_seller_webpage">
+    <div style="float:right;">
+      <div class="link_button_xl" style="width:55px;float:left;">
+        <%= link_to 'Next', {:controller => "#{@website_type.downcase}_websites", :action => :step1 } %>  
+      </div>
+      <div class="link_button_xl" style="width:60px;float:left;">
+        <%= link_to 'Cancel', {:controller=>:buyer_websites, :action=>:index,:clicked=>"no"}  %>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  center_align();
+</script>
+
+<% else %>
+<div>
+  <div align="right"><%= link_to  image_tag ("icons/add.png",:width=>14,:height=>14)+" Add Website", {:controller=>:buyer_websites, :action=>:step1}%></div>
+  <div align="center">
+    <fieldset>
+      <%= render :partial => "/shared/#{@website_type}_website_list", :my_websites => @my_websites %>
+    </fieldset>
+  </div>
+</div>
+<% end %>

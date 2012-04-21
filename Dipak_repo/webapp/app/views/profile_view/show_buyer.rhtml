@@ -1,0 +1,35 @@
+<%- @page_title = "Buyer Profile for "+@target_profile.display_name -%>
+<%- @page_icon_style = 'icon_buyer_profile' -%>
+<%- @tip = render_tip("show_buyer") -%>
+
+<% require_js_controllers :favorites_icon, :public_profile, :new_message_form, :profile_image_view -%>
+<% require_js_helpers :match_count -%>
+
+<% content_for :page_scripts do -%>
+    Event.observe(window, 'load', function() {
+      fav_icon_controller = new NL.FavoritesIconController("<%=url_for profile_profile_favorites_path(@profile)%>", "<%=@profile.id%>","<%=@target_profile.id%>");
+      $$('div.profile.favicon').each(function(item) {
+        fav_icon_controller.attachTo(item);
+      });
+      <% if params[:profile_inbox_msg_param] == "profile_inbox_msg_param" %>
+        public_profile_controller = new NL.PublicProfileController("<%=url_for new_profile_profile_message_path(@profile)%>?profile_message_form[send_to][]=indiv&profile_inbox_msg_param=<%= params[:profile_inbox_msg_param] %>&ref=<%= params[:ref]%>&not_show_link=<%= params[:not_show_link]%>&conversation=<%= params[:conversation]%>&profile_inbox_message=<%= params[:profile_inbox_message]%>&profile_message_recipient_id=<%= params[:profile_message_recipient_id]%>&profile_inbox_message_id=<%= params[:profile_inbox_message_id]%>&profile_message_form[indiv_profile_id]=<%=@target_profile.id%>&<%=encode_return_dashboard_params%>");
+      <% else %>
+         public_profile_controller = new NL.PublicProfileController("<%=url_for new_profile_profile_message_path(@profile)%>?profile_message_form[send_to][]=indiv&profile_message_form[indiv_profile_id]=<%=@target_profile.id%>&<%=encode_return_dashboard_params%>");
+      <% end %>
+      tab_controller = null;
+      profile_image_view_controller = new NL.ProfileImageViewController($$('#dashboard div.thumbnail img')[0], $$('#dashboard div.thumbnail_selector img.micro'));
+
+
+<%- if flash[:notice] -%>
+new Effect.Fade($('notice'), { duration: 4.0,queue: 'end'} );
+<%- end -%>
+    });
+
+<% end -%>
+
+<div class="left">
+
+<%=render :partial=>'/shared/public_buyer_profile'%>
+
+</div>
+

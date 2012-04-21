@@ -1,0 +1,30 @@
+/**
+ * Lightbox overlay management
+ */
+NL.LightboxController = Class.create();
+NL.LightboxController.prototype = {
+
+    loading: function() {
+        $$('div.loading').each(function(item) {
+                                   item.show();
+                               });
+    },
+
+    loaded: function() {
+        alert("hello");
+        $$('div.loading').each(function(item) {
+                                   item.hide();
+                               });
+	Effect.Appear('overlay_Lightbox', {duration:0.1, from:0.0, to:-1.8});
+	Effect.toggle('lightbox_contents','appear');
+    },
+
+    close: function() {
+	alert("hello");
+	Effect.Fade('overlay_Lightbox',{duration:0});
+	Effect.Fade('lightbox_contents',{duration:0});
+    },
+
+    initialize: function() {
+    }
+}

@@ -1,0 +1,19 @@
+<div>
+      <div style="text-align:right;">
+          <a onclick="lightbox_controller.close();" id="streetview_close" href="#"><img src="/images/active_scaffold/default/close.gif"/></a>
+       </div>
+    	<div style="clear: both;"/>
+	<%- form_remote_tag(:update => "lightbox_contents", :url=>{ :controller => :reports, :action => :update_delete_comment, :id => params[:id]}, :html=>{:mehtod=>:post})  do -%>
+        <div style="clear: both;"/>
+              <table cellspacing="10">
+                <% admin_delete_comment = @profile.admin_delete_comment.blank? ? ( @is_seller_profile ? @profile.delete_comment ) : @profile.delete_reason : @profile.admin_delete_comment %>
+                <tr><td align="left"> Support Comment on Deleted Profile: </td></tr>
+                <tr><td><%=text_area  "profile", "admin_delete_comment", :value=>admin_delete_comment, :rows => "12", :cols=>"35" %> <%=error_message_on :profile, :admin_delete_comment%></td></tr>
+                <tr>
+                <td colspan="2" align="center" style="margin:0;">
+                      &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <input type="submit" value=" Save " name="commit" class="submit_ll" onclick="lightbox_controller.close();" style="margin-right:60px;"/>
+                </td>
+                </tr>
+             </table>
+    	<%- end -%> 
+</div>

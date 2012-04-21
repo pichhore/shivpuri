@@ -1,0 +1,27 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+# one:
+#   column: value
+#
+# two:
+#   column: value
+
+
+john:
+  id:                        1
+  login:                     john
+  first_name:                john
+  last_name:                 michael
+  email:                     john@example.com
+  salt:                      356a192b7913b04c54574d18c28d46e6395428ab # SHA1('0')
+  crypted_password:          4a2fa8e660ec3c0b465da96074a1dc4d69ca8e04 # 'monkey'
+  created_at:                <%= 5.days.ago.to_s :db  %>
+  remember_token_expires_at: <%= 1.year.from_now.to_s %>
+  remember_token:            77de68daecd823babbb58edb1c8e14d7106e83bb
+  activation_code:
+  activated_at:              <%= 1.year.ago.to_s :db %>
+
+
+
+
+

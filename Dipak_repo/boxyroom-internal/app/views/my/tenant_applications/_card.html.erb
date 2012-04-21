@@ -1,0 +1,40 @@
+<div class="fld">
+  <%= card.label :first_name %>
+  <div class="fld-info"><%= card.text_field :first_name %></div>
+</div>
+
+<div class="fld">
+  <%= card.label :last_name %>
+  <div class="fld-info"><%= card.text_field :last_name %></div>
+</div>
+
+<%- card.object.relationship ||= relationship unless local_assigns[:relationship].nil? %>
+<%- if local_assigns[:hidden] && hidden == true %>
+  <%= card.hidden_field :relationship %>
+<%- else %>
+
+  <div class="fld">
+    <%= card.label :relationship %>
+    <div class="fld-info"><%= card.text_field :relationship %></div>
+  </div>
+<%- end %>
+
+<div class="fld">
+  <%= card.label :email %>
+  <div class="fld-info"><%= card.text_field :email %></div>
+</div>
+
+<div class="fld">
+  <%= card.label :phone_no %>
+  <div class="fld-info"><%= card.text_field :phone_no %></div>
+</div>
+
+<div class="fld">
+  <%= card.label :mobile_no %>
+  <div class="fld-info"><%= card.text_field :mobile_no %></div>
+</div>
+
+<div class="fld">
+  <%= card.label :fax_no %>
+  <div class="fld-info"><%= card.text_field :fax_no %></div>
+</div>

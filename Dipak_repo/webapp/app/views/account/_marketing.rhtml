@@ -1,0 +1,192 @@
+<% if request.xhr? %>
+<script type="text/javascript">
+    //<![CDATA[
+    YAHOO.util.Event.onDOMReady(function(){
+        new YAHOO.util.Element(document.getElementsByTagName('body')[0]).addClass('yui-skin-sam');
+        
+        var textAreas = document.getElementsByTagName('textarea');
+        for (var i = 0; i < textAreas.length; i++) {
+            var textArea = textAreas[i];
+            if (new YAHOO.util.Element(textArea).hasClass('rich_text_editor')) {
+                var editor = new YAHOO.widget.SimpleEditor(textArea.id, {
+                    handleSubmit: true,
+                    autoHeight: true,
+                    dompath: false,
+                    collapse: true,
+                    height: '100px',
+                    width: '530px',
+                    markup: 'default',
+                    toolbar: {
+                        collapse: true,
+                        draggable: false,
+                        buttonType: 'advanced',
+                        buttons: [{
+                            group: 'textstyle',
+                            label: ' ',
+                            buttons: [{
+                                type: 'push',
+                                label: 'Bold CTRL + SHIFT + B',
+                                value: 'bold'
+                            }, {
+                                type: 'push',
+                                label: 'Italic CTRL + SHIFT + I',
+                                value: 'italic'
+                            }, {
+                                type: 'push',
+                                label: 'Underline CTRL + SHIFT + U',
+                                value: 'underline'
+                            }, {
+                                type: 'separator'
+                            }, {
+                                type: 'push',
+                                label: 'Create an Unordered List',
+                                value: 'insertunorderedlist'
+                            }, {
+                                type: 'separator'
+                            }, {
+                                type: 'push',
+                                label: 'HTML Link CTRL + SHIFT + L',
+                                value: 'createlink'
+                            }]
+                        }]
+                    }
+                });
+                // MyExtension.install(editor);;
+                editor.render();
+	            }
+        }
+    });
+    
+    //]]>
+</script>
+<% end %>
+
+<%- form_for(:buyer_notification, :url => {:controller=>'account', :action=>'marketing'}, :html => { :method => :post }) do |f| -%>
+<div id="left_navigation" style="float:left; width:222px;">
+<table>
+    <tr>
+        <td>
+            <%= link_to_remote "Welcome Email", :update => "email_intro", :url => {:action => :update_marketing_page, :id => 'welcome'}, :html => {:class =>  assign_class(!@buyer_notification.summary_type.nil? ? @buyer_notification.summary_type : params[:id], params[:summary_type], 'welcome') } %>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <%= link_to_remote "Buyer Responder (Daily)", :update => "email_intro", :url => {:action => :update_marketing_page, :id => 'daily'} , :html => {:class => assign_class(!@buyer_notification.summary_type.nil? ? @buyer_notification.summary_type : params[:id], params[:summary_type], 'daily') } %>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <%= link_to_remote "Buyer Responder (Summary)", :update => "email_intro", :url => {:action => :update_marketing_page, :id => 'weekly'}  , :html => {:class => assign_class(!@buyer_notification.summary_type.nil? ? @buyer_notification.summary_type : params[:id], params[:summary_type], 'weekly') }%>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <%= link_to_remote "Trust Responder Series", :update => "email_intro", :url => {:action => :update_marketing_page, :id => 'trust_resp_series'} , :html => {:class => assign_class(!@buyer_notification.summary_type.nil? ? @buyer_notification.summary_type : params[:id], params[:summary_type], 'trust_resp_series') } %>
+        </td>
+    </tr>
+</table>
+<div id='personalized_list' style="padding:0px;">
+
+ <% personalize = ["{Retail buyer first name}", "{Investor first name}", "{Investor full name}",
+       "{Company name}", "{Company address}", "{Company phone}", "{Company email}", 
+       "{buyer website HP}", "{buyer website Squeeze}", "{eBook Download Link}"] %>
+
+  <select multiple onchange="doRichEditCommand(this.options[this.selectedIndex].value,'<%=personalize%>',this.selectedIndex)">
+      <% personalize.each do |l| %>
+      <option class='personalized_item' value='' >
+      <%=l%>
+      </option>
+    <% end %>
+  </select>
+</div>
+</div>
+
+<div id="right_navigation" style=" float:right; width:527px;">
+<table>
+    <tr>
+    	<td>
+    		<h3>
+    			<%= display_title(!@buyer_notification.summary_type.nil? ? @buyer_notification.summary_type : params[:id]) %>
+			</h3>
+		</td>    
+    <tr>    	
+        <td>
+            <%= @name %>	
+        </td>
+    </tr>
+	
+	<%if @static_mails == "Yes"%>
+		<tr>    	
+			<td>
+				 <%= f.check_box "trust_responder_series" %> Activate
+			</td>
+		</tr>
+		
+		<tr>    	
+			<td>
+				<%= @links %>	
+			</td>
+		</tr>	
+	
+	
+    <tr>
+        <td>
+            <%= f.hidden_field "summary_type", :value => session[:summary_type] || (!@buyer_notification.summary_type.blank? ? @buyer_notification.summary_type : (!params[:id].blank? ? params[:id] : "welcome")) %>
+        </td>
+    </tr>
+<% else%>	
+  <%= f.hidden_field "summary_type", :value => session[:summary_type] || (!@buyer_notification.summary_type.blank? ? @buyer_notification.summary_type : (!params[:id].blank? ? params[:id] : "welcome")) %>
+    <tr>
+        <td>
+            <b>Subject:</b>
+            <br/>   
+            <%= f.text_field "subject", :value => assign_subject, :size => "84", :style => "margin-left: 0px;" %>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <b>Email Intro:</b>
+            <span class='personlized_span'>
+              <a href="javascript:;" id="email_intro_editor" onclick="toggel_personalized_list(this.id)">Personalize</a>
+              <img src="/images/reimatcher_images/help_icon.png" alt='help' title="To personalize your emails, simply place your cursor where you want the variable added, then click Personalize and the name of variable you wish to add from the list" />
+            </span>
+            <br/>            
+            <%= f.text_area "email_intro", :value => assign_email_intro , :class=>"rich_text_editor", :size => "50x4", :style => "margin-left: 0px;" %>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <b>Closing:</b>
+            <span class='personlized_span'  >
+              <a href="javascript:;" id="email_closing_editor" onclick="toggel_personalized_list(this.id)" >Personalize</a>
+              <img src="/images/reimatcher_images/help_icon.png" alt='help' title="To personalize your emails, simply place your cursor where you want the variable added, then click Personalize and the name of variable you wish to add from the list" />
+            </span>
+            <br/>
+            <%= f.text_area "email_closing", :value => assign_email_closing, :class=>"rich_text_editor", :size => "50x4", :style => "margin-left: 0px;" %>
+        </td>
+    </tr>
+<%end%>
+    <tr>
+        <td colspan=2"">
+            <span style="color:red;">Note:</span>
+            <%= @note%>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" align="center">            
+            <%=submit_tag "Preview", :class=>'submit_xl' if @static_mails!= "Yes"%>
+            <%=submit_tag "Update Settings", :class=>'submit_xl' %>            
+        </td>
+    </tr>
+
+</table>
+</div>
+<div style="clear:both"></div>
+<div id="email_intro">
+</div>
+
+<%- end -%>
+<% session[:subject] =  nil %>
+<% session[:email_intro] =  nil %>
+<% session[:email_closing] = nil %>
+<% session[:summary_type] = nil %>

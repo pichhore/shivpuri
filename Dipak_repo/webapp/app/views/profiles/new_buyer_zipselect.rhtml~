@@ -1,0 +1,282 @@
+<%- @page_title = "Austin Real Estate Property Texas: Create Your Buyer Profile" -%>
+<%- @page_heading = "Create Your Buyer Profile - Step 1 of 2" -%>
+<%- @meta_description = "Begin matching Austin Real Estate property in Texas when you create your buyer profile on dwellgo’s exclusive online intelligent matching system - dwellgo" -%>
+<%- @meta_keywords = "austin real estate, investment property, Austin metro area, Austin metro, Texas, dwellgo" -%>
+<%- @include_gmap_header = true -%>
+<% require_js_controllers :zip_selection -%>
+<%=javascript_include_tag "prototype"%>
+<%= javascript_include_tag "add_buyer" %>
+<% content_for :page_scripts do -%>
+function validate() {
+  wholesale = document.getElementById("wholesale");
+  owner_finance = document.getElementById("owner_finance");
+  if ($('country_country').value == 'US'){
+    if (!wholesale.checked && !owner_finance.checked){
+    alert("Please select any investment type before proceding further")
+    return false;
+    }else if ((wholesale.checked || !owner_finance.checked) && $('county_state').value == '' ) {
+    alert("Please select your state ");
+    return false;
+    }else if ((wholesale.checked || !owner_finance.checked) && $('county_county').value == '' ) {
+    alert("Please select at least one county for your new buyer profile");
+    return false;
+    }
+    else if (($('country_country').value == 'US') && (!wholesale.checked && owner_finance.checked) && ($('zip_code').value == '')) {
+    alert("Please select at least one zip code for your new buyer profile");
+    return false;
+    } else if (($('country_country').value == 'US') && (!wholesale.checked && owner_finance.checked) && ! /^\d{5}(,\s*\d{5})*$/.test($F('zip_code'))) {
+    alert("Zip codes must be 5 digits long and separated by commas");
+    return false;
+    } 
+    else if (($('country_country').value == 'CA') && ($('profile_state').value == '')) {
+    alert("Please select your province ");
+    return false;
+    }else if (($('country_country').value == 'CA') && ($('city_city').value == '')) {
+    alert("Please select your City ");
+    return false;
+    }
+    else {
+    return true;
+    }
+    }
+  else{
+    if (!wholesale.checked && !owner_finance.checked){
+    alert("Please select any investment type before proceding further")
+    return false;
+    }
+    else if (($('country_country').value == 'CA') && ($('profile_state').value == '')) {
+    alert("Please select your province ");
+    return false;
+    }else if (($('country_country').value == 'CA') && ($('city_city').value == '')) {
+    alert("Please select your City ");
+    return false;
+    }
+    else {
+    return true;
+    }
+  }
+}
+/** Controller setup **/
+Event.observe(window, 'load', function() {
+zip_selection_controller = new NL.ZipSelectionController("<%=@zip_code %>");
+// insure zip_code input text field is always in sync with js-generated map
+$('zip_code').value = '<%=@zip_code %>';
+});
+
+
+Event.observe(window, 'load', function() {
+//document.getElementById("map_block").style.display = 'none';
+});
+
+
+
+<% end -%>
+
+<div class="form" style="width:102%;">
+     <h3>Step 1: Select Area & Investment Type</h3>
+<% form_tag({:controller=>'profiles', :action=>'new', :id=>'buyer'},{ :onSubmit=>"return validate()"}) do -%>
+  <fieldset style="padding-bottom:0px;">
+    <div>
+      <div>
+      <table>
+      <tr>
+          <th class="label_required expand_label">
+              Country:
+          </th>
+          <td align="left">
+            <select id="country_country" class="move_select_dropdown" name="country" onchange="update_map();">
+              <%= options_for_select( County::COUNTRY_NAME,params[:coun]) %>
+            </select>
+          </td>
+      </tr>
+    </table>
+    </div>
+    <div>
+      <span class="investment_type">
+              Investment Type:
+          </span>
+      <% @wholesale_flag = true if @wholesale_flag.blank? %>
+      <%=check_box_tag 'wholesale', InvestmentType.find_by_code('WS').id, @wholesale_flag , :onclick=>"get_wholesale_owner_finance_value_for_buyer_profile();"%>Wholesale &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=check_box_tag 'owner_finance', InvestmentType.find_by_code('OF').id, @owner_finance_flag, :onclick=>"get_wholesale_owner_finance_value_for_buyer_profile();"%>Owner Finance
+    </div>
+  </div>
+  </fieldset>
+    <div>
+        <div class="full" style="padding-bottom: 0; margin-bottom:0;">
+            <p class="label_text_style">
+                <% unless params[:coun] == "CA" %>
+                  <span style="display:none;" id="msg_block">Click On The Map to Select Areas OR Type The Area Code Where You Wish To Buy Property</span>
+                <% else %>
+                   Please Select The Area Where You Wish To Buy Property 
+                <% end %>
+             </p>
+        </div>
+    </div>
+    <fieldset>
+        
+        <div class="full" style="padding-bottom: 10px;">
+            
+            <% unless params[:coun] == "CA" %>
+              <div id="owner_finance_section" style="display:none;">
+                <table>
+                <tr> 
+                   <th class="label_required expand_label">Zip Codes:<img title="The areas you select on the map will appear as zip codes here. You may also enter zip codes manually where you wish to buy. if entered manually, separate zip codes by a comma, e.x. 78704,78702,78723" src="/images/reimatcher_images/help_icon.png" alt="Help_icon"></th>
+                   <td><%= text_field_tag "zip_code", @zip_code, :size=>82, :class=>"required zipcodes" %></td>
+                   <td><%=submit_tag "Next >", :class=>"submit" %></td>
+                 <tr> 
+                 </table>
+              </div>
+              <div id="wholesale_section" style="display:block;">
+                <table>
+                      <tr>
+                          <th class="label_required expand_label">
+                              State:
+                          </th>
+                          <td align="left">
+                            <select id="county_state" class="move_select_dropdown" name="state" onchange="get_state_county();">
+                            <%= options_for_select([[ "Select a State", "" ]] + State::NAMES) %>
+                            </select>
+                          </td>
+                      </tr>
+                      <th class="label_required expand_label">
+                              County:
+                          </th>
+                          <td align="left">
+                            <span id="ajax_county_update_div" class="move_select_dropdown">
+                             <%=select("county","county",@counties.map { |county| [county, county]  },{ :include_blank => "--- Select a County --- "})%>
+                            </span>
+                          </td>
+                      </tr>
+                     </table>
+    <%=submit_tag "Next >", :class=>"submit" %>
+              </div>
+            <% else %>
+                  <div>
+                     <table>
+                      <tr>
+                          <th class="label_required expand_label">
+                              Province:
+                          </th>
+                          <td align="left">
+                            <select id="profile_state" class="move_select_dropdown" name="state" <% if !(error_message_on :seller_property,:state).blank? %> style="border:1px solid #FF3300; width:105px;color:#FF3300;"<% end %> onchange="get_province_city();">
+                            <%= options_for_select([[ "Select a Province", "" ]] + State::CANADA_NAMES) %>
+                            </select>
+                          </td>
+                      </tr>
+                      <th class="label_required expand_label">
+                              City:
+                          </th>
+                          <td align="left">
+                            <span id="ajax_update_div" class="move_select_dropdown">
+                              <%=select("city","city",@cities.map { |city| [city, city]  },{ :include_blank => "--- Select a City --- " })%>
+                            </span>
+                          </td>
+                      </tr>
+                     </table>
+                    </div>
+             <br />
+            <%=submit_tag "Next >", :class=>"submit" %>
+            <% end %>
+            
+            
+        </div>
+
+      <% unless params[:coun] == "CA" %>
+        <div style="display:none;" id="map_block">
+        <div id="direction_links" style="padding-bottom: 10px;">
+            <% if(!@directions_available.blank? and @directions_available!=0) %>
+            <%= render :partial => 'directional_links' %>			
+			<% end %>
+        </div>
+        <div id="map" style="clear:both; height: 450px; width: 100%; text-align: center; background: #CCCCCC; padding: 0; margin: 0; margin-bottom: 10px; color: white; border: 1px solid black;">
+       <div id="preview_results_map_div" style="width: 100%; height: 450px; position: relative; background-color: rgb(229, 227, 223); overflow: hidden;"></div>
+        </div>
+        <div class="ie_fix">
+
+        </div>
+        <div class="loading" style="display:none">
+            <span class="text">Loading...</span>
+        </div>
+        <div id="wholesale_section" style="display:block;">
+          
+       </div>
+       </div>
+      <% end %>
+    </fieldset>
+    <% end -%>
+</div>
+
+<script type="text/javascript"
+    src="http://maps.googleapis.com/maps/api/js?sensor=true">
+</script>
+
+<script type="text/javascript">
+
+    function update_map(){
+        country = $('country_country').value;
+        window.location.href = '/profiles/new_buyer_zipselect/buyer?coun='+country;
+    }
+
+ var map;
+ window.onload = function initialize() {
+    var latlng = new google.maps.LatLng(<%= @center_zip_code[0].lat %>, <%= @center_zip_code[0].lng %>);
+    var myOptions = {
+      zoom: <%= @zoom_level %>,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    map = new google.maps.Map(document.getElementById("preview_results_map_div"), myOptions);
+    
+    google.maps.event.addListener(map, 'mousemove', function(event) {
+      map.setOptions({ draggableCursor: 'pointer' });
+    });
+    
+    google.maps.event.addListener(map, 'click', function(event) {
+       if(event){
+         new Ajax.Request('<%= @map_params[:click_route] %>', { asynchronous:true, evalScripts:true, parameters:'lat='+event.latLng.lat()+'&long='+event.latLng.lng()+'&zipcodes='+ <%= @map_params[:zipcodes_js_source] %>});
+         
+       }
+       return false;
+    });
+  }
+
+  function load_map() {
+    var latlng = new google.maps.LatLng(<%= @center_zip_code[0].lat %>, <%= @center_zip_code[0].lng %>);
+    var myOptions = {
+      zoom: <%= @zoom_level %>,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    map = new google.maps.Map(document.getElementById("preview_results_map_div"), myOptions);
+    
+    google.maps.event.addListener(map, 'mousemove', function(event) {
+      map.setOptions({ draggableCursor: 'pointer' });
+    });
+    
+    google.maps.event.addListener(map, 'click', function(event) {
+       if(event){
+         new Ajax.Request('<%= @map_params[:click_route] %>', { asynchronous:true, evalScripts:true, parameters:'lat='+event.latLng.lat()+'&long='+event.latLng.lng()+'&zipcodes='+ <%= @map_params[:zipcodes_js_source] %>});
+         
+       }
+       return false;
+    });
+  }
+
+    function get_province_city(){
+      profile_state = $('profile_state').value
+      new Ajax.Request('/profiles/get_city_for_province?state_id='+profile_state,
+      {
+          method:'get',
+          onSuccess: function(transport){
+             var response = transport.responseText || "no response text";
+             $('ajax_update_div').innerHTML = response
+          },
+          onFailure: function(){ alert('Something went wrong...') }
+      });
+   }
+
+</script>
+
+
+

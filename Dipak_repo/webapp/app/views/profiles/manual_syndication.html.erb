@@ -1,0 +1,86 @@
+<script>  
+      function SelectAll(id)
+      {
+        document.getElementById(id).focus();
+        document.getElementById(id).select();
+      }
+</script>  
+<%- @page_title = "Property Syndication - #{@profile.private_display_name}" -%>
+
+<h3>Link to this property<img alt="Help_icon" src="/images/reimatcher_images/help_icon.png" title="Use this URL in your marketing efforts to drive traffic to this property specifically."> <%= text_field_tag "short_url", @short_url, :size => 68, :readonly=>"true", :onClick=>"SelectAll('short_url');" %></h3><br/>
+<h3>Property Posting Embed Code (HTML)</h3><br/>
+<div>
+<p style="padding-left: 10px;">Use the provided HTML code to create an enhanced property posting on any site that accepts HTML, such as craigslist.</p>
+
+<p style="padding-left: 10px;">When ready, just click <a href="http://www.craigslist.com" target="_blank">Post to Craigslist</a> and paste the HTML code into the Property Description section. <img alt="Help_icon" src="/images/reimatcher_images/help_icon.png" title="To use the enhanced posting, simply Copy (Ctrl-c or Cmd-c) the HTML code in the window below. To highlight the code, click on the window below." style="cursor:pointer;"/>
+</p>
+
+<p style="padding-left: 10px;">Need Help? <a href="http://www.reimatcher.com/faq/property-marketing/how-to-create-enhanced-postings" target="_blank">How To Create Enhanced Postings</a> </p>
+</div>
+&nbsp&nbsp<%= text_area_tag :flyer, get_flyer_html(@profile_id), :size=> "90x5", :readonly=>"true", :onClick=>"SelectAll('flyer');"%>
+<% if !@xml_output["sites"].nil? %>
+<% form_tag('/profiles/save_sites') do %><br />
+<h3>Site Syndication</h3>
+<table><br />
+<tr >
+  <th width="550px" align="left">&nbsp&nbsp&nbsp&nbsp&nbsp Website </th>
+  <th> Sent </th>
+</tr>
+<% @xml_shorted = short_sites(@xml_output) %>
+<% @xml_shorted.each do |site| %>
+<% unless site["name"] == "Oodle Pro" %>
+  <tr>
+    <td >	
+      <% if @user_subscription == "Pro" %>
+      <%= hidden_field_tag "sites[#{site["id"]}]", site["id"] %>
+      <% else %>
+      <%= check_box_tag "sites[#{site["id"]}]", site["id"], true %>
+      <% end %>
+      <%= get_syndication_site_icon(site["name"]) %>
+    </td>
+    <td>
+      <%= time_in_words(syndication_time(site["id"])) + " ago" if !syndication_time(site["id"]).to_s.empty? %>
+    </td>
+  </tr>
+  <% else %>
+  <% if @user_subscription == "Pro" %>
+  <tr>
+    <td >	
+      <%= hidden_field_tag "sites[#{site["id"]}]", site["id"] %>
+      <%= get_syndication_site_icon(site["name"]) %>
+    </td>
+    <td>
+      <%= time_in_words(syndication_time(site["id"])) + " ago" if !syndication_time(site["id"]).to_s.empty? %>
+    </td>
+  </tr>
+  <tr>
+    <td >	
+      <img src="/images/syndication_site_logos/facebook.png" alt="facebook" width="99" height="36">
+    </td>
+    <td>
+      <%= time_in_words(syndication_time(site["id"])) + " ago" if !syndication_time(site["id"]).to_s.empty? %>
+    </td>
+  </tr>
+  <tr>
+    <td >	
+      <img src="/images/syndication_site_logos/pro-network.png" alt="pro-network" width="99" height="36">
+    </td>
+    <td>
+      <%= time_in_words(syndication_time(site["id"])) + " ago" if !syndication_time(site["id"]).to_s.empty? %>
+    </td>
+  </tr>
+  <% end %>
+  <% end %>
+  <% end %>
+
+</table>
+<input type="hidden" name="profile_id" value=<%= @profile_id %> />
+<div style="margin-top: 20px;">
+<%= submit_tag "Syndicate", :class=>"submit_xl" %>
+&nbsp; <%=link_to "Cancel", profile_path(@profile_id) %>
+</div>
+<% end %>
+<% else %>
+  <h4>No Sites to Syndicate</h4>
+<% end %>
+

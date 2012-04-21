@@ -1,0 +1,825 @@
+# Logfile created on Fri Jul 22 15:17:08 +0530 2011 by logger.rb/22283
+==================
+email of the customer: eleganthomesllc@yahoo.com
+User Not Found In REIM
+==================
+ something went wrong 
+ Error 1 : (NameError) "undefined local variable or method `mail' for #<ShoppingCartAutomaticCancellation:0xb6b7b8d8>" 
+==================
+email of the customer: eleganthomesllc@yahoo.com
+User Not Found In REIM
+==================
+email of the customer: rajivkapil12@mailinator.com
+User Name: Rajiv Test
+ something went wrong 
+ Error 1 : (ArgumentError) "wrong number of arguments (1 for 2)" 
+==================
+email of the customer: rajivkapil12@mailinator.com
+User Name: Rajiv Test
+==================
+==================
+==================
+==================
+==================
+ something went wrong 
+ Error 1 : (NameError) "uninitialized constant ShoppingCartAutomaticCancellation::KEY" 
+==================
+ something went wrong 
+ Error 1 : (NameError) "uninitialized constant ShoppingCartAutomaticCancellation::KEY" 
+==================
+==================
+order found
+order found
+order found
+order found
+==================
+order id 181810082
+Client Email reachdamonhere@gmail.com
+order id 181810082
+Client Email reachdamonhere@gmail.com
+order id 181810082
+Client Email reachdamonhere@gmail.com
+order id 181810082
+Client Email reachdamonhere@gmail.com
+==================
+ something went wrong 
+ Error 1 : (NameError) "undefined local variable or method `declined_mail_body' for #<ShoppingCartAutomaticCancellation:0xb6ad071c>" 
+==================
+ something went wrong 
+ Error 1 : (NameError) "undefined local variable or method `declined_mail_body' for #<ShoppingCartAutomaticCancellation:0xb6b3971c>" 
+==================
+==================
+Order ID: 181810082
+==================
+=======: 1
+=======: 2
+=======: 3
+=======: 4
+==================
+Order ID: 181810082
+Client Email: reachdamonhere@gmail.com,  Client ID: 139440923
+User Not Found In REIM with email: reachdamonhere@gmail.com
+==================
+Order ID: 181810082
+Client Email: reachdamonhere@gmail.com,  Client ID: 139440923
+User Not Found In REIM with email: reachdamonhere@gmail.com
+==================
+Order ID: 181810082
+Client Email: reachdamonhere@gmail.com,  Client ID: 139440923
+User Not Found In REIM with email: reachdamonhere@gmail.com
+==================
+Order ID: 181810082
+Client Email: reachdamonhere@gmail.com,  Client ID: 139440923
+User Not Found In REIM with email: reachdamonhere@gmail.com
+==================
+User Email: reachdamonhere@gmail.com,  Order ID: 181954101
+User Not Found In REIM with email: reachdamonhere@gmail.com
+==================
+User Email: 1234a@mailinator.com,  Order ID: 181954101
+User Not Found In REIM with email: 1234a@mailinator.com
+==================
+User Email: reachdamonhere@gmail.com,  Order ID: 181954101
+User Not Found In REIM with email: reachdamonhere@gmail.com
+==================
+User Email: 1234a@mailinator.com,  Order ID: 181954101
+==================
+User Email: reachdamonhere@gmail.com,  Order ID: 181954101
+User Not Found In REIM with email: reachdamonhere@gmail.com
+==================
+User Email: 1234a@mailinator.com,  Order ID: 181954101
+==================
+User Email: reachdamonhere@gmail.com,  Order ID: 181954101
+User Not Found In REIM with email: reachdamonhere@gmail.com
+==================
+User Email: 1234a@mailinator.com,  Order ID: 181954101
+==================
+User Email: rajiv224@mailinator.com <http://localhost:3000/account/settings>,  Order ID: 181205994
+User Not Found In REIM with email: rajiv224@mailinator.com <http://localhost:3000/account/settings>
+==================
+==================
+==================
+==================
+==================
+User Email: rajivkapil12@mailinator.com,  Order ID: 181202324
+==================
+User Email: reachdamonhere@gmail.com,  Order ID: 181954101
+User Not Found In REIM with email: reachdamonhere@gmail.com
+==================
+User Email: 1234a@mailinator.com,  Order ID: 181954101
+==================
+==================
+==================
+==================
+User Email: rajiv224@mailinator.com <http://localhost:3000/account/settings>,  Order ID: 181205994
+User Not Found In REIM with email: rajiv224@mailinator.com <http://localhost:3000/account/settings>
+==================
+==================
+==================
+==================
+==================
+User Email: eleganthomesllc@yahoo.com,  Order ID: 181417176
+User Not Found In REIM with email: eleganthomesllc@yahoo.com
+==================
+User Email: rajivkapil12@mailinator.com,  Order ID: 181202324
+==================
+User Email: reachdamonhere@gmail.com,  Order ID: 181954101
+User Not Found In REIM with email: reachdamonhere@gmail.com
+==================
+User Email: 1234a@mailinator.com,  Order ID: 181954101
+==================
+User Email: reachdamonhere@gmail.com,  Order ID: 181954101
+User Not Found In REIM with email: reachdamonhere@gmail.com
+==================
+User Email: 1234a@mailinator.com,  Order ID: 181954101
+==================
+==================
+==================
+User Email: reachdamonhere@gmail.com,  Order ID: 181954101
+User Not Found In REIM with email: reachdamonhere@gmail.com
+==================
+User Email: 1234a@mailinator.com,  Order ID: 181954101
+==================
+User Email: reachdamonhere@gmail.com,  Order ID: 181954101
+User Not Found In REIM with email: reachdamonhere@gmail.com
+==================
+User Email: 1234a@mailinator.com,  Order ID: 181954101
+==================
+User Email: reachdamonhere@gmail.com,  Order ID: 181954101
+User Not Found In REIM with email: reachdamonhere@gmail.com
+==================
+User Email: 1234a@mailinator.com,  Order ID: 181954101
+==================
+User Email: rajivkapil12@mailinator.com,  Order ID: 181202324
+==================
+User Email: reachdamonhere@gmail.com,  Order ID: 181954101
+User Not Found In REIM with email: reachdamonhere@gmail.com
+ something went wrong 
+ Error 1 : (Errno::ECONNREFUSED) "Connection refused - Unable to connect to Redis on localhost:6379" 
+==================
+User Email: 1234a@mailinator.com,  Order ID: 181954101
+==================
+==================
+==================
+User Email: almirah@aol.com,  Order ID: 181202324, Order Price: $97.00
+==================
+==================
+==================
+User Email: rajiv224@mailinator.com <http://localhost:3000/account/settings>,  Order ID: 181205994, Order Price: $250.00
+==================
+==================
+==================
+==================
+==================
+User Email: eleganthomesllc@yahoo.com,  Order ID: 181417176, Order Price: $97.00
+==================
+User Email: rajivkapil12@mailinator.com,  Order ID: 181202324, Order Price: $97.00
+==================
+User Email: reachdamonhere@gmail.com,  Order ID: 181954101, Order Price: $1.00
+==================
+User Email: 1234a@mailinator.com,  Order ID: 181954101, Order Price: $1.00
+==================
+User Email: almirah@aol.com,  Order ID: 181202324, Order Price: $97.00
+User Not Found In REIM with email: almirah@aol.com
+==================
+User Email: rajiv224@mailinator.com <http://localhost:3000/account/settings>,  Order ID: 181205994, Order Price: $250.00
+==================
+==================
+==================
+==================
+==================
+User Email: eleganthomesllc@yahoo.com,  Order ID: 181417176, Order Price: $97.00
+User Not Found In REIM with email: eleganthomesllc@yahoo.com
+==================
+User Email: rajivkapil12@mailinator.com,  Order ID: 181202324, Order Price: $97.00
+==================
+User Email: reachdamonhere@gmail.com,  Order ID: 181954101, Order Price: $1.00
+==================
+User Email: 1234a@mailinator.com,  Order ID: 181954101, Order Price: $1.00
+==================
+User Email: almirah@aol.com,  Order ID: 181202324, Order Price: $97.00
+User Not Found In REIM with email: almirah@aol.com
+==================
+User Email: rajiv224@mailinator.com <http://localhost:3000/account/settings>,  Order ID: 181205994, Order Price: $250.00
+==================
+==================
+==================
+==================
+==================
+User Email: eleganthomesllc@yahoo.com,  Order ID: 181417176, Order Price: $97.00
+User Not Found In REIM with email: eleganthomesllc@yahoo.com
+==================
+User Email: rajivkapil12@mailinator.com,  Order ID: 181202324, Order Price: $97.00
+==================
+User Email: reachdamonhere@gmail.com,  Order ID: 181954101, Order Price: $1.00
+==================
+User Email: 1234a@mailinator.com,  Order ID: 181954101, Order Price: $1.00
+==================
+User Email: sean@seansteam.com,  Order ID: 182288953 , Order Price: $497.00
+==================
+User Email: sean@seansteam.com,  Order ID: 182288953, Order Price: $497.00
+==================
+User Email: info@marksmenhomesolutions.com,  Order ID: 182293157, Order Price: $497.00
+==================
+User Email: sjackson@jacksonassoc.com,  Order ID: 182307381, Order Price: $97.00
+User Not Found In REIM with email: sjackson@jacksonassoc.com
+==================
+==================
+User Email: elizabeth@reimatcher.com,  Order ID: 182356517 , Order Price: $97.00
+User Not Found In REIM with email: elizabeth@reimatcher.com
+==================
+User Email: eilstewart@austin.rr.com,  Order ID: 182356514, Order Price: $49.00
+User Not Found In REIM with email: eilstewart@austin.rr.com
+==================
+User Email: elizabeth@reimatcher.com,  Order ID: 182394369 , Order Price: $97.00
+User Not Found In REIM with email: elizabeth@reimatcher.com
+==================
+User Email: mark@nukeyrealtysolutions.com,  Order ID: 182394365, Order Price: $97.00
+User Not Found In REIM with email: mark@nukeyrealtysolutions.com
+==================
+User Email: jim@housebuyerssellers.com,  Order ID: 182394361, Order Price: $97.00
+User Not Found In REIM with email: jim@housebuyerssellers.com
+==================
+==================
+User Email: managroupinc@gmail.com,  Order ID: 182410118 , Order Price: $250.00
+==================
+User Email: managroupinc@gmail.com,  Order ID: 182410118 , Order Price: $250.00
+==================
+User Email: managroupinc@gmail.com,  Order ID: 182410118 , Order Price: $250.00
+==================
+==================
+User Email: elizabeth@reimatcher.com,  Order ID: 182439396 , Order Price: $97.00
+User Not Found In REIM with email: elizabeth@reimatcher.com
+==================
+User Email: zen2k888@yahoo.com,  Order ID: 182456805, Order Price: $97.00
+User Not Found In REIM with email: zen2k888@yahoo.com
+==================
+==================
+User Email: charlesp@clearwire.net,  Order ID: 182494329, Order Price: $97.00
+User Not Found In REIM with email: charlesp@clearwire.net
+==================
+User Email: onesourcesolutions1@gmail.com,  Order ID: 182502848, Order Price: $97.00
+User Not Found In REIM with email: onesourcesolutions1@gmail.com
+==================
+User Email: suzieq15@live.com,  Order ID: 182516336, Order Price: $97.00
+User Not Found In REIM with email: suzieq15@live.com
+==================
+User Email: cdcarter1@comcast.net,  Order ID: 182539869, Order Price: $97.00
+User Not Found In REIM with email: cdcarter1@comcast.net
+==================
+User Email: superhousingsolutions@gmail.com,  Order ID: 182539866, Order Price: $97.00
+User Not Found In REIM with email: superhousingsolutions@gmail.com
+==================
+==================
+User Email: michaeldawes@telus.net,  Order ID: 182539877, Order Price: $97.00
+User Not Found In REIM with email: michaeldawes@telus.net
+==================
+User Email: chingrw@gmail.com,  Order ID: 182539872, Order Price: $97.00
+User Not Found In REIM with email: chingrw@gmail.com
+==================
+User Email: gregn@securerealtysolutions.com,  Order ID: 182564808, Order Price: $97.00
+User Not Found In REIM with email: gregn@securerealtysolutions.com
+==================
+User Email: tadams@remax.net,  Order ID: 182573392, Order Price: $97.00
+User Not Found In REIM with email: tadams@remax.net
+==================
+==================
+User Email: groupe360@gmail.com,  Order ID: 182589727, Order Price: $97.00
+User Not Found In REIM with email: groupe360@gmail.com
+==================
+User Email: edwardswill1@gmail.com,  Order ID: 182593897, Order Price: $97.00
+User Not Found In REIM with email: edwardswill1@gmail.com
+==================
+User Email: cjorgensen1@gmail.com,  Order ID: 182598323, Order Price: $250.00
+==================
+User Email: dms1golf@earthlink.net,  Order ID: 182634888, Order Price: $97.00
+User Not Found In REIM with email: dms1golf@earthlink.net
+==================
+==================
+User Email: superbcutz1@verizon.net,  Order ID: 182644356, Order Price: $97.00
+User Not Found In REIM with email: superbcutz1@verizon.net
+==================
+User Email: managroupinc@gmail.com,  Order ID: 182647844, Order Price: $250.00
+==================
+User Email: ajv@gsh-usa.com,  Order ID: 182652652, Order Price: $97.00
+User Not Found In REIM with email: ajv@gsh-usa.com
+==================
+User Email: ajv@gsh-usa.com,  Order ID: 182655631, Order Price: $250.00
+==================
+User Email: peacelands@att.net,  Order ID: 182661721, Order Price: $97.00
+User Not Found In REIM with email: peacelands@att.net
+==================
+==================
+User Email: george@stoneycreekventures.biz,  Order ID: 182677372, Order Price: $97.00
+User Not Found In REIM with email: george@stoneycreekventures.biz
+==================
+User Email: safetynetfinancial@gmail.com,  Order ID: 182728399, Order Price: $97.00
+User Not Found In REIM with email: safetynetfinancial@gmail.com
+==================
+User Email: stucarr@sbcglobal.net,  Order ID: 182763821 , Order Price: $97.00
+User Not Found In REIM with email: stucarr@sbcglobal.net
+==================
+User Email: stucarr@sbcglobal.net,  Order ID: 182763821, Order Price: $97.00
+User Not Found In REIM with email: stucarr@sbcglobal.net
+==================
+User Email: tothetopllc@yahoo.com,  Order ID: 182778163, Order Price: $97.00
+User Not Found In REIM with email: tothetopllc@yahoo.com
+==================
+User Email: wfred@comcast.net,  Order ID: 182830133, Order Price: $497.00
+==================
+User Email: james@jalexonalpha.com,  Order ID: 182834841, Order Price: $97.00
+User Not Found In REIM with email: james@jalexonalpha.com
+==================
+User Email: dlornwade@insightbb.com,  Order ID: 182851667, Order Price: $97.00
+User Not Found In REIM with email: dlornwade@insightbb.com
+==================
+User Email: docplehn@gmail.com,  Order ID: 182851664, Order Price: $97.00
+User Not Found In REIM with email: docplehn@gmail.com
+==================
+==================
+User Email: tim@stsrealestate.com,  Order ID: 182871187, Order Price: $97.00
+User Not Found In REIM with email: tim@stsrealestate.com
+==================
+User Email: ryriggins@gmail.com,  Order ID: 182881223, Order Price: $0.00
+==================
+User Email: riggins@lava.net,  Order ID: 182882210, Order Price: $0.00
+==================
+==================
+User Email: grapevinecapital@gmail.com,  Order ID: 182901092, Order Price: $97.00
+User Not Found In REIM with email: grapevinecapital@gmail.com
+==================
+User Email: janetrand100@gmail.com,  Order ID: 182936570, Order Price: $0.00
+==================
+User Email: mike@realhouseleads.com,  Order ID: 182950294 , Order Price: $97.00
+User Not Found In REIM with email: mike@realhouseleads.com
+==================
+==================
+User Email: calebdirect@gmail.com,  Order ID: 182989141 , Order Price: $97.00
+User Not Found In REIM with email: calebdirect@gmail.com
+==================
+User Email: mike@realhouseleads.com,  Order ID: 182989136 , Order Price: $97.00
+User Not Found In REIM with email: mike@realhouseleads.com
+==================
+==================
+User Email: curtiswoodlock@yahoo.com,  Order ID: 182989145, Order Price: $97.00
+User Not Found In REIM with email: curtiswoodlock@yahoo.com
+==================
+User Email: reese@rfainvestments.com,  Order ID: 182995490, Order Price: $0.00
+==================
+User Email: boomdude@gmail.com,  Order ID: 183008494, Order Price: $0.00
+==================
+User Email: kandcinvestment@yahoo.com,  Order ID: 183018556, Order Price: $0.00
+==================
+==================
+User Email: calebdirect@gmail.com,  Order ID: 183022805 , Order Price: $97.00
+User Not Found In REIM with email: calebdirect@gmail.com
+==================
+User Email: mike@realhouseleads.com,  Order ID: 183022803 , Order Price: $97.00
+User Not Found In REIM with email: mike@realhouseleads.com
+==================
+User Email: jean_pierre_jardin@yahoo.com,  Order ID: 183022799, Order Price: $97.00
+User Not Found In REIM with email: jean_pierre_jardin@yahoo.com
+==================
+User Email: kyle@westernstateshomes.com,  Order ID: 183042235, Order Price: $0.00
+==================
+User Email: trader43@gmail.com,  Order ID: 183050607, Order Price: $0.00
+==================
+User Email: artpuotinen@sbcglobal.net,  Order ID: 183062991, Order Price: $97.00
+User Not Found In REIM with email: artpuotinen@sbcglobal.net
+==================
+User Email: calebdirect@gmail.com,  Order ID: 183062986 , Order Price: $97.00
+User Not Found In REIM with email: calebdirect@gmail.com
+==================
+==================
+User Email: mike@realhouseleads.com,  Order ID: 183062997 , Order Price: $97.00
+User Not Found In REIM with email: mike@realhouseleads.com
+==================
+User Email: joneshome3@sbcglobal.net,  Order ID: 183063001, Order Price: $97.00
+User Not Found In REIM with email: joneshome3@sbcglobal.net
+==================
+User Email: mcorbin@m2realestateinvestments.com,  Order ID: 183081914, Order Price: $0.00
+==================
+User Email: edgar.chance2@gmail.com,  Order ID: 183084913, Order Price: $0.00
+==================
+User Email: mike@realhouseleads.com,  Order ID: 183110299 , Order Price: $97.00
+User Not Found In REIM with email: mike@realhouseleads.com
+==================
+User Email: moemoneymac@gmail.com,  Order ID: 183110298 , Order Price: $97.00
+User Not Found In REIM with email: moemoneymac@gmail.com
+==================
+User Email: calebdirect@gmail.com,  Order ID: 183110294 , Order Price: $97.00
+User Not Found In REIM with email: calebdirect@gmail.com
+==================
+==================
+User Email: atc103@gmail.com,  Order ID: 183117838, Order Price: $0.00
+==================
+User Email: jwam@iglide.net,  Order ID: 183135191, Order Price: $0.00
+==================
+User Email: calebdirect@gmail.com,  Order ID: 183157631 , Order Price: $97.00
+User Not Found In REIM with email: calebdirect@gmail.com
+==================
+User Email: chris@idealps.com,  Order ID: 183157638 , Order Price: $97.00
+User Not Found In REIM with email: chris@idealps.com
+==================
+User Email: moemoneymac@gmail.com,  Order ID: 183157636 , Order Price: $97.00
+User Not Found In REIM with email: moemoneymac@gmail.com
+==================
+User Email: shonore@yahoo.com,  Order ID: 183157634, Order Price: $97.00
+User Not Found In REIM with email: shonore@yahoo.com
+==================
+==================
+User Email: mike@realhouseleads.com,  Order ID: 183157642 , Order Price: $97.00
+User Not Found In REIM with email: mike@realhouseleads.com
+==================
+User Email: lewsin@gmail.com,  Order ID: 183170375, Order Price: $0.00
+==================
+User Email: joel_loera@yahoo.com,  Order ID: 183207179, Order Price: $97.00
+User Not Found In REIM with email: joel_loera@yahoo.com
+==================
+User Email: calebdirect@gmail.com,  Order ID: 183207174 , Order Price: $97.00
+User Not Found In REIM with email: calebdirect@gmail.com
+==================
+User Email: chris@idealps.com,  Order ID: 183207189 , Order Price: $97.00
+User Not Found In REIM with email: chris@idealps.com
+==================
+==================
+User Email: moemoneymac@gmail.com,  Order ID: 183207185 , Order Price: $97.00
+User Not Found In REIM with email: moemoneymac@gmail.com
+==================
+User Email: money_doctor@sbcglobal.net,  Order ID: 183229540, Order Price: $497.00
+==================
+User Email: pudgal@yahoo.com,  Order ID: 183241002, Order Price: $0.00
+==================
+User Email: tiliff1@aol.com,  Order ID: 183253598 , Order Price: $97.00
+User Not Found In REIM with email: tiliff1@aol.com
+==================
+==================
+User Email: chris@idealps.com,  Order ID: 183253605 , Order Price: $97.00
+User Not Found In REIM with email: chris@idealps.com
+==================
+User Email: moemoneymac@gmail.com,  Order ID: 183253602 , Order Price: $97.00
+User Not Found In REIM with email: moemoneymac@gmail.com
+==================
+User Email: theabrentice@yahoo.com,  Order ID: 183284788, Order Price: $0.00
+==================
+User Email: tiliff1@aol.com,  Order ID: 183296927 , Order Price: $97.00
+User Not Found In REIM with email: tiliff1@aol.com
+==================
+User Email: moemoneymac@gmail.com,  Order ID: 183296922 , Order Price: $97.00
+User Not Found In REIM with email: moemoneymac@gmail.com
+==================
+User Email: ry@bridgetowneproperties.com,  Order ID: 183296942 , Order Price: $97.00
+User Not Found In REIM with email: ry@bridgetowneproperties.com
+==================
+User Email: scott@gonexx.com,  Order ID: 183296938, Order Price: $97.00
+User Not Found In REIM with email: scott@gonexx.com
+==================
+User Email: sean.realestateinbox@gmail.com,  Order ID: 183296935, Order Price: $97.00
+User Not Found In REIM with email: sean.realestateinbox@gmail.com
+==================
+User Email: chris@idealps.com,  Order ID: 183296930 , Order Price: $97.00
+User Not Found In REIM with email: chris@idealps.com
+==================
+==================
+User Email: tiliff1@aol.com,  Order ID: 183330176 , Order Price: $97.00
+User Not Found In REIM with email: tiliff1@aol.com
+==================
+User Email: mattschrock1@gmail.com,  Order ID: 183330171 , Order Price: $97.00
+User Not Found In REIM with email: mattschrock1@gmail.com
+==================
+User Email: moemoneymac@gmail.com,  Order ID: 183330168 , Order Price: $97.00
+User Not Found In REIM with email: moemoneymac@gmail.com
+==================
+User Email: ry@bridgetowneproperties.com,  Order ID: 183330189 , Order Price: $97.00
+User Not Found In REIM with email: ry@bridgetowneproperties.com
+==================
+==================
+User Email: jhampton@ktc.com,  Order ID: 183330184, Order Price: $97.00
+User Not Found In REIM with email: jhampton@ktc.com
+==================
+User Email: chris@idealps.com,  Order ID: 183330182 , Order Price: $97.00
+User Not Found In REIM with email: chris@idealps.com
+==================
+User Email: research@quirkyproperties.com,  Order ID: 183347343, Order Price: $250.00
+==================
+User Email: mattschrock1@gmail.com,  Order ID: 183358961 , Order Price: $97.00
+User Not Found In REIM with email: mattschrock1@gmail.com
+==================
+User Email: rajivstpl@mailinator.com,  Order ID: 181202324, Order Price: $97.00
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+User Email: almirah@aol.com,  Order ID: 181202324, Order Price: $97.00
+User Not Found In REIM with email: almirah@aol.com
+==================
+==================
+==================
+User Email: rajiv224@mailinator.com <http://localhost:3000/account/settings>,  Order ID: 181205994, Order Price: $250.00
+==================
+==================
+==================
+==================
+==================
+User Email: eleganthomesllc@yahoo.com,  Order ID: 181417176, Order Price: $97.00
+User Not Found In REIM with email: eleganthomesllc@yahoo.com
+==================
+User Email: rajivkapil12@mailinator.com,  Order ID: 181202324, Order Price: $97.00
+==================
+==================
+User Email: reachdamonhere@gmail.com,  Order ID: 181954101, Order Price: $1.00
+==================
+User Email: 1234a@mailinator.com,  Order ID: 181954101, Order Price: $1.00
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+User Email: rajivstpl@mailinator.com,  Order ID: 181202324, Order Price: $97.00
+==================
+User Email: rajivstpl@mailinator.com,  Order ID: 181202324, Order Price: $97.00
+==================
+User Email: 143raj@mailinator.com,  Order ID: 181202324, Order Price: $97.00, Date: Mon Jul 11 11:51:12 -0400 2011
+==================
+User Email: 143raj@mailinator.com,  Order ID: 181202324, Order Price: $97.00, Date: Mon Jul 11 11:51:12 -0400 2011
+==================
+User Email: rajiv224@mailinator.com <http://localhost:3000/account/settings>,  Order ID: 181205994, Order Price: $250.00, Date: Mon Jul 11 13:02:40 -0400 2011
+==================
+==================
+==================
+==================
+==================
+User Email: 143raj@mailinator.com,  Order ID: 181202324, Order Price: $97.00, Date: Mon Jul 11 11:51:12 -0400 2011
+==================
+User Email: rajiv224@mailinator.com,  Order ID: 181202324, Order Price: $97.00, Date: Mon Jul 11 11:51:12 -0400 2011
+==================
+User Email: 143raj@mailinator.com,  Order ID: 181202324, Order Price: $97.00, Date: Mon Jul 11 11:51:12 -0400 2011
+==================
+User Email: rajiv224@mailinator.com,  Order ID: 181202324, Order Price: $97.00, Date: Mon Jul 11 11:51:12 -0400 2011
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+==================
+User Email: user_transaction123@mailinator.com,  Order ID: 181202324, Order Price: $97.00, Date: Mon Jul 11 11:51:12 -0400 2011
+==================
+User Email: user_transaction123@mailinator.com,  Order ID: 181202324, Order Price: $97.00, Date: Mon Jul 11 11:51:12 -0400 2011
+==================
+User Email: user_transaction123@mailinator.com,  Order ID: 181202324, Order Price: $97.00, Date: Mon Jul 11 11:51:12 -0400 2011
+==================
+User Email: user_transaction123@mailinator.com,  Order ID: 181202324, Order Price: $97.00, Date: Mon Jul 11 11:51:12 -0400 2011
+==================
+User Email: rajiv224@mailinator.com,  Order ID: 187472455, Order Price: $97.00, Date: Mon Nov 28 11:16:40 -0500 2011
+==================
+User Email: rajiv224@mailinator.com,  Order ID: 187472455, Order Price: $97.00, Date: Mon Nov 28 11:16:40 -0500 2011
+==================
+User Email: rajiv224@mailinator.com,  Order ID: 187472455, Order Price: $97.00, Date: Mon Nov 28 11:16:40 -0500 2011
+User rajiv224@mailinator.com have Succesful Payment
+==================
+User Email: rajiv224@mailinator.com,  Order ID: 187472455, Order Price: $97.00, Date: Mon Nov 28 11:16:40 -0500 2011
+User rajiv224@mailinator.com have Failed Payment
+==================
+Mail Subject: New Order was placed for Love American Homes
+User Email: rajiv224@mailinator.com,  Order ID: 187472455, Order Price: $97.00, Date: Mon Nov 28 11:16:40 -0500 2011
+User rajiv224@mailinator.com have Successful Payment
+==================
+Mail Subject: Recurring order failed for Love American Homes
+User Email: ra212@mailinator.com,  Order ID: 187745344 , Order Price: $97.00, Date: Sun Dec 04 06:28:57 -0500 2011 
+User ra212@mailinator.com have Failed Payment

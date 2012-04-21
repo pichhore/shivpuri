@@ -1,0 +1,122 @@
+
+<div id="content">
+        <div class="container">
+	<div style="font: 18px bold;color: green;margin-bottom: 10px;">Tax Invoice</div>
+	<%str= flash_helper %>
+	  <%unless str.blank?%>
+	    <%- content_tag :div, :id => "payment_notification" do %>
+		<div class="message_payment" ><span class="right-image"></span><span id="message-payment" ><%= str %></span></div>
+	    <%- end %>
+	  <%end%>
+                <div class="primary">
+
+                        <table cellspacing="0"  class="listings" id="table_invoice" style="width: 960px;"> 
+                                <colgroup>
+                                        <col class="description" />
+                                        <col class="description" />
+                                        <col class="description" />
+                                        <col class="description" />
+                                </colgroup>
+                                <thead>
+                                        <tr class="row_header_width" style="border-top: 1px solid #88B4CB;">
+                                                <th style="padding: 8px 12px; ">Description</th>
+						<th></th>
+						<th style="padding: 8px 12px;">Boxyroom Fee</th>
+                                                <th style="padding: 8px 12px;">Transferred Amount</th>
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                        <tr class="row_header_width" style="border: none;background: #F0F0F0;">
+                                                <td ><%= @application.property.title.slice(0..10)%></td>
+                                                <td ></td>
+                                                <td><%= @application.property.currency_type %>$<%= boxyroom_fees @application.property.monthly_rental %></td>
+					        <td><%= @application.property.currency_type %>$<%= payment_to_landlord @application.property.monthly_rental %></td>
+                                        </tr>
+                                </tbody>
+				<tbody>
+				  <tr class="row_header_width" style="border: none;">
+					  <td></td>
+					  <td ></td>
+					  <td style="float: right;">Total</td>
+					  <td style="border-bottom: 1px solid gray;"><%= @application.property.currency_type %>$<%= payment_to_landlord @application.property.monthly_rental %></td>
+				  </tr>
+				</tbody>
+                                <tbody>
+				  <tr class="row_header_width" style="border: none;">
+					  <td></td>
+					  <td ></td>
+					  <td style="float: right;">Amount Paid</td>
+					  <td  style="border-bottom: 1px solid gray;"><%= @application.property.currency_type%>$<%=payment_to_landlord@application.property.monthly_rental %></td>
+				  </tr>
+				</tbody>
+                        </table>
+			
+			<div ><span class="payment_transaction">Payment History</span></div>
+			   <table cellspacing="0" class="listings" style="width: 960px;"> 
+                                <colgroup>
+                                        <col class="description" />
+                                        <col class="description" />
+                                        <col class="description" />
+                                        <col class="description" />
+					<col class="description" />
+                                </colgroup>
+                                <thead>
+                                        <tr class="row_header_width" style="border-top: 1px solid #88B4CB;" >
+                                                <th style="padding: 8px 12px;">ID</th>
+						<th style="padding: 8px 12px;">Payment Method</th>
+						<th style="padding: 8px 12px;">Received</th>
+                                                <th style="padding: 8px 12px;">Amount</th>
+						<th style="padding: 8px 12px;">Status</th>
+                                        </tr>
+                                </thead>
+				 <% current_user.applications.paid.each do|app|%>
+				  <tbody>
+					  <tr class="row_header_width" style="border: none;">
+						  <td>#<%= app.transaction_id%></td>
+						  <td ><%= payment_type(app) %></td>
+						  <td><%= boxy_date_format app.paid_at%></td>
+						  <td>$<%= app.property.monthly_rental.to_i%></td>
+						  <td style="color: green;">successful</td>
+					  </tr>
+				  </tbody>
+				<% end %>
+                        </table>
+                       <div ><span class="payment_transaction">Receive Payment History</span></div>
+			<table cellspacing="0" class="listings" style="width: 960px;"> 
+			    <colgroup>
+				    <col class="description" />
+				    <col class="description" />
+				    <col class="description" />
+				    <col class="description" />
+				    <col class="description" />
+			    </colgroup>
+			    <thead>
+				    <tr class="row_header_width" style="border-top: 1px solid #88B4CB;">
+					    <th style="padding: 8px 12px;">ID</th>
+					    <th style="padding: 8px 12px;">Transferred</th>
+					    <th style="padding: 8px 12px;">Advance Rent</th>
+					    <th style="padding: 8px 12px;">Boxyroom Fee</th>
+					    <th style="padding: 8px 12px;">Status</th>
+				    </tr>
+			    </thead>
+			    
+			    <% @applications_for_me.each do|app|%>
+			      <tbody>
+				      <tr class="row_header_width" style="border: none;">
+					<td>#<%= app[0].transaction_id%></td>
+					<td><%= boxy_date_format app[0].paid_at%></td>
+					<td>$<%= app[0].property.monthly_rental.to_i%></td>
+				      <td>$<%= boxyroom_fees app[0].property.monthly_rental %></td>
+					<td style="color: green;">successful</td>
+				      </tr>
+			      </tbody>
+			    <% end %>
+		    </table>
+
+
+                </div>
+        </div>
+</div>
+
+
+

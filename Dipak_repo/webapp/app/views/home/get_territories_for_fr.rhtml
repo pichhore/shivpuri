@@ -1,0 +1,1 @@
+<%=select("filter_results","territory_name",@territories.map { |territory| [territory.territory_name, territory.id]  },{ :include_blank => "-------- Select Territory --------" }, {:class => 'wide'} )%>

@@ -1,0 +1,49 @@
+<%- @page_title = "Marketing Settings" -%>
+<% require_js_controllers :tab, :account_settings, :lightbox, :profile_update -%>
+<%- content_for :page_scripts do -%>
+Event.observe(window, 'load', function() {
+account_settings_controller = new NL.AccountSettingsController();
+lightbox_controller = new NL.LightboxController();
+});
+<%- end -%>
+
+<% content_for :page_styles do -%>
+<%=stylesheet_link_tag "lightbox"%>
+<% end -%>
+
+<% session[:subject] =  params[:buyer_notification][:subject] %>
+<% session[:email_intro] =  params[:buyer_notification][:email_intro] %>
+<% session[:email_closing] = params[:buyer_notification][:email_closing] %>
+<% session[:summary_type] = params[:buyer_notification][:summary_type] %>
+<div class="full">
+  <div class="tabset larger">
+      <%=render :partial=>"account_tab", :locals=>{:active_class_buyer_responder=>"active"}%>
+  </div>
+
+  <fieldset> 
+  <h2><i>Email Preview</i></h2>
+  <%=image_tag @user_company_image.public_filename(:profile), :alt=>"thumbnail" if (!@user_company_image.nil?) && (!@user_company_image.find_profile_thumbnail.blank?) %>
+  <div style="clear:both;">
+  <table>
+      <tr>
+          <td>
+              <%= display_email_intro(params[:buyer_notification][:email_intro]) %>
+          </td>
+      </tr>
+      <tr>
+          <td>
+	<% if params[:buyer_notification][:summary_type]!="welcome" %>
+              <%= params[:buyer_notification][:summary_type]!="daily" ? image_tag("example_email.PNG") : image_tag("example_1_property.png") %>
+	<% end %>
+          </td>
+      </tr>
+      <tr>
+          <td>
+              <%= display_email_closing(params[:buyer_notification][:email_closing]) %>
+          </td>
+      </tr>
+  </table>
+  <%=button_to_function "Back","document.location='#{url_for({:controller=>'account', :action=>'marketing', :summary_type => params[:buyer_notification][:summary_type] })}';", :class=>"submit_l" %>
+  </div> 
+   </fieldset> 
+</div>

@@ -1,0 +1,225 @@
+body {
+    background: #fff url('../../images/headerBg.jpg') repeat-x top left;
+}
+.nav-howto a {
+    display: block;
+    text-decoration: none;
+    color: #ffffff;
+    padding: 5px 15px 5px 15px;
+    white-space: nowrap;
+    text-align: left;
+    border-top: solid 1px transparent;
+    border-left: solid 1px  transparent;
+    border-right: solid 1px  transparent; 
+}
+.nav-training a {
+    display: block;
+    text-decoration: none;
+    color: #ffffff;
+    padding: 5px 15px 5px 15px;
+    white-space: nowrap;
+    text-align: left;
+    border-top: solid 1px transparent;
+    border-left: solid 1px  transparent;
+    border-right: solid 1px  transparent; 
+}
+.nav-dashboard a { 
+    display: block;
+    text-decoration: none;
+    color: #ffffff;
+    padding: 5px 15px 5px 15px;
+    white-space: nowrap;
+    text-align: left;
+    border-top: solid 1px transparent;
+    border-left: solid 1px  transparent;
+    border-right: solid 1px  transparent; 
+}
+.nav-buyer a { 
+    display: block;
+    text-decoration: none;
+    color: #ffffff;
+    padding: 5px 15px 5px 15px;
+    white-space: nowrap;
+    text-align: left;
+    border-top: solid 1px transparent;
+    border-left: solid 1px  transparent;
+    border-right: solid 1px  transparent; 
+}
+.nav-seller a { 
+    display: block;
+    text-decoration: none;
+    color: #ffffff;
+    padding: 5px 15px 5px 15px;
+    white-space: nowrap;
+    text-align: left;
+    border-top: solid 1px transparent;
+    border-left: solid 1px  transparent;
+    border-right: solid 1px  transparent; 
+}
+.nav-network a { 
+    display: block;
+    text-decoration: none;
+    color: #ffffff;
+    padding: 5px 15px 5px 15px;
+    white-space: nowrap;
+    text-align: left;
+    border-top: solid 1px transparent;
+    border-left: solid 1px  transparent;
+    border-right: solid 1px  transparent; 
+}
+.nav-admin a { 
+    display: block;
+    text-decoration: none;
+    color: #ffffff;
+    padding: 5px 15px 5px 15px;
+    white-space: nowrap;
+    text-align: left;
+    border-top: solid 1px transparent;
+    border-left: solid 1px  transparent;
+    border-right: solid 1px  transparent; 
+}
+.nav-seller-selected a {       
+    background: #fff; 
+    border-top: solid 1px #69b928 !important;
+    border-left: solid 1px #69b928 !important;
+    border-right: solid 1px #69b928 !important;
+}
+.nav-admin-selected a {        
+    background: #fff; 
+    border-top: solid 1px #69b928 !important;
+    border-left: solid 1px #69b928 !important;
+    border-right: solid 1px #69b928 !important;
+}
+.nav-network-selected a {      
+    background: #fff; 
+    border-top: solid 1px #69b928 !important;
+    border-left: solid 1px #69b928 !important;
+    border-right: solid 1px #69b928 !important;
+}
+.nav-dashboard-selected a {    
+    background: #fff; 
+    border-top: solid 1px #69b928 !important;
+    border-left: solid 1px #69b928 !important;
+    border-right: solid 1px #69b928 !important;
+}
+.nav-buyer-selected a {    
+    background: #fff !important;
+    border-top: solid 1px #69b928 !important;
+    border-left: solid 1px #69b928 !important;
+    border-right: solid 1px #69b928 !important;
+}
+#header {
+       background-repeat: no-repeat;
+       position: relative;
+       height: 80px;
+       line-height: 16px !important;
+       }
+       #logo {
+               position: absolute;
+               top: 8px;
+               left: 0px;
+               }
+       
+/* Navigation
+----------------------------------------------- */
+
+ul#menu {
+       position: absolute;
+       top: 40px; left: 250px;
+       width: 600px;
+       font-family: Arial, Verdana;
+       font-size: 14px;
+       margin: 0;
+       padding: 0;
+       list-style: none;
+       }
+ul#menu a:link, 
+ul#menu a:visited, 
+ul#menu a:active {
+       color: #535353;
+       text-decoration: none;
+       }    
+ul#menu a:hover {
+       color: #69b928;
+       text-decoration: none;
+       }       
+               ul#menu li {
+                       display: block;
+                       position: relative;
+                       float: left;
+                       }
+               ul#menu li ul { 
+                       display: none;                  
+                       border-left: solid 1px #69b928;
+                       border-right: solid 1px #69b928;
+                       border-bottom: solid 1px #69b928;
+                       }
+               ul#menu li a {
+                       display: block;
+                       text-decoration: none;
+                       color: #ffffff;
+                       padding: 5px 10px 5px 10px;
+                       white-space: nowrap;
+                       text-align: left;
+                       border-top: solid 1px transparent;
+                       border-left: solid 1px  transparent;
+                       border-right: solid 1px  transparent;
+                       }
+               ul#menu li a:hover { 
+                       background: #69b928; 
+                       }
+                       ul#menu li:hover ul { 
+                               display: block; 
+                               position: absolute;
+                               }
+                       ul#menu li:hover li { 
+                               float: none;
+                               font-size: 12px;
+                               }
+                       ul#menu li:hover a { 
+                               background: #fff; 
+                               border-top: solid 1px #69b928;
+                               border-left: solid 1px #69b928;
+
+
+                               border-right: solid 1px #69b928;
+                               }
+                               ul#menu li:hover li a { 
+                               background: #fff; 
+                               border-top: none;
+                               border-left: none;
+                               border-right: none;
+                               }
+                               
+                       ul#menu li:hover li a:hover {   
+                               background: #69b928; 
+                               color: #fff;
+                               }
+#footer {
+    font: 0.9em/16px verdana,helvetica,arial,sans-serif;
+    padding: 10 10 0 0;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 16px;
+    color: #535353;
+    background: #fff url('../../images/headerBg.jpg') repeat-x bottom left;
+    width: 800px;
+    height: 40px;
+
+}
+#footer a:link, #footer a:visited, #footer a:active {
+    color: #535353;
+    text-decoration: underline;
+}
+#footer a:hover {
+    color: #535353;
+    text-decoration: none;
+}
+
+.new-content{
+    padding: 80px 80px 80px 10px
+}
+
+
+
+

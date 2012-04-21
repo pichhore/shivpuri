@@ -1,0 +1,82 @@
+<fieldset id="study">
+  <div class="clr"></div>
+  <div class="select_list">
+    <label>Income Source:</label>
+    <p class="r">
+        <input type="text" value="<%= @application.profile.income_source %>" name="Income_source" id="Income_source" />
+    </p>
+  </div>
+  <div class="clr"></div>
+  <div class="select_list">
+    <label>School:</label>
+    <p class="r">
+        <input value="<%= @application.profile.school %>" type="text" name="School" id="School" />
+    </p>
+  </div>
+  <div class="clr"></div>
+  <div class="select_list">
+    <label>Course:</label>
+    <p class="r">
+        <input value="<%= @application.profile.course %>"  type="text" name="Course" id="Course" />
+    </p>
+  </div>
+  <div class="clr"></div>
+  <div class="select_list">
+    <label>Student Number:</label>
+    <p class="r">
+        <input value="<%= @application.profile.student_no %>" type="text" name="student_number" id="student_number" />
+    </p>
+  </div>
+  <div class="clr"></div>
+  <div class="select_list">
+    <label>Weekly Income:</label>
+    <p class="r">
+        <input value="<%= @application.profile.weekly_income %>" type="text" name="weekly_income" id="weekly_income" />
+    </p>
+  </div>
+  <legend>Guardian’s Contact Details</legend>
+  <div class="clr"></div>
+  <div class="select_list">
+    <label>First Name:</label>
+    <p class="r">
+        <input value="<%= @application.profile.guardian.first_name%>" type="text" name="gfirst_name" id="gfirst_name" />
+    </p>
+  </div>
+  <div class="clr"></div>
+  <div class="select_list">
+    <label>Last Name:</label>
+    <p class="r">
+        <input value="<%= @application.profile.guardian.last_name%>" type="text" name="glast_name" id="glast_name" />
+    </p>
+  </div>
+  <div class="clr"></div>
+  <div class="select_list">
+    <label>E-Mail Address:</label>
+    <p class="r">
+        <input value="<%= @application.profile.guardian.email%>" type="text" name="gemail" id="gemail" />
+    </p>
+  </div>
+  <div class="clr"></div>
+  <div class="select_list">
+    <label>Phone Number:</label>
+    <p class="r">
+        <input value="<%= @application.profile.guardian.phone_no%>" type="text" name="gPhone" id="gPhone" />
+    </p>
+  </div>
+  <div class="clr"></div>
+  <div class="select_list">
+    <label>Mobile Number:</label>
+    <p class="r">
+        <input value="<%= @application.profile.guardian.mobile_no%>" type="text" name="gmobile" id="gmobile" />
+    </p>
+  </div>
+  <div class="clr"></div>
+  <div class="select_list">
+    <label>Fax Number:</label>
+    <p class="r">
+        <label for="gFax">Fax Number</label>
+        <input value="<%= @application.profile.guardian.fax_no%>" type="text" name="gFax" id="gFax" />
+    </p>
+  </div>
+  <div class="clr"></div>
+</fieldset>

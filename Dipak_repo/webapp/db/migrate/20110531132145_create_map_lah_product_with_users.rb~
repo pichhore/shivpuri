@@ -1,0 +1,12 @@
+class CreateMapLahProductWithUsers < ActiveRecord::Migration
+  def self.up
+    create_table :map_lah_product_with_users do |t|
+
+      t.timestamps
+    end
+  end
+
+  def self.down
+    drop_table :map_lah_product_with_users
+  end
+end

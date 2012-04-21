@@ -1,0 +1,44 @@
+body{background:#4e76af; }
+*{ margin:0; padding:0;}
+.wapper{ width:960px; background:#FFF; font-family:Arial, Helvetica, sans-serif; margin:auto; padding:67px 0; font-size:12px; color:#222; font-size:13px;}
+.heading{ text-align:center; padding-bottom:60px;}
+.sapcer{ clear:both;}
+.leftcolum{ float:left; margin-left:81px; width:350px;}
+.colomright{ margin-right:22px; float:right; width:422px;}
+.flash{ padding-bottom:65px;}
+h1{ color:#4e76af; font-size:22px; text-align:center;}
+ul.bollet{ margin-top:20px;}
+ul.bollet li{ list-style:none; background:url(../images/liststyle.png) left 4px no-repeat; padding-left:20px; padding-bottom:18px;}
+.rightarrow{ background:url(../images/arrowriight.png) left 66px no-repeat;}
+.formtop{ background:#eff9fe url(../images/fromtop.png)  top no-repeat; }
+.formgre{ background:url(../images/formbg.png) bottom left repeat-x; padding-bottom:5px; padding-top:60px; text-align:center;}
+h2{ font-weight:normal; font-size:26px; color:#1a1b1c; font-family:Myriad_Pro;}
+.redtext{ color:#dd1615; text-decoration:underline;}
+.smalltext{ font-size:22px;}
+.magin{ margin:auto;}
+p{ text-align:left; font-size:14px;}
+p span{  font-size:18px; color:#739305;}
+
+.submitbutn{ background:url(../images/getinstant.png) no-repeat; width:273px; height:45px; margin:auto ; border:none; cursor:pointer;}
+.form{ font-size:15px;
+color:#1c79a6;}
+.textbox{ width:158px; height:20px; border:#b7c8d0 1px solid; padding:1px 3px;}
+#footer {
+    font-size: 12px;
+    margin: 0px;
+    padding: 1px 0 1px 0;
+    background: url("/images/investor_footer2.gif") top center no-repeat;
+    width: 800px;
+    height: 30px;
+    clear: both;
+    color: #fff;
+    line-height: 14px;
+}
+#footer a:link, #footer a:visited, #footer a:active {
+        color: #fff;
+    text-decoration: underline;
+        }
+#footer a:hover {
+        color: #fff;
+    text-decoration: none;
+        }

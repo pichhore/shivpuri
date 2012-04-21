@@ -1,0 +1,72 @@
+<%- @page_title = "Property Syndication" -%>
+<% require_js_controllers :tab, :account_settings -%>
+
+<%- content_for :page_scripts do -%>
+
+Event.observe(window, 'load', function() {
+account_settings_controller = new NL.AccountSettingsController();
+});
+
+<%- end -%>
+<div class="full">
+  
+  <div class="tabset larger">
+    <%=render :partial=>"account_tab", :locals=>{:active_class_syndication=>"active"}%>
+  </div>
+  <fieldset>
+    
+    <% if !@xml_output["sites"].nil? %>
+    
+    <% form_tag('/account/save_preferences') do %>
+    
+    <h3><input type="hidden" name="automatic" value="0" /> <%= check_box_tag "automatic", 1, checked = current_user.auto_syndication %>Automatic</h3><br/>
+    
+    <% all_enable = current_user.auto_syndication && @user_subscription == "Pro" %>
+        
+    <% sites = @site_users.map{|x| x.site_id} %>
+    <TABLE width='100%'>
+      <TR><TD width='65%'><%= image_tag("social_media/buttonFacebook.png") %></TD><TD><% if !current_user.fb_access_token || current_user.fb_access_token == '' %><%= link_to image_tag("social_media/fb-connect.jpg", :size => "93x24"), :action => 'facebook' %><img alt="Help_icon" src="/images/reimatcher_images/help_icon.png" title="Please click on this button to authenticate your facebook account and allow reimatcher for syndicating your properties on facebook."><% else %><%= link_to image_tag("social_media/fb-connected.jpg", :size => "93x24"), :action => 'facebook' %><img alt="Help_icon" src="/images/reimatcher_images/help_icon.png" title="Please click on this button to disconnect or reconnect your facebook account in case of any problems."><% end %>
+</TD></TR>
+      <TR><TD width='65%'><%= image_tag("social_media/buttonTwitter.png") %></TD><TD><% if !current_user.twitter %><%= link_to image_tag("social_media/tw-connect.jpg", :size => "93x24"), oauth_consumer_path('twitter') %><img alt="Help_icon" src="/images/reimatcher_images/help_icon.png" title="Please click on this button to authenticate your twitter account and allow reimatcher for syndicating your properties on twitter."><% else %><%= link_to image_tag("social_media/tw-connected.jpg", :size => "93x24"), oauth_consumer_path('twitter') %><img alt="Help_icon" src="/images/reimatcher_images/help_icon.png" title="Please click on this button to disconnect or reconnect your twitter account in case of any problems."><% end %></TD>
+</TR>
+      <% @xml_shorted = short_sites(@xml_output) %>
+      <% @xml_shorted.each do |site| %>
+	<% unless site["name"] == "Oodle Pro" %>
+      <TR>
+	<TD width='65%'><%= get_syndication_site_icon(site["name"]) %> </TD>
+	<TD><% unless @user_subscription == "Pro" %><%= check_box_tag "sites[#{site["id"]}]", site["id"], checked = all_enable || sites.include?(site["id"]) %>
+<% else %>
+<%= check_box_tag "sites[#{site["id"]}]", site["id"], checked = all_enable , :disabled => true, :readonly => true %>
+<% end %> </TD>
+      </TR>
+<% else %>
+<% if @user_subscription == "Pro" %>
+<TR>
+	<TD width='65%'><%= get_syndication_site_icon(site["name"]) %> </TD>
+	<TD><%= check_box_tag "sites[#{site["id"]}]", site["id"], checked = all_enable , :disabled => true, :readonly => true %></TD>
+</TR>
+<% end %>
+<% end %>
+      <% end %>
+<% if @user_subscription == "Pro" %>
+<TR>
+	<TD width='65%'><%= get_syndication_site_icon("facebook") %> </TD>
+	<TD><%= check_box_tag "fb_mp",100 , checked = all_enable , :disabled => true, :readonly => true %></TD>
+</TR>
+<TR>
+	<TD width='65%'><%= get_syndication_site_icon("pro-network") %> </TD>
+	<TD><%= check_box_tag "more_ws",101 , checked = all_enable , :disabled => true, :readonly => true %></TD>
+</TR>
+<% end %>
+    </TABLE>
+    <div style="margin-top: 10px" align="center">
+      <%= submit_tag "Update", :class => "submit_xl"%>
+    </div>
+    <% end %>
+    
+    <% else %>
+    <h4>No Sites to Syndicate</h4><br/>
+    <%= render "shared/syndication_sites"%>
+    <% end %>
+  </fieldset>
+</div>

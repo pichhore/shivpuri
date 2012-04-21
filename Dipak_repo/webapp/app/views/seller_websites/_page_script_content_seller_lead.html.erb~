@@ -1,0 +1,44 @@
+<%- content_for :page_scripts do -%>
+
+Event.observe(window, 'load', function() {
+  account_settings_controller = new NL.AccountSettingsController();
+});
+
+  function show_bankruptcy_in_coulmn()
+    {
+      $('show_on_bankruptcy_in').show();
+    }
+
+  function hide_bankruptcy_in_coulmn()
+    {
+      $('show_on_bankruptcy_in').hide();
+    }
+
+
+  function show_divorce_coulmn()
+    {
+      $('show_on_filed_divorce').show();
+    }
+
+  function hide_divorce_coulmn()
+    {
+      $('show_on_filed_divorce').hide();
+    }
+
+   function show_if_seller_is_not_owner()
+    {
+      $('display_owner_detail').show();
+    }
+
+   function hide_if_seller_is_owner()
+    {
+      $('display_owner_detail').hide();
+    }
+<%- end -%>
+
+<script type="text/javascript">
+	var dp_cal;
+window.onload = function () {
+	dp_cal  = new Epoch('epoch_popup','popup',document.getElementById('seller_profile_bankruptcy_expiration'));
+};
+</script>

@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+   <title>REIMatcher</title>
+   
+   <META NAME="robots" CONTENT="all, index, follow">
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   
+   <%=stylesheet_link_tag "reimatcher/main" %>
+   
+	<!--[if IE 6]>
+	<link href="css/ie-6.css" rel="stylesheet" type="text/css" media="screen" />
+	<![endif]-->
+	
+	<!--[if IE 7]>
+	<link href="css/ie-7.css" rel="stylesheet" type="text/css" media="screen" />
+	<![endif]-->
+	
+    <%#=javascript_include_tag "reimatcher/ie6pngifx", "fade" %>   
+    <%=javascript_include_tag "reimatcher/ie6pngifx", "fade" ,:cache => "cached/home_all"%>
+	<link rel="icon" href="/favicon.png" type="image/png"/>
+
+	
+
+	<style type="text/css">
+	  .notice {
+	  margin-left: 50px;
+	  margin-right: 50px;
+	  margin-bottom: 5px;
+	  margin-top: 15px;
+	  padding: 5px;
+	  text-align: center;
+	  color: #008800;
+	  background: #ccffcc;
+	  border-top: 1px solid #008800;
+	  border-bottom: 1px solid #008800;
+	  font-size: 1.2em;
+	  }
+	</style>
+	
+</head>
+
+<body>
+  <% if RAILS_ENV == 'production' %>
+  <%= clicktale_top %>
+  <% end %>
+<div id="container">
+
+  	<div id="header">
+	
+
+			<a href="/"><img src="/images/biglogo.png" alt="REI Matcher" width="540" height="149" style="float: none"/></a>
+  	</div><!--end header-->
+	<div id="notice" class="notice" <%="style=\"display:none\"" if !flash[:notice]%>><%=flash[:notice]%></div>	
+  	<div id="main">
+	  <div class="lpo_1">The REIMatcher Platform is only available through<br/>the Mortgage Assignment Profit System...<br />We've reopened the doors on this amazing product,<br />but <font style="text-decoration:underline">only until May 12, 2011</font>.</div>
+        <div>
+  	  <div align="center">
+            <p><%= link_to image_tag("/images/btnIWantIn.jpg", :alt=>"I Want In",:style=>"width:296px; height:61px;"),"#", :onclick=>"countDown()" %></p>
+            </div>
+  		</div>
+	<div class="lpo_1">Watch How This System Works<br />and Why Experienced Investors Are Moving To It<br />in Today's Market...</div>
+	<div class="lpo_1" id="timer"></div>
+
+
+
+  		
+  		<div id="box">
+	    <h2>Hi, we're REI Matcher</h2>
+			<p>We had one mission when we created REIMatcher, and that was...To Build the System we wished we'd had when we began investing...with Rich, Powerful Tools that will put your business on Autopilot & Fuel faster Success in a shorter period of time.</p>
+			<p>We're an Investing platform that was developed from the ground up by Real Estate Investors...for Real Estate Investors. We love Investing...we love Technology...and we love Helping People Succeed. If you want to take it to the next level, using "plug-in and it works" automation...this is the system for you.</p>
+
+  		</div>
+  		
+  		
+  		
+	 </div><!--end main-->
+  	
+  
+    <div id="footer">
+    	&copy;Copyright 2010-2011 REI Technologies LLC <br />
+		<%- if logged_in? -%>
+        <%=link_to "Privacy",:controller=>"home", :action=>"privacy" %> |
+        <%=link_to "Terms of Use",:controller=>"home", :action=>"terms_of_use"%> |
+        <%- if logged_in? -%><%=link_to "Dashboard", '/account/profiles' %><% else %><%=link_to "Dashboard", '/login' %><% end %> |
+        <%=link_to "Support", :controller=>"home", :action=>"support" %>
+		<% end %>
+  	</div><!--end footer-->
+  
+  
+</div><!--end container-->
+
+<script type="text/javascript">
+   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+   document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+  <script type="text/javascript">
+<%- if RAILS_ENV == "production" -%>
+   var pageTracker = _gat._getTracker("UA-2786879-8");
+<%- else -%>
+   var pageTracker = _gat._getTracker("UA-2786879-4");
+<%- end -%>
+   pageTracker._initData();
+   <%- if @content_for_track_page_view -%>
+     <%=@content_for_track_page_view%>
+   <%- else -%>
+   pageTracker._trackPageview();
+   <%- end -%>
+
+   <%- if @content_for_google_analytics_script -%>
+     <%=@content_for_google_analytics_script%>
+   <%- end -%>
+  </script>
+
+  <%- if @controller.controller_name == "home" and @action_name == "index" -%>
+  <script type="text/javascript" src="http://cetrk.com/pages/scripts/0007/4869.js"> </script>
+  <%- end -%>
+
+
+<script src="http://static.getclicky.com/53394.js" type="text/javascript"></script>
+
+        <script type="text/javascript">
+	  setTimeout("new fade('notice');", 10000);
+	</script>
+<% if RAILS_ENV == 'production' %>
+<%= clicktale_bottom %>
+<% end %>
+</body>
+<script language="JavaScript" type="text/javascript">  
+  var count =20  
+  var redirect="https://loveamerican.infusionsoft.com/go/landing/dflowe/"  
+  
+  function countDown(){  
+  if (count <=0){  
+	       window.location = redirect;  
+	       }else{  
+  count--;  
+	       document.getElementById("timer").innerHTML = "<br />Site will redirect in "+count+" seconds."  
+	       setTimeout("countDown()", 1000)  
+	       }  
+	       }  
+	       </script>  
+</html>

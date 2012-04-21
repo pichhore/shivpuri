@@ -1,0 +1,18 @@
+<h1>Listing buyer_user_images</h1>
+
+<table>
+  <tr>
+  </tr>
+
+<% for buyer_user_image in @buyer_user_images %>
+  <tr>
+    <td><%= link_to 'Show', buyer_user_image %></td>
+    <td><%= link_to 'Edit', edit_buyer_user_image_path(buyer_user_image) %></td>
+    <td><%= link_to 'Destroy', buyer_user_image, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New buyer_user_image', new_buyer_user_image_path %>

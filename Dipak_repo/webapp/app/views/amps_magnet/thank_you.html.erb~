@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Sell Your House Fast, Even With Little or No Equity</title>
+<%= stylesheet_link_tag "amps_sp3", "amps_commons_#{@color}" %>
+</head>
+
+<body>
+<div id="wrap">
+	<div id="header">
+		<div id="wrap-top">
+                       <% if @seller_magnet.thankyou_page_headline.blank? || @seller_magnet.thankyou_page_headline == 'A Member of Our Network Will Be Contacting You Soon!'%>
+			<h1>A <span class="orange">Member</span> of Our Network will be Contacting You Soon!</h1>
+                       <% else %>
+		        <h1><%= strip_tags(@seller_magnet.thankyou_page_headline) %></h1>
+                       <% end %>
+		</div>
+	</div>
+	
+	<div id="content">
+		<p class="special-text" style="padding: 0px; margin: 0 82px 0 90px; font-size: 17px;"><strong><%= strip_tags(@seller_magnet.thankyou_page_copy) %></strong></p>
+		
+		<div id="screen">
+			<div id="screen-inner">
+                        <center><div id="evp-cb8f06828e5268a24f1c25b107028ba9-wrap" class="evp-video-wrap"></div><script type="text/javascript" src="http://www.damonflowers.com/evp/framework.php?div_id=evp-cb8f06828e5268a24f1c25b107028ba9&id=QU1QUy1tYWduZXQtMi1waGlsbG1hcmtxYS5tb3Y%3D&v=1320771036&profile=default"></script><script type="text/javascript"><!--
+_evpInit('QU1QUy1tYWduZXQtMi1waGlsbG1hcmtxYS5tb3Y=[evp-cb8f06828e5268a24f1c25b107028ba9]');//--></script></center>
+                        </div>
+		</div>
+		
+		<div id="left">
+<p>A member of our network will contact you at the phone number or email address you provided.  They will walk through some questions with you to better understand your situation and let you know if you qualify for this program.</p>
+<p>If you do qualify, we will setup a time to meet and discuss next steps.</p>
+<p>If you do not qualify, we still may be able to help you by buying your home direct or using additional solutions offered within our network.  We'll be able to guide you better after we've had a chance to speak.</p>
+<p>We look forward to speaking further!</p>
+		</div>
+		
+		<div id="right">
+			
+			<div id="bluebox">
+				<div class="corner"></div>
+				<p><strong>Get Your Homeowners Guide to Assignment of Mortgage Payments Program Right Here</strong></p>
+				<p class="center-text"><a href="http://reimatcher.com.s3.amazonaws.com/seller/AMP-Homeowner-Guide.pdf" target="_blank"><img src="/images/amps_magnet/btn-download.png" width="242" height="63" alt="Download" /></a></p>
+			</div>
+
+		</div>
+		
+		<div class="clear"></div>
+		
+	</div>
+	
+	<div id="wrap-bottom"></div>
+</div>
+</body>
+</html>

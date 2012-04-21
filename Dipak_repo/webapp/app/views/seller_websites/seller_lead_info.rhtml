@@ -1,0 +1,28 @@
+<%- @page_title = "My Seller Leads" -%>
+<%- content_for :page_scripts do -%>
+
+
+
+ function go_to_seller_full_page_view(full_page_view_path)
+      {
+          document.location.href = full_page_view_path
+      }
+  
+<% end %>
+<div class="full">
+  <div class="left" style="width:75%;">
+    <% form_for(:seller_profile, :url => {:controller=>'seller_websites', :action=>'seller_lead_info'}) do |f| %>
+    Choose Existing Seller: <%= text_field_with_auto_complete :seller_profile, :name, { :size => 30, :value => @search } %>
+ OR
+ <%=link_to "Add New Seller",:controller => "seller_websites", :action => "add_new_seller", :profile_id=>params[:id]%>
+<% end %>
+  </div>
+  <fieldset>
+ <div style="display:none;margin-left:205px;" class="loading" id="spinner"><span class="text">Loading...</span></div>
+  <div id="ajax_update_div">
+     <% form_for(:seller_profile, :url => {:controller=>'seller_websites', :action=>'assign_existing_seller_lead'}) do |f| %>
+      <%= render :partial=>"seller_lead_management_for_existing_seller"%>
+    <% end %>
+  </div>
+  </fieldset>
+</div>

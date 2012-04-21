@@ -1,0 +1,27 @@
+<%-
+   style_if_new_value = style_if_new(profile_message_recipient)
+-%>
+  <div id="msg_<%= profile_message_recipient.id %>" class="message <%=style_if_new_value%>" uri="<%=url_for(profile_conversation_path(@profile, profile_message_recipient.from_profile))%>">
+      <div class="column1">
+        <%=render_thumbnail(profile_message_recipient.from_profile, {:class=>"image"}) %>
+      </div>
+      <div class="columns">
+        <div class="column2"><b><span><%=truncate(profile_message_recipient.display_from_profile_name,:length => 25)%></span></b></div>
+        <div class="column3"><b><span><%=profile_message_recipient.display_from_profile_type%></span></b></div>
+        <div class="column4"><b><span><%=profile_message_recipient.display_sent_at%></span></b></div>
+      </div>
+      <div class="description"><span class="description_text" style="font-size: 1.2em">
+        <%=link_to "Go to Conversation", profile_conversation_path(@profile, profile_message_recipient.from_profile)+'?message_filter='+@message_filter%>
+      </span></div>
+      <div class="description"><span class="description_text" style="font-size: 1.2em">
+        <%=style_if_new_value == "new" ? image_tag("icons/icon_message_24.gif", :align=>"top", :mouseover=>"/images/icons/icon_mail_hover.jpg") : image_tag("icons/icon_mail_open_24.gif", :align=>"top")%> <%= style_if_new_value == "new" ? "<strong>" : ""%><%=style_if_new_value == "new" ? "New" : "Latest"%> Message -<%= style_if_new_value == "new" ? "</strong>" : ""%> <%=truncate(profile_message_recipient.display_subject, :length => 35)%></span>
+      </div>
+     <%- if (@profile_type.buyer? or @profile_type.buyer_agent?) and !profile_message_recipient.archived? -%>
+        <%= link_to_remote image_tag("active_scaffold/default/close.gif", :class=>"message_close",:alt=>"Archive this conversation", :title=>"Archive this conversation"), 
+         :url => { :controller=>"/profile_messages", :action=>"archive", :id=>profile_message_recipient },
+         :success => visual_effect(:blind_up, "msg_#{profile_message_recipient.id}", :direction=>'top-right'),
+         :failure => "alert('Error archiving conversation.  Please try again.')"
+        %>
+      <%- end -%>
+      <div class="clear"></div>
+  </div>

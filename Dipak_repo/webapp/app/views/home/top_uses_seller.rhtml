@@ -1,0 +1,109 @@
+<%- @page_title = "10 Reasons to Post your Home For Sale in the Austin Real Estate Dwellgo Community" -%>
+<%- @page_heading = "10 Reasons to Sell your Property Using Dwellgo" -%>
+<%- @meta_description = "Dwellgo is the best way to post your home or property for sale and reach buyers in the Austin Metro area enabling communication with buyers directly" -%>
+<%- @meta_keywords = "sell austin real estate, austin fsbo, austin for sale by owner, real estate in Austin, dwellgo" -%>
+<%- @page_title_h1 = "Post your home for sale in the Austin Real Estate Dwellgo Community" -%>
+<%- @page_title_h1_class = "smaller" -%>
+
+<%- content_for :title_ad do -%>
+  <div class="language"><%=link_to "English", :action=>"top_uses_seller"%> / <%=link_to "Español", :action=>"top_uses_seller_es"%><br/><br/></div>
+<%- end -%>
+
+<%- content_for :page_styles do -%>
+<style>
+.reasons p {
+  font-size: 1.2em;
+}
+
+.left h1.smaller {
+  font-size: 1.1em;
+  color: #858383;
+}
+
+.left h3.normal {
+  font-size: 1.4em;
+}
+
+.right .stats {
+  font-size: 1.2em;
+}
+
+.right .date {
+  font-size: 0.9em;
+}
+
+.right h1 {
+  background: #6C757A  url(/images/corner.gif) no-repeat top right;;
+  color: #FFF;
+  padding: 3px 0 3px 5px;
+  font: bold 1.0em Tahoma, Arial, Sans-Serif;
+  margin: 0 0 3px 0;
+  text-align: center;
+}
+
+</style>
+<%- end -%>
+
+<div class="left reasons">
+
+  <p><%=image_tag "numbers/1.gif", :style=>"vertical-align: middle"%> The community is free!</p>
+  <p><%=image_tag "numbers/2.gif", :style=>"vertical-align: middle"%> Takes 2 minutes to add your property</p>
+  <p><%=image_tag "numbers/3.gif", :style=>"vertical-align: middle"%> Communicate with Buyers directly</p>
+  <p><%=image_tag "numbers/4.gif", :style=>"vertical-align: middle"%> See which buyers have viewed your property</p>
+  <p><%=image_tag "numbers/5.gif", :style=>"vertical-align: middle"%> Expose your property without disclosing the Address</p>
+  <p><%=image_tag "numbers/6.gif", :style=>"vertical-align: middle"%> Manage all properties and Buying Profiles under one login</p>
+  <p><%=image_tag "numbers/7.gif", :style=>"vertical-align: middle"%> Receive personal messages from Buyers via email</p>
+  <p><%=image_tag "numbers/8.gif", :style=>"vertical-align: middle"%> Reveal Contact Information only when you're ready</p>
+  <p><%=image_tag "numbers/9.gif", :style=>"vertical-align: middle"%> Dwellgo is the #1 community for Austin Real Estate</p>
+  <p><%=image_tag "numbers/10.gif", :style=>"vertical-align: middle"%> We have buyers waiting...for you!</p>
+
+</div>
+
+
+<div class="right">
+
+  <h1>Austin Real Estate Community</h1>
+  <div class="right_articles legend">
+
+    <p class="date">Today is <%=Time.now.strftime("%B %d, %Y")%></p>
+    <div class="stats">
+      <table width="100%">
+
+        <tr>
+          <td><%=@community_stats.active_buyers%> Buyers</td>
+        </tr>
+
+        <tr>
+          <td><%=@community_stats.property_count%> Properties</td>
+        </tr>
+
+      </table>
+
+    </div>
+
+ </div>
+
+ <div>
+  <% form_tag({:controller=>"profiles", :action=>"new", :id=>"owner"}) do -%>
+  <p align="center" style="padding-top: 10px"><%=submit_tag "Create Property Profile", :class=>"submit_xl"%></p>
+  <% end -%>
+ </div>
+
+
+
+</div>
+
+<div class="left">
+
+  <h3 class="normal">Example Buyers</h3>
+
+  <%=image_tag "buyer_profile.jpg"%>
+  <%=image_tag "buyer_profile2.jpg"%>
+
+</div>
+
+
+<div class="right">
+
+
+</div>

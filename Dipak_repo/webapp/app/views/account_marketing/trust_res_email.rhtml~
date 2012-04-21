@@ -1,0 +1,50 @@
+        <%= render :partial => "marketing_links" %>
+   <fieldset id="email_intro">
+
+<div id="left_navigation" style="float:left; width:222px;">
+        <%= render :partial => "responder_links" %>
+</div>
+
+<%- form_for(:buyer_notification, :url => {:controller=>'account_marketing', :action=>'update_marketing_page'}, :html => { :method => :post }) do |f| -%>
+<div id="right_navigation" style=" float:right; width:527px;">
+  <table>
+    <tr>
+      <td><h3>Buyer Trust Responder Series</h3></td>
+    <tr>
+      <td>
+        The Buyer Trust Responder Series is a 7 part email series, delivered to the Buyer.  It's purpose is to built trust between the buyer and you, by delivering great content and answering some of the common questions regarding Owner Finance transactions.<br><br>    Once activated, one Trust Responder email will be sent the next day after a retail buyer either completes a Buyer Profile or Opts-in to one of your Squeeze Pages.  Emails are sent every other day, until the series is complete.  <br><br>
+      </td>
+    </tr>
+    <tr>
+      <td>
+	<%= f.check_box "trust_responder_series" %> Activate
+      </td>
+    </tr>
+    <tr>
+      <td>
+        To view an email, simply click one of the links below: <br><br><a href='#' onclick="document.getElementById('trust_responder_mail1').style.display='block';">Email1</a><br><a href='#' onclick="document.getElementById('trust_responder_mail2').style.display='block';">Email2</a><br><a href='#' onclick="document.getElementById('trust_responder_mail3').style.display='block';">Email3</a><br><a href='#' onclick="document.getElementById('trust_responder_mail4').style.display='block';">Email4</a><br><a href='#' onclick="document.getElementById('trust_responder_mail5').style.display='block';">Email5</a><br><a href='#' onclick="document.getElementById('trust_responder_mail6').style.display='block';">Email6</a><br><a href='#' onclick="document.getElementById('trust_responder_mail7').style.display='block';">Email7</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= f.hidden_field "summary_type", :value => session[:summary_type] || (!@buyer_notification.summary_type.blank? ? @buyer_notification.summary_type : (!params[:id].blank? ? params[:id] : "welcome")) %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan=2"">
+        <span style="color:red;">Note:</span>
+        This email series contains an affiliate link to an eBook on Owner Financing, which has been provided by a recommended 3rd party.
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center">
+          <%=submit_tag "Update Settings", :class=>'submit_xl' %>            
+      </td>
+    </tr>
+  </table>
+</div>
+<div style="clear:both"></div>
+<div id="email_intro">
+</div>
+<% end %>
+  </fieldset>

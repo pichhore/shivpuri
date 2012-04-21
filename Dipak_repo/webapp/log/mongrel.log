@@ -1,0 +1,17 @@
+** Daemonized, any open files are closed.  Look at /home/rajiv_work/reim-redux/webapp/tmp/pids/mongrel.pid and log/mongrel.log for info.
+** Starting Mongrel listening at 0.0.0.0:3000
+** Starting Rails with bug environment...
+/home/rajiv_work/reim-redux/webapp/config/../vendor/rails/railties/lib/initializer.rb:206:in `read': No such file or directory - /home/rajiv_work/reim-redux/webapp/config/environments/bug.rb (Errno::ENOENT)
+	from /home/rajiv_work/reim-redux/webapp/config/../vendor/rails/railties/lib/initializer.rb:206:in `load_environment'
+	from /home/rajiv_work/reim-redux/webapp/vendor/rails/activerecord/lib/../../activesupport/lib/active_support/core_ext/kernel/reporting.rb:11:in `silence_warnings'
+	from /home/rajiv_work/reim-redux/webapp/config/../vendor/rails/railties/lib/initializer.rb:199:in `load_environment'
+	from /home/rajiv_work/reim-redux/webapp/config/../vendor/rails/railties/lib/initializer.rb:91:in `process'
+	from /home/rajiv_work/reim-redux/webapp/config/../vendor/rails/railties/lib/initializer.rb:49:in `send'
+	from /home/rajiv_work/reim-redux/webapp/config/../vendor/rails/railties/lib/initializer.rb:49:in `run'
+	from /home/rajiv_work/reim-redux/webapp/config/environment.rb:29
+	from /usr/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+	 ... 10 levels...
+	from /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/command.rb:212:in `run'
+	from /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/mongrel_rails:281
+	from /usr/bin/mongrel_rails:19:in `load'
+	from /usr/bin/mongrel_rails:19

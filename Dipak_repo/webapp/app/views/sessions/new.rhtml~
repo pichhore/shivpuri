@@ -1,0 +1,69 @@
+<%- @page_title = "Sign-in to your Account as a REIMatcher Community Member" -%>
+<%- @page_heading = "Sign-in to your account" -%>
+<%- @meta_description = "Add your property or become a buyer in the REIMatcher Community for Austin Real Estate, Texas – where property owners and buyers meet in the Austin Metro Area" -%>
+<%- @meta_keywords = "Austin real estate, Austin metro area, real estate, Texas, REIMatcher" -%>
+<%- content_for :page_scripts do -%>
+Event.observe(window, 'load', function() {
+$('login').focus();
+});
+<%- end -%>
+<style>
+.page_title {
+background:none repeat scroll 0 0 transparent;
+margin-top:10px;
+padding:0 0 1em 216px;
+}
+.remember_me_div{font:0.9em/1.5em Tahoma,sans-serif; float:left;}
+</style>
+    <div class="form" style="width:430px; margin-left:220px;">
+        <% form_tag sessions_path do -%>
+        <fieldset>
+            <table style="width:400px;">
+                <tr>
+                    <th>
+                        Email:
+                    </th>
+                    <td>
+                        <%= text_field_tag 'login', "", :style=>"width:231px;" %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Password:
+                    </th>
+                    <td>
+                        <%= password_field_tag 'password', "", :style=>"width:231px;" %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        &nbsp;
+                    </th>
+                    <td>
+                      <div class="remember_me_div">Remember Me: <%= check_box_tag 'remember_me' %></div>
+                      <div style="float:left; width:67px;position:relative;left:57px;">
+                      <%=submit_tag "Login", :class=>"submit" %></div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        &nbsp;
+                    </th>
+                     <td style="padding-left: 104px;">
+                        <%= link_to "Forgot your password?", :controller=>'account', :action=>'forgot_password' %>
+                    </td>
+                </tr>
+            </table>
+            <!-- Uncomment this if you want this functionality
+            <p><label for="remember_me">Remember me:</label>
+            <%= check_box_tag 'remember_me' %></p>
+            -->
+        </fieldset>
+        <% end -%>
+    </div>
+<!--
+<div class="split_right">
+<h3>Not a community member yet?</h3>
+<p><%=link_to "Add Your Property", :controller=>"profiles", :action=>"new", :id=>"owner"%> or <%=link_to "Become a Buyer", :controller=>"profiles", :action=>"new", :id=>"buyer"%></p>
+</div>
+-->

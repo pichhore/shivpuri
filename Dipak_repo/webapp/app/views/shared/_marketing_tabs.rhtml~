@@ -1,0 +1,9 @@
+  <div class="tabset larger">
+    <ul>
+      <li class="linkable" uri="<%=url_for({:controller=>'account', :action=>'settings'})%>">Investor Profile</li>
+      <li class="linkable" uri="<%=url_for({:controller=>'account', :action=>'company_info'})%>">Company Info</li>
+      <li class="linkable" uri="<%=url_for({:controller=>'account', :action=>'buyer_webpage'})%>">Buyer Websites</li>
+      <li class="linkable" uri="<%=url_for({:controller=>'account_marketing', :action=>'welcome_email'})%>">Buyer Responder</li>
+      <li class="linkable active" uri="<%=url_for({:controller=>'account', :action=>'digest_frequency'})%>">Alerts</li>
+    </ul>
+  </div>

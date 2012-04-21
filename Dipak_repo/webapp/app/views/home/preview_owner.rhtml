@@ -1,0 +1,45 @@
+<%- @page_title = @target_profile.display_name -%>
+<%- @page_icon_style = 'icon_seller_profile' -%>
+<%- @include_gmap_header = true -%>
+<%- @meta_keywords = "dwellgo, #{@target_profile.display_property_address_with_zip}" -%>
+<%- @meta_description = "dwellgo - Photos, maps, description for #{@target_profile.display_property_address_with_zip}. Search homes for sale, get school district and neighborhood info for #{@target_profile.display_zip_code} – where property and buyers meet" -%>
+
+<% content_for :page_styles do -%>
+<%=stylesheet_link_tag "lightbox"%>
+<% end -%>
+
+<% require_js_controllers :preview_profile, :profile_image_view, :streetview, :public_profile -%>
+
+
+<% content_for :page_scripts do -%>
+    Event.observe(window, 'load', function() {
+    <%- if @profile -%>
+      public_profile_controller = new NL.PublicProfileController("<%=url_for new_profile_profile_message_path(@profile)%>?target_profile_type=<%= @target_profile_type.permalink %>&profile_message_form[send_to][]=indiv&profile_message_form[indiv_profile_id]=<%=@target_profile.id%>&<%=encode_return_dashboard_params%>");
+    <% elsif !params[:investor_full_page].blank?%>
+      public_profile_controller = new NL.PublicProfileController("<%=url_for new_community_profile_profile_message_path('ask')%>?ref=<%= params[:ref] %>&target_profile_type=<%= @target_profile_type.permalink %>&profile_message_form[send_to][]=indiv&profile_message_form[indiv_profile_id]=<%=@target_profile.id%>&investor_full_page=<%=params[:investor_full_page]%>&state_code=<%= params[:state_code]%>&user_territory_id=<%= params[:user_territory_id]%>&search_investor=<%= params[:search_investor] %>&page_number=<%= params[:page_number]%>");
+    <%- elsif logged_in? -%>
+      public_profile_controller = new NL.PublicProfileController("<%=url_for new_community_profile_profile_message_path('ask')%>?ref=<%= params[:ref] %>&target_profile_type=<%= @target_profile_type.permalink %>&profile_message_form[send_to][]=indiv&profile_message_form[indiv_profile_id]=<%=@target_profile.id%>&<%=encode_return_dashboard_params%>");
+    <%- else -%>
+      public_profile_controller = new NL.PreviewProfileController("<%=url_for(:controller=>'profiles', :action=>'new_buyer_zipselect', :id=>params[:type], :zip_code=>@target_profile.zip_code)%>");
+    <%- end -%>
+      profile_image_view_controller = new NL.ProfileImageViewController($$('#dashboard div.thumbnail img')[0], $$('#dashboard div.thumbnail_selector img.micro'));
+	});
+
+<% end -%>
+<div class="full">
+<div class="loading" style="display:none"><span class="text">Loading...</span></div>
+</div>
+
+<div class="left">
+<%=render :partial=>'/shared/public_owner_profile'%>
+</div>
+
+<div style="display:none;" id="overlay_Streetview"/>
+<div style="display:none;" id="lightbox_Streetview" style="width: 60%;">
+	<div id="streetview_header">
+		<a href="#" id="streetview_close"><img src="/images/active_scaffold/default/close.gif"/></a>
+	</div>
+	<div id="streetview_contents"/>
+  <style>
+  .left{ margin:0px 0px 0px 0px!important; padding: 0px!important;}
+  </style>

@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Sell Your House Fast, Even With Little or No Equity</title>
+  <%= stylesheet_link_tag "amps_sp1", "amps_commons_#{@color}" %>
+  <%= javascript_include_tag :defaults %>
+</head>
+<body>
+
+<script type="text/javascript">
+Event.observe(window, 'load', function() {
+  Event.observe('cold_lead_form', 'submit', checkForm);
+
+  function checkForm(e){
+    alert_message = "";
+    if($('seller_property_beds').value == ""){
+      alert_message += "Choose # of beds\n";
+    }
+    if($('seller_property_baths').value == ""){
+      alert_message += "Choose # of baths\n";
+    }
+
+    zip_code = $('seller_property_zip_code').value;
+    if(zip_code == ""){
+      alert_message += "Zip can't be blank\n";
+    }
+    else {
+      var reg = /(^(\d{5})$)|(^[A-Za-z0-9]{3} [A-Za-z0-9]{3}$)/;
+      if(reg.test(zip_code) == false) {
+        alert_message += "Invalid zip code.\n";
+      }
+    }
+
+    if($('seller_profile_first_name').value == ""){
+      alert_message += "First name can't be blank\n";
+    }
+
+    email = $('seller_profile_email').value;
+    if( email == ""){
+      alert_message += "EMail can't be blank\n";
+    }
+    else {
+      var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+      if(reg.test(email) == false) {
+        alert_message += "Invalid EMail address\n";
+      }
+    }
+
+    if(alert_message != ""){
+      alert(alert_message);
+      Event.stop(e);
+    }
+  }
+});
+</script>
+
+<style>
+.nice label{
+ width: 100px;
+}
+</style>
+
+<div id="wrap">
+
+	<div id="header">
+                <% if @seller_magnet.landing_page_headline.blank? || @seller_magnet.landing_page_headline == "Sell your home FAST at NO COST and NO HARM to your credit (in weeks not months)!"%>
+		<h1>Sell your home Fast at <span class="orange">NO COST</span> and <span class="orange">NO HARM</span> to your credit (in weeks not months)!</h1>
+                 <% else %>
+		<h1><%= strip_tags(@seller_magnet.landing_page_headline) %></h1>
+                <% end %>
+	</div>
+	
+	<div id="content" class="content_<%=@color%>">
+		<div id="screen">
+			<div id="screen-inner"><img src="/images/amps_magnet/home-image.jpg" /></div>
+		</div>
+		
+		<div id="right">
+			<h1><em>Find OUT HOW MANY Buyers Match Your Home</em></h1>
+<%- form_for(:seller_profile, :url => {:controller=>"amps_magnet", :action=>"create_cold_lead",:permalink_text=>params[:permalink_text]}, :before => "alert('hello');", :html => { :method => :post, :class=> "nice", :id => "cold_lead_form" }) do |f| -%>
+<% if @seller_profile %>
+  <%= hidden_field_tag 'seller_profile_id', @seller_profile.id %>
+<% end %>			
+				<div id="bluebox">
+					<div class="corner" ></div>
+
+					<div class="form-row">
+						<label for="beds">Beds:<span style="color:red"> *</span></label>
+          <%= select("seller_property", "beds", [["--Beds--", ""], ["1", 1], ["2", 2], ["3", 3], ["4", 4], ["5", 5], ["6", 6], ["7", 7], ["8", 8], ["9", 9], ["10", 10]], {}, {:class => "nice-select"}) %>
+					</div>
+					
+					<div class="form-row">
+						<label for="baths">Baths:<span style="color:red"> *</span></label>
+                                  <%= select("seller_property", "baths", [["--Baths--", ""], ["1", 1], ["1 1/2", 1.5], ["2", 2], ["2 1/2", 2.5], ["3", 3], ["4", 4], ["5", 5], ["6", 6]], {}, {:class => "nice-select"}) %>
+					</div>
+					
+					<div class="form-row">
+						<label for="zip">Zip Code:<span style="color:red"> *</span></label>
+                                                 <%=text_field "seller_property", "zip_code" , :class => "nice-field" %>
+					</div>
+					
+					<div class="form-row">
+						<label for="fname">First Name:<span style="color:red"> *</span></label>
+                                                <%=text_field "seller_profile", "first_name" , :class => "nice-field" %>
+					</div>
+					
+					<div class="form-row">
+						<label for="email">Email:<span style="color:red"> *</span></label>
+                                                <%=text_field "seller_profile", "email" , :class => "nice-field" %>
+					</div>
+				
+				</div>
+				
+				<p class="center-text"><input type="image" src="/images/amps_magnet/btn-go.png" /></p>
+				
+			 <%- end -%>
+		</div>
+	</div>
+    <%= render :partial => "/shared/amps_footer" %>
+	
+</div>
+</body>
+</html>

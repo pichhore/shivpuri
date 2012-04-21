@@ -1,0 +1,49 @@
+  <div style="margin-bottom: 15px;">
+    <b>Product ID's: </b>
+    <div class="admin_tip">Enter the product_id if you want to set alert according to the product</div>
+    <%= f.text_field :product_ids, :size=> 40 %>
+      <%=error_message_on :user_email_alert_definition,:product_ids %>
+  </div>
+  
+  <div style="margin-bottom: 15px;">
+    <%= f.radio_button "email_type", "welcome_reminder" %> New
+    <%= f.radio_button "email_type", "existing_welcome_reminder_email" %> Existing
+  </div>
+
+  <div style="margin-bottom: 15px;">
+    <b>Delay: </b>
+    <div class="admin_tip">For time-based triggers, indicate how many days before the event to create the Alert.</div>
+    <div><%= f.text_field :trigger_delay_days, :size=>6 %>
+      <%=error_message_on :user_email_alert_definition,:trigger_delay_days %>
+    </div>
+  </div>
+
+  <div style="margin-bottom: 15px;">
+    <b>Email Subject: </b>
+	<div class="admin_tip"></div>
+    <%= f.text_field :email_subject, :size=>80 %>
+      <%=error_message_on :user_email_alert_definition,:email_subject %>
+  </div>
+
+  <div style="margin-bottom: 15px;">
+    <b>Message Body: </b>
+  <div>Personalize Variables: [User First Name], [User Last Name], [User Full Name], [User Email], [User Login], [User Activation Link]</div>
+	<div class="admin_tip"></div>
+    <%= f.text_area :message_body, :class=>"rich_text_editor", :size=> "80x4" %>
+      <%=error_message_on :user_email_alert_definition,:message_body %>
+  </div>
+
+  <div style="margin-bottom: 15px;">
+    <b>Title: </b>
+    <div class="admin_tip">The title is displayed as the header of the alert message.</div>
+    <%= f.text_field :title, :size=> 40 %>
+      <%=error_message_on :user_email_alert_definition,:title %>
+  </div>
+  
+  <div style="margin-bottom: 15px;">
+    <b>Disabled: </b>
+    <div class="admin_tip">Disable the alert until you are ready to release it.
+      <%= f.check_box :disabled %>
+      <%=error_message_on :user_email_alert_definition,:disabled %>
+    </div>
+  </div>

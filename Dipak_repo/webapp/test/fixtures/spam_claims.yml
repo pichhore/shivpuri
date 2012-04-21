@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: 1
+  claim_type: MyString
+  claim_id: MyString
+  created_by_user_id: MyString
+two:
+  id: 2
+  claim_type: MyString
+  claim_id: MyString
+  created_by_user_id: MyString

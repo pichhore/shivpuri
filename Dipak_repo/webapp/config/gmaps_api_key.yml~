@@ -1,0 +1,30 @@
+# key is for localhost:3000 (development+test), will need to add actual URL key for production
+
+development:
+  # Following key is for http://reimatcher.com 
+  # ABQIAAAAzMUFFnT9uH0xq39J0Y4kbhTJQa0g3IQ9GZqIMmInSLzwtGDKaBR6j135zrztfTGVOm2QlWnkaidDIQ
+  
+  # Following key is generated for http://208.78.97.33
+  ABQIAAAAROHbRl0JnXVAYv7maFF8HxQxZgyBgzW7DU4iwi_Rq_QwjbTEZxSUEd5xO5ZMbfNY6JwDUEnWGE37TA
+
+vmhost:
+  ABQIAAAA2QSaVjmsU8axtp79_mnGARTtNatFpDsea9EWALF1ZSSjXCB57hQRgOV3qiZykwaVx1qbcJ5LkKVBwA
+
+test:
+  ABQIAAAAzMUFFnT9uH0xq39J0Y4kbhTJQa0g3IQ9GZqIMmInSLzwtGDKaBR6j135zrztfTGVOm2QlWnkaidDIQ
+
+staging:
+#  ABQIAAAAy3ZQYLx-KAADPmM341HhJBT1SFO1ZRRUUerOmTv7i21N7wrziRRe_VdssHKSIRPzTj4y3xYeXYtYgg
+#  ABQIAAAAROHbRl0JnXVAYv7maFF8HxQxZgyBgzW7DU4iwi_Rq_QwjbTEZxSUEd5xO5ZMbfNY6JwDUEnWGE37TA
+
+#   ABQIAAAAoaDSEda7SK0Rhq5mMihd2RT1ssA5xn0jSB4Bf4gPb3MPGe9-RRRNg1MTZRveoarf13InuZRClt_SvA
+  ABQIAAAAS6OK9wwOrgtslRxWUnhTBBSmHfUqEIikD5SPvPq8MNpSH5vk1RQyl1Me102TGyoeF8fRP0XZy7oiOQ
+
+production:
+ # ABQIAAAAy3ZQYLx-KAADPmM341HhJBS5RBpkgAiMlXFelQOGGe6F7e5csxTs9bkfmHJchlhxTTzfyJsOkYm__g
+ # Following is the new API key for http:// www.reimatcher.com
+ #ABQIAAAA2TuOWVcyg_ajPzttpANclhTU9r5E3aF5bTvLYKDL5It8aXGp0RSkQV7LnFHNIf5dBGsVlIoIzlizfQ
+ ABQIAAAAxJNmL3jH5fVds1VU2woHfhTt42DwM17ILxkG7tbGso9nkY48ihQM17sXi-uf4d_JVALkhNSXJl1TwA
+
+production_test:
+ ABQIAAAA1VcEUQoKk5ODTkLftKluBBQGxEjtlP9FDw3ToXioC0AXAakVUBQuoygkKxm2Kg0iMWaGDkJIcKXorA

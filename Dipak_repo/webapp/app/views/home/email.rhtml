@@ -1,0 +1,87 @@
+ <div id="email_block">
+  <% unless @sent %>
+  <%= form_remote_tag :url => {:controller => "home",:action => "email_to_support"},:method => "post",:update => { :success => "ibox_content"},:loading => "$('wait').show();$('email_block').hide();" %>
+  <table cellspacing="3" cellpadding="0" border="0" width="440">
+       <tr>
+	<th><span style="color:red;">*</span> To</th>
+	   <td>
+           <%= text_field 'email', 'to_email', :value => @to_email, :readonly => true, :size => 40 %>
+           <%=error_message_on :email, :to_email%>
+          </td>
+      </tr>
+        <th><span style="color:red;">*</span> Subject</th>
+	   <td>
+           <%= text_field 'email', 'subject', :size => 40 %>
+           <%=error_message_on :email, :subject%>
+          </td>
+      </tr>
+      <tr>
+        <th><span style="color:red;">*</span> Body</th>
+	   <td>
+            <%= text_area 'email', 'body', :rows => 4, :cols => 40 %>
+           <%=error_message_on :email, :body%>
+          </td>
+      </tr>
+      <tr></tr>	
+      <tr></tr>
+      <tr></tr>
+      <tr>
+	<td colspan="2" align="left" style="padding-left:75px;">
+            <input name="return" class="submit" type="submit" value="Send" />
+        </td>
+      </tr>		
+  </table>
+</form>
+<% else %>
+<div align="center"><b>Message sent successfully</b></div>
+<% end %>
+</div>
+<div id="wait" style="display:none;padding-top:50px;" align="center">
+<%= image_tag "/images/processing.gif" %>
+</div>
+
+
+<style>
+#errorExplanation {
+   margin: 0 0 0 18px !important;
+}
+#ibox_wrapper {
+  height:284px !important;
+  background-color:#088FC9;
+  border:1px solid #088FC9;
+  -moz-border-radius:10px;
+}
+#ibox_content {
+  height:225px !important;
+  background-color: white !important;
+}
+
+#ibox_footer_wrapper a {
+background: url('/images/closelabel.gif') !important;
+border: 0px;
+}
+
+input.submit {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+-x-system-font:none;
+background:#E0691A url(/images/submit.gif) no-repeat scroll 0 0;
+border:0 none;
+color:#FFFFFF;
+cursor:pointer;
+font-family:Arial,Sans-Serif;
+font-size:1em;
+font-size-adjust:none;
+font-stretch:normal;
+font-style:normal;
+font-variant:normal;
+font-weight:bold;
+height:24px;
+line-height:normal;
+margin:0 15px 1px 0;
+padding:4px 0;
+width:65px;
+}
+
+</style>

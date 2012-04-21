@@ -1,0 +1,74 @@
+<%- @page_title = "Messaging - Investors" -%>
+<%=stylesheet_link_tag "lightbox"%>
+<% require_js_controllers :tab, :account_settings,:ifp_lightbox, :lightbox_image,:lightbox -%>
+<%= include_yui_editor_if_used %>
+	<%= include_yui_lightbox_if_used %>
+
+<%- content_for :page_scripts do -%>
+function go_to_investor_conversation(is_read,user_id,subject_span_id,investor_message_id,reciever_id)
+{
+         subject = $(subject_span_id).innerHTML;
+         new Ajax.Request('/account/investor_conversation',
+          {
+          method:'POST',
+          parameters: { is_read: is_read, user_id: user_id, subject: subject,investor_message_id: investor_message_id,reciever_id: reciever_id},
+          onSuccess: function(transport){
+          var response = transport.responseText || "no response text";
+          $('investor_inbox').show();
+          $('result_filter').hide();
+          $('ajax_update_div').innerHTML = response
+          },
+        onFailure: function(){ alert('Something went wrong...') },
+         onLoading: function(){ $('spinner').style.display = 'block';},
+           onComplete: function(){$('spinner').style.display = 'none';}
+        });
+   }
+
+Event.observe(window, 'load', function() {
+  lightbox_controller = new NL.LightboxController();
+  ount_settings_controller = new NL.AccountSettingsController();
+  $('choose_message_filter').observe('change', function(){
+        filter_by = $('choose_message_filter').value
+        new Ajax.Request('/account/investor_inbox?filter_by='+filter_by,
+          {
+          method:'get',
+          onSuccess: function(transport){
+          var response = transport.responseText || "no response text";
+          $('ajax_update_div').innerHTML = response
+          },
+           onFailure: function(){ alert('Something went wrong...') },
+           onLoading: function(){ $('spinner').style.display = 'block';},
+           onComplete: function(){$('spinner').style.display = 'none';}
+        });
+        });
+});
+
+<% end %>
+<div style="display:none;" id="lightbox_inv_msg_contents">Lightbox</div>
+<div class="full">
+
+  <div class="tabset larger">
+    <ul>
+      <li class="active" uri="<%=url_for({:controller=>'account', :action=>'investor_inbox'})%>">Investor Inbox</li>
+      <li uri="<%=url_for({:controller=>'account', :action=>'profile_inbox'})%>">Profile Inbox</li>
+	</ul>
+  </div>
+
+  <fieldset>
+<div>
+  <%=link_to "« Back to Inbox<br/><br/>", {:controller=>'account', :action=>'investor_inbox', :page => params[:page]},:id=>'investor_inbox',:style=>'display:none;' %>
+</div>
+ <div id="result_filter" style="float: right;">
+      Show: <select name="choose_message_filter" id="choose_message_filter">
+          <option selected="selected" value="Current">Current</option>
+          <option value="Archived">Archived</option></select>
+ </div>
+  <div style="display:none;margin-left:205px;" class="loading" id="spinner"><span class="text">Loading...</span></div>
+<div id="ajax_update_div">
+     <%= render :partial=>"investor_inbox"%>
+
+</div>
+  </fieldset>
+
+
+</div>

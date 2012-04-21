@@ -1,0 +1,7 @@
+class SellerPropertyOwner < ActiveRecord::Base
+  uses_guid
+  belongs_to :seller_property_profile
+
+  has_attached_file :owner_name
+  validates_attachment_presence :owner_name
+end

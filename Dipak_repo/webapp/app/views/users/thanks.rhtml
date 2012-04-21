@@ -1,0 +1,36 @@
+<%- @page_title = "Signup Confirmation Sent" -%>
+
+<%- if flash[:type] == "buyer" -%>
+  <%- content_for :track_page_view do -%>
+pageTracker._trackPageview("new_buyer_created");
+ <%- end  -%>
+<%- end  -%>
+
+<%- if flash[:type] == "owner" -%>
+  <%- content_for :track_page_view do -%>
+pageTracker._trackPageview("new_owner_created");
+  <%- end  -%>
+<%- end  -%>
+
+
+<%- if flash[:type] == "seller_agent" -%>
+  <%- content_for :track_page_view do -%>
+pageTracker._trackPageview("new_seller_agent_created");
+  <%- end  -%>
+<%- end  -%>
+
+
+<%- if flash[:type] == "buyer_agent" -%>
+  <%- content_for :track_page_view do -%>
+pageTracker._trackPageview("new_buyer_agent_created");
+  <%- end  -%>
+<%- end  -%>
+
+<div class="wide">
+
+  <p>Thanks for signing up with REIMatcher! An email has been sent <%= @user.blank? ? "to confirm your email address" : "to "+ @user.email %>. Click the link provided in the email to activate your account and start using REIMatcher.</p>
+
+  <br />
+<center><div id="evp-575bfc89f14b34d1b201be5e917f343e-wrap" class="evp-video-wrap"></div><script type="text/javascript" src="http://www.damonflowers.com/evp/framework.php?div_id=evp-575bfc89f14b34d1b201be5e917f343e&id=UmlnaHQgQWN0aXZhdGlvbiBWaWRlby5tcDQ%3D&v=1326822501&profile=default"></script><script type="text/javascript"><!--
+_evpInit('UmlnaHQgQWN0aXZhdGlvbiBWaWRlby5tcDQ=[evp-575bfc89f14b34d1b201be5e917f343e]');//--></script></center>
+</div>

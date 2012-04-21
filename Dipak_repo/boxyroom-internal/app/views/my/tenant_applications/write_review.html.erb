@@ -1,0 +1,111 @@
+    <div id="content">
+            <div class="container">
+                <div class="primary">
+                    <h1>Write a Review</h1>
+                    <%- form_for(@review, :url => create_review_my_application_path(:id => params[:id]), :html => {:method => :post, :multipart => true, :class => "complex-form", :id=>"form_write_review"}) do |f| %>
+		        <div class="margin_top_content"></div>
+                        <div class="content" id="min_height_property_image_descrption">
+                         <div >
+                            <div class="thumbnail large">
+                              <%- if @application.property.pictures.empty? %>
+                                <%= image_tag("/images/missing/missing_properties_thumb.png") %>
+                              <%- else %>
+                                <%= image_tag(@application.property.pictures.first.image.url(:middle)) %>
+                              <%- end %>
+                            <div class="overlay"></div>
+                          </div>
+                          <p class="title_des_write_review" ><span class="title"><%= @application.property.title%></span><br><%= @application.property.description%>.</p>
+                          </div>
+                          <div class="clear"> </div>
+                        </div>
+                        <fieldset id="share-your-thoughts">
+                           <%= f.error_messages :header_message => "Opps! There are problems with your information." , :message => ""%>
+                            <legend class="share_thoughts_write_review">Share your thoughts on the property you rented.</legend>
+                            <div class="clr"></div>
+                            <div class="select_list">
+                                   <%= f.label (:rental_from , "Period of Rental From") %>
+                                  <div class="fld-info" style="top:19px;position: relative;"><%= f.date_select :rental_from , {:start_year =>  2000, :use_short_month => true} ,:class=>:small%></div>
+                             </div>
+                             <div class="clr"></div>
+                             <div class="select_list">
+                                <%= f.label :rental_from , "Period of Rental To" %>
+                                <div class="fld-info" style="top:17px;position: relative;"><%= f.date_select :rental_to ,{ :start_year =>   2000, :use_short_month => true},:class=>:small %></div>   
+                             </div>
+                             <div class="clr"></div>
+                        </fieldset>
+                       <%= f.hidden_field :profile_type %>
+                        <div  class="tabs">
+                            <div id="sub-profile-tabs_write_review" class="navigation">
+                                <span>Please choose one</span>
+                                <ul>
+                                     <li class="study"><a href="#study-profile">Study</a></li>
+                                     <li class="business"><a href="#business-profile">Business</a></li>
+                                     <li class="travel"><a href="#travel-profile">Travel</a></li>
+                                </ul>
+                            </div>
+                            <fieldset id="study-profile">
+                                <p class="full">
+                                   <%= f.label  :rtitle, 'Title Of Review'   %>
+                                   <%= f.text_field :title,:id=>"review_rtitle"%>
+                                </p>
+                                <p class="full large">
+                                     <%= f.label (:review , "Write Your Review(100 words max)") %> 
+                                     <%= f.text_area :review_text,:id=>"review_review"%>
+                                </p>
+                            </fieldset>
+                            <fieldset id="business-profile">
+                                <p class="full">
+                                   <%= f.label  :rtitle_business, 'Title Of Review'   %>
+                                   <%= f.text_field :review_title_business ,:id=>"review_rtitle_business"%>
+                                </p>
+                                <p class="full large">
+                                    <%= f.label (:review_business , "Write Your Review(100 words max)") %> 
+                                     <%= f.text_area :review_text_business ,:id=>"review_review_business"%>
+                                </p>
+                            </fieldset>
+                            <fieldset id="travel-profile">
+                                <p class="full">
+                                   <%= f.label  :rtitle_travel, 'Title Of Review'   %>
+                                   <%= f.text_field :review_title_travel,:id=>"review_rtitle_travel"%>
+                                </p>
+                                <p class="full large">
+                                      <%= f.label (:review_travel , "Write Your Review(100 words max)") %> 
+                                     <%= f.text_area :review_text_travel ,:id=>"review_review_travel"%>
+                                </p>
+                            </fieldset>
+                        </div>
+                        <fieldset id="uploadfiles">
+                           <legend class="share_thoughts_write_review">Upload some photos of property.</legend>
+                           <% i = 1 %>
+                           <%- f.fields_for :reivew_property_pictures do |picture| %>
+                             <div class="line">
+                               <span>
+                                <%= picture.text_field :image , :onmouseout=>"document.getElementById('upload#{i.to_s}').style.display='none';",:id =>"viewfile#{i.to_s}",:class=>"inputstyle" ,:name => "" ,:value => "" ,:readonly =>""%>
+                               </span>
+                               <label for="unload<%=i.to_s%>"    onmouseover="document.getElementById('upload<%=i.to_s%>').style.display='block';"      class="browse_button"></label>
+                               <%= picture.file_field :image , :onchange=>"document.getElementById('viewfile#{i.to_s}').value=this.value;this.style.display='none';",:class=>"file",:id =>"upload#{i.to_s}",:size=>20%>
+                             </div>
+                            <% i = i + 1 %>
+                            <% end %>
+                        </fieldset>
+                       <div>
+                 	      <input id="form_submit" class="position receive review" type="Submit" value="">
+		      </div>
+                    <% end %>
+                </div>
+                <div class="secondary">
+                    <div class="section">
+                        <h3>Tips & Tricks</h3>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+<%- javascript_tag :defer => 'defer' do %>
+  $(document).ready(function(){
+  var $tabs = $("#sub-profile-tabs").tabs({
+  select: function(event, ui) { $('#review_profile_type').val(ui.panel.id); }
+  });
+  $tabs.tabs('select', '#<%= @review.profile_type.tableize.singularize.gsub("_", "-") %>');
+  });
+<%- end %>

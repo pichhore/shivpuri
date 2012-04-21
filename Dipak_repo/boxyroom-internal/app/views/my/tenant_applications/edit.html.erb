@@ -1,0 +1,246 @@
+<head>
+  <!--[if IE 7]>
+    <style type="text/css">
+      .new-app {
+        left: 311px !important;
+      }
+      .complex-form{overflow: hidden!important;}
+      .previous_link{right: 329px;position: relative;line-height: 20px;}
+      #application_duration_of_stay{position: relative;right: 8px;}
+    </style>
+  <![endif]-->
+</head>
+	<div id="content">
+            <div class="container">
+                <div class="previous_link" id="previous_link_new_app" ><a href="/properties/<%=@application.property.id%>?input=<%=@application.property.address.city%>">Back to property details</a></div>
+                <div class="primary" style="width:660px;">
+                    <h1>Edit application form for <%= @application.property.address.location %></h1>
+                    <%- form_for([:my, @application], :html => {:multipart => true, :class=>"complex-form", :style=>"overflow-x: hidden;"}) do |f| %>
+                    <%= render :partial=>"shared/property_details" , :locals => {:application => @application}%>
+                        <%= f.error_messages :header_message => "Opps! There are problems with your information." , :message => ""%>
+                        <fieldset id="application-details">
+                            <legend>Application Details</legend>
+                            <div class="select_list" style="width: 100%;">
+                              <p>
+                                <%= f.label :expected_arrival,"Expected arrival", :id =>"application_expected_arr", :style => "top: 0px;"  %>
+                              </p>
+                              <p class="new-app">
+                                <%= f.date_select :expected_arrival , {:start_year =>  2000, :use_short_month => true} ,:class=>:small%>
+                              </p>
+                            </div>
+                            <p>
+			      <%= f.label :duration_of_stay,"Duration of Stay", :style => "top: 20px;left: 18px;"%>
+			    </p>
+			    <p class="right" style="margin-left: 17px;padding-top: 0px; ">
+			      <%= f.select :duration_of_stay, [['1 month', 1],['2 months',2],['3 months', 3],['4 months',4],['5 months', 5],['6 months',6],['7 months', 7],['8 months',8],['9 months', 9],['10 months',10],['11 months', 11],['12 months',12]],{:prompt => false}, :style=>"width: 322px;"%>
+			    </p>
+                        </fieldset>
+                        <fieldset id="personal-details">
+                            <legend>Personal Details</legend>
+                            <%- f.fields_for :card do |card| %>
+                                <p>
+                                    <%= card.label (:first_name,"First Name") %>
+                                    <%= card.text_field :first_name%>
+                                </p>
+                                <p class="right">
+                                    <%= card.label (:last_name,"Last Name") %>
+                                    <%= card.text_field :last_name%>
+                                </p>
+                                <p>
+                                    <%= card.label (:email,"Email Address") %>
+                                    <%= card.text_field :email%>
+                                 </p>
+                                <p class="right">
+                                    <%= card.label (:phone_no,"Phone Number") %>
+                                    <%= card.text_field :phone_no%>
+                               </p>
+                                <p >
+                                    <%= card.label (:mobile_no,"Mobile Number (Optional)") %>
+                                    <%= card.text_field :mobile_no%>
+                                </p>
+                                <p class="right">
+                                    <%= card.label (:fax_no,"Fax Number (Optional)") %>
+                                    <%= card.text_field :fax_no%>
+                                </p>
+                            <% end %>
+                        </fieldset>
+                        <%- f.fields_for :profile do |profile| %>
+                            <%= profile.hidden_field :value_type %>
+                            <div class="tabs">
+                                <div id="sub-profile-tabs" class="navigation">
+                                    <span class="purpose_moving">For what purpose are you moving?</span>
+                                    <ul>
+                                        <li class="study"><a href="#study-profile">Study</a></li>
+                                        <li class="business"><a href="#business-profile">Business</a></li>
+                                        <li class="travel"><a href="#travel-profile">Others</a></li>
+                                    </ul>
+                                </div>
+                                <fieldset id="study-profile">
+                                    <div class="select_list-study"  >
+                                      <p>
+                                        <%= profile.label :income_source_i,"Income source"%>
+                                      </p>
+                                      <p class="right" style="margin-left: 17px">
+                                        <%= profile.select :income_source, options_for_income_source%>
+                                      </p>
+                                    </div>
+                                    <p>
+                                        <%= profile.label (:school,"School" )%>
+                                        <%= profile.text_field :school,:id=>"application_profile_attributes_school" %>
+                                    </p>
+                                    <p class="right">
+                                        <%= profile.label (:course,"Course" )%>
+                                        <%= profile.text_field :course,:id=>"application_profile_attributes_course" %>
+                                    </p>
+                                    <p>
+                                        <%= profile.label (:student_no,"Student Number (Optional)" )%>
+                                        <%= profile.text_field :student_no,:id=>"application_profile_attributes_student_no" %>
+                                    </p>
+                                    <p class="right">
+                                      <%= profile.label (:weekly_income,"Weekly allowance" )%>
+                                      <%= profile.text_field :weekly_income%>
+                                    </p>
+                                  <legend>Guardian's Contact Details</legend>
+                                  <%- profile.fields_for :guardian do |card| %>
+                                    <p>
+                                        <%= card.label (:guardian_first_name,"First Name") %>
+                                        <%= card.text_field :first_name,:id=>"application_profile_attributes_guardian_attributes_guardian_first_name"%>
+                                    </p>
+                                    <p class="right">
+                                        <%= card.label (:guardian_last_name,"Last Name") %>
+                                        <%= card.text_field :last_name,:id=>"application_profile_attributes_guardian_attributes_guardian_last_name"%>
+                                    </p>
+                                    <p class="right">
+                                        <%= card.label (:guardian_relationship,"Relationship") %>
+                                        <%= card.text_field :relationship, :id=>"application_profile_attributes_guardian_attributes_guardian_relationship" %>
+                                    </p>
+                                    <p >
+                                        <%= card.label (:guardian_email,"Email") %>
+                                        <%= card.text_field :email, :id=>"application_profile_attributes_guardian_attributes_guardian_email" %>
+                                    </p>
+                                    <p>
+                                        <%= card.label (:guardian_phone_no,"Phone Number") %>
+                                        <%= card.text_field :phone_no, :id=>"application_profile_attributes_guardian_attributes_guardian_phone_no" %>
+                                    </p>
+                                    <p class="right">
+                                        <%= card.label (:guardian_mobile_no,"Mobile Number (Optional)") %>
+                                        <%= card.text_field :mobile_no, :id=>"application_profile_attributes_guardian_attributes_guardian_mobile_no" %>
+                                    </p>
+                                    <p>
+                                        <%= card.label (:guardian_fax_no,"Fax Number (Optional)") %>
+                                        <%= card.text_field :fax_no, :id=>"application_profile_attributes_guardian_attributes_guardian_fax_no" %>
+                                    </p>
+                                  <%- end %>
+                                </fieldset>
+                                <fieldset id="business-profile">
+                                     <div class="select_list-business" style="width: 100%;">
+                                       <p>
+                                        <%= profile.label (:nature_of_employment, "Nature of Employment")%>
+                                       </p>
+                                       <p class="right">
+                                        <%= profile.select :nature_of_employment, options_for_nature_of_employment, :id=>"application_profile_attributes_nature_of_employment-button" %>
+                                       </p>
+                                    </div>
+                                    <div class="select_list-business" style="width: 100%;">
+                                      <p >
+                                        <%= profile.label (:start_of_employment,"Start of Employment")%>
+                                      </p>
+                                      <p  class="right" style="width:350px;top:21px;right:-48px;">
+                                        <%= profile.date_select :start_of_employment , {:start_year =>  2000, :use_short_month => true, :prompt => true},:class=>:small%>
+                                      </p>
+                                    </div>
+                                    <div class="clr"></div>
+                                    <div class="select_list-business" style="width: 100%;">
+                                      <p>
+                                        <%= profile.label :end_of_employment, "End of employment (Optional)"%>
+                                      </p>
+                                      <p class="right" style="width:350px;top:21px;right:-48px;">
+                                        <%= profile.date_select :end_of_employment , {:start_year =>  2000, :use_short_month => true},:class=>:small%>
+                                      </p>
+                                    </div>
+                                    <div class="clr"></div>
+                                    <p>
+                                      <%= profile.label (:company_name,"Company Name") %>
+                                      <%= profile.text_field :company_name,:id=>"application_profile_attributes_company_name" %>
+                                    </p>
+                                    <p class="right">
+                                      <%= profile.label (:industry,"Industry") %>
+                                        <%= profile.text_field :industry,:id=>"application_profile_attributes_industry" %>
+                                    </p>
+                                    <p>
+                                        <%= profile.label (:position,"Position") %>
+                                        <%= profile.text_field :position,:id=>"application_profile_attributes_position" %>
+                                    </p>
+                                    <p class="right">
+                                        <%= profile.label (:gross_annual_salary,"Gross Annual Salary (optional)") %>
+                                        <%= profile.text_field :gross_annual_salary,:id=>"application_profile_attributes_gross_annual_salary" %>
+                                    </p>
+                                    <legend>Superior's Contact Details</legend>
+                                    <%- profile.fields_for :superior do |card| %>
+                                        <p>
+                                            <%= card.label (:superior_first_name,"First Name") %>
+                                            <%= card.text_field :first_name,:id=>"application_profile_attributes_superior_attributes_superior_first_name"%>
+                                        </p>
+                                        <p class="right">
+                                            <%= card.label (:superior_last_name,"Last Name") %>
+                                            <%= card.text_field :last_name,:id=>"application_profile_attributes_superior_attributes_superior_last_name"%>
+                                        </p>
+                                        <p>
+                                          <%= card.label (:superior_email,"Email") %>
+                                          <%= card.text_field :email,:id=>"application_profile_attributes_superior_attributes_superior_email"%>
+                                        </p>
+                                        <p class="right">
+                                          <%= card.label (:superior_phone_no,"Phone Number") %>
+                                          <%= card.text_field :phone_no,:id=>"application_profile_attributes_superior_attributes_superior_phone_no"%>
+                                        </p>
+                                        <p>
+                                          <%= card.label (:superior_mobile_no,"Mobile Number (optional)") %>
+                                          <%= card.text_field :mobile_no,:id=>"application_profile_attributes_superior_attributes_superior_mobile_no"%>
+                                        </p>
+                                        <p class="right">
+                                          <%= card.label (:superior_fax_no,"Fax Number (optional)") %>
+                                          <%= card.text_field :fax_no,:id=>"application_profile_attributes_superior_attributes_superior_fax_no"%>
+                                        </p>
+                                  <%- end %>
+                                </fieldset>
+                                <fieldset id="travel-profile">
+                                    <p>
+                                        <%= profile.label (:prev_destination,"Previous Destination") %>
+                                        <%= profile.text_field :previous_destination,:id=>"application_profile_attributes_prev_destination"%>
+                                    </p>
+                                    <p class="right">
+                                        <%= profile.label (:next_destination,"Next Destination (optional)") %>
+                                        <%= profile.text_field :next_destination,:id=>"application_profile_attributes_next_destination"%>
+                                    </p>
+                                    <p class="">
+                                        <%= profile.label (:reason_for_moving,"Reason for Moving") %>
+                                        <%= profile.text_field :reason_for_moving,:id=>"application_profile_attributes_reason_for_moving"%>
+                                    </p>
+                                </fieldset>
+                            </div>
+                            <div >
+                                <button class="edit_application"></button>
+                            </div>
+                      <% end %>
+                 <% end %>
+                </div>
+                <div class="secondary" >
+                    <div class="section" style="height: 50px">
+                         <h3 class="green">Tips & Tricks</h3>
+                    </div>
+                </div>
+                 <div class="secondary">
+                  <div class="section2">
+                    <p class="amount_field" style="font-size: 15px;text-align: left;margin-left: 9px;font-weight:400;">To increase your chances of approval, you must fill in the application form accurately</p>
+                  </div>
+                </div>
+            </div>
+        </div>
+<%- javascript_tag :defer => 'defer' do %>
+  $(document).ready(function(){
+  var $tabs = $("#sub-profile-tabs").tabs({
+  select: function(event, ui) { $('#application_profile_attributes_value_type').val(ui.panel.id); }
+  });
+  $tabs.tabs('select', '#<%= @application.profile.value_type.tableize.singularize.gsub("_", "-") %>');
+  });
+<%- end %>

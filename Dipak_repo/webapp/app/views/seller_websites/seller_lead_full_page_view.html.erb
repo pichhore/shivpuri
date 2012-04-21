@@ -1,0 +1,11 @@
+<%= render :partial => "partial_for_meta_tag"%>
+
+<%= render :partial => "page_script_content_full_page_view"%>
+
+  <%= render :partial => "scratch_pad_lightbox" %>
+
+<% form_for :seller_property, :url => {:controller => :seller_websites, :action => :update_seller_profile, :id => params[:id]} do |f| %>
+
+<div style="display:none;margin-left:205px;" class="loading" id="spinner"><span class="text">Loading...</span></div>
+    <%= render :partial => "form_for_seller_profile_fields", :locals=>{:f => f} %>
+<% end %>

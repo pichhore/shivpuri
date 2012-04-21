@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+   <title><%=@page_title%></title>
+    <META NAME="robots" CONTENT="noindex,nofollow">
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+     <% if !@meta_description.nil? %>
+     <%= '<meta name="'+@meta_description+'" content="text/html" >' %>
+     <% end %>
+        <%=stylesheet_link_tag "investor_buyer_web_page" %>
+         <%=stylesheet_link_tag "investor_web_page" %>
+        <%#= javascript_include_tag :defaults %>
+        <%#=javascript_include_tag "scriptaculous"%>
+        <%#=javascript_include_tag "object.event.js"%>
+        <%#= javascript_include_tag "calendar_date_select" %>
+<%= javascript_include_tag :defaults, "scriptaculous", "object.event.js", "calendar_date_select", "validation", "reimatcher/epoch_classes",  :cache => "cached/investor_web_page_default" %>
+        <%#= stylesheet_link_tag "calendar_date_select" %>
+        <%#= stylesheet_link_tag "reimatcher/epoch_styles" %>
+<%= stylesheet_link_tag "calendar_date_select", "reimatcher/epoch_styles", "lightbox", :cache => "cached/investor_web_page_all"%>
+        <%#=stylesheet_link_tag "lightbox"%>  
+        <%= include_yui_editor_if_used %>
+	<%= include_yui_lightbox_if_used %>
+        <%=javascript_include_tag "base_controller"%>
+        <%=javascript_include_tag "lightbox_controller"%>
+        <%=javascript_include_tag "utils-debug" if RAILS_ENV != "production"%>
+        <%=javascript_include_tag "utils" if RAILS_ENV == "production"%>
+        <%#=javascript_include_tag "validation"%>
+	   <%#=javascript_include_tag "reimatcher/epoch_classes"%>
+        <%=add_js_requires%>
+    <% if @content_for_web_page_styles -%>
+    <%= @content_for_web_page_styles %>
+    <% end -%>
+    <% if @content_for_web_page_scripts -%>
+         <script type="text/javascript">
+                function open_pop_up(path, zip_code_dom){
+               var path = path + "&field_zip_codes=" + ($(zip_code_dom).value);
+                window.location = path;
+//                window.open(path,"Window1","menubar=no,width=500,height=500,toolbar=no,scrollbars=yes");
+              }
+            <%= @content_for_web_page_scripts %>
+	        lightbox_controller = new NL.LightboxController();
+         </script>
+    <% end -%>
+     <%= GMap.header if !latest_buyer_webpage_actions.include?(@controller.action_name) && @controller.action_name != 'thank_you_page' && @latest_action.nil? %>
+<script type="text/javascript">
+<% if !params[:permalink_text].nil? %>
+<%= ga_code(params[:permalink_text]) %>
+<% else %>
+<%= ga_code(params[:id]) %>
+<% end %>
+</script>
+</head>
+
+<% if @controller.controller_name != "account" %> <body><% elsif @preview || @controller.controller_name == "account" %><body onload="disable_forms();"<% end %>
+<% if RAILS_ENV == 'production' %>
+<%= clicktale_top %>
+<% end %>
+<div class="full">
+  <div id="container" class="clearfix" >
+<!-- Header-->
+
+  	<div id="header" <% if !@buyer_web_page.dynamic_css.blank? %> style="border-top:8px solid <%=@buyer_web_page.dynamic_css%>;" <% end%> >
+ 	        <div class="col1">	
+  			<div id="logo" style="*float:left;">
+                   <% logo_img = image_tag @user_company_image.public_filename(:profile), :alt=>"Company Logo" if (!@user_company_image.nil?) && (!@user_company_image.find_profile_thumbnail.blank?) %>
+                   <% if !@preview_type && (!@latest_action.blank? || latest_buyer_webpage_actions.include?(@controller.action_name)) && logo_img %>         
+                      <%= link_to logo_img, {:controller=>"investor_buyer_web_page", :action=>"investor_buyer_web_page_latest", :permalink_text => @business_name} %>
+                   <% elsif !@preview_type || ['thank_you_page'].include?(@controller.action_name) && logo_img %>
+                     <a href="/<%=@territory_param_name%>/<%=@business_name%>"><%= logo_img %></a>                   
+  		   <% elsif logo_img %>
+		     <a href="#"><%= logo_img %></a>
+		   <% end %>
+                    </a>
+  			</div>
+  			<div id="tagline" style="*float:left;">
+  				<%= @buyer_web_page.tag_line %>
+  			</div>  			
+  		</div>
+  		
+  		<div class="col2">
+  			<div id="address">
+                    <%=@user_company_info.business_name unless @user_company_info.nil?  %><br />
+  				<%=@user_company_info.business_address unless @user_company_info.nil?  %>
+                    <br/>
+                    <% if !@user_company_info.nil? and !@user_company_info.city.blank? %>
+                    <%=@user_company_info.city.to_s %>, <%= @user_company_info.state.to_s + " " + @user_company_info.zipcode.to_s   %>
+                    <% end %>
+  			</div>
+  			<div id="contact">
+  				<b class="phone_size_bold"><% unless @user_company_info.nil? %><%= !@buyer_web_page.local_phone.blank? ? @buyer_web_page.local_phone : @user_company_info.business_phone %><% end %></b><br /><br />
+                  <% if @controller.controller_name != "account" %>
+<% if !@preview_type && params[:terms_of_use].nil? %>
+<%=link_to_remote("Contact Us",{:url => {:action => 'contact_us',:id => @business_name, :territory_name=>@territory_param_name},
+                                                                                :method => :get,
+                                                                                :update         => "lightbox_contents",
+                                                                                :loading        => "lightbox_controller.loading()",
+                                                                                :loaded         => "lightbox_controller.loaded()"},{
+                                                                                :title=>"Contact to Investor" }) %>
+<% end %>
+<% else %><a href="#" >Contact Us</a><% end %>
+  			</div>  	
+  	  	</div> 
+  	
+  	</div>
+
+<!-- End Header-->
+      <%= yield  %>
+  </div><!--end container-->
+</div>
+<div style="display:none;" id="overlay_Lightbox"></div>
+<div style="display:none;" id="lightbox_contents">Lightbox</div>
+<div id="footer" style="margin:auto;text-align:center;width:960px; height:auto;padding:5px 0px;">
+<% if !@user_company_info.nil? and !@user_company_info.business_name.blank? %>
+  <%=@user_company_info.business_name %><br/>
+  <%=@user_company_info.business_address %>, <%=@user_company_info.city %>, <%=@user_company_info.state  %> <%=@user_company_info.zipcode  %> <br/>
+<% end %>
+
+
+<% unless @user_company_info.nil? %>
+   <%= !@buyer_web_page.local_phone.blank? ? @buyer_web_page.local_phone : @user_company_info.business_phone %>
+<% end %> | <b>
+<% if @controller.controller_name != "account" %>
+   <% if latest_buyer_webpage_actions.include?(@controller.action_name) || !@latest_action.nil? %>
+   <%= link_to "Create a Buyer Profile (FREE)", {:controller=>'investor_buyer_web_page', :action=>'new_retail_buyer_zipselect_latest', :permalink_text => @business_name} %>
+   <% else %>
+   <%= link_to "Create a Buyer Profile (FREE)", {:controller=>'investor_buyer_web_page', :action=>'new_retail_buyer_zipselect', :id=>@business_name, :territory_name=>@territory_param_name} %>
+   <% end %>
+<% else %>
+   <a href="#" >Create a Buyer Profile (FREE)</a><% end %></b> <br/>
+   <% if @controller.controller_name == "investor_buyer_web_page" %>
+     <% if latest_buyer_webpage_actions.include?(@controller.action_name) || !@latest_action.nil? %>
+     <%= link_to "Privacy Policy", {:controller=>'investor_buyer_web_page', :action =>'investor_buyer_web_page_latest', :permalink_text => @business_name, :privacy_policy => true} %> |
+     <%= link_to "Terms of Use", {:controller=>'investor_buyer_web_page', :action =>'terms_of_use_latest', :permalink_text => @business_name} %><br/>
+     <% else %>
+     <%= link_to "Privacy Policy", "/#{@territory_param_name}/#{params[:id]}?privacy_policy=true" %> |
+     <%= link_to "Terms of Use", "/#{@territory_param_name}/#{params[:id]}/terms_of_use" %><br/>
+     <% end %>
+   <% else %>
+     <% if @controller.controller_name != "account" %> <a href="/home/privacy">Privacy Policy</a>|<a href="/home/terms_of_use">Terms of Use</a> <% else %><a href="#">Privacy Policy</a>|<a href="#">Terms of Use</a>  <% end %><br/>
+     <% end %>
+	REI Technologies LLC &copy; 2012
+  </div>
+<% if RAILS_ENV == 'production' %>
+<%= clicktale_bottom %>
+<% end %>
+</body>
+</html>
+

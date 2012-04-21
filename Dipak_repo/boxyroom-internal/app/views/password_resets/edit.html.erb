@@ -1,0 +1,23 @@
+
+<% form_for @user, :url => password_reset_path, :method => :put do |f| %>
+    <%= f.error_messages :header_message => "Opps! There are problems with your information." , :message => ""%>
+  <fieldset class="login">
+  <legend>Change My Password</legend>
+    <p>
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+    </p>
+    <p>
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation %>
+    </p>
+    <button id="user_submit" class="positive button" name="commit" type="submit" style="margin-left: 105px;"></button>
+  </fieldset>
+<% end %>
+
+<style>
+#content
+{
+       min-height: 825px!important; 
+}
+</style> 

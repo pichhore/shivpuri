@@ -1,0 +1,13 @@
+<h1>Clips Listing</h1>
+<br/>
+<table>
+<% @clips_hash.each do |directory_hash| %>
+<% debugger %>
+  <tr>
+    <td>
+      <%= link_to directory_hash["title"],show_clip_webinar_path(directory_hash["guid"]) %>
+    </td>
+  </tr>
+ 
+<% end %>
+ </table>

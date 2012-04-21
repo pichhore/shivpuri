@@ -1,0 +1,16 @@
+<div class="content" id="min_height_content">
+  <div >
+    <div class="thumbnail large">
+      <%- if @application.property.pictures.empty? %>
+        <%= image_tag("/images/missing/missing_properties_thumb.png") %>
+      <%- else %>
+        <%= image_tag(@application.property.pictures.first.image.url(:middle)) %>
+      <%- end %>
+      <div class="overlay"></div>
+    </div>
+    <p style="float:left; padding-left:20px; width:430px;font-size: 15px;color:#3A3A3A;"><span class="title"><%= @application.property.title%></span><br><%= @application.property.description%>.<br><span style="float:left;font-weight: bold;">Property available from <%= boxy_date_format_for_account @application.property.available_at%></span></p>
+    <div class="clear"> </div>
+    
+  </div>
+  <div class="clear"> </div>
+</div>

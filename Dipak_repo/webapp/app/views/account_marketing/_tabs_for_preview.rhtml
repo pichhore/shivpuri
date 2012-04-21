@@ -1,0 +1,26 @@
+<%- @page_title = "Marketing Settings" -%>
+<%# require_js_controllers :tab, :account_settings, :lightbox, :profile_update -%>
+<% require_js_controllers :lightbox, :profile_update -%>
+<%- content_for :page_scripts do -%>
+Event.observe(window, 'load', function() {
+//account_settings_controller = new NL.AccountSettingsController();
+lightbox_controller = new NL.LightboxController();
+});
+<%- end -%>
+
+<% content_for :page_styles do -%>
+<%=stylesheet_link_tag "lightbox"%>
+<% end -%>
+
+<div class="full">
+<!--
+  <div class="tabset larger">
+    <ul>
+      <li uri="<%#=url_for({:controller=>'account', :action=>'settings'})%>">Investor Profile</li>
+      <li uri="<%#=url_for({:controller=>'account', :action=>'company_info'})%>">Company Info</li>
+      <li uri="<%#=url_for({:controller=>'account', :action=>'buyer_webpage'})%>">Buyer Websites</li>
+      <li class="active" uri="<%#=url_for({:controller=>'account_marketing', :action=>'welcome_email'})%>">Buyer Notification</li>
+      <li uri="<%#=url_for({:controller=>'account', :action=>'digest_frequency'})%>">Alerts</li>
+    </ul>
+  </div>
+-->

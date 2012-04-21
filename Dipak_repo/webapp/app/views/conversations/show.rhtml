@@ -1,0 +1,189 @@
+
+
+<%- @page_title = "My Conversation with #{@target_profile.display_name}" -%>
+
+<%=stylesheet_link_tag "lightbox"%>
+<% require_js_controllers :tab, :account_settings,:ifp_lightbox, :lightbox_image,:lightbox -%>
+<%- content_for :page_scripts do -%>
+
+function toggleCreateMessageForm() {
+  $('conversation_create_form').toggle();
+}
+
+function toggleReplyForm(the_parent) {
+  $(the_parent).getElementsBySelector("div.reply_form").each(function(item) { item.toggle(); });
+}
+
+function closeReplyForms() {
+  $$("div.reply_form").each(function(item) { item.hide(); });
+}
+
+ Event.observe(window, 'load', function() {
+    lightbox_controller = new NL.LightboxController();
+});
+
+<%- end -%>
+
+<div class="full">
+
+  <div class="conversation_profile_summary">
+
+    <div class="details">
+      <div class="thumbnail" style="float:left;width:200px;">
+              
+          <%= link_to render_photo_fullsize(@target_profile), profile_profile_view_path(@profile, @target_profile)+'?ref=conv'%>
+      </div>
+
+      <div style="float:left; margin-top:-7px; width:340px;">
+      <% if @target_profile.owner? %>
+           
+        <h2 style="font-weight: normal"><%=@target_profile.display_name%> </h2>
+          
+      <% else %>
+         
+        <h2 style="font-weight: normal"><%=@target_profile.user.full_name%> </h2>
+          <strong>Looking for:</strong> <%=@target_profile.display_description%>
+
+      <% end %>
+        <%- if @target_profile.owner? -%>
+
+        <%- # SF and CT -%>
+        <%- if @target_profile.property_type_single_family? or @target_profile.property_type_condo_townhome? -%>
+        <div><strong>Beds:</strong> <%=@target_profile.display_bedrooms%> &nbsp;&nbsp;<strong>Baths:</strong> <%=@target_profile.display_bathrooms%> &nbsp;&nbsp;<strong>SqFt:</strong> <%=@target_profile.display_square_feet%></div>
+        <div><strong>Price:</strong> <%=@target_profile.display_price%> &nbsp;&nbsp;
+          <%- if !@target_profile.display_neighborhood.nil? and !@target_profile.display_neighborhood.empty? -%>
+              <strong>Neighborhood:</strong> <%=@target_profile.display_neighborhood%></div>
+          <%- end -%>
+        <div><strong><%=render_for_buyer_or_owner(@target_profile, "Comments to Owner", "Features")%>:</strong> <%=@target_profile.display_features%></div>
+        <%- end -%>
+
+        <%- # MF -%>
+        <%- if @target_profile.property_type_multi_family? -%>
+        <div><strong>Units:</strong> <%=@target_profile.display_units%> &nbsp;&nbsp;<strong>Total SqFt:</strong> <%=@target_profile.display_square_feet%></div>
+        <div><strong>Price:</strong> <%=@target_profile.display_price%> &nbsp;&nbsp;
+          <%- if !@target_profile.display_neighborhood.nil? and !@target_profile.display_neighborhood.empty? -%>
+              <strong>Neighborhood:</strong> <%=@target_profile.display_neighborhood%></div>
+          <%- end -%>
+        <div><strong><%=render_for_buyer_or_owner(@target_profile, "Comments to Owner", "Features")%>:</strong> <%=@target_profile.display_features%></div>
+        <%- end -%>
+
+        <%- # VL -%>
+        <%- if @target_profile.property_type_vacant_lot? -%>
+        <div>&nbsp;</div>
+        <div><strong>Price:</strong> <%=@target_profile.display_price%> &nbsp;&nbsp;
+          <%- if !@target_profile.display_neighborhood.nil? and !@target_profile.display_neighborhood.empty? -%>
+              <strong>Neighborhood:</strong> <%=@target_profile.display_neighborhood%></div>
+          <%- end -%>
+        <div><strong><%=render_for_buyer_or_owner(@target_profile, "Comments to Owner", "Features")%>:</strong> <%=@target_profile.display_features%></div>
+        <%- end -%>
+
+        <%- # AC -%>
+        <%- if @target_profile.property_type_acreage? -%>
+        <div><strong>Acres:</strong> <%=@target_profile.display_acres%></div>
+        <div><strong>Price:</strong> <%=@target_profile.display_price%> &nbsp;&nbsp;
+          <%- if !@target_profile.display_neighborhood.nil? and !@target_profile.display_neighborhood.empty? -%>
+              <strong>Neighborhood:</strong> <%=@target_profile.display_neighborhood%></div>
+          <%- end -%>
+        <div><strong><%=render_for_buyer_or_owner(@target_profile, "Comments to Owner", "Features")%>:</strong> <%=@target_profile.display_features%></div>
+        <%- end -%>
+
+      <%- else -%>
+
+        <%- # SF and CT -%>
+        <%- if @target_profile.property_type_single_family? or @target_profile.property_type_condo_townhome? -%>
+        <div><strong>Beds:</strong> <%=@target_profile.display_bedrooms%> &nbsp;&nbsp;<strong>Baths:</strong> <%=@target_profile.display_bathrooms%> &nbsp;&nbsp;<strong>SqFt:</strong> <%=@target_profile.display_square_feet_range%></div>
+        <div><strong>Price:</strong> <%=@target_profile.display_price_range%> &nbsp;&nbsp;
+          <%- if !@target_profile.display_neighborhood.nil? and !@target_profile.display_neighborhood.empty? -%>
+              <strong>Neighborhood:</strong> <%=@target_profile.display_neighborhood%></div>
+          <%- end -%>
+        <div><strong><%=render_for_buyer_or_owner(@target_profile, "Comments to Owner", "Features")%>:</strong> <%=@target_profile.display_features%></div>
+        <%- end -%>
+
+        <%- # MF -%>
+        <%- if @target_profile.property_type_multi_family? -%>
+        <div><strong>Units:</strong> <%=@target_profile.display_units%> &nbsp;&nbsp;<strong>Total SqFt:</strong> <%=@target_profile.display_square_feet_range%></div>
+        <div><strong>Price:</strong> <%=@target_profile.display_price_range%> &nbsp;&nbsp;
+          <%- if !@target_profile.display_neighborhood.nil? and !@target_profile.display_neighborhood.empty? -%>
+              <strong>Neighborhood:</strong> <%=@target_profile.display_neighborhood%></div>
+          <%- end -%>
+        <div><strong><%=render_for_buyer_or_owner(@target_profile, "Comments to Owner", "Features")%>:</strong> <%=@target_profile.display_features%></div>
+        <%- end -%>
+
+        <%- # VL -%>
+        <%- if @target_profile.property_type_vacant_lot? -%>
+        <div>&nbsp;</div>
+        <div><strong>Price:</strong> <%=@target_profile.display_price_range%> &nbsp;&nbsp;
+          <%- if !@target_profile.display_neighborhood.nil? and !@target_profile.display_neighborhood.empty? -%>
+              <strong>Neighborhood:</strong> <%=@target_profile.display_neighborhood%></div>
+          <%- end -%>
+        <div><strong><%=render_for_buyer_or_owner(@target_profile, "Comments to Owner", "Features")%>:</strong> <%=@target_profile.display_features%></div>
+        <%- end -%>
+
+        <%- # AC -%>
+        <%- if @target_profile.property_type_acreage? -%>
+        <div><strong>Acres:</strong> <%=@target_profile.display_acres%></div>
+        <div><strong>Price:</strong> <%=@target_profile.display_price_range%> &nbsp;&nbsp;
+          <%- if !@target_profile.display_neighborhood.nil? and !@target_profile.display_neighborhood.empty? -%>
+              <strong>Neighborhood:</strong> <%=@target_profile.display_neighborhood%></div>
+          <%- end -%>
+        <div><strong><%=render_for_buyer_or_owner(@target_profile, "Comments to Owner", "Features")%>:</strong> <%=@target_profile.display_features%></div>
+        <%- end -%>
+
+      <%- end -%>
+      <div>
+        <% query_string ="ref=conv"
+         query_string ="ref=conv" + "&not_show_link=true&conversation=#{request.path.to_s}&profile_inbox_message=#{params[:profile_inbox_message]}&profile_message_recipient_id=#{params[:profile_message_recipient_id]}&profile_inbox_message_id=#{params[:profile_inbox_message_id]}&profile_inbox_msg_param=profile_inbox_msg_param"  if !params[:profile_inbox_message_id].blank?
+         %>
+        <%=link_to "View Property Details", profile_profile_view_path(@profile, @target_profile)+'?'+ query_string.to_s  if @target_profile.owner?%>
+        <%=link_to "View Buyer Details", profile_profile_view_path(@profile, @target_profile)+'?'+ query_string.to_s if @target_profile.buyer?%>
+      </div>
+</div>
+
+</div>
+
+</div>
+  <div class="clear" style="margin-bottom: 15px;"></div>      
+       <div class="clear" style="margin-bottom: 15px;">
+
+
+        <%=link_to_function(image_tag("icons/icon_contact.gif", :style=>"border:none")+" Send a New Message","toggleCreateMessageForm()", :class=>"new_message_toggle") %>
+
+&nbsp;&nbsp;&nbsp;
+
+	<%if params[:message_filter]=="All" || params[:profile_inbox_message_id].blank? %>
+	        <%=link_to("Return to Messages", profile_path(:id=>@profile.id, :result_filter=>"messages", :message_filter=>@message_filter))%> 
+		 <%end%>
+       
+</div>
+  <div class="clear" style="margin-bottom: 15px;"></div>
+
+  <div id="conversation_create_form" style="display:none">
+
+    <%=render :partial=>"create_form"%>
+
+  </div>
+
+  <div class="clear"></div>
+
+  <div id="conversation_messages" class="conversation_messages">
+
+  <%= render :partial => 'conversation_message', :collection => @profile_message_recipients %>
+
+  </div>
+
+    <div class="buttonbar">
+      <div class="center">
+        <%- if !@profile_message_recipients.empty? && @profile_inbox_message.blank? -%>
+        <p><%=link_to(" < Prev",hash_for_profile_conversation_path(:id=>@target_profile.id, :profile_id=>@profile.id, :page_number=>(@page_number-1)), :class=>"prev_page") if @page_number > 1%>&nbsp;&nbsp;Page <span id="current_page_number"><%=@page_number%></span> of <span id="total_pages"><%=@total_pages%></span>&nbsp;&nbsp;
+          <%=link_to(" Next > ",hash_for_profile_conversation_path(:id=>@target_profile.id, :profile_id=>@profile.id, :page_number=>(@page_number+1)), :class=>"next_page") if @page_number < @total_pages%></p>
+       <%elsif !@profile_message_recipients.empty? && !@profile_inbox_message.blank?%>
+          
+
+          <%= will_paginate @profile_message_recipients, :params=>{:id=>@target_profile.id, :profile_id=>@profile.id, :page_number=>(@page_number-1), :profile_inbox_message=>@profile_inbox_message},:renderer => 'RemoteLinkRenderer' , :remote => {:update => 'ajax_update_div'} %>
+                    
+        <%-end-%>
+      </div>
+    </div>
+
+
+</div>

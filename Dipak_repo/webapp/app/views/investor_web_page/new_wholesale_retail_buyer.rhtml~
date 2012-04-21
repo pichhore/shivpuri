@@ -1,0 +1,86 @@
+<%=stylesheet_link_tag "#{@investor_website.layout=="modern" ? 'investorwebsitetemp2' : 'investorwebsite'}" %>
+<%=stylesheet_link_tag "investorwebcommoncss" %>
+ <% @uses_yui_editor = true %>
+<% require_js_controllers :profile_setup, :expand_collapse, :lightbox,:profile_update, :tab -%>
+<% require_js_helpers :currency_field, :integer_field -%>
+<%= javascript_include_tag "add_buyer" %>
+<%= javascript_include_tag "scratch_pad" %>
+<%= javascript_include_tag "dom-drag.js" %>
+<%= javascript_include_tag "ibox.js" %>
+<%= javascript_include_tag "datetimepicker_css"%>
+<%= javascript_include_tag :defaults, "scriptaculous", "object.event.js", "calendar_date_select", "validation", "reimatcher/epoch_classes",  :cache => "cached/reim_app_layout_js" %>
+<%=javascript_include_tag "base_controller"%>
+<%=javascript_include_tag "utils-debug" if RAILS_ENV != "production"%>
+<%=javascript_include_tag "utils" if RAILS_ENV == "production"%>
+<%= stylesheet_link_tag "calendar_date_select", "reimatcher/epoch_styles", "lightbox", :cache => "cached/reim_app_layout_css"%>
+
+<%= include_yui_editor_if_used %>
+<%= include_yui_lightbox_if_used %>
+<%=javascript_include_tag "base_controller"%>
+<%=javascript_include_tag "utils-debug" if RAILS_ENV != "production"%>
+<%=javascript_include_tag "utils" if RAILS_ENV == "production"%>
+<%=add_js_requires%>
+
+
+
+<%- content_for :page_scripts do -%>
+Event.observe(window, 'load', function() {
+  lightbox_controller = new NL.LightboxController();
+  profile_setup_controller = new NL.ProfileSetupController($('fields_property_type'),$('fields_privacy_public'),$('fields_privacy_private'));
+  optional_expand_collapse = new NL.ExpandCollapseController($$('#optional h3')[0],$$('#optional div.optional_content')[0]);
+  integer_field_helper_sqft_min = new NL.IntegerFieldHelper($('fields_square_feet_min'));
+  integer_field_helper_sqft_max = new NL.IntegerFieldHelper($('fields_square_feet_max'));
+
+  integer_field_helper_max_mon_pay = new NL.IntegerFieldHelper($('fields_max_mon_pay'));
+  integer_field_helper_max_dwn_pay = new NL.IntegerFieldHelper($('fields_max_dow_pay'));
+
+  integer_field_helper_units_min = new NL.IntegerFieldHelper($('fields_units_min'));
+  integer_field_helper_units_max = new NL.IntegerFieldHelper($('fields_units_max'));
+  integer_field_helper_acres_min = new NL.IntegerFieldHelper($('fields_acres_min'));
+  integer_field_helper_acres_max = new NL.IntegerFieldHelper($('fields_acres_max'));
+  currency_field_helper_after_repair_value = new NL.CurrencyFieldHelper($('fields_max_purchase_value'));
+  currency_field_helper_avr_repairs_value = new NL.CurrencyFieldHelper($('fields_arv_repairs_value'));
+  currency_field_helper_min_mon_pay = new NL.CurrencyFieldHelper($('fields_max_mon_pay'));
+  currency_field_helper_min_dow_pay = new NL.CurrencyFieldHelper($('fields_max_dow_pay'));
+
+});
+
+<%- end -%>
+
+<% if @content_for_page_scripts -%>
+<script type="text/javascript">
+// <![CDATA[
+<%= @content_for_page_scripts %>
+
+// ]]>
+</script>
+<% end -%>
+<%- if @include_gmap_header -%>
+<%= GMap.header %>
+<%- end -%>
+<title>Investor Website</title>
+
+<% if @investor_website.layout=="modern" %>
+    <div id="wrap">
+      <%#= render :partial => "inv_web_temp2_header"%>
+      <div class="clear"></div>
+      <div>&nbsp;</div>
+      <div class="menu_wrap_inside">
+        <div id="sitecontent" style="padding: 5px 6px 0; width: 960px;background:none;">
+          <%= render :partial => "retail_buyer_form_fields" %>
+          <div style="width:940px; margin-left:10px;">
+            <%= render :partial => "inv_web_temp2_footer"%>
+          </div>
+        </div>
+      </div>
+    </div>
+<% else %>
+    <%#= render :partial => "inv_web_template1_header" %>
+    <div id="back_div" style="background-color:#E6EBEC;">
+	
+	    <div id="content" style="padding: 4px 6px 16px;background:none;">
+          <%= render :partial => "retail_buyer_form_fields" %>
+      </div>
+      <%#= render :partial => "inv_web_temp1_footer" %>
+    </div>
+<% end %>

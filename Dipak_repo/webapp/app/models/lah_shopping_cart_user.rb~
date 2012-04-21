@@ -1,0 +1,2 @@
+class LahShoppingCartUser < ActiveRecord::Base
+end

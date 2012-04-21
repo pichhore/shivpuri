@@ -1,0 +1,10 @@
+require File.dirname(__FILE__) + '/../spec_helper'
+
+describe LahShoppingCartController do
+
+  #Delete this example and add some real ones
+  it "should use LahShoppingCartController" do
+
+  end
+
+end

@@ -1,0 +1,115 @@
+<h3>Editing Alert: <strong><%= truncate(@alert_definition.title, :length => 80) %></strong></h3>
+
+<%= error_messages_for :alert_definition %>
+
+<% form_for(@alert_definition, :url => admin_alert_definition_path(@alert_definition), :html => {:method => 'put'}) do |f| %>
+  <div style="margin-bottom: 15px;">
+    <b>Title: </b>
+    <div class="admin_tip">The title is displayed as the header of the alert message.</div>
+    <%= f.text_field :title, :size=>60 %>
+  </div>
+  
+  <div style="margin-bottom: 15px;">
+    <b>Disabled: </b>
+    <div class="admin_tip">Disable the alert until you are ready to release it.
+    <%= f.check_box :disabled %>
+    </div>
+  </div>
+
+  <div style="margin-bottom: 15px;">
+    <b>User Class: </b>
+    <div class="admin_tip">Select User Class for the Page Alerts:</div>
+      <%=f.select("user_class_id", UserClass.find(:all).collect {|p| [ p.user_type_name, p.id ] }, {:include_blank => 'All'})%>
+    </div>
+
+  <div style="margin-bottom: 15px;">
+    <b>Training: </b>
+      <%= f.check_box :amps %>AMPS <%= f.check_box :amps_gold %>AMPS Gold <%= f.check_box :top1 %> Top 1% Coaching
+      <%= f.check_box :re_volution %> RE-Volution <%= f.check_box :rei_mkt_dept %>My REI Marketing Department
+  </div>
+
+  <div style="margin-bottom: 15px;">
+    <b>Message: </b>
+    <div class="admin_tip">The message that is displayed in the alert below the title.</div>
+    <%= f.text_area :message, :size=>"40x4", :required=>true %>
+  </div>
+
+  <div style="margin-bottom: 15px;">
+    <b>Details: </b>
+    <div class="admin_tip">Optional additional details that the user can see by clicking a link.</div>
+    <%= f.text_area :details, :size=>"60x6"%>
+  </div>
+  
+  <div style="margin-bottom: 15px;">
+    <b>Alert Trigger</b>
+    <div class="admin_tip">The Alert Trigger Type that will determine under what conditions the Alert will be created.</div>
+    <%= f.collection_select(:alert_trigger_type_id, @alert_trigger_types, :id, :name, options={:prompt=>"-Select a Trigger Type-"},
+        :onchange=>"if (this.value) { $('parameter_description').innerHTML = $('parm_'+this.value).innerHTML } else { $('parameter_description').innerHTML = '' }") %>
+  </div>
+  <%- @alert_trigger_types.each do |alert_trigger_type| -%>
+      <span style="display:none" id="parm_<%= alert_trigger_type.id %>"><%= alert_trigger_type.parameter_description %></span>
+  <%- end %>
+
+  <div style="margin-bottom: 15px;">
+    <b>Parameter(s): </b>
+    <div class="admin_tip">Some triggers require a parameter, for example, the on_event trigger requires the name of a date field on the User.</div>
+    <div id="parameter_description"></div>
+    <%= f.text_field :trigger_parameter_value %>
+  </div>
+
+  <div style="margin-bottom: 15px;">
+    <b>Welcome Alert ?: </b> 
+    <div class="admin_tip" )>Is this a Welcome Alert for new Users ?</div>
+    <div><%#= f.select("is_welcome_alert", [["False", false], ["True", true]] )%>
+      <select name="alert_definition[is_welcome_alert]" id="welcomealert" onclick = "welcome_alert(this.id)">
+	<option value=false  <%="selected" if @alert_definition.is_welcome_alert ==  false%>>false</option>
+	<option value=true  <%="selected" if @alert_definition.is_welcome_alert ==  true%>>true</option>
+    </select>
+    <%=error_message_on :alert_definition,:is_welcome_alert %></div>
+  </div>
+
+  <div style="margin-bottom: 15px; display: none;" id ="welcome_alert_expiry">
+    <b>Welcome Alert Expiry Time (in days): </b>
+  <div class="admin_tip">For new Users, indicate till how many days, only Welcome Alerts should be displayed  </div>
+    <div><%= f.text_field :welcome_alert_expiry %>
+    <%=error_message_on :alert_definition,:welcome_alert_expiry %></div>
+  </div>
+
+  <div style="margin-bottom: 15px;">
+    <b>Trigger Delay Days: </b>
+    <div class="admin_tip">For time-based triggers, indicate how many days after the event to create the Alert.</div>
+    <div><%= f.text_field :trigger_delay_days, :size=>6 %></div>
+  </div>
+  
+  <div style="margin-bottom: 15px;">
+    <b>Trigger Cutoff Days: </b>
+    <div class="admin_tip">For time-based triggers, indicate how many days after the event to stop creating the Alert. This will mainly be used to allow alerts to be created that affect new users, but not existing ones.</div>
+    <div><%= f.text_field :trigger_cutoff_days, :size=>6 %></div>
+  </div>
+
+  <p>
+    <%= f.submit "Update", :style=>"float: left; margin-right: 10px;" %>
+    <%= button_to_function 'Cancel', "document.location='#{admin_alert_definitions_path}';", :style=>"margin-right: 10px;"  %>
+    <%= button_to_function 'Show', "document.location='#{admin_alert_definition_path(@alert_definition)}';" %>
+  </p>
+<% end %>
+<script type="text/javascript">
+  function welcome_alert(id) {
+     var e = document.getElementById(id);
+     var x = e.options[e.selectedIndex].value;
+     if (x == "true")
+       {
+         document.getElementById('welcome_alert_expiry').style.display = "";
+       }
+     else if (x == "false")
+       {
+         document.getElementById('welcome_alert_expiry').style.display = "none";
+       }
+  }
+
+<% content_for :page_scripts do -%>
+Event.observe(window, 'load', function() {
+ welcome_alert("welcomealert");
+});
+<% end -%>
+</script>

@@ -1,0 +1,43 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>REI-Matcher Email</title>
+</head>
+
+<body>
+<div style="font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#16161C; width:500px;margin:0 auto; padding:50px;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	  <tr>
+		  <td colspan="2">
+			  <p>Hey <%= @name %>,</p>
+			  <p><%= @header %></p>
+		  </td>
+	  </tr>
+	  <tr>
+<<<<<<< HEAD:webapp/app/views/user_notifier/send_notification_for_new_badge.rhtml
+		  <td valign="middle"><img src="<%= REIMATCHER_URL + @image.public_filename.gsub("/badge_images","badge_images") %>" alt="<%= @badge_name %>" width="85" height="104" hspace="10" vspace="10" /></td>
+=======
+		  <td valign="middle">
+                    <% unless @image.blank? %>
+                      <img src="<%= REIMATCHER_URL + @image.public_filename.gsub("/badge_images","badge_images") %>" alt="<%= @badge_name %>" width="85" height="104" hspace="10" vspace="10" /></td>
+                    <% else %>
+                      <%= @badge_name %>
+                    <% end %>
+>>>>>>> ticket_1755_production:webapp/app/views/user_notifier/send_notification_for_new_badge.rhtml
+		  <td>
+			  <h1 style="font-size:18px;padding:6px 0;margin:0;"><%= @badge_name %></h1>
+			  <p style="line-height:19px;padding:5px 0 5px 15px;margin:0;"><%= @body %></p>
+		  </td>
+	  </tr>
+	  <tr>
+		  <td colspan="2">
+			  <p><br /><%= @footer %></p>
+		  </td>
+	  </tr>
+	</table>
+
+</div>
+</body>
+</html>

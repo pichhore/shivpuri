@@ -1,0 +1,17 @@
+class AddUserEmailTypeInUserEmailAlertDefinition < ActiveRecord::Migration
+  def self.up
+    add_column :user_email_alert_definitions, :user_email_type, :string, :default => "new"
+    user_email_alert_definitions = UserEmailAlertDefinition.find(:all, :conditions=>["email_type='existing_welcome_reminder_email'"])
+    user_email_alert_definitions.each do |user_email_alert_definition|
+      user_email_alert_definition.update_attribute(:email_type, 'welcome')
+    end
+  end
+
+  def self.down
+    remove_column :user_email_alert_definitions, :user_email_type
+    user_email_alert_definitions = UserEmailAlertDefinition.find(:all, :conditions=>["email_type='welcome'"])
+    user_email_alert_definitions.each do |user_email_alert_definition|
+      user_email_alert_definition.update_attribute(:email_type, 'existing_welcome_reminder_email')
+    end
+  end
+end

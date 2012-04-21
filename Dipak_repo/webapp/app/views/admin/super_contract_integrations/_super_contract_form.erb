@@ -1,0 +1,94 @@
+<%- content_for :page_scripts do -%>
+NL.AccountSettingsController = Class.create();
+NL.AccountSettingsController.prototype = {
+
+    onTabChange: function(old_tab, new_tab) {
+        uri = new_tab.getAttribute("uri");
+        if(uri) {
+            document.location = uri;
+        }
+    },
+
+    initialize: function() {
+        this.tab_controller = new NL.TabController(1, $$('div.tabset')[0]);
+        this.tab_controller.model.observe("tab.change", this.onTabChange.bind(this));
+    }
+}
+
+function toggel_personalized_list(editor){
+ var link = document.getElementById(editor)
+ var list = document.getElementById('personalized_list')
+ if (link.rel=='true' && list.style.display!='none'){
+ list.style.display='none';
+ link.setAttribute('rel', false);
+ }else{
+ list.style.display='block';
+ link.setAttribute('rel', true);
+ }
+ var personalized_items = document.getElementsByClassName('personalized_item');
+ for (var i = 0; i < personalized_items.length; i++) {
+ personalized_items[i].setAttribute('value', editor);
+ }
+}
+
+function getIFrameDocument(aID){
+ if (document.getElementById(aID).contentDocument){
+ return document.getElementById(aID).contentDocument;
+ } else {
+  alert("hello");
+ return document.frames[aID].document;
+ }
+}
+
+function doRichEditCommand(frame, personalize, index, flag){
+ oframe = 'super_contract_integration_' + frame;
+ var pattr = /\{\w+[\s\w+]+\}/g;
+ var personalize_array = personalize.match(pattr);
+ text = personalize_array[index];
+ var browser = sendToClipboard(text);
+ if (browser != "Not IE"){
+ document.getElementById(oframe).contentWindow.focus();
+ var temp = getIFrameDocument(oframe).execCommand('paste');
+ document.getElementById(oframe).contentWindow.focus();
+ document.getElementById('personalized_list').style.display='none';
+ }
+ if (browser == "Not IE"){
+ var temp = getIFrameDocument(oframe).execCommand('InsertHTML', false, text);
+ document.getElementById(oframe).contentWindow.focus();
+ document.getElementById('personalized_list').style.display='none';
+ }
+}
+
+function sendToClipboard(s){
+ if (window.clipboardData && clipboardData.setData){
+ clipboardData.setData("text", s);
+ }
+ else{
+ return "Not IE";
+ }
+}
+<%- end -%>
+
+
+<%= f.collection_select(:state_id, State.all, :id, :name) %>
+<br><br>
+<span class='personlized_span' style="float:left;margin-left:450px;">
+  <a href="javascript:;" id="contract_editor" onclick="toggel_personalized_list(this.id)" >Personalize</a>
+  <img src="/images/reimatcher_images/help_icon.png" alt='help' title="To personalize your emails, simply place your cursor where you want the variable added, then click Personalize and the name of variable you wish to add from the list" />
+</span>
+<br>
+<div  class="widecontent">
+<div style="float:left;">
+<%= f.text_area :contract, :class=>"rich_text_editor", :size=> "80x4" %>
+</div>
+<div id='personalized_list' style="padding:0px;float:left;">
+ <% personalize = ["{Retail buyer first name}","{seller first name}","{seller property city}", "{date seller lead created}","{Investor first name}", "{Investor full name}", "{Company name}", "{Company address}", "{Company phone}", "{Company email}", "{investor seller website URL}"] %>
+  <select multiple onchange="doRichEditCommand(this.options[this.selectedIndex].value,'<%=personalize%>',this.selectedIndex,'<%= 2 %>')">
+      <% personalize.each do |l| %>
+      <option class='personalized_item' value='' >
+      <%=l%>
+      </option>
+    <% end %>
+  </select>
+</div>
+</div>

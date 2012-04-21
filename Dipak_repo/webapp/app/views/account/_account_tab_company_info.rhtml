@@ -1,0 +1,12 @@
+<ul>
+  <li><%= link_to "Investor Profile", {:controller=>'account', :action=>'settings'}, {:onclick => "return show_confirmation();"} %></li>
+  <li class="<%= active_class_company_info unless defined?(active_class_company_info).nil? %>"  uri="<%=url_for({:controller=>'account', :action=>'company_info'})%>">Company Info</li>
+  <li class="<%= active_class_social_media unless defined?(active_class_social_media).nil? %>"  uri="<%=url_for({:controller=>'account', :action=>'social_media'})%>">Social Media</li>
+<!--
+  <li><%#= link_to "Buyer Websites", {:controller=>'account', :action=>'buyer_webpage'}, {:onclick => "return show_confirmation();"} %></li>
+  <li><%#= link_to "Buyer Responder", {:controller=>'account_marketing', :action=>'welcome_email'}, {:onclick => "return show_confirmation();"} %></li>
+-->
+  <li class="<%= active_class_syndication unless defined?(active_class_syndication).nil? %>"  uri="<%=url_for({:controller=>'account', :action=>'property-syndication'})%>">Syndication</li>
+  <li><%= link_to "Alerts", {:controller=>'account', :action=>'digest_frequency'}, {:onclick => "return show_confirmation();"} %></li>
+
+</ul>

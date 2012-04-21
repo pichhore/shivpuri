@@ -1,0 +1,152 @@
+<%- @page_title = "Island Escape Contest" -%>
+<%- @page_heading = "Island Escape Contest" -%>
+<%- @page_title_h1 = "Island Escape Contest" -%>
+<%- @ignore_h2 = true -%>
+<%- @meta_description = "" -%>
+<%- @meta_keywords = "" -%>
+<%- @tip = "Invite Your Friends to Dwellgo and Win!" -%>
+
+<%=javascript_include_tag "counter"%>
+
+<%- content_for :page_styles do -%>
+<style>
+.page_title .tip {
+  font-size: 1.2em;
+}
+</style>
+<%- end -%>
+
+
+<%- content_for :page_scripts do -%>
+function showMoreFields() {
+  $('extra_fields').show();
+  $('have_more').hide();
+}
+<%- end -%>
+
+<%- content_for :title_ad do -%>
+<div class="refRightHeader">
+  <p>Time remaing till contest ends</p>
+
+  <span id="countdown1" style="font-size: 24px; font-family: arial, sans-serif; color: #302db8; background: #eaeaf8; border: 1px solid #cfcfea; padding: 6px 10px; margin: 0; text-align: center; white-space: nowrap;">2008-09-03 17:00:00 GMT+00:00</span>
+<br /><br />
+<a href="#form"><%=image_tag "button-Invite.jpg", :width=>"147", :height=>"24", :border=>"0"%></a>
+</div>
+<%- end -%>
+
+<div class="contest">
+
+<a name="top"></a>
+
+<div class="refLeftBody">
+<embed id="VideoPlayback" style="width:370px;height:300px" allowFullScreen="true" src="http://video.google.com/googleplayer.swf?docid=373932616658563527&hl=en&fs=true" type="application/x-shockwave-flash"> </embed>
+</div>
+
+<div class="refRightBody">
+  <p class="refHeaderMain">How to Enter</p>
+
+  <p>Simply Invite your friends to Dwellgo by scrolling down to the form below or clicking <a href="#form">here</a>!  You can invite as many friends as you want, but note that Dwellgo is currently only for matching property and buyers in <strong>Central Texas</strong>.  We track everytime your referral creates a profile on Dwellgo.  For every friend that adds their property to Dwellgo, you will receive 2 points.  For every friend that creates a Buyer Profile, you will receive 1 point.  It's literally that easy!
+<br/><%=link_to "See Contest Terms and Rules", :action=>"terms_and_rules"%></p>
+
+  <p class="refHeaderMain">Prizes</p>
+  <p>The contestant with the most points at the end of the contest period will win a trip for 2 to Hotel del Coronado on Coronado Island off the coast of San Diego, CA. For every contestant who brings in at lesat 6 profiles (Buyer or Property), you will receive a $15 Starbucks giftcard (limit 1 per person).
+<br/><%=link_to "See Contest Terms and Rules", :action=>"terms_and_rules"%></p>
+  <p class="refHeaderMain">Follow the Contest</p>
+  <p>See the <a href="http://dwellgo.wordpress.com/referral-contest/">Contest Leaders</a> on our blog!</p>
+  <p>&nbsp;</p><p>&nbsp;</p>
+
+</div>
+
+<a name="form"></a>
+
+<div id="refForm">
+
+<%- if flash[:form_error] -%>
+<div class="error">
+<%=flash[:form_error]%>
+</div>
+<%- end -%>
+
+<%- form_tag :action=>"invite" do -%>
+
+  <div class="refHeaderMain"  align="center">Refer Friends and Win!</div>
+  <div id="refLeftForm">
+    <table width="250" border="0" cellspacing="2" cellpadding="0">
+      <tr>
+        <td height="10"></td>
+      </tr>
+
+      <tr>
+        <td id="invite">From:</td>
+      </tr>
+      <tr>
+        <td><%=text_field_tag "from_name", "Your Name", :size=>"28", :style=>"color:#999", :onfocus=>"this.select()"%></td>
+      <tr>
+        <td><%=text_field_tag "from_email", "Your Email", :size=>"28", :style=>"color:#999", :onfocus=>"this.select()"%></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td><div align="center">
+            <p><a href="#" tabindex="999" onclick="window.open('/images/email-screenshot.jpg',         '','height=450,width=875,menubar=0,resizable=1,scrollbars=0,status=0,titlebar=0,toolbar=0');"><img src="/images/emailThumb.jpg" border="0" alt="email" width="208" height="104"/></a></p>
+            <p><a href="#" tabindex="999" onclick="window.open('/images/email-screenshot.jpg',         '','height=450,width=875,menubar=0,resizable=1,scrollbars=0,status=0,titlebar=0,toolbar=0');">click to view sample email</a><br />
+
+            </p>
+            <p>&nbsp;</p>
+            <p align="left">
+              <span style="color: #3333BB; font-weight: bold">NOTE</span>- Your friends will NOT automatically be added to our membership database and they will never receive any communications from us (except for this invitation to join). To enjoy the Dwellgo community (including emails), they must join.
+            </p>
+        </div></td>
+      </tr>
+    </table>
+  </div>
+
+  <div id="refRightForm">
+    <table width="390" border="0" cellspacing="2" cellpadding="0">
+      <tr>
+
+        <td height="10" colspan="2"></td>
+      </tr>
+      <tr>
+        <td colspan="2">Sending to:</td>
+      </tr>
+      <%- for index in 1..5 do -%>
+      <tr>
+        <td><%=text_field_tag "invitee[first_name][]", "First Name", :size=>"28", :style=>"color:#999", :onfocus=>"this.select()"%></td>
+        <td><%=text_field_tag "invitee[email][]", "Email", :size=>"28", :style=>"color:#999", :onfocus=>"this.select()"%></td>
+      </tr>
+      <%- end -%>
+    </table>
+    <table width="390" border="0" cellspacing="2" cellpadding="0" id="extra_fields" style="display:none;">
+      <%- for index in 1..5 do -%>
+      <tr>
+        <td><%=text_field_tag "invitee[first_name][]", "First Name", :size=>"28", :style=>"color:#999", :onfocus=>"this.select()"%></td>
+        <td><%=text_field_tag "invitee[email][]", "Email", :size=>"28", :style=>"color:#999", :onfocus=>"this.select()"%></td>
+      </tr>
+      <%- end -%>
+    </table>
+
+    <table width="390" border="0" cellspacing="2" cellpadding="0">
+      <tr id="have_more">
+        <td colspan="2"><a href="#" onClick="showMoreFields(); return false;">Have more friends?</a></td>
+      </tr>
+      <tr>
+        <td colspan="2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td  align="center" colspan="2">
+
+          <%=submit_tag "Send Now", :class=>"submit_l_ref"%> &nbsp; <input class="submit_l_ref" name="" type="submit" value="Cancel" /></td>
+    </tr>                </table>
+  </div>
+</div>
+<%- end -%>
+
+  <p style="clear:both">&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+  <p>&nbsp;</p>
+
+</div>

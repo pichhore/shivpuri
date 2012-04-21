@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+   <title>REI Matcher Pro One Time Offer</title>
+<script type="text/javascript" src="http://static.flowplayer.org/js/flowplayer-3.2.6.min.js"></script>
+<script src="http://static.flowplayer.org/js/flowplayer-3.2.6.min.js"></script>
+<script src="http://static.flowplayer.org/js/flowplayer.ipad-3.2.2.min.js"></script>
+
+   <META NAME="robots" CONTENT="noindex, nofollow">
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<%= stylesheet_link_tag "pro_upsell_offer" %>
+
+	<!--[if IE 6]>
+	<link href="css/ie-6.css" rel="stylesheet" type="text/css" media="screen" />
+	<![endif]-->
+
+	<!--[if IE 7]>
+	<link href="css/ie-7.css" rel="stylesheet" type="text/css" media="screen" />
+	<![endif]-->
+
+	<!--[if IE 6]>
+	<script type="text/javascript" src="js/ie6pngifx.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+<div id="container">
+
+  	<div id="header">
+			<a href="#"><img id="logo" src="/images/logo.png" alt="REI Matcher" width="500" height="107" /></a>
+  	</div><!--end header-->
+
+  	<div id="main">
+
+	<div style="clear:both; height: 10px;"></div>
+
+
+  				<div align="center">
+		    <h1 class="main_head" style="font-size:30px">Wait!  We have a special offer for you!		      <br />
+		      <br />
+		    </h1>
+		    <div id="video-truth">
+			  <center><div id="evp-e9e81fa44335c9c97e57a820143a5703-wrap" class="evp-video-wrap"></div><script type="text/javascript" src="http://www.damonflowers.com/evp/framework.php?div_id=evp-e9e81fa44335c9c97e57a820143a5703&id=cmVpbS11cHNlbGwubW92&v=1329104557&profile=default"></script><script type="text/javascript"><!--
+_evpInit('cmVpbS11cHNlbGwubW92[evp-e9e81fa44335c9c97e57a820143a5703]');//--></script></center>
+			</div>
+            <h1 class="sub_head">Unadvertised Bonus Offer              </h1>
+            <h1 class="main_head">Get REIMatcher Pro for 50% off...PLUS...Lock in your discounted price FOREVER <br />
+            </h1>
+            <h1 class="sub_head"><strong>Free 30-Day Trial of REI Matcher Pro at the discounted price of $97/month (normally $197/month).  If you dont absolutely love it, Just cancel and pay nothing.</strong></h1>
+            <h1 class="rsvp"><br />
+              Here are just a few of the hundreds of tools that are available to you with REI Matcher
+            Pro... </h1>
+            <table width="554" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="554" height="260"><ul class="green_aro style2">
+              <li>You get Property Syndication so that <strong>your properties will be instantly syndicated to more
+                than 250 Top Real Estate websites.</strong></li>
+              <li>Youll get <strong>your own electronic salesperson</strong> with the Seller Magnet System which <strong>captures and
+                automatically follow-ups with your leads.</strong>                </li>
+              <li>Youll get a Seller & Buyer Lead Management Systems with phone scripts built right in, so
+                you can <strong>easily process leads and know exactly what to say when you speak to them.</strong></li>
+              <li>Youll also get our Exclusive A.I. Responders that will <strong>automatically stay in contact with your Seller & Buyer leads for
+                up to 12 months.</strong></li>
+              <li>Have your own Personal Brand online within minutes, using our <strong>Content Rich Seller Website & Dynamic Buyer Websites which practically maintain themselves. </strong></li>
+              <li>PLUS, you'll have access to <strong>LIVE Coaching Calls with Real Estate Expert, Phill Grove</strong> and his guest speakers. </li>
+            </ul></td>
+    </tr>
+</table>
+
+            <h1 class="sub_head">Take advantage of this 30-day FREE trial right now by clicking the orange button below            </h1>
+            <div id="hiddenContent-">
+
+			  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td align="center"><div align="center"></div>
+        <table width="431" border="0" align="center" cellpadding="5" cellspacing="0">
+    <tr>
+      <td width="421"><h1 class="checkout"> 30 days free then $97/month</h1>
+       <h1 class="checkout-option-gray">If you select the Pro monthly payment option <br />
+         you will be billed  $97 every 30 days beginning in 30 days. <strong><br />
+         You will not be billed anything today.</strong> </h1></td>
+      </tr>
+    <tr>
+      <td><div align="center"><a href="http://www.reimatcher.com/securecart.php?pid=6618375a756547ed94dacda289f4fac0&amp;bn=1&amp;clear=1"><img src="/images/cart.jpg" width="348" height="154" border="0" /></a></div></td>
+      </tr>
+    <tr>
+      <td><div align="center"><b><%=link_to "No Thanks, I just want the Free Version without the above features", { :controller => "users", :action=>"thanks", :email => @user.blank? ? "" : @user.email }, :class=>"main_head_nothanks" %></b></div></td>
+      </tr>
+  </table></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+    </tr>
+  </table>
+
+
+
+
+
+
+				<p>&nbsp;</p><p>&nbsp;</p>
+			</div> <!-- End: Hidden Content -->
+  </div>
+
+
+  </div><!--end main-->
+
+
+    <div id="footer">
+    	<div id="copyright">&copy; Copyright 2012 REI Technologies</div>
+  	</div><!--end footer-->
+
+
+</div><!--end container-->
+<script type="text/javascript">
+	flowplayer("mediaspace-truth","http://releases.flowplayer.org/swf/flowplayer-3.2.7.swf", {
+		plugins:{
+			controls:null
+		},
+		playlist: [
+			{
+				url: 'http://bizampbeta.com/reimatcher/rei-pro/media/splash.png',
+				scaling: 'orig'
+			},
+			{
+				url: 'http://bizampbeta.com/reimatcher/up1/media/reim-upsell.mov',
+				autoPlay: true,
+				autoBuffering: true
+			}
+		]
+	});
+
+	function showContent(){
+		$("#hiddenContent").fadeIn("slow");
+		clearTimeout(to);
+	}
+	$(function() {
+		var to = setTimeout("showContent()", 5000);
+	}).ipad();
+</script>
+
+
+</body>
+
+</html>

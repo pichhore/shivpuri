@@ -1,0 +1,99 @@
+<div class="lead_magnet_div">
+  <% form_for(:fields, :url => {:controller=>"investor_seller_web_page", :action=>"create_new_seller_profile",:permalink_text=>params[:permalink_text]}) do |f| %>
+    <%= error_messages_for :criteria %>
+    <fieldset class="lead_magnet" style="width: 383px;">
+      <div align="left" style="margin-left:10px;"><b style="font-size:larger;"> Sell Property Now  </b></div><br />
+      <table  style="margin-left:10px;">
+        <tr>
+          <td class="label_required">First Name:*</td>
+          <td class="label_required">Last Name:</td>
+        </tr>
+
+        <tr>
+          <td><%=text_field "seller_profile", "first_name" , :size=>15 %><%=error_message_on :seller_profile,:first_name%></td>
+          <td><%=text_field "seller_profile", "last_name" , :size=>15%><%=error_message_on :seller_profile,:last_name%></td>
+        </tr>
+
+        <tr>
+          <td class="label_required">Home Phone:</td>
+          <td class="label_required">Email:*</td>
+        </tr>
+
+        <tr>
+          <td><%=text_field "seller_profile", "phone", :size=>15  %><%=error_message_on :seller_profile,:phone%></td>
+          <td><%=text_field "seller_profile", "email", :size=>15  %><%=error_message_on :seller_profile,:email%></td>
+        </tr>
+      </table>
+      <div id="lead_magnet_text" align="left" style="margin: 20px 0 10px 10px;" ><b style="font-size:larger;"> Tell us about the property you are selling  </b></div>
+      <table style="margin-left:10px;" id="populator">
+        <tr>
+            <td id="property_address_label" class="label_required">Address:</td>
+            <td class="label_required">Country:</td>
+        </tr>
+
+        <tr>
+            <td><%=f.text_field "property_address", :size=>15 %><%=error_message_on :fields, :property_address %></td>
+            <td>
+               <select id="fields_country" name="fields[country]" <% if !(error_message_on :fields,:country).blank? %> style="border:1px solid #FF3300; width:105px;color:#FF3300;"<% end %> onchange="fields_get_states();">
+                <%= options_for_select(County::COUNTRY_NAME,@country) %>
+              </select>
+               <%=error_message_on :fields,:country %>
+          </td>
+        </tr>   
+        <%# if !@country.blank? and @country == "CA" %>
+
+            <tr class="canada" style="display:none;">
+                <td class="label_required" id="state_block">Province:</td>
+                <td class="label_required" id="zip_block">Postal Code:</td>
+            </tr>
+            <tr class="canada" style="display:none;">
+                <td>
+                  <select id="fields_state" name="fields[state]" <% if !(error_message_on :fields,:state).blank? %> style="border:1px solid #FF3300; width:105px;color:#FF3300;"<% end %>>
+                  <%= options_for_select([[ "Select a Province", "" ]] + State::CANADA_NAMES,@state) %>
+                  </select>
+                  <%=error_message_on :fields,:state %>
+                </td>
+                <td><%=f.text_field "zip_code", :size=>15  %><%=error_message_on :fields,:zip_code %></td>
+            </tr>
+
+          <%# else %>
+
+            <tr class="usa">
+                <td class="label_required" id="state_block">State:</td>
+                <td class="label_required" id="zip_block">Zip Code:</td>
+            </tr>
+            <tr class="usa">
+                <td>
+                  <select id="fields_state" name="fields[state]" <% if !(error_message_on :fields,:state).blank? %> style="border:1px solid #FF3300; width:105px;color:#FF3300;"<% end %>>
+                  <%= options_for_select([[ "Select a State", "" ]] + State::NAMES,@state) %>
+                  </select>
+                  <%=error_message_on :fields,:state %>
+                </td>
+                <td><%=f.text_field "zip_code", :size=>15  %><%=error_message_on :fields,:zip_code %></td>
+            </tr>
+          <%# end %>
+
+      </table>
+      <p id="beds_margin" style="margin:10px 0 2px 16px;"> <span># Beds: </span><span style="margin-left:37px;"># Baths: </span><span style="margin-left:42px;">Estimated Home Value: </span></p>
+      <p  style="margin-left:14px;">
+      <span><%=f.select("beds", [["--Beds--", ""], ["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"], ["8", "8"], ["9", "9"], ["10+", "10"]]) %><%=error_message_on :fields,:beds%></span>
+      <span style="margin-left:15px;"> <%=f.select("baths", [["--Baths--", ""], ["1", "1"], ["1 1/2", "1.5"], ["2", "2"], ["2 1/2", "2.5"], ["3", "3"], ["4", "4"], ["5", "5"], ["6+", "6+"]]) %><%=error_message_on :fields,:baths %></span>
+      <span id="home_margin" style="margin-left:12px;"> <%=f.text_field "estimated_home_value", :size=>15 %><%=error_message_on :fields,:estimated_home_value %></span></p>
+      <%= hidden_field_tag "render_action", params[:action]%>
+      <div style="margin-top:30px;text-align: center;"><%=submit_tag "Get Offer Now", :class=>"submit_xl"%></div>
+    </fieldset>
+  <% end %>
+</div>
+<!--[if IE 8]>
+<style>
+#beds_margin {
+ margin:10px 0 2px 15px !important;
+}
+
+#home_margin {
+  margin-left:19px !important;
+}
+</style>
+<![EndIf]-->
+
+

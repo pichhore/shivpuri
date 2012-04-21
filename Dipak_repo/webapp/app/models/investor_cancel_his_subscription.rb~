@@ -1,0 +1,21 @@
+require "validatable"
+#
+# Base class for capturing profile fields from a webform, prior to updating a profile.
+#
+# See the subclasses for the complex validation logic.
+#
+class InvestorCancelHisSubscription
+  include Validatable
+
+  validates_presence_of :reason, :message => "Please specify why Are You Cancelling?"
+  validates_presence_of :name, :message => "Please enter your name"
+  validates_presence_of :email, :message => "Please enter your email"
+  validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "Please enter your valid email address"
+
+  INVESTORCANCELHISSUBS = [:reason,
+                                :name,
+                                :email,
+                                :understand]
+  create_attrs INVESTORCANCELHISSUBS
+
+end

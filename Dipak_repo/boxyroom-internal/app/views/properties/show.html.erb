@@ -1,0 +1,424 @@
+<script type="text/javascript" src="http://maps.google.com/maps?file=api&v=2&key=<%= Geokit::Geocoders::google %>"></script>
+<script type="text/javascript" src="/javascripts/jquery.cycle.all.min.js">
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    <%- if !@property.pictures.empty? %>
+      $('ul#photos-slider').cycle({
+          fx:     'fade',
+          speed:  'fast',
+          timeout: 2000,
+          next:   '#next1',
+          prev:   '#prev'
+      });
+    <%end%>
+<% if !@property.address.lat.blank? and !@property.address.lng.blank? %>
+    if (GBrowserIsCompatible()) {
+      var map = new GMap2(document.getElementById("maps"),{ size: new GSize(650,350) } );
+      var point = new GLatLng(<%= @property.address.lat %>, <%= @property.address.lng %>);
+      map.setCenter(point, 10);
+      map.setUIToDefault();
+      var streetv = new GStreetviewPanorama(document.getElementById("street-view"), { latlng:point });
+    }
+    map.addOverlay(new GMarker(point));
+<% end %>
+    $("#main").tabs();
+  });
+ </script>
+
+<div id="content">
+                <div id="back_link_show_property" style="right: 102px !important;position:relative!important;margin-bottom: 10px !important; margin: 0px auto!important;">  <%= flash_message %> </div>
+                <div class="container" id="display_property_for_previous_link" style="margin-top: 0!important;">
+                  <div class="previous_link" > <%= link_to "Back to Previous Page", :back %></div>
+				  <div class="primary" style="margin-right:0px;margin-bottom: 0px;">
+				  <h1 style="width:644px;"><%= @property.title %>
+                                    <%if false%>
+				      <div  class="ms_check" style="width: 120px; float: right;" class=""> 
+					  <%if !check_user_like_property_status(@property)%>
+					    <a class="like" style="click: once;"></a> 
+					  <%else%>
+					    <span class="liked"></span>
+					  <%end%>
+					<span id="like_g"></span>
+				      </div>
+                                    <% end %>
+				  </h1>
+			          <strong style="width:644px;"><%= @property.address.location %></strong>
+    				  <div class="main" id="prop-views" style="width: 652px;">
+					  <div class="tabs" >
+						  <ul>
+							  <li class="photos"><a href="#photos">Photos</a></li>
+							  <li class="maps"><a href="#maps">Maps</a></li>
+							  <li class="street-view"><a href="#street-view">Street View</a></li>
+						  </ul>
+						  <div id="photos">
+							  <div class="tabs photos" >
+							  <%- if @property.pictures.empty? %>
+							    <div style="width: 650px; height: 350px;">
+								<SPAN>There are no Pictures for this property</SPAN>
+							    </div>
+							   <%- else %>
+							    <ul id="photos-slider">
+								<%- @property.pictures.each do |picture| %>
+								  <li><%= image_tag picture.image.url(:medium) %></li>
+								<%- end %>
+							    </ul>
+      							 <%- end %>
+							  </div>
+							    <ul id="photos-next-prev">
+							    <li><a id="prev" href="#">Prev</a></li>
+							    <li><a id="next1" href="#">Next</a></li>
+							    </ul>
+						  </div>
+						  <div id="maps" style="width: 650px; height: 350px">
+							  <!--<p>Maps</p>-->
+						  </div>
+						  <div id="street-view" style="width: 650px; height: 350px">
+							  <!--<p>Street View</p>-->
+						  </div>
+					  </div>
+                                          <div class="stats">
+                                             <ul>
+                                              <li class="likes"><%= property_likes_count(@property) %> likes</li>
+                                              <li class="reviews"><%= property_review_count(@property) %> reviews</li>
+                                              <%if verified_property(@property)%>
+				                 <li class="verified last-child"  id="verify_width_show_property">Verified</li>
+				              <% end %>
+                                             </ul>
+                                          </div>
+                                          <div style="clear:both;"> </div>
+					  <p class="highlight"><strong>Description: </strong><%= @property.description %></p>
+                                 </div>
+      				<div class="primary" style="margin-right:0px;">
+ 				  <h1 style="width:644px;">Property Details</h1>
+  				  <div class="main" id="prop-views" style="width: 652px;">
+              <div class="property_review_page">
+				  	    <fieldset id="listing-property" class="section">
+						      <div style="margin-top: 20px;"></div>
+						      <div style="clear:both;"> </div>
+					        <div>
+					          <div class="pro-sty" >Facilitie(s): </div>
+                      <%unless !@property.bathroom%>
+              					<p class="full normal" id="check_width">
+					      		      <span class="property_review_right_image"></span>
+					          		    <%= label :bathroom, "Private bathrooms available" %>
+					          		</p>
+                      <%end%>
+                      <%unless !@property.parking%>
+      						      <p class="full normal" id="check_width">
+                          <span class="property_review_right_image"></span>
+            							<%= label :parking, "Parking Available" %>  
+				      		      </p>
+                      <%end%>
+      						    <%unless !@property.wheelchair_accessible%>
+			      			      <p class="full normal" id="check_width">
+                          <span class="property_review_right_image"></span>
+            							<%= label :wheelchair_accessible, "Wheelchair accessible" %>
+						            </p>
+                      <%end%>
+                      <%unless !@property.elevator_in_building%>
+      						      <p class="full normal" id="check_width">
+                          <span class="property_review_right_image"></span>
+            							<%= label :elevator_in_building, "Elevator in building" %>
+					      	      </p>
+                      <%end%>
+                      <%unless !@property.garden%>
+      						      <p class="full normal" id="check_width">
+                          <span class="property_review_right_image"></span>
+      							      <%= label :garden, "Garden" %>
+			 			            </p>
+                     <%end%>
+                     <%unless !@property.balcony%>
+    						       <p class="full normal" id="check_width">
+                         <span class="property_review_right_image"></span>
+            						 <%= label :balcony, "Balcony" %>
+      						     </p>
+                     <%end%>
+      						  </div>&nbsp;
+        						<div>
+				      		    <div class="pro-sty margin_top" >Amenitie(s): </div>
+                        <%unless !@property.kitchen%>
+        						      <p class="full normal" id="check_width">
+                            <span class="property_review_right_image"></span>
+                  					<%= label :kitchen, "Kitchen" %>
+						              </p>
+                        <%end%>
+                        <%unless !@property.freezer%>
+        						      <p class="full normal" id="check_width">
+                            <span class="property_review_right_image"></span>
+              							<%= label :freezer, "Fridge/freezer" %>
+        						      </p>
+                                                    <%end%>
+                                                    <%unless !@property.dishwasher%>
+				                    <p class="full normal" id="check_width">
+                                                                    <span class="property_review_right_image"></span>
+					                 <%= label :dishwasher, "Dishwasher" %>
+				                    </p>
+                                                              <%end%>
+                                                              <%unless !@property.washer%>
+				                    <p class="full normal" id="check_width">
+                                                                    <span class="property_review_right_image"></span>
+					                 <%= label :washer , "Washer" %>
+				                    </p>
+                                                              <%end%>
+                                                              <%unless !@property.heating%>
+				                     <p class="full normal" id="check_width">
+                                                                    <span class="property_review_right_image"></span>
+					                 <%= label :heating, "Heating" %>
+				                    </p>
+                                                              <%end%>
+                                                              <%unless !@property.shower%>
+				                    <p class="full normal" id="check_width">
+                                                                    <span class="property_review_right_image"></span>
+					                 <%= label :shower, "Shower/bathtub" %>
+				                    </p>
+                                                              <%end%>
+                                                              <%unless !@property.Internet%>
+				                    <p class="full normal" id="check_width">
+                                                                    <span class="property_review_right_image"></span>
+					              <%= label :Internet, "Internet" %>
+				                    </p>
+                                                              <%end%>
+                                                              <%unless !@property.wifi%>
+				                    <p class="full normal" id="check_width">
+                                                                    <span class="property_review_right_image"></span>
+					               <%= label :wifi, "Wifi (Wireless LAN)" %>
+				                    </p>
+                                                              <%end%>
+                                                              <%unless !@property.phone%>
+				                    <p class="full normal" id="check_width">
+                                                                    <span class="property_review_right_image"></span>
+					                <%= label :phone, "Phone" %>
+				                    </p>
+                                                              <%end%>
+                                                              <%unless !@property.tv%>
+				                    <p class="full normal" id="check_width">
+                                                                    <span class="property_review_right_image"></span>
+					               <%= label :tv, "TV" %>
+				                    </p>
+                                                              <%end%>
+                                                              <%unless !@property.air_conditioning%>
+				                    <p class="full normal" id="check_width">
+                                                                    <span class="property_review_right_image"></span>
+					                 <%= label :air_conditioning   , "Air Conditioning" %>
+				                    </p>
+                                                              <%end%>
+					            </div>&nbsp;
+					          <div>
+        						<div class="pro-sty margin_top" >Nearby: </div>
+                                                            <%unless !@property.schools%>
+						                <p class="full normal" id="check_width">
+                                                                      <span class="property_review_right_image"></span>
+							               <%= label :schools, "Schools" %>
+						                </p>
+                                                            <%end%>
+                                                            <%unless !@property.bus_stops%>
+						                <p class="full normal" id="check_width">
+                                                                      <span class="property_review_right_image"></span>
+							              <%= label :bus_stops, "Bus Stops" %>
+						                </p>
+                                                            <%end%>
+                                                            <%unless !@property.railway_stations%>
+						                <p class="full normal" id="check_width">
+                                                                      <span class="property_review_right_image"></span>
+						                      <%= label :railway_stations, " Railway Station" %>
+						                </p>
+                                                            <%end%>
+                                                            <%unless !@property.shopping_centres%>
+						                <p class="full normal" id="check_width">
+                                                                      <span class="property_review_right_image"></span>
+							              <%= label :shopping_centres , "Shopping Centres" %>
+						                </p>
+                                                            <%end%>
+                                                            <%unless !@property.parks%>
+						                <p class="full normal" id="check_width">
+                                                                      <span class="property_review_right_image"></span>
+							              <%= label :parks, "Parks" %>
+						                </p>
+                                                            <%end%>
+                                                            <%unless !@property.community_facilities%>
+						                <p class="full normal" id="check_width">
+                                                                      <span class="property_review_right_image"></span>
+							              <%= label :community_facilities, "Community Facilities." %>
+						                </p>
+                                                            <%end%>
+                                                            <%unless !@property.entertainment%>
+						                <p class="full normal" id="check_width">
+                                                                      <span class="property_review_right_image"></span>
+							              <%= label :entertainment, "Entertainment." %>
+						                </p>
+                                                            <%end%>
+                                                            <%unless !@property.restaurants%>
+						                <p class="full normal" id="check_width">
+                                                                      <span class="property_review_right_image"></span>
+							              <%= label :restaurants, "Restaurants." %>
+						                </p>
+                                                             <%end%>
+                                                             <%unless !@property.recreation_centres%>
+						                <p class="full normal" id="check_width">
+                                                                      <span class="property_review_right_image"></span>
+							               <%= label :recreation_centres, "Recreation Centres." %>
+						                </p>
+                                                             <%end%>
+                                                             <%unless !@property.health_care%>
+						                <p class="full normal" id="check_width">
+                                                                      <span class="property_review_right_image"></span>
+							            <%= label :health_care, "Health Care." %>
+						                </p>
+                                                             <%end%>
+                                                             <%unless !@property.emergency_services%>
+						                <p class="full normal" id="check_width">
+                                                                      <span class="property_review_right_image"></span>
+						              	  <%= label :emergency_services   , "Emergency Services." %>
+						                </p>
+                                                             <%end%>
+						        </div>&nbsp;
+    						  <div>
+      						<div class="pro-sty margin_top" > Property Style: </div>
+                                                <%if @property.property_style == "Cool"%>
+						              <p class="full normal" id="radio_width">
+                                                                    <span class="property_review_right_image"></span>
+							            <%= label :property_style, "Cool"%>
+						              </p>
+                                                          <%end%>
+                                                          <%if @property.property_style == "Cozy"%>
+						              <p class="full normal" id="radio_width">
+                                                                    <span class="property_review_right_image"></span>
+							            <%= label :property_style, "Cozy"%>
+						              </p>
+                                                         <%end%>
+                                                         <%if @property.property_style == "Modern"%>
+						              <p class="full normal" id="radio_width">
+                                                                    <span class="property_review_right_image"></span>
+							            <%= label :property_style, "Modern"%>
+                						    </p>
+                                                         <%end%>
+                                                         <%if @property.property_style == "Traditional"%>
+						              <p class="full normal" id="radio_width">
+                                                                    <span class="property_review_right_image"></span>
+							            <%= label :property_style, "Traditional"%>
+						              </p>
+                                                         <%end%>
+                                                         <%if @property.property_style == "Compact"%>
+						              <p class="full normal" id="radio_width">
+                                                                    <span class="property_review_right_image"></span>
+							            <%= label :property_style, "Compact"%>
+						              </p>
+                                                         <%end%>
+                                                         <%if @property.property_style == "Airy"%>
+						              <p class="full normal" id="radio_width">
+                                                                    <span class="property_review_right_image"></span>
+							             <%= label :property_style, "Airy"%>
+						              </p>
+                                                         <%end%>
+                                                         <%if @property.property_style == "Simple"%>
+						              <p class="full normal" id="radio_width">
+                                                                    <span class="property_review_right_image"></span>
+							            <%= label :property_style, "Simple"%>
+						              </p>
+                                                         <%end%>
+                                                         <%if @property.property_style == "Fresh"%>
+						              <p class="full normal" id="radio_width">
+                                                                    <span class="property_review_right_image"></span>
+							            <%= label :property_style, "Fresh"%>
+						              </p>
+                                                         <%end%>
+                                                         <%if  @property.property_style == "Green"%>
+						              <p class="full normal"  id="radio_width">
+                                                                    <span class="property_review_right_image"></span>
+							            <%= label :property_style, "Green"%>
+						              </p>
+                                                         <%end%>
+                                                         <%if @property.property_style == "Bright"%>
+						              <p class="full normal" id="radio_width">
+                                                                    <span class="property_review_right_image"></span>
+							             <%= label :property_style, "Bright"%>
+						              </p>
+                                                        <%end%>
+      					  </div>
+    					    <br />
+                  <div class="house_rule_prop_prop">
+                     <strong>House rule: </strong><%= @property.house_rules %>
+                  </div>
+			       	  </fieldset>
+					  </div>
+          </div>
+        </div>
+        
+        <%if current_user and !verified_property(@property)%>
+    		  <%if current_user.roles[0][:title] == "admin" %>
+      		  <div class="primary" style="margin-right:0px;">
+ 	    			  <h1 style="width:644px;">Property Ownership Document</h1>
+     				  <div class="main" id="prop-views" style="width: 652px;">
+                <div class="property_review_page"> 
+                <% if @properties.empty? %>
+                  <SPAN>There are no Documents for this property</SPAN>
+                <% else %>
+                  <% @properties.each do |picture| %>
+                  <%=link_to(image_tag(picture.document.url(:middle)),picture.document.url(:medium))%>
+           
+								  <% end %>
+								 <% end %>           
+                </div>
+                <% if is_in_pending_verification(@property) %>
+                <div id="property_verify">
+  		          <%= link_to "Verify", property_verification_admin_property_path %>
+  	  	        </div>
+  	  	        <div id="property_reject"> 
+  	  	          <%= link_to "Reject", reject_admin_property_path(@property), :method => :put, :class => "reject" %>
+  	  	        </div>
+  	  	        <% end %>
+              </div>              
+            </div>
+		      <% end %>
+		    <% end%>        
+      </div>
+				  <div class="secondary">
+				      <div class="section">
+					      <h3>About the Owner</h3>
+					      <div class="owner">
+						      <div class="thumbnail small"  id="thubm_show_property">
+							      <%= image_tag(@property.owner.avatar.url(:thumb))%>
+						      </div>
+							<strong style="width: 161px;font-weight: 500;text-align: left; "><%= @property.owner.full_name %></strong> 
+							  <span><%= link_to "Send a Message", new_my_message_path(:to => @property.owner.id), :rel => "facebox" ,:id=>"link_with_sm"%></span>
+					      </div>
+				  </div>
+				  <div class="section">
+					  <h3 class="purple">Rental Information</h3>
+					  <div class="details">
+						  <strong><span id="per_month_amount"><%= return_currency_abbrebiation(@property.currency_type.nil? ? 'USD' : @property.currency_type)%><%= ISO4217::Currency.from_code(@property.currency_type.nil? ? 'USD' : @property.currency_type).symbol%><%=@property.monthly_rental.to_i%></span><span class="per_month_text">per month</span></strong>
+						    <%- can_apply_for_property(@property) do %>
+							<%= link_to "Apply!", new_my_application_path(:property_id => @property), :class => "apply-btn" %>
+						    <%- end %>
+						  <%# link_to "Back to search results", properties_path(:input => params[:input]), :class => "back-btn" %>
+					  </div>
+					  <ul class="attributes" style="text-align: left;">
+                                                  <li><span class="label property">Available from: </span> <span class="data"><%= boxy_date_format_for_account @property.available_at %></span></li>
+						  <li><span class="label property">Whole apartment: <span style="font-weight: 500;float: right;"><%= @property.floor_area %><%= PropertiesHelper::OPTIONS_FOR_UNIT[@property.unit.try(:to_sym)] %> </span></span></li>
+						  <li><span class="label property">Subletting: </span> <span class="data"><%= @property.sublet ? "Yes" : "No" %></span></li>
+						  <li><span class="label property">Accept on same day notice: </span> <span class="data"><%= @property.short_notice ? "Yes" : "No" %></span></li>
+						  <li><span class="label property">Max no. of occupants: </span> <span class="data"><%= @property.occupancy %></span></li>
+						  <li><span class="label property">Landlord staying here: </span> <span class="data"><%= @property.landlord_address ? "Yes" : "No" %></span></li>
+						  <li><span class="label property">Minimum rental period: </span> <span class="data"><%= @property.rental_period %> months</span></li>
+						  <li><span class="label property">No. of rooms: </span> <span class="data"><%= @property.rooms %></span></li>
+					  </ul>
+				  </div>
+			  </div>
+			</div>
+		</div>		
+		
+		
+<script>
+  $('.like').live('click', function(){
+        $.ajax({
+            url: '/properties/<%=@property.id %>/like_properties',
+            type: 'GET',
+            success: function(data){
+              $('.like').hide();
+              document.getElementById('like_g').innerHTML = '<%=  render :partial => "image_liked"%>'; 
+            }
+        });
+    });
+</script>
+

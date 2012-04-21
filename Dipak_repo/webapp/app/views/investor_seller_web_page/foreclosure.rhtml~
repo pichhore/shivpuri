@@ -1,0 +1,14 @@
+<%- @page_title = "REIMatcher-Foreclosure" -%>
+<%- @meta_title = @seller_website.meta_title -%>
+<%- @meta_description = @seller_website.meta_description -%>
+<%= render :partial => "show_navigation_link" %>
+<div id="seller_page_main_div">
+  <h1><b>Foreclosure</b></h1>
+  <div style="margin-right:390px;"><%= render :partial => "fb_like_twitter_tweet" %></div><div style="clear:both"></div>
+  <%= render :partial => "lead_magnet" %>
+
+<div class="subpage_content_div_1">
+<p class="top_style_para_seller_website">The worst way to lose a home is through a foreclosure. We call foreclosure “the atomic bomb of credit scars” - it cuts the deepest and lasts the longest. When something effects your credit negatively, it lowers your credit score and the effects last for varying periods of time. Foreclosure lowers your score the most and for the longest period of time - up to 7 (or more years). </p>
+<p class="style_para_seller_website">Some distressed homeowners reach the end of their patience and decide they simply want to “walk away” from a home believing that foreclosure will be the end of their problems. The truth is that foreclosure is the beginning of an 8-10 year nightmare that can involve everything from an eviction by the sheriff, embarrassment, battling creditors for years, deficiency judgments and lawsuits, possible tax ramifications that can even lead to garnished wages, and difficulty getting credit cards, car loans, or even many types of employment for up to a decade.</p>
+<p class="style_para_seller_website">If you are facing foreclosure or in a home that you cannot afford to keep and want to sell, please <%=link_to 'CLICK HERE',:controller=>"investor_seller_web_page", :action=>"new_seller"%> so that we can contact you and give you all of your options for selling your home and avoiding foreclosure.</p><br>
+</div>

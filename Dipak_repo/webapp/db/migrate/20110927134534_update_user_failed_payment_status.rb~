@@ -1,0 +1,11 @@
+class UpdateUserFailedPaymentStatus < ActiveRecord::Migration
+  def self.up
+    users = User.find(:all, :conditions=>["is_user_have_access_to_reim = ?", false])
+    users.each do |user|
+      user.update_attributes(:is_user_have_failed_payment => true)
+    end
+  end
+
+  def self.down
+  end
+end

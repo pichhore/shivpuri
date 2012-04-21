@@ -1,0 +1,94 @@
+<%- @page_title = "10 Razónes para Usar Dwellgo para Comprar y Vender Propiedades en la Comunidad de Bienes Raíces de Austin" -%>
+<%- @page_heading = "10 Motivos de Usar Dwellgo como un Inversionista de Bienes Inmuebles" -%>
+<%- @meta_description = "Inversionistas interesados en compra y venta de Bienes Raíces en Austin pueden beneficiarse significamente al usar la Comunidad de Dwellgo, permitiendo comunicación directa con los compradores y vendedores" -%>
+<%- @meta_keywords = "invertir en bienes raíces en austin, austin bienes raíces, bienes raíces en Austin, dwellgo" -%>
+<%- @page_title_h1 = "Compra y Vende Propiedad en la Comunidad de Dwellgo" -%>
+<%- @page_title_h1_class = "smaller" -%>
+
+<%- content_for :title_ad do -%>
+  <div class="language"><%=link_to "English", :action=>"top_uses_investor"%> / <%=link_to "Español", :action=>"top_uses_investor_es"%><br/><br/></div>
+<%- end -%>
+
+<%- content_for :page_styles do -%>
+<style>
+.reasons p {
+  font-size: 1.2em;
+}
+
+.left h1.smaller {
+  font-size: 1.1em;
+  color: #858383;
+}
+
+.left h3.normal {
+  font-size: 1.4em;
+}
+
+.right .stats {
+  font-size: 1.2em;
+}
+
+.right .date {
+  font-size: 0.9em;
+}
+
+.right h1 {
+  background: #6C757A  url(/images/corner.gif) no-repeat top right;;
+  color: #FFF;
+  padding: 3px 0 3px 5px;
+  font: bold 1.0em Tahoma, Arial, Sans-Serif;
+  margin: 0 0 3px 0;
+  text-align: center;
+}
+
+</style>
+<%- end -%>
+
+<div class="left reasons">
+
+  <p><%=image_tag "numbers/1.gif", :style=>"vertical-align: middle"%> ¡La comunidad es gratis!</p>
+  <p><%=image_tag "numbers/2.gif", :style=>"vertical-align: middle"%> Ver la propiedad de Inversión que usted no encontrará en el MLS</p>
+  <p><%=image_tag "numbers/3.gif", :style=>"vertical-align: middle"%> Comuníquese con Compradores o Dueños directamente</p>
+  <p><%=image_tag "numbers/4.gif", :style=>"vertical-align: middle"%> Maneje todas las propiedades y Perfiles de Compra en un acceso</p>
+  <p><%=image_tag "numbers/5.gif", :style=>"vertical-align: middle"%> Invierta más inteligente sabiendo # de Compradores para códigos postales de Austin Metro</p>
+  <p><%=image_tag "numbers/6.gif", :style=>"vertical-align: middle"%> Salve el Tiempo por Alarmas de Correo electrónico mostrando a un nuevo partido de propiedad</p>
+  <p><%=image_tag "numbers/7.gif", :style=>"vertical-align: middle"%> Ver qué Compradores han visto su propiedad</p>
+  <p><%=image_tag "numbers/8.gif", :style=>"vertical-align: middle"%> Apunte diferentes tipos de Propiedades con Perfiles de Comprador separados</p>
+  <p><%=image_tag "numbers/9.gif", :style=>"vertical-align: middle"%> Reciba mensajes de vendedores motivados</p>
+  <p><%=image_tag "numbers/10.gif", :style=>"vertical-align: middle"%> Presenta su propiedad sin revelar la Dirección</p>
+
+</div>
+
+
+<div class="right">
+
+  <h1>La Comunidad de Austin Bienes Inmuebles</h1>
+  <div class="right_articles legend">
+
+    <p class="date">Hoy es <%=Time.now.strftime("%B %d, %Y")%></p>
+    <div class="stats">
+      <table width="100%">
+
+        <tr>
+          <td><%=@community_stats.active_buyers%> Buyers</td>
+        </tr>
+
+        <tr>
+          <td><%=@community_stats.property_count%> Properties</td>
+        </tr>
+
+      </table>
+
+    </div>
+
+ </div>
+
+  <% form_tag({:controller=>"profiles", :action=>"new", :id=>"buyer"}) do -%>
+  <p align="center" style="padding-top: 10px"><%=submit_tag "Haga Perfil de Comprador", :class=>"submit_xl"%></p>
+  <% end -%>
+
+  <% form_tag({:controller=>"profiles", :action=>"new", :id=>"owner"}) do -%>
+  <p align="center" style="padding-top: 10px"><%=submit_tag "Haga Perfil de Propiedad", :class=>"submit_xl"%></p>
+  <% end -%>
+
+</div>

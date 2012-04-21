@@ -1,0 +1,42 @@
+<%- @page_title = "Short Sale - "+company_name -%>
+<%- @meta_title = @seller_website.meta_title -%>
+<%- @meta_description = @seller_website.meta_description -%>
+ <%= render :partial => "show_navigation_link" %>
+<div id="seller_page_main_div">
+  <h1><b>Short Sale</b></h1>
+    <div style="margin-right:390px;"><%= render :partial => "fb_like_twitter_tweet" %></div><div style="clear:both"></div>
+  <%= render :partial => "lead_magnet" %>
+
+<div class="subpage_content_div_1">
+  <p class="top_style_para_seller_website">The best way to sell a property that is more than 20-30% under water, without having to pay off the shortage, is to negotiate a short sale. This is also one of the most common ways to sell a property in which the owner is already many months behind in payments, has little or no equity, and wishes to avoid a foreclosure.</p>
+  <p class="top_style_para_seller_website">A Short Sale involves an investor or buyer and a Realtor, working with the property owner to negotiate with the property owner's lender. The goal of the negotiations is to postpone (and prevent) a foreclosure auction and negotiate a discounted payoff on the loan (or loans). Using this method, the property can be purchased at a reduced price (less than what’s owed) and a foreclosure can be avoided.</p>
+  
+  <p class="style_para_seller_website"><b>Short Sale Example</b></p>
+  <p class="style_para_seller_website">Let's look at a Standard Sales Scenario...</p>
+  <p class="style_para_seller_website">-	Current Property Value: $185,000</p>
+  <p class="style_para_seller_website">-	Existing loan(s) payoff: $210,000</p>
+  <p class="style_para_seller_website">-	Sales price needed to break even: $231,000  (assumes ~10% closing costs and commissions, etc.)</p>
+</div>
+<div class="subpage_content_div_2">
+  <p class="style_para_seller_website">This property would have to be sold for approximately $231,000 to cover all loans, taxes, closing costs, commissions, etc. Unfortunately, the property is only worth $185,000 in the current market, so the property owner would have to come up with $46,000 to cover the difference.</p>
+  <p class="style_para_seller_website">Now, let's look at a Short Sale Scenario...</p>
+  <p class="style_para_seller_website">-	Property Value: $185,000</p>
+  <p class="style_para_seller_website">-	Negotiated loan(s) payoff: $165,000</p>
+  <p class="style_para_seller_website">-	Sales price needed to break even: $181,500</p>
+  <p class="style_para_seller_website">In this scenario, after the loan is negotiated, the property can be sold for anywhere from $181,500 to $185,000 with no foreclosure and no additional cost to the property owner.</p>
+  
+  <p class="style_para_seller_website"><b>Short Sale Advantages and Disadvantages</b></p>
+  <p class="style_para_seller_website">The advantage to a short sale is that it may be the only way to actually sell a property where the loan(s) add up to more than the property is worth, and the property owner cannot make up the difference. And, starting a short sale can both postpone a foreclosure and (if successful) avoid a foreclosure.</p>
+  <p class="style_para_seller_website">The disadvantage to a short sale is that, like everything, it does affect a property owner's credit. A successful short sale is simply better than a bankruptcy and much, much better than a foreclosure (the "Atomic Bomb" of credit scars). Also, about half of short sales are either denied by the lenders, or are never negotiated to a price that a buyer will accept, meaning that about half still end in foreclosure. Finally, a short sale may result in a deficiency judgment (in the event that the lender sues you for their loss, which is rare), a negative impact on a person’s security clearance (for some government employees), and a 1099 for phantom income that may have tax ramifications (although the Debt Forgiveness act of 2007 temporarily restricts lenders for issuing these to homestead short sale sellers) </p>
+  <p class="style_para_seller_website">Short sales are highly complex negotiations that take significant time, paperwork, and expertise. They are among the most complex transactions in real estate. In addition, it typically takes many many months to negotiate with the seller's lender.</p>
+  <p class="style_para_seller_website"><b><%= company_name%></b> is part of a network that has performed over 1,000 short sales for sellers needing this service. If you would like to discuss a short sale, and all of your other options for avoiding foreclosure, <b><%= company_name%></b> can help! <%=link_to 'Contact Us',:controller=>"investor_seller_web_page", :action=>"new_seller"%> if you would like to explore this further.</p>
+  
+  <p class="style_para_seller_website"><b>Common Questions about Short Sales</b></p>
+  <p class="style_para_seller_website"><b>Question:</b> Can I do a short sale myself?</p>
+  <p class="style_para_seller_website"><b>Answer:</b> No. A lender will need a purchase offer before they will even consider negotiating a short sale. The offer must be real and be accompanied by a "Proof of Funds" letter from the investor and/or buyer. Additionally, the lender will want a great deal of documentation from the property owner. Our network of investors and Realtors has a great deal of experience and expertise in this area. If you would like our help: <%=link_to 'Contact Us',:controller=>"investor_seller_web_page", :action=>"new_seller"%></p>
+  <p class="style_para_seller_website"><b>Question:</b> Will a short sale hurt my credit?</p>
+  <p class="style_para_seller_website"><b>Answer:</b> Yes. Everything you do affects your credit to different degrees. In order for a lender to consider approving a short sale on a loan, the loan will generally have to be non-performing. In other words, the property owner must be behind in payments – thus credit damage is already occurring. Once the short sale is approved, the lender will "charge off" a portion of the loan, which also affects the property owner's credit. The benefit is that the property can be sold and that a foreclosure and its legal ramifications can be avoided. Most experts acknowledge that a foreclosure is the worst thing that can happen to your credit.</p>
+  <p class="style_para_seller_website"><b>Question:</b> Do I have to Bring Money to the Closing with a short sale?</p>
+  <p class="style_para_seller_website"><b>Answer:</b> Not usually. The bank will pay for all of the closings costs, commission, taxes and fees on behalf of the property owner (out of the proceeds) to facilitate the transaction. Beware of companies that charge fees for foreclosure avoidance, loan modifications, and credit repair - many of these services are not reputable, and possibly not legal. </p>
+  <p class="style_para_seller_website"><%= company_name %> and our affiliate, Love American Homes, have helped over 1,000 people to navigate through the process of doing a short sale. We can help – <%=link_to 'Contact Us',:controller=>"investor_seller_web_page", :action=>"new_seller"%></p><br>
+</div>

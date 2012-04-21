@@ -1,0 +1,63 @@
+<%- @page_title = "Personal Message" -%>
+<%- @page_icon_style = 'icon_message' -%>
+
+<% require_js_controllers :dashboard_nav, :view_message, :new_message_form -%>
+
+<script>
+    Event.observe(window, 'load', function() {
+      tab_controller = null;
+      view_message_dashboard_controller = new NL.ViewMessageDashboardController("<%=url_for profile_profile_messages_path(@profile)%>",
+                                                                                "<%=url_for profile_path(@profile)%>");
+      view_message_controller = new NL.ViewMessageController(view_message_dashboard_controller,"<%=@profile_message.id%>");
+      view_message_controller.attachListeners($('dashboard'));
+    });
+
+    $$('div.loading').each(function(item) { item.hide(); }.bindAsEventListener(this));
+</script>
+
+<div class="left">
+
+  <div class="loading" style="display:none"><span class="text">Loading...</span></div>
+
+  <div id="dashboard_subcontent" class="public" style="display:none"></div>
+
+  <div id="dashboard">
+
+<fieldset>
+
+  <%- if @profile.owner? -%>
+  <div><b><u>From:</u></b> <%=@message_from_profile.display_name%><br/>
+    <b><u>To:</u></b> <%=@profile.display_property_address_without_zip%>
+  </div>
+  <%- else -%>
+  <div><b><u>From:</u></b> <%=@message_from_profile.display_property_address_with_zip%><br/>
+    <b><u>To:</u></b> <%=@profile.display_name%>, <%=@profile.display_property_type%> Buyer profile
+  </div>
+  <%- end -%>
+
+  <div class="clear">&nbsp;</div>
+
+    <%=render_thumbnail(@message_from_profile, { :class=>"image" }) %>
+
+  <div>
+    <p><b>Subject: <%=@profile_message.display_subject%></b></p>
+    <p><%=@profile_message.body%></p>
+  </div>
+
+  <div class="clear">&nbsp;</div>
+
+  <p style="text-align: center">
+  <%-# if xhr, then we came from the dashboard. Otherwise, we came from the profile_messages/show -%>
+  <%-if request.xhr? -%>
+    <%=submit_tag "Close", :class=>"submit close_button"%>
+  <%-else-%>
+    <%=submit_tag "My Dashboard", :class=>"submit_l close_button"%>
+  <%-end-%>
+    <%=submit_tag "Reply", :class=>"submit reply_button", :profile_id=>@message_from_profile.id%>
+  </p>
+
+</fieldset>
+
+  </div>
+
+</div>

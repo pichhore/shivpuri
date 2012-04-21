@@ -1,0 +1,19 @@
+function updateThumb() {
+		thumbnail = document.getElementById('thumbnail');
+		thumbnail.src = "http://thumbnail.api.livestream.com/thumbnail?name=y101fm&t=" 
+			+ new Date().valueOf();
+	}
+ 
+	setInterval("updateThumb()", 10000);
+
+
+params = { AllowScriptAccess: 'always' };
+    function livestreamPlayerCallback(event) {
+    	if (event == "ready") {
+                player = document.getElementById("livestreamPlayer");
+    		player.load('y101fm');
+    		player.startPlayback();
+    	}
+    }
+    swfobject.embedSWF("http://cdn.livestream.com/chromelessPlayer/v20/playerapi.swf",
+      "livestreamPlayer", "500", "214", "9.0.0", "expressInstall.swf", null, params);

@@ -1,0 +1,12 @@
+<%
+  unless @profile_type.blank?
+  word = "Buyers" if (@profile_type.owner? or @profile_type.seller_agent?)
+  word = "Properties" if (@profile_type.buyer? or @profile_type.buyer_agent?)
+  word = "Buyers and Properties" unless word
+  end
+%>
+<h2>Search for <%= word %>...</h2>
+<% form_tag search_path, :method => :get do %>
+  <%= text_field_tag :q %>
+  <%= submit_tag "Search", :name => nil  %>
+<% end %>

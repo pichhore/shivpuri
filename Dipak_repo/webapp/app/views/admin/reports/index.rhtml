@@ -1,0 +1,36 @@
+<div class="clear">&nbsp;</div>
+
+<h2>Reports List</h2>
+
+<p>Select a report from the list below to get started:</p>
+
+<p><%=link_to "Total Users", :action=>"execute", :id=>"total_users"%></p>
+
+<p><%=link_to "Total Sent Messages (By User)", :action=>"execute", :id=>"total_messages"%></p>
+
+<p><%=link_to "Invite a Friend", :action=>"execute", :id=>"invite_a_friend"%></p>
+
+<p><%=link_to "Ad Click Through", :action=>"execute", :id=>"ad_click_through"%></p>
+
+<p><%=link_to "Activity Logs", :action=>"execute", :id=>"activity_logs"%></p>
+
+<p><%=link_to "Site Stats", :action=>"execute", :id=>"site_stats"%></p>
+
+<p><%=link_to "Profiles (All or By User)", :action=>"execute", :id=>"profiles"%></p>
+
+<p>
+  <%#=link_to "Profiles That Need Help", "#" %>
+  <%=link_to "Profiles That Need Help", :action=>"execute", :id=>"profiles_need_help"%>
+</p>
+
+<p>
+  <%=link_to "Unread Messages", :action=>"execute", :id=>"unread_messages"%>
+</p>
+
+<p><%=link_to "Contest Invitations", :action=>"execute", :id=>"contest_invitations"%></p>
+
+<p><%=link_to "Application Error Log", :action=>"error_log" %></p>
+
+<p><%=link_to image_tag("/images/icons/subscribe_rss.png") ,{:action=>"properties"},:target=>'_blank' %>&nbsp;&nbsp;<%=link_to "Properties Rss", {:action=>"properties"},:target=>'_blank'%></p>
+
+<p><%=link_to "Cancellations", :action=>"user_cancellations"%></p>

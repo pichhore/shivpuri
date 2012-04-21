@@ -1,0 +1,183 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+buyer1:
+  id: buyer1
+  profile_type_id: ce5c2320-4131-11dc-b431-009096fa4c28
+  name: Chuck B
+  private_display_name: buyer1
+  permalink: chuck-b
+  user_id: 1
+buyer2:
+  id: buyer2
+  profile_type_id: ce5c2320-4131-11dc-b431-009096fa4c28
+  name: Mary Z
+  private_display_name: buyer2
+  permalink: mary-z
+  user_id: 1
+buyer3:
+  id: buyer3
+  profile_type_id: ce5c2320-4131-11dc-b431-009096fa4c28
+  name: Bob S
+  private_display_name: buyer3
+  permalink: bob-s
+  user_id: 1
+buyer4:
+  id: buyer4
+  profile_type_id: ce5c2320-4131-11dc-b431-009096fa4c28
+  name: Sophie B
+  private_display_name: buyer4
+  permalink: sophie-b
+  user_id: 1
+buyer5:
+  id: buyer5
+  profile_type_id: ce5c2320-4131-11dc-b431-009096fa4c28
+  name: Brian W
+  private_display_name: buyer5
+  permalink: brian-w
+  user_id: 1
+buyer6:
+  id: buyer6
+  profile_type_id: ce5c2320-4131-11dc-b431-009096fa4c28
+  name: Mike H
+  private_display_name: buyer6
+  permalink: mike-h
+  user_id: 1
+owner1:
+  id: owner1
+  profile_type_id: ce5c2320-4131-11dc-b432-009096fa4c28
+  name: 1800 Test Street, 78613
+  private_display_name: owner1
+  permalink: 1800-test-street-78613
+  user_id: 1
+owner2:
+  id: owner2
+  profile_type_id: ce5c2320-4131-11dc-b432-009096fa4c28
+  name: 1801 Test Street, 78613
+  private_display_name: owner2
+  permalink: 1801-test-street-78613
+  user_id: 1
+owner3:
+  id: owner3
+  profile_type_id: ce5c2320-4131-11dc-b432-009096fa4c28
+  name: 1802 Test Street, 78613
+  private_display_name: owner3
+  permalink: 1802-test-street-78613
+  user_id: 1
+owner4:
+  id: owner4
+  profile_type_id: ce5c2320-4131-11dc-b432-009096fa4c28
+  name: 1803 Test Street, 78613
+  private_display_name: owner4
+  permalink: 1803-test-street-78613
+  user_id: 1
+owner5:
+  id: owner5
+  profile_type_id: ce5c2320-4131-11dc-b432-009096fa4c28
+  name: 1804 Test Street, 78613
+  private_display_name: owner5
+  permalink: 1804-test-street-78613
+  user_id: 1
+owner6:
+  id: owner6
+  profile_type_id: ce5c2320-4131-11dc-b432-009096fa4c28
+  name: 1805 Test Street, 78613
+  private_display_name: owner6
+  permalink: 1805-test-street-78613
+  user_id: 1
+owner7:
+  id: owner7
+  profile_type_id: ce5c2320-4131-11dc-b432-009096fa4c28
+  name: 1806 Test Street, 78613
+  private_display_name: owner7
+  permalink: 1806-test-street-78613
+  user_id: 2
+owner8:
+  id: owner8
+  profile_type_id: ce5c2320-4131-11dc-b432-009096fa4c28
+  name: 1808 Test Street, 78613
+  private_display_name: owner8
+  permalink: 1808-test-street-78613
+  user_id: 3
+buyer_agent1:
+  id: buyer_agent1
+  profile_type_id: ce5c2320-4131-11dc-b433-009096fa4c28
+  name: Diane L
+  private_display_name: agent1
+  permalink: diane-l
+  user_id:
+buyer_agent2:
+  id: buyer_agent2
+  profile_type_id: ce5c2320-4131-11dc-b433-009096fa4c28
+  name: Cheri A
+  private_display_name: agent2
+  permalink: cheri-a
+  user_id:
+buyer_agent3:
+  id: buyer_agent3
+  profile_type_id: ce5c2320-4131-11dc-b433-009096fa4c28
+  name: Stu K
+  private_display_name: agent3
+  permalink: stu-k
+  user_id:
+buyer_agent4:
+  id: buyer_agent4
+  profile_type_id: ce5c2320-4131-11dc-b433-009096fa4c28
+  name: Jean J
+  private_display_name: agent4
+  permalink: jean-j
+  user_id:
+buyer_agent5:
+  id: buyer_agent5
+  profile_type_id: ce5c2320-4131-11dc-b433-009096fa4c28
+  name: Homer S
+  private_display_name: agent5
+  permalink: homer-s
+  user_id:
+buyer_agent6:
+  id: buyer_agent6
+  profile_type_id: ce5c2320-4131-11dc-b433-009096fa4c28
+  name: Marge S
+  private_display_name: agent6
+  permalink: marge-s
+  user_id:
+seller_agent1:
+  id: seller_agent1
+  profile_type_id: ce5c2320-4131-11dc-b434-009096fa4c28
+  name: 1900 Test Street, 78613
+  private_display_name: selleragent1
+  permalink: 1900-test-street-78613
+  user_id:
+seller_agent2:
+  id: seller_agent2
+  profile_type_id: ce5c2320-4131-11dc-b434-009096fa4c28
+  name: 1901 Test Street, 78613
+  private_display_name: selleragent2
+  permalink: 1901-test-street-78613
+  user_id:
+seller_agent3:
+  id: seller_agent3
+  profile_type_id: ce5c2320-4131-11dc-b434-009096fa4c28
+  name: 1902 Test Street, 78613
+  private_display_name: selleragent3
+  permalink: 1902-test-street-78613
+  user_id:
+seller_agent4:
+  id: seller_agent4
+  profile_type_id: ce5c2320-4131-11dc-b434-009096fa4c28
+  name: 1903 Test Street, 78613
+  private_display_name: selleragent4
+  permalink: 1903-test-street-78613
+  user_id:
+seller_agent5:
+  id: seller_agent5
+  profile_type_id: ce5c2320-4131-11dc-b434-009096fa4c28
+  name: 1904 Test Street, 78613
+  private_display_name: selleragent5
+  permalink: 1904-test-street-78613
+  user_id:
+seller_agent6:
+  id: seller_agent6
+  profile_type_id: ce5c2320-4131-11dc-b434-009096fa4c28
+  name: 1905 Test Street, 78613
+  private_display_name: selleragent6
+  permalink: 1905-test-street-78613
+  user_id:

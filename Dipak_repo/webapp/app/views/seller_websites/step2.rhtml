@@ -1,0 +1,18 @@
+<%- @page_title = "Seller Web Site Setup" -%>
+<%= stylesheet_link_tag "investor_buyer_page" %>
+
+<fieldset>
+  <legend>Step 2 of 2 </legend>
+
+  <% form_for(@seller_website) do |f| %>
+      <table>
+        <% if @seller_website.seller_magnet %>
+          <%= render :partial => "setup_magnet",:locals => { :f => f, :button_name  => "Finish" } %>
+        <% else %>
+          <%= render :partial => "set_up",:locals => { :f => f, :button_name  => "Finish" } %>
+        <% end %>
+      </table>
+  <% end %>
+</fieldset>
+
+

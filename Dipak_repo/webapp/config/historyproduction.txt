@@ -1,0 +1,148 @@
+ 299  ls -la
+  300  Date
+  301  ps -ef | grep 'mongrel'
+  302  ps -ef | grep 'mongrel'
+  303  top
+  304  ls
+  305  ls
+  306  ps -ef | grep 'mongrel'
+  307  exit
+  308  ls
+  309  ls -la
+  310  rm rei_staging_dump.13-12-2011.tar.gz 
+  311  df -h
+  312  clear
+  313  ls
+  314  ls
+  315  df -h
+  316  cd /var/www/apps/reimatcher/
+  317  ls
+  318  cd
+  319  rm -rf reimatcher_db_backup
+  320  ls
+  321  cd reimatcher_db_backup
+  322  ls
+  323  cd ..
+  324  ls
+  325  ls -la
+  326  rm livedb.sql 
+  327  ls
+  328  df -h
+  329  rm 2011july2_dump.*
+  330  df -h
+  331  clear
+  332  ls
+  333  ls -la
+  334  cd reimatcher_db_backup
+  335  ls
+  336  ls -la
+  337  ls
+  338  clea
+  339  rls
+  340  clear
+  341  ls
+  342  cd ..
+  343  ls
+  344  ls -la
+  345  rm livedb.tar.gz 
+  346  df -h
+  347  clear
+  348  ls
+  349  ls -la
+  350  rm prod_dump.sql
+  351  df -h
+  352  clear
+  353  ls
+  354  ls -la
+  355  cd /var/www/apps/reimatcher/
+  356  ls
+  357  cd current/
+  358  ls
+  359  clear
+  360  ls
+  361  cat config/database.yml 
+  362  cd ..
+  363  cd ..
+  364  cd
+  365  mysqldump -u root -p rei_staging > prod_backup_12-1-2012.sql
+  366  ls
+  367  df -h
+  368  ls -la
+  369  clear
+  370  ls
+  371  cd /var/www/apps/reimatcher/
+  372  cd current/
+  373  vi app/models/seller_property_profile.rb 
+  374  vi lib/user_activity_report.rb 
+  375  ruby script/console production
+  376  vi lib/user_activity_report.rb 
+  377  ruby script/console production
+  378  clear
+  379  ls
+  380  exit
+  381  ls
+  382  cd /var/www/apps/reimatcher/
+  383  cd current/
+  384  ruby script/console production
+  385  cd /var/www/apps/reimatcher/
+  386  ps -ef | grep 'mongrel'
+  387  ps -ef | grep 'mongrel'
+  388  ps -ef | grep 'mongrel'
+  389  ps -ef | grep 'mongrel'
+  390  ps -ef | grep 'mongrel'
+  391  ps -ef | grep 'mongrel'
+  392  ps -ef | grep 'mongrel'
+  393  ls
+  394  exit
+  395  cd /var/www/apps/reimatcher/
+  396  cd current/
+  397  ls
+  398  cat lib/user_activity_report.rb 
+  399  vid lib/user_activity_report.rb 
+  400  vi lib/user_activity_report.rb 
+  401  ruby script/console production
+  402  vi lib/user_activity_report.rb 
+  403  ruby script/console
+  404  ruby script/console production
+  405  ruby script/console production
+  406  exit
+  407  cd /var/www/apps/reimatcher/
+  408  cd current/
+  409  ruby script/console production
+  410  exit
+  411  cd /var/www/apps/reimatcher/
+  412  ls
+  413  cd
+  414  ls
+  415  cd 20120110045349/
+  416  ls
+  417  cd db/
+  418  ls
+  419  cd ..
+  420  ls -la
+  421  ls
+  422  ls
+  423  ls
+  424  ls
+  425  top
+  426  ls
+  427  ls
+  428  ls
+  429  ruby script/console production
+  430  ls
+  431  vi config/database.yml 
+  432  ruby script/console production
+  433  exit
+  434  df -h
+  435  ls
+  436  cat /var/www/apps/reimatcher/current/config/database.yml 
+  437  mysql -u root -p
+  438  ls
+  439  mysql -u root -p reim_dump_db < prod_backup_12-1-2012.sql
+  440  mysql -u root -p reim_dumb_db < prod_backup_12-1-2012.sql
+  441  ls
+  442  clear
+  443  ls
+  444  df -h
+  445  ls
+

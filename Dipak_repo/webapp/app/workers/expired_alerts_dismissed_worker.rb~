@@ -1,0 +1,15 @@
+#ticket 594
+class ExpiredAlertsDismissedWorker
+@queue = :alerts_queue
+
+  def self.perform
+#Rails.logger.info "running"
+   alert_arr = Alert.find_by_sql("select a.id from alerts a join alert_definitions ad where a.alert_definition_id = ad.id and CURRENT_TIMESTAMP > DATE_ADD(a.created_at, INTERVAL ad.trigger_cutoff_days DAY)  and a.dismissed = false") ;
+   alert_arr.each do |i|
+      #puts i.id
+      i.dismissed = true
+      i.save!
+    end
+  end
+end
+

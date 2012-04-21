@@ -1,0 +1,47 @@
+<head>
+  <!--[if IE 7]>
+   <style type="text/css">
+   .top {
+         line-height: 16px;
+    }
+   </style>
+  <![endif]-->
+</head>
+<div id="header">
+  <div class="container">
+  	  <a href="/home" id="logo_register">
+            <div class="logo" >Boxyroom</div>
+        </a>
+      <div class="top">
+          <div class="pic header" ><%= image_tag current_user.avatar.url(:thumb) %></div>
+          <b><p class="profile">Logged in as <%= current_user.full_name if current_user%>.</p></b>
+          <ul class="top-nav">
+	   <li id=""><a href="/safe"><b>Safety</b></a></li>
+            <li id=""><b><%= link_to "How it works", how_it_works_path%></b></li>
+	   <li ><a href="/my/dashboard/my_dashboard"><b>Dashboard</b></a></li>
+            <li ><b><%= link_to "Logout", logout_path%></b></li>
+	    <li>
+                <a class="list_your_property_home" href="/my/properties/new" id=""> &nbsp; </a>
+            </li>
+        </ul>
+        <%if current_user.roles[0][:title]=="admin"%>
+          <div id="admin_top"><%= render "shared/admin_options" %></div>
+        <% end %>
+ 
+      </div>
+      <%= render "shared/tabs" %>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  function nilkey(){
+    var v1 = document.getElementById("nilvalue")
+    v1.value = ""
+  }
+  function search()
+  {
+    var v1 = document.getElementById("nilvalue")
+    v1.value = "search"
+  }
+</script>

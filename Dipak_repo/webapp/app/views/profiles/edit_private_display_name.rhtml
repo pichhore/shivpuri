@@ -1,0 +1,32 @@
+<%- @page_title = "Change your profile's private name" -%>
+
+<%- if request.xhr? -%>
+<h2 style="margin-bottom: 10px;"><%=@page_title%></h2>
+<%- end -%>
+
+<div class="form">
+
+  <%- if request.xhr? -%>
+
+    <%- remote_form_for(:target_profile, :url => update_private_display_name_profile_path(@profile),
+                        :update         => "scratch",
+                        :loading        => "lightbox_controller.loading()",
+                        :loaded         => "lightbox_controller.loaded()"
+    ) do |f| %>
+
+    <%=render :partial=>"edit_private_display_name_form", :locals => { :f => f }%>
+
+    <%- end %>
+
+  <%- else -%>
+
+  <%- end -%>
+
+
+</div>
+
+<%- if request.xhr? -%>
+<script>
+lightbox_controller.loaded();
+</script>
+<%- end -%>

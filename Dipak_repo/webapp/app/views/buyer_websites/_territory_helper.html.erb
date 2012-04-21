@@ -1,0 +1,56 @@
+<script>
+         $('state_name_state_name').observe('change', function(){
+         	var th_state_id = $('state_name_state_name').value;
+	if (th_state_id != "") {
+        new Ajax.Request('/account/get_counties?state_id='+th_state_id,
+          {
+          method:'get',
+          onSuccess: function(transport){
+          var response = transport.responseText || "no response text";
+          $('county_update_div').update(response);
+          },
+        onFailure: function(){ alert('Something went wrong...') }
+        });
+	}
+        }); 
+
+</script>
+
+
+<div class="right_row_div">
+  <div class="left_float_left" style="text-align:left;">
+    <div>
+      Enter a State and County to find out which Territory it belongs to:
+    </div>
+  </div>
+</div>
+
+<div class="right_row_div">
+  <div class="left_float_left">    
+    <div >
+      <select name="state_name[state_name]" id="state_name_state_name">
+        <option value="">--- Select State --- </option>
+        <% @states.each do |state|%>
+        <option value="<%=state.id%>" ><%=state.name%></option>
+        <%end%>
+      </select>
+    </div>
+  </div>
+</div>
+
+<br/>
+
+<div class="right_row_div">
+  <div class="left_float_left">
+    <div id="county_update_div" >
+      <%=select("county","id",@counties.map { |county| [county.name, county.id]  },{ :include_blank => "--- Select County --- " })%>          
+    </div>
+  </div>
+</div>
+
+<div class="right_row_div">
+  <div class="left_float_left" style="text-align:left;">
+    <div id="ajax_update_terr_div" >  
+    </div>
+</div>
+</div>

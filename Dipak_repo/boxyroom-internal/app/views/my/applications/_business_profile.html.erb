@@ -1,0 +1,101 @@
+
+  <fieldset id="business">
+    <div class="clr"></div>
+    <div class="select_list">
+      <label>Nature of Employment:</label>
+      <p class="r" >
+          <input type="text" value="<%= @application.profile.nature_of_employment.tableize.singularize.gsub('_', ' ').gsub(/\b\w/){$&.upcase} %>" name="employment_nature" id="employment_nature" style="width: 200px;" />
+      </p>
+    </div>
+    <div class="clr"></div>
+    <div class="select_list">
+      <label>Start of Employment: </label>
+      <p class="r" style="width: 350px;">
+          <input type="text" value="<%= @application.profile.start_of_employment.day%>" name="start_employment_date" id="start_employment_date" class="small" />
+          <input type="text" value="<%= @application.profile.start_of_employment.strftime("%B").upcase%>" name="start_employment_month" id="start_employment_month" class="small" >
+
+          <input type="text" value="<%= @application.profile.start_of_employment.year%>"  name="start_employment_year" id="start_employment_year" class="small" >
+      </p>
+    </div>
+    <div class="clr"></div>
+    <div class="select_list">
+      <label>End of Employment: </label>
+      <p class="r" style="width: 350px;">
+        <input type="text" value="<%= @application.profile.end_of_employment.day%>" name="start_employment_date" id="start_employment_date" class="small" />
+        <input type="text" value="<%= @application.profile.end_of_employment.strftime("%B").upcase%>" name="start_employment_month" id="start_employment_month" class="small" >
+        <input type="text" value="<%= @application.profile.end_of_employment.year%>"  name="start_employment_year" id="start_employment_year" class="small" >
+      </p>
+    </div>
+    <div class="clr"></div>
+    <div class="select_list">
+      <label>Company Name:</label>
+      <p class="r">
+          <input value="<%= @application.profile.company_name%>" type="text" name="Company" id="Company" />
+      </p>
+    </div>
+    <div class="clr"></div>
+    <div class="select_list">
+      <label>Industry:</label>
+      <p class="r">
+          <input value="<%= @application.profile.industry%>" type="text" name="Industry" id="Industry" />
+      </p>
+    </div>
+    <div class="clr"></div>
+    <div class="select_list">
+      <label>Position:</label>
+      <p class="r">
+          <input value="<%= @application.profile.position%>" type="text" name="Position" id="Position" />
+      </p>
+    </div>
+    <div class="clr"></div>
+    <div class="select_list">
+      <label>Gross Annual Salary:</label>
+      <p class="r">
+          <input value="<%= @application.profile.gross_annual_salary%>" type="text" name="Salary" id="Salary" />
+      </p>
+    </div>
+    <legend>Superior’s Contact Details</legend>
+    <div class="clr"></div>
+    <div class="select_list">
+      <label>First Name:</label>
+      <p class="r">
+          <input value="<%= @application.profile.superior.first_name%>" type="text" name="sfirst_name" id="sfirst_name" />
+      </p>
+    </div>
+    <div class="clr"></div>
+    <div class="select_list">
+      <label>Last Name:</label>
+      <p class="r">
+          <input value="<%= @application.profile.superior.last_name%>" type="text" name="slast_name" id="slast_name" />
+      </p>
+    </div>
+    <div class="clr"></div>
+    <div class="select_list">
+      <label>E-Mail Address:</label>
+      <p class="r">
+          <input value="<%= @application.profile.superior.email %>" type="text" name="semail" id="semail" />
+      </p>
+    </div>
+    <div class="clr"></div>
+    <div class="select_list">
+      <label>Phone Number:</label>
+      <p class="r">
+          <input value="<%= @application.profile.superior.phone_no %>" type="text" name="sPhone" id="sPhone" />
+      </p>
+    </div>
+    <div class="clr"></div>
+    <div class="select_list">
+      <label>Mobile Number:</label>
+      <p class="r">
+          <input value="<%= @application.profile.superior.mobile_no %>" type="text" name="smobile" id="smobile" />
+      </p>
+    </div>
+    <div class="clr"></div>
+    <div class="select_list">
+      <label>Fax Number:</label>
+      <p class="r">
+          <input value="<%= @application.profile.superior.fax_no %>" type="text" name="sFax" id="sFax" />
+      </p>
+    </div>
+    <div class="clr"></div>
+  </fieldset>

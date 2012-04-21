@@ -1,0 +1,22 @@
+Marshmallow
+===========
+
+Marshmallow is a chat-bot who will connect to your Campfire room and tell you things.
+We use him to tell us when someone deploys with Capistrano, when people make feedback
+tickets, when we commit a subversion change, and many other purposes.
+
+Have fun!  Patches always appreciated.
+
+Development of Marshmallow was initially sponsored by CollectiveX, Inc: http://collectivex.com
+
+
+Here are some sample usages:
+
+* Exception notification
+* Subversion post-commit notices
+* Send feedback from your site straight to the dev chatroom.
+
+You need to edit some files and add your various usernames and password for these to work.
+Remember to *create* the usernames if you have a campfire room.
+
+ lib/exception_bot.rb

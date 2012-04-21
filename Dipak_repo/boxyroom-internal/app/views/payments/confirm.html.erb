@@ -1,0 +1,51 @@
+<div id="ct-lt">
+  <div id="header-wp">
+    <h1>Payment Confirmation</h1>
+  </div>
+
+  <h3>Lets Recap</h3>
+  <table class="console">
+    <tr><td>Property</td><td><%= @application.property.title %></td></tr>
+    <tr><td>Address</td><td><%= @application.property.address.to_s %></td></tr>
+    <tr><td>Estimated duration of stay</td><td><%= @application.duration_of_stay %></td></tr>
+    <tr><td>Monthly amount</td><td><%= @application.property.monthly_rental %></td></tr>
+    <tr><td><b>Total Payable</td><td><%= number_to_currency(session[:amount].to_f/100) %> (<%= @application.property.currency_type %>)</td></tr>
+  </table>
+
+  <h3>Personal Information</h3>
+  <table class="console">
+  <tr><td>Name</td><td><%= @address['name'] %></td></tr>
+  <tr><td>Company</td><td><%= @address['company'] %></td></tr>
+  <tr><td>Address 1</td><td><%= @address['address1'] %></td></tr>
+  <tr><td>Address 2</td><td><%= @address['address2'] %></td></tr>
+  <tr><td>City</td><td><%= @address['city'] %></td></tr>
+  <tr><td>State</td><td><%= @address['state'] %></td></tr>
+  <tr><td>Country</td><td><%= @address['country'] %></td></tr>
+  <tr><td>Zip</td><td><%= @address['zip'] %></td></tr>
+  <tr><td>Amount</td>
+    <td>
+      <%= number_to_currency(session[:amount].to_f / 100) %> 
+      <%= @application.property.currency_type %>
+      <% if current_user.prefers_currency != @application.property.currency_type
+    %> 
+    <%# number_to_currency CurrencyExchange.currency_exchange((session[:amount].to_f / 100), @application.property.currency_type, current_user.prefers_currency) %> <%# current_user.prefers_currency %>
+  <% end %>
+    </td>
+  </tr>
+</table>
+
+<% form_tag :action => 'complete', 
+            :token => params[:token], 
+            :payer_id => params[:PayerID] do %>
+
+    <p class="btn">
+      <button class="positive button" name="submit" type="submit">Complete Payment</button>
+    </p>
+
+<% end %>
+
+</div>
+
+<div id="ct-rt">
+</div>
+

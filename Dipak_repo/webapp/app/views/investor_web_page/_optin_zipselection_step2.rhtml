@@ -1,0 +1,124 @@
+<div class="form" style="width:940px;padding:9px;">
+    <div>
+        <div class="full" style="padding-bottom: 0; margin-bottom:0;">
+            <p class="label_text_style">
+                <% unless params[:coun] == "CA" %>
+                   <span style="display:none;" id="msg_block">Click On The Map To Select Areas OR Type The Area Code Where You Wish To Buy Property</span>
+                <% else %>
+                   Please Select The Area Where You Wish To Buy Property 
+                <% end %>
+             </p>
+        </div>
+    </div>
+    <h3>Step 1: Select Area & Investment Type</h3>
+        <% form_tag({:controller=>'investor_web_page', :action=>'new_wholesale_retail_buyer', :permalink_text=>params[:permalink_text] },{ :onSubmit=>"return validate()"}) do -%>
+          <fieldset>
+            <input type="hidden" value="<%=params[:first_name]%>" name="first_name"/>
+            <input type="hidden" value="<%=params[:email]%>" name="email"/>
+       
+            <div>
+                <div>
+                 <table>
+                  <tr>
+                      <th class="label_required" style="width:19%;">
+                          Country:
+                      </th>
+                      <td align="left">
+                        <select id="country_country" class="move_select_dropdown" name="country" onchange="update_map();">
+                          <%= options_for_select( County::COUNTRY_NAME,params[:coun]) %>
+                        </select>
+                      </td>
+                  </tr>
+                </table>
+                </div>
+                <div>
+                  <span class="investment_type">
+                    Investment Type:
+                  </span>
+                  <% @wholesale_flag = true if @wholesale_flag.blank? %>
+                  <%=check_box_tag 'wholesale', InvestmentType.find_by_code('WS').id, @wholesale_flag , :onclick=>"get_wholesale_owner_finance_value_for_buyer_profile();"%>Wholesale &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=check_box_tag 'owner_finance', InvestmentType.find_by_code('OF').id, @owner_finance_flag, :onclick=>"get_wholesale_owner_finance_value_for_buyer_profile();"%>Owner Finance
+              </div>
+            </div>
+            </fieldset>
+             <fieldset>
+             <div class="full" style="padding-bottom: 10px;">
+            <% unless params[:coun] == "CA" %>
+              <div id="owner_finance_section" style="display:none;">
+                <table>
+                <tr> 
+                   <th class="label_required expand_label" style="width:19%;">Zip Codes:<img title="The areas you select on the map will appear as zip codes here. You may also enter zip codes manually where you wish to buy. if entered manually, separate zip codes by a comma, e.x. 78704,78702,78723" src="/images/reimatcher_images/help_icon.png" alt="Help_icon"></th>
+                   <td><%= text_field_tag "zip_code", @zip_code, :size=>92, :class=>"required zipcodes" %></td>
+                 <tr> 
+                 </table>
+            <%=submit_tag "Next >", :class=>"submit_inv_web" %>
+              </div>
+              <div id="wholesale_section" style="display:block;">
+                <table>
+                      <tr>
+                          <th class="label_required expand_label">
+                              State:
+                          </th>
+                          <td align="left">
+                            <select id="county_state" class="move_select_dropdown" name="state" onchange="get_state_county();">
+                            <%= options_for_select([[ "Select a State", "" ]] + State::NAMES) %>
+                            </select>
+                          </td>
+                      </tr>
+                      <th class="label_required expand_label">
+                              County:
+                          </th>
+                          <td align="left">
+                            <span id="ajax_county_update_div" class="move_select_dropdown">
+                             <%=select("county","county",@counties.map { |county| [county, county]  },{ :include_blank => "--- Select a County --- "})%>
+                            </span>
+                          </td>
+                      </tr>
+                     </table>
+              </span>
+            <% else %>
+                  <div>
+                     <table>
+                      <tr>
+                          <th class="label_required expand_label" style="width:19%;">
+                              Province:
+                          </th>
+                          <td align="left">
+                            <select id="profile_state" class="move_select_dropdown" name="state" <% if !(error_message_on :seller_property,:state).blank? %> style="border:1px solid #FF3300; width:105px;color:#FF3300;"<% end %> onchange="get_province_city();">
+                            <%= options_for_select([[ "Select a Province", "" ]] + State::CANADA_NAMES) %>
+                            </select>
+                          </td>
+                      </tr>
+                      <th class="label_required expand_label" style="width:19%;">
+                              City:
+                          </th>
+                          <td align="left">
+                            <span id="ajax_update_div" class="move_select_dropdown">
+                              <%=select("city","city",@cities.map { |city| [city, city]  },{ :include_blank => "--- Select a City --- " })%>
+                            </span>
+                          </td>
+                      </tr>
+                     </table>
+                    </div>
+            <% end %>
+            
+            <br />
+            <%=submit_tag "Next >", :class=>"submit_inv_web" %>
+        </div>
+
+      <% unless params[:coun] == "CA" %>
+        <div style="display:none;" id="map_block">
+          <div id="map" style="clear:both; height: 450px; width: 100%; text-align: center; background: #CCCCCC; padding: 0; margin: 0; margin-bottom: 10px; color: white; border: 1px solid black;">
+        <div id="preview_results_map_div" style="width: 100%; height: 450px; position: relative; background-color: rgb(229, 227, 223); overflow: hidden;"></div>
+          </div>
+          <div class="ie_fix">
+  
+          </div>
+          <div class="loading" style="display:none">
+              <span class="text">Loading...</span>
+          </div>
+        </div>
+      <% end %>
+    </fieldset>
+    <% end -%>
+</div>
+

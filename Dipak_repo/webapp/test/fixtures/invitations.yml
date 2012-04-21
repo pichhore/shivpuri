@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: 1
+  user_id: 1
+  to_email: MyString
+  to_first_name: MyString
+  to_last_name: MyString
+  invitation_message: MyText
+  created_at: 2007-12-10 14:08:41

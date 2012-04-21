@@ -1,0 +1,62 @@
+<%= javascript_include_tag "rei_website_domain" %>
+
+<input type="hidden" name="my_website_form[type]" value="<%= @website_type %>" />
+<tr>
+  <td><%=error_message_on :my_website_form,:domain %></td>
+</tr>
+<tr>
+  <td>
+    <div style="display:none;"><%=f.radio_button "domain", "bying",:onclick=>"show_domain_info('buying_domain')"%> Buy Domain</div>
+  </td>
+</tr>
+<tr id="buying_domain" style="display:none;">
+  <td>
+    <!--Content to be displayed for the ENOM-->
+  </td>
+</tr>
+<tr>
+  <td>
+    <%=f.radio_button  "domain", "having",:onclick => "show_domain_info('having_domain')" %>I have my own domain
+  </td>
+</tr>
+<tr id="having_domain" style="<% if (! error_message_on(:my_website_form,:having_domain_name).blank?)%>display:block;<%else%>display:none;<%end%>">
+  <td >
+    <%= render :partial => '/rei_websites/own_domain_form', :locals => {:f => f} %>                 
+  </td>
+</tr>
+
+<tr>
+  <td>
+    <%=f.radio_button  "domain", "reim",:onclick=>"show_domain_info('reim_domain')"%>Use REIMatcher Domain
+  </td>
+</tr>
+<tr id="reim_domain" style="<% if (! error_message_on(:my_website_form,:reim_domain_name).blank? || ! error_message_on(:my_website_form,:reim_domain_permalink1).blank? || ! error_message_on( :my_website_form,:reim_domain_permalink2).blank?)%>display:block;<%else%>display:none;<%end%>">
+  <td >
+    <div class="seller_domain_margin">
+      <div ><%=error_message_on :my_website_form,:reim_domain_name %><br/></div>
+      <div>
+        <div style="float:left;">
+          <%=f.radio_button  "reim_domain_name", @rei_domains[0] %> <%= @rei_domains[0] %> / <%= f.text_field "reim_domain_permalink1",:size=>20 ,:onclick =>"checked_radio_button_1('"+@rei_domains[0].gsub(/\./,'')+"')",:onkeyup=>"select_website(event,'my_website_form_reim_domain_permalink1','"+@rei_domains[0].gsub(/\./,'')+"','"+@rei_domains[1].gsub(/\./,'')+"');"%>  <input type="button" name="check_permalink1" value="Check Availability" onclick = "check_availablity('my_website_form_reim_domain_name_<%= @rei_domains[0].gsub(/\./,'') %>','my_website_form_reim_domain_permalink1','<%= @website_type.downcase %>' + '_websites' )">
+        </div>
+        <div style="float:left;padding-left:10px;">
+          <img  src="/images/spinner.gif" id="feeds_spinner_1" style="display:none;" class="loading-indicator" alt="loading indicator" />
+        </div>
+        <div id="ajax_update_div_1" style="float:left;padding-left:10px;"></div>
+      </div>
+      <div class="seller_domain_margin"><%=error_message_on :my_website_form,:reim_domain_permalink1 %></div>
+      <br/>
+      <br/>
+      <div>
+        <div style="float:left;">
+          <%=f.radio_button  "reim_domain_name", @rei_domains[1] %> <%= @rei_domains[1] %> / <%= f.text_field "reim_domain_permalink2",:size=>20,:onclick =>"checked_radio_button_2('"+@rei_domains[1].gsub(/\./,'')+"')",:onkeyup=>"select_website(event,'my_website_form_reim_domain_permalink2','"+@rei_domains[0].gsub(/\./,'')+"','"+ @rei_domains[1].gsub(/\./,'')+"');"%>  <input type="button" name="check_permalink2" value="Check Availability" onclick = "check_availablity('my_website_form_reim_domain_name_<%= @rei_domains[1].gsub(/\./,'') %>','my_website_form_reim_domain_permalink2', '<%= @website_type.downcase %>' + '_websites')">
+        </div>
+        <div style="float:left;padding-left:10px;">
+          <img  src="/images/spinner.gif" id="feeds_spinner_2" style="display:none;" class="loading-indicator" alt="loading indicator" />
+        </div>
+        <div id="ajax_update_div_2" style="float:left;padding-left:10px;"></div>
+      </div>
+      <div class="seller_domain_margin"><%=error_message_on :my_website_form,:reim_domain_permalink2 %></div>
+    </div>
+  </td>
+</tr>
+

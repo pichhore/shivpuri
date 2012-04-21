@@ -1,0 +1,24 @@
+<div>
+<span style="vertical-align: top;"><b>Area Select</b></span>
+<span><%= image_tag '/images/streetView-new.gif', :size => '26x26' %></span>
+<span style="padding-left: 10px; vertical-align: top;">
+<% if(!@directions_available.first.direction.include?("NE,NW,SE,SW")) %>
+<%= link_to_remote "NW #{@directions_available.first.city.downcase.capitalize}", :url => { :action => "select_multiple_areas_on_map", :direction => "NW", :city => @directions_available.first.city, :state => @directions_available.first.state }, :with => "'zipcodes=' + $('zip_code').value" %>&nbsp;&nbsp;&nbsp;&nbsp;
+<%= link_to_remote "NE #{@directions_available.first.city.downcase.capitalize}", :url => { :action => "select_multiple_areas_on_map", :direction => "NE", :city => @directions_available.first.city, :state => @directions_available.first.state}, :with => "'zipcodes=' + $('zip_code').value"  %>&nbsp;&nbsp;&nbsp;&nbsp;
+<%= link_to_remote "SE #{@directions_available.first.city.downcase.capitalize}", :url => { :action => "select_multiple_areas_on_map", :direction => "SE", :city => @directions_available.first.city, :state => @directions_available.first.state}, :with => "'zipcodes=' + $('zip_code').value" %>&nbsp;&nbsp;&nbsp;&nbsp;
+<%= link_to_remote "SW #{@directions_available.first.city.downcase.capitalize}", :url => { :action => "select_multiple_areas_on_map", :direction => "SW", :city => @directions_available.first.city, :state => @directions_available.first.state}, :with => "'zipcodes=' + $('zip_code').value" %>
+<% else %>
+<% if(@directions_available.first.city=="ROUND ROCK") 
+     area = "RR"
+   elsif(@directions_available.first.city=="PFLUGERVILLE")
+     area = "PF"
+   elsif(@directions_available.first.city=="CEDAR PARK")
+     area = "CP"
+   elsif(@directions_available.first.city=="LEANDER")
+     area = "LE"   
+   end %>
+
+<%= link_to_remote "#{area}", :url => { :action => "select_multiple_areas_on_map", :direction => "SW", :city => @directions_available.first.city, :state => @directions_available.first.state}, :with => "'zipcodes=' + $('zip_code').value", :html => {:title => @directions_available.first.city} %>
+<% end %>
+</span>
+</div>

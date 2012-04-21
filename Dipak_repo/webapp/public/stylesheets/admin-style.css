@@ -1,0 +1,82 @@
+.widecontent {
+  margin-left: 10px;
+}
+
+#admin_nav {
+  padding: 10px;
+  float: left;
+  width: 48%;
+}
+
+#admin_nav a {
+  font-size: 1.0em;
+}
+
+#user {
+  float: left;
+  width: 49%;
+  padding-top: 5px;
+}
+
+.report_filter {
+  margin-bottom: 10px;
+}
+
+.report_export {
+  margin-bottom: 10px;
+}
+
+.report_results {
+}
+
+.report_results table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.report_results table TH {
+  text-align: left;
+  background: #CCCCCC;
+  padding-left: 5px;
+}
+
+.report_results table TD {
+  padding-left: 5px;
+}
+
+.report_results table TR.odd {
+  background: #EEEEEE;
+}
+
+.report_results p {
+  margin-top: 10px;
+}
+
+.widecontent h2 {
+  margin-left: 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-left: 0;
+}
+
+.widecontent h3 {
+  margin-left: 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-left: 0;
+}
+.badges_results table th{
+  background:none repeat scroll 0 0 #CCCCCC;
+  padding-left:10px;
+  text-align:left;
+  border-left:1px hidden;
+}
+
+.badges_results table{
+  border-collapse:collapse;
+  text-align:center;
+}
+
+ #badges_margin {
+  text-align:left;
+}

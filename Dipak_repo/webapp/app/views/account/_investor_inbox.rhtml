@@ -1,0 +1,50 @@
+<% if @subject.blank?%>
+  <%if !@investor_message_recieved.blank? && !current_user.blank?%>
+  
+  <%form_tag ({ :controller => "account", :action => "delete_investor_inbox_message"},:method=>:post) do%>
+  <div><% if @investor_filter_type.blank? || @investor_filter_type == 'Current'%> <%=submit_tag "Archive ", :class=>'submit_s' %><%else%><br/><%end%></div>
+  <table  border="0" cellspacing="0" class="investor_inbox_grid">
+  <tr>
+    <% if @investor_filter_type.blank? || @investor_filter_type == 'Current'%><th>Select&nbsp;</th><%end%>
+    <th>From</th>
+    <th>Subject: Message</th>
+    <th>Date/Time</th>
+  </tr>
+  <% @investor_message_recieved.each_with_index do |message, index| %>
+    <tr  <% if message.reciever_id == current_user.id and !message.is_read %>class ='investor_inbox_grid_row'<%end%>>
+      <% if @investor_filter_type.blank? || @investor_filter_type == 'Current'%>
+          <td class="investor_inbox_selector">
+            <%= check_box_tag 'investor_message[]', "#{message.id}#user_id##{message.user_id}"%>
+          </td>
+      <%end%>
+      <td class="investor_inbox_seperator" onclick="go_to_investor_conversation('<%=message.is_read%>','<%=message.user_id%>','messge_suject_display_none_<%=index.to_s%>','<%=message.id%>','<%= message.reciever_id %>');" ><%= message.first_name%> <%= message.last_name%> (<% message_content = no_of_investor_message(message.subject,message.reciever_id,message.user_id)%><%= message_content[0]%>)</td>
+      <td class="investor_inbox_seperator" onclick="go_to_investor_conversation('<%=message.is_read%>','<%=message.user_id%>','messge_suject_display_none_<%=index.to_s%>','<%=message.id%>','<%= message.reciever_id %>');"><%= truncate(message.subject,50)%> - <span style ="font-size:0.8em;"><%= message_content[1]%></span>
+      <div id="messge_suject_display_none_<%=index.to_s%>" style="display:none;" ><%=message.subject %></div>
+      </td>
+      <td class="investor_inbox_seperator" onclick="go_to_investor_conversation('<%=message.is_read%>','<%=message.user_id%>','messge_suject_display_none_<%=index.to_s%>','<%=message.id%>','<%= message.reciever_id %>');"><%= message.created_at.strftime("%m/%d/%y")%></td>
+    </tr>
+  <%end%>
+  </table>
+  <%= will_paginate @investor_message_recieved %>
+  <%end%>
+  <%else%>
+   <div><% if @investor_filter_type.blank? || @investor_filter_type == 'Current'%> <%=submit_tag "Archive ", :class=>'submit_s' %><%else%><br/><%end%></div>
+    <table border="0" cellspacing="0" class="investor_inbox_grid">
+          <tr>
+          <th>Select</th>
+          <th>From</th>
+          <th>Subject: Message</th>
+          <th>Date/Time</th>
+          </tr>
+          <td class="investor_inbox_seperator"></td><td class="investor_inbox_seperator"></td><td class="investor_inbox_seperator"></td><td class="investor_inbox_seperator"></td>
+    </table>
+
+    Empty Inbox.
+
+  <%end%>
+<%else%>
+   <div id="messge_suject_display_none_email" style="display:none;" ><%=@subject %></div>
+   <script type="text/javascript">
+      go_to_investor_conversation('<%= @is_read%>','<%= @user_id%>','messge_suject_display_none_email','<%= @investor_message_id%>');
+  </script>
+<%end%>

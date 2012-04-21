@@ -1,0 +1,110 @@
+<head>
+<!--[if IE 7]>
+  <style type="text/css">
+   .b_date_l{top: 18px!important;}
+   .legend_position{left: -8px!important;}
+   .email_l{top: 34px!important;}
+   #user_payment_transfer_mail{position: relative!important;top: 15px;}
+   .preferred_currency{top: 60px!important;}
+   #user_prefers_currency{position: relative!important; top: 45px!important;}
+   .description{position:relative!important; margin-top: 40px!important;}
+  </style>
+<![endif]-->
+</head>
+<div id="content">
+        <div class="container">
+                <%= flash_message %>
+                <div class="primary" id="profile_primary">
+                        <%- form_for :user, current_user, :url => my_account_path, :html => { :multipart => true, :method => :put, :class => "form" } do |f| %>
+                           <%= f.error_messages :header_message => "Opps! There are problems with your information." , :message => ""%>
+                                <fieldset>
+                                      <legend class="legend_position">Edit Profile</legend>
+                                        <div class="change-password">
+                                          <p class="">
+                                                  <label >Name</label>
+                                          </p>
+                                          <p>
+					          <label for="user_first_name">First name</label>
+                                                  <%= f.text_field :first_name %>
+                                          </p >
+                                          <p >
+                                                  <label for="user_last_name">Last name</label>
+                                                  <%= f.text_field :last_name%>
+                                          </p>
+                                          <p class="">	
+                                              <label class="email_l">Email</label>
+                                          </p>
+                                          <p>
+                                                  <%= f.text_field :payment_transfer_mail %>
+                                          </p>
+                                         </div>
+                                         <div class="change-password">
+                                          <p class="">
+                                            <%= f.label :birth_date, "Birthdate (dd/mm/yyyy)", :class =>"b_date_l" %>
+                                          </p>
+                                          <p style="width: 391px;">
+                                            <%= f.date_select :birth_date, :start_year => Time.now.year - 60, :end_year => Time.now.year - 18,:class=>:small,:short_month=>true %>
+                                          </p>
+                                        </div>
+                                        <p class="">
+                                          <label class="preferred_currency">Preferred Currency</label>
+                                        </p>
+                                        <p style="margin-left: -106px;">
+                                          <%= select_tag "user[prefers_currency]", options_for_select(options_for_currency, current_user.prefers_currency) %>
+                                        </p>
+                                        <div class="description">
+                                                <div class="profile">
+                                                  <div class="thumbnail large">
+                                                          <%= image_tag current_user.avatar.url(:medium)%>
+                                                          <div class="overlay"></div>
+                                                  </div>
+                                                  <%unless current_user[:avatar_file_size].nil?%>
+                                                    <a href="/my/dashboard/delete_user_pic" class="cancel">Cancel</a>
+                                                  <% end %>
+                                                </div>
+                                                <%= f.text_area :about, :rows => 8 ,:id=>"about_me_area" %>
+                                        </div>
+                                         <div class="change-password">
+                                            <p>
+                                              <%= f.label :"Upload profile photo" %>
+                                            </p>
+                                            <p>
+                                              <%= f.file_field :avatar,:size=> 33%>
+                                            </p>
+                                         </div>
+                                        <div class="change-password">
+                                                <p class="">
+                                                        <label>Change password</label>
+                                                </p>
+                                                <p class="">
+                                                        <label for="user_password">New password</label>
+                                                        <%= f.password_field :password %>
+                                                </p>
+                                                <p class="">
+                                                        <label for="user_password_confirmation">Password Confirmation</label>
+                                                         <%= f.password_field :password_confirmation %>
+                                                </p>
+                                        </div>
+                                       <div class="buttons" style="margin-right: 0px;margin-left: 335px;">
+                                         <button id="user_submit" class="positive button" name="commit" type="submit"></button>
+                                       </div>
+                                </fieldset>
+                        <% end %>
+                </div>
+                 <div class="secondary" >
+                        <div class="section" style="height: 50px;">
+                                <h3>Tips and Tricks</h3>
+                        </div>
+                </div>
+                <div class="secondary">
+                  <div class="section2" >
+                    <p class="amount_field" style="font-size: 140%;text-align: left;margin-left: 9px;font-weight: 400;padding: 8px;">It is important to provide accurate contact information for timely Email communication.</p>
+                  </div>
+                </div>
+                <div class="secondary">
+                  <div class="section2" >
+                    <p class="amount_field" style="font-size: 140%;text-align: left;margin-left: 9px;font-weight: 400;padding: 8px;">Uploading a profile photo builds credibility and greater chance of success.</p>
+                  </div>
+                </div>
+        </div>
+</div>

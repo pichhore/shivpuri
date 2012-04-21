@@ -1,0 +1,53 @@
+<%if !@investor_messages.blank?%>
+  <%@investor_messages.each do |message|%>
+  <div class="conversation_message <%#=style_if_new_value%>">
+
+   <div class="subject">Subject: <%=message.subject%></div>
+  
+    <div class="body"><%=message.body%></div>
+  
+<<<<<<< HEAD:webapp/app/views/account/investor_conversation.rhtml
+    <div class="reply_link"><%=link_to_function image_tag("icons/icon_mail_open_right.gif")+" Reply", "$('#{message.id}').show()"  if current_user.can_view? %></div>
+
+    <div class="spam_link" style="width:235px;" >
+
+      <%if message.marked_as_spam == true%>
+        <span id="marked_as_spam_<%=message.id%>">
+            Marked as spam
+        </span>
+      <%else%>
+
+       <span id="marked_as_spam_<%=message.id%>">
+          <%=link_to_remote(image_tag("icons/icon_spam.gif", :alt=>"Flag as spam or inappropriate", :title=>"Flag as spam or inappropriate", :class=>"image")+" Flag msg", :update => "scratch", :url=>{:action=>:mark_as_spam,:id=>@user_id, :message_id=>message.id,:controller=>:users},
+                                                                                  :method => :get,
+                                                                                  :update         => "lightbox_contents",
+                                                                                  :loading        => "lightbox_controller.loading()",
+                                                                                  :loaded         => "lightbox_controller.loaded()") %>
+       </span>
+      <%end%>
+
+  </div>
+=======
+    <div class="reply_link"><%=link_to_function image_tag("icons/icon_mail_open_right.gif")+" Reply", "$('#{message.id}').show()"  if current_user.can_view? %></div>
+>>>>>>> aa6fd9a...  Ticket #349:webapp/app/views/account/investor_conversation.rhtml
+  
+    <div class="from"><% if message.sender_id == current_user.id%>Sent from me<%else%>Received from <%= message_user_name(message.sender_id)%> <%end%> on <%=message.created_at.strftime("%m %d %Y %I:%M %p")%></div>
+  
+    <div style="clear: both;"></div>
+  
+    <%#- @div_id = "reply_form_#{versation_message.profile_message.id}" -%>
+  
+    <div <%="id='#{message.id}'"%> class="reply_form" style="display:none;">
+  
+      <%=render :partial=>"reply_form", :locals=>{:subject=>message.subject,:reply_to_investor_id=>message.sender_id, :div_id=>message.id} %>
+  
+    </div>
+          <div style="display:none;" id="overlay_Lightbox"></div>
+          <div style="display:none;" id="lightbox_contents">Lightbox</div>
+    </div>
+
+  <%end%>
+  <%= will_paginate @investor_messages, :params=>{:user_id=>@user_id, :subject=>@investor_messages[0].subject},:renderer => 'RemoteLinkRenderer' , :remote => {:update => 'ajax_update_div'} %>
+<%else%>
+   No Conversation Found
+<%end%>

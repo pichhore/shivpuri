@@ -1,0 +1,72 @@
+<script type="text/javascript">
+  function check_user_input(){
+    var btns = document.forms['site_type_form'].elements['seller_magnet'];
+    for (counter = 0; counter < btns.length; counter++)
+    {
+      if (btns[counter].checked)
+      {
+        $('seller_magnet').value = btns[counter].value;
+        toggle_elements();
+        return true;
+      }
+    }
+    alert("Please select site type");
+    return false;
+  }
+
+  function toggle_elements(){   
+    $('site_type_div').toggle();
+    $('domain_selection').toggle();
+  }
+</script>
+
+<%- @page_title = "#{@website_type.capitalize} Web Site Setup" -%>
+
+  <% if @website_type == 'seller' %>
+    <div id="site_type_div">
+    <form name="site_type_form">
+
+    <% if @my_websites.blank? %>
+      <span style="font-size: 14px; font-weight: bold; padding-left: 0 0 5px 5px;">Select Site Type</span>
+      <div style="margin: 5px; padding-top: 5px;"><input type="radio" name="seller_magnet" value="false"> Seller Website</div>
+      <div style="margin: 5px;"><input type="radio" name="seller_magnet" value="true"> AMPS Seller Magnet</div>
+    <% else %>
+      <%seller_magnet = @my_websites[0].site.seller_magnet? %>
+      <span style="font-size: 14px; font-weight: bold; padding-right: 10px;">You already have a <%= seller_magnet == false ? "seller website" : "seller magnet"%> associated with your account. Click next to create a <%= seller_magnet == false ? "seller magnet" : "seller website" %> </span>
+        <% if seller_magnet %>
+          <div style="margin: 5px; padding-top: 5px;"><input type="radio" name="seller_magnet" value= "false" checked disabled /> Seller Website</div>
+          <div style="margin: 5px;"><input type="radio" name="seller_magnet" value="true" disabled> AMPS Seller Magnet</div>
+        <% else %>
+          <div style="margin: 5px; padding-top: 5px;"><input type="radio" name="seller_magnet" value= "false" disabled /> Seller Website</div>
+          <div style="margin: 5px;"><input type="radio" name="seller_magnet" value="true" checked disabled /> AMPS Seller Magnet</div>
+        <% end %>
+    <% end %>
+        <div align="left" style="margin-top:10px; text-align: center">
+          <input type=button value="Next" name="Next" class="submit_s" onClick="check_user_input();">
+        </div>
+      </form>
+    </div>
+  <% end %>
+
+<span id="domain_selection" style=<%= @website_type == 'seller' ? 'display:none' : 'display:block' %>>
+<fieldset>
+<legend>Step 1 of <%= @steps %></legend>
+  <table>
+    <%- form_for(:my_website_form,@my_website_form, :url => {:controller => "#{@website_type + '_websites'}", :action => 'step2'}, :html => { :method => :post }) do |f| -%>
+         <%= render :partial => 'rei_websites/domain_selection', :locals => {:f => f} %>
+    <tr>
+      <td>
+        <div align="center">
+          <%= hidden_field_tag "seller_magnet", false %>
+          <% if @website_type == 'seller' %>
+            <input type=button value="Back" name="back" class="submit_s" onClick="toggle_elements();">
+          <% end %>
+          <%= f.submit "Next", :class=>'submit_s' %>
+        </div>
+      </td>
+    </tr>
+    <% end %>	 
+  </table>
+</fieldset>
+</span>
+

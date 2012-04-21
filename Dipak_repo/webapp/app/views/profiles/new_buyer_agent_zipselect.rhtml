@@ -1,0 +1,74 @@
+<%- @page_title = "Austin Real Estate Property Texas: Create Your Buyer Agent Profile" -%>
+<%- @page_heading = "Create a Profile For Your Buyer - Step 1 of 2" -%>
+<%- @meta_description = "Begin matching Austin Real Estate property in Texas when you create your buyer profile on dwellgo’s exclusive online intelligent matching system - dwellgo" -%>
+<%- @meta_keywords = "austin real estate, investment property, Austin metro area, Austin metro, Texas, dwellgo" -%>
+
+<%- @include_gmap_header = true -%>
+
+<% require_js_controllers :zip_selection -%>
+
+<% content_for :page_scripts do -%>
+
+    function validate() {
+       if ($('zip_code').value == '') {
+         alert("Please select at least one zip code for your new buyer agent profile");
+         return false;
+       } else if (! /^\d{5}(,\s*\d{5})*$/.test($F('zip_code'))) {
+	     alert("Zip codes must be 5 digits long and separated by commas");
+		 return false;
+	   } else {
+         return true;
+       }
+    }
+
+    /** Controller setup **/
+
+    Event.observe(window, 'load', function() {
+      zip_selection_controller = new NL.ZipSelectionController("<%=@zip_code%>");
+                // insure zip_code input text field is always in sync with js-generated map
+                $('zip_code').value = '<%=@zip_code%>';
+    });
+
+<% end -%>
+
+<div class="full">
+
+<div>
+
+  <%- if logged_in? -%>
+  <p class="note">Note: This new profile will be attached to your user account, <%=current_user.login%>. If you want to create a separate user account with a different email address, please <%=link_to "sign out", :controller=>'sessions', :action=>'destroy' if logged_in?%> first.</p>
+  <%- end -%>
+
+</div>
+
+    <fieldset>
+
+        <div class="full" style="padding-bottom: 0; margin-bottom:0;">
+            <h4 style="font-size: 1.2em">Click on the map to select areas where your buyer wishes to buy property</h4>
+        </div>
+
+        <% form_tag({:controller=>'profiles', :action=>'new', :id=>'buyer_agent'},{ :onSubmit=>"return validate()"}) do -%>
+        <div class="full" style="padding-bottom: 10px;">
+            <b>Selected:</b> <%= text_field_tag "zip_code", @zip_code, :size=>88, :class=>"required zipcodes" %> <%=submit_tag "Next >", :class=>"submit"%>
+
+        </div>
+
+        <div id="map" style="clear:both; height: 450px; width: 100%; text-align: center; background: #CCCCCC; padding: 0; margin: 0; margin-bottom: 10px; color: white; border: 1px solid black;">
+                <%= @map.div(:width => 749, :height => 450 ) %>
+        </div>
+        <div class="ie_fix">
+                <%- @boundary_overlays.each do |overlay| -%>
+                        <%- js = overlay.to_javascript() -%>
+                        <%- @map.record_init( "map.addOverlay( overlay = #{ js } );" ) -%>
+                        <%- if @js -%>
+                                <%- @map.record_init( "GEvent.addListener( overlay, 'click', #{ @js } );" ) -%>
+                        <%- end -%>
+                <%- end -%>
+                <%= @map.to_html({:proto_load=>true}) %>
+        </div>
+
+        <div class="loading" style="display:none"><span class="text">Loading...</span></div>
+    </fieldset>
+
+        <% end -%>
+</div>

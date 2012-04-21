@@ -1,0 +1,21 @@
+#!/usr/local/bin/ruby
+require 'lib/marshmallow.rb'
+
+svnlook = "/usr/bin/svnlook"
+bot = Marshmallow.new(:domain => 'jaymon')
+bot.login :method => :login, :username => "support@dashearth.com", :password => "support", :room => '98908'
+
+if ARGV.size > 1
+  revision = ARGV[1]
+  path = ARGV[0]
+
+  author = `#{svnlook} author -r #{revision} #{path}`
+  paths  = `#{svnlook} changed -r #{revision} #{path}`
+  log    = `#{svnlook} log -r #{revision} #{path}`
+  message = [log,paths].join.strip
+  url = "Changeset \##{revision} by #{author} (http://http://208.78.97.33:9090/projects/webapp/changeset/#{revision})"
+  bot.say(url)
+  bot.say(message, true)
+else
+  bot.say(ARGV[0])
+end

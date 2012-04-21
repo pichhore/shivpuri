@@ -1,0 +1,27 @@
+     <table width="100%">
+      <tr>
+          <td colspan=2>State:</td>
+	  </tr>
+	  <tr>
+          <td colspan=2>
+            <%= select("filter_results","state_name",@states.map { |state| [state.name, state.id]  },{ :include_blank => "--------- Select State ---------" }, { :class => "wide" })%>
+           </td>
+        </tr>
+         <tr>
+          <td colspan=2>Territory:</td>
+	  </tr>
+	  <tr>
+          <td colspan=2>
+             <div id="ajax_update_div">
+                <%= select("filter_results","territory_name",@territories.map { |territory| [territory.territory_name, territory.id]  },{ :include_blank => "-------- Select Territory --------"}, {:class => 'wide' })%>
+             	</div>
+        </td>
+        </tr>
+
+</table>
+
+<script>
+ $('filter_results_state_name').observe('change', function(){
+alert("JSB");
+   });
+</script>

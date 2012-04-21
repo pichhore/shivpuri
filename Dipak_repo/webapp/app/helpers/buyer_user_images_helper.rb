@@ -1,0 +1,2 @@
+module BuyerUserImagesHelper
+end

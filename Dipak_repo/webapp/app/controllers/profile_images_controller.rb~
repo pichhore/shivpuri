@@ -1,0 +1,109 @@
+class ProfileImagesController < ApplicationController
+  before_filter :login_required
+  before_filter :load_profile
+  before_filter :check_profile_ownership
+
+  layout "application"
+
+  # GET /profiles/<profile_id/profile_images/
+  # GET /profiles/<profile_id/profile_images.xml
+  def index
+    @profile_images = @profile.profile_images_large # do something to ignore thumbnail entries?
+    @profile_image = ProfileImage.new
+  end
+
+  # GET /profiles/<profile_id/profile_images/<id>
+  # GET /profiles/<profile_id/profile_images/<id>.xml
+  def show
+    render :text=>"update not supported", :status=>500
+  end
+
+  # GET /profiles/<profile_id/profile_images/new
+  def new
+    render :text=>"update not supported", :status=>500
+  end
+
+  # GET /profiles/<profile_id/profile_images/1;edit
+  def edit
+    render :text=>"update not supported", :status=>500
+  end
+
+  # POST /profiles/<profile_id/profile_images
+  # POST /profiles/<profile_id/profile_images.xml
+  def create
+    image_count =0
+    puts params.inspect
+    unless params[:uploaded_data].blank?
+      for item in params[:uploaded_data] - [""]      
+        ProfileImage.create!(:uploaded_data=>item,:profile=>@profile)      
+      end    
+      params[:uploaded_data].each do |image|
+        image_count = image_count + 1  if !image.blank?
+      end
+    end
+    if image_count==0
+      flash[:notice] = "Please upload atleast one image."
+    else
+      flash[:notice] = "Image uploaded successfully."
+    end
+    
+    profile_image = ProfileImage.find_by_profile_id(@profile.id, :conditions => {:default_photo => true})
+    image_url = REIMATCHER_URL + "profile_images/#{profile_image.id}/#{profile_image.filename}" if !profile_image.nil?
+    
+    if profile_image.nil?
+      profile_image = ProfileImage.find_by_profile_id(@profile.id, :conditions => {:thumbnail => "big"})
+      image_url = REIMATCHER_URL + "profile_images/#{profile_image.parent_id}/#{profile_image.filename}" if !profile_image.nil?
+    end
+    
+    property = SyndicateProperty.find_by_profile_id(@profile.id)
+    property.update_attribute(:image_link, image_url) if !property.nil? && !image_url.nil?
+    redirect_to :action => 'index' and return 
+  rescue ActiveRecord::RecordInvalid => e
+    flash[:error] = "Invalid image format. Please check that the image is one of the support types and , it is under 3MB in size."
+    redirect_to :action => 'index' and return
+  rescue Exception  => e
+     ExceptionNotifier.deliver_exception_notification( e, self, request, params)
+    handle_error("Error during processing of the image you uploaded",e)
+  end
+
+  # PUT /profiles/<profile_id/profile_images/1
+  # PUT /profiles/<profile_id/profile_images/1.xml
+  def update
+    render :text=>"update not supported", :status=>500
+  end
+
+  # DELETE /profiles/<profile_id/profile_images/1
+  # DELETE /profiles/<profile_id/profile_images/1.xml
+  def destroy
+    id = params[:id]
+    if !id or id.empty?
+      handle_error("Must provide a profile_image_id to destroy") and return
+    end
+
+    @profile_image = ProfileImage.find_by_id(id)
+    if !@profile_image
+      handle_error("Must provide a valid profile_image_id to destroy") and return
+    end
+
+    @profile_image.destroy
+    redirect_to :action => 'index' and return
+  rescue Exception => e
+     ExceptionNotifier.deliver_exception_notification( e, self, request, params)
+    handle_error("Error while trying to delete the profile image",e)
+  end
+  
+  # Action to make one of the property profile photo as default photo
+  def default_photo
+    @profile_image = ProfileImage.find_by_id(params[:id])
+    ProfileImage.update_all("default_photo = 0","profile_id='#{params[:profile_id]}'")
+    @profile_image.update_attribute(:default_photo, true)
+    image_url = REIMATCHER_URL + "profile_images/#{@profile_image.id}/#{@profile_image.filename}"
+    property = SyndicateProperty.find_by_profile_id(params[:profile_id])
+    property.update_attribute(:image_link, image_url) if !property.nil?
+    flash[:notice] = "Default photo updated successfully."
+    redirect_to :action => 'index' and return
+  rescue Exception => e
+    ExceptionNotifier.deliver_exception_notification( e, self, request, params)
+    handle_error("Error while trying to delete the profile image",e)
+  end
+end

@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+   <title>REIMatcher</title>
+   
+   <META NAME="robots" CONTENT="all, index, follow">
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   
+   <%=stylesheet_link_tag "reimatcher/main" %>
+   
+	<!--[if IE 6]>
+	<link href="css/ie-6.css" rel="stylesheet" type="text/css" media="screen" />
+	<![endif]-->
+	
+	<!--[if IE 7]>
+	<link href="css/ie-7.css" rel="stylesheet" type="text/css" media="screen" />
+	<![endif]-->
+
+    <%#=javascript_include_tag "reimatcher/ie6pngifx", "fade" %>   
+    <%=javascript_include_tag "reimatcher/ie6pngifx", "fade" ,:cache => "cached/home_all"%>
+	<link rel="icon" href="/favicon.png" type="image/png"/>
+
+	
+
+	<style type="text/css">
+	  .notice {
+	  margin-left: 50px;
+	  margin-right: 50px;
+	  margin-bottom: 5px;
+	  margin-top: 15px;
+	  padding: 5px;
+	  text-align: center;
+	  color: #008800;
+	  background: #ccffcc;
+	  border-top: 1px solid #008800;
+	  border-bottom: 1px solid #008800;
+	  font-size: 1.2em;
+	  }
+	</style>
+	
+</head>
+
+<body>
+  <% if RAILS_ENV == 'production' %>
+  <%= clicktale_top %>
+  <% end %>
+<div id="container">
+
+  	<div id="header">
+	
+	<%- if logged_in? -%>
+	<div class="loggedin">
+        <%=link_to "logged in as #{current_user.login}", :controller=>'account', :action=>'profiles' %>  &middot; <%=link_to "Sign out", :controller=>'sessions', :action=>'destroy'%></div>
+	<a href="/account/profiles"><img id="logo" src="/images/homepage/reiLogo.png" alt="REI Matcher" width="269" height="57" /></a>
+        <%- else -%>
+        	<%=link_to image_tag("/images/homepage/bntMemberLogin.png" , :alt=>"Member Login" ,:width=>"167" ,:height=>"45", :id =>"memberLogin"), :controller=>'sessions', :action=>'new'%>
+	<a href="/"><img id="logo" src="/images/homepage/reiLogo.png" alt="REI Matcher" width="269" height="57" /></a>
+        <%- end -%>
+
+  	</div><!--end header-->
+	<div id="notice" class="notice" <%="style=\"display:none\"" if !flash[:notice]%>><%=flash[:notice]%></div>	
+  	<div id="main">
+  	<div align="center">
+		<img src="/images/homepage/headerSuccesful.jpg" alt="Successful Investors Use Powerful Tools" width="647" height="36" />
+  		<p style="width: 600px">Create Profit like Clockwork using the latest and most powerful investment strategies known in today's market.</p>
+		<p>
+			<img src="/images/homepage/pic1.png" alt="pic" width="271" height="196" />
+			<img src="/images/homepage/pic2.png" alt="pic" width="272" height="196" />
+			<img src="/images/homepage/pic3.png" alt="pic" width="272" height="196" />
+		</p>
+
+		
+	<div id="testimonials">
+
+  <div class="comment">
+		<em>&ldquo;I have checked out at least a dozen real estate investing systems in the past 16 months and spent a ton of money looking for integrity, value, and automation. MAPS/AMPS is by far the best for providing a real service, a sophisticated platform and fast cash.&rdquo;</em></div>
+	<div class="comment-footer">
+	  <p class="testimonial"> <img src="/images/testimonials/George_Glumac.jpg" alt="George Glumac" width="50" height="45" style="float: left;" /><font class="testimonial-owner">George Glumac</font></p><br/><br/>
+    </div>	<!--end comment-->  
+
+  <div class="comment">
+		<em>&ldquo;This is a Game / Life Changer. Thank you Phill and Damon for being sincere and straight to the point. You both are great Teachers and explain everything very well. Thank You for that.&rdquo;</em></div>
+	<div class="comment-footer">
+	  <p class="testimonial"> <img src="/images/testimonials/buyer-60.jpg" alt="Harold Paul-Emile" width="50" height="45" style="float: left;" /><font class="testimonial-owner">Harold Paul-Emile</font></p><br/><br/>
+    </div>	<!--end comment-->
+
+  <div class="comment">
+		<em>&ldquo;You guys have done a stellar job! Thanks! I'm thrilled to be a part of this!&rdquo;</em></div>
+	<div class="comment-footer">
+	  <p class="testimonial"> <img src="/images/testimonials/Melody_Balk.jpg" alt="Melody Balk" width="50" height="45" style="float: left;" /><font class="testimonial-owner">Melody Balk</font></p><br/><br/>
+    </div>	<!--end comment-->
+
+  <div class="comment">
+		<em>&ldquo;Wow! I love this site, it seems so powerful. I'm looking forward to learning and earning w/this system. Tks Phill & Team!&rdquo;</em></div>
+	<div class="comment-footer">
+	  <p class="testimonial"> <img src="/images/testimonials/buyer-60.jpg" alt="Joe Riddell" width="50" height="45" style="float: left;" /><font class="testimonial-owner">Joe Riddell</font></p><br/><br/>
+    </div>	<!--end comment-->
+    
+  <div class="comment">
+		<em>&ldquo;Looks like a solid program and network database for matching of buyers and sellers and very uniquely being able to work with other investors to the benefit of all. I am ready to put the concept to work and be part of the network!&rdquo;</em></div>
+	<div class="comment-footer">
+	  <p class="testimonial"> <img src="/images/testimonials/buyer-60.jpg" alt="John Eden" width="45" height="45" style="float: left;" /><font class="testimonial-owner">John Eden</font></p><br/><br/>
+    </div>	<!--end comment-->
+    
+  <div class="comment">
+		<em>&ldquo;This is awesome. I am not a computer savvy person but I can learn fast. Thank you for the opportunity to finally work with something that makes a lot of sense&rdquo;</em></div>
+	<div class="comment-footer">
+	  <p class="testimonial"> <img src="/images/testimonials/buyer-60.jpg" alt="Faleilelagi Foster" width="50" height="45" style="float: left;" /><font class="testimonial-owner">Faleilelagi Foster</font></p><br/><br/>
+    </div>	<!--end comment-->
+    
+  <div class="comment">
+		<em>&ldquo;Thank you! I love REI-Matcher!!&rdquo;</em></div>
+	<div class="comment-footer">
+	  <p class="testimonial"> <img src="/images/testimonials/buyer-60.jpg" alt="Lynn Deshler" width="50" height="45" style="float: left;" /><font class="testimonial-owner">Lynn Deshler</font></p><br/><br/>
+    </div>	<!--end comment-->
+    
+   <div class="comment">
+		<em>&ldquo;I have tried different systems and have yet to find one that fits my personality and is easy to do...this seems like it might fit the bill perfectly.&rdquo;</em></div>
+	<div class="comment-footer">
+	  <p class="testimonial"> <img src="/images/testimonials/Rose_Robinson.jpg" alt="Rose Robinson" width="50" height="45" style="float: left;" /><font class="testimonial-owner">Rose Robinson</font></p><br/><br/>
+    </div>	<!--end comment-->
+    
+  <div class="comment">
+		<em>&ldquo;Great beginning, I am very pleased with what I have seen about this program so far. I look forward to learning more, and generating a good income by helping to provide what is needed in the real estate market today.&rdquo;</em></div>
+	<div class="comment-footer">
+	  <p class="testimonial"> <img src="/images/testimonials/Jenanah_W._Amatullah-muqsit.jpg" alt="Jenanah W. Amatullah-muqsit" width="50" height="45" style="float: left;" /><font class="testimonial-owner">Jenanah W. Amatullah-muqsit</font></p><br/><br/>
+    </div>	<!--end comment-->
+	
+  <div class="comment">
+		<em>&ldquo;REI Matcher & the MAPS/AMPS Program is brilliant.&rdquo;</em></div>
+	<div class="comment-footer">
+	 <p class="testimonial"> <img src="/images/testimonials/Janice_Nagao.jpg" alt="Janice Nagao" width="50" height="45" style="float: left;" /><font class="testimonial-owner">Janice Nagao</font></p><br/><br/>
+    </div>	<!--end comment-->
+
+	</div><!--end testimonial-->
+	
+	<div id="recentActivity">
+	  <% unless @feeds.empty? %>
+	  <% @feeds.each do |feed| %>
+	  <div class="entry">
+	    <%= display_feeds(feed) %>
+	    <div class="daysAgo" ><%= time_in_words(feed.created_at)%> ago</div>
+	  </div>
+	  <% end %>
+	  <% end %>
+	</div><!--end recentActivity-->
+
+	<div style="clear:both; height: 10px;"></div>
+
+  		<div id="box">
+	    <h2>Our Mission...</h2>
+			<p>We had one mission when we created REIMatcher, and that was...To Build the System we wished we'd had when we first began investing...with Rich, Powerful Tools that will put your business on Autopilot & <u>Fuel Faster Success in a Shorter Period of Time</u>.</p>
+			<p>REIMatcher is an Investing platform that was developed from the ground up by Real Estate Investors...for Real Estate Investors. We love Investing...we love Technology...and we love Helping People Succeed. If you want to take it to the next level, using "plug it in and it works" automation...this is the system for you.</p>
+
+  		</div>
+  		
+  		
+  		
+	 </div><!--end main-->
+  	
+    <div id="footer" align="center">
+        REI Technologies LLC &copy; 2012 <br />
+		<%- if logged_in? -%>
+        <%=link_to "Privacy",:controller=>"home", :action=>"privacy" %> |
+        <%=link_to "Terms of Use",:controller=>"home", :action=>"terms_of_use"%> |
+        <%- if logged_in? -%><%=link_to "Dashboard", '/account/profiles' %><% else %><%=link_to "Dashboard", '/login' %><% end %> |
+        <%=link_to "Support", :controller=>"home", :action=>"support" %>
+		<% end %>
+  	</div><!--end footer-->
+  
+  
+</div><!--end container-->
+	
+	<script type="text/javascript">
+	  <%= ga_code_for_reim %>
+	</script>
+	
+  <%- if @controller.controller_name == "home" and @action_name == "index" -%>
+  <script type="text/javascript" src="http://cetrk.com/pages/scripts/0007/4869.js"> </script>
+  <%- end -%>
+
+
+  <%= get_clicky_code %>
+
+        <script type="text/javascript">
+	  setTimeout("new fade('notice');", 10000);
+	</script>
+<% if RAILS_ENV == 'production' %>
+<%= clicktale_bottom %>
+<% end %>
+</body>
+</html>
+

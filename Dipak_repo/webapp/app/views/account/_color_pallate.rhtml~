@@ -1,0 +1,12 @@
+<table class="table_class">
+    <TR class="fix_height_tr" align="center"> 
+          <TD class="fix_width_td" ><div id="div1" onclick="set_css_color(this)" class="select_css <% if current_object_css == "rgb(51, 102, 255)"%><%="set_class_css"%> <%end%>" style="background-color:rgb(51, 102, 255);"></div></TD> 
+          <TD class="fix_width_td"><div id="div2"  onclick="set_css_color(this)" class="select_css <% if current_object_css == "rgb(102, 102, 153)"%><%="set_class_css"%> <%end%>" style="background-color:rgb(102 ,102 ,153);"></div></TD> 
+          <TD class="fix_width_td"> <div id="div3"  onclick="set_css_color(this)" class="select_css <% if current_object_css == "rgb(150, 150, 150)"%><%="set_class_css"%> <%end%>" style="background-color:rgb(150 ,150, 150);"></div></TD> 
+          <TD class="fix_width_td"><div id="div4"  onclick="set_css_color(this)" class="select_css <% if current_object_css == "rgb(0, 51, 102)"%><%="set_class_css"%> <%end%>" style="background-color:rgb(0 ,51 ,102);"></div></TD> 
+          <TD class="fix_width_td"><div id="div5"  onclick="set_css_color(this)" class="select_css <% if current_object_css == "rgb(0, 51, 0)"%><%="set_class_css"%> <%end%>" style="background-color:rgb(0 ,51, 0);"></div></TD> 
+          <TD class="fix_width_td"><div id="div6"  onclick="set_css_color(this)" class="select_css <% if current_object_css == "rgb(51, 51, 0)"%><%="set_class_css"%> <%end%>" style="background-color:rgb(51 ,51, 0);"></div></TD> 
+          <TD class="fix_width_td"><div id="div7"  onclick="set_css_color(this)" class="select_css <% if current_object_css == "rgb(153, 51, 0)"%><%="set_class_css"%> <%end%>" style="background-color:rgb(153, 51, 0);"></div></TD> 
+          <TD class="fix_width_td"><div id="div8"  onclick="set_css_color(this)" class="select_css <% if current_object_css == "rgb(0, 0, 0)"%><%="set_class_css"%> <%end%>" style="background-color:rgb(0, 0, 0);"></div></TD> 
+    </TR>
+  </table>

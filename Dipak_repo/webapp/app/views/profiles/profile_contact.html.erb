@@ -1,0 +1,75 @@
+<%- @page_title = "Update Property - #{@profile.display_name}" -%>
+
+<% require_js_controllers :tab, :profile_update -%>
+<% require_js_helpers :currency_field, :integer_field -%>
+<%= javascript_include_tag "add_property" %>
+
+<%- content_for :page_scripts do -%>
+
+Event.observe(window, 'load', function() {
+  profile_update_controller = new NL.ProfileUpdateController("<%=@profile.property_type%>");
+  currency_field_helper = new NL.CurrencyFieldHelper($('fields_price'));
+  currency_field_helper_after_repair_value = new NL.CurrencyFieldHelper($('fields_after_repair_value'));
+  currency_field_helper_total_repair_needed = new NL.CurrencyFieldHelper($('fields_total_repair_needed'));
+  currency_field_helper_min_mon_pay = new NL.CurrencyFieldHelper($('fields_min_mon_pay'));
+  currency_field_helper_min_dow_pay = new NL.CurrencyFieldHelper($('fields_min_dow_pay'));
+  integer_field_helper_sqft = new NL.IntegerFieldHelper($('fields_square_feet'));
+  integer_field_helper_units = new NL.IntegerFieldHelper($('fields_units'));
+  integer_field_helper_acres = new NL.IntegerFieldHelper($('fields_acres'));
+});
+
+<%- end -%>
+
+<div class="form">
+
+<%= error_messages_for :criteria %>
+
+</div>
+
+<%- form_for(:profile, :url => update_profile_contact_profile_path(@profile), :html => { :method => :put }) do |f| -%>
+
+<div class="form">
+
+    <div class="tabset larger">
+      <ul>
+        <li uri="<%=url_for edit_profile_path(@profile)%>">Property Information</li>
+        <li uri="<%=url_for profile_profile_images_path(@profile)%>">Photos</li>
+        <li class="active" uri="<%=url_for profile_contact_profile_path(@profile)%>">Contact</li>
+      </ul>
+    </div>
+
+    <div class="clear"></div>
+
+<div class="form">
+
+  <%- if logged_in? and @profile -%>
+
+  <fieldset>
+
+  <div id="primary_contact">Primary contact for this Property Listing <img alt="Help_icon" src="/images/reimatcher_images/help_icon.png" title="If someone other than the Account Admin should be the primary contact for this property, then change their name and phone here. This contact information will be available everywhere the property is listed, both within REIMatcher and outside of REIMatcher" /></div>
+    <table>
+
+      <tr>
+        <th class="label_required">Name:</th>
+        <td><%=f.text_field "contact_name", :value => "#{@is_profile_contact.blank? ? profile_contact_name(@profile) : @profile_contact_name}" %><%=error_message_on :profile, :contact_name%></td>
+      </tr>
+
+      <tr>
+        <th class="label_required">Phone:</th>
+        <td><%=f.text_field "contact_phone", :value => "#{@is_profile_contact_phone.blank? ? display_contact_phone(@profile) : @profile_contact_phone}" %><%=error_message_on :profile, :contact_phone %></td>
+      </tr>
+
+    </table>
+
+  </fieldset>
+
+  <%- end -%>
+</div>
+
+</div>
+
+<p style="text-align: center">
+  <%=submit_tag "Update", :class=>"submit"%>
+</p>
+
+<%- end -%>

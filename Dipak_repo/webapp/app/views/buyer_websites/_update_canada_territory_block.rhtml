@@ -1,0 +1,11 @@
+<div class="left_float_left">
+      <b>Select Province</b>
+      <%= error_message_on :user_territory, :user_id %>
+    </div>
+<input type="hidden" name="state_code[state_code]" id="state_code_state_code" value="">
+    <br/><br/>
+    <div class="inner_right_div" id="ajax_update_div">
+      <%=select("user_territory","territory_id",@territories.map { |territory| [territory.territory_name, territory.id]  },{ :include_blank => "--- Select Province --- " })%>
+      <%=error_message_on :user_territory, :territory_id %>
+    </div>    
+

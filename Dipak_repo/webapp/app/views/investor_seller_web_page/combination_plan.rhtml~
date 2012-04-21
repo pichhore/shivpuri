@@ -1,0 +1,53 @@
+<%- @page_title = "REIMatcher-Combination Plans" -%>
+<%- @meta_title = @seller_website.meta_title -%>
+<%- @meta_description = @seller_website.meta_description -%>
+ <%= render :partial => "show_navigation_link" %>
+<div id="seller_page_main_div">
+  <h1><b>Combination Plans</b></h1>
+  <div style="margin-right:390px;"><%= render :partial => "fb_like_twitter_tweet" %></div><div style="clear:both"></div>
+  <%= render :partial => "lead_magnet" %>
+
+  <div class="subpage_content_div_1">
+  <p class="top_style_para_seller_website">Sometimes the best way to have your cake and eat it too is by using a Combination Plan. Combination plans generally combine 2 or more strategies at the same time. Using this strategy the seller has more options (and more chances for success more quickly) than with one single strategy.   We came up with this option after studying and helping many homeowners navigate difficult situations.  In some cases, this is how we  best serve our clients and that’s why it’s become a popular choice.</p>
+  
+  <p class="style_para_seller_website"><b>Combination Plan Example #1</b></p>
+  <p class="style_para_seller_website">-	Current Appraised Property Value: $200,000</p>
+  <p class="style_para_seller_website">-	Existing loan(s) payoff: $175,000</p>
+  <p class="style_para_seller_website">-	Typical costs of sales: ~$20,000</p>
+  <p class="style_para_seller_website">-	Sales price needed to break even: $195,000 </p>
+  <p class="style_para_seller_website">In this example, the seller wants to SELL FAST and wants to sell for FULL PRICE, but unfortunately lives in an area where there is more than 10 months of inventory on the market.  </p>
+  </div>
+  <div class="subpage_content_div_2">
+  <p class="style_para_seller_website"><b>Solution:</b> Combination Plan: Traditional Listing and Wrap Around Mortgage</p>
+  <p class="style_para_seller_website">-	List home with Realtor in MLS for $200,000</p>
+  <p class="style_para_seller_website">-	Offer home to investor with financing for $210,000</p>
+  <p class="style_para_seller_website">By listing the home in the MLS at full price the seller “may get lucky” and find a buyer within his timeframe. As a backup plan, the seller also offers the home with a wrap-around mortgage through an investor. Because the second option includes owner financing, in general such a property will sell FASTER and at a PREMIUM PRICE. Of course if the seller does not feel as comfortable with the backup plan, he may opt to try plan A for some pre-determined period of time first. For example he may say “I want to try a traditional listing for 60 days, and if we don’t get an offer, we offer the owner financing as well.”</p>
+  <p class="style_para_seller_website"><b>Combination Plan Example #2</b></p>
+  <p class="style_para_seller_website">-	Current Appraised Property Value: $150,000</p>
+  <p class="style_para_seller_website">-	Existing loan(s) payoff: $140,000</p>
+  <p class="style_para_seller_website">-	Typical costs of sales: ~$15,000</p>
+  <p class="style_para_seller_website">-	Sales price needed to break even: $155,000 </p>
+  <p class="style_para_seller_website">In this example, the seller wants to SELL FAST and needs to sell for a PREMIUM PRICE because of the amount owed on the loan(s). </p>
+  <p class="style_para_seller_website"><b>Solution:</b> Combination Plan: Traditional Listing and Mortgage Payment Assignment Sale</p>
+  <p class="style_para_seller_website">-	List home with Realtor in MLS for $155,000</p>
+  <p class="style_para_seller_website">-	Offer home to investor with financing for $140,000 with a $10,000 + down</p>
+  <p class="style_para_seller_website">This is a very common scenario. By listing the home in the MLS at full price the seller “may get lucky” and find a buyer within his timeframe – although this is not likely because most buyers are looking for “deals” and there are plenty out there. </p>
+  <p class="style_para_seller_website">As a backup plan, the seller also offers the home with a mortgage payment assignment program through an investor. Because the second option includes owner financing, in general such a property will sell FASTER and at FULL OR A PREMIUM PRICE. Of course if the seller does not feel as comfortable with the backup plan, he may opt to try plan A for some pre-determined period of time first. For example he may say “I want to try a traditional listing for 60 days, and if we don’t get an offer, we offer the owner financing as well.”</p>
+  <p class="style_para_seller_website"><b>Combination Plan Example #3</b></p>
+  <p class="style_para_seller_website">-	Current Appraised Property Value: $300,000</p>
+  <p class="style_para_seller_website">-	Existing loan(s) payoff: $240,000</p>
+  <p class="style_para_seller_website">-	Typical costs of sales: ~$30,000</p>
+  <p class="style_para_seller_website">-	Sales price needed to break even: $270,000 </p>
+  <p class="style_para_seller_website">-	Seller is BEHIND ON PAYMENTS – 2 months, $6,000</p>
+  <p class="style_para_seller_website">In this example, the seller needs to SELL FAST to avoid foreclosure and would like to receive some equity if that is possible.  </p>
+  <p class="style_para_seller_website"><b>Solution:</b> Combination Plan: Traditional Listing and Mortgage Payment Assignment Sale and Short Sale (TRIPLE COMBO)</p>
+  <p class="style_para_seller_website">-	List home with Realtor in MLS for $290,000</p>
+  <p class="style_para_seller_website">-	Offer home to investor with financing for $250,000+ with a $20,000 + down payment</p>
+  <p class="style_para_seller_website">This is another very common scenario. By listing the home in the MLS at full price the seller “may get lucky” and find a buyer within his timeframe – although this is not likely because each month the seller falls further behind on payments and the property gets closer to foreclosure. </p>
+  <p class="style_para_seller_website">As a combo plan, the seller also offers the home with a mortgage payment assignment program through an investor. As a second backup, the investor also begins to negotiate a short sale. </p>
+  <p class="style_para_seller_website">If a traditional buyer is not found it is likely a owner finance buyer would want the property and the home can be purchased through the mortgage payment assignment program.</p>
+  <p class="style_para_seller_website">If a mortgage payment assignment buyer is not found quickly and with sufficient money to pay for the closing costs, fees, and back payments, then the home can still be sold through a short sale – which will allow the seller to avoid foreclosure.</p>
+  <p class="style_para_seller_website">Now that’s getting creative!  As you can see, finding alternatives that meet the needs of our clients is our #1 priority.  We know how difficult and frustrating selling a home can be, especially if there’s not a lot of equity.  That’s why we’ve studied the market and come up with solutions that work for our clients and ultimately enables them to move to the next stage of their lives</p>
+  <p class="style_para_seller_website"><b><%= company_name %></b> can recommend a Realtor to manage combination plans. Because it will be a Realtor that we also have a relationship with, there will be no additional charge to you for doing a combination plan with us. In other words, if plan A works – great, the property is sold and the Realtor is paid by you. If plan B works, great, the property is sold and the Realtor is paid by us (and the new buyer). </p>
+  <p class="style_para_seller_website">If this is an option you wish to explore, <%=link_to 'Contact Us!',:controller=>"investor_seller_web_page", :action=>"new_seller"%> We are part of a national network that buys and sells large volumes of properties. Our network has gone through the painstaking process of interviewing and even hiring scores of realtors, to determine who the VERY BEST ONES are, and we would be happy to refer these Realtors to you at no charge.</p><br>
+</div>

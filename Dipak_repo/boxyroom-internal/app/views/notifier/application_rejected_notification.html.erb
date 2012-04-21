@@ -1,0 +1,16 @@
+Transaction ID: <%= @application.transaction_id.upcase %>
+
+Hi <%= @application.user.first_name %>,
+
+We regret to inform you that the landlord has declined your application for one of the following reasons:
+
+
+* Someone else had paid the deposit to secure the rental space before you
+* The owner has rejected your application
+* An administrator has cancelled the property listing
+
+What to do next:
+1. No worries! Start looking for another rental space now at <%= @root_url %>
+
+
+The Boxyroom Team

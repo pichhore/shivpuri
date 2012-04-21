@@ -1,0 +1,285 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+   <title><%=@page_title%></title>
+   <META NAME="robots" CONTENT="all, index, follow">
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+         <%=stylesheet_link_tag "main" %>
+        <%=stylesheet_link_tag "legacy" %>
+        <%=stylesheet_link_tag "lightbox" %>
+        <%=javascript_include_tag "prototype"%>
+        <%=javascript_include_tag "scriptaculous"%>
+        <%=javascript_include_tag "object.event.js"%>
+        <%=javascript_include_tag "application"%>
+
+        <%=javascript_include_tag "base_controller"%>
+        <%=javascript_include_tag "streetview_controller"%>
+        <%= GMap.header %>
+</head>
+<body>
+  <% if RAILS_ENV == 'production' %>
+  <%= clicktale_top %>
+  <% end %>
+<div class="full">
+  <div id="container" class="clearfix">
+
+<!-- Header-->
+
+  	<div id="header" >
+  	
+  		<div class="col1">	
+  			<div id="logo">
+                    <a href="/<%=@territory_param_name%>/<%=@business_name%>">
+  				<%=image_tag @user_company_image.public_filename(:profile), :alt=>"thumbnail" if (!@user_company_image.nil?) && (!@user_company_image.find_profile_thumbnail.blank?) %>
+                    </a>
+  			</div>
+  			<div id="tagline">
+  				<%=@buyer_web_page.tag_line%>
+  			</div>  			
+  		</div>
+  		
+  		<div class="col2">
+  			<div id="address">
+  				<%=@user_company_info.business_address unless @user_company_info.nil?  %>
+  			</div>
+  			<div id="contact">
+  				<%=@user_company_info.business_phone unless @user_company_info.nil?  %><br />
+				<a href="/home/contact_us">Contact Us</a>
+  			</div>  	
+  	  	</div> 
+  	
+  	</div>
+
+	<div style="clear:both"></div>
+	<div id="subHeader1">
+	  	<%=@profile.display_name%>
+	</div>
+	<div id="subHeader2">
+	  	Owner Financed Homes For Sale	
+	  	<span class="breadCrumb">Owner Finance / <%=@territory_param_name%></span>
+	</div>
+
+	<div style="clear:both"></div>
+  	 <div class="content">
+
+    <div class="widecontent">
+
+      <div id="notice" class="notice" style="display:none"></div>
+
+    </div>
+
+   
+
+  
+
+    <div class="widecontent">
+
+  <div class="left_propertyProfile">
+
+    <fieldset>
+    <div id="contact">
+    	<input class="submit_m" name="commit" type="submit" value=" Contact " />
+    </div>
+      <h4>Price: <%=@profile.display_price%></h4>
+      <div id="propertyPhotoBig">
+        <%=render_photo_fullsize(@profile, {:id=>"image0"}) %>
+      </div>
+      
+      <div id="propertyDetails">
+    
+    <table width="170" cellspacing="0" cellpadding="0">
+     <tr>
+        <td valign="top" width="40%"><strong>Property:</strong></td>
+        <td valign="top"><strong><%=@profile.display_property_type%></strong></td>
+
+      </tr>
+      <%- if @profile.property_type_single_family? or @profile.property_type_condo_townhome? -%>
+      <tr>
+        <td valign="top" width="40%"><strong>Bedrooms: </strong></td>
+        <td valign="top"><%=@profile.display_bedrooms %></td>
+      </tr>
+      <%- end -%>
+
+      <%- if @profile.property_type_single_family? or @profile.property_type_condo_townhome?-%>
+      <tr>
+        <td valign="top"><strong>Bathrooms: </strong></td>
+        <td valign="top"><%=@profile.display_bathrooms%></td>
+      </tr>
+      <%- end -%>
+
+      <%- if @profile.property_type_multi_family? -%>
+      <tr>
+        <td valign="top"><strong>Units: </strong></td>
+        <td valign="top"><%=@profile.display_units%></td>
+      </tr>
+      <%- end -%>
+
+      <%- if @profile.property_type_single_family? or @profile.property_type_multi_family? or @profile.property_type_condo_townhome? -%>
+      <tr>
+        <td valign="top"><strong>Approx Sq Ft:</strong></td>
+        <td valign="top"><%=@profile.display_square_feet%></td>
+      </tr>
+
+      <tr>
+        <td valign="top"><strong>Price/Sqft: </strong></td>
+        <td valign="top"><%=@profile.display_price_per_square_foot%></td>
+      </tr>
+      <%- end -%>
+
+      <%- if !@profile.property_type_acreage? and !@profile.property_type_other? and !@profile.display_neighborhood.nil? and !@profile.display_neighborhood.empty? -%>
+      <tr>
+        <td valign="top"><strong>Neighborhood:</strong></td>
+        <td valign="top"><%=@profile.display_neighborhood%></td>
+      </tr>
+      <%- end -%>
+
+
+      <tr>
+
+        <td colspan="2">&nbsp;</td>
+
+      </tr>
+
+    </table>
+
+        
+        
+        
+      </div>
+      
+      
+   
+
+	<div style="clear: both"></div>
+    <div id="photoThumbList">
+    	<ul>
+        	<li><%=render_thumbnail_micro(@profile, {:class=>"micro", :id=>"image1"}, 1)%></li>
+        	<li><%=render_thumbnail_micro(@profile, {:class=>"micro", :id=>"image2"}, 2)%></li>
+        	<li><%=render_thumbnail_micro(@profile, {:class=>"micro", :id=>"image3"}, 3)%></li>
+        	<li><%=render_thumbnail_micro(@profile, {:class=>"micro", :id=>"image4"}, 4)%></li>
+        	<li><%=render_thumbnail_micro(@profile, {:class=>"micro", :id=>"image5"}, 5)%></li>
+        	<li><%=render_thumbnail_micro(@profile, {:class=>"micro", :id=>"image6"}, 6)%></li>
+        	<li><%=render_thumbnail_micro(@profile, {:class=>"micro", :id=>"image7"}, 7)%></li>
+        	<li><%=render_thumbnail_micro(@profile, {:class=>"micro", :id=>"image8"}, 8)%></li>
+        	<li><%=render_thumbnail_micro(@profile, {:class=>"micro", :id=>"image9"}, 9)%></li>
+        </ul>
+    </div>
+           
+    
+    
+	<div style="clear: both"></div>
+    
+
+	<p><strong>Property Features</strong><br />
+    <%=@profile.display_features %></p>
+    <p><strong>Property Description</strong><br />
+    <%= customize_embedcode(@profile.display_description) %></p>
+    <p><strong>Video Tour</strong><br />
+      <% if(!@profile.display_embed_video.blank?) %>
+	    <%= customize_embedcode(@profile.display_embed_video) %>
+	  <% elsif(!@profile.display_video_tour.blank?) %>
+      <% video_id = @profile.display_video_tour.split('=')[-1] %>
+	    <object width="480" height="385"><param name="movie" value="http://www.youtube.com/v/<%=video_id%>&amp;hl=en_US&amp;fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/<%=video_id%>&amp;hl=en_US&amp;fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="480" height="385"></embed></object>
+	  <% else %>
+	    (not provided)
+	  <% end %>
+
+    </p>
+
+<%=button_to_function "< Return","document.location='/#{@territory_param_name}/#{@business_name}';", :class=>"submit_l" %>
+
+ </fieldset>
+  </div>
+ 
+ 
+<!--Left Block 1-->
+  <div class="right">
+    <h3>Request Information</h3>
+    <div class="right_requestInformation legend">
+    <div id="profileThumb">
+      <%=medium_thumbnail_image%>
+    </div>
+    <div id="profileContact">
+    	<strong>Bryan Cady</strong><br />	
+        (512) 555-1212
+    </div>
+    
+    			<div style="clear: both; height: 6px;"></div>
+    
+    	<form onSubmit="return false;">
+            <input class="radio" type="radio" name="radio" id="radio" value="radio" />
+            <strong> Want to View?</strong>
+            
+            	<div style="clear: both"></div>
+            
+            <input class="radio" type="radio" name="radio" id="radio" value="radio" />
+            <strong> Have a Question? </strong>
+            
+    			<div style="clear: both; height: 6px;"></div>
+            
+        <input class="txtField" name="name" type="text" value="Name" size="30" maxlength="40" onblur="if(this.value=='') this.value='Name';" onfocus="if(this.value=='Name') this.value='';"/>
+     	<input class="txtField" name="Phone" type="text" value="Phone" size="30" maxlength="40" onblur="if(this.value=='') this.value='Phone';" onfocus="if(this.value=='Phone') this.value='';"/>
+     	<input class="txtField" name="Email" type="text" value="Email" size="30" maxlength="40" onblur="if(this.value=='') this.value='Email';" onfocus="if(this.value=='Email') this.value='';"/>
+        <textarea name="Message (optional)" cols="25" rows="4" class="txtField" onfocus="if(this.value=='Message (optional)') this.value='';" onblur="if(this.value=='') this.value='Message (optional)';">Message (optional)</textarea>
+       <div style="clear: both"></div>     
+      <input class="submit_m" name="commit" type="submit" value=" Submit " />
+    	</form>
+    </div>
+          <%- if @profile.public_profile? and @map -%>
+              <div style="overflow:hidden">
+                    <%= @map.div(:width => 265, :height => 180 ) %>
+            </div>
+            <div class="ie_fix">
+                        <%- @boundary_overlays.each do |overlay| -%>
+                        <%- js = overlay.to_javascript() -%>
+                        <%- @map.record_init( "map.addOverlay( overlay = #{ js } );" ) -%>
+                <%- end unless @boundary_overlays == nil -%>
+                <%- @marker_overlays.each do |overlay| -%>
+                        <%- js = overlay.to_javascript() -%>
+                        <%- @map.record_init( "map.addOverlay( overlay = #{ js } );" ) -%>
+                <%- end unless @marker_overlays == nil -%>
+
+                        <%= @map.to_html({:proto_load=>true, :streetview=>true}) %>
+            </div>
+            <div style="text-align: center; margin-top: 5px; ">
+                <input type="button" id="streetview_button" class="submit_l" value="Street View" style="display: none;"/>
+            </div>
+    <%- end -%>
+    <br />
+
+  </div>
+  
+    </div>
+    
+
+    </div>
+        
+    
+
+    <div class="divider"></div>
+
+    <div id="scratch" style="display:none;"></div>
+
+  </div><!--end container-->
+</div>
+<!--///////////////////////////////////////////////////////////////////////////////////////////////-->
+<div style="display:none;" id="overlay_Lightbox">
+
+</div>
+
+<div style="display:none;" id="lightbox_contents" style="width: 60%;">Lightbox</div>
+
+<div style="display:none;" id="overlay_Streetview"/>
+<div style="display:none;" id="lightbox_Streetview" style="width: 60%;">
+    <div id="streetview_header">
+        <a href="#" id="streetview_close"><img src="/images/active_scaffold/default/close.gif"/></a>
+    </div>
+    <div id="streetview_contents"/>
+</div>
+<!--////////////////////////////////////////////////////////////////////////////////////////////////-->
+<% if RAILS_ENV == 'production' %>
+<%= clicktale_bottom %>
+<% end %>
+</body>
+</html>

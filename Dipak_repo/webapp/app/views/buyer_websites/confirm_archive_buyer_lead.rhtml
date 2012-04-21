@@ -1,0 +1,69 @@
+<% unless @profiles.nil?%>
+<br/><%- @page_title = "Delete Buyers ?"  -%>
+<fieldset>
+
+<% form_for :profiles, :url => {:controller => :buyer_websites, :action => :archive_buyer_lead, :page => params[:page], :archive_buyer_profiles => @profiles} do |f| %>
+
+<div class="form" style="font-size: 1.2em">
+
+  <p>Deleting Buyers will also remove any linked properties, matches, sent and received messages.</p>
+  <p>Deletions are permanent.</p>
+
+  <p>&nbsp;</p>
+
+  <p><b>We're Curious...why are you deleting?</b></p>
+  <p>&nbsp;</p>
+   <table>
+
+    <tr>
+      <th class="label_required" colspan="2">Reason:
+        <select name="retail_buyers[delete_reason]" id="retail_buyers_delete_reason" onchange="show_comment_box_on_change(this.value);">
+          <option value="">---Select Reason---</option>
+          <option value="<%= RetailBuyerProfile::RETAIL_BUYER_PROFILE_DELETE_REASON[0] %>">I bought/sold the property</option>
+          <option value="<%= RetailBuyerProfile::RETAIL_BUYER_PROFILE_DELETE_REASON[1] %>">Buyer bought the property</option>
+          <option value="<%= RetailBuyerProfile::RETAIL_BUYER_PROFILE_DELETE_REASON[2] %>">Other</option>
+        </select>
+      <br/><p><%#= error_message_on :retail_buyers, :delete_reason %></p></th>
+    </tr>
+ </table>
+  <table id="show_on_delete_comment" style="display:none;">
+    <tr>
+      <th colspan="2">Can you tell us in a few sentences how the deal worked out for you? (without sharing private information)</th>
+    </tr>
+
+    <tr>
+      <th colspan="2"><textarea cols="70" id="delete_comment_cols100rows4" name="delete_comment[cols100rows4]" rows="4"></textarea></th>
+    </tr>
+  </table>
+
+</div>
+
+<div style="margin-bottom: 20px">
+   <a href="http://www.reimatcher.com/faq/investor-website/why-does-reimatcher-ask-me-why-im-deleting-a-profile/" target="_blank">Why Does REIMatcher always ask me why I’m deleting a Property or Buyer?</a> 
+</div>
+
+<p style="text-align: center">
+  <%=submit_tag "Yes, Delete", :class=>"submit_l"%>
+  <%=button_to_function "Cancel", "document.location='#{url_for :controller=>'buyer_websites', :action=>'buyer_lead_management', :page => params[:page]}'", :class=>"submit_l"%>
+</p>
+
+<%- end -%>
+
+</fieldset>
+<%end%>
+
+<script type="text/javascript">
+
+  function show_comment_box_on_change(txt)
+    {
+      if (txt=="bought_sold_the_property")
+        {
+          document.getElementById("show_on_delete_comment").style.display="block";
+        }
+      else
+        {
+          document.getElementById("show_on_delete_comment").style.display="none";
+        }
+    }
+
+</script>

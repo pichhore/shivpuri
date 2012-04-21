@@ -1,0 +1,7 @@
+class XapianRebuildIndexWorker
+    @queue = :xapian_rebuild_index
+    def self.perform()
+      system "cd #{RAILS_ROOT} && RAILS_ENV=#{RAILS_ENV} rake xapian:rebuild_index models='Profile User' >> /tmp/xapian_rebuild.out"
+      #Original cron command 00 01 * * * cd /var/www/apps/reimatcher/current/;RAILS_ENV=production rake xapian:rebuild_index models="Profile" >> /tmp/xapian_rebuild.out 2>&1
+    end 
+end

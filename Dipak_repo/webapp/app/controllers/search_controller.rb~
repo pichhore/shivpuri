@@ -1,0 +1,180 @@
+class SearchController < ApplicationController
+  
+  before_filter :load_target_profile, :only=>[:preview_buyer, :preview_owner]
+  
+  def new
+    if params.include?(:q)
+      # we have a query, so call create to actually do the search
+      # don't redirect, though, there's no need, and bookmarkable
+      # search URLs are handy
+      show
+    end
+  rescue Exception => e
+    render :file => "#{RAILS_ROOT}/public/404.html"
+  end
+
+  def show
+    
+    @page_number = 1
+    @total_pages = 1
+    
+    @page_number = (params[:page_number] || "1").to_i
+    @page_number = 1 if @page_number == 0 || (@page_number.kind_of? String and @page_number.empty?)
+    @offset = @page_number == 1 ? 0 : (@page_number-1) * PROFILES_PER_PAGE
+    
+    @search_profile_type = params[:search_profile_type_choice] || params[:search_profile_type] || "all"
+    @search_profile_type = "all" if @search_profile_type.blank?
+    @property_type = params[:property_type] || "all"
+    @property_type = "all" if @property_type.blank?
+    
+    @query_string = params[:q].to_s.gsub("OR","or").gsub("AND","and").gsub(".","")
+    query_string = build_query_string(params)
+    
+    search = ActsAsXapian::Search.new([Profile], query_string, {:limit=>PROFILES_PER_PAGE, :offset=>@offset})
+    #search.results.each_with_index {|result, index| puts "#{@offset+index}: " + result[:model].name }
+    @estimated_results = search.matches_estimated
+    # Ticket 511, search.matches_estimated gave wrong count, run another query with same query string to get the count
+    search_count = ActsAsXapian::Search.new([Profile], query_string, {:limit=>10000000})
+
+    @profiles = []
+    search.results.each { |result|
+      @profiles << result[:model]
+    }
+    
+    # @total_profiles = search.matches_estimated
+    @total_profiles = search_count.results.length
+
+    @total_pages = (@total_profiles-1)/PROFILES_PER_PAGE + 1
+    
+    @messaging_stats = MessagingStats.new
+    @messaging_stats.fetch_stats
+
+    @community_stats = CommunityStats.new
+    @community_stats.fetch_stats # fetching for entire community for initial release
+
+    @profiles.each { |profile |
+      zip = Zip.find(:first, :conditions => ['zip = ?', profile.zip_code.split(",")[0]]) unless profile.nil? and profile.zip_code.nil?
+      if zip and zip.latlng
+         @center_latlng = zip.latlng
+         break
+      end
+    }
+    @center_latlng = Zip.find(:first, :conditions => ['zip = ?', '78701']).latlng if @center_latlng.nil?
+    
+    @uses_yui_lightbox = true
+    
+    respond_to do |format|
+      format.html  do
+        render :partial=>"search_results" and return if request.xhr?
+        render :action=>"search_results" and return unless request.xhr?
+      end
+      format.xml   { render :xml => @profiles.to_xml }
+      format.json  { render :json => @profiles.to_json(:only=>[:id], :methods =>[:display_name, :display_type, :display_description, :display_features, :display_price]) }
+    end
+  rescue Exception => exp
+    ExceptionNotifier.deliver_exception_notification(exp,self, request, params)
+    render :file => "#{RAILS_ROOT}/public/404.html"
+  end
+  
+  def preview_buyer
+
+    @search_profile_type = params[:search_profile_type] || "all"
+    @search_profile_type = "all" if @search_profile_type.blank?
+    @property_type = params[:property_type] || "all"
+    @property_type = "all" if @property_type.blank?
+    
+    @query_string = params[:q] || ""
+    query_string = build_query_string(params)
+    
+    find_next_prev_search_results(query_string, params)
+    
+    respond_to do |format|
+      format.html { render :template=>"home/preview_buyer" }
+      format.xml  { render :xml => @target_profile.to_xml }
+    end
+  rescue Exception => e
+    render :file => "#{RAILS_ROOT}/public/404.html"    
+  end
+
+  def preview_owner
+    
+    @search_profile_type = params[:search_profile_type] || "all"
+    @search_profile_type = "all" if @search_profile_type.blank?
+    @property_type = params[:property_type] || "all"
+    @property_type = "all" if @property_type.blank?
+    
+    if @target_profile.public_profile?
+      # center map on address
+      # LATLNG
+      center_latlng = @target_profile.owner? ? @target_profile.latlng : nil
+      # center_latlng = @target_profile.owner? ? ZipCodeMap.lookup_latlng(@target_profile.geocoder_address) : nil
+
+      if center_latlng == nil then
+        @map = ZipCodeMap.prepare_map(@target_profile.zip_code, :suppress_controls => true, :zoom_level => 11, :map_type_init => GMapType::G_HYBRID_MAP )
+      else
+        @map = ZipCodeMap.prepare_map(@target_profile.zip_code, :suppress_controls => true, :zoom_level => 17, :center_latlng => center_latlng, :map_type_init => GMapType::G_HYBRID_MAP )
+        @marker_overlays = ZipCodeMap.prepare_marker_overlays([@target_profile])
+      end
+    else
+      @map = nil
+    end
+    @query_string = params[:q] || ""
+    query_string = build_query_string(params)
+    
+    find_next_prev_search_results(query_string, params)
+   
+    # indicate that we're using popups on thumbnails
+    @uses_yui_lightbox = true
+    
+    respond_to do |format|
+      format.html { render :template=>"home/preview_owner" }
+      format.xml  { render :xml => @target_profile.to_xml }
+    end
+  rescue Exception => e
+    render :file => "#{RAILS_ROOT}/public/404.html"    
+  end
+  
+  def find_next_prev_search_results(query_string, params)
+     # Find the next and previous for paging through previews
+    @page_number = (params[:page_number] || "1").to_i
+    @page_number -= 1 unless @page_number == 0
+    @offset = @page_number * PROFILES_PER_PAGE
+    @offset -= 1 if @offset > 0
+    limit = PROFILES_PER_PAGE * 2 + 1
+    #puts "Page: #{@page_number}"
+    #puts "Offset: #{@offset}"
+    #puts "Limit: #{limit}"
+    
+    search = ActsAsXapian::Search.new([Profile], query_string, {:limit=>limit, :offset=>@offset})
+    #search.results.each_with_index {|result, index| puts "#{@offset+index}: " + result[:model].name }
+    curr_index = -1
+    search.results.each_with_index { |result,index| curr_index = index if result[:model].id == @target_profile.id }
+    if curr_index > 0
+      @prev_profile_id = search.results[curr_index-1][:model].id
+      @previous_profile_page = ((@offset+curr_index-1)/PROFILES_PER_PAGE)+1
+    end
+    if curr_index < search.results.length-1
+      @next_profile_id = search.results[curr_index+1][:model].id
+      @next_profile_page = ((@offset+curr_index+1)/PROFILES_PER_PAGE)+1
+    end
+  end
+
+  def build_query_string(params)
+    query_string = @query_string
+    
+    search_owner = @search_profile_type == "property"
+    search_buyer = @search_profile_type == "buyer"
+
+    query_string = "(profile_type:owner) " + query_string if search_owner and ! query_string.match(/^profile_type:/)
+    query_string = "(profile_type:buyer) " + query_string if search_buyer and ! query_string.match(/^profile_type:/)
+    query_string = "(property_type:" + @property_type + ") " + query_string if (@property_type and @property_type != 'all')
+    query_string = "(activated:true) " + query_string unless params[:inactive]
+    logger.info "Query: #{query_string}"
+        
+    return query_string
+  rescue Exception => exp
+    ExceptionNotifier.deliver_exception_notification(exp,self, request, params)
+    render :file => "#{RAILS_ROOT}/public/404.html"
+  end
+  
+end

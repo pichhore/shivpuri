@@ -1,0 +1,45 @@
+<%-
+   style_if_new_value = style_if_new(conversation_message)
+-%>
+<div class="conversation_message <%=style_if_new_value%>">
+
+  <div class="subject">Subject: <%=conversation_message.profile_message.subject%></div>
+
+  <div class="body"><%=conversation_message.profile_message.body%></div>
+
+  <div class="reply_link"><%=link_to_function image_tag("icons/icon_mail_open_right.gif")+" Reply", "toggleReplyForm($(this).up().up())" %></div>
+
+  <div class="spam_link">
+       <%if conversation_message.profile_message.marked_as_spam == true%>
+          <span id="marked_as_spam_<%=conversation_message.profile_message_id%>">
+              Marked as spam
+          </span>
+       <%else%>
+          <span id="marked_as_spam_<%=conversation_message.profile_message_id%>">
+              <%=link_to_remote(image_tag("icons/icon_spam.gif", :alt=>"Flag as spam or inappropriate", :title=>"Flag as spam or inappropriate", :class=>"image")+" Flag msg", :update => "scratch", :url=>{:action=>:mark_as_spam_for_profile_inbox, :id=>@profile.id, :dom=>conversation_message.profile_message_id, :controller=>:profiles},
+                                                                                      :method => :get,
+                                                                                      :update         => "lightbox_contents",
+                                                                                      :loading        => "lightbox_controller.loading()",
+                                                                                      :loaded         => "lightbox_controller.loaded()") %>
+          </span>
+       <%end%>
+  </div>
+
+  <div class="from"><%=sent_received_from(extract_profile_from(conversation_message.from_profile_id))%> on <%=conversation_message.profile_message.created_at.strftime("%b %d %Y %I:%M %p")%></div>
+
+  <div style="clear: both;"></div>
+
+  <%- @div_id = "reply_form_#{conversation_message.profile_message.id}" -%>
+
+  <div <%="id='#{@div_id}'"%> class="reply_form" style="display:none;">
+
+    <%=render :partial=>"reply_form", :locals=>{:subject=>build_reply_subject(conversation_message.profile_message.subject), :div_id=>@div_id, :reply_to_profile_message_id=>conversation_message.profile_message.id}%>
+
+  </div>
+
+  
+          <div style="display:none;" id="overlay_Lightbox"></div>
+          <div style="display:none;" id="lightbox_contents">Lightbox</div>
+   
+
+</div>

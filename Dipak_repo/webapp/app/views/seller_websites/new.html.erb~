@@ -1,0 +1,137 @@
+<%- @page_title = "Seller Website" -%>
+<% require_js_controllers :tab, :account_settings -%>
+<%= stylesheet_link_tag "investor_buyer_page" %>
+<%- content_for :page_scripts do -%>
+
+Event.observe(window, 'load', function() {
+  account_settings_controller = new NL.AccountSettingsController();
+});
+  function set_css_color(this_id)
+  {
+      $$('table.table_class tr td div').each(function(item) {
+                                   item.classNames().remove("set_class_css");
+                                    item.classNames().add("select_css");
+                               });
+      this_id.classNames().add("set_class_css");
+      $('seller_website_dynamic_css').value = this_id.getStyle('backgroundColor') ;
+   }
+
+  function show_video()
+    {
+      $('embed_video').show();
+      $('or_tr').show();
+      $('video_link').show();
+    }
+
+  function hide_video()
+    {
+      $('embed_video').hide();
+      $('seller_website_video_tour').value="";
+      $('seller_website_embed_video').value="";
+      $('or_tr').hide();
+      $('video_link').hide();
+    }
+
+<%- end -%>
+<fieldset>
+  <% form_for(@seller_website) do |f| %>
+      <table>
+        <tr>
+          <th>Header</th>
+          <td><%= f.text_field :header %><%=error_message_on :seller_website,:header%></td>
+        </tr>
+        <tr>
+          <th>Opening text</th>
+          <td><%= f.text_area :opening_text,:rows=>5,:cols=>40 ,:style=>'margin-left:0px;' %><%=error_message_on :seller_website,:opening_text%></td>
+        </tr>
+        <tr>
+          <th colspan="2">Choose color for your website </th>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+           <div class="inner_right_div">
+            <%=render :partial=>"account/color_pallate" ,:locals=>{:current_object_css=>@seller_website.dynamic_css} %>
+            <%=hidden_field "seller_website", "dynamic_css"%>
+           </div>
+          </td>
+        </tr>
+
+        <tr>
+          <th>Welcome Video</th>
+          <td>
+               <% default_video = false
+                 own_video = false
+                 display_none = false
+                 if @seller_website.default_video == true 
+                    default_video = true
+                 elsif  @seller_website.default_video == false
+                    own_video = true
+                 end
+                 if ( default_video == false and own_video == false ) or ( default_video )
+                      display_none = true
+                 end
+                 %>
+
+              <%=f.radio_button :default_video, "1", :checked=>default_video, :onclick=>"hide_video();"%> Use Default
+              <%=f.radio_button :default_video, "0", :checked=>own_video,  :onclick=>"show_video();"%> Use My Own
+          </td>
+        </tr>
+
+        <tr id="video_link" <% if display_none %> style="display:none;" <% end %> >
+          <th> Video Tour</th>
+          <td>
+                <div>
+                    http://<%= f.text_field "video_tour", :size => 48 %><%=error_message_on :seller_website,:video_tour %>
+                    <br/>
+                    <div style="font-size:12px; font-family:Arial; color:grey;">
+                        (<span style="color:red; font-weight:500;">Note:</span>
+                        Use this field for an <span style="text-decoration:underline;">external video tour only</span>.  Links to other promotional or innapropriate material will be removed from the marketplace.)
+                    </div>
+                </div>
+        </tr>
+        <tr id="or_tr" <% if display_none %> style="display:none;" <% end %> ><th style="padding-left:45px;">OR</th><td></td></tr>
+        <tr id="embed_video" <% if display_none %> style="display:none;" <% end %> >
+          <th>
+            Embedded Video
+            <br/>
+            <a title='<%= title_popup %>' href="#" style="font-weight:300;">what's this?</a>
+          </th>
+          <td><%= f.text_area :embed_video,:size => "40x3",:style=>'margin-left:0px;' %><%=error_message_on :seller_website,:embed_video%></td>
+        </tr>
+
+        <tr>
+          <th class="label_required">Permalink</th>
+          <td>
+            <%= f.text_field :permalink_text %><%=error_message_on :seller_website,:permalink_text%>
+          </td>
+        </tr>
+
+   <div class="right_row_div">
+            <div class="left_float_left" style="text-align:left;">
+              <%- if @seller_website.permalink_text.blank? && params  -%>
+                <% permalink_text = !current_user.user_company_info.nil? ? current_user.user_company_info.business_name.gsub(' ','_') : ""   %>
+              <%- else -%>
+                 <% permalink_text = @seller_website.permalink_text  %>
+              <%- end -%>
+              <%- if !@seller_website.blank?  &&  !@seller_website.errors.blank? && !@seller_website.errors[:permalink_text].blank? && @seller_website.errors[:permalink_text].size > 0 -%>
+              <%- permalink_text = @seller_website.permalink_text  -%>
+              <%- end -%>
+              <%=hidden_field "buyer_web_page", "user_territory_id"%>
+              <%=@base_url %><%=text_field "buyer_web_page", "permalink_text",:value=>permalink_text ,:size=>10%><%=error_message_on :buyer_web_page,:permalink_text %>
+            </div>
+   </div>
+    
+         <tr>
+          <th>Active</th>
+          <td><%= f.check_box :active %><%=error_message_on :seller_website,:active%></td>
+        </tr>
+
+        <tr>
+          <td colspan="2" align="center">    <%= f.submit "Update Settings", :class=>"submit_xl" %></td>
+        </tr>
+
+      </table>
+  <% end %>
+
+</fieldset>

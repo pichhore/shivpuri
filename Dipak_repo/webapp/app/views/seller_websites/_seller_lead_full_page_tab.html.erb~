@@ -1,0 +1,14 @@
+<ul>
+
+  <li class="<%= active_class_seller_profile unless defined?(active_class_seller_profile).nil? %>" onclick=" navigate_seller_tab('<%=url_for(get_action_for_seller_tab)%>') ;" >Seller Profile</li>
+
+  <li class="<%= active_class_property unless defined?(active_class_property).nil? %>" onclick="navigate_seller_tab('<%=url_for({ :controller => :seller_websites, :action => :property, :id => params[:id]})%>')">Property</li>
+
+  <li class="<%= active_class_financial_tab unless defined?(active_class_financial_tab).nil? %>" onclick="navigate_seller_tab('<%=url_for({ :controller => :seller_websites, :action => :financial_tab, :id => params[:id]})%>') ">Financials</li>
+
+  <li class="<%= active_class_repair unless defined?(active_class_repair).nil? %>" onclick="navigate_seller_tab('<%=url_for({ :controller => :seller_websites, :action => :repairs, :id => params[:id]})%>') ">Repairs</li>
+
+  <li class="<%= active_class_engagement_tab unless defined?(active_class_engagement_tab).nil? %>" onclick="navigate_seller_tab('<%=url_for({ :controller => :seller_websites, :action => :engagement_tab, :id => params[:id]})%>') ">Engagement <% if is_seller_profile_have_bounced_emails %><b class="bounce_email_exclamation_mark" title="Bounced Email">! </b><% end %></li>
+
+</ul>
+

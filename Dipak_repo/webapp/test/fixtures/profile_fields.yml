@@ -1,0 +1,171 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+buyer1_property_type:
+  id: buyer1-prop-type
+  key: property_type
+  value: single_family
+  profile_id: buyer1
+buyer1_zip_code:
+  id: buyer1-zip-code
+  key: zip_code
+  value_text: 78613
+  profile_id: buyer1
+buyer1_bedrooms:
+  id: buyer1-bedrooms
+  key: beds
+  value: 3
+  profile_id: buyer1
+buyer1_bathrooms:
+  id: buyer1-bathrooms
+  key: baths
+  value: 2
+  profile_id: buyer1
+buyer1_square_feet:
+  id: buyer1-square-feet-min
+  key: square_feet_min
+  value: 2500
+  profile_id: buyer1
+buyer1_price:
+  id: buyer1-price-max
+  key: price_max
+  value: 290000
+  profile_id: buyer1
+buyer2_property_type:
+  id: buyer2-prop-type
+  key: property_type
+  value: single_family
+  profile_id: buyer2
+buyer2_zip_code:
+  id: buyer2-zip-code
+  key: zip_code
+  value_text: 78613
+  profile_id: buyer2
+buyer2_bedrooms:
+  id: buyer2-bedrooms
+  key: beds
+  value: 5
+  profile_id: buyer2
+buyer2_bathrooms:
+  id: buyer2-bathrooms
+  key: baths
+  value: 4
+  profile_id: buyer2
+buyer2_square_feet:
+  id: buyer2-square-feet-min
+  key: square_feet_min
+  value: 3300
+  profile_id: buyer2
+owner1_property_address:
+  id: owner1-prop-address
+  key: property_address
+  value: 1800 Test Street
+  profile_id: owner1
+owner1_property_type:
+  id: owner1-prop-type
+  key: property_type
+  value: single_family
+  profile_id: owner1
+owner1_zip_code:
+  id: owner1-zip-code
+  key: zip_code
+  value_text: 78613
+  profile_id: owner1
+owner1_bedrooms:
+  id: owner1-bedrooms
+  key: beds
+  value: 3
+  profile_id: owner1
+owner1_bathrooms:
+  id: owner1-bathrooms
+  key: baths
+  value: 2
+  profile_id: owner1
+owner1_square_feet:
+  id: owner1-square-feet
+  key: square_feet
+  value: 2650
+  profile_id: owner1
+owner1_price:
+  id: owner1-price
+  key: price
+  value: 285000
+  profile_id: owner1
+owner2_privacy:
+  id: owner2-privacy
+  key: privacy
+  value: public
+  profile_id: owner2
+owner2_property_address:
+  id: owner2-prop-address
+  key: property_address
+  value: 1801 Test Street
+  profile_id: owner2
+owner2_property_type:
+  id: owner2-prop-type
+  key: property_type
+  value: single_family
+  profile_id: owner2
+owner2_zip_code:
+  id: owner2-zip-code
+  key: zip_code
+  value_text: 78613
+  profile_id: owner2
+owner2_bedrooms:
+  id: owner2-bedrooms
+  key: beds
+  value: 4
+  profile_id: owner2
+owner2_bathrooms:
+  id: owner2-bathrooms
+  key: baths
+  value: 2
+  profile_id: owner2
+owner2_square_feet:
+  id: owner2-square-feet
+  key: square_feet
+  value: 3050
+  profile_id: owner2
+owner2_price:
+  id: owner2-price
+  key: price
+  value: 290000
+  profile_id: owner2
+owner3_privacy:
+  id: owner3-privacy
+  key: privacy
+  value: public
+  profile_id: owner3
+owner3_property_address:
+  id: owner3-prop-address
+  key: property_address
+  value: 1802 Test Street
+  profile_id: owner3
+owner3_property_type:
+  id: owner3-prop-type
+  key: property_type
+  value: single_family
+  profile_id: owner3
+owner3_zip_code:
+  id: owner3-zip-code
+  key: zip_code
+  value_text: 78613
+  profile_id: owner3
+owner3_bedrooms:
+  id: owner3-bedrooms
+  key: beds
+  value: 5
+  profile_id: owner3
+owner3_bathrooms:
+  id: owner3-bathrooms
+  key: baths
+  value: 4
+  profile_id: owner3
+owner3_square_feet:
+  id: owner3-square-feet
+  key: square_feet
+  value: 3350
+  profile_id: owner3
+owner3_price:
+  id: owner3-price
+  key: price
+  value: 315000
+  profile_id: owner3

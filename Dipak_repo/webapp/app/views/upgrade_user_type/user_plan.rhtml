@@ -1,0 +1,8 @@
+<%- @page_title = "Upgrade Plan" -%>
+<%- @hide_page_title=true-%>
+<br/>
+<% if params[:wp_from]==User::PRODUCT_TYPE[:amps] or params[:wp_from]==User::PRODUCT_TYPE[:goldcoaching] or params[:wp_from]==User::PRODUCT_TYPE[:top1] or params[:wp_from]==User::PRODUCT_TYPE[:re_volution] or params[:wp_from]==User::PRODUCT_TYPE[:LAH]%>
+  <%=render :partial=>"wp_training_upgrade_plan" %>
+<%else%> 
+  <%=render :partial=>"upgrade_user_plan" %>
+<%end%>

@@ -1,0 +1,20 @@
+<ul id="user-nv" style="position:relative; top: 20px;">
+  <%- if current_user != nil %>
+    <li class="admin" style="width:40px;margin-left: 500px;">
+      <span style="font-size: 120%"><b>Admin</b></span>
+      <ul style="width: 160px;padding: 4px 0;">
+        <%- if permitted_to? :index, :admin_properties %>
+          <li style="font-size: 120%;padding: 4px;"><%= link_to "Listings", admin_properties_path %></li>
+        <%- end %>
+
+        <%- if permitted_to? :index, :admin_users %>
+          <li style="font-size: 120%;padding: 4px;"><%= link_to "Users", admin_users_path %></li>
+        <%- end %>
+
+        <%- if permitted_to? :index, :admin_transactions %>
+          <li style="font-size: 120%;padding: 4px;"><%= link_to "Transactions", admin_transactions_path %></li>
+        <%- end %>
+      </ul>
+    </li>
+  <%- end %>
+</ul>

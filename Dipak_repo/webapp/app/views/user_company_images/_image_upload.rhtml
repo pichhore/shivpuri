@@ -1,0 +1,14 @@
+<tr>
+  <th class="<% if(params[:action]!='step2') %>label_required <% end %>" > Company Logo: </th>
+  <td>
+          <%- if !@user_company_image.nil? && @user_company_image.size.to_i > 0 && !@user_company_image.find_profile_thumbnail.nil? -%>
+          <%=image_tag @user_company_image.public_filename(:profile), :class=>"thumbnail"%>
+          <br />
+          <%- end -%>
+	          <input type="hidden" size="30" name="user_company_image[uploaded_data]" id="user_company_image_uploaded_data"/> 
+        <input type="file" size="30" name="user_company_image[uploaded_data]" id="user_company_image_uploaded_data"/>
+        <input type="submit" value="Upload Image" name="commit" id="user_company_image_submit" onmousedown="document.getElementById('check_enter').value='0';"/>
+        <p><b>Note: Only .png, .jpg, and .gif image types are accepted and images are limited to 3MB in size.</b></p>
+    <%=error_message_on :user_company_info,:user_company_image_id%>
+  </td>
+</tr>

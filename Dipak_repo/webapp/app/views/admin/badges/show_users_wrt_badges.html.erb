@@ -1,0 +1,29 @@
+<h2>Listing Users with respect to badge</h2>
+
+<div style="margin-left: 20px;">
+<h3><%= h @badge.name %></h3> 
+<table border="1" BORDERCOLOR="black">
+<tr>
+  <th class="label_required">S. No</th>
+  <th class="label_required">Name</th>
+  <th class="label_required">Email Address</th>
+</tr>
+
+<% unless @users_badges.blank? %><% i=1 %>
+  <% for users_badge in @users_badges %>
+
+      <tr>  <td><%= i %></td>
+        <td><%= users_badge.first_name %> <%= users_badge.last_name %> </td>
+        <td><%= users_badge.email %></td>
+      </tr>
+<% i +=1  %>
+  <% end %>
+<%else%>
+   There is no users for badge.
+<%end%>
+</table><br/>
+<%= link_to 'Back', admin_badges_path %>
+</div>
+
+
+

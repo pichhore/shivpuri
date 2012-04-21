@@ -1,0 +1,52 @@
+<%- @page_title = "REIMatcher-Selling FAQ" -%>
+<%- @meta_title = @seller_website.meta_title -%>
+<%- @meta_description = @seller_website.meta_description -%>
+ <%= render :partial => "show_navigation_link" %>
+ <%= render :partial => "fb_like_twitter_tweet" %>
+<div id="seller_page_main_div">
+  <h1><b>Selling Your Property - Frequently Asked Questions</b></h1><br>
+  <%= render :partial => "lead_magnet" %>
+
+<div class="subpage_content_div_1">
+<p class="top_style_para_seller_website"><b>How does this process work?</b></p>
+<p class="top_style_para_seller_website"><b>Step 1 </b>- Complete the <%=link_to "Sell Your House",:controller=>"investor_seller_web_page", :action=>"new_seller", :permalink_text => params[:permalink_text] %> form online or call our office at <b><%= business_phone %></b></p>
+
+<p class="top_style_para_seller_website"><b>Step 2 </b>- We will prepare one or more offers and quickly call you back to review and/or schedule a time to meet</p>
+
+<p class="top_style_para_seller_website"><b>Step 3 </b>- Choose the offer you like or say "No thanks!"  No pressure, no obligation!
+
+<p class="top_style_para_seller_website"><b>That's it!</b></p><br />
+
+<p class="top_style_para_seller_website"><b>Our Guarantee</b>
+
+<p class="top_style_para_seller_website"><b><%= company_name %></b> is uniquely different from other real estate solutions providers. Contact us and we guarantee the following:</p>
+
+<p class="top_style_para_seller_website">1. We will always make you an immediate cash offer</p>
+
+<p class="top_style_para_seller_website">2. We will also make you some creative offers that may be more beneficial to your situation and timeframe</p>
+</div>
+<div class="subpage_content_div_2">
+<br />
+<p class="top_style_para_seller_website">3. We will also offer to list your home, with one of our affiliate agents, with our purchase offer as a back-up</p>
+
+<p class="top_style_para_seller_website">4. Our offers are no-pressure, no-obligation</p>
+
+<br />
+<p class="top_style_para_seller_website"><b>Questions about Selling a Property</b></p>
+
+<p class="top_style_para_seller_website"><b>Question: </b>How quickly can I sell my property? </p>
+
+<p class="top_style_para_seller_website"><b>Answer:</b> In as little as a couple of days if necessary, but typically in 2-3 weeks</p>
+
+<p class="top_style_para_seller_website"><b>Question: </b>I've talked to investors, and all they did was make me a low-ball offer. Are you any different? </p>
+
+<p class="top_style_para_seller_website"><b>Answer:</b> YES!  We are part of a huge national network of buyers and investors. We often already have someone in the network that is LOOKING FOR YOUR PROPERTY before we even talk. We also have several ways we buy properties and different members of our network have different "applications" for the properties they want to buy - ranging from homesteads to rentals to renovations. Because of all of this, we offer possibilities that nobody else has. Sometimes we can even buy properties at full value, or even above full value, in just  a matter of days. Complete the <%=link_to "Sell Your House",:controller=>"investor_seller_web_page", :action=>"new_seller", :permalink_text => params[:permalink_text] %> form online or call our office at <b><%= business_phone %></b> to see what we can do for you!</p>
+
+<p class="top_style_para_seller_website"><b>Question:</b> What if I have a unique problem to deal with?</p>
+
+<p class="top_style_para_seller_website"><b>Answer:</b> Well, our experience is that just about everyone thinks their situation is unique, but the truth is that we, or someone in our network has probably seen just about everything. Divorce, moving, inheritance, deceased or missing owners on the deed, probate, fire damage, mold, power lines, lottery winners, illness, jail, job transfer, flooding and natural disasters, or someone that just hates their neighbors. Everyone has their own reason for wanting or needing to sell - we can help!</p>
+
+<p class="top_style_para_seller_website"><b>Question:</b> Why should I sell to <b><%= company_name %></b>?</p>
+
+<p class="top_style_para_seller_website"><b>Answer:</b> We are professionals! We've had professional training in advanced real estate techniques. We can solve virtually any problem related to selling a property. We are unique. Additionally, our national network has helped over 1000 property owners sell their homes, even in difficult situations. Complete the <%=link_to "Sell Your House",:controller=>"investor_seller_web_page", :action=>"new_seller", :permalink_text => params[:permalink_text] %> form online or call our office at <b><%= business_phone %></b> to see what we can do for you!</p>
+</div>

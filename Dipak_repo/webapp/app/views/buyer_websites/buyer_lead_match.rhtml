@@ -1,0 +1,172 @@
+<%-
+  count_all = @profile.display_match_total_near_count(@listing_type)
+  @page_title = "#{@profile.private_display_name}, you're matched to #{@profile.match_count_text(count_all, @listing_type)}"
+  @profile_title_name = "<div id='private_display_name'>#{link_to_remote(truncate(@profile.private_display_name,25),{
+                                                                 :url => {
+                                                                 :action => 'edit_private_display_name'
+                                                                 },
+                                                                 :method => :get,
+                                                                 :update         => "lightbox_contents",
+                                                                 :loading        => "lightbox_controller.loading()",
+                                                                 :loaded         => "lightbox_controller.loaded()"},{
+                                                                 :title=>"Rename Buyer Profile" })}</div>, you're matched to #{@profile.match_count_text(count_all, @listing_type)}"
+-%>
+  
+<%- @page_icon_style = 'icon_buyer_profile' -%>
+<%- @include_gmap_header = true -%>
+<%= render :partial => "partial_for_meta_tag"%>
+
+<%= render :partial => "page_script_content_full_page_view"%>
+<%= render :partial => "scratch_pad_lightbox" %>
+<%-# @tip = render_tip("buyer_dashboard") -%>
+  
+
+<% require_js_controllers :account_settings, :tab, :sortable, :favorites_icon, :pagination, :dashboard, :dashboard_nav, :new_message_form, :view_message, :lightbox, :public_profile, :lightbox_image -%>
+
+<%= add_js_requires %>
+
+<%# require_js_helpers :match_count -%>
+  
+<% content_for :page_styles do -%>
+<%=stylesheet_link_tag "lightbox"%>
+<style>
+#private_display_name {float:left;}
+#private_display_name a {
+  text-decoration: underline;
+}
+</style>
+<% end -%>
+  
+<% content_for :page_scripts do -%>
+
+    /** Controller setup **/
+  
+    Event.observe(window, 'load', function() {
+      tab_controller = new NL.TabController(<%=@tab_index+1%>, $$('div.tabset_inner')[0]);
+      sortable_controller = new NL.SortableController($$('#profile_list div.headings div.sortable'));
+      dashboard_controller = new NL.DashboardController("<%=url_for (profile_profile_matches_path(@profile)+"?from=buyer_leads")%>",
+                                                        "<%=url_for(profile_profile_messages_path(@profile))%>",
+                                                        "<%=url_for profile_profile_favorites_path(@profile)%>",
+                                                        "<%=url_for(new_profile_profile_message_path(@profile))+"?"+encode_return_dashboard_params%>",
+                                                        tab_controller,
+                                                        sortable_controller, '<%= @listing_type %>');
+      dashboard_controller.attachProfileMessagesDetailLinkListeners();
+      lightbox_controller = new NL.LightboxController();
+    lightbox_image_controller = new NL.LightboxImageController();
+  
+<%- if flash[:notice] -%>
+new Effect.Fade($('notice'), { duration: 4.0,queue: 'end'} );
+<%- end -%>
+  
+    });
+ 
+    Event.observe(window, 'click', function() {
+    			      
+      dashboard_controller = new NL.DashboardController("<%=url_for (profile_profile_matches_path(@profile)+"?from=buyer_leads")%>",
+                                                        "<%=url_for(profile_profile_messages_path(@profile))%>",
+                                                        "<%=url_for profile_profile_favorites_path(@profile)%>",
+                                                        "<%=url_for(new_profile_profile_message_path(@profile))+"?"+encode_return_dashboard_params%>",
+                                                        tab_controller,
+                                                        sortable_controller, '<%= @listing_type %>');
+      dashboard_controller.attachProfileMessagesDetailLinkListeners();
+      
+    });
+
+ 
+<% end -%>
+  
+<%- @page_title = "Buyer Matches - #{@profile.private_display_name}" -%>
+<% require_js_controllers :tab, :profile_notification, :profile_update,:lightbox -%>
+<%- content_for :page_scripts do -%>
+<%- @include_gmap_header = true -%>
+Event.observe(window, 'load', function() {
+  profile_notification_controller = new NL.ProfileNotificationController();
+});
+
+<%- end -%>
+
+<div class="full">
+    <div class="tabset larger">
+        <ul>
+            <li onclick="navigate_buyer_tab('<%=url_for(:action => 'buyer_lead_full_page_view', :controller => 'buyer_websites', :id => @profile.id) %>')">
+                Buyer Profile
+            </li>
+            <li onclick="navigate_buyer_tab('<%=url_for(:action => 'edit_buying_areas', :controller => 'buyer_websites', :id => @profile.id)%>')">
+                Buying Areas
+            </li>
+            <li onclick="navigate_buyer_tab('<%=url_for(:action => 'edit_buying_criteria', :controller => 'buyer_websites', :id => @profile.id) %>')">
+                Buying Criteria
+            </li>
+            <li class="active" onclick="navigate_buyer_tab('<%=url_for(:action => 'buyer_lead_match', :controller => 'buyer_websites', :id => @profile.id) %>')">
+                Matches
+            </li>
+            <li onclick="navigate_buyer_tab('<%=url_for(:action => 'buyer_lead_engagement', :controller => 'buyer_websites', :id => @profile.id) %>')">
+                Engagement
+            </li>
+        </ul>
+    </div>
+    <div class="clear">
+ </div>
+<fieldset>
+<div class="full">
+<% content_for :title_ad do -%>
+<div class="page_title" style="margin-top:10px;">
+<% if !@profile.display_notification_email.blank? %>
+<b>Email: </b><%= @profile.display_notification_email %>
+<% end %>
+<% if !@profile.display_notification_phone.blank? %>
+<br><b>Phone: </b><%= @profile.display_notification_phone %>
+<% else %>
+<% if !@profile.retail_buyer_profile.nil? %>
+<br><b>Phone: </b><%= @profile.retail_buyer_profile.phone %>
+<% end %>
+<% end %>
+<div class="subtitle">&nbsp;</div>
+</div>
+<% end -%>
+  
+<div class="left">
+  Include&nbsp;&nbsp;
+  <%= check_box_tag "listing_type", "all", @listing_type == 'all' || @listing_type.blank?, :onchange=>"dashboard_controller.updateListingType('all');", :class=>"listing_type_cb" %>All
+  <%= check_box_tag "listing_type", "fsbo", @listing_type == 'fsbo', :onchange=>"dashboard_controller.updateListingType('fsbo');", :class=>"listing_type_cb" %>FSBO
+  <%= check_box_tag "listing_type", "listed", @listing_type == 'listed',  :onchange=>"dashboard_controller.updateListingType('listed');", :class=>"listing_type_cb" %>Listed
+</div>
+
+  
+  <div id="dashboard_subcontent" class="left" style="display:none"></div>
+  
+  <div id="dashboard" class="left" style="width : 100%;">
+  
+    <div class="loading" style="display:none; margin-top:0px;"><span class="text">Loading...</span></div>
+  
+    <div class="tabset tabset_inner">
+      <ul style="list-style: none;">
+        <li default_sort="privacy,desc" result_filter="all" <%="class=\"active\"" if @tab_index == 0%>>Properties (<span class="match_count" result_filter="all"><%=count_all%></span>)</li>
+        <li default_sort="privacy,desc" result_filter="new" <%="class=\"active\"" if @tab_index == 1%>>New (<span class="match_count" result_filter="new"><%=@profile.count_new(@listing_type)+@profile.near_count_new(@listing_type)%></span>)</li>
+        <li default_sort="privacy,desc" result_filter="favorites" <%="class=\"active\"" if @tab_index == 2%>><%=image_tag "icon_favorite_star.gif", :align=>"left", :style=>"padding-top:0.3em; position: static;"%>&nbsp; Favorites (<span class="match_count" result_filter="favorites"><%=@profile.count_favorites(@listing_type)%></span>)</li>
+        <li default_sort="privacy,desc" result_filter="viewed_me" <%="class=\"active\"" if @tab_index == 3%>>Viewed My Profile (<span class="match_count" result_filter="viewed_me"><%=@profile.count_viewed_me(@listing_type)%></span>)</li>
+        <li default_sort="created_at,desc" result_filter="messages" <%="class=\"active\"" if @tab_index == 4%>>Messages (<span class="match_count" result_filter="messages"><%=@profile.count_messages(@listing_type)%></span>)</li>
+      </ul>
+    </div>
+  
+    <div class="clear"></div>
+  
+    <div id="tab_content">
+  
+    <%=render :partial=>"/profile_messages/list_messages" if @result_filter == "messages"%>
+    <%=render :partial=>"/profile_matches/buyer_matches" unless @result_filter == "messages"%>
+  
+    </div>
+  
+  </div>
+
+  
+  
+</div>
+  
+<div style="display:none;" id="overlay_Lightbox">
+  
+</div>
+  
+<div style="display:none;" id="lightbox_contents">Lightbox</div>
+</fieldset>

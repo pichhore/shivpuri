@@ -1,0 +1,123 @@
+<%- @include_gmap_header = true -%>
+<% require_js_controllers :zip_selection -%>
+<%=javascript_include_tag "prototype"%>
+<% content_for :page_scripts do -%>
+function validate() {
+if (($('country_country').value == 'US') && ($('zip_code').value == '')) {
+alert("Please select at least one zip code for your new buyer profile");
+return false;
+} else if (($('country_country').value == 'US') && ! /^\d{5}(,\s*\d{5})*$/.test($F('zip_code'))) {
+alert("Zip codes must be 5 digits long and separated by commas");
+return false;
+} else if (($('country_country').value == 'CA') && ($('profile_state').value == '')) {
+alert("Please select your province ");
+return false;
+}else if (($('country_country').value == 'CA') && ($('city_city').value == '')) {
+alert("Please select your City ");
+return false;
+}
+ else {
+return true;
+}
+}
+/** Controller setup **/
+Event.observe(window, 'load', function() {
+zip_selection_controller = new NL.ZipSelectionController("<%=@zip_code %>");
+// insure zip_code input text field is always in sync with js-generated map
+$('zip_code').value = '<%=@zip_code %>';
+});<% end -%>
+<%=stylesheet_link_tag "lightbox" %>
+<%=stylesheet_link_tag "#{@investor_website.layout=="modern" ? 'investorwebsitetemp2' : 'investorwebsite'}" %>
+<%=stylesheet_link_tag "investorwebcommoncss" %>
+<%= javascript_include_tag :defaults, "scriptaculous", "object.event.js", "calendar_date_select", "validation", "reimatcher/epoch_classes",  :cache => "cached/reim_app_layout_js" %>
+<%=javascript_include_tag "base_controller"%>
+<%=javascript_include_tag "utils-debug" if RAILS_ENV != "production"%>
+<%=javascript_include_tag "utils" if RAILS_ENV == "production"%>
+<%=add_js_requires%>
+
+ <% if @content_for_page_scripts -%>
+ <script type="text/javascript">
+ // <![CDATA[
+ <%= @content_for_page_scripts %>
+ // ]]>
+ </script>
+ <% end -%>
+<title>Investor Website</title>
+<% if @investor_website.layout=="modern" %>
+    <div id="wrap">
+      <%= render :partial => "inv_web_temp2_header"%>
+      <div class="clear"></div>
+      <div>&nbsp;</div>
+      <div class="menu_wrap_inside">
+        <div id="sitecontent" style="padding: 5px 6px 0; width: 960px;">
+          <div class="sitecontent_top"></div>
+          <%= render :partial => "optin_zipselection_step2" %>
+          <div style="width:940px; margin-left:10px;">
+            <%= render :partial => "inv_web_temp2_footer"%>
+          </div>
+          <div class="sitecontent_bottom"></div>
+        </div>
+      </div>
+    </div>
+<% else %>
+    <%= render :partial => "inv_web_template1_header" %>
+    <div id="back_div" style="background-color:#E6EBEC;">
+	
+	    <div id="content" style="padding: 4px 6px 16px;">
+		    <div class="content_top"></div>
+          <%= render :partial => "optin_zipselection_step2" %>
+      </div>
+      <%= render :partial => "inv_web_temp1_footer" %>
+    </div>
+<% @map_params[:click_route] = "http://localhost:3000/i/wwwjamcom/multi_zip_select_latest"%>
+<% debugger %>
+<% end %>
+<script type="text/javascript"
+    src="http://maps.googleapis.com/maps/api/js?sensor=true">
+</script>
+
+<script type="text/javascript">
+
+    function update_map(){
+        country = $('country_country').value;
+        window.location.href = '/i/<%= params["permalink_text"]%>/new_retail_buyer_zipselect?first_name=<%= params[:first_name]%>&email=<%= params[:email]%>&coun='+country;
+    }
+
+ var map;
+ window.onload = function initialize() {
+    var latlng = new google.maps.LatLng(<%= @center_zip_code[0].lat %>, <%= @center_zip_code[0].lng %>);
+    var myOptions = {
+      zoom: <%= @zoom_level %>,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    map = new google.maps.Map(document.getElementById("preview_results_map_div"), myOptions);
+    
+    google.maps.event.addListener(map, 'mousemove', function(event) {
+      map.setOptions({ draggableCursor: 'pointer' });
+    });
+    
+    google.maps.event.addListener(map, 'click', function(event) {
+       if(event){
+         new Ajax.Request('<%= @map_params[:click_route] %>', { asynchronous:true, evalScripts:true, parameters:'lat='+event.latLng.lat()+'&long='+event.latLng.lng()+'&zipcodes='+ <%= @map_params[:zipcodes_js_source] %>});
+         
+       }
+       return false;
+    });
+  }
+
+    function get_province_city(){
+      profile_state = $('profile_state').value
+      new Ajax.Request('/profiles/get_city_for_province?state_id='+profile_state,
+      {
+          method:'get',
+          onSuccess: function(transport){
+             var response = transport.responseText || "no response text";
+             $('ajax_update_div').innerHTML = response
+          },
+          onFailure: function(){ alert('Something went wrong...') }
+      });
+   }
+</script>
+

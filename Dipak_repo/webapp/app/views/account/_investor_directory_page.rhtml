@@ -1,0 +1,77 @@
+<input type="hidden" id="page_number" value="<%=@page_number%>">
+ <div id="status">    
+	<% flash[:messages].each do |message| %>
+	<%= message %><br />
+	<% end unless flash[:messages].blank? %>
+  </div>
+  <%if !@investors.blank?%>
+    <div id="my_profiles">
+      <% if @current_territory_investors.blank? and @other_investors.blank? %>
+        <h3>Investors in <%= @current_territory.territory_name unless @current_territory.blank? %> Territory</h3>
+      <% end %>
+        <%- @investors.each do |investor| -%>
+    <% if !@current_territory_investors.blank? and @flag.blank? and @current_territory_investors.include?(investor) %>
+        <h3>Investors in <%= @current_territory.territory_name unless @current_territory.blank?%> Territory</h3>
+        <% @flag = 1 %>
+    <% elsif !@other_investors.blank? and @flag2.blank? and @other_investors.include?(investor) %>
+        <h3>Reimatcher Investors</h3>
+        <% @flag2 = 1 %>
+    <% end %>
+        <div class="investor_dir_border"></div>
+        <div class="profile">
+            
+
+            <div class="thumbnail borderit">
+                <% image_path = "/images/buyer-60.jpg" %>
+                <% if investor.buyer_user_image && investor.buyer_user_image.find_medium_thumbnail %>
+                  <% image_path = investor.buyer_user_image.public_filename(:medium) %>
+                <% end %>
+                <a href='/account/investor_full_page/<%= "#{investor.id}" %>?state_code=<%=@state_selected%>&user_territory_id=<%=@territory_selected_id%><% if !@page_number.blank?%>&page_number=<%=@page_number.to_s%><%end%>&search_investor=<%=@search_investor%>' ><%=image_tag(image_path , :class=>"image" )%></a>
+            </div>
+            <div class="summary">
+                <div class="subtitle">
+                     <!--Need to give the right path-->
+                    <%#=link_to(truncate(investor.full_name,50), user_path(investor)) %>
+
+                    <a href='/account/investor_full_page/<%= "#{investor.id}" %>?state_code=<%=@state_selected%>&user_territory_id=<%=@territory_selected_id%><% if !@page_number.blank?%>&page_number=<%=@page_number.to_s%><%end%>&search_investor=<%=@search_investor%>' ><%= truncate(investor.full_name,50)%></a>
+
+                </div>
+                <div style="font-size: 1.2em;">
+                    <%if !investor.user_company_info.blank?%>
+                      <%= investor.user_company_info.city.to_s.strip%><% if !investor.user_company_info.city.blank? && !investor.user_company_info.state.blank?%>, <%end%><%= investor.user_company_info.state.to_s.strip%>
+                  <%end%>
+		 
+                </div>
+            </div>
+            <div class="stats">
+                <div class="investor_dir_label">
+
+                    <%=link_to_remote("<img title='Send Message' src='/images/icons/icon_mail.gif' onmouseover=\"this.src='/images/icons/icon_mail_hover.jpg'\" onmouseout=\"this.src='/images/icons/icon_mail.gif'\" class='image' alt='Send Message'/>",{:url => {:action => :send_message_to_investor, :reciever_id=>investor.id, :controller=>:account},
+                                                                                :method => :get,
+                                                                                :update         => "lightbox_inv_msg_contents",
+                                                                                :loading        => "lightbox_controller.loading()",
+                                                                                :loaded         => "lightbox_controller.loaded()"},{
+                                                                                :title=>"Send Message" }) %>
+						 
+			 </div>
+       
+                <div class="value">
+                    &nbsp;
+                </div>
+             </div>
+	      <div>
+	       <div class="value">
+                    &nbsp;
+                </div>
+	      	<%= show_badges(investor) %>
+		</div>
+            <div class="clear">
+            </div>
+	   
+        </div>
+        <%- end -%>
+      </div>
+      <%= will_paginate @investors, :params=>{:territory_selected_id=>@territory_selected_id, :state_selected=>@state_selected, :search_investor => @search_investor} %>
+<%else%>
+<%= "No Result Found." if @other_investors.blank?%>
+<%end%>

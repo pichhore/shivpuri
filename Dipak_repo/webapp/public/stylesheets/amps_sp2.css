@@ -1,0 +1,150 @@
+/* *** HEADER *** */
+#header{
+    background:#FFFFCC none;
+    color:#012E1F;
+    width:952px;
+    height:200px;
+    position:absolute;
+    top:-200px;
+    left:0;
+    
+}
+#header h1{
+    font-size:31px;
+    font-style:italic;
+    text-align:center;
+    line-height:35px;
+    padding:10px;
+    margin:0;
+}
+
+/* *** CONTENT *** */
+#content{
+    padding:15px 63px 15px 32px;
+}
+
+.special-text{
+    font-size:20px;
+    line-height:30px;
+    padding:0 85px;
+}
+
+#left{
+    font-size:17px;
+    width:495px;
+    float:left;
+    padding-left:5px;
+    margin-top:10px;
+}
+
+#right{
+    width:340px;
+    float:right;
+    margin-top:45px;
+}
+
+/* *** BLUE BOX *** */
+#bluebox{
+    background:#8ECCFE none;
+    width:330px;
+    padding:16px 49px 16px 16px;
+    position:relative;
+    margin-right:-31px;
+}
+
+.text-with-tag{
+    font-size:17px;
+    padding-left:70px;
+}
+
+.form-row{
+    clear:left;
+    padding:5px 0;
+}
+
+.nice label{
+    font-size:13px;
+    font-weight:bold;
+    display:inline-block;
+    width:115px;
+}
+
+input.nice-field{
+    background:transparent url(../images/amps_magnet/field.png) no-repeat left top;
+    color:#ADADAD;
+    border:0;
+    width:204px;
+    height:24px;
+    line-height:24px;
+    padding:1px 3px 5px;
+}
+
+select.nice-select{
+    background:#F6F6F6 url(../images/amps_magnet/field.png) no-repeat left top;
+    color:#ADADAD;
+    border:0;
+    width:210px;
+    height:29px;
+    padding:5px;
+}
+
+input.go{
+    margin:15px 0 15px 90px;
+}
+
+.tag{
+    background:transparent url(../images/amps_magnet/tag.png) no-repeat left top;
+    width:148px;
+    height:154px;
+    position:absolute;
+    top:-60px;
+    left:0;
+}
+
+#screen{
+    background:transparent url(../images/amps_magnet/screen.png) no-repeat left top;
+    width:883px;
+    height:501px;
+    padding:4px 3px 10px;
+    margin:25px auto;
+}
+
+#screen-inner{
+    background: url(../images/amps_magnet/screen-inner.png) repeat-x left top;
+    text-align:center;
+    width:867px;
+    height:485px;
+    padding:8px;
+}
+
+#wrap-bottom{
+    background:transparent url(../images/amps_magnet/wrap-bottom.png) no-repeat left top;
+    width:952px;
+    height:25px;
+    position:absolute;
+    top:100%;
+    left:0;
+}
+
+#wrap{
+    background:transparent url(../images/amps_magnet/wrap-bg.gif) repeat-y left top;
+    width:990px;
+    position:relative;
+    padding-right:38px;
+    margin:200px auto 0;
+}
+
+#amps_web_footer {
+    color: #fff;
+    clear:both;
+    margin:auto;
+    text-align:center;
+    width:960px;
+    height:auto;
+    padding:20px 0px;
+    font-family:serif;
+}
+#amps_web_footer a{
+	color:#fff;
+	text-decoration:underline;
+}

@@ -1,0 +1,54 @@
+<% responder_sequences.each do |sequence|  %>
+<% if sequence[0] == 'sequence_one' %>
+    <div style="margin: 5px 0 5px 0; color:#222222;">
+      <b>Motivated Sellers</b>
+    </div>   
+<% end %>
+<% if sequence[0] == 'amps_cold' %>
+    <div style="margin: 30px 0 5px 0; color:#222222;">
+      <b>AMPS Sellers</b>
+    </div>   
+<% end %>
+<span>
+  <img src=<%= (params[:sequence_name] == sequence[0] && params[:email_number]) ? '/images/minus_image_icon.png' : "/images/plus_image_icon.png" %> id="<%= sequence[0] %>" class="responder_sequence_expand" height="12px" width="12px"/>
+  <%= link_to sequence[1], "/seller_responder_system/seller_responder_sequence_series?email_number=1&sequence_name=#{sequence[0]}" %><img alt="Help_icon" src="/images/reimatcher_images/help_icon.png" title='<%=sequence[2]%>' />
+  <br>
+  <div style=<%= (params[:sequence_name] == sequence[0] && params[:email_number]) ? "display:block" : "display:none;" %> id="sequence_emails_listing">
+    <%= display_sequence_for_series(sequence[0]) %>
+  </div>
+</span>
+<% end %>
+
+
+<style type="text/css">
+  #sequence_emails_listing{
+    margin-left: 30px;
+  }
+</style>
+
+<div id='personalized_list' style="padding:0px;">
+  <% personalize = ["{seller first name}", "{seller last name}","{seller property city}", "{date seller lead created}","{Investor first name}", "{Investor full name}", "{Company name}", "{Company address}", "{Company phone}", "{Company email}", "{seller website}"] %>
+  <% personalize += ["{AMPS Homeowners Guide}", "{seller website - squeeze}"] if ['amps_cold', 'amps_new'].include?(params[:sequence_name]) %>
+
+  <select multiple onchange="doRichEditCommand(this.options[this.selectedIndex].value,'<%=personalize%>',this.selectedIndex,'<%= 2 %>')">
+    <% personalize.each do |l| %>
+      <option class='personalized_item' value='' ><%=l%></option>
+    <% end %>
+  </select>
+</div>
+
+<script>
+$$('.responder_sequence_expand').each(function(ele){
+  $(ele).observe('click', function() {
+    this.next('#sequence_emails_listing').toggle();
+    if (this.src.toString() == "<%= REIMATCHER_URL%>images/plus_image_icon.png".toString())
+    {
+      this.src ='/images/minus_image_icon.png';
+    }
+    else
+    {
+      this.src ='/images/plus_image_icon.png';
+    }
+  })
+})
+</script>

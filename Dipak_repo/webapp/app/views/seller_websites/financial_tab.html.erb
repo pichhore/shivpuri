@@ -1,0 +1,90 @@
+<%= render :partial => "partial_for_meta_tag"%>
+<%=stylesheet_link_tag "lightbox"%>
+<% require_js_controllers :tab, :account_settings, :profile_setup, :expand_collapse, :lightbox  -%>
+<%- content_for :page_scripts do -%>
+
+Event.observe(window, 'load', function() {
+  account_settings_controller = new NL.AccountSettingsController();
+  lightbox_controller = new NL.LightboxController();
+});
+<%- end -%>
+
+  <%= render :partial => "scratch_pad_lightbox" %>
+
+<div style="display:none;margin-left:205px;" class="loading" id="spinner"><span class="text">Loading...</span></div>
+  <div class="tabset larger">
+      <%=render :partial=>"seller_lead_full_page_tab", :locals=>{:active_class_financial_tab=>"active"}%>
+  </div><br><br>
+
+<% form_for(:seller_financial_loan_one_info, :url =>{ :controller => :seller_websites, :action => :update_seller_financial_infos, :id => params[:id]}) do |f| %>
+<%= hidden_field "seller_profile", "id" %>
+<div class="form">
+  <h3>Financial</h3>
+  <fieldset>
+    <DIV id="financial_tab_div">
+      <div class="main_div">
+        <p></p>
+        <p><b>Origination Date</b></p>
+        <p><b>Original Loan Amount</b></p>
+        <p><b>Monthly Payment<SPAN style="font-size:8.5px;">(include all escrow)</SPAN></b></p>
+        <p><b>InteresT Rate</b></p>
+        <p><b>Estimated Balance</b></p>
+        <p><b>Loan Type/Term</b></p>
+        <p><b>Date of Last Payment<img alt="Help_icon" src="/images/reimatcher_images/help_icon.png" title="Estimated missed payments: $0"/></b></p>
+        <p><b>Back Payments</b></p>
+        <p><b>Lender</b></p>
+        <p><b>Loan Number</b></p>
+        <p style="margin-top:20px;"><b>Price-Need For Property<img alt="Help_icon" src="/images/reimatcher_images/help_icon.png" title="How much do you really need for this property if we were to do this deal quickly?"/></b></p>
+        <p style="margin-top:40px;"><b>Other Financial Notes </b></p>
+      </div>
+      <div class="inner_second_div">
+        <div class="inner_third_div">
+          <%= f.hidden_field "financial_loan_number", :value => "loan_one" %>
+          <p><b>Loan #1</b></p>
+          <p><%=f.text_field "origination_date", :class=>"input_text_financial_tab", :size=>35 %><%=error_message_on :seller_financial_loan_one_info, :origination_date %></p>
+          <p><%=f.text_field "original_loan_payment", :class=>"input_text_financial_tab", :size=>35 %><%=error_message_on :seller_financial_loan_one_info, :original_loan_payment %></p>
+          <p><%=f.text_field "monthly_payment", :class=>"input_text_financial_tab", :size=>35 %><%=error_message_on :seller_financial_loan_one_info, :monthly_payment %></p>
+          <p><%=f.text_field "interest_rate", :class=>"input_text_financial_tab", :size=>35 %><%=error_message_on :seller_financial_loan_one_info, :interest_rate %></p>
+          <p><%=f.text_field "estimated_balance", :class=>"input_text_financial_tab", :size=>35 %><%=error_message_on :seller_financial_loan_one_info, :estimated_balance %></p>
+        </div>
+        <div class="inner_fourth_div">
+          <p>
+            <%=f.select("loan_type", [["FHA/VA", "pha_link"], ["Conventional", "conventional"], ["ARM", "arm"], ["Other", "other"]]) %><%=error_message_on :seller_financial_loan_one_info,:loan_type %>
+            <%=f.select("loan_term", [["10", "10"], ["15", "15"], ["20", "20"], ["30", "30"]], :style => "margin-left:10px;") %><%=error_message_on :seller_financial_loan_one_info,:loan_term %>
+          </p>
+          <p><%=f.text_field "last_payment_date", :value => seller_property_last_payment_made, :class=>"input2_text_financial_tab", :size=>35 %><%=error_message_on :seller_financial_loan_one_info, :last_payment_date %></p>
+          <p><%=f.text_field "back_payment", :class=>"input2_text_financial_tab", :size=>35 %><%=error_message_on :seller_financial_loan_one_info, :back_payment %></p>
+          <p><%=f.text_field "lender", :class=>"input2_text_financial_tab", :size=>35 %><%=error_message_on :seller_financial_loan_one_info, :lender %></p>
+          <p><%=f.text_field "loan_number", :class=>"input2_text_financial_tab", :size=>35 %><%=error_message_on :seller_financial_loan_one_info, :loan_number %></p>
+        </div>
+      </div>
+      <div class="inner_second_div">
+        <div class="inner_third_div">
+          <%= hidden_field "seller_financial_loan_two_info", "financial_loan_number", :value => "loan_two" %>
+          <p><b>Loan #2</b></p>
+          <p><%= text_field "seller_financial_loan_two_info", "origination_date", :class=>"input_text_financial_tab", :size=>35 %><%=error_message_on :seller_financial_loan_two_info, :origination_date %></p>
+          <p><%= text_field "seller_financial_loan_two_info", "original_loan_payment", :class=>"input_text_financial_tab", :size=>35 %><%=error_message_on :seller_financial_loan_two_info, :original_loan_payment %></p>
+          <p><%= text_field "seller_financial_loan_two_info", "monthly_payment", :class=>"input_text_financial_tab", :size=>35 %><%=error_message_on :seller_financial_loan_two_info, :monthly_payment %></p>
+          <p><%= text_field "seller_financial_loan_two_info", "interest_rate", :class=>"input_text_financial_tab", :size=>35 %><%=error_message_on :seller_financial_loan_two_info, :interest_rate %></p>
+          <p><%= text_field "seller_financial_loan_two_info", "estimated_balance", :class=>"input_text_financial_tab", :size=>35 %><%=error_message_on :seller_financial_loan_two_info, :estimated_balance %></p>
+        </div>
+        <div class="inner_fourth_div">
+          <p>
+            <%= select("seller_financial_loan_two_info", "loan_type", [["FHA/VA", "pha_link"], ["Conventional", "conventional"], ["ARM", "arm"], ["Other", "other"]]) %><%=error_message_on :seller_financial_loan_two_info,:loan_type %>
+            <%= select("seller_financial_loan_two_info", "loan_term", [["10", "10"], ["15", "15"], ["20", "20"], ["30", "30"]], :style => "margin-left:10px;") %><%=error_message_on :seller_financial_loan_two_info,:loan_term %>
+          </p>
+          <p><%= text_field "seller_financial_loan_two_info", "last_payment_date", :class=>"input2_text_financial_tab", :size=>35 %><%=error_message_on :seller_financial_loan_two_info, :last_payment_date %></p>
+          <p><%= text_field "seller_financial_loan_two_info", "back_payment", :class=>"input2_text_financial_tab", :size=>35 %><%=error_message_on :seller_financial_loan_two_info, :back_payment %></p>
+          <p><%= text_field "seller_financial_loan_two_info", "lender", :class=>"input2_text_financial_tab", :size=>35 %><%=error_message_on :seller_financial_loan_two_info, :lender %></p>
+          <p><%= text_field "seller_financial_loan_two_info", "loan_number", :class=>"input2_text_financial_tab", :size=>35 %><%=error_message_on :seller_financial_loan_two_info, :loan_number %></p>
+        </div>
+      </div>
+      <%= f.text_field "price_need", :size=>15, :style => "margin:20px 0 0 10px;" %><%=error_message_on :seller_financial_loan_two_info, :price_need %>
+      <%= f.text_area "other_financial_note", :cols => 50, :rows => 4, :style => "margin:20px 0 0 10px;" %>
+    </div>
+  <p style="text-align: center">
+    <div style="margin-left:300px;"><%=submit_tag "Update", :class=>"submit_xl"%></div>
+  </p>
+  </fieldset>
+</div>
+<% end %>

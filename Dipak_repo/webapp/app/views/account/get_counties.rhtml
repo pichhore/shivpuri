@@ -1,0 +1,18 @@
+<script>
+         $('county_id').observe('change', function(){
+        var county_id = $('county_id').value;
+	var th_state_id = $('state_name_state_name').value;
+	if (county_id != "" && th_state_id != "") {
+        new Ajax.Request('/account/get_territory_name?county_id='+county_id+'&state_id='+th_state_id,
+          {
+          method:'get',
+          onSuccess: function(transport){
+          var response = transport.responseText || "no response text";
+          $('ajax_update_terr_div').update(response);
+          },
+        onFailure: function(){ alert('Something went wrong...') }
+        });
+	}
+        }); 
+</script>
+ <%=select("county","id",@counties.map { |county| [county.name, county.id]  },{ :include_blank => "--- Select County --- " })%> 

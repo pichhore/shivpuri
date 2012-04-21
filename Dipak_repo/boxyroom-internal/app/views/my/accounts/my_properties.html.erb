@@ -1,0 +1,157 @@
+<head>
+  <!--[if IE 7]>
+   <style type="text/css">
+    .td_proper_des_ie7{width: 320px !important;}
+    .thumbnail{width: 78px !important!flaot:left!important;}
+    .proper_des_ie7{width: 70%px !important;position: relative!important;}
+    .description{margin-left: opx !important;}
+    table {
+    border: 1px solid #CCCCCC!important;
+    margin-bottom: 16px!important;
+    width: 100%!important;
+    }
+    table tbody td{ border-bottom :1px solid #CCCCCC!important;}
+   </style>
+  <![endif]-->
+</head>
+<div id="content">
+    <div class="container">
+       <%= flash_message %>
+        <div class="primary">
+
+            <table cellspacing="0" class="listings">
+                <caption>My Properties</caption>
+                <colgroup>
+                    <col class="description" />
+                    <col class="amount" />
+                    <col class="status" />
+                    <col class="actions" />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Amount</th>
+                        <th class="centralign">Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                <%if !@properties.empty?%>
+                  <%- @properties.each do |property| %>
+                    <tr class="extended">
+                        <td style="padding: 8px 10px" class="td_proper_des_ie7">
+                            <a class="link" href="/properties/<%=property.id%>?input=<%=property.address.city%>">
+                                <div class="thumbnail">
+                                    <%- if property.pictures.empty? %>
+                                      <%= image_tag("/images/missing/missing_properties_thumb.png" ) %>
+                                    <%- else %>
+                                      <%= image_tag(property.pictures.first.image.url(:thumb)) %>
+                                    <%- end %>
+                                </div>
+                                <div class="proper_des_ie7">
+                                  <p class="description" style="margin-left: 82px;"><%= property.title.slice(0..50)%><%= "..." if property.title.size>50%><div style="margin-top: 2px;margin-left: 82px;"><strong class="location"  ><%= truncate property.address.location %></strong></div></p>
+                                </div>
+                            </a>
+                            </td>
+                            <td id="amount_field"><%= return_currency_abbrebiation(property.currency_type.nil? ? 'USD' : property.currency_type)%><%= ISO4217::Currency.from_code(property.currency_type.nil? ? 'USD' : property.currency_type).symbol%><%=property.monthly_rental.to_i%></td>
+                            <%if property.occupied?%>
+                              <td class="position_status"><span class="blue status occupied"></span></td>
+                            <%elsif property.paid? %>
+                              <td class="position_status"><span class="blue status advance"></span></td>
+                            <%elsif property.listed?%>
+                                <td class="position_status"><span class="orange status listed"></span></td>
+                            <%elsif property.pending?%>
+                                <td class="position_status"><span class="orange status pending"></span></td>
+                             <%elsif property.delisted?%>
+                                <td class="position_status"><span class="red status delisted"></span></td>
+                             <%elsif property.rejected?%>
+                                <td class="position_status"><span class="red status rejected"></span></td>
+                            <%elsif property.withdraw_pending?%>
+                                <td class="position_status"><span class="orange status widthrawl_pending"></span></td>
+                            <% end %>
+                            <td style="padding: 8px 10px;">
+                            <div class="manage">
+                                <strong></strong>
+                                <ul class="menu">
+                                <%unless property.occupied? %>
+                                <li><%= link_to "Applications (#{application_count(property.applications)})", my_property_path(property) %></li>
+                                <% end%>
+                                <li class="divider"></li>
+                                <li><%= link_to "#{property.listed? ? "View Listing" : "Preview Listing"}", property_path(property) %></li>
+                                <%- if property.editable? %>
+                                  <li><%= link_to "Edit Listing", edit_my_property_path(property) %></li>
+                                <%- end %>
+                                <%- if property.can_delist? %>
+                                  <li><%= link_to "Delist", my_property_path(property), :confirm => "Are you sure you want to delist this property?", :method => :delete %></li>
+                                <%- end %>
+                                <%- if property.can_resubmit? %>
+                                  <li><%= link_to "Resubmit Listing", resubmit_my_property_path(property), :method => :put %></li>
+                                <%- end %>
+                                <%- if property.can_relist? %>
+                                  <li><%= link_to "Relist", relist_my_property_path(property), :method => :put %></li>
+                                <%- end %>
+                                <%- if property.can_receive_payment? %>
+                                          <% @application = get_property_application(property) %>
+                                  <li><%= link_to "Receive Payment", receive_payment_my_property_path(property.id,:application_id=>@application), :method => :get %></li>
+                                <%- end %>
+                                 <li><%= link_to "Upload Property Doc", property_doc_my_property_path(property.id) %></li>
+                              </ul>
+                            </div>
+                            <div class="stats">
+                                <ul>
+                                    <li class="likes"><%= property_likes_count(property) %> likes</li>
+                                    <li class="reviews"><%= property_review_count(property) %> reviews</li>
+                                    <%if verified_property(property)%>
+				      <li class="verified last-child">Verified</li>
+				    <% end %>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                   <%- end %>
+                    </tr>
+                <%else%>
+                  <tr><td>Nothing to show you.</td><td></td><td></td><td></td></tr>
+                <%end%>
+                </tbody>
+                <tfoot>
+                 <tr>
+                    <td colspan="4">
+                            <li> <%= will_paginate @properties, :previous_label => "Previous", :next_label => "Next"%></li>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+
+        </div>
+
+            <div class="secondary">
+                <div class="section" id="section_height">
+                    <h3 class="purple">Summary</h3>
+                </div>
+            </div>
+            <div class="secondary">
+              <div class="section1 ahead">
+                <p class="amount_field"><%= current_user.properties.listed.count%></p>
+                <p class="notification_under_records">LISTED PROPERTIES</p>
+              </div>
+            </div>
+           <div class="secondary">
+              <div class="section1 ahead">
+                <p class="amount_field"><%=  current_user.properties.occupied.count%></p>
+                <p class="notification_under_records">OCCUPIED PROPERTIES</p>
+              </div>
+           </div>
+            <div class="secondary">
+              <div class="section1 ahead">
+                <p class="amount_field"><%= current_user.properties.pending.count%></p>
+                <p class="notification_under_records">LISTINGS PENDING APPROVAL</p>
+              </div>
+           </div>
+           <div class="secondary">
+              <div >
+                <p class="list_a_property_p_properties"><a href="/my/properties/new"   class="list_a_property"  ></a></p>
+              </div>
+           </div>
+    </div>
+</div>

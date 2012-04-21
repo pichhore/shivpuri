@@ -1,0 +1,103 @@
+= ActionMailer Callbacks
+
+ActionMailer callbacks provides basic callback support for ActionMailer.  It providers similar functionality to before and after filters available in ActionController.
+
+== Installation
+
+Install as a plugin in your vendor/plugins directory.
+
+If your rails version supports it, you can do:
+
+script/plugin install git://github.com/AnthonyCaliendo/action_mailer_callbacks.git
+
+== Compatibility
+
+This plugin is currently compatible with Rails 2.1 (untested with 2.2).
+
+
+
+== How Do I Use It?
+
+There are 3 ways to define a callback. In each case, the callback method/block is passed the mail object as the only argument.
+
+You may define a callback using a block:
+class FooMailer < ActionMailer::Base
+  after_deliver do |mail|
+    ...
+  end
+end
+
+
+You may also define a callback using a symbol/string for a method name:
+class FooMailer < ActionMailer::Base
+  before_deliver :append_advertisement
+
+  def append_advertisement(mail)
+    ...
+  end
+end
+
+
+You can also pass a Method object directly in:
+class FooMailer < ActionMailer::Base
+  class Handler
+    def self.bar
+      ...
+    end
+  end
+
+  after_deliver Handler.method(:bar)
+end
+
+
+Callbacks take options which can be used to define which mail types (i.e. methods) they will be applied to.
+These options take the format of *only* and *except*.
+  - An *only* callback will only be run for methods which match the passed method names.
+  - An *except* callback will be called for all methods EXCEPT those that match the passed method names
+The options can take either an array of strings/symbols, or a single string/symbol.
+
+class FooMailer < ActionMailer::Base
+  before_deliver :append_disclaimer, :only => [:email_friend, :announce_something]
+  after_deliver :notify_user, :except => :invite_user
+
+ ...
+end
+
+
+
+== What About Halting the Chain?
+
+You can halt the chain in either a before or after callback.  In order to do this, just call +halt_callback_chain+ in the block (or +self.class.halt_callback_chain+ in an instance method).
+If the chain is halted in a before callback, the email will *NOT* be delivered and no other callbacks will be invoked (either any after callbacks or any remaining before callbacks).
+If the chain is halted in an after callback, the email will have already been sent and all before callbacks would have run, but any remaining after callbacks will not be invoked.
+
+class FooMailer < ActionMailer::Base
+  before_deliver do |mail|
+    halt_callback_chain if invalid_mail?(mail)
+  end
+
+  after_deliver :abort
+
+  def abort(mail)
+    self.class.halt_callback_chain
+  end
+end
+
+
+
+== TODO
+
+1) Add an around_deliver callback which would allow around advice
+2) Add ability to skip filters
+3) Add ability to prepend filters in the chain
+
+Any bug reports or features requests are welcomed.
+
+
+
+=== Contact
+Feel free to email me at:
+action.mailer.callbacks@gmail.com
+
+
+Copyright (c) 2009 Anthony Caliendo, released under the MIT license

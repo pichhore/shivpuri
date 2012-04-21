@@ -1,0 +1,67 @@
+<%= render :partial => "marketing_links" %>
+<fieldset id="email_intro">
+
+<div id="left_navigation" style="float:left; width:222px;">
+  <%= render :partial => "responder_links" %>
+</div>
+
+<%- form_for(:buyer_notification, :url => {:controller=>'account_marketing', :action=>'update_buyer_responder_notification'}, :html => { :method => :post }) do |f| -%>
+<div id="right_navigation" style=" float:right; width:527px;">
+  <table>
+    <tr>
+      <td><h3>Buyer Trust Responder Series</h3></td></tr>
+    <tr>
+      <td>
+        The Buyer Trust Responder Series is a 7 part email series, delivered TO the Buyer, FROM You. It’s purpose is to build trust between the buyer and you, by delivering great content and answering some of the common questions regarding Owner Finance transactions.<br><br>
+
+        Once activated, one Trust Responder email will be sent the next day after a retail buyer either completes a Buyer Profile or Opts-in to one of your Squeeze Pages. Emails are then sent every other day, until the series is complete.
+        <br><br>
+      </td>
+    </tr>
+    <tr>
+      <td>
+	<%= f.check_box "trust_responder_series" %> Activate
+      </td>
+    </tr>
+    <tr>
+      <td>
+        To view an email, simply click one of the links below: <br><br>
+        <a href='#' onclick="document.getElementById('trust_responder_email1').style.display='block';">Email1</a> <br>
+        <a href='#' onclick="document.getElementById('trust_responder_email2').style.display='block';">Email2</a><br>
+        <a href='#' onclick="document.getElementById('trust_responder_email3').style.display='block';">Email3</a><br>
+        <a href='#' onclick="document.getElementById('trust_responder_email4').style.display='block';">Email4</a><br>
+        <a href='#' onclick="document.getElementById('trust_responder_email5').style.display='block';">Email5</a><br>
+        <a href='#' onclick="document.getElementById('trust_responder_email6').style.display='block';">Email6</a><br>
+        <a href='#' onclick="document.getElementById('trust_responder_email7').style.display='block';">Email7</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= f.hidden_field "summary_type", :value => @summary_type %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <%= display_note_for_trust_responder %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center">
+          <%=submit_tag "Update Settings", :class=>'submit_xl' %>
+      </td>
+    </tr>
+  </table>
+</div>
+<div style="clear:both"></div>
+<div id="email_intro">
+</div>
+<% end %>
+  </fieldset>
+
+<%= display_trust_responder_example('trust_responder_email1') %>
+<%= display_trust_responder_example('trust_responder_email2') %>
+<%= display_trust_responder_example('trust_responder_email3') %>
+<%= display_trust_responder_example('trust_responder_email4') %>
+<%= display_trust_responder_example('trust_responder_email5') %>
+<%= display_trust_responder_example('trust_responder_email6') %>
+<%= display_trust_responder_example('trust_responder_email7') %>

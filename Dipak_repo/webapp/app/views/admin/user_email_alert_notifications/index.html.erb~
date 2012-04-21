@@ -1,0 +1,18 @@
+<h1>Listing user_email_alert_notifications</h1>
+
+<table>
+  <tr>
+  </tr>
+
+<% @user_email_alert_notifications.each do |user_email_alert_notification| %>
+  <tr>
+    <td><%= link_to 'Show', user_email_alert_notification %></td>
+    <td><%= link_to 'Edit', edit_user_email_alert_notification_path(user_email_alert_notification) %></td>
+    <td><%= link_to 'Destroy', user_email_alert_notification, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New user_email_alert_notification', new_user_email_alert_notification_path %>

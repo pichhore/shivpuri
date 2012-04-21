@@ -1,0 +1,87 @@
+<img src=<%= (params[:sequence_name] == "sequence_one" && params[:email_number]) ? '/images/minus_image_icon.png' : "/images/plus_image_icon.png" %> iod="sequence_one" height="12px" width="12px"/>
+<%= link_to "New Lead", "/seller_responder_system/seller_responder_sequence_series?email_number=1&sequence_name=sequence_one" %><img alt="Help_icon" src="/images/reimatcher_images/help_icon.png" title="Thank You email is sent to the Seller lead immediately after they complete an opt-in or lead capture form on your Seller Website" /><br>
+  <div style=<%= (params[:sequence_name]=="sequence_one" && params[:email_number]) ? "margin-left:30px;" : "display:none;margin-left:30px;" %> id="sequence_email_one">
+    <%= display_email_link_for_sequence_one(1,'sequence_one') %>
+  </div>
+
+<img src=<%= (params[:sequence_name] == "sequence_two" && params[:email_number]) ? '/images/minus_image_icon.png' : "/images/plus_image_icon.png" %> id="sequence_two" height="12px" width="12px"/>
+<%= link_to "Trying to Reach You", "/seller_responder_system/seller_responder_sequence_series?email_number=1&sequence_name=sequence_two" %><img alt="Help_icon" src="/images/reimatcher_images/help_icon.png" title="Responder sequence to be initiated when Investor has attempted to phone Seller lead several times with no response" /><br>
+  <div style=<%= (params[:sequence_name]=="sequence_two" && params[:email_number]) ? "margin-left:30px;" : "display:none;margin-left:30px;" %> id="sequence_email_two">
+    <%= display_sequence_for_series('sequence_two') %>
+  </div>
+
+<img src=<%= (params[:sequence_name] == "sequence_three" && params[:email_number]) ? '/images/minus_image_icon.png' : "/images/plus_image_icon.png" %> id="sequence_three" height="12px" width="12px"/>
+<%= link_to "After Call: Next Steps", "/seller_responder_system/seller_responder_sequence_series?email_number=1&sequence_name=sequence_three" %><img alt="Help_icon" src="/images/reimatcher_images/help_icon.png" title="Responder sequence to be initiated when Investor has submitted proposal or contract and is following up with Seller lead on next steps" /><br>
+  <div style=<%= (params[:sequence_name]=="sequence_three" && params[:email_number]) ? "margin-left:30px;" : "display:none;margin-left:30px;" %> id="sequence_email_three">
+    <%= display_sequence_for_series('sequence_three') %>
+  </div>
+
+<img src=<%= (params[:sequence_name] == "sequence_four" && params[:email_number]) ? '/images/minus_image_icon.png' : "/images/plus_image_icon.png" %> id="sequence_four" height="12px" width="12px"/>
+<%= link_to "After Call: Not Now", "/seller_responder_system/seller_responder_sequence_series?email_number=1&sequence_name=sequence_four" %><img alt="Help_icon" src="/images/reimatcher_images/help_icon.png" title="Responder sequence to be initiated when Seller lead has said they are not ready to move forward and/or need more time" /><br>
+  <div style=<%= (params[:sequence_name]=="sequence_four" && params[:email_number]) ? "margin-left:30px;" : "display:none;margin-left:30px;" %> id="sequence_email_four">
+    <%= display_sequence_for_series('sequence_four') %>
+  </div>
+
+<div id='personalized_list' style="padding:0px;">
+<<<<<<< HEAD:webapp/app/views/seller_responder_system/_seller_responder_links.rhtml
+ <% personalize = ["{seller first name}", "{seller last name}","{seller property city}", "{date seller lead created}","{Investor first name}", "{Investor full name}", "{Company name}", "{Company address}", "{Company phone}", "{Company email}", "{investor seller website URL}"] %>
+=======
+ <% personalize = ["{seller first name}", "{seller last name}","{seller property city}", "{Investor first name}", "{Investor full name}",
+       "{Company name}", "{Company address}", "{Company phone}", "{Company email}", "{investor seller website URL}"] %>
+>>>>>>> 51ae8f5... wholesale strategy commit done with UI and validations:webapp/app/views/seller_responder_system/_seller_responder_links.rhtml
+  <select multiple onchange="doRichEditCommand(this.options[this.selectedIndex].value,'<%=personalize%>',this.selectedIndex,'<%= 2 %>')">
+      <% personalize.each do |l| %>
+      <option class='personalized_item' value='' >
+      <%=l%>
+      </option>
+    <% end %>
+  </select>
+</div>
+
+<script>
+$("sequence_two").observe('click', function() {
+  $('sequence_email_two').toggle();
+   if (this.src.toString() == "<%= REIMATCHER_URL%>images/plus_image_icon.png".toString())
+    {
+      this.src ='/images/minus_image_icon.png';
+    }
+   else
+    {
+      this.src ='/images/plus_image_icon.png';
+    }
+});
+
+$("sequence_three").observe('click', function() {
+  $('sequence_email_three').toggle();
+   if (this.src.toString() == "<%= REIMATCHER_URL%>images/plus_image_icon.png".toString())
+    {
+      this.src ='/images/minus_image_icon.png';
+    }
+   else
+    {
+      this.src ='/images/plus_image_icon.png';
+    }
+});
+$("sequence_four").observe('click', function() {
+  $('sequence_email_four').toggle();
+   if (this.src.toString() == "<%= REIMATCHER_URL%>images/plus_image_icon.png".toString())
+    {
+      this.src ='/images/minus_image_icon.png';
+    }
+   else
+    {
+      this.src ='/images/plus_image_icon.png';
+    }
+});
+$("sequence_one").observe('click', function() {
+  $('sequence_email_one').toggle();
+   if (this.src.toString() == "<%= REIMATCHER_URL%>images/plus_image_icon.png".toString())
+    {
+      this.src ='/images/minus_image_icon.png';
+    }
+   else
+    {
+      this.src ='/images/plus_image_icon.png';
+    }
+});
+</script>

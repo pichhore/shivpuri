@@ -1,0 +1,148 @@
+<head>
+  <!--[if IE 7]>
+   <style type="text/css">
+     .section{padding-bottom: 0px!important;padding-top: 11px!important;}
+   table {
+   border: 1px solid #CCCCCC!important;
+   margin-bottom: 16px!important;
+   width: 100%!important;
+   }
+   table tbody td{ border-bottom :1px solid #CCCCCC!important;}
+   </style>
+  <![endif]-->
+</head>
+<div id="content">
+        <div class="container">
+
+                <div class="primary">
+
+                        <table cellspacing="0">
+                                <caption>Amount held by Boxyroom</caption>
+                                <thead>
+                                        <tr>
+					        <th class="left_padding">Status</th>
+                                                <th>Amount</th>
+                                                <th>Username</th>
+                                                <th>Received</th>
+                                                <th>Actions</th>
+                                        </tr>
+                                </thead>
+                                 <%if !@applications_for_me.empty?%>
+                                 <%@applications_for_me.each do |f|%>
+                                    <%if !(f[0].nil?)%>
+                                   <%if f[0].property.paid? %>
+                                <tbody>
+                                         <tr>
+					          <td><span class="blue status advance"></span></td>
+                                                  <td id = "amount_field" ><%= return_currency_abbrebiation(current_user.prefers_currency.nil? ? 'USD' : current_user.prefers_currency)%><%= ISO4217::Currency.from_code(current_user.prefers_currency.nil? ? 'USD' : current_user.prefers_currency).symbol%><%= (CurrencyExchange.currency_exchange_local( payment_to_landlord(f[0].property.monthly_rental), f[0].property.currency_type.nil? ? "USD" : f[0].property.currency_type , f[0].property.owner.prefers_currency) ).to_i %></td>
+                                                  <td><%= f[0].user.first_name %></td>
+                                                  <td ><%=boxy_date_format_for_account( f[0].paid_at)%></td>
+                                                  <td><%= link_to "Withdraw", receive_payment_my_property_path(f[0].property.id,:application_id=>f[0].id), :method => :get %></li><%# link_to "#{f[0].property.listed? ? "View" : "View"}", property_path(f[0].property) %></td>
+                                        </tr>
+                                </tbody>
+                                  <%end%>
+                                  <%end%>
+                                <%end%>
+				<%@applications_for_me.each do |f|%>
+				      <%if !(f[0].nil?)%>
+				      <%if  f[0].property.withdraw_pending? %>
+				    <tr>
+					    <td><span class="orange status widthrawl_pending"></span></td>
+					    <td id = "amount_field" style=""><%= return_currency_abbrebiation(current_user.prefers_currency.nil? ? 'USD' : current_user.prefers_currency)%><%= ISO4217::Currency.from_code(current_user.prefers_currency.nil? ? 'USD' : current_user.prefers_currency).symbol%><%= CurrencyExchange.currency_exchange_local( payment_to_landlord(f[0].property.monthly_rental), f[0].property.currency_type.nil? ? "USD" : f[0].property.currency_type , f[0].property.owner.prefers_currency).to_i  %></td>
+					    <td><%= f[0].user.first_name %></td>
+					    <td><%=boxy_date_format_for_account( f[0].updated_at) %></td>
+					    <td><%= link_to "#{f[0].property.listed? ? "View" : "View"}", property_path(f[0].property) %></a></td>
+				    </tr>
+				    <%end%>
+				    <%end%>
+				  <%end%>
+                                <%else%>
+                                  <tr><td>Nothing to show you.</td><td></td><td></td><td></td><td></td></tr>
+                                <%end%>
+                                <tfoot>
+                                </tfoot>
+                        </table>
+
+                        <table cellspacing="0">
+                                <caption>Transaction History</caption>
+                                <thead>
+                                        <tr>
+                                                <th class="left_padding">Status</th>
+                                                <th>Amount</th>
+                                                <th>Username</th>
+                                                <th>Date</th>
+                                                <th>Actions</th>
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                        <%if !@applications_for_me.empty? and !current_user.applications.paid.empty? and !current_user.applications.moved_in.empty?%>
+                                        <%@applications_for_me.each do |f|%>
+                                           <%if !(f[0].nil?)%>
+                                           <%if  f[0].property.occupied? %>
+                                          <tr>
+                                                  <td><span class="green status payout"></span></td>
+                                                  <td id = "amount_field" style=""><%= return_currency_abbrebiation(current_user.prefers_currency.nil? ? 'USD' : current_user.prefers_currency)%><%= ISO4217::Currency.from_code(current_user.prefers_currency.nil? ? 'USD' : current_user.prefers_currency).symbol%><%= CurrencyExchange.currency_exchange_local( payment_to_landlord(f[0].property.monthly_rental), f[0].property.currency_type.nil? ? "USD" : f[0].property.currency_type , f[0].property.owner.prefers_currency).to_i %></td>
+                                                  <td><%= f[0].user.first_name %></td>
+                                                  <td><%=boxy_date_format_for_account( f[0].payment_transfer_date) %></td>
+                                                  <td><%= link_to "#{f[0].property.listed? ? "View" : "View"}", property_path(f[0].property) %></a></td>
+                                          </tr>
+                                          <%end%>
+                                          <%end%>
+                                        <%end%>
+                                        <%current_user.applications.paid.each do |f|%>
+                                          <tr>
+                                              <td><span class="blue status paid"></span></td>
+                                              <td id = "amount_field" ><%= return_currency_abbrebiation(current_user.prefers_currency.nil? ? 'USD' : current_user.prefers_currency)%><%= ISO4217::Currency.from_code(current_user.prefers_currency.nil? ? 'USD' : current_user.prefers_currency).symbol%><%= CurrencyExchange.currency_exchange_local( f.property.monthly_rental, f.property.currency_type.nil? ? "USD" : f.property.currency_type , @current_user.prefers_currency).to_i  %></td>
+                                              <td><%=get_user_name(f.property.user_id) %></td>
+                                              <td><%= boxy_date_format_for_account( f.paid_at) %></td>
+                                              <td><%= link_to "#{f.property.listed? ? "View" : "View"}", property_path(f.property) %></td>
+                                          </tr>
+                                        <%end%>
+                                          <%current_user.applications.moved_in.each do |f|%>
+                                          <tr>
+                                              <td><span class="red status moved_in"></span></td>
+                                              <td id = "amount_field" ><%= return_currency_abbrebiation(current_user.prefers_currency.nil? ? 'USD' : current_user.prefers_currency)%><%= ISO4217::Currency.from_code(current_user.prefers_currency.nil? ? 'USD' : current_user.prefers_currency).symbol%><%= CurrencyExchange.currency_exchange_local( f.property.monthly_rental, f.property.currency_type.nil? ? "USD" : f.property.currency_type , @current_user.prefers_currency).to_i  %></td>
+                                              <td><%=get_user_name(f.property.user_id) %></td>
+                                              <td><%= boxy_date_format_for_account( f.paid_at) %></td>
+                                              <td><%= link_to "#{f.property.listed? ? "View" : "View"}", property_path(f.property) %></td>
+                                          </tr>
+                                        <%end%>
+                                      <%else%>
+                                          <tr><td>Nothing to show you.</td><td></td><td></td><td></td><td></td></tr>
+                                      <%end%>
+                                </tbody>
+                                <tfoot>
+                                </tfoot>
+                        </table>
+
+                        <h2>Payout Method</h2>
+                        <div class="section">
+                                <p>Paypal Account: <span><%= current_user.payment_transfer_mail  %></span></p>
+                                 <%= link_to "", edit_my_account_path, :method => :get, :class =>"action"%>
+                        </div>
+
+                </div>
+
+                <div class="secondary">
+                        <div class="section" id="section_height">
+                                <h3>Summary</h3>
+                        </div>
+                </div>
+
+		<div class="secondary">
+		  <div class="section1 ahead" >
+		    <p class="amount_field"><%= return_currency_abbrebiation(current_user.prefers_currency.nil? ? 'USD' : current_user.prefers_currency)%><%= ISO4217::Currency.from_code(current_user.prefers_currency.nil? ? 'USD' : current_user.prefers_currency).symbol%><%= total_held_by_boxyroom(current_user.properties.paid + current_user.properties.withdraw_pending).to_i%></p>
+		    <p class="notification_under_records">TOTAL CURRENTLY HELD BY BOXYROOM</p>
+		  </div>
+		</div>
+
+		<div class="secondary">
+		  <div class="section1 ahead">
+		    <p class="amount_field"><%= return_currency_abbrebiation(current_user.prefers_currency.nil? ? 'USD' : current_user.prefers_currency)%><%= ISO4217::Currency.from_code(current_user.prefers_currency.nil? ? 'USD' : current_user.prefers_currency).symbol%><%=total_received_to_date(current_user.properties.occupied).to_i%></p>
+		    <p class="notification_under_records">TOTAL RECEIVED TO DATE</p>
+		  </div>
+		</div>
+
+        </div>
+</div>
+

@@ -1,0 +1,21 @@
+<%- @page_title = "REIMatcher-Option For selling" -%>
+<%- @meta_title = @seller_website.meta_title -%>
+<%- @meta_description = @seller_website.meta_description -%>
+ <%= render :partial => "show_navigation_link" %>
+ <%= render :partial => "fb_like_twitter_tweet" %>
+<div id="seller_page_main_div">
+  <h1><b>Options For Selling Your House</b></h1><br>
+   <%= render :partial => "lead_magnet" %>
+  <div class="subpage_content_div_1">
+  <p class="top_style_para_seller_website"><b>Note:</b> The content of this site has been developed by a team of creative real estate investors. Please consult a lawyer, Realtor, Auctioneer, CPA, or financial planner for professional advice on your specific situation.</p>
+  <p class="style_para_seller_website">Today, Owners have many traditional and creative options for selling their property</p>
+  <p class="style_para_seller_website">Want to SELL FAST, but you have LITTLE, NO, or NEGATIVE Equity??? </p>
+  <p class="style_para_seller_website">Watch the VIDEO below to see your best options</p>
+      <div class="welcome_video_tour">
+
+	    <div id="evp-4ac1eb8561610515f6bdf3bf7018a737-wrap" class="evp-video-wrap"></div><script type="text/javascript" src="http://www.damonflowers.com/evp/framework.php?div_id=evp-4ac1eb8561610515f6bdf3bf7018a737&id=c2VsbGVycy1iZXN0LXdvcnN0LWNsb3NlLXJlaW0tMi0xLm00dg%3D%3D&v=1307416492&profile=default"></script><script type="text/javascript"><!--
+            _evpInit('c2VsbGVycy1iZXN0LXdvcnN0LWNsb3NlLXJlaW0tMi0xLm00dg==[evp-4ac1eb8561610515f6bdf3bf7018a737]');//--></script>
+
+      </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<%- @page_title = "REIMatcher-Privacy Policy" -%>
+<%- @meta_title = @seller_website.meta_title -%>
+<%- @meta_description = @seller_website.meta_description -%>
+
+<%= render :partial => "show_navigation_link" %>
+<div class="seller_content">
+    <div class="seller_privacy_tems">
+    <h1><b>Privacy Policy</b></h1>
+     </div>
+    <div class="seller_widecontent" style="margin-left:20px">
+        <%= render :partial => "/shared/privacy", :locals => { :web_page => "investor_buyer_web_page"} %>
+    </div>
+</div><br>

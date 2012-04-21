@@ -1,0 +1,12 @@
+<%- @page_title = "Thanks for the Feedback" -%>
+<%- content_for :page_scripts do -%>
+Event.observe(window, 'load', function() {
+  $('feedback_first_name').focus();
+});
+<%- end -%>
+
+<div class="full">
+
+<p>Your feedback has been received. Thanks for helping us to make this a better service!</p>
+
+</div>

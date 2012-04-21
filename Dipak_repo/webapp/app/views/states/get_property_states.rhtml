@@ -1,0 +1,9 @@
+<% if @country == "CA"%>
+<select id="fields_state" name="fields[state]" >
+                          <%= options_for_select([[ "Select a Province", "" ]] + State::CANADA_NAMES) %>
+                    </select>
+<% else %>
+ <select id="fields_state" name="fields[state]" >
+                          <%= options_for_select([[ "Select a State", "" ]] + State::NAMES) %>
+                    </select>
+<% end %>

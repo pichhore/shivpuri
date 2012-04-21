@@ -1,0 +1,42 @@
+<%- form_for(:buyer_notification, :url => {:controller=>'account_marketing', :action=>'update_buyer_responder_notification'}, :html => { :method => :post }) do |f| -%>
+<div id="right_navigation" style=" float:right; width:527px;">
+<table>	
+  <%= f.hidden_field "summary_type", :value => @summary_type %>
+  <tr>
+    <td>
+      <b>Subject:</b>
+      <br/>   
+      <%= f.text_field "subject", :value => @buyer_notification.subject, :size => "84", :style => "margin-left: 0px;" %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>Email Intro:</b>
+      <%= render :partial => "display_personalize_variable", :locals => { :id => "email_intro_editor"}%>
+      <%= f.text_area "email_intro", :value => assign_email_intro , :class=>"rich_text_editor", :size => "50x4", :style => "margin-left: 0px;" %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>Closing:</b>
+      <%= render :partial => "display_personalize_variable", :locals => { :id => "email_closing_editor"}%>
+      <%= f.text_area "email_closing", :value => assign_email_closing, :class=>"rich_text_editor", :size => "50x4", :style => "margin-left: 0px;" %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <span style="color:red;">Note:</span>
+      Make sure your Company Info is complete before using this feature.
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center">
+      <%=submit_tag "Preview", :class=>'submit_xl' %>
+      <%=submit_tag "Update Settings", :class=>'submit_xl' %>
+    </td>
+  </tr>
+
+</table>
+</div>
+<div style="clear:both"></div>
+<% end %>

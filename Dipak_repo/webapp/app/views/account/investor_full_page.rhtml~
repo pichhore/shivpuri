@@ -1,0 +1,212 @@
+<%=stylesheet_link_tag "lightbox"%>
+<% require_js_controllers :ifp_lightbox, :lightbox_image -%>
+<% content_for :page_styles do -%>
+<%=stylesheet_link_tag "lightbox"%>
+<% end -%>
+<%- content_for :page_scripts do -%>
+Event.observe(window, 'load', function() {
+
+    lightbox_controller = new NL.LightboxController();
+    lightbox_image_controller = new NL.LightboxImageController();
+   
+
+
+});
+<% end %>
+<style type="text/css" >
+           .mask {height: 0px!important;
+           width: 0px!important;}
+</style>
+<div class ="test"
+<%- @page_title = "#{@user.first_name.humanize} #{@user.last_name.humanize}" -%>
+</div>
+<div class="mask" id="test5_mask" style="z-index: 3; display: block; height: 0px; width: 0px; fixedcenter : true;">&nbsp;</div>
+<div class="full">
+
+ <div class="conversation_profile_summary">
+
+ <div class="right">
+      <div class="conversation_create" style="margin-bottom: 0px;">
+
+       	 <div class="stats">
+              <div class="investor_dir_label">
+                <% if !params[:user_territory_id].blank?%>
+                    <%=link_to_remote(image_tag("icons/icon_contact.gif", :style=>"border:none")+" Send Message",{:url => {:action => :send_message_to_investor, :reciever_id=>@user.id, :controller=>:account},
+                                                                                :method => :get,
+                                                                                :update         => "lightbox_inv_msg_contents",
+                                                                                :loading        => "lightbox_controller.loading()",
+                                                                                :loaded         => "lightbox_controller.loaded()"},{
+                                                                                :title=>"Send Message" }) %>
+                <% end %>
+               </div>
+<div style="display:none;" id="overlay_Lightbox"></div>
+       <div style="display:none;" id="lightbox_inv_msg_contents">Lightbox</div>
+
+             </div>
+      </div>
+
+<font style="font-weight: normal; text-decoration: underline;"><strong>Stats</strong></font>
+<div><strong># Buyers: </strong><% if !@profiles.nil? %><%= profiles_count(@profiles, "buyer") %><% end %></div>
+<div><strong># Properties: </strong><% if !@profiles.nil? %><%= profiles_count(@profiles, "owner") %><% end %></div>
+<div><strong># Deals Completed: </strong><% if !@user.nil? %><%= link_to deals_completed(@user),{:controller => "account", :action => "show_deals"} %><% end %></div>
+<div><strong># Profile Views: </strong><% if !@user.nil? %><%= profiles_viewed_count(@user) %><% end %></div>
+<div class="clear" style="margin-bottom: 15px;"></div>
+<div><%= social_media(@user.id,"inv_profile") %></div>
+
+</div>
+
+ <div class="left">
+<div class="thumbnail">
+     <%- if @buyer_user_image.find_medium_thumbnail -%>
+ 	 <%=image_tag @buyer_user_image.public_filename(:profile), :class=>"thumbnail"%>
+     <%- else -%>
+     	 <%=image_tag("/images/buyer-170.jpg",:width=>170 )%>
+     <%- end -%><br />
+</div>
+ <div class="details" style="width: 309px;">
+      <div><strong>Primary Location:</strong><% if !@user_company_info.nil? %> <%= @user_company_info.city %><% end %></div>
+      <div><strong>Investor Focus: </strong><% unless @user.user_focus_investor.blank? %><% if @user.user_focus_investor.is_longterm_hold == true %>Longterm Hold (Landlord)<%end%><% if !@user.user_focus_investor.is_fix_and_flip == true && !@user.user_focus_investor.is_longterm_hold == true && !@user.user_focus_investor.is_wholesale == true %><% if @user.user_focus_investor.is_fix_and_flip == true && @user.user_focus_investor.is_longterm_hold == true %>,<%end%><% if @user.user_focus_investor.is_wholesale == true && @user.user_focus_investor.is_longterm_hold == true %>,<%end%> <%elsif @user.user_focus_investor.is_fix_and_flip == true && @user.user_focus_investor.is_longterm_hold == true && @user.user_focus_investor.is_wholesale == true %><% if @user.user_focus_investor.is_fix_and_flip == true && @user.user_focus_investor.is_longterm_hold == true %>,<%end%><%else%><% if @user.user_focus_investor.is_fix_and_flip == true && @user.user_focus_investor.is_longterm_hold == true %>,<%end%><% if @user.user_focus_investor.is_wholesale == true && @user.user_focus_investor.is_longterm_hold == true %>,<%end%><%end%> <% if @user.user_focus_investor.is_fix_and_flip == true %>Fix & Flip (Rehabber)<%end%><% if @user.user_focus_investor.is_wholesale == true && @user.user_focus_investor.is_fix_and_flip == true %>,<%end%> <% if @user.user_focus_investor.is_wholesale == true %>Wholesale<%end%><% if !@user.user_focus_investor.is_lines_and_notes == true && !@user.user_focus_investor.is_wholesale == true && !@user.user_focus_investor.is_fix_and_flip == true && !@user.user_focus_investor.is_longterm_hold == true%><% if @user.user_focus_investor.is_lines_and_notes == true && @user.user_focus_investor.is_wholesale == true %>,<%end%><% if @user.user_focus_investor.is_lines_and_notes == true && @user.user_focus_investor.is_fix_and_flip == true%>,<%end%><% if @user.user_focus_investor.is_lines_and_notes == true && @user.user_focus_investor.is_longterm_hold == true%>,<%end%><%elsif @user.user_focus_investor.is_lines_and_notes == true && @user.user_focus_investor.is_wholesale == true && @user.user_focus_investor.is_fix_and_flip == true %><%if @user.user_focus_investor.is_wholesale == true && @user.user_focus_investor.is_lines_and_notes%>,<%end%><%elsif @user.user_focus_investor.is_lines_and_notes == true && @user.user_focus_investor.is_fix_and_flip == true%><% if @user.user_focus_investor.is_lines_and_notes == true && @user.user_focus_investor.is_fix_and_flip == true%>,<%end%><%elsif @user.user_focus_investor.is_lines_and_notes == true && @user.user_focus_investor.is_wholesale == true %><% if @user.user_focus_investor.is_lines_and_notes == true && @user.user_focus_investor.is_wholesale == true %>,<%end%><%else%><% if @user.user_focus_investor.is_lines_and_notes == true && @user.user_focus_investor.is_longterm_hold == true%>,<%end%><%end%> <% if @user.user_focus_investor.is_lines_and_notes == true %>Liens & Notes<%end%><%end%></div>
+      <div><strong>Member Since: </strong><%= time_in_words(@user.created_at) %><br /></div>
+      <div><strong>Investing Since:</strong><% if !@user.investing_since.nil? %> <%= time_in_words(@user.investing_since) %><br /> <% end %></div>
+      <div><strong>Last Seen:</strong><% if !@user.last_login_at.nil? %> <%= time_in_words(@user.last_login_at) %> ago <% end %></div>
+      <div><strong>Territories: </strong><% if !@user_territories.nil? %><%= display_territories(@user_territories) %><% end %></div>
+      <strong>Badges: </strong><div><%= show_badges(@user) %></div>
+</div>
+<div class="clear" style="margin-bottom: 15px;"></div>
+<div class="conversation_message new" style="background: #FFFFFF;border: 0px;">
+ <div class="subject">About Me:</div>
+<div class="body"> <%= @user.about_me %></div>
+</div>
+
+<div class="conversation_message new" style="background: #FFFFFF;border: 0px;">
+ <div class="subject">Real Estate Experience:</div>
+<div class="body"><%= @user.real_estate_experience %></div>
+</div>
+
+
+<div class="conversation_message new" style="background: #FFFFFF;border: 0px;margin-bottom: 0px;">
+ <div class="subject">My Properties For Sale:</div>
+  <div class="body">
+    <div id="propery_images_block">
+        <ul id="lightbox_out">
+          <%j=0%>
+    <% @property_profiles.each do |profile| %>
+        <div class="thumbnail_properties">
+        <% default_photo_parent = profile.profile_images.find_by_default_photo(1)%>
+
+
+        <%if (profile.field_value(:privacy) == 'public')%>
+            <%prop_address = profile.field_value(:property_address)%>
+        <%else%>
+            <%prop_address = '(private property)'%>
+        <%end%>
+            
+        <%zip = ProfileFieldEngineIndex.find_by_profile_id(profile.id).zip_code.to_i%>
+        <%prop_zip = Zip.find_by_zip(zip)%>
+        <%property_full_address ="#{prop_address}, #{prop_zip.city.capitalize}, #{prop_zip.zip}, #{prop_zip.state.upcase}, #{prop_zip.country.upcase}"%>
+        <%property_full_address ="#{prop_zip.city.capitalize}, #{prop_zip.zip}, #{prop_zip.state.upcase}, #{prop_zip.country.upcase}" if (profile.field_value(:property_type) == 'other' && profile.field_value(:privacy) == 'public')%>
+        
+          <li  style ="height :auto; width :300px " >
+        <div  id=<%=j%>   onmouseover = "address_lightbox(this, document.getElementById('txtarea'), '<%=property_full_address%>')">
+
+
+        <% if(!default_photo_parent.blank?) %>
+              <% image_path = profile.profile_thumbnail(default_photo_parent.id).property_image_filename if !profile.profile_thumbnail(default_photo_parent.id).blank? %>
+             <%=link_to image_tag(image_path ,:id=>"#{profile.id}_thumb" , :class=>"image", :width=>"170", :height=>"128",:style=>"cursor:pointer;",:uri=>"#",:title=>"View Full Description"), {:controller=>:home, :action=>:preview_owner, :id=>profile.id , :investor_full_page=>@user.id, :state_code=>@state_selected, :user_territory_id=> @territory_selected,:search_investor=>@search_investor,:page_number=>@page_number }%>
+        <% else %>
+             <%=link_to render_photo_full_size(profile, :class=>"image", :title=>"View Full Description",:id=>"image"+"#{j}", :width=>"170", :height=>"128"),{:controller=>:home, :action=>:preview_owner, :id=>profile.id, :investor_full_page=>@user.id, :state_code=>@state_selected, :user_territory_id=> @territory_selected,:search_investor=>@search_investor,:page_number=>@page_number}%>
+        <% end %></div>
+
+        </li>
+        </div>
+          <%j+=1%>
+    <% end %>
+        </ul>
+    </div>
+  </div>
+</div>
+</div>
+
+</div>
+<div class="right">
+<div class="clear" style="margin-bottom: 15px;"></div>
+<div class="conversation_message new" style="background: #FFFFFF;border: 0px;">
+ <table id="feeds" width="100%">
+   <div class="subject"><h3 style="font-size: 11px;"><%=@user.first_name.humanize%>'s Recent Activity:</h3></div>
+ </table>
+ <div class="right_articles legend">
+        <table id="feeds" width="100%">
+	        <% @feeds.each do |feed| %>
+             <tr >
+                <td onMouseOver="this.style.backgroundColor='#FFFFFF'"; onMouseOut="this.style.backgroundColor='transparent'">
+                  <%= display_investor_feeds(feed) %>
+                    <div class="time" style="font-size: 0.7em; font-weight: normal; color:#454545; text-align: right;"><%= time_in_words(feed.created_at)%> ago</div>
+                </td>
+	    </tr>
+	    <tr><td><div class="investor_dir_border"></div></td></tr>
+	<% end %>
+        </table>
+	<% if @feeds.blank? %><p style="font: 0.9em/1.5em Tahoma,sans-serif; text-color: #414141; font-weight: bold;padding-left: 5px;">No recent activity to display</p><% end %>
+    </div>
+</div>
+</div>
+</div>
+
+<div id="test5" class="container_close" style="background-color:#F5F5F5;color:#000000;display:none;">
+  <div class="hd" style=" background-color: #F5F5F5; color: #000000; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-style: solid; border-color: #6C757A; text-align: center; cursor: move; "><span style="color:#5CC003;font-weight:bold"><p style="margin: 0px"> Property Address </p></span></div>
+<div class="bd" style=" background-color: #F5F5F5; color: #000000; border-top-width: 0px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-style: solid; border-color: #6C757A; text-align: center; cursor: move; "> <span style="color:#0000FF; font-weight:bold"><textarea style="border: 10px" id="txtarea" rows="2" cols="39" readonly="readonly" font="0.9em"></textarea></span></div>
+<div class ="container-close" style="width: 0px; height: 0px;"</div>
+</div>
+
+<style type="text/css" >
+           .container-close {height: 0px!important;
+           width: 0px!important;}
+
+          .conversation_profile_summary .thumbnail_properties {
+     float: left;
+     width: 185px;
+ }
+</style>
+
+
+<script type="text/javascript">
+//YAHOO.namespace('com.thecodecentral');
+function address_lightbox(img, txtara, prop_prof) {
+  image_id = img.id;
+ //alert(txtara.inspect());
+ //alert(prop_prof.inspect());
+  txtara.value = prop_prof
+  YAHOO.com.thecodecentral.dialog5.show();
+
+        }
+
+function init() {
+
+	var handleCancel = function(o){
+		this.cancel();
+	}
+                
+YAHOO.com.thecodecentral.dialog5 =
+
+	new YAHOO.widget.Dialog("test5",
+	{ width : "355px",
+	fixedcenter : true,
+	visible : false,
+	close: true,
+	draggable: true,
+	modal: true,
+	constraintoviewport : false});
+	YAHOO.util.Event.addListener('lightbox_out', 'mouseout', function(o){YAHOO.com.thecodecentral.dialog5.hide()});
+	YAHOO.com.thecodecentral.dialog5.render();
+
+
+
+	YAHOO.util.Dom.setStyle(['test5'], 'display', 'block');
+}
+YAHOO.util.Event.addListener(window, "load", init);
+</script>
+
+
+
+
+

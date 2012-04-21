@@ -1,0 +1,18 @@
+module SellerResponderSystemHelper
+
+  def display_sequence_for_series(sequence_name)
+    return display_email_links(1,sequence_name), display_email_links(2,sequence_name), display_email_links(3,sequence_name), display_email_links(4,sequence_name), display_email_links(5,sequence_name), display_email_links(6,sequence_name), display_email_links(7,sequence_name), display_email_links(8,sequence_name), display_email_links(9,sequence_name), display_email_links(10,sequence_name), display_email_links(11,sequence_name), display_email_links(12,sequence_name), display_email_links(13,sequence_name), display_email_links(14,sequence_name), display_email_links(15,sequence_name), "#{display_email_links(16,sequence_name) if sequence_name == "sequence_two"}"
+  end
+
+  def display_email_links(email_number,sequence_name)
+    return "<a href='/seller_responder_system/seller_responder_sequence_series?email_number=#{email_number}&sequence_name=#{sequence_name}' style=#{(@sequence_name == sequence_name && @email_number.to_i == email_number.to_i) ? 'font-weight:bold' : ''}>Email#{email_number.to_s}</a><br>"
+  end
+
+  def display_email_description(email_description)
+    return User.display_email_assign_values(current_user, email_description.to_s)
+  end
+
+  def display_email_link_for_sequence_one(email_number,sequence_name)
+    return "<a href='/seller_responder_system/seller_responder_sequence_series?email_number=#{email_number}&sequence_name=#{sequence_name}' style=#{(@sequence_name == sequence_name && @email_number.to_i == email_number.to_i) ? 'font-weight:bold' : ''}>Thank You</a><br>"
+  end
+end

@@ -1,0 +1,41 @@
+<%- @page_title = "Seller Responders" -%>
+<%=javascript_include_tag "account_settings_controller.js"%>
+<fieldset id="email_intro">
+  <div id="left_navigation" style="float:left; width:222px;">
+    <%= render :partial => "seller_responder_links" %>
+  </div>
+<h3><%= "#{@sequence_name}: #{@email_number}" %></h3>
+  <%- form_for(:seller_responder_notification, :url => {:controller=>'seller_responder_system', :action=>'update_seller_responder_notification'}, :html => { :method => :post }) do |f| -%>
+    <div id="right_navigation" style=" float:right; width:527px;">
+      <%= f.hidden_field "email_number", :value => params[:email_number]%>
+      <%= hidden_field "seller_notification", "sequence_name", :value => params[:sequence_name] %>
+      <%= hidden_field "seller_notification", "active", :value => true %>
+      <table>
+          <tr>
+            <td>
+              <br><b>Subject:</b>
+              <br/>
+              <%= f.text_field "email_subject", :value => @seller_responder_notification.email_subject, :size => "73", :style => "margin-left: 0px;" %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Email Body:</b><br>
+                <span class='personlized_span'  >
+                  <a href="javascript:;" id="email_body_editor" onclick="toggel_personalized_list(this.id)" >Personalize</a>
+                  <img src="/images/reimatcher_images/help_icon.png" alt='help' title="To personalize your emails, simply place your cursor where you want the variable added, then click Personalize and the name of variable you wish to add from the list" />
+                </span><br/>
+              <%= f.text_area "email_body", :value => @seller_responder_notification.email_body, :class=>"rich_text_editor", :size => "50x4", :style => "margin-left: 0px;" %>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" align="center">
+              <%=submit_tag "Preview", :class=>'submit_xl' %>
+              <%=submit_tag "Update Settings", :class=>'submit_xl' %>
+            </td>
+          </tr>
+      </table>
+    </div>
+<div style="clear:both"></div>
+  <% end %>
+</fieldset>

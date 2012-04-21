@@ -1,0 +1,29 @@
+<h1>Live Video on Channel</h1><br/>
+<a href="/webinars/y101fm/live"><img id="thumbnail" src="http://thumbnail.api.livestream.com/thumbnail?name=y101fm" 
+	style="width:240px; height:180px"></a>
+
+<br />
+<h1>Channel Directories Listing </h1>
+
+<table>
+<% @directories_hash.each do |directory_hash| %>  
+  <tr>
+    <td>
+      <%= link_to directory_hash["title"],show_all_clip_webinar_path(directory_hash["id"]) %>
+    </td>
+  </tr>
+ 
+<% end %>
+ </table>
+
+<script language="JavaScript" type="text/javascript">
+	function updateThumb() {
+		thumbnail = document.getElementById('thumbnail');
+		thumbnail.src = "http://thumbnail.api.livestream.com/thumbnail?name=y101fm&t=" 
+			+ new Date().valueOf();
+	}
+ 
+	setInterval("updateThumb()", 10000);
+</script>
+
+

@@ -1,0 +1,224 @@
+# Logfile created on Tue Jul 12 18:23:22 +0530 2011DEPRECATION WARNING: require "activesupport" is deprecated and will be removed in Rails 3. Use require "active_support" instead.. (called from /home/rajiv_work/reim-redux/webapp/vendor/rails/activesupport/lib/activesupport.rb:2)
+DEPRECATION WARNING: require "activesupport" is deprecated and will be removed in Rails 3. Use require "active_support" instead.. (called from /home/rajiv_work/reim-redux/webapp/vendor/rails/activesupport/lib/activesupport.rb:2)
+DEPRECATION WARNING: require "activesupport" is deprecated and will be removed in Rails 3. Use require "active_support" instead.. (called from /home/rajiv_work/reim-redux/webapp/vendor/rails/activesupport/lib/activesupport.rb:2)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mUser Columns (2.7ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Indexes (1.1ms)[0m   [0;1mSHOW KEYS FROM `users`[0m
+  [4;35;1mTerritory Load (0.7ms)[0m   [0mSELECT * FROM `territories` [0m
+  [4;36;1mTerritory Columns (0.5ms)[0m   [0;1mSHOW FIELDS FROM `territories`[0m
+  [4;35;1mTerritory Indexes (0.5ms)[0m   [0mSHOW KEYS FROM `territories`[0m
+  [4;36;1mProfileField Load (1509.5ms)[0m   [0;1mselect * from profile_fields where profile_fields.key = 'geo_ll' and profile_id in (select profile_id from profile_fields where profile_fields.key='latlng' && profile_fields.value is null)[0m
+  [4;35;1mProfileField Columns (1.4ms)[0m   [0mSHOW FIELDS FROM `profile_fields`[0m
+  [4;36;1mProfileField Indexes (98.7ms)[0m   [0;1mSHOW KEYS FROM `profile_fields`[0m
+  [4;35;1mProfile Load (0.5ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.`id` = 'ffc6a4c6-82dd-11df-99f2-0017312822fa') LIMIT 1[0m
+  [4;36;1mProfile Columns (1.4ms)[0m   [0;1mSHOW FIELDS FROM `profiles`[0m
+  [4;35;1mProfile Indexes (2.5ms)[0m   [0mSHOW KEYS FROM `profiles`[0m
+  [4;36;1mProfileField Load (77.3ms)[0m   [0;1mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = 'ffc6a4c6-82dd-11df-99f2-0017312822fa' AND `profile_fields`.`key` = 'property_address') LIMIT 1[0m
+  [4;35;1mProfileField Load (30.3ms)[0m   [0mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = 'ffc6a4c6-82dd-11df-99f2-0017312822fa' AND `profile_fields`.`key` = 'zip_code') LIMIT 1[0m
+  [4;36;1mProfileField Load (0.7ms)[0m   [0;1mselect id from profile_fields where profile_fields.key='latlng' && profile_fields.profile_id = 'ffc6a4c6-82dd-11df-99f2-0017312822fa'[0m
+  [4;35;1mSQL (20.3ms)[0m   [0mupdate `profile_fields` set `created_at`='2011-07-12 12:55:19', `deleted_at` = NULL, `updated_at`='2011-07-12 12:55:19', `value` = '25.6430998,-100.3610943', `value_text` = null, `key`= 'latlng', `profile_id` = 'ffc6a4c6-82dd-11df-99f2-0017312822fa' where profile_fields.id in('08adf76a-82de-11df-99f2-0017312822fa' )[0m
+  [4;36;1mProfile Load (10.2ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.`id` = 'f2d8c3e4-3ffc-11df-98ad-0017312822fa') LIMIT 1[0m
+  [4;35;1mProfileField Load (0.9ms)[0m   [0mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = 'f2d8c3e4-3ffc-11df-98ad-0017312822fa' AND `profile_fields`.`key` = 'property_address') LIMIT 1[0m
+  [4;36;1mProfileField Load (1.1ms)[0m   [0;1mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = 'f2d8c3e4-3ffc-11df-98ad-0017312822fa' AND `profile_fields`.`key` = 'zip_code') LIMIT 1[0m
+  [4;35;1mProfileField Load (0.7ms)[0m   [0mselect id from profile_fields where profile_fields.key='latlng' && profile_fields.profile_id = 'f2d8c3e4-3ffc-11df-98ad-0017312822fa'[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mupdate `profile_fields` set `created_at`='2011-07-12 12:55:19', `deleted_at` = NULL, `updated_at`='2011-07-12 12:55:19', `value` = '43.2501708,13.7462948', `value_text` = null, `key`= 'latlng', `profile_id` = 'f2d8c3e4-3ffc-11df-98ad-0017312822fa' where profile_fields.id in('32860ed0-43b7-11df-9d77-0017312822fa' )[0m
+  [4;35;1mProfile Load (0.4ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.`id` = '4495918a-940d-11df-8bfa-0017312822fa') LIMIT 1[0m
+  [4;36;1mProfileField Load (0.7ms)[0m   [0;1mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = '4495918a-940d-11df-8bfa-0017312822fa' AND `profile_fields`.`key` = 'property_address') LIMIT 1[0m
+  [4;35;1mProfileField Load (0.6ms)[0m   [0mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = '4495918a-940d-11df-8bfa-0017312822fa' AND `profile_fields`.`key` = 'zip_code') LIMIT 1[0m
+  [4;36;1mProfileField Load (0.7ms)[0m   [0;1mselect id from profile_fields where profile_fields.key='latlng' && profile_fields.profile_id = '4495918a-940d-11df-8bfa-0017312822fa'[0m
+  [4;35;1mProfile Load (0.4ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.`id` = 'aa8845b0-82b9-11df-b2b3-0017312822fa') LIMIT 1[0m
+  [4;36;1mProfileField Load (0.8ms)[0m   [0;1mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = 'aa8845b0-82b9-11df-b2b3-0017312822fa' AND `profile_fields`.`key` = 'property_address') LIMIT 1[0m
+  [4;35;1mProfileField Load (0.7ms)[0m   [0mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = 'aa8845b0-82b9-11df-b2b3-0017312822fa' AND `profile_fields`.`key` = 'zip_code') LIMIT 1[0m
+  [4;36;1mProfileField Load (0.7ms)[0m   [0;1mselect id from profile_fields where profile_fields.key='latlng' && profile_fields.profile_id = 'aa8845b0-82b9-11df-b2b3-0017312822fa'[0m
+  [4;35;1mSQL (134.4ms)[0m   [0mupdate `profile_fields` set `created_at`='2011-07-12 12:55:20', `deleted_at` = NULL, `updated_at`='2011-07-12 12:55:20', `value` = '26.4744902,50.0360770', `value_text` = null, `key`= 'latlng', `profile_id` = 'aa8845b0-82b9-11df-b2b3-0017312822fa' where profile_fields.id in('b25b962a-82b9-11df-b2b3-0017312822fa' )[0m
+  [4;36;1mProfile Load (0.4ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.`id` = 'ad9f1170-8070-11df-b5f2-0017312822fa') LIMIT 1[0m
+  [4;35;1mProfileField Load (0.8ms)[0m   [0mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = 'ad9f1170-8070-11df-b5f2-0017312822fa' AND `profile_fields`.`key` = 'property_address') LIMIT 1[0m
+  [4;36;1mProfileField Load (0.7ms)[0m   [0;1mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = 'ad9f1170-8070-11df-b5f2-0017312822fa' AND `profile_fields`.`key` = 'zip_code') LIMIT 1[0m
+  [4;35;1mProfileField Load (0.7ms)[0m   [0mselect id from profile_fields where profile_fields.key='latlng' && profile_fields.profile_id = 'ad9f1170-8070-11df-b5f2-0017312822fa'[0m
+  [4;36;1mProfile Load (0.5ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.`id` = 'b92a661a-82dd-11df-99f2-0017312822fa') LIMIT 1[0m
+  [4;35;1mProfileField Load (0.8ms)[0m   [0mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = 'b92a661a-82dd-11df-99f2-0017312822fa' AND `profile_fields`.`key` = 'property_address') LIMIT 1[0m
+  [4;36;1mProfileField Load (0.8ms)[0m   [0;1mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = 'b92a661a-82dd-11df-99f2-0017312822fa' AND `profile_fields`.`key` = 'zip_code') LIMIT 1[0m
+  [4;35;1mProfileField Load (0.7ms)[0m   [0mselect id from profile_fields where profile_fields.key='latlng' && profile_fields.profile_id = 'b92a661a-82dd-11df-99f2-0017312822fa'[0m
+  [4;36;1mSQL (20.9ms)[0m   [0;1mupdate `profile_fields` set `created_at`='2011-07-12 12:55:21', `deleted_at` = NULL, `updated_at`='2011-07-12 12:55:21', `value` = '22.0130882,96.0945567', `value_text` = null, `key`= 'latlng', `profile_id` = 'b92a661a-82dd-11df-99f2-0017312822fa' where profile_fields.id in('d6192360-82dd-11df-99f2-0017312822fa' )[0m
+  [4;35;1mProfile Load (0.4ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.`id` = 'cbca2ce2-82dd-11df-99f2-0017312822fa') LIMIT 1[0m
+  [4;36;1mProfileField Load (1.0ms)[0m   [0;1mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = 'cbca2ce2-82dd-11df-99f2-0017312822fa' AND `profile_fields`.`key` = 'property_address') LIMIT 1[0m
+  [4;35;1mProfileField Load (0.8ms)[0m   [0mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = 'cbca2ce2-82dd-11df-99f2-0017312822fa' AND `profile_fields`.`key` = 'zip_code') LIMIT 1[0m
+  [4;36;1mProfileField Load (0.8ms)[0m   [0;1mselect id from profile_fields where profile_fields.key='latlng' && profile_fields.profile_id = 'cbca2ce2-82dd-11df-99f2-0017312822fa'[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mupdate `profile_fields` set `created_at`='2011-07-12 12:55:21', `deleted_at` = NULL, `updated_at`='2011-07-12 12:55:21', `value` = '4.8596700,-75.6210000', `value_text` = null, `key`= 'latlng', `profile_id` = 'cbca2ce2-82dd-11df-99f2-0017312822fa' where profile_fields.id in('d68a5b7a-82dd-11df-99f2-0017312822fa' )[0m
+  [4;36;1mProfile Load (0.4ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.`id` = '9228342a-82dd-11df-99f2-0017312822fa') LIMIT 1[0m
+  [4;35;1mProfileField Load (0.8ms)[0m   [0mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = '9228342a-82dd-11df-99f2-0017312822fa' AND `profile_fields`.`key` = 'property_address') LIMIT 1[0m
+  [4;36;1mProfileField Load (0.7ms)[0m   [0;1mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = '9228342a-82dd-11df-99f2-0017312822fa' AND `profile_fields`.`key` = 'zip_code') LIMIT 1[0m
+  [4;35;1mProfileField Load (0.7ms)[0m   [0mselect id from profile_fields where profile_fields.key='latlng' && profile_fields.profile_id = '9228342a-82dd-11df-99f2-0017312822fa'[0m
+  [4;36;1mProfile Load (0.4ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.`id` = '91ebf3ce-44c1-11e0-8858-002618c30c0a') LIMIT 1[0m
+  [4;35;1mProfileField Load (0.8ms)[0m   [0mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = '91ebf3ce-44c1-11e0-8858-002618c30c0a' AND `profile_fields`.`key` = 'property_address') LIMIT 1[0m
+  [4;36;1mProfileField Load (0.7ms)[0m   [0;1mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = '91ebf3ce-44c1-11e0-8858-002618c30c0a' AND `profile_fields`.`key` = 'zip_code') LIMIT 1[0m
+  [4;35;1mProfileField Load (0.7ms)[0m   [0mselect id from profile_fields where profile_fields.key='latlng' && profile_fields.profile_id = '91ebf3ce-44c1-11e0-8858-002618c30c0a'[0m
+  [4;36;1mSQL (73.5ms)[0m   [0;1mupdate `profile_fields` set `created_at`='2011-07-12 12:55:22', `deleted_at` = NULL, `updated_at`='2011-07-12 12:55:22', `value` = '24.2607863,87.2458488', `value_text` = null, `key`= 'latlng', `profile_id` = '91ebf3ce-44c1-11e0-8858-002618c30c0a' where profile_fields.id in('eeb60d42-5c68-11e0-a23a-002618c30c0a' )[0m
+  [4;35;1mRetailBuyerProfile Columns (0.9ms)[0m   [0mSHOW FIELDS FROM `retail_buyer_profiles`[0m
+  [4;36;1mRetailBuyerProfile Indexes (45.8ms)[0m   [0;1mSHOW KEYS FROM `retail_buyer_profiles`[0m
+  [4;35;1mAd Columns (1.4ms)[0m   [0mSHOW FIELDS FROM `ads`[0m
+  [4;36;1mAd Indexes (22.3ms)[0m   [0;1mSHOW KEYS FROM `ads`[0m
+  [4;35;1mSmtpNotification Columns (33.1ms)[0m   [0mSHOW FIELDS FROM `smtp_notifications`[0m
+  [4;36;1mSmtpNotification Indexes (38.5ms)[0m   [0;1mSHOW KEYS FROM `smtp_notifications`[0m
+  [4;35;1mTip Columns (1.0ms)[0m   [0mSHOW FIELDS FROM `tips`[0m
+  [4;36;1mTip Indexes (16.8ms)[0m   [0;1mSHOW KEYS FROM `tips`[0m
+DEPRECATION WARNING: :record is deprecated, use :member instead. (called from send at /home/rajiv_work/reim-redux/webapp/vendor/plugins/active_scaffold/lib/active_scaffold/data_structures/action_link.rb:21)
+  [4;35;1mBadge Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `badges`[0m
+  [4;36;1mBadge Indexes (0.3ms)[0m   [0;1mSHOW KEYS FROM `badges`[0m
+  [4;35;1mShoppingCartUser Columns (0.7ms)[0m   [0mSHOW FIELDS FROM `shopping_cart_users`[0m
+  [4;36;1mShoppingCartUser Indexes (9.8ms)[0m   [0;1mSHOW KEYS FROM `shopping_cart_users`[0m
+DEPRECATION WARNING: Disabling sessions for a single controller has been deprecated. Sessions are now lazy loaded. So if you don't access them, consider them off. You can still modify the session cookie options with request.session_options.. (called from /home/rajiv_work/reim-redux/webapp/app/controllers/application.rb:12)
+DEPRECATION WARNING: require "activesupport" is deprecated and will be removed in Rails 3. Use require "active_support" instead.. (called from /home/rajiv_work/reim-redux/webapp/vendor/rails/activesupport/lib/activesupport.rb:2)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mUser Columns (1.2ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Indexes (62.8ms)[0m   [0;1mSHOW KEYS FROM `users`[0m
+  [4;35;1mTerritory Load (0.6ms)[0m   [0mSELECT * FROM `territories` [0m
+  [4;36;1mTerritory Columns (0.5ms)[0m   [0;1mSHOW FIELDS FROM `territories`[0m
+  [4;35;1mTerritory Indexes (0.5ms)[0m   [0mSHOW KEYS FROM `territories`[0m
+  [4;36;1mProfileField Load (80.7ms)[0m   [0;1mselect * from profile_fields where profile_fields.key = 'geo_ll' and profile_id in (select profile_id from profile_fields where profile_fields.key='latlng' && profile_fields.value is null)[0m
+  [4;35;1mProfileField Columns (1.1ms)[0m   [0mSHOW FIELDS FROM `profile_fields`[0m
+  [4;36;1mProfileField Indexes (126.7ms)[0m   [0;1mSHOW KEYS FROM `profile_fields`[0m
+  [4;35;1mProfile Load (9.2ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.`id` = '4495918a-940d-11df-8bfa-0017312822fa') LIMIT 1[0m
+  [4;36;1mProfile Columns (1.4ms)[0m   [0;1mSHOW FIELDS FROM `profiles`[0m
+  [4;35;1mProfile Indexes (2.2ms)[0m   [0mSHOW KEYS FROM `profiles`[0m
+  [4;36;1mProfileField Load (0.7ms)[0m   [0;1mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = '4495918a-940d-11df-8bfa-0017312822fa' AND `profile_fields`.`key` = 'property_address') LIMIT 1[0m
+  [4;35;1mProfileField Load (0.6ms)[0m   [0mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = '4495918a-940d-11df-8bfa-0017312822fa' AND `profile_fields`.`key` = 'zip_code') LIMIT 1[0m
+  [4;36;1mProfileField Load (0.6ms)[0m   [0;1mselect id from profile_fields where profile_fields.key='latlng' && profile_fields.profile_id = '4495918a-940d-11df-8bfa-0017312822fa'[0m
+  [4;35;1mProfile Load (0.4ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.`id` = 'ad9f1170-8070-11df-b5f2-0017312822fa') LIMIT 1[0m
+  [4;36;1mProfileField Load (0.8ms)[0m   [0;1mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = 'ad9f1170-8070-11df-b5f2-0017312822fa' AND `profile_fields`.`key` = 'property_address') LIMIT 1[0m
+  [4;35;1mProfileField Load (0.7ms)[0m   [0mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = 'ad9f1170-8070-11df-b5f2-0017312822fa' AND `profile_fields`.`key` = 'zip_code') LIMIT 1[0m
+  [4;36;1mProfileField Load (0.7ms)[0m   [0;1mselect id from profile_fields where profile_fields.key='latlng' && profile_fields.profile_id = 'ad9f1170-8070-11df-b5f2-0017312822fa'[0m
+  [4;35;1mProfile Load (0.4ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.`id` = '9228342a-82dd-11df-99f2-0017312822fa') LIMIT 1[0m
+  [4;36;1mProfileField Load (0.8ms)[0m   [0;1mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = '9228342a-82dd-11df-99f2-0017312822fa' AND `profile_fields`.`key` = 'property_address') LIMIT 1[0m
+  [4;35;1mProfileField Load (0.7ms)[0m   [0mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = '9228342a-82dd-11df-99f2-0017312822fa' AND `profile_fields`.`key` = 'zip_code') LIMIT 1[0m
+  [4;36;1mProfileField Load (0.7ms)[0m   [0;1mselect id from profile_fields where profile_fields.key='latlng' && profile_fields.profile_id = '9228342a-82dd-11df-99f2-0017312822fa'[0m
+  [4;35;1mRetailBuyerProfile Columns (1.2ms)[0m   [0mSHOW FIELDS FROM `retail_buyer_profiles`[0m
+  [4;36;1mRetailBuyerProfile Indexes (0.4ms)[0m   [0;1mSHOW KEYS FROM `retail_buyer_profiles`[0m
+  [4;35;1mAd Columns (0.7ms)[0m   [0mSHOW FIELDS FROM `ads`[0m
+  [4;36;1mAd Indexes (0.3ms)[0m   [0;1mSHOW KEYS FROM `ads`[0m
+  [4;35;1mSmtpNotification Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `smtp_notifications`[0m
+  [4;36;1mSmtpNotification Indexes (10.0ms)[0m   [0;1mSHOW KEYS FROM `smtp_notifications`[0m
+  [4;35;1mTip Columns (0.6ms)[0m   [0mSHOW FIELDS FROM `tips`[0m
+  [4;36;1mTip Indexes (0.2ms)[0m   [0;1mSHOW KEYS FROM `tips`[0m
+DEPRECATION WARNING: :record is deprecated, use :member instead. (called from send at /home/rajiv_work/reim-redux/webapp/vendor/plugins/active_scaffold/lib/active_scaffold/data_structures/action_link.rb:21)
+  [4;35;1mBadge Columns (0.7ms)[0m   [0mSHOW FIELDS FROM `badges`[0m
+  [4;36;1mBadge Indexes (0.2ms)[0m   [0;1mSHOW KEYS FROM `badges`[0m
+  [4;35;1mShoppingCartUser Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `shopping_cart_users`[0m
+  [4;36;1mShoppingCartUser Indexes (0.2ms)[0m   [0;1mSHOW KEYS FROM `shopping_cart_users`[0m
+DEPRECATION WARNING: Disabling sessions for a single controller has been deprecated. Sessions are now lazy loaded. So if you don't access them, consider them off. You can still modify the session cookie options with request.session_options.. (called from /home/rajiv_work/reim-redux/webapp/app/controllers/application.rb:12)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mUser Columns (1.3ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Indexes (0.6ms)[0m   [0;1mSHOW KEYS FROM `users`[0m
+  [4;35;1mTerritory Load (0.7ms)[0m   [0mSELECT * FROM `territories` [0m
+  [4;36;1mTerritory Columns (0.5ms)[0m   [0;1mSHOW FIELDS FROM `territories`[0m
+  [4;35;1mTerritory Indexes (0.5ms)[0m   [0mSHOW KEYS FROM `territories`[0m
+  [4;36;1mProfileField Load (9.1ms)[0m   [0;1mselect * from profile_fields where profile_fields.key = 'geo_ll' and profile_id in (select profile_id from profile_fields where profile_fields.key='latlng' && profile_fields.value is null)[0m
+  [4;35;1mProfileField Columns (0.7ms)[0m   [0mSHOW FIELDS FROM `profile_fields`[0m
+  [4;36;1mProfileField Indexes (171.0ms)[0m   [0;1mSHOW KEYS FROM `profile_fields`[0m
+  [4;35;1mProfile Load (0.5ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.`id` = '4495918a-940d-11df-8bfa-0017312822fa') LIMIT 1[0m
+  [4;36;1mProfile Columns (1.4ms)[0m   [0;1mSHOW FIELDS FROM `profiles`[0m
+  [4;35;1mProfile Indexes (1.0ms)[0m   [0mSHOW KEYS FROM `profiles`[0m
+  [4;36;1mProfileField Load (0.5ms)[0m   [0;1mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = '4495918a-940d-11df-8bfa-0017312822fa' AND `profile_fields`.`key` = 'property_address') LIMIT 1[0m
+  [4;35;1mProfileField Load (0.4ms)[0m   [0mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = '4495918a-940d-11df-8bfa-0017312822fa' AND `profile_fields`.`key` = 'zip_code') LIMIT 1[0m
+  [4;36;1mProfileField Load (0.7ms)[0m   [0;1mselect id from profile_fields where profile_fields.key='latlng' && profile_fields.profile_id = '4495918a-940d-11df-8bfa-0017312822fa'[0m
+  [4;35;1mProfile Load (0.4ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.`id` = 'ad9f1170-8070-11df-b5f2-0017312822fa') LIMIT 1[0m
+  [4;36;1mProfileField Load (0.8ms)[0m   [0;1mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = 'ad9f1170-8070-11df-b5f2-0017312822fa' AND `profile_fields`.`key` = 'property_address') LIMIT 1[0m
+  [4;35;1mProfileField Load (0.7ms)[0m   [0mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = 'ad9f1170-8070-11df-b5f2-0017312822fa' AND `profile_fields`.`key` = 'zip_code') LIMIT 1[0m
+  [4;36;1mProfileField Load (0.7ms)[0m   [0;1mselect id from profile_fields where profile_fields.key='latlng' && profile_fields.profile_id = 'ad9f1170-8070-11df-b5f2-0017312822fa'[0m
+  [4;35;1mProfile Load (0.4ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.`id` = '9228342a-82dd-11df-99f2-0017312822fa') LIMIT 1[0m
+  [4;36;1mProfileField Load (0.8ms)[0m   [0;1mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = '9228342a-82dd-11df-99f2-0017312822fa' AND `profile_fields`.`key` = 'property_address') LIMIT 1[0m
+  [4;35;1mProfileField Load (0.7ms)[0m   [0mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = '9228342a-82dd-11df-99f2-0017312822fa' AND `profile_fields`.`key` = 'zip_code') LIMIT 1[0m
+  [4;36;1mProfileField Load (0.7ms)[0m   [0;1mselect id from profile_fields where profile_fields.key='latlng' && profile_fields.profile_id = '9228342a-82dd-11df-99f2-0017312822fa'[0m
+  [4;35;1mRetailBuyerProfile Columns (1.0ms)[0m   [0mSHOW FIELDS FROM `retail_buyer_profiles`[0m
+  [4;36;1mRetailBuyerProfile Indexes (0.3ms)[0m   [0;1mSHOW KEYS FROM `retail_buyer_profiles`[0m
+  [4;35;1mAd Columns (0.7ms)[0m   [0mSHOW FIELDS FROM `ads`[0m
+  [4;36;1mAd Indexes (0.3ms)[0m   [0;1mSHOW KEYS FROM `ads`[0m
+  [4;35;1mSmtpNotification Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `smtp_notifications`[0m
+  [4;36;1mSmtpNotification Indexes (0.2ms)[0m   [0;1mSHOW KEYS FROM `smtp_notifications`[0m
+  [4;35;1mTip Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `tips`[0m
+  [4;36;1mTip Indexes (0.3ms)[0m   [0;1mSHOW KEYS FROM `tips`[0m
+  [4;35;1mBadge Columns (0.7ms)[0m   [0mSHOW FIELDS FROM `badges`[0m
+  [4;36;1mBadge Indexes (0.2ms)[0m   [0;1mSHOW KEYS FROM `badges`[0m
+  [4;35;1mShoppingCartUser Columns (0.7ms)[0m   [0mSHOW FIELDS FROM `shopping_cart_users`[0m
+  [4;36;1mShoppingCartUser Indexes (0.2ms)[0m   [0;1mSHOW KEYS FROM `shopping_cart_users`[0m
+DEPRECATION WARNING: require "activesupport" is deprecated and will be removed in Rails 3. Use require "active_support" instead.. (called from /home/rajiv_work/reim-redux/webapp/vendor/rails/activesupport/lib/activesupport.rb:2)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mUser Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Indexes (1.1ms)[0m   [0;1mSHOW KEYS FROM `users`[0m
+  [4;35;1mTerritory Load (0.6ms)[0m   [0mSELECT * FROM `territories` [0m
+  [4;36;1mTerritory Columns (0.5ms)[0m   [0;1mSHOW FIELDS FROM `territories`[0m
+  [4;35;1mTerritory Indexes (0.5ms)[0m   [0mSHOW KEYS FROM `territories`[0m
+  [4;36;1mProfileField Load (19.3ms)[0m   [0;1mselect * from profile_fields where profile_fields.key = 'geo_ll' and profile_id in (select profile_id from profile_fields where profile_fields.key='latlng' && profile_fields.value is null)[0m
+  [4;35;1mProfileField Columns (1.1ms)[0m   [0mSHOW FIELDS FROM `profile_fields`[0m
+  [4;36;1mProfileField Indexes (90.4ms)[0m   [0;1mSHOW KEYS FROM `profile_fields`[0m
+  [4;35;1mProfile Load (0.5ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.`id` = '4495918a-940d-11df-8bfa-0017312822fa') LIMIT 1[0m
+  [4;36;1mProfile Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `profiles`[0m
+  [4;35;1mProfile Indexes (14.8ms)[0m   [0mSHOW KEYS FROM `profiles`[0m
+  [4;36;1mProfileField Load (0.5ms)[0m   [0;1mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = '4495918a-940d-11df-8bfa-0017312822fa' AND `profile_fields`.`key` = 'property_address') LIMIT 1[0m
+  [4;35;1mProfileField Load (0.3ms)[0m   [0mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = '4495918a-940d-11df-8bfa-0017312822fa' AND `profile_fields`.`key` = 'zip_code') LIMIT 1[0m
+  [4;36;1mProfileField Load (0.6ms)[0m   [0;1mselect id from profile_fields where profile_fields.key='latlng' && profile_fields.profile_id = '4495918a-940d-11df-8bfa-0017312822fa'[0m
+  [4;35;1mProfile Load (0.3ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.`id` = 'ad9f1170-8070-11df-b5f2-0017312822fa') LIMIT 1[0m
+  [4;36;1mProfileField Load (0.7ms)[0m   [0;1mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = 'ad9f1170-8070-11df-b5f2-0017312822fa' AND `profile_fields`.`key` = 'property_address') LIMIT 1[0m
+  [4;35;1mProfileField Load (0.7ms)[0m   [0mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = 'ad9f1170-8070-11df-b5f2-0017312822fa' AND `profile_fields`.`key` = 'zip_code') LIMIT 1[0m
+  [4;36;1mProfileField Load (0.7ms)[0m   [0;1mselect id from profile_fields where profile_fields.key='latlng' && profile_fields.profile_id = 'ad9f1170-8070-11df-b5f2-0017312822fa'[0m
+  [4;35;1mProfile Load (0.4ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.`id` = '9228342a-82dd-11df-99f2-0017312822fa') LIMIT 1[0m
+  [4;36;1mProfileField Load (0.8ms)[0m   [0;1mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = '9228342a-82dd-11df-99f2-0017312822fa' AND `profile_fields`.`key` = 'property_address') LIMIT 1[0m
+  [4;35;1mProfileField Load (0.7ms)[0m   [0mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = '9228342a-82dd-11df-99f2-0017312822fa' AND `profile_fields`.`key` = 'zip_code') LIMIT 1[0m
+  [4;36;1mProfileField Load (0.7ms)[0m   [0;1mselect id from profile_fields where profile_fields.key='latlng' && profile_fields.profile_id = '9228342a-82dd-11df-99f2-0017312822fa'[0m
+  [4;35;1mRetailBuyerProfile Columns (1.0ms)[0m   [0mSHOW FIELDS FROM `retail_buyer_profiles`[0m
+  [4;36;1mRetailBuyerProfile Indexes (0.3ms)[0m   [0;1mSHOW KEYS FROM `retail_buyer_profiles`[0m
+  [4;35;1mAd Columns (0.7ms)[0m   [0mSHOW FIELDS FROM `ads`[0m
+  [4;36;1mAd Indexes (0.3ms)[0m   [0;1mSHOW KEYS FROM `ads`[0m
+  [4;35;1mSmtpNotification Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `smtp_notifications`[0m
+  [4;36;1mSmtpNotification Indexes (0.2ms)[0m   [0;1mSHOW KEYS FROM `smtp_notifications`[0m
+  [4;35;1mTip Columns (0.6ms)[0m   [0mSHOW FIELDS FROM `tips`[0m
+  [4;36;1mTip Indexes (0.2ms)[0m   [0;1mSHOW KEYS FROM `tips`[0m
+DEPRECATION WARNING: :record is deprecated, use :member instead. (called from send at /home/rajiv_work/reim-redux/webapp/vendor/plugins/active_scaffold/lib/active_scaffold/data_structures/action_link.rb:21)
+  [4;35;1mBadge Columns (0.7ms)[0m   [0mSHOW FIELDS FROM `badges`[0m
+  [4;36;1mBadge Indexes (0.2ms)[0m   [0;1mSHOW KEYS FROM `badges`[0m
+  [4;35;1mShoppingCartUser Columns (0.7ms)[0m   [0mSHOW FIELDS FROM `shopping_cart_users`[0m
+  [4;36;1mShoppingCartUser Indexes (0.2ms)[0m   [0;1mSHOW KEYS FROM `shopping_cart_users`[0m
+DEPRECATION WARNING: Disabling sessions for a single controller has been deprecated. Sessions are now lazy loaded. So if you don't access them, consider them off. You can still modify the session cookie options with request.session_options.. (called from /home/rajiv_work/reim-redux/webapp/app/controllers/application.rb:12)
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LahShoppingCartController#index (for 127.0.0.1 at 2011-07-12 18:37:46) [GET]
+  Parameters: {"<NewOrder><Token>87a3c549783e42f58deed01e20c82a34</Token></NewOrder>"=>nil, "method"=>:post}
+DEPRECATION WARNING: require "activesupport" is deprecated and will be removed in Rails 3. Use require "active_support" instead.. (called from /home/rajiv_work/reim-redux/webapp/vendor/rails/activesupport/lib/activesupport.rb:2)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mUser Columns (2.4ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Indexes (1.1ms)[0m   [0;1mSHOW KEYS FROM `users`[0m
+  [4;35;1mTerritory Load (1.3ms)[0m   [0mSELECT * FROM `territories` [0m
+  [4;36;1mTerritory Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `territories`[0m
+  [4;35;1mTerritory Indexes (1.0ms)[0m   [0mSHOW KEYS FROM `territories`[0m
+  [4;36;1mProfileField Load (19.1ms)[0m   [0;1mselect * from profile_fields where profile_fields.key = 'geo_ll' and profile_id in (select profile_id from profile_fields where profile_fields.key='latlng' && profile_fields.value is null)[0m
+  [4;35;1mProfileField Columns (1.6ms)[0m   [0mSHOW FIELDS FROM `profile_fields`[0m
+  [4;36;1mProfileField Indexes (206.4ms)[0m   [0;1mSHOW KEYS FROM `profile_fields`[0m
+  [4;35;1mProfile Load (0.5ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.`id` = '4495918a-940d-11df-8bfa-0017312822fa') LIMIT 1[0m
+  [4;36;1mProfile Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `profiles`[0m
+  [4;35;1mProfile Indexes (2.1ms)[0m   [0mSHOW KEYS FROM `profiles`[0m
+  [4;36;1mProfileField Load (0.8ms)[0m   [0;1mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = '4495918a-940d-11df-8bfa-0017312822fa' AND `profile_fields`.`key` = 'property_address') LIMIT 1[0m
+  [4;35;1mProfileField Load (0.7ms)[0m   [0mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = '4495918a-940d-11df-8bfa-0017312822fa' AND `profile_fields`.`key` = 'zip_code') LIMIT 1[0m
+  [4;36;1mProfileField Load (0.6ms)[0m   [0;1mselect id from profile_fields where profile_fields.key='latlng' && profile_fields.profile_id = '4495918a-940d-11df-8bfa-0017312822fa'[0m
+  [4;35;1mProfile Load (0.4ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.`id` = 'ad9f1170-8070-11df-b5f2-0017312822fa') LIMIT 1[0m
+  [4;36;1mProfileField Load (0.8ms)[0m   [0;1mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = 'ad9f1170-8070-11df-b5f2-0017312822fa' AND `profile_fields`.`key` = 'property_address') LIMIT 1[0m
+  [4;35;1mProfileField Load (1.0ms)[0m   [0mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = 'ad9f1170-8070-11df-b5f2-0017312822fa' AND `profile_fields`.`key` = 'zip_code') LIMIT 1[0m
+  [4;36;1mProfileField Load (0.7ms)[0m   [0;1mselect id from profile_fields where profile_fields.key='latlng' && profile_fields.profile_id = 'ad9f1170-8070-11df-b5f2-0017312822fa'[0m
+  [4;35;1mProfile Load (0.4ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.`id` = '9228342a-82dd-11df-99f2-0017312822fa') LIMIT 1[0m
+  [4;36;1mProfileField Load (0.8ms)[0m   [0;1mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = '9228342a-82dd-11df-99f2-0017312822fa' AND `profile_fields`.`key` = 'property_address') LIMIT 1[0m
+  [4;35;1mProfileField Load (0.7ms)[0m   [0mSELECT * FROM `profile_fields` WHERE (`profile_fields`.`profile_id` = '9228342a-82dd-11df-99f2-0017312822fa' AND `profile_fields`.`key` = 'zip_code') LIMIT 1[0m
+  [4;36;1mProfileField Load (0.7ms)[0m   [0;1mselect id from profile_fields where profile_fields.key='latlng' && profile_fields.profile_id = '9228342a-82dd-11df-99f2-0017312822fa'[0m
+  [4;35;1mRetailBuyerProfile Columns (0.9ms)[0m   [0mSHOW FIELDS FROM `retail_buyer_profiles`[0m
+  [4;36;1mRetailBuyerProfile Indexes (0.3ms)[0m   [0;1mSHOW KEYS FROM `retail_buyer_profiles`[0m
+  [4;35;1mAd Columns (0.7ms)[0m   [0mSHOW FIELDS FROM `ads`[0m
+  [4;36;1mAd Indexes (0.3ms)[0m   [0;1mSHOW KEYS FROM `ads`[0m
+  [4;35;1mSmtpNotification Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `smtp_notifications`[0m
+  [4;36;1mSmtpNotification Indexes (0.2ms)[0m   [0;1mSHOW KEYS FROM `smtp_notifications`[0m
+  [4;35;1mTip Columns (0.6ms)[0m   [0mSHOW FIELDS FROM `tips`[0m
+  [4;36;1mTip Indexes (0.2ms)[0m   [0;1mSHOW KEYS FROM `tips`[0m
+DEPRECATION WARNING: :record is deprecated, use :member instead. (called from send at /home/rajiv_work/reim-redux/webapp/vendor/plugins/active_scaffold/lib/active_scaffold/data_structures/action_link.rb:21)
+  [4;35;1mBadge Columns (0.7ms)[0m   [0mSHOW FIELDS FROM `badges`[0m
+  [4;36;1mBadge Indexes (0.2ms)[0m   [0;1mSHOW KEYS FROM `badges`[0m
+  [4;35;1mShoppingCartUser Columns (0.7ms)[0m   [0mSHOW FIELDS FROM `shopping_cart_users`[0m
+  [4;36;1mShoppingCartUser Indexes (0.2ms)[0m   [0;1mSHOW KEYS FROM `shopping_cart_users`[0m
+DEPRECATION WARNING: Disabling sessions for a single controller has been deprecated. Sessions are now lazy loaded. So if you don't access them, consider them off. You can still modify the session cookie options with request.session_options.. (called from /home/rajiv_work/reim-redux/webapp/app/controllers/application.rb:12)

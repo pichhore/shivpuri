@@ -1,0 +1,57 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  id: 1
+  name: MyString
+  method_name: never
+  parameter_description: MyString
+  description: MyString
+
+two:
+  id: 2
+  name: MyString
+  method_name: never
+  parameter_description: MyString
+  description: MyString
+  
+always:
+  id: 3
+  name: Always
+  method_name: always
+  parameter_description: No parameters
+  description: MyString
+  
+never:
+  id: 4
+  name: Never
+  method_name: never
+  parameter_description: No parameters
+  description: MyString
+  
+on_event:
+  id: 5
+  name: On Event
+  method_name: on_event
+  parameter_description: Field name
+  description: MyString
+  
+admin_only:
+  id: 6
+  name: Admin Only
+  method_name: admin_only
+  parameter_description: None
+  description: MyString
+  
+domain_matches:
+  id: 7
+  name: Domain matches
+  method_name: domain_matches
+  parameter_description: Domain
+  description: MyString
+  
+login_matches:
+  id: 8
+  name: Login Matches
+  method_name: login_matches
+  parameter_description: Login to match
+  description: MyString

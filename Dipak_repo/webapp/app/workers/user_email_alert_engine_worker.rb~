@@ -1,0 +1,7 @@
+class UserEmailAlertEngineWorker
+    @queue = :user_email_alert_engine
+    def self.perform
+puts "fine"
+       UserEmailAlertEngine.process()
+    end 
+end

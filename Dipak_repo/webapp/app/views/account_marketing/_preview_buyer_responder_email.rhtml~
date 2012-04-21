@@ -1,0 +1,19 @@
+  <table>
+      <tr>
+          <td>
+              <%= display_email_description(params[:buyer_notification][:email_intro]) %>
+          </td>
+      </tr>
+      <tr>
+          <td>
+	<% if params[:buyer_notification][:summary_type]!="welcome" %>
+              <%= params[:buyer_notification][:summary_type]!="daily" ? image_tag("example_email.PNG") : image_tag("example_1_property.png") %>
+	<% end %>
+          </td>
+      </tr>
+      <tr>
+          <td>
+              <%= display_email_description(params[:buyer_notification][:email_closing]) %>
+          </td>
+      </tr>
+  </table>

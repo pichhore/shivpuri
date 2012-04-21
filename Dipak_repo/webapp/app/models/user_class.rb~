@@ -1,0 +1,4 @@
+class UserClass < ActiveRecord::Base
+  has_many :users, :dependent => :nullify
+  has_many :alert_definitions, :dependent => :nullify
+end

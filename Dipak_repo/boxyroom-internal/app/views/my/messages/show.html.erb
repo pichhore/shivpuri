@@ -1,0 +1,36 @@
+<%= javascript_include_tag :defaults %>
+
+<div class="container">
+  <div class="primary">
+    <%- if @thread.nil? %>
+      <p>Please select a thread.</p>
+    <%- else %>
+      <%= render :partial => "messages", :object => @thread.messages, :locals => {:new_message => @new_message} %>
+    <%- end %>
+  </div>
+  <div class="secondary">
+    <h2>People you talk to.</h2>
+
+	   <ul class="navigation">
+            <% current_user.owned_threads.each do |thread, message|%>
+	       <li>
+	         <div class="pic"><%= image_tag thread.participant.avatar.url(:thumb) %></div>
+                 <span id="change_width_link" ><%= link_to thread.participant.full_name, my_message_path(thread.code), :id=>"color_link_messages"%></span>
+                 <span id="change_position_count"><%=thread.messages.count %></span>
+	       </li>
+            <% end %>
+	   </ul>
+
+	   <ul class="navigation">
+            <% current_user.participating_threads.each do |thread, message|%>
+	     <% if  thread.owner != current_user%>
+	     <li>
+	      <div class="pic"><%= image_tag thread.owner.avatar.url(:thumb) %></div>
+              <span id="change_width_link" ><%= link_to thread.owner.full_name, my_message_path(thread.code), :id=>"color_link_messages"%></span>
+              <span id="change_position_count" ><%=thread.messages.count %></span>
+              </li>
+	     <% end %>
+            <% end %>
+           </ul>
+  </div>
+</div>

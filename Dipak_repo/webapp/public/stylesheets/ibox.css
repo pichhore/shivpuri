@@ -1,0 +1,28 @@
+#ibox_wrapper {
+    padding: 10px 10px 35px 10px;
+    line-height: 1px;
+    border-color:red;
+    width: 1400px;  
+}
+#ibox_wrapper, #ibox_footer_wrapper a { background-color:#fff; width: 950px;
+    height: px;}
+#ibox_content { 
+background-color:#fff;
+    border: 2px soild blue
+    
+
+ }
+#ibox_footer_wrapper {
+    padding: 0 3px;
+    bottom: 1px;
+    top: auto;
+}
+#ibox_footer_wrapper a {
+    text-indent: -10000px;
+    background: url('/images/closelabel.gif');
+    width: 10px;
+    height: 10px;
+}
+#ibox_progress {
+    background: #fff url('/images/loading.gif') center center no-repeat;
+}

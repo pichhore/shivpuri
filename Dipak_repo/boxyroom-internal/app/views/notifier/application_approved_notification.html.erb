@@ -1,0 +1,14 @@
+Transaction ID: <%= @application.transaction_id.upcase %>
+
+Hi <%= @application.user.first_name %>,
+
+Congratulations! Your application for <%=@application.property.address.unit_no%><%= @application.property.address.location unless @application.property.address.location.nil?%><%=@application.property.address.postal_code%> has been approved.
+
+In order to secure this rental space, you need to place a deposit of <%= @application.property.currency_type.nil? ? 'US' : (@application.property.currency_type == 'USD' ? 'US' : (@application.property.currency_type == 'SGD' ?  'S'  : (@application.property.currency_type == 'AUD' ?  'A'  : (@application.property.currency_type == 'CAD' ? 'C' : ""))))%><%= ISO4217::Currency.from_code(@application.property.currency_type.nil? ? 'USD' : @application.property.currency_type).symbol%><%=@application.property.monthly_rental.to_i%>, equivalent to one month’s rent, within 48 hours of approval. The owner may have approved more than one application for this property, so do hurry before someone else steals the deal.
+
+What to do next:
+1. Pay a deposit of <%= @application.property.currency_type.nil? ? 'US' : (@application.property.currency_type == 'USD' ? 'US' : (@application.property.currency_type == 'SGD' ?  'S' : (@application.property.currency_type == 'AUD' ? 'A' : (@application.property.currency_type == 'CAD' ? C : ""))))%><%= ISO4217::Currency.from_code(@application.property.currency_type.nil? ? 'USD' : @application.property.currency_type).symbol%><%=@application.property.monthly_rental.to_i%> to secure your rental space: <%=@make_payment_my_application_url%>
+2. View your Dashboard for more details: <%= @my_dashboard_my_account_url %>
+
+
+The Boxyroom Team

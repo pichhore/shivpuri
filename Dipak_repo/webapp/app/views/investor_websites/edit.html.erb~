@@ -1,0 +1,31 @@
+<%- @page_title = "My Websites – #{@investor_website.my_website.domain_name}" -%>
+<%= stylesheet_link_tag "investor_buyer_page" %>
+ <%- content_for :page_scripts do -%>
+
+  function set_css_color(this_id)
+  {
+      $$('table.table_class tr td div').each(function(item) {
+                                   item.classNames().remove("set_class_css");
+                                    item.classNames().add("select_css");
+                               });
+      this_id.classNames().add("set_class_css");
+      $('investor_website_dynamic_css').value = this_id.getStyle('backgroundColor') ;
+  }
+  
+  function set_banner_image_css(this_id)
+  {
+      $$('table.banner_image_div_class tr td img').each(function(item) {
+                                   item.classNames().remove("set_class_image_css");
+                                    item.classNames().add("set_class_image");
+                               });
+      this_id.classNames().add("set_class_image_css");
+      $('investor_website_banner_image_path').value = this_id.src ;
+  }
+
+<%- end -%>
+
+<fieldset>
+    
+    <%= render :partial => "set_up",:locals => { :button_name  => "Update Settings" } %>
+
+</fieldset>

@@ -1,0 +1,146 @@
+<% CalendarDateSelect.format=(:american )%><%= calendar_date_select_includes %>
+<%= hidden_field "seller_profile", "id" %>
+  <div class="tabset larger">
+      <%=render :partial=>"seller_lead_full_page_tab", :locals=>{:active_class_seller_profile=>"active"}%>
+  </div><br><br>
+<div class="form">
+
+  <h3>Seller Profile</h3>
+
+  <fieldset>
+  <div id="seller_lead_div_table_one" style="float:left; width:54%;">
+    <table id="seller_lead_table_one">
+      <tr>
+        <th class="label_required">First Name:</th>
+        <td><%= text_field "seller_profile", "first_name", :size => "20" %><%=error_message_on :seller_profile,:first_name%></td>
+      </tr>
+      <tr>
+        <th class="label">Last Name:</th>
+        <td><%= text_field "seller_profile", "last_name", :size => "20" %><%=error_message_on :seller_profile,:last_name%></td>
+      </tr>
+      <tr>
+        <th class="label">Phone:</th>
+        <td><%= text_field "seller_profile", "phone", :size => "20" %><%=error_message_on :seller_profile,:phone%></td>
+      </tr>
+      <tr>
+        <th class="label">Alternate Phone:</th>
+        <td><%= text_field "seller_profile", "alternate_phone", :size => "20" %><%=error_message_on :seller_profile,:alternate_phone%></td>
+      </tr>
+      <tr>
+        <th class="label_required">Email:</th>
+        <td><%= text_field "seller_profile", "email", :size => "20" %><%=error_message_on :seller_profile,:email%></td>
+      </tr>
+    </table>
+  </div>
+  <div id="seller_lead_div_table_two"  style="float:left;margin-left:20px;">
+      <p><b>Is seller is also the owner?</b>
+        <%= radio_button "seller_owner_one", "is_seller_lead_owner", true, :onclick => "hide_if_seller_is_owner();"%>Yes
+        <%= radio_button "seller_owner_one", "is_seller_lead_owner", false, :onclick => "show_if_seller_is_not_owner();" %>No
+      </p>
+      <div id="display_owner_detail" style=<%= (@seller_owner_one.blank? ? "display:none;" : (@seller_owner_one.is_seller_lead_owner == false ? "" : "display:none;")) %>>
+        <p>Owner: <%= text_field "seller_owner_one", "owner_name", :size => "20" %> <a onclick='show_on_onclick_one();' href='javascript:void(0);' id="link_one" style=<%= @seller_owner_two.blank? ? "" : "display:none;" %>>Add Owner </a></p>
+        <p id="owner_two" style=<%= @seller_owner_two.blank? ? "display:none;" : "" %>>Owner: <%= text_field "seller_owner_two", "owner_name", :size => "20" %> <a onclick='show_on_onclick_two();' href='javascript:void(0);' id="link_two" style=<%= @seller_owner_three.blank? ? "" : "display:none;" %>>Add Owner </a></p>
+        <p id="owner_three" style=<%= @seller_owner_three.blank? ? "display:none;" : "" %>>Owner: <%= text_field "seller_owner_three", "owner_name", :size => "20" %> <a onclick='show_on_onclick_three();' href='javascript:void(0);' id="link_three" style=<%= @seller_owner_four.blank? ? "" : "display:none;" %>>Add Owner </a></p>
+        <p id="owner_four" style=<%= @seller_owner_four.blank? ? "display:none;" : "" %>>Owner: <%= text_field "seller_owner_four", "owner_name", :size => "20" %></p>
+        <br/>
+     </div>
+      <% unless @seller_profile.profile_seller_lead_mappings.blank? %>
+        <p><%=link_to "Unassign Seller Lead", :controller=>"seller_websites", :action=>"unassign_seller_lead", :id=>"#{@seller_profile.id}"%></p>
+    <% end %>
+  </div>
+  </fieldset>
+</div>
+<%= hidden_field "seller_property", "property_type", :value => "single_family" %>
+<div class="form">
+
+  <h3>Situation</h3>
+  <fieldset>
+    <table>
+      <tr>
+        <th class="label">Need to Sell In:</th>
+        <td>
+          <%= select("seller_profile","need_to_sell_in", [["less than 1 week", "lees_than_one_week"], ["within 30 days", "within_thirty_days"], ["within 60 days", "within_sixty_days"], ["within 4 months", "within_four_months"], ["No hurry", "no_hurry"]]) %>
+        </td>
+      </tr>
+      <tr>
+        <th class="label">Price Wanted:<img alt="Help_icon" src="/images/reimatcher_images/help_icon.png" title="How Much Do You Want for this property?"/></th>
+        <td><%= text_field "seller_profile", "price_want", :value=>"#{@seller_property.asking_home_price}", :cols => 50, :rows => 4, :style => "margin:0px;" %></td>
+      </tr>
+      <tr>
+        <th class="label">Seller Motivation:<img alt="Help_icon" src="/images/reimatcher_images/help_icon.png" title="Can I ask…why are you selling the property?"/></th>
+        <td><%= text_area "seller_profile", "seller_motivation", :cols => 50, :rows => 5, :style => "margin:0px;"%></td>
+      </tr>
+      <tr>
+        <th class="label">Bankruptcy:</th>
+        <td>
+          <%= radio_button "seller_profile", "bankruptcy", "considering", :onclick => "hide_bankruptcy_in_coulmn();"%>Considering <%= radio_button "seller_profile", "bankruptcy", "filed", :onclick => "show_bankruptcy_in_coulmn();"%>Filed <%= radio_button "seller_profile", "bankruptcy", "none", :onclick => "hide_bankruptcy_in_coulmn();"%>N/A
+        </td>
+      </tr>
+      </table>
+        <table id="show_on_bankruptcy_in" style=<%= @seller_profile.bankruptcy == "filed" ? "" : "display:none;" %>>
+          <tr>
+            <th class="label">Type:</th>
+            <td>
+              <%= radio_button "seller_profile", "type", "type_seven" %>Chapter 7
+              <%= radio_button "seller_profile", "type", "type_thirteen" %>Chapter 13
+            </td>
+          </tr>
+          <tr>
+            <th class="label">Home Included:</th>
+            <td>
+              <%= radio_button "seller_profile", "home_included", "yes"%>Yes
+              <%= radio_button "seller_profile", "home_included", "no" %>No
+            </td>
+          </tr>
+          <% bankrup_exp = @seller_profile.bankruptcy_expiration.strftime("%m/%d/%y") unless @seller_profile.bankruptcy_expiration.blank? %>
+          <tr>
+            <th class="label">Bankruptcy Expiration:</th>
+            <td><%= text_field "seller_profile", "bankruptcy_expiration", :value => bankrup_exp, :size => 9 %></td>
+          </tr>
+      </table>
+    <table>
+      <tr>
+        <th class="label">Divorce:</th>
+        <td>
+           <%= radio_button "seller_profile", "divorce", "considering", :onclick => "hide_divorce_coulmn();"%>Considering <%= radio_button "seller_profile", "divorce", "filed", :onclick => "show_divorce_coulmn();"%>Filed <%= radio_button "seller_profile", "divorce", "none", :onclick => "hide_divorce_coulmn();"%>N/A
+        </td>
+      </tr>
+      <tr id="show_on_filed_divorce" style=<%= @seller_profile.divorce == "filed" ? "" : "display:none;" %>>
+        <th class="label">How is Relationship with Spouse:</th>
+        <td><%= text_area "seller_profile", "relation_with_spouse", :cols => 50, :rows => 4, :style => "margin:0px;" %></td>
+      </tr>
+      <tr>
+        <th class="label">Additional Contact Notes:</th>
+        <td><%= text_area "seller_profile", "additional_contact_notes", :cols => 50, :rows => 5, :style => "margin:0px;" %></td>
+      </tr>
+    </table>
+  </fieldset>
+</div>
+
+<div class="form">
+
+ <h3>Tracking</h3>
+  <fieldset>
+    <table>
+      <tr>
+        <th class="label">Date Created:</th> 
+        <td>
+          <input type="text" value="<%= get_date_created %>" name="seller_profile[date_created]" id="seller_profile[date_created]">
+        </td>
+      </tr>
+      <tr>
+        <th class="label">Source:</th>
+        <td>
+          <%= select("seller_profile", "source", [["--Select Source--", ""], ["Door Hanger", "door_hanger"], ["Letter", "letter"], ["Seller Website", "seller_website"], ["Bandit Sign", "bandit_sign"], ["Online Ad", "online_ad"], ["Local Print Ad", "local_print_ad"], ["Referral", "referral"]]) %><%=error_message_on :seller_profile,:source %>
+        </td>
+      </tr>
+      <tr>
+        <th class="label">Bird Dog/Locator:</th>
+        <td><%= text_field "seller_profile", "bird_dog_locator", :cols => 50, :rows => 4, :style => "margin:0px;" %></td>
+      </tr>
+    </table>
+  <p style="text-align: center">
+    <div style="margin-left:300px;"><%=submit_tag "Update", :class=>"submit_xl"%></div>
+  </p>
+  </fieldset>
+</div>

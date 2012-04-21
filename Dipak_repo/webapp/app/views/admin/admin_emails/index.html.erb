@@ -1,0 +1,180 @@
+
+      <div class="active-scaffold active-scaffold-admin__admin_emails default-theme" id="admin__admin_emails-active-scaffold">
+  <div class="active-scaffold-header">
+    
+  <div class="actions">
+
+      <a position="top" id="admin__admin_emails-show_search--link" class="show_search action" href="/admin/admin_emails/show_search?_method=get">Search</a>
+    
+
+    <img style="visibility: hidden;" src="/images/active_scaffold/default/indicator.gif?1293702157" id="admin__admin_emails-table-loading-indicator" class="loading-indicator" alt="loading indicator"/>
+  </div>
+
+<h2>Smtp Notifications</h2>
+  <div style="float:left;padding-right:17px;">Total Emails Bounced Today : <%= @total_bounced_emails%></div>
+  <div style="float:left;padding-right:17px;">Total Emails Delivered Today : <%= @total_delivered_emails%></div>
+  </div>
+  <table cellspacing="0" cellpadding="0">
+    <tbody id="admin__admin_emails-search-container" class="before-header"/>
+  </table>
+  <div id="admin__admin_emails-content">
+    <table cellspacing="0" cellpadding="0">
+  <thead>
+    <tr>
+          <th id="admin__admin_emails-attempt-column">
+          <a onclick="addActiveScaffoldPageToHistory('/admin/admin_emails/update_table?page=1&amp;sort=attempt&amp;sort_direction=ASC', 'admin__admin_emails'); new Ajax.Updater('admin__admin_emails-content', '/admin/admin_emails/update_table?page=1&amp;sort=attempt&amp;sort_direction=ASC', {asynchronous:true, evalScripts:true, method:'get', onFailure:function(request){ActiveScaffold.report_500_response('admin__admin_emails-active-scaffold')}, onLoading:function(request){Element.addClassName('admin__admin_emails-attempt-column','loading');}}); return false;" href="/admin/admin_emails/update_table?page=1&amp;sort=attempt&amp;sort_direction=ASC">Attempt</a>
+    </th>
+    <th id="admin__admin_emails-category-column">
+          <a onclick="addActiveScaffoldPageToHistory('/admin/admin_emails/update_table?page=1&amp;sort=category&amp;sort_direction=ASC', 'admin__admin_emails'); new Ajax.Updater('admin__admin_emails-content', '/admin/admin_emails/update_table?page=1&amp;sort=category&amp;sort_direction=ASC', {asynchronous:true, evalScripts:true, method:'get', onFailure:function(request){ActiveScaffold.report_500_response('admin__admin_emails-active-scaffold')}, onLoading:function(request){Element.addClassName('admin__admin_emails-category-column','loading');}}); return false;" href="/admin/admin_emails/update_table?page=1&amp;sort=category&amp;sort_direction=ASC">Category</a>
+    </th>
+    <th class="sorted desc" id="admin__admin_emails-created_at-column">
+          <a onclick="addActiveScaffoldPageToHistory('/admin/admin_emails/update_table?page=1&amp;sort=created_at&amp;sort_direction=reset', 'admin__admin_emails'); new Ajax.Updater('admin__admin_emails-content', '/admin/admin_emails/update_table?page=1&amp;sort=created_at&amp;sort_direction=reset', {asynchronous:true, evalScripts:true, method:'get', onFailure:function(request){ActiveScaffold.report_500_response('admin__admin_emails-active-scaffold')}, onLoading:function(request){Element.addClassName('admin__admin_emails-created_at-column','loading');}}); return false;" href="/admin/admin_emails/update_table?page=1&amp;sort=created_at&amp;sort_direction=reset">Created at</a>
+    </th>
+    <th id="admin__admin_emails-email-column">
+          <a onclick="addActiveScaffoldPageToHistory('/admin/admin_emails/update_table?page=1&amp;sort=email&amp;sort_direction=ASC', 'admin__admin_emails'); new Ajax.Updater('admin__admin_emails-content', '/admin/admin_emails/update_table?page=1&amp;sort=email&amp;sort_direction=ASC', {asynchronous:true, evalScripts:true, method:'get', onFailure:function(request){ActiveScaffold.report_500_response('admin__admin_emails-active-scaffold')}, onLoading:function(request){Element.addClassName('admin__admin_emails-email-column','loading');}}); return false;" href="/admin/admin_emails/update_table?page=1&amp;sort=email&amp;sort_direction=ASC">Email</a>
+    </th>
+    <th id="admin__admin_emails-event-column">
+          <a onclick="addActiveScaffoldPageToHistory('/admin/admin_emails/update_table?page=1&amp;sort=event&amp;sort_direction=ASC', 'admin__admin_emails'); new Ajax.Updater('admin__admin_emails-content', '/admin/admin_emails/update_table?page=1&amp;sort=event&amp;sort_direction=ASC', {asynchronous:true, evalScripts:true, method:'get', onFailure:function(request){ActiveScaffold.report_500_response('admin__admin_emails-active-scaffold')}, onLoading:function(request){Element.addClassName('admin__admin_emails-event-column','loading');}}); return false;" href="/admin/admin_emails/update_table?page=1&amp;sort=event&amp;sort_direction=ASC">Event</a>
+    </th>
+    <th id="admin__admin_emails-reason-column">
+          <a onclick="addActiveScaffoldPageToHistory('/admin/admin_emails/update_table?page=1&amp;sort=reason&amp;sort_direction=ASC', 'admin__admin_emails'); new Ajax.Updater('admin__admin_emails-content', '/admin/admin_emails/update_table?page=1&amp;sort=reason&amp;sort_direction=ASC', {asynchronous:true, evalScripts:true, method:'get', onFailure:function(request){ActiveScaffold.report_500_response('admin__admin_emails-active-scaffold')}, onLoading:function(request){Element.addClassName('admin__admin_emails-reason-column','loading');}}); return false;" href="/admin/admin_emails/update_table?page=1&amp;sort=reason&amp;sort_direction=ASC">Reason</a>
+    </th>
+    <th id="admin__admin_emails-response-column">
+          <a onclick="addActiveScaffoldPageToHistory('/admin/admin_emails/update_table?page=1&amp;sort=response&amp;sort_direction=ASC', 'admin__admin_emails'); new Ajax.Updater('admin__admin_emails-content', '/admin/admin_emails/update_table?page=1&amp;sort=response&amp;sort_direction=ASC', {asynchronous:true, evalScripts:true, method:'get', onFailure:function(request){ActiveScaffold.report_500_response('admin__admin_emails-active-scaffold')}, onLoading:function(request){Element.addClassName('admin__admin_emails-response-column','loading');}}); return false;" href="/admin/admin_emails/update_table?page=1&amp;sort=response&amp;sort_direction=ASC">Response</a>
+    </th>
+    <th id="admin__admin_emails-status-column">
+          <a onclick="addActiveScaffoldPageToHistory('/admin/admin_emails/update_table?page=1&amp;sort=status&amp;sort_direction=ASC', 'admin__admin_emails'); new Ajax.Updater('admin__admin_emails-content', '/admin/admin_emails/update_table?page=1&amp;sort=status&amp;sort_direction=ASC', {asynchronous:true, evalScripts:true, method:'get', onFailure:function(request){ActiveScaffold.report_500_response('admin__admin_emails-active-scaffold')}, onLoading:function(request){Element.addClassName('admin__admin_emails-status-column','loading');}}); return false;" href="/admin/admin_emails/update_table?page=1&amp;sort=status&amp;sort_direction=ASC">Status</a>
+    </th>
+    <th id="admin__admin_emails-type-column">
+          <a onclick="addActiveScaffoldPageToHistory('/admin/admin_emails/update_table?page=1&amp;sort=type&amp;sort_direction=ASC', 'admin__admin_emails'); new Ajax.Updater('admin__admin_emails-content', '/admin/admin_emails/update_table?page=1&amp;sort=type&amp;sort_direction=ASC', {asynchronous:true, evalScripts:true, method:'get', onFailure:function(request){ActiveScaffold.report_500_response('admin__admin_emails-active-scaffold')}, onLoading:function(request){Element.addClassName('admin__admin_emails-type-column','loading');}}); return false;" href="/admin/admin_emails/update_table?page=1&amp;sort=type&amp;sort_direction=ASC">Type</a>
+    </th>
+    <th id="admin__admin_emails-updated_at-column">
+          <a onclick="addActiveScaffoldPageToHistory('/admin/admin_emails/update_table?page=1&amp;sort=updated_at&amp;sort_direction=ASC', 'admin__admin_emails'); new Ajax.Updater('admin__admin_emails-content', '/admin/admin_emails/update_table?page=1&amp;sort=updated_at&amp;sort_direction=ASC', {asynchronous:true, evalScripts:true, method:'get', onFailure:function(request){ActiveScaffold.report_500_response('admin__admin_emails-active-scaffold')}, onLoading:function(request){Element.addClassName('admin__admin_emails-updated_at-column','loading');}}); return false;" href="/admin/admin_emails/update_table?page=1&amp;sort=updated_at&amp;sort_direction=ASC">Updated at</a>
+    </th>
+    <th id="admin__admin_emails-url-column">
+          <a onclick="addActiveScaffoldPageToHistory('/admin/admin_emails/update_table?page=1&amp;sort=url&amp;sort_direction=ASC', 'admin__admin_emails'); new Ajax.Updater('admin__admin_emails-content', '/admin/admin_emails/update_table?page=1&amp;sort=url&amp;sort_direction=ASC', {asynchronous:true, evalScripts:true, method:'get', onFailure:function(request){ActiveScaffold.report_500_response('admin__admin_emails-active-scaffold')}, onLoading:function(request){Element.addClassName('admin__admin_emails-url-column','loading');}}); return false;" href="/admin/admin_emails/update_table?page=1&amp;sort=url&amp;sort_direction=ASC">Url</a>
+    </th>
+<th class="actions">
+</th>
+
+    </tr>
+  </thead>
+  <tbody class="messages">
+    <tr>
+      <td class="messages-container" colspan="12">
+        <div id="admin__admin_emails-messages">
+</div>
+        <p style="display: none;" class="empty-message" id="admin__admin_emails-empty-message">
+          No Entries
+        </p>
+      </td>
+    </tr>
+  </tbody>
+  <tbody id="admin__admin_emails-tbody" class="records">
+<% @bounced_emails.each do |bounced_email|%>
+<tr id="admin__admin_emails-list-<%= bounced_email.id%>-row" class="record ">
+  
+    
+    <td class="attempt-column  empty">
+     <%= bounced_email.attempt%>
+    </td>
+  
+    
+    <td class="category-column  empty">
+      <%= bounced_email.category%>
+    </td>
+  
+    
+    <td class="created_at-column  sorted">
+      <%= bounced_email.created_at.strftime("%m/%d/%Y %I:%M %p")%>
+    </td>
+  
+    
+    <td class="email-column  empty">
+      <%= bounced_email.email%>
+    </td>
+  
+    
+    <td class="event-column  empty">
+      <%= bounced_email.event%>
+    </td>
+  
+    
+    <td class="reason-column  empty">
+      <%= bounced_email.reason%>
+    </td>
+  
+    
+    <td class="response-column  empty">
+     <%= bounced_email.response%>
+    </td>
+  
+    
+    <td class="status-column  empty">
+     <%= bounced_email.status%>
+    </td>
+  
+    
+    <td class="type-column  empty">
+      <%= bounced_email.type%>
+    </td>
+  
+    
+    <td class="updated_at-column ">
+      <%= bounced_email.updated_at.strftime("%m/%d/%Y %I:%M %p")%>
+    </td>
+  
+    
+    <td class="url-column  empty">
+      <%= bounced_email.url%>
+    </td>
+      <td class="actions">
+    <table cellspacing="0" cellpadding="0">
+  <tbody><tr>
+    <td class="indicator-container">
+      <img style="visibility: hidden;" src="/images/active_scaffold/default/indicator.gif?1293702157" id="admin__admin_emails-record-<%= bounced_email.id%>-loading-indicator" class="loading-indicator" alt="loading indicator"/>
+    </td>
+    
+      
+      <td>
+        <a onclick="return confirm('Are you sure?');" id="admin__admin_emails-destroy-<%= bounced_email.id%>-link" class="destroy action" href="/admin/admin_emails/destroy/<%= bounced_email.id%>?_method=delete">Delete</a>
+      </td>
+    
+  </tr>
+</tbody></table>
+  </td>
+  </tr>
+
+<script type="text/javascript">
+actions = new ActiveScaffold.Actions.Record(
+  $$('#admin__admin_emails-list-<%= bounced_email.id%>-row a.action'),
+  $('admin__admin_emails-list-<%= bounced_email.id%>-row'),
+  $('admin__admin_emails-record-<%= bounced_email.id%>-loading-indicator'),
+  {refresh_url: '/admin/admin_emails/row/<%= bounced_email.id%>?_method=get'}
+);
+</script>
+<%end%>
+            </tbody>
+</table>
+<div class="active-scaffold-footer">
+  <div class="active-scaffold-found"><span class="active-scaffold-records"><%=@total_emails%></span> Found</div>
+  <div class="active-scaffold-pagination">
+    <%= will_paginate @bounced_emails %>
+  </div>
+  <br clear="both"/>
+</div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+new ActiveScaffold.Actions.Table($$('#admin__admin_emails-active-scaffold div.active-scaffold-header a.action'), $('admin__admin_emails-search-container'), $('admin__admin_emails-table-loading-indicator'))
+ActiveScaffold.server_error_response = '<p class="error-message message">'
+  + "Request Failed (code 500, Internal Error)"
+  + '<a href="#" onclick="Element.remove(this.parentNode); return false;">'
+  + "Close"
+  + '</a>'
+  + '</p>';
+</script>
+
+

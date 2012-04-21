@@ -1,0 +1,194 @@
+<%= render :partial => "not_show_navigation_link" %>
+<META NAME="robots" CONTENT="noindex,nofollow">
+<%- @page_title = "Lead Capture Process: Step 3 - "+company_name -%>
+<%- @page_heading = "Almost Done..." -%>
+<%- @meta_title = @seller_website.meta_title -%>
+<%- @meta_description = @seller_website.meta_description -%>
+
+<% require_js_controllers :profile_setup, :expand_collapse -%>
+<% require_js_helpers :currency_field, :integer_field , :date_field -%>
+
+<%- content_for :page_scripts do -%>
+
+Event.observe(window, 'load', function() {
+  account_settings_controller = new NL.AccountSettingsController();
+});
+  function show_coulmn()
+    {
+      $('last_pay_made').show();
+    }
+
+  function hide_column()
+    {
+      $('last_pay_made').hide();
+    }
+
+<%- end -%>
+
+<script type="text/javascript">
+/*<![CDATA[*/
+/*You can also place this code in a separate file and link to it like epoch_classes.js*/
+	var dp_cal;
+window.onload = function () {
+	dp_cal  = new EpochSellerWebsiteLastPayment('epoch_popup','popup',document.getElementById('fields_last_payment_made'));
+};
+/*]]>*/
+</script>
+
+<div class="form">
+
+<%= error_messages_for :criteria %>
+
+</div>
+
+<% form_for(:fields, :url => {:controller=>"investor_seller_web_page", :action=>"create_seller_step_3_info",:permalink_text=>params[:permalink_text], :id=>params[:id]}) do |f| %>
+
+<div id="form_2" style="margin-top: -30px;">
+<h3 style="font-size:medium;"> Almost Done...</h3>
+    <fieldset id="opt_fields">
+        <div id="optional">
+            <div class="optional_content">
+      <div class="welcome_video_tour_div" style="width:320px;">
+      <% if(!@seller_website.lead_funnel_embed_video.blank?) %>
+	    <%= customize_embedcode(@seller_website.home_page_embed_video) %>
+	  <% elsif(!@seller_website.lead_funnel_video_tour.blank?) %>
+      <% video_id = @seller_website.lead_funnel_video_tour.split('=')[-1] %>
+	    <object width="268px" height="202px"><param name="movie" value="http://www.youtube.com/v/<%=video_id%>&amp;hl=en_US&amp;fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/<%=video_id%>&amp;hl=en_US&amp;fs=1;&autoplay=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="268px" height="202px" wmode="opaque"></embed></object>
+	  <% else %>
+	    <center><div id="evp-1c1d07ca6a65ee015c337dd8eefaa9bb-wrap" class="evp-video-wrap"></div><script type="text/javascript"  src="http://www.damonflowers.com/evp/framework.php?div_id=evp-1c1d07ca6a65ee015c337dd8eefaa9bb&id=c2VsbGVyLXdlYnNpdGUtbGVhZC12MS5tNHY%3D&v=1307140003&profile=default"></script><script type="text/javascript"><!--
+ _evpInit('c2VsbGVyLXdlYnNpdGUtbGVhZC12MS5tNHY=[evp-1c1d07ca6a65ee015c337dd8eefaa9bb]');//--></script></center>
+	  <% end %>
+    </div>
+    <div id="seller_step3_div">
+                <table>
+                    <tr>
+                        <th class="label">
+                            # of Stories:
+                        </th>
+                        <td>
+                            <%=f.select("stories", [["--- Select Stories ---", ""], ["1", "1"], ["2+", "2"]]) %><%=error_message_on :fields,:stories %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="label">
+                            # of Living Areas:
+                        </th>
+                        <td>
+                            <%=f.select("livingrooms", [["--- Select Living Areas ---", ""], ["1", "1"], ["2", "2"], ["3+", "3"]]) %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="label">
+                            Garage Type:
+                        </th>
+                        <td>
+                            <%=f.select("garage", [["--- Select Garage Type ---", ""], ["None", "0"], ["1", "1"], ["2", "2"], ["3+", "3"], ["Carport", "carport"], ["Converted", "converted"]]) %><%=error_message_on :fields,:garage %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="label" id="pool_label">
+                            Pool:
+                        </th>
+                        <td>
+                            <%=f.radio_button "pool", "no", :onclick => "this.focus();"%> No <%=f.radio_button "pool", "yes", :onclick => "this.focus();"%> Yes
+                            <br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="label">
+                            Foundation Type:
+                        </th>
+                        <td>
+                            <%=f.radio_button "foundation_type", "slab", :onclick => "this.focus();"%> Slab <%=f.radio_button "foundation_type", "piel_beam", :onclick => "this.focus();"%> Pier/Beam
+                            <br/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th class="label" id="pool_label">
+                            Mobile/Manufactured Home:
+                        </th>
+                        <td>
+                            <%=f.radio_button "mobile_or_manufactured_home", "no", :onclick => "this.focus();"%> No <%=f.radio_button "mobile_or_manufactured_home", "yes", :onclick => "this.focus();"%> Yes
+                            <br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="label">
+                            Property Conditions:
+                        </th>
+                        <td>
+                            <%=f.radio_button "property_conditions", "unlivable", :onclick => "this.focus();"%> Not Really Livable
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="label">
+                        </th>
+                        <td>
+                           <%=f.radio_button "property_conditions", "needs_work", :onclick => "this.focus();"%> Some Things Work...Some Don't
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="label">
+                        </th>
+                        <td>
+                            <%=f.radio_button "property_conditions", "paints_carpet", :onclick => "this.focus();"%> Just Need Paint Carpet
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="label">
+                        </th>
+                        <td>
+                            <%=f.radio_button "property_conditions", "excellent", :onclick => "this.focus();"%> Beautifully Kept
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="label">
+                            Repairs Needed:
+                        </th>
+                        <td>
+                           <%=f.text_area "repairs_needed", :size => "55x6" %><%=error_message_on :fields,:repairs_needed %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="label">
+                            Is the Mortgage Current ?
+                        </th>
+                        <td>
+                          <%=f.radio_button :mortgage_current, "no", :onclick=>"show_coulmn();"%> No
+                          <%=f.radio_button :mortgage_current, "yes",  :onclick=>"hide_column();"%> Yes
+                        </td>
+                    </tr>
+                    <tr id="last_pay_made" style="display:none;" >
+                      <th class="label">  Last Payment Made:</th>
+                      <td>
+                          <%=f.text_field "last_payment_made", {:size => 12, :readonly => true} %>
+                          (Format as mm/dd/yy or mm-dd-yy)
+                      </td>
+                    </tr>
+                    <tr>
+                        <th id="price_label" class="label">
+                              How much do you want for the house ?
+                        </th>
+                        <td>
+                          $ <%=f.text_field "asking_home_price" %><%=error_message_on :fields,:asking_home_price %>
+                        </td>
+                    </tr>
+                     <tr>
+                        <th class="label">
+                            Is the Home Listed ?
+                        </th>
+                        <td>
+                            <%=f.radio_button "home_listed", "no", :onclick => "this.focus();"%> No <%=f.radio_button "home_listed", "yes", :onclick => "this.focus();"%> Yes
+                        </td>
+                    </tr>
+                </table>
+              </div>
+            </div>
+        </div>
+    </fieldset>
+  <div class="lead_capture_button_div" style="margin:20px;">
+      <%=submit_tag "Submit", :class=>"submit", :style=>"margin-bottom:15px" %>
+  </div>
+</div>
+<% end %>

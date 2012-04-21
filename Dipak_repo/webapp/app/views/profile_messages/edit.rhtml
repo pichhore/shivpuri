@@ -1,0 +1,37 @@
+<h1>Editing profile_message</h1>
+
+<%= error_messages_for :profile_message %>
+
+<% form_for(:profile_message, :url => profile_profile_message_path(@profile_message), :html => { :method => :put }) do |f| %>
+  <p>
+    <b>From profile</b><br />
+    <%= f.text_field :from_profile_id %>
+  </p>
+
+  <p>
+    <b>To profile</b><br />
+    <%= f.text_field :to_profile_id %>
+  </p>
+
+  <p>
+    <b>Body</b><br />
+    <%= f.text_area :body %>
+  </p>
+
+  <p>
+    <b>Created at</b><br />
+    <%= f.text_field :created_at %>
+  </p>
+
+  <p>
+    <b>Viewed at</b><br />
+    <%= f.datetime_select :viewed_at %>
+  </p>
+
+  <p>
+    <%= submit_tag "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', profile_profile_message_path(@profile_message) %> |
+<%= link_to 'Back', profile_profile_messages_path %>

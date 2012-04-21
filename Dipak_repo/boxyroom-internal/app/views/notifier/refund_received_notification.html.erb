@@ -1,0 +1,6 @@
+Dear <%= @application.user.first_name %>,
+
+This email is to inform you that your payment has been refunded. For more details, visit:
+<%= @link %>
+
+<%= render :partial => "transaction", :object => @application %>

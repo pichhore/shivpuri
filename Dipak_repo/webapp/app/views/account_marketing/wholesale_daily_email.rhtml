@@ -1,0 +1,21 @@
+<%= render :partial => "marketing_links" %>
+<fieldset id="email_intro">
+
+<div id="left_navigation" style="float:left; width:222px;">
+<%= render :partial => "responder_links" %>
+</div>
+
+<div id="right_navigation" style=" float:right; width:527px;">
+  <table>
+    <tr>
+      <td><h3>Wholesale Buyer Match</h3></td>
+    <tr>
+      <td>
+        Use the fields below to customize your Buyer Update Email. This feature will send an update to the email address you specify within a Buyer Profile, only when there is a new property that matches the Buyer Profile. To use this feature, you must Activate it within each Buyer Profile and provide a valid email address. A maximum of one email is sent per day. To see a sample email, click <a href='#' onclick="document.getElementById('<%= @summary_type %>').style.display='block';">Example</a>
+      </td>
+    </tr>
+  </table>
+</div>
+  <%= render :partial => "email_desc" %>
+</fieldset>
+<%= display_example_for_notification_mail(@summary_type) %>

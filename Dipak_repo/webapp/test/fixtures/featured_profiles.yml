@@ -1,0 +1,29 @@
+buyer_1:
+  id: buyer_1
+  profile_type: buyer
+  profile_id: buyer1
+  created_at: <%= 5.days.ago.to_s :db %>
+
+buyer_2:
+  id: buyer_2
+  profile_type: buyer
+  profile_id: buyer2
+  created_at: <%= 5.days.ago.to_s :db %>
+
+owner_1:
+  id: owner_1
+  profile_type: owner
+  profile_id: owner1
+  created_at: <%= 5.days.ago.to_s :db %>
+
+owner_2:
+  id: owner_2
+  profile_type: owner
+  profile_id: owner2
+  created_at: <%= 5.days.ago.to_s :db %>
+
+owner_3:
+  id: owner_3
+  profile_type: owner
+  profile_id: owner3
+  created_at: <%= 5.days.ago.to_s :db %>

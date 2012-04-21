@@ -1,0 +1,17 @@
+<%- @page_title = "Thanks for recommending dwellgo!" -%>
+
+<div>
+
+  <h2 style="margin-top: 50px; text-align: center">Your invitation has been sent</h2>
+
+  <p style="text-align: center">Thank you for endorsing dwellgo!</p>
+
+  <p style="text-align: center">
+    <br/>
+    <br/>
+    <%- if request.xhr? -%>
+    <%= button_to_function 'Close', 'lightbox_controller.close()', :class=>"submit_xl" %>
+    <%- end -%>
+  </p>
+
+</div>

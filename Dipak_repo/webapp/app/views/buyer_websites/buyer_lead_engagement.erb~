@@ -1,0 +1,89 @@
+<%- @page_title = "Buyer Lead Engagement - #{@profile.private_display_name}" -%>
+<% require_js_controllers :tab, :profile_notification, :profile_update,:lightbox -%>
+<%- content_for :page_scripts do -%>
+
+Event.observe(window, 'load', function() {
+  profile_notification_controller = new NL.ProfileNotificationController();
+});
+
+<%- end -%>
+<%= render :partial => "partial_for_meta_tag"%>
+
+<%= render :partial => "page_script_content_full_page_view"%>
+
+<%=stylesheet_link_tag "lightbox"%>
+<% require_js_controllers :tab, :account_settings, :profile_setup, :expand_collapse, :lightbox  -%>
+<%- content_for :page_scripts do -%>
+
+Event.observe(window, 'load', function() {
+  account_settings_controller = new NL.AccountSettingsController();
+lightbox_controller = new NL.LightboxController();
+});
+
+ function go_to_buyer_note_full_page_view(full_page_view_path)
+{
+        document.location.href = full_page_view_path
+    }
+<%- end -%>
+
+  <%= render :partial => "scratch_pad_lightbox" %>
+
+
+
+<div class="full">
+    <div class="tabset larger">
+        <ul>
+            <li  uri="<%=url_for(:action => 'buyer_lead_full_page_view', :controller => 'buyer_websites', :id => @profile.id) %>">
+                Contact
+            </li>
+            <li uri="<%=url_for(:action => 'edit_buying_areas', :controller => 'buyer_websites', :id => @profile.id) %>">
+                Buying Areas
+            </li>
+            <li uri="<%=url_for(:action => 'edit_buying_criteria', :controller => 'buyer_websites', :id => @profile.id) %>">
+                Buying Criteria
+            </li>
+            <li uri="<%=url_for(:action => 'buyer_lead_match', :controller => 'buyer_websites', :id => @profile.id) %>">
+                Matches
+            </li>
+            <li class ="active" uri="<%=url_for(:action => 'buyer_lead_engagement', :controller => 'buyer_websites', :id => @profile.id) %>">
+                Engagement
+            </li>
+        </ul>
+    </div>
+    <div class="clear">
+    </div>
+
+
+ <fieldset>
+ <div style="display:none;margin-left:205px;" class="loading" id="spinner"><span class="text">Loading...</span></div>
+<div id="ajax_update_div">
+    <% if !@buyer_engagement_infos.blank? %>
+    <table  border="0" cellspacing="0" class="investor_inbox_grid">
+    <tr>
+      <th>Date</th>
+      <th>Note Type</th>
+      <th>Description</th>
+    </tr>
+      <% @buyer_engagement_infos.each do |buyer_engagement_info| %>
+        <tr class="hover_change">
+            <td class="investor_inbox_seperator" onclick="go_to_buyer_note_full_page_view('/buyer_websites/buyer_note_full_page_view/<%= params[:id] %>?buyer_note_id=<%= buyer_engagement_info.id%>');" >
+              <%= buyer_engagement_info.created_at.strftime("%m/%d/%y")%>
+            </td>
+
+            <td class="investor_inbox_seperator" onclick="go_to_buyer_note_full_page_view('/buyer_websites/buyer_note_full_page_view/<%= params[:id] %>?buyer_note_id=<%= buyer_engagement_info.id%>');">
+                <%= buyer_engagement_info.note_type%>
+            </td>
+            
+            <td class="investor_inbox_seperator" onclick="go_to_buyer_note_full_page_view('/buyer_websites/buyer_note_full_page_view/<%= params[:id] %>?buyer_note_id=<%= buyer_engagement_info.id%>');">
+              <%= display_email_with_assign_values_for_buyer_responder(truncate(buyer_engagement_info.subject,40), @retail_buyer, buyer_engagement_info.note_type) %>
+            </td>
+         </tr>
+      <%end%>
+    </table>
+    <div align="right"><%= will_paginate @buyer_engagement_infos %></div>
+  <%else%>
+    No Buyer Note Found
+  <%end%>
+</div>
+  </fieldset>
+</div>

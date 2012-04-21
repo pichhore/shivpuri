@@ -1,0 +1,37 @@
+<%- @page_title = "REIMatcher-Auction Sale" -%>
+<%- @meta_title = @seller_website.meta_title -%>
+<%- @meta_description = @seller_website.meta_description -%>
+ <%= render :partial => "show_navigation_link" %>
+<div id="seller_page_main_div">
+  <h1><b>Auction Sale</b></h1>
+  <div style="margin-right:390px;"><%= render :partial => "fb_like_twitter_tweet" %></div><div style="clear:both"></div>
+  <%= render :partial => "lead_magnet" %>
+
+  <div class="subpage_content_div_1">
+  <p class="top_style_para_seller_website">Another option for selling a property FAST, where the property has at least 30% equity or more, is through an Auction Sale. </p>
+  <p class="style_para_seller_website">Typically the way this works is that an investor will get the property under contract for up to 70% of the as-is fair market value, and will then auction and/or market the property aggressively to prospective buyers he may have already identified. Alternatively, a licensed auctioneer can work with the property owner to set a reserve price, typically at up to 70% of the as-is fair market value, and then auction the property, through a public auction, to the highest bidder that bids above the reserve. </p>
+  <p class="style_para_seller_website">The advantage of working with an investor is that the owner is not required to pay for the marketing of the property (which can cost 5-10% of the value of the property) and the owner does not have to pay sales commissions or possibly even the closing costs (which can total 6-15% of the cost of the property). The advantage of working with an auctioneer is that any proceeds after marketing, commissions, and closing costs go back to the seller.</p>
+  </div>
+  <div class="subpage_content_div_2">
+  <p class="style_para_seller_website"><b>Auction Sale Example</b></p>
+  <p class="style_para_seller_website">-	Current Appraised Property Value: $500,000</p>
+  <p class="style_para_seller_website">-	Existing loan(s) payoff: $330,000</p>
+  <p class="style_para_seller_website">-	Sales/Reserve price: $350,000 +</p>
+  <p class="style_para_seller_website">In this example one of two scenarios can occur:</p>
+  <p class="style_para_seller_website">1)	An investor gets the property under contract for $350,000 and attempts to wholesale the property quickly to a list of pre-qualified buyers within an option period (usually 60 days). If the investor can wholesale the property within the option period, the sale is completed, the investor takes care of all expenses and closing costs, and any premium above the option price of $350,000 goes to the investor. If no buyer is found, no sale occurs, and the seller is not out any costs or expenses. </p>
+  <p class="style_para_seller_website">2)	Alternatively, a licensed auctioneer can auction the property for the seller. In this scenario, the auctioneer collect 5-10% of the property value from the seller and spends this money on marketing. After the marketing, the property will be auctioned off to buyers found by the marketing, with bids starting at the reserve price of $350,000. If a buyer is found and bids above the reserve price, the property is sold and the seller receives any proceeds remaining after closing costs and commissions (which can be 10% or more) and of course the costs of the marketing. If no buyer is found, no sale occurs, however the seller is NOT reimbursed the marketing expenses. </p>
+  <p class="style_para_seller_website"><b><%= company_name%></b> can manage this entire process for you by contracting to buy your property from you, and marketing it to sell quickly to a list of pre-qualified buyers, within the option period (usually 60 days). <%=link_to 'Contact Us',:controller=>"investor_seller_web_page", :action=>"new_seller"%> to discussion this further. </p>
+  
+  <p class="style_para_seller_website"><b>Auction Sale Advantages and Disadvantages</b></p>
+  <p class="style_para_seller_website">The advantage to this strategy is that several people may be drawn to the property due to its low reserve price, causing a competitive bidding situation when the auction day comes. If this happens, the property owner may achieve the goal of getting the property sold quickly at a price somewhere between the reserve price and the fair market value.</p>
+  <p class="style_para_seller_website">The disadvantage to this strategy is that in a slow market, it's very possible that no one will bid on the property or perhaps only a few people may bid and you may only hit the minimum reserve price at best.</p>
+  <a class="style_para_seller_website">If you would like to explore this option further, just <%=link_to 'Contact Us',:controller=>"investor_seller_web_page", :action=>"new_seller"%></p>
+  
+  <p class="style_para_seller_website"><b>Common Questions about Auction Sales</b></p>
+  <p class="style_para_seller_website"><b>Question:</b> Does auctioning work?</p>
+  <p class="style_para_seller_website"><b>Answer:</b> Maybe, maybe not. Like lottery tickets, it works if you are lucky, and it may be a good option to explore, if you have tried to sell traditionally, without luck, and would like to sell quickly. It also works well for certain types of properties (like HIGHLY unique properties) in certain types of markets. </p>
+  <p class="style_para_seller_website">If you are interested in pursuing an auction option, we suggest you try this with us, <b><%= company_name%></b>, and if it is not successful, you are not out any money, and can then explore hiring a licensed auctioneer.</p>
+  <p class="style_para_seller_website">If you would like to discuss this further, <%=link_to 'Contact Us',:controller=>"investor_seller_web_page", :action=>"new_seller"%></p>
+  <p class="style_para_seller_website"><b>Question:</b> Do you need a license to auction a property?</p>
+  <p class="style_para_seller_website"><b>Answer:</b> Laws regulating auctioning vary from state to state. In most cases, if you hire an auctioneer to auction your property for you, they will be required to have a license. In some cases, a Realtor may be allowed to auction your property. In the scenario in which you contract to sell your property to an investor, such as <b><%= company_name%></b>, the investor will get the property under contract, and will then use their own methods of marketing the property to pre-qualified buyers that may or may not include the formal auctioning process. </p><br>
+</div>

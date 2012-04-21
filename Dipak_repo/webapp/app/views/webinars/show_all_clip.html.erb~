@@ -1,0 +1,19 @@
+<h1>Clips Listing</h1>
+<br/>
+<table>
+<% unless @clips_hash.blank? %>
+<% @clips_hash.each do |directory_hash| %>
+  <tr>
+    <td>
+      <%= link_to directory_hash["title"],show_clip_webinar_path(directory_hash["guid"]) %>
+    </td>
+  </tr> 
+<% end %>
+<% else %>
+  <tr>
+    <td>
+      <%= link_to directory_hash["title"],show_clip_webinar_path(directory_hash["guid"]) %>
+    </td>
+  </tr>
+<% end %>
+ </table>

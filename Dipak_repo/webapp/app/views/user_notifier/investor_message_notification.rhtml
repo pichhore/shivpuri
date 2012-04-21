@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title></title>
+</head>
+
+<body style="background: #FFFFFF; color: #000000; ">
+<p></p>
+  <p style="color: #A2A2A2; text-align: center;">## To Reply, simply add your response above this message and click Send <br/>
+==========================================================</p>
+<div>
+<% url = REIMATCHER_URL %>
+<%=image_tag "#{@env.to_s}images/logoSub_50.gif", :alt=>"REIMatcher"%>
+
+<p>
+  <% image_path = REIMATCHER_URL.chop + "/images/buyer-60.jpg" %>
+  <% if @investor.buyer_user_image && @investor.buyer_user_image.find_medium_thumbnail %>
+  <% image_path = REIMATCHER_URL.chop + @investor.buyer_user_image.public_filename(:medium) %>
+  <% end %>
+  <%=image_tag(image_path , :class=>"image", :alt => "#{@investor.full_name}")%>
+</p>
+          
+<p><%= @investor.full_name%> sent you the following private message... </p>
+
+<p>Subject: <%= @message.subject%><br/>
+Message: <%= @message.body%></p>
+
+<p>Thanks,<br/>
+<%= @investor.full_name%><br/>
+<% if @investor.user_company_info %><%= @investor.user_company_info.business_phone %><% end %></P>
+
+<p>Powered by REIMatcher</p>
+
+<p>* There is no need to go back into REIMatcher to send a reply…simply add your response above the line ”## To Reply…“ and then click send. It’s that easy!</p>
+</div>
+</body>
+</html>

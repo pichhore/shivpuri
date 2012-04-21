@@ -1,0 +1,11 @@
+<div class="user-wp">
+  <h3><%= title %></h3>
+  <%= link_to(image_tag(user.avatar.url(:thumb)), user, :class => "user-thumb") %>
+  <div class="user-ct">
+    <p class="user"><%= user.full_name %></p>
+    <ul>
+      <%#*<li class="first"><a href="#">View other properties</a></li>%>
+      <li><%= link_to "Send a Message", new_my_message_path(:to => user.id), :rel => "facebox" %></li>
+    </ul>
+  </div>
+</div>

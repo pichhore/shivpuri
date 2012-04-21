@@ -1,0 +1,163 @@
+<%- @page_title = "REIMatcher - Create Your Buyer Profile" -%>
+<% require_js_controllers :zip_selection -%>
+<% content_for :web_page_scripts do -%>
+        function zip_validate() {
+        if (($('country_country').value == 'us') && $('zip_code').value == '') {
+          alert("Please select at least one zip code for your new buyer profile");
+          return false;
+        }
+         else if (($('country_country').value == 'us') && ! /^\d{5}(,\s*\d{5})*$/.test($F('zip_code'))) {
+          alert("Zip codes must be 5 digits long and separated by commas");
+          return false;
+        } 
+        else if (($('country_country').value == 'ca') && ($('profile_state').value == '')) {
+          alert("Please select your province ");
+          return false;
+        }
+        else if (($('country_country').value == 'ca') && ($('city_city').value == '')) {
+          alert("Please select your city ");
+          return false;
+        }
+      else
+     {
+      return true;
+      }
+  }
+
+      /** Controller setup **/
+      Event.observe(window, 'load', function() {
+      zip_selection_controller = new NL.ZipSelectionController("<%=@zip_code %>");
+      // insure zip_code input text field is always in sync with js-generated map
+      $('zip_code').value = '<%=@zip_code %>';
+      });
+<% end -%>
+<div class="content">
+
+   <div class="widecontent below_header" style="margin-top:100px !important;">
+
+      <div class="full">
+    <fieldset>
+        <% form_tag({:controller=>'investor_buyer_web_page', :action=>'new_retail_buyer_latest', :id=>@business_name,:territory_name=>@territory_param_name},{ :onSubmit=>"return zip_validate()"}) do -%>
+            <p class="label_text_style">
+                <% unless @country == "ca" %>
+                  11Click On The Map To Select Areas OR Type The Area Code Where You Wish To Buy Property 
+                <% else %>
+                  Please Select The Area Where You Wish To Buy Property 
+                <% end %>
+            </p>
+            
+            <input type="hidden" value="<%=params[:first_name]%>" name="first_name"/>
+            <input type="hidden" value="<%=params[:email]%>" name="email_address"/>
+            <input type="hidden" id="country_country" name="country" value="<%= @country %>"/>
+            <input type="hidden" value="1" name="latest"/>
+             <% unless @country == "ca" %>
+              <b>Selected:</b>
+              <div class="label_required expand_label" >Zip Codes:<img title="The areas you select on the map will appear as zip codes here. You may also enter zip codes manually where you wish to buy. if entered manually, separate zip codes by a comma, e.x. 78704,78702,78723" src="/images/reimatcher_images/help_icon.png" alt="Help_icon"><input type="text" value="" size="80" name="zip_code" id="zip_code" class="required zipcodes required_margin"/></div>
+            <% else %>
+                  <div>
+                     <table>
+                      <tr>
+                          <th class="label_required expand_label">
+                              Province:
+                          </th>
+                          <td align="left">
+                            <select id="profile_state" name="state" <% if !(error_message_on :seller_property,:state).blank? %> style="border:1px solid #FF3300; width:105px;color:#FF3300;"<% end %> onchange="get_province_city();">
+                            <%= options_for_select([[ "Select a Province", "" ]] + State::CANADA_NAMES) %>
+                          </select>
+                          </td>
+                      </tr>
+                      <tr>
+                          <th class="label_required expand_label">
+                              City:
+                          </th>
+                          <td align="left">
+                            <span id="ajax_update_div">
+                              <%=select("city","city",@cities.map { |city| [city, city]  },{ :include_blank => "--- Select a City --- " })%>
+                            </span>
+                          </td>
+                      </tr>
+                    </table>
+                    </div>
+            <% end %>
+            <input type="submit" value="Next >" name="commit" class="submit"/>
+        </div>
+        <div style="padding-bottom: 10px;" id="direction_links">
+            
+        </div>
+
+<script type="text/javascript"
+    src="http://maps.googleapis.com/maps/api/js?sensor=true">
+</script>
+
+<script type="text/javascript">
+
+ var map;
+ window.onload = function initialize() {
+    var latlng = new google.maps.LatLng(<%= @center_zip_code[0].lat %>, <%= @center_zip_code[0].lng %>);
+    var myOptions = {
+      zoom: 12,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    map = new google.maps.Map(document.getElementById("preview_results_map_div"), myOptions);
+    
+    google.maps.event.addListener(map, 'mousemove', function(event) {
+      map.setOptions({ draggableCursor: 'pointer' });
+    });
+
+    google.maps.event.addListener(map, 'click', function(event) {
+
+       if(event){
+         new Ajax.Request('<%= @map_params[:click_route] %>', { asynchronous:true, evalScripts:true, parameters:'lat='+event.latLng.lat()+'&long='+event.latLng.lng()+'&zipcodes='+ <%= @map_params[:zipcodes_js_source] %>});
+       }
+       return false;
+    });
+  }
+</script>
+
+        <% unless @country == "ca" %>
+            <div style="border: 1px solid black; margin: 0pt 0pt 10px; padding: 0pt; background: rgb(204, 204, 204) none repeat scroll 0% 0%; clear: both; height: 450px; width: 100%; text-align: center; -moz-background-clip: border; -moz-background-origin: padding; -moz-background-inline-policy: continuous; color: white;" id="map">
+    
+              <%= @map.div(:width => 860, :height => 450 ) %>
+    
+            </div>
+            <div class="ie_fix">
+                <%#- @boundary_overlays.each do |overlay| -%>
+                <%#- js = overlay.to_javascript() -%>
+                <%#- @map.record_init( "map.addOverlay( overlay = #{ js } );" ) -%>
+                <%#- if @js -%>
+                <%#- @map.record_init( "GEvent.addListener( overlay, 'click', #{ @js } );" ) -%>
+                <%#- end -%>
+                <%#- end -%>
+                <%#= @map.to_html({:proto_load=>true}) %>
+            </div>
+            <div style="display: none;" class="loading">
+                <span class="text">Loading...</span>
+            </div>
+          <% end %>
+    <%- end -%></fieldset>
+    </div>
+
+
+    </div>
+
+    <div class="divider"/>
+
+    <div style="display: none;" id="scratch"/>
+
+  </div>
+<script>
+function get_province_city(){
+      profile_state = $('profile_state').value
+      new Ajax.Request('/b/profiles/get_city_for_province?state_id='+profile_state,
+      {
+          method:'get',
+          onSuccess: function(transport){
+             var response = transport.responseText || "no response text";
+             $('ajax_update_div').innerHTML = response
+          },
+          onFailure: function(){ alert('Something went wrong...') }
+      });
+   }
+</script>

@@ -1,0 +1,13 @@
+         <table width="100%"> 
+        <tr>
+          <td colspan=2>Province:</td>
+	  </tr>
+	  <tr>
+          <td colspan=2>
+             <div id="ajax_update_div">
+                <%= select("filter_results","territory_name",@territories.map { |territory| [territory.territory_name, territory.id]  },{ :include_blank => "-------- Select Province --------"}, {:class => 'wide' })%>
+             	</div>
+        </td>
+        </tr>
+        </table>
+

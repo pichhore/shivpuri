@@ -1,0 +1,48 @@
+<%- @page_title = "Choose A Password For Your New Account" -%>
+
+<% content_for :page_scripts do -%>
+Event.observe(window, 'load', function() {
+  $("user_password").focus();
+});
+<% end -%>
+
+<div class="left">
+
+<div class="form">
+
+  <fieldset>
+	<% form_for(:user, :url => {:controller=>'users', :action=>'update_activation'}) do |f| %>
+
+    <table>
+  <tr>
+    <th class="label_required">Username:</th>
+    <td><%= @user.login %> </td>
+  <th>
+  </tr>
+      <tr>
+
+        <th class="label_required">Password:</th>
+        <td><%= f.password_field "password", :size => 30  %></td><td valign="top" width="30%" ><%= error_message_on "user", "password" %></td>
+      </tr>
+      <tr>
+        <th class="label_required">Password (again):</th>
+        <td><%= f.password_field "password_confirmation", :size => 30  %></td><td valign="top" width="30%" ><%= error_message_on "user", "password_confirmation" %></td>
+      </tr>
+
+      <tr>
+        <td colspan="2">&nbsp;</td>
+      </tr>
+
+    </table>
+
+    <p style="text-align: center">
+      <%=hidden_field_tag "activation_code",params[:activation_code]%>
+      <%=submit_tag "Set Password", :class=>"submit_xl"%>
+    </p>
+    <% end %>
+
+  </fieldset>
+
+</div>
+
+</div>

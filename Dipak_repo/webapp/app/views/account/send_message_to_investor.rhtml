@@ -1,0 +1,27 @@
+
+<div>
+      <div style="text-align:right;">
+          <a onclick="lightbox_controller.close();" id="streetview_close" href="#"><img src="/images/active_scaffold/default/close.gif"/></a>
+       </div>
+    	<div style="clear: both; height: 6px;"/>
+	<%- form_remote_tag(:update => "lightbox_inv_msg_contents", :url=>"/account/send_message_to_investor",:html=>{:mehtod=>:post})  do -%>
+        <div style="clear: both; height: 6px;"/>
+            <input type="hidden" value="<%=@to_email%>" name="to_email" id="to_email"/>
+            <input type="hidden" value="<%=@reciever_id%>" name="reciever_id" id="reciever_id"/>
+            <table style="text-align:left;margin-top:-20px;" cellspacing="10">
+            <tr><td colspan="2" align="center"><b>Send Message</b><br/> </td></tr>
+            <tr><td align="right"><!--<span style="color:#FF2631;">*</span>-->To :</td><td><%=@investor_name%></td></tr>
+             <tr><td align="right"><!--<span style="color:#FF2631;">*</span>-->Subject : </td><td><%=text_field  "investor_message", "subject" %><%=error_message_on :investor_message, :subject%></td></tr>
+            <tr><td align="right"><!--<span style="color:#FF2631;">*</span>-->Message : </td><td><%=text_area  "investor_message", "message", :cols=>44,:rows=>4 %><%=error_message_on :investor_message, :message%></td></tr>
+            <tr>
+              <td colspan="2" align="center">
+                     &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <input type="submit" value=" Submit " name="commit" class="submit_l"/>
+                    <%- if request.xhr? -%>
+                      <%= button_to_function 'Cancel', 'lightbox_controller.close()', :class=>"submit_l" %>
+                    <%- end -%>
+               </td>
+          </tr>
+      </table>
+    	<%- end -%>
+</div>
+

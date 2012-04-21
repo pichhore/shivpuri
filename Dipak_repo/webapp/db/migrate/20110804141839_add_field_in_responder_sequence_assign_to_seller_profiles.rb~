@@ -1,0 +1,11 @@
+class AddFieldInResponderSequenceAssignToSellerProfiles < ActiveRecord::Migration
+  def self.up
+    add_column :responder_sequence_assign_to_seller_profiles, :sequence_one_subscription, :boolean, :default=>true
+    add_column :responder_sequence_assign_to_seller_profiles, :sequence_two_subscription, :boolean, :default=>true
+    add_column :responder_sequence_assign_to_seller_profiles, :sequence_three_subscription, :boolean, :default=>true
+    add_column :responder_sequence_assign_to_seller_profiles, :sequence_four_subscription, :boolean, :default=>true
+  end
+
+  def self.down
+  end
+end

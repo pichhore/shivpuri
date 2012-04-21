@@ -1,0 +1,9 @@
+class AddIsReadColumntoInvestorMessageRecipient < ActiveRecord::Migration
+  def self.up
+    add_column :investor_message_recipients,:is_read,:boolean,:default=>false
+  end
+
+  def self.down
+    remove_column :investor_message_recipients,:is_read
+  end
+end

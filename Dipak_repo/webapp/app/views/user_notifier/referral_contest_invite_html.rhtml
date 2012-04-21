@@ -1,0 +1,22 @@
+<p align="center" style="text-align:center"><img src="http://www.dwellgo.com/images/dwellgo_logo_email.png"/></p>
+
+<p>Hello <%=@to_name%>,</p>
+
+<p>A friend, <%=@from_name%>, has invited you to check out a new website called Dwellgo, which can best be described as <strong>online dating for Real Estate</strong>.  Dwellgo enables Owners and Buyers to be intelligently matched based on the criteria of the property and buyer profile. Owners and Buyers are then able to communicate privately, revealing personal information only when ready.  Best of all, Dwellgo is <strong>Free</strong>.</p>
+
+<p><%=link_to("Watch a video of How Dwellgo Works", url_for(:controller=>"how_it_works", :action=>"index", :utm_campaign=>"RefCon_Aug08", :utm_medium=>"contest", :utm_source=> "#{@from_name}_#{@from_email}", :to_email=>"#{@to_email}", :only_path=>false))%></p>
+
+<p>Dwellgo currently has <strong>over 1100 profiles in the Austin Metro area</strong> and is now celebrating our official launch with an exciting contest to bring even more people into the Dwellgo community.  The friend who referred you has received great value from Dwellgo and wants to share the experience with you.  They are also receiving credit for every friend who creates a Buyer Profile or add's a Property to Dwellgo.</p>
+
+<p><strong>Add Your Property</strong> to the community by simply completing a <%=link_to("Property Profile",url_for(:controller=>"profiles", :action=>"new", :id=>"owner", :utm_campaign=>"RefCon_Aug08", :utm_medium=>"contest", :utm_source=> "#{@from_name}_#{@from_email}", :to_email=>"#{@to_email}", :only_path=>false))%>, which takes less than 3 minutes.
+</p>
+
+<p>* Don't want others to know you are looking to sell?  Add your property using Dwellgo's exclusive Private status to hide your property address.</p>
+
+<p><strong>Become a Buyer</strong> and have unlisted property find you by simply completing a <%=link_to "Buyer Profile", url_for(:controller=>"profiles", :action=>"new", :id=>"buyer", :utm_campaign=>"RefCon_Aug08", :utm_medium=>"contest", :utm_source=> "#{@from_name}_#{@from_email}", :to_email=>"#{@to_email}", :only_path=>false)%>, which takes less than 2 minutes.</p>
+
+<p><strong>Can I add both my property and create a buyer profile?</strong>  Yes, Dwellgo makes it easy to view/add/delete property or buyer profiles all with the same login.</p>
+
+<p><strong>Note:</strong> Your information has NOT been automatically added to Dwellgo's membership database and you will not receive any further communication from Dwellgo.  To enjoy the Dwellgo service (which is FREE), you must create a profile.</p>
+
+<p>We hope to see you at Dwellgo!</p>

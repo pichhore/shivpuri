@@ -1,0 +1,41 @@
+      <div style="margin-top:10px">
+        
+      <%- form_remote_tag(:update=>"ajax_update_div",:url=>"/account/investor_conversation",:html=>{:mehtod=>:post})  do -%>
+
+        <fieldset>
+
+          <table>
+
+            <tr>
+              <th class="label">Subject:</th>
+              <td align="left"><%=subject%></td>
+            </tr>
+
+            <tr>
+              <th class="label" colspan="2">Your Message:</th>
+            </tr>
+
+            <tr>
+              <td colspan="2"><%= text_area "investor_message", "message", :size => "60x4" %><%=error_message_on :investor_message, :body%></td>
+            </tr>
+
+            <tr>
+              <td colspan="2" align="center">
+                <%=submit_tag "Send Message", :class=>"submit_l"%>
+                <%=button_to_function "Cancel", "$('#{div_id}').hide()", :class=>"submit_l"%>
+              </td>
+            </tr>
+
+          </table>
+
+        </fieldset>
+        <%=hidden_field_tag "investor_message[subject]", subject %>
+        <%=hidden_field_tag "reciever_id", reply_to_investor_id %>
+        <%= hidden_field_tag "from_investor_conversation", "true" %>
+        <%=hidden_field_tag "root_message_id", @root_message_id %>
+
+        <%- end -%>
+
+      </div>
+
+      &nbsp;

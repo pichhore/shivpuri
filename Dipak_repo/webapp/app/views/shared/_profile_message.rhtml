@@ -1,0 +1,26 @@
+<fieldset>
+
+  <div class="title">Message from <%=@message_from_profile.display_name%></div>
+
+  <div class="clear">&nbsp;</div>
+
+    <%=render_thumbnail(@message_from_profile, { :class=>"image" }) %>
+
+  <div>
+    <p><b>Subject: <%=@profile_message.display_subject%></b></p>
+    <p><%=@profile_message.body%></p>
+  </div>
+
+  <div class="clear">&nbsp;</div>
+
+  <p style="text-align: center">
+  <%-# if xhr, then we came from the dashboard. Otherwise, we came from the profile_messages/show -%>
+  <%-if request.xhr? -%>
+    <%=submit_tag "Close", :class=>"submit close_button"%>
+  <%-else-%>
+    <%=submit_tag "My Dashboard", :class=>"submit_l close_button"%>
+  <%-end-%>
+    <%=submit_tag "Reply", :class=>"submit reply_button", :profile_id=>@message_from_profile.id%>
+  </p>
+
+</fieldset>

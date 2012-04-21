@@ -1,0 +1,155 @@
+<%- @page_title = "Hi #{@user.first_name}..." -%>
+<%- @tip = render_tip("my_dwellgo") -%>
+<% require_js_controllers :hover, :click_to_uri, :lightbox -%>
+<% content_for :page_styles do -%>
+<%=stylesheet_link_tag "lightbox" %>
+<% end -%>
+<%- content_for :page_scripts do -%>
+Event.observe(window, 'load', function() {
+hover_controller = new NL.HoverController($$('#my_profiles div.profile'));
+lightbox_controller = new NL.LightboxController();
+});
+ 
+function page_alerts_effect(idx)
+{
+new Effect.toggle('alert_details_'+idx,'Blind',{duration:0.7});
+if($('link_text_'+idx).text=="Show Details")
+$('link_text_'+idx).update('Hide Details');
+else
+$('link_text_'+idx).update('Show Details');
+}
+<%- end -%>
+<div class="left">
+    <%- @user.active_alerts(force_reload=true).each_with_index do |alert, idx| -%>
+      <% if !@welcome_alert_active || alert.alert_definition.is_welcome_alert %>
+      <% page_alert_for_user = alert.alert_definition.user_class_id.blank? ? true : ( alert.alert_definition.user_class_id == current_user.user_class_id ? true : false )%>
+      <% if page_alert_for_user %>
+       <% @alert = alert %>
+       <% unless is_having_products? %>
+        <div class="alert" id="alert_<%= idx %>">
+            <%= image_tag("icons/icon_go.gif", :style=>"float: left") %>
+            <%= link_to_remote image_tag("active_scaffold/default/close.gif", :style=>"float: right; border: 0", :alt=>"Dismiss this message"),
+            :url => { :controller=>"/alerts", :action=>"dismiss", :id=>alert },
+            :success => visual_effect(:shrink, "alert_#{idx}", :direction=>'top-right'),
+            :failure => "alert('Error dismissing alert.  Please try again.')" %>
+            <div style="border:2px solid #FFEE88;margin-left:50px;margin-right:25px;padding:5px; background-color:#FFFFCC;">
+                <span class="title"><%= alert.alert_definition.title %></span>
+                <div class="message">
+                    <%= alert.alert_definition.message %>
+                </div>
+                <%- if !alert.alert_definition.details.blank? -%>
+                <a href="javascript://" onclick="page_alerts_effect('<%=idx%>');" id="link_text_<%= idx %>">Show Details</a>
+                <div id="alert_details_<%= idx %>" style="display: none">
+                    <%= alert.alert_definition.details %>
+                </div>
+                <%- end -%>
+            </div>
+         </div>
+        <%end%>
+      <% end %>
+     <%end%>
+    <%- end -%>
+     
+  <div id="status" style="margin: 5px;">   
+    <% flash[:messages].each do |message| %>
+    <%= message %><br />
+    <% end unless flash[:messages].blank? %> 
+  </div>
+   
+    <div id="my_profiles">
+        <%= render :partial => "profile", :collection => @profiles %>
+    </div>
+      <%= will_paginate @profiles, :params =>{ :user_profiles_search => params[:user_profiles_search] }  %>
+</div>
+<div class="right">
+  <div style="width:250px;">
+  <h4>Profile Completeness</h4>
+  <div>
+  <div style="float:left;">
+        <% image_path = !@user.buyer_user_image.blank? ? ( !@user.buyer_user_image.find_medium_thumbnail.blank? ? @user.buyer_user_image.public_filename(:medium) : "/images/buyer-60.jpg") : "/images/buyer-60.jpg" %>
+         
+                <%=image_tag(image_path , :class=>"thumbnail" )%>
+            
+  </div>
+  <div class="profile_completeness_bar">
+                <div class="subtitle" style="float:right;">
+                     <!--Need to give the right path-->
+                    <%#=link_to(truncate(investor.full_name,50), user_path(investor)) %>
+                    <a href='/account/investor_full_page/<%= "#{current_user.id}" %>'>View</a> &nbsp
+                    <a href='/account/settings' >Edit</a> 
+                </div>
+         <div><%= @user.first_name %></div>
+          <div>Profile is <%=@completeness%>% Complete.</div>
+        <div class="total_bar">
+          <div class="total_bar_inside"><div class="color_filling" style="width:<%=@completeness%>%;">&nbsp;</div></div>
+          </div>
+      </div>
+   </div>
+   <div class="dotted_line"></div>
+    
+   
+   <% if @todos && @todos.size > 0 %>
+        <% @todos.each_with_index do |todo,index| %>
+                  <div style="clear:both;"> </div>
+         <div class="todos_block">
+            <div style="float:left;"><%= link_to todo[:text],todo[:link] + "?id=#{todo[:element]}" %></div><div class="todos_percent">+<%=todo[:percent]%>%</div>
+        </div>
+        <% break if index ==1 %>
+        <% end %>
+   <% end %>
+ 
+    
+  </div> 
+  <div style="clear:both;">&nbsp;</div> 
+    <br/>
+    <h3>Community</h3>
+    <div class="right_articles legend">
+        <table width="100%">
+            <tr>
+                <td>
+                    <%= link_to "Properties", :controller=>'home', :action=>'preview', :id=>'buyer' %>
+                </td>
+                <td>
+                  <%= number_with_delimiter(@community_stats.property_count, :delimiter => ',') %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <%= link_to "Buyers", :controller=>'home', :action=>'preview', :id=>'owner' %>
+                </td>
+                <td>
+                    <%= number_with_delimiter(@community_stats.active_buyers, :delimiter => ',') %>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <br />
+
+    <h3>My Profiles Search</h3>
+
+      <% form_tag '/account/profiles', :method => :get do %>
+      <%= text_field_tag :user_profiles_search, params[:user_profiles_search] %>
+      <%= submit_tag "Search", :name => nil %>
+      <% end %>
+
+    <br />
+
+     <h3>Community Search</h3>
+    <% form_tag search_path, :method => :get do %>
+    <%= text_field_tag :q, params[:q] %>
+    <%= submit_tag "Search", :name => nil %>
+    <br/>
+    <% buyer_selected, property_selected = {}, {}
+    property_selected = "checked=\"checked\"" if @profiles.any? { |profile| profile.owner? }
+    buyer_selected = "checked=\"checked\"" if property_selected.empty? %>
+    <input type="radio" name="search_profile_type" value="buyer"<%= buyer_selected %>/>Buyer<input type="radio" name="search_profile_type" value="property"<%= property_selected %>/>Property<% end %>
+     
+    <div style="margin-top: 10px">
+        <%=render_ad :width=>240, :height=>150, :name=>"manana", :target_page=>"mydwellgo" %>
+    </div>
+</div>
+<div style="display:none;" id="overlay_Lightbox">
+</div>
+<div style="display:none;" id="lightbox_contents">
+    Lightbox
+</div>

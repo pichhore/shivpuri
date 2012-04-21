@@ -1,0 +1,13 @@
+  <fieldset> 
+  <h2><i>Email Preview</i></h2>
+  <div style="clear:both;"></div>
+  <table>
+    <tr>
+      <td>
+        <%= display_email_description(params[:seller_responder_notification][:email_body]) %>
+      </td>
+    </tr>
+  </table>
+<%debugger%>
+  <%=button_to_function "Back","document.location='#{url_for({:controller=>'seller_responder_system', :action=>'seller_responder_sequence_series', :email_number => params[:seller_responder_notification][:email_number], :sequence_name => params[:seller_notification][:sequence_name]})}';", :class=>"submit_l" %>
+  </fieldset>

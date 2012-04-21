@@ -1,0 +1,31 @@
+<%- @page_title = "REIMatcher-Behind on payments" -%>
+<%- @meta_title = @seller_website.meta_title -%>
+<%- @meta_description = @seller_website.meta_description -%>
+ <%= render :partial => "show_navigation_link" %>
+ <%= render :partial => "fb_like_twitter_tweet" %>
+<div id="seller_page_main_div">
+  <h1><b>Behind on Payments</b></h1><br>
+  <%= render :partial => "lead_magnet" %>
+<div class="subpage_content_div_1">
+<p class="top_style_para_seller_website"><b>Note:</b> We are home buyers. We do not offer for-fee foreclosure avoidance services such as loan modification services. Please be warned that these services can be very expensive, and based on our observed experience rarely work.</p>
+<p class="style_para_seller_website">Homeowners facing foreclosure have many options in today’s market. Individual Realtors, attorneys, and financial planners do not know ALL of the options available, so we have created a comprehensive list of strategies (below) for your reference:</p>
+<ul class="style_para_seller_website">
+  <LI><%=link_to 'Bankruptcy',:controller=>"investor_seller_web_page", :action=>"bankruptcy", :permalink_text => params[:permalink_text] %></LI>
+
+  <LI><%=link_to 'Temporary Restraining Orders',:controller=>"investor_seller_web_page", :action=>"temporary_restraning_orders", :permalink_text => params[:permalink_text] %></LI>
+
+  <LI><%=link_to 'Deed-in-lieu',:controller=>"investor_seller_web_page", :action=>"deed_in_lieu", :permalink_text => params[:permalink_text] %></LI>
+
+  <LI><%=link_to 'Forbearance Plans',:controller=>"investor_seller_web_page", :action=>"forbearence_plans", :permalink_text => params[:permalink_text] %></LI>
+
+  <LI><%=link_to 'Loan Modification',:controller=>"investor_seller_web_page", :action=>"loan_modification", :permalink_text => params[:permalink_text] %></LI>
+
+  <LI><%=link_to 'Foreclosure',:controller=>"investor_seller_web_page", :action=>"foreclosure", :permalink_text => params[:permalink_text] %></LI>
+</ul>
+</div>
+<div class="subpage_content_div_2">
+<p class="style_para_seller_website">Our goal is to help homeowners with their difficult <br /> problems. We treat each person individually and get personally involved <br />with them.  At <b><%= company_name %></b>, we want <br />to  understand your unique situation and apply our vast knowledge of strategies to help you in your situation.</p>
+
+ <p class="style_para_seller_website">We know you place your trust in us and that’s why each homeowner’s information is treated confidentially.  In addition, we pride ourselves on working with you on your timeline and providing regular updates so you can make the best decision.  Together we can help you take the next step in your life.</p>
+<p class="style_para_seller_website">For Traditional and Creative Selling Strategies [including Short Sales, Wraps, Mortgage Payment Assignment, Lease/Optioning, and more:<%=link_to 'CLICK HERE',:controller=>"investor_seller_web_page", :action=>"option_for_sell", :permalink_text => params[:permalink_text] %></p><br>
+</div>

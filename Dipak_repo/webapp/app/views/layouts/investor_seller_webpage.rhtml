@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+   <title><%=@page_title%></title>
+
+<script type="text/javascript">
+  <%= get_ga_tracking_code(params[:permalink_text]) %>
+</script>
+
+
+<script type="text/javascript">
+
+function resizeImage()
+{
+	var height_ratio  = document.images[0].height
+	var width_ratio   = document.images[0].width
+	if (height_ratio > width_ratio)
+	{
+		document.images[0].style.width  = "auto"
+		document.images[0].style.height = "140px"
+	}
+	else if (height_ratio >=141)
+	{
+		document.images[0].style.width  = "auto"
+		document.images[0].style.height = "135px"
+	}
+        else
+        {
+		document.images[0].style.width  = "auto"
+		document.images[0].style.height = "auto"
+        }
+}
+</script>
+
+    
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+
+     <% if !@meta_description.nil? && !@meta_title.nil?%>
+      <META NAME="Title" CONTENT="<%= @meta_title %>"/>
+      <meta name="description" content="<%= @meta_description %>" />
+     <% end %>
+
+        <%=stylesheet_link_tag "investor_buyer_web_page" %>
+         <%=stylesheet_link_tag "investor_web_page" %>
+         <%=stylesheet_link_tag "seller_web_page" %>
+
+    <%= javascript_include_tag :defaults %>
+    <%= javascript_include_tag "calendar_date_select" %>
+    <%= stylesheet_link_tag "calendar_date_select" %>
+    <%= stylesheet_link_tag "reimatcher/epoch_styles" %>  
+    <%=javascript_include_tag "prototype"%>
+		    <%= include_yui_editor_if_used %>
+		    <%= include_yui_lightbox_if_used %>
+        <%=javascript_include_tag "scriptaculous"%>
+        <%=javascript_include_tag "object.event.js"%>
+        <%=javascript_include_tag "base_controller"%>
+        <%=javascript_include_tag "utils-debug" if RAILS_ENV != "production"%>
+        <%=javascript_include_tag "utils" if RAILS_ENV == "production"%>
+        <%=javascript_include_tag "application"%>
+        <%=javascript_include_tag "validation"%>
+		<%=javascript_include_tag "reimatcher/epoch_classes"%>
+        <%=add_js_requires%>
+        <%=stylesheet_link_tag "lightbox"%>
+        <%= calendar_date_select_includes %>
+        <%=javascript_include_tag "lightbox_controller"%>
+<%= javascript_include_tag :defaults, "eopch_seller_website_last_payment_classes" %>
+         <% if @content_for_page_scripts -%>
+         <script type="text/javascript">
+         // <![CDATA[
+         <%= @content_for_page_scripts %>
+         // ]]>
+         </script>
+         <% end -%>
+
+
+
+</head>
+
+<% if @controller.controller_name != "account" %> <body><% else %><body onload="disable_forms();"<% end %>
+<% if RAILS_ENV == 'production' %>
+<%= clicktale_top %>
+<% end %>
+<div class="full">
+  <div id="container" class="clearfix" >
+
+<!-- Header-->
+
+  	<div id="header">
+              <div class="col1">
+                  <div id="logo" style="*float:left;">
+                      <% if @controller.controller_name != "account" %> 
+                        <a href="/<%=@territory_param_name%>/<%=@business_name%>">
+                      <% else %>
+                        <a href="#" >
+                      <% end %>
+                      <% link_value =image_tag( @user_company_image.public_filename(:profile), :alt=>"thumbnail", :onload=>"resizeImage();") if (!@user_company_image.nil?) && (!@user_company_image.find_profile_thumbnail.blank?)
+                        link_value = "" if link_value.blank? %>
+                        <%=link_to link_value , {:controller=>"investor_seller_web_page", :action=>"seller_web_page", :permalink_text => params[:permalink_text]} %>
+                       </a>
+                      <%#= social_media(params[:permalink_text], "seller") %>
+  	          </div>
+              </div>
+  	</div>
+
+        <div class="social_media_icons">
+             <%= social_media(params[:permalink_text], "seller") %>
+        </div>
+
+        <div class="seller_col2">
+                  <b class="phone_size_bold"><% unless @user_company_info.nil? %>
+                  <p style="float:left;"></p><%= @user_company_info.business_phone %><% end %></b><br /><br />
+                  <% if @controller.controller_name != "account" %>
+                      <% if params[:terms_of_use].nil? && params[:privacy_policy].nil? %>
+                        <%#=link_to_remote("Contact Us",{:url => {:action => 'contact_us',:id=>@business_name, :territory_name=>@territory_param_name},
+                                                                                                      :method  => :get,
+                                                                                                      :update  => "lightbox_contents",
+                                                                                                      :loading => "lightbox_controller.loading()",
+                                                                                                      :loaded  => "lightbox_controller.loaded()"},{
+                                                                                                      :title   => "Contact to Investor" }) %>
+                      <% end %>
+                      <% else %>
+                        <a href="#" >Contact Us</a>
+                  <% end %>
+        </div>
+
+      <h2 style="margin:-69px;margin-left:0px;margin-right:0px"></h2>
+
+<!-- End Header-->
+      <%= yield  %>
+  </div><!--end container-->
+</div>
+<div style="display:none;" id="overlay_Lightbox"></div>
+<div style="display:none;" id="lightbox_contents">Lightbox</div>
+<div id="seller_web_footer" style="margin:auto ;text-align:center;width:960px; height:auto;padding:20px 0px;font-family:serif;">
+        <% if !@user_company_info.nil? and !@user_company_info.business_address.blank? %>
+          <%=@user_company_info.business_name%><br />
+          <%=@user_company_info.business_address %> <%=@user_company_info.city.to_s %>, <%= @user_company_info.state.to_s + " " + @user_company_info.zipcode.to_s %><br />
+          <%= @user_company_info.business_phone %> |
+        <% end %> 
+        <%=link_to 'Privacy Policy', {:controller => "investor_seller_web_page", :permalink_text=>params[:permalink_text], :action => "privacy_policy"} %> | <%=link_to 'Terms of Use', {:controller => "investor_seller_web_page", :action => "terms_of_use", :permalink_text=>params[:permalink_text]} %> | <%=link_to 'RE Agents', {:controller => "investor_seller_web_page", :action => "re_agents", :permalink_text=>params[:permalink_text]} %><br />
+                REI Technologies LLC &copy; 2012
+</div>
+
+<% if RAILS_ENV == 'production' %>
+<%= clicktale_bottom %>
+<% end %>
+</body>
+</html>
+
+<!--[if IE 7]>
+<style>
+#topnavlink {
+ margin:135px 0px 20px 0px !important;
+}
+</style>
+<![EndIf]-->
+
+<!--[if IE ]>
+<style>
+#overlay_Lightbox {
+        background-color:activeborder;
+        opacity: -1.9;
+        filter: alpha(opacity=9);
+}
+</style>
+<![EndIf]-->

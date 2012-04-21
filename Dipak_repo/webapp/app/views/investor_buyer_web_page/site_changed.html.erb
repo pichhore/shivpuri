@@ -1,0 +1,19 @@
+This page has been moved.
+<br/><br/>
+You will redirected automatically in 10 seconds...please bookmark the new page.
+
+<% if @squeeze_type %>
+  <% website_path = @buyer_web_page.new_format_url_for_syndication + "/2" %>
+<% else %>
+  <% website_path = @buyer_web_page.new_format_url_for_syndication %>
+<% end %>
+
+<script type="text/javascript">
+  window.setTimeout( 
+  function(){ 
+     window.location ="<%= website_path %>";
+  }, 1000*10);
+</script>
+
+
+

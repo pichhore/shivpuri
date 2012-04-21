@@ -1,0 +1,23 @@
+<%= error_messages_for :buyer_user_image %>
+
+<% form_for(@buyer_user_image, :url => {:controller => 'buyer_user_images', :action => 'index', :from => params[:action]}, 
+                      :html => { :multipart => true }) do |f| %>
+  <p><b>Profile Image</b></p>
+  <table>
+      <tr>
+        <th>
+           <%- if @buyer_user_image.find_medium_thumbnail -%>
+                <%=image_tag @buyer_user_image.public_filename(:medium), :class=>"thumbnail"%>
+          <%- else -%>
+                <%=image_tag("/images/buyer-60.jpg",:width=>60 )%>
+           <%- end -%>
+          </th>
+        <td>
+          <%= f.file_field :uploaded_data %>
+          <%= f.submit "Upload Image" %>
+        </td>
+      </tr>
+  </table>
+  <p>Note: Only .png, .jpg, and .gif image types are accepted and images are limited to 3MB in size.</p>
+  <p style="padding-top:15px;"><b>Tell us a little more about yourself</b>, so we can notify you of additional opportunities</p>
+<% end %>

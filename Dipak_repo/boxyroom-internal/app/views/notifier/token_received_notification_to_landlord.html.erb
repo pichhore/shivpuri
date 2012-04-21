@@ -1,0 +1,24 @@
+<html>
+<div style="margin-bottom:10px"><span >Transaction ID: <%= @application.transaction_id.upcase %></span> </div>
+
+<div style="margin-bottom:10px">Hi <%= @application.property.owner.first_name %>,</div>
+
+<div style="margin-bottom:10px">We’ve received the Payment Code for your property at <%=@application.property.address.unit_no%><%= @application.property.address.location %><%=@application.property.address.postal_code%>.</div>
+
+<div style="margin-bottom:10px">We’ll transfer the deposit (minus Boxyroom admin fees) paid by your tenant to your Paypal account within 48 hours. </div>
+
+  <div ><label style="width:25%;margin-right:10px;display: block;float:left;">Deposit paid by your tenant</label><span style="width:70%;float:left;"><%= @application.property.currency_type.nil? ? 'US' : (@application.property.currency_type == 'USD' ? 'US' : (@application.property.currency_type == 'SGD' ?  'S'  : (@application.property.currency_type == 'AUD' ?  'A'  : (@application.property.currency_type == 'CAD' ? 'C' : ""))))%><%= ISO4217::Currency.from_code(@application.property.currency_type.nil? ? 'USD' : @application.property.currency_type).symbol%><%=@application.property.monthly_rental.to_i%></span></div>
+  <div ><label style="width:25%;margin-right:10px;display: block;float:left;">Boxyroom fees</label><span style="width:70%;float:left;"><%= @application.property.currency_type.nil? ? 'US' : (@application.property.currency_type == 'USD' ? 'US' : (@application.property.currency_type == 'SGD' ?  'S'  : (@application.property.currency_type == 'AUD' ?  'A'  : (@application.property.currency_type == 'CAD' ? 'C' : ""))))%><%= ISO4217::Currency.from_code(@application.property.currency_type.nil? ? 'USD' : @application.property.currency_type).symbol%><%=(@application.property.monthly_rental * BOXYROOM_ADMIN_FEE).to_i%></span></div>
+<div ><label style="width:25%;margin-right:10px;display: block;float:left;">Balance</label><span style="width:70%;float:left;"><%= @application.property.currency_type.nil? ? 'US' : (@application.property.currency_type == 'USD' ? 'US' : (@application.property.currency_type == 'SGD' ?  'S'  : (@application.property.currency_type == 'AUD' ?  'A'  : (@application.property.currency_type == 'CAD' ? 'C' : ""))))%><%= ISO4217::Currency.from_code(@application.property.currency_type.nil? ? 'USD' : @application.property.currency_type).symbol%><%=(@application.property.monthly_rental * PAYMENT_TO_LANDLRD).to_i %></span>
+<div style="clear:both;"></div>
+</div>
+
+
+<div style="margin-top: 20px;">What to do next:</div>
+<div>1. Check your Paypal account after 48 hours to see if you’ve received the deposit</div>
+<div style="margin-bottom:25px">2. If you don’t receive the deposit after 48 hours, contact us at contact@boxyroom.com
+<div style="clear:both;"></div>
+</div>
+
+
+<span>The Boxyroom Team</span>

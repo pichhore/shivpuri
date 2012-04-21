@@ -1,0 +1,111 @@
+<head>
+  <!--[if IE 7]>
+   <style type="text/css">
+     #admin_transaction{position: absolute!important;z-index:1111111111111;"}
+     .manage{"position: relative;z-index:1px!important;"}
+     .container{width: 94% !important;}
+     .number_box_text{position: relative;top: -15px!important;}
+    table {
+    border: 1px solid #CCCCCC!important;
+    margin-bottom: 16px!important;
+    width: 100%!important;
+    }
+    table tbody td{ border-bottom :1px solid #CCCCCC!important;}
+   </style>
+  <![endif]-->
+</head>
+<div class="number_box_main" id="number_box_main_users">
+    <div class="number_box" style="right:0px;">
+      <%= all_users%>
+      <div style="clear:both;"></div>
+      <span class="number_box_text">Total users</span>
+    </div>
+</div>
+<div class="container">
+    <div id="header-wp" style="margin-top:30px;">
+      <%= flash_message %> 
+    <h1>Users</h1>
+  </div>
+  <div class="primary" id="admin_users">
+    <table cellspacing="0" class="listings user">
+      <caption>All Users</caption>
+      <colgroup>
+        <col class="actions" />
+        <col class="description" />
+        <col class="actions" />
+	<col class="description" />
+        <col class="actions" />
+	<col class="description" />
+        <col class="actions" />
+      </colgroup>
+      <thead>
+        <tr>  
+	   <th></th>
+          <th>Name</th>
+	  <th>Email</th>
+	  <th class="centralize">Status</th>
+	  <th>Properties</th>
+	  <th>Applications</th>
+          <th></th>
+        </tr>
+      </thead>
+        <%- @users.each do |user| %>
+        <tr>
+          <td>
+              <div >
+                <%= image_tag(user.avatar.url(:thumb))%>
+              </div>
+              <p class="description" style="margin-left: 82px;">
+                  <div style="margin-top: 2px;margin-left: 82px;">
+                  </div>
+              </p>
+          </td>
+          <td><div id="user_name_admin_part"><%= link_to user == current_user ? "This is you" : (is_admin user), admin_user_path(user) %></div></td>
+	  <td ><div  id="user_email_admin_part" ><%= user.email%></div></td>
+          <%if  user.active and !user.suspended%>
+	   <td ><span class="green status active"></span></td>
+          <%elsif user.suspended %>
+	   <td ><span class="red status suspended"></span></td>
+	  <%else%>
+	   <td ><span class="orange status inactive"></span></td>
+	  <% end %>
+	  <td class="centralize"><%= user.properties.count %></td>
+          <td class="centralize"><%= user.applications.count %></td>
+          <td>
+            <div class="manage">
+              <strong></strong>
+              <ul class="menu" id="admin_transaction"  >
+                <li><%= link_to "View User", admin_user_path(user), :class => "view" %></li>
+                <li>
+                  <%- if user.suspended? %>
+                    <%= link_to "Reinstate", reinstate_admin_user_path(user), :method => :put %>
+                  <%- else %>
+                    <%- if user.open_trans? %>
+                      <%=link_to "Suspend", suspend_admin_user_path(user), :method => :delete, :confirm => "WARNING! There's pending transactions on this user. Are you sure?"%>
+                    <%- else %>
+                      <%=link_to "Suspend", suspend_admin_user_path(user), :method => :delete, :confirm => "Are you sure?"%>
+                    <%- end %>
+                  <%- end %>
+                </li>
+                <%if change_permission user%>
+                  <%if change_option user%>
+                   <li><%= link_to "Admin access", role_admin_admin_user_path(user), :method => :put, :class => "view" %></li>
+                  <% else %>
+                   <li><%= link_to "Remove admin", role_user_admin_user_path(user), :method => :put, :class => "view" %></li>
+                  <% end %>
+                <%end%>
+              </ul>
+            </div>
+          </td>
+        <%- end %>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<script type="text/javascript">
+      window.onload = firstLoad;
+        function firstLoad() {
+	 document.getElementById("messg_pay").style.marginTop  = '30px';
+        }
+</script>

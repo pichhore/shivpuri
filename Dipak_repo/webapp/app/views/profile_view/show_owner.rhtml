@@ -1,0 +1,61 @@
+<%- @page_title = @target_profile.display_name -%>
+<%- @page_icon_style = 'icon_seller_profile' -%>
+<%- @tip = render_tip("show_owner") -%>
+<%- @include_gmap_header = true -%>
+
+<% content_for :page_styles do -%>
+<%=stylesheet_link_tag "lightbox"%>
+<% end -%>
+
+<% require_js_controllers :favorites_icon, :public_profile, :new_message_form, :profile_image_view, :lightbox, :streetview -%>
+<% require_js_helpers :match_count -%>
+
+<% content_for :page_scripts do -%>
+    Event.observe(window, 'load', function() {
+      fav_icon_controller = new NL.FavoritesIconController("<%=url_for profile_profile_favorites_path(@profile)%>", "<%=@profile.id%>","<%=@target_profile.id%>");
+      $$('div.profile.favicon').each(function(item) {
+        fav_icon_controller.attachTo(item);
+      });
+      <% if params[:profile_inbox_msg_param] == "profile_inbox_msg_param" %>
+        public_profile_controller = new NL.PublicProfileController("<%=url_for new_profile_profile_message_path(@profile)%>?profile_message_form[send_to][]=indiv&profile_inbox_msg_param=<%= params[:profile_inbox_msg_param] %>&ref=<%= params[:ref]%>&not_show_link=<%= params[:not_show_link]%>&conversation=<%= params[:conversation]%>&profile_inbox_message=<%= params[:profile_inbox_message]%>&profile_message_recipient_id=<%= params[:profile_message_recipient_id]%>&profile_inbox_message_id=<%= params[:profile_inbox_message_id]%>&profile_message_form[indiv_profile_id]=<%=@target_profile.id%>&<%=encode_return_dashboard_params%>");
+      <% else %>
+      	  <% if params[:retail_buyer_profile].blank? %>
+             public_profile_controller = new NL.PublicProfileController("<%=url_for new_profile_profile_message_path(@profile)%>?profile_message_form[send_to][]=indiv&profile_message_form[indiv_profile_id]=<%=@target_profile.id%>&<%=encode_return_dashboard_params%>");
+	  <% else %>
+	    public_profile_controller = new NL.PublicProfileController("<%=url_for new_profile_profile_message_path(@profile)%>?profile_message_form[send_to][]=indiv&profile_message_form[indiv_profile_id]=<%=@target_profile.id%>&retail_buyer_profile=<%=params[:retail_buyer_profile]%>");
+          <% end%>
+
+      <%end%>
+      tab_controller = null;
+      profile_image_view_controller = new NL.ProfileImageViewController($$('#dashboard div.thumbnail img')[0], $$('#dashboard div.thumbnail_selector img.micro'));
+      lightbox_controller = new NL.LightboxController();
+
+<%- if flash[:notice] -%>
+new Effect.Fade($('notice'), { duration: 4.0,queue: 'end'} );
+<%- end -%>
+    });
+
+<% end -%>
+<div class="full">
+  <div class="loading" style="display:none"><span class="text">Loading...</span></div>
+</div>
+
+<div class="left">
+
+<%=render :partial=>"/shared/public_owner_profile"%>
+
+</div>
+
+<div style="display:none;" id="overlay_Lightbox">
+
+</div>
+
+<div style="display:none;" id="lightbox_contents" style="width: 60%;">Lightbox</div>
+
+<div style="display:none;" id="overlay_Streetview"/>
+<div style="display:none;" id="lightbox_Streetview" style="width: 60%;">
+    <div id="streetview_header">
+        <a href="#" id="streetview_close"><img src="/images/active_scaffold/default/close.gif"/></a>
+    </div>
+    <div id="streetview_contents"/>
+</div>

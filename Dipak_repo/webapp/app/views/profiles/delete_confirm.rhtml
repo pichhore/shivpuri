@@ -1,0 +1,71 @@
+<%- @page_title = display_page_title_for_delete_reason -%>
+<fieldset>
+
+<%- form_for(:profile_form, :url => profile_path(@profile), :html => { :method => :delete }) do |f| -%>
+
+<div class="form" style="font-size: 1.2em">
+
+  <p>Deleting a <%= display_profile_name_to_be_deleted %> removes all matches, sent and received messages. Deletion is permanent.</p>
+
+  <p>&nbsp;</p>
+
+  <p><b>We're Curious...why are you deleting.</b></p>
+
+  <p>&nbsp;</p>
+
+  <table>
+
+    <tr>
+      <th class="label_required" colspan="2">Reason:
+        <select name="profile_form[profile_delete_reason_id]" id="profile_form_profile_delete_reason_id" onchange="show_comment_box_on_change(this.value)">
+          <option value="">---Select Reason---</option>
+          <%@profile_delete_reasons.each do |profile_delete_reason| %>
+            <option value="<%= profile_delete_reason.id %>"><%= profile_delete_reason.name %></option>
+          <%end%>
+        </select>
+      <br/><p><%=error_message_on :profile_form, :profile_delete_reason_id%></p></th>
+    </tr>
+ </table>
+  <table id="show_on_delete_comment" style="display:none;margin-top:20px;">
+    <tr>
+      <th colspan="2">Can you tell us in a couple of words why you are deleting your profile?<br/><br/></th>
+    </tr>
+
+    <tr>
+      <th colspan="2">Comments:<br/> <%=f.text_area("delete_reason",:cols=>60, :rows=>4)%><br/><p><%=error_message_on :profile_form, :delete_reason%></p></th>
+    </tr>
+  </table>
+
+</div>
+<div style="margin-bottom: 20px">
+   <a href="http://www.reimatcher.com/faq/investor-website/why-does-reimatcher-ask-me-why-im-deleting-a-profile/" target="_blank">Why Does REIMatcher always ask me why I’m deleting a Property or Buyer?</a> 
+</div>
+
+<p style="text-align: center">
+  <%=submit_tag "Yes, Delete", :class=>"submit_l"%>  
+  <%- if params['update'] == 'true' then %>
+  <%=button_to_function "Cancel", "document.location='#{edit_profile_path(@profile)}'", :class=>"submit_l"%>
+  <%- else -%>
+  <%=button_to_function "Cancel", "document.location='#{url_for :controller=>'account', :action=>'profiles'}'", :class=>"submit_l"%>
+  <%- end -%>
+</p>
+
+<%- end -%>
+
+</fieldset>
+
+<script type="text/javascript">
+
+  function show_comment_box_on_change(txt)
+    {
+      if ((txt=="") || (txt=="other_buyer") || (txt=="other_owner"))
+        {
+          document.getElementById("show_on_delete_comment").style.display="none";
+        }
+      else
+        {
+          document.getElementById("show_on_delete_comment").style.display="block";
+        }
+    }
+
+</script>

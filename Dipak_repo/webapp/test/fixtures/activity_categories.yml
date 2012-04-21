@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+cat_acct_login:
+  id: cat_acct_login
+  name: cat_acct_login
+cat_acct_logout:
+  id: cat_acct_logout
+  name: cat_acct_logout
+cat_acct_created:
+  id: cat_acct_created
+  name: cat_acct_created
+cat_prof_created:
+  id: cat_prof_created
+  name: cat_prof_created
+cat_prof_updated:
+  id: cat_prof_updated
+  name: cat_prof_updated
+cat_prof_deleted:
+  id: cat_prof_deleted
+  name: cat_prof_deleted

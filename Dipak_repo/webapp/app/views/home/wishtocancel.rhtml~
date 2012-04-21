@@ -1,0 +1,27 @@
+<p align="center"><%= customize_embedcode('<center><div id="evp-bab45511e91e0fe2e63b529eb9252235-wrap" class="evp-video-wrap"></div><script type="text/javascript" src="http://www.damonflowers.com/evp/framework.php?div_id=evp-bab45511e91e0fe2e63b529eb9252235&id=Q29ycmVjdCBDYW5jZWxsYXRpb24gVmlkZW8gLm1wNA%3D%3D&v=1316803778&profile=default"></script><script type="text/javascript"><!--
+_evpInit("Q29ycmVjdCBDYW5jZWxsYXRpb24gVmlkZW8gLm1wNA==[evp-bab45511e91e0fe2e63b529eb9252235]");//--></script></center>') %></p><br>
+<h4 class="formtitle">Personal Information</h4>
+<% form_for(:user_wish_to_cancel, :url => {:controller=>"home", :action=>"update_user_info_when_cancel"}) do |f| %>
+<%= error_messages_for :criteria %>
+        <table width="100%" border="0" cellspacing="3" cellpadding="3">
+          <tr>
+                <td align="right"><%= image_tag "required.gif" %>Name:</td>
+                <td><%=f.text_field "name", :size=>21 %><%=error_message_on :user_wish_to_cancel, :name %></td>
+          </tr>
+          <tr>
+                <td align="right" class="label_required"><%= image_tag "required.gif" %>Why Are You Cancelling?</td>
+                <td><%=f.text_area "reason", :cols => 50, :rows => 4 %><%=error_message_on :user_wish_to_cancel, :reason %></td>
+          </tr>
+          <tr>
+                <td align="right" valign="top">&nbsp;</td>
+                <td>&nbsp;</td>
+          </tr>
+          <input type="hidden" name="submitted" id="submitted" value="1" />
+          <tr>
+                <td align="center" colspan="2">
+                        <%= image_tag "required.gif" %><%=f.check_box "understand" %>I understand that I am canceling my membership. I also understand that my current territory selections and membership pricing may not be available if I choose to rejoin at a later time.<br><%=error_message_on :user_wish_to_cancel, :understand %><span style="color:red;"><%= flash[:understand] %></span><br /><br />
+                        <%=submit_tag "Cancel Membership", :class=>"submit_xl"%>
+                </td>
+          </tr>
+        </table>
+<% end %>

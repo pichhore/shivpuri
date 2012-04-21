@@ -1,0 +1,6 @@
+class ProcessPendingIcontactUserListWorker
+    @queue = :process_pending_icontact_user
+    def self.perform(limit,offset)
+      Icontact.process_to_add_icontact_pending_user_in_list(limit,offset)
+    end 
+end

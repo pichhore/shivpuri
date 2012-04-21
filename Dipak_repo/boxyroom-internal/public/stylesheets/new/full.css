@@ -1,0 +1,450 @@
+/*body {
+        background-color: #e8f3f8;
+	background: url("/new_images/page-bg.jpg") repeat;
+}*/
+body {
+   background: url("/new_images/page-bg.jpg") repeat-x scroll 0 0 #E6F1F5;
+}
+#main {
+	text-align: center;
+	background: url("/new_images/homepage_bg.jpg") no-repeat top;
+}
+#main_s {
+	text-align: center;
+	background: url("/new_images/homepage_bg.jpg") no-repeat top;
+}
+
+#content {
+	text-align: center;
+        min-height: 830px;
+}
+
+#main_s #content {
+	min-height: 660px;
+}
+
+#content .login {
+    margin-top: 100px;
+}
+
+#header, #header .container {
+	height: 96px;
+	margin-bottom: 16px;
+}
+
+#header .logo {
+	top: 32px;
+}
+
+/* Navigation */
+
+#header .main-nav li {
+   -moz-border-radius: 6px 6px 6px 6px;
+    background: url("/new_images/buttons-sprite.png") no-repeat scroll -166px -188px transparent;
+    border: medium none;
+    float: right;
+    height: 31px;
+    width: 62px;
+}
+
+#header .main-nav li a {
+	color: #063349;
+	text-shadow: 1px 1px 1px #3fb0e6;
+	font-weight: 500;
+	letter-spacing: 0.1em;
+	font-size: 90%;
+	padding: 8px 10px;
+}
+
+#header .main-nav li.black {
+    background: url("/new_images/buttons-sprite.png") no-repeat scroll -64px -145px transparent;
+    height: 33px;
+    width: 83px;
+    border: none;
+}
+
+#header .main-nav li.black a {
+	color: #fff;
+	text-shadow: 1px 1px 1px #191616;
+}
+
+/* Home page */
+
+h1 {
+	color: #105a7e;
+	font-size: 30px;
+	font-weight: 400;
+	width: 640px;
+	margin: 0 auto 32px;
+	text-shadow: 2px 1px 1px #eaf8fe;
+}
+
+h1.home {
+	margin: 32px auto;
+}
+
+h1 strong {
+	color: #000;
+}
+
+.search {
+	margin: 32px auto;
+          background: url("/new_images/search-bg.png") no-repeat;
+	width: 471px;
+	height: 55px;
+	position: relative;
+}
+
+.search input[type="text"] {
+	width: 335px;
+	height: 48px;
+	padding-left: 16px;
+	line-height: 48px;
+	border: 0;
+	position: absolute;
+	left: 5px;
+	top: 2px;
+	font-size: 120%;
+	font-weight: 600;
+	color: #3a3a3a;
+}
+
+.search input[type="submit"] {
+	background: none;
+	border: 0;
+	position: absolute;
+	right: 0;
+	width: 110px;
+	height: 54px;
+	cursor: pointer;
+	text-indent: -9999px;
+}
+
+.pointers {
+    bottom: 0;
+    font-size: 90%;
+    left: -118px;
+    margin: 0 auto 32px;
+    overflow: hidden;
+    position: relative;
+    text-align: left;
+    width: 760px;
+}    
+
+.pointers h3 {
+	font-size: 18px;
+	margin-bottom: 16px;
+}
+
+.pointers .landlords {
+    -moz-border-radius: 6px 0 0 6px;
+    background-color: #C4DDE8;
+    color: #34596A;
+    float: left;
+    height: 400px;
+    padding: 16px;
+    width: 345px;}
+
+.pointers .tenants {
+    -moz-border-radius: 0 6px 6px 0;
+    background-color: #90BDD1;
+    color: #173F54;
+    float: left;
+    padding: 16px;
+    width: 341px;
+    height: 400px;}
+
+.pointers dt {
+	font-weight: bold;
+	margin-bottom: 2px;
+	padding-left: 48px;
+	height: 32px;
+	background: url("/new_images/home-icons.png") no-repeat;
+}
+
+.pointers dd {
+	font-size: 100%;
+	font-weight: 200;
+	margin-bottom: 2px;
+	padding-left: 48px;
+	position: relative;
+	top: -16px;
+}
+
+.pointers .landlords dt.term-1 {
+	background-position: 0 0;
+}
+
+.pointers .landlords dt.term-2 {
+	background-position: 0 -32px;
+}
+
+.pointers .landlords dt.term-3 {
+	background-position: 0 -64px;
+}
+
+.pointers .landlords dt.term-4 {
+	background-position: 0 -96px;
+}
+
+.pointers .landlords dt.term-5 {
+	background-position: 0 -128px;
+}
+
+.pointers .tenants dt.term-1 {
+	background-position: 0 -160px;
+}
+
+.pointers .tenants dt.term-2 {
+	background-position: 0 -192px;
+}
+
+.pointers .tenants dt.term-3 {
+	background-position: 0 -224px;
+}
+
+.pointers .tenants dt.term-4 {
+	background-position: 0 -256px;
+}
+
+.pointers .tenants dt.term-5 {
+	background-position: 0 -288px;
+}
+
+
+/* Forms */
+
+fieldset {
+	border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border: 1px solid #6990a4;
+	width: 430px;
+	padding: 12px;
+	margin: 32px auto 32px;
+	background-color: #cddce4;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f4fafd), color-stop(0.01, #cddce4), to(#cddce4));
+	background: -moz-linear-gradient(top, #f4fafd 0%, #cddce4 1%, #cddce4 100%);
+}
+
+fieldset legend {
+	float: left;
+	margin-bottom: 12px;
+	color: #09384e;
+	font-weight: 500;
+	font-size: 130%;
+	text-shadow: 1px 1px 1px #dff1fa;
+	width: 414px;
+	text-align: left;
+}
+
+fieldset input[type="text"] {
+	width: 414px;
+	border: 1px solid #6c899a;
+	line-height: 24px;
+	height: 36px;
+	padding: 0 8px;
+	font-weight: bold;
+	font-size: 90%;
+	margin-bottom: 8px;
+	color: #414141;
+}
+
+fieldset input[type="password"] {
+	width: 414px;
+	border: 1px solid #6c899a;
+	line-height: 24px;
+	height: 36px;
+	padding: 0 8px;
+	font-weight: bold;
+	font-size: 90%;
+	margin-bottom: 8px;
+	color: #414141;
+}
+
+fieldset p {
+	position: relative;
+	float: left;
+}
+
+fieldset label {
+	position: absolute;
+	top: 12px;
+	left: 12px;
+	font-weight: 500;
+	font-size: 110%;
+}
+
+fieldset input[type="text"].half {
+	width: 192px;
+	float: left;
+}
+
+fieldset input[type="text"].half.end {
+	float: right;
+}
+
+fieldset .buttons {
+	float: right;
+	margin-top: 2px;
+}
+
+fieldset button {
+	background: url("/new_images/buttons-sprite.png") no-repeat scroll -358px -139px transparent;
+	display: block;
+	cursor: pointer;
+	height: 38px;
+	width: 151px;
+	float: left;
+	position: relative;
+	border: none;
+}
+
+fieldset button.facebook {
+   background: url("/new_images/buttons-sprite.png") no-repeat scroll -75px -185px transparent;
+    height: 37px;
+    width: 87px;
+    }
+
+fieldset.login {
+   background: url("/new_images/login.png") no-repeat scroll 1px 0px transparent;
+    margin: 152px auto 128px;
+    width: 451px;
+    height:220px;
+    border:0px;
+    }
+.signup
+{
+   background: url("/new_images/sign-up.png") no-repeat scroll 1px 0 transparent;
+    height: 314px;
+    margin: 0px auto 128px;
+    width: 460px;    border:0px;
+}
+.terms_and_policy{    
+    width:100%;        
+    float:left;
+    left: -4px;
+    text-align:left;    
+}
+#user_terms_and_policy{
+  float: left;
+  position: relative;
+}
+.login_p {
+   background: url("/new_images/login.png") no-repeat scroll -1px -4px transparent;
+    margin: 152px auto 128px;
+    width: 377px;
+    border: 1px solid red;}
+
+.login_p button.facebook {
+background: url("/new_images/buttons-sprite.png") no-repeat scroll -75px -185px transparent;
+height: 37px;
+width: 87px;
+}
+.login_p legend {
+	width: 360px;
+}
+
+.login_p input[type="text"] {
+	width: 360px;
+}
+
+.login_p input[type="password"] {
+	width: 360px;
+}
+
+.login_p input[type="text"] {
+    -moz-border-radius: 4px 4px 4px 4px;
+    border: 1px solid #6C899A;
+    color: #414141;
+    font-size: 90%;
+    font-weight: bold;
+    height: 36px;
+    line-height: 24px;
+    margin-bottom: 8px;
+    padding: 0 8px;
+    width: 360px;
+} 
+.login_p input[type="password"] {
+    -moz-border-radius: 4px 4px 4px 4px;
+    border: 1px solid #6C899A;
+    color: #414141;
+    font-size: 90%;
+    font-weight: bold;
+    height: 36px;
+    line-height: 24px;
+    margin-bottom: 8px;
+    padding: 0 8px;
+    width: 360px;
+}
+fieldset.login legend {
+	width: 360px;
+}
+
+fieldset.login input[type="text"] {
+	width: 360px;
+}
+
+fieldset.login input[type="password"] {
+	width: 360px;
+}
+
+#or_home
+{
+   bottom: 76px;
+    display: block;
+    font-size: 30px;
+    font-weight: bold;
+    height: 0;
+    left: 579px;
+    margin-left: 23px;
+    position: relative;
+    width: 6px;
+}
+
+#bottom_margin_home
+{
+    margin-bottom: 04px !important;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+#font_size_home_h2
+{
+  font-size: 20px;
+  font-weight: normal;
+  margin-bottom: 37px !important;
+}
+#font_size_home_h2 a
+{
+  position: relative;
+  font-size: 15px;
+  margin-left: 7px;
+}
+
+.pw_reset
+{
+    background: url("/new_images/reset_pw_bg_img.png") no-repeat scroll 1px 0 transparent;
+    border: 0 none;
+    height: 220px;
+    margin: 60px auto 0px;
+    width: 451px;
+}
+
+.pw_reset input 
+{
+  float: left;
+  margin-top: -10px!important;
+}
+#chk_terms_and_policy{
+  float:left;
+  margin-top: -2px;
+  width: 20px;
+}
+#text_terms_and_policy{
+    float: left;
+    text-align: left;
+    width: 415px;
+}
+
+

@@ -1,0 +1,2 @@
+module SmtpNotificationHelper
+end

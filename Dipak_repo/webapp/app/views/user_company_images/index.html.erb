@@ -1,0 +1,18 @@
+<h1>Listing user_company_images</h1>
+
+<table>
+  <tr>
+  </tr>
+
+<% for user_company_image in @user_company_images %>
+  <tr>
+    <td><%= link_to 'Show', user_company_image %></td>
+    <td><%= link_to 'Edit', edit_user_company_image_path(user_company_image) %></td>
+    <td><%= link_to 'Destroy', user_company_image, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New user_company_image', new_user_company_image_path %>

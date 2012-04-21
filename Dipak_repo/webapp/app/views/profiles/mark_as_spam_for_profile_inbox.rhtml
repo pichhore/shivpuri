@@ -1,0 +1,26 @@
+
+
+<div>
+      <div style="text-align:right;">
+          <a onclick="lightbox_controller.close();" id="streetview_close" href="#"><img src="/images/active_scaffold/default/close.gif"/></a>
+       </div>
+    	<div style="clear: both; height: 6px;"/>
+  
+	<%- form_remote_tag(:update => "marked_as_spam_#{params[:dom]}", :url=>"/profiles/give_spam_reason",:html=>{:mehtod=>:get})  do -%>
+        <div style="clear: both; height: 6px;"/>
+            <table style="text-align:left;margin-top:-20px;" cellspacing="10">
+            <input type="hidden" value="<%= params[:id] %>" name="id" id="id">
+            <input type="hidden" value="<%=params[:dom]%>" name="id" id="id">
+            <tr><td colspan="2" align="center"><b>Spam Reason</b><br/> </td></tr>
+             <tr><td align="right">Comment : </td><td><%=text_area  "profile_message", "spam_reason", :cols=>44,:rows=>4 %></td></tr>
+            <tr>
+              <td colspan="2" align="center">
+                     &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <input type="submit" value=" Submit " name="commit" class="submit_l" onclick="lightbox_controller.close();"/>
+                    <%- if request.xhr? -%>
+                      <%= button_to_function 'Cancel', 'lightbox_controller.close()', :class=>"submit_l" %>
+                    <%- end -%>
+               </td>
+           </tr>
+      </table>
+    	<%- end -%>
+</div>

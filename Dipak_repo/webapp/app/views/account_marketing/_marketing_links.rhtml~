@@ -1,0 +1,109 @@
+<% if request.xhr? %>
+<%= javascript_include_tag "editor_script" %>
+<% end %>
+
+<%- @page_title = "Buyer Responder" -%>
+<%# require_js_controllers :tab, :account_settings, :lightbox, :profile_update -%>
+<% require_js_controllers :lightbox, :profile_update -%>
+<%- content_for :page_scripts do -%>
+Event.observe(window, 'load', function() {
+//account_settings_controller = new NL.AccountSettingsController();
+lightbox_controller = new NL.LightboxController();
+});
+function show_confirmation()
+{
+if(business_name_bc==business_name_ac && business_address_bc==business_address_ac && business_phone_bc==business_phone_ac && business_email_bc==business_email_ac)
+ return true;
+else
+ return !confirm("Your settings have not been saved. Are you sure you want to exit this page? To save your changes, click OK, then click \"Update Settings\".");
+}
+
+function values_after_change()
+{
+ business_name_ac = $('user_company_info_business_name').value;
+ business_address_ac = $('user_company_info_business_address').value;
+ business_phone_ac = $('user_company_info_business_phone').value;
+ business_email_ac = $('user_company_info_business_email').value;
+}
+
+function toggel_personalized_list(editor){
+ var link = document.getElementById(editor)
+ var list = document.getElementById('personalized_list')
+ if (link.rel=='true' && list.style.display!='none'){
+ list.style.display='none';
+ link.setAttribute('rel', false);
+ }else{
+ list.style.display='block';
+ link.setAttribute('rel', true);
+ }
+ var personalized_items = document.getElementsByClassName('personalized_item');
+ for (var i = 0; i < personalized_items.length; i++) {
+ personalized_items[i].setAttribute('value', editor);
+ }
+}
+
+function getIFrameDocument(aID){
+ if (document.getElementById(aID).contentDocument){
+ return document.getElementById(aID).contentDocument;
+ } else {
+ return document.frames[aID].document;
+ }
+}
+
+function doRichEditCommand(frame, personalize, index, flag){
+ if (flag==1)
+ { oframe = 'buyer_notification_' + frame; }
+ else
+ { oframe = 'trust_responder_notification_' + frame; }
+ var pattr = /\{\w+[\s\w+]+\}/g;
+ var personalize_array = personalize.match(pattr);
+ text = personalize_array[index];
+ var browser = sendToClipboard(text);
+ if (browser != "Not IE"){
+ document.getElementById(oframe).contentWindow.focus();
+ var temp = getIFrameDocument(oframe).execCommand('paste');
+ document.getElementById(oframe).contentWindow.focus();
+ document.getElementById('personalized_list').style.display='none';
+ }
+ if (browser == "Not IE"){
+ var temp = getIFrameDocument(oframe).execCommand('InsertHTML', false, text);
+ document.getElementById(oframe).contentWindow.focus();
+ document.getElementById('personalized_list').style.display='none';
+ }
+}
+
+function sendToClipboard(s){
+ if (window.clipboardData && clipboardData.setData){
+ clipboardData.setData("text", s);
+ }
+ else{
+ return "Not IE";
+ }
+}
+<%- end -%>
+<% content_for :page_styles do -%>
+<%=stylesheet_link_tag "lightbox" %>
+<% end -%>
+<div class="full">
+<!--
+  <div class="tabset larger">
+    <ul>
+      <li uri="<%#=url_for({:controller=>'account', :action=>'settings'})%>">
+        Investor Profile
+      </li>
+      <li uri="<%#=url_for({:controller=>'account', :action=>'company_info'})%>">
+        Company Info
+      </li>
+      <li uri="<%#=url_for({:controller=>'account', :action=>'buyer_webpage'})%>">
+        Buyer Websites
+      </li>
+      <li class="active" uri="<%#=url_for({:controller=>'account_marketing', :action=>'welcome_email'})%>">
+        Buyer Responder
+      </li>
+      <li uri="<%#=url_for({:controller=>'account', :action=>'digest_frequency'})%>">
+        Alerts
+      </li>
+    </ul>
+  </div>
+-->
+</div>

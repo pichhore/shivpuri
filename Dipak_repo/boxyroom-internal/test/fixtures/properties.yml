@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  description: MyText
+  country: MyString
+  city: MyString
+  streetname: MyString
+  postcalcode: 1
+  rentalperiod: 1
+  landlordlivein: false
+
+two:
+  description: MyText
+  country: MyString
+  city: MyString
+  streetname: MyString
+  postcalcode: 1
+  rentalperiod: 1
+  landlordlivein: false

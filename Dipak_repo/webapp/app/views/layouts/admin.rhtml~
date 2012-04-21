@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+        <meta name="author" content="Blue Jazz Consulting (www.bluejazzconsulting.com)" />
+        <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+        <%- if @meta_keywords -%>
+        <meta name="keywords" content="<%=@meta_keywords%>"/>
+        <%- end -%>
+        <%- if @meta_description -%>
+        <meta name="description" content="<%=@meta_description%>"/>
+        <%- end -%>
+
+        <%=stylesheet_link_tag "style"%>
+        <%=stylesheet_link_tag "admin-style"%>
+        <% if @content_for_page_styles -%>
+        <%= @content_for_page_styles %>
+        <% end -%>
+        
+		<%= include_yui_editor_if_used %>
+		<%= include_yui_lightbox_if_used %>
+        <%=javascript_include_tag "prototype"%>
+        <%=javascript_include_tag "scriptaculous"%>
+        <%=javascript_include_tag "object.event.js"%>
+        <%=javascript_include_tag "base_controller"%>
+        <%=javascript_include_tag "utils-debug" if RAILS_ENV != "production"%>
+        <%=javascript_include_tag "utils" if RAILS_ENV == "production"%>
+        <%=javascript_include_tag "application"%>
+        <%=javascript_include_tag "validation"%>
+        <%= stylesheet_link_tag "reimatcher/epoch_styles" %>
+	   <%=javascript_include_tag "reimatcher/epoch_classes"%>
+        <%=add_js_requires%>
+        <%= active_scaffold_includes %>
+
+
+         <% if @content_for_page_scripts -%>
+         <script type="text/javascript">
+         // <![CDATA[
+         <%= @content_for_page_scripts %>
+         // ]]>
+         </script>
+         <% end -%>
+
+        <title>REIMatcher admin</title>
+</head>
+<body>
+  <% if RAILS_ENV == 'production' %>
+  <%= clicktale_top %>
+  <% end %>
+  <div>
+    
+    <%- if logged_in? -%>
+
+      <div id="admin_nav">
+
+        <strong>Admin Options:</strong>
+        <%=link_to_unless_current "Start", :controller=>'/admin/start', :action=>'index'%> |
+        <%=link_to_unless_current "Reports", :controller=>'/admin/reports', :action=>'index'%> |
+        <%=link_to_unless_current "Users", :controller=>'/admin/admin_users', :action=>'index'%> |
+        <%=link_to_unless_current "Profiles", :controller=>'/admin/admin_profiles', :action=>'index'%> |
+        <%=link_to_unless_current "Tips", :controller=>'/admin/admin_tips', :action=>'index'%> |
+        <%=link_to_unless_current "Ads", :controller=>'/admin/admin_ads', :action=>'index'%> | 
+        <%=link_to_unless_current "Page Alerts", :controller=>'/admin/alert_definitions', :action=>'index'%> | 
+        <%=link_to_unless_current "Profile Email Alerts", :controller=>'/admin/email_alert_definitions', :action=>'index'%> |
+        <%=link_to_unless_current "User Email Alerts", :controller=>'/admin/user_email_alert_definitions', :action=>'index'%> |
+        <%=link_to_unless_current "Sendgrid Emails", :controller=>'/admin/admin_emails/', :action=>'index'%> |
+	<%=link_to_unless_current "Badges", :controller=>'/admin/badges/', :action=>'index'%> | 	<%=link_to_unless_current "Shopping Cart Users", :controller=>'/admin/user_shopping_cart/', :action=>'index'%> | <%=link_to_unless_current "Contracts", :controller=>'/admin/super_contract_integrations/', :action=>'index'%> 
+      </div>
+
+
+    <div id="user"><%=link_to "logged in as #{current_user.login}", :controller=>'/account', :action=>'settings' %>  &middot; <%=link_to "REIMatcher Homepage", :controller=>'/home', :action=>'index'%>  &middot; <%=link_to "Sign out", :controller=>'/sessions', :action=>'destroy'%></div>
+
+    <%- else -%>
+
+    <div id="user"><%=link_to "Sign in", :controller=>'sessions', :action=>'new'%></div>
+
+    <%- end -%>
+
+  <div>
+
+    <div class="widecontent">
+
+
+      <!--
+      <div id="notice" class="notice" <%="style=\"display:none\"" if !flash[:notice]%>><%=flash[:notice]%></div>
+
+      <%- if flash[:warning] -%>
+
+      <div class="warning"><%=flash[:warning]%></div>
+
+      <%- end -%>
+
+      <%- if flash[:error] -%>
+
+      <div class="error"><%=flash[:error]%></div>
+
+      <%- end -%>
+      -->
+
+    </div>
+
+    <div class="widecontent">
+
+      <%=@content_for_layout%>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <div id="scratch" style="display:none;"></div>
+
+  </div>
+
+  </div>
+  <% if RAILS_ENV == 'production' %>
+  <%= clicktale_bottom %>
+  <% end %>
+</body>
+
+</html>

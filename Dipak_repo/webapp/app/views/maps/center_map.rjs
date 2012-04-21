@@ -1,0 +1,23 @@
+page << "map.clearOverlays();"
+
+@overlays.each do |overlay|
+  page << "map.addOverlay(" + overlay.to_javascript() + ")"
+end
+
+page << "map.setCenter(new GLatLng(" + @center_lat + "," + @center_lng + "));"
+
+page.replace_html 'highlighted_zip', session[:maps_buyer_preview_zip].zip
+page.replace_html 'highlighted_city', session[:maps_buyer_preview_zip].city
+page.replace_html 'highlighted_state', session[:maps_buyer_preview_zip].state
+page.replace_html 'highlighted_profile_count', @profile_count
+
+# flash.each do |key, msg| 
+#   page.replace_html key, msg 
+# end
+
+# page.replace_html 'notice', flash[:notice]
+# page['notice'].visual_effect :fade, :duration => 5
+
+# flash.discard
+
+

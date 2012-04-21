@@ -1,0 +1,177 @@
+<%=stylesheet_link_tag "lightbox"%>
+
+<% require_js_controllers :ifp_lightbox, :lightbox_image -%>
+<%- content_for :page_scripts do -%>
+Event.observe(window, 'load', function() {
+  	     lightbox_controller = new NL.LightboxController();
+         $('user_territory_territory_id').observe('change', function(){ 
+           $('submit_states_territory').click();
+         });
+         $('state_code_state_code').observe('change', function(){
+        state_id = $('state_code_state_code').value
+        new Ajax.Request('/account/get_territories?state_id='+state_id,
+          {
+          method:'get',
+          onSuccess: function(transport){
+          var response = transport.responseText || "no response text";
+          $('ajax_update_div').innerHTML = response
+          },
+          onComplete: function(){
+              $('user_territory_territory_id').observe('change', function(){
+                    $('submit_states_territory').click();
+              });
+          },
+        onFailure: function(){ alert('Something went wrong...') }
+        });
+        });
+
+        $('state_code_state_code').value = $('current_state_id').value;
+        $('country_country').value = $('current_country_id').value;
+        $('user_territory_territory_id').value = $('current_territory_id').value;
+});
+
+  function receive_enter_key(event)
+  {
+    if (event.keyCode == 13)
+      {
+        go_to_investor_search(); //function call to enter key code
+      }
+  }
+
+  function go_to_investor_search()
+  {
+    user_territory_territory_id = $('user_territory_territory_id').value
+    state_code_state_code = $('state_code_state_code').value
+      new Ajax.Request('/account/investor_network',
+      {
+        method:'POST',
+        parameters: {user_territory_territory_id: user_territory_territory_id, state_code_state_code: state_code_state_code, search_investor: $('search_investor').value },
+        onLoading: function(){ $('investor_search_spinner').style.visibility = 'visible' },
+        onSuccess: function(transport){
+        var response = transport.responseText || "no response text";
+        $('territoy_Investor').innerHTML = response
+        },
+        onLoaded: function(){$('investor_search_spinner').style.visibility = 'hidden'},
+        onFailure: function(){ alert('Something went wrong...') }
+    });
+   }
+
+  function go_to_back_page(path)
+  {
+    window.location = path + "?state_code=" + $('state_code_state_code').value + "&user_territory_id=" + $('user_territory_territory_id').value + "&search_investor=" + $('search_investor').value + "&page_number=" + $('page_number').value
+  }
+
+<% end %>
+<%- @page_title = "Investor Network" -%>
+<!--Filter-->
+
+<%= hidden_field_tag "current_state_id", @state_selected %>
+<%= hidden_field_tag "current_country_id", @country_selected %>
+<%= hidden_field_tag "current_territory_id", @territory_selected_id %>
+
+<%form_remote_tag (:update=>"territoy_Investor",:url=>{ :controller => "account", :action => "investor_directory_page"},:html=>{:method=>:post}, :loading => "$('spinner').style.visibility = 'visible'", :complete => "$('spinner').style.visibility = 'hidden'") do%>
+  <div class="investro_dir_right_row_div">
+              <div class="investro_dir_inner_right_div">
+                <select name="country[country]" id="country_country">
+                  <%= options_for_select([[ "--- Select Country ---", "" ]] + County::COUNTRY_NAME, @country) %>
+                </select>
+                </div>
+                <span id="territory_block">
+                <% if !@country_selected.blank? and @country_selected == "CA" %>
+                    <div class="investro_dir_inner_right_territory_div" id="ajax_update_div">
+                      <%=select("user_territory","territory_id",@territories.map { |territory| [territory.territory_name, territory.id]  },{ :include_blank => "--- Select Province --- " })%>
+                      <%=error_message_on :user_territory,:territory_id %>
+                    <input type="hidden" name="state_code[state_code]" id="state_code_state_code">
+                    </div>
+                <% else %>
+                        <div class="investro_dir_inner_right_div">
+                          <select name="state_code[state_code]" id="state_code_state_code" style="margin-left:15px;">
+                            <option value="">--- Select State --- </option>
+                              <% @states.each do |state|%>
+                                  <option value="<%=state.id%>" <%if !@state_selected.blank? && @state_selected == state.id %> selected="true" <%end%> ><%if !state.name.blank?%> <%=state.name%> <%else%> <%=state.state_code%> <%end%> </option>
+                                <%end%>
+                          </select>
+                          </div>
+                          <div class="investro_dir_inner_right_territory_div" id="ajax_update_div">
+                            <%if @territory_selected_id.blank?%>
+                            <%=select("user_territory","territory_id",@territories.map { |territory| [territory.territory_name, territory.id]  },{ :include_blank => "--- Select Territories --- " })%>
+                            <%else%>
+                                <select name="user_territory[territory_id]" id="user_territory_territory_id">
+                                    <option value="">--- Select Territories --- </option>
+                                      <% @territories.each do |territory|%>
+                                          <option value="<%=territory.id%>" <%if !@territory_selected_id.blank? && @territory_selected_id ==territory.id %> selected="true" <%end%> ><%=territory.territory_name%></option>
+                                        <%end%>
+                                  </select>
+                            <%end%>
+                            <%=error_message_on :user_territory,:territory_id %>
+                          </div>
+              <% end %>
+            </span>
+  </div>
+	<img style="visibility: hidden;" src="/images/spinner.gif" id="spinner" class="loading-indicator" alt="loading indicator"/> 
+  <div style='display:none;'>
+    <%=submit_tag "Go", :class=>'submit_s', :id=>'submit_states_territory' %>
+  </div>
+<%end%>
+<br/>
+<div class="left" id="territoy_Investor">
+     <%=render :partial=>"investor_directory_page" %>
+</div>
+
+<div style="display:none;" id="overlay_Lightbox"></div>
+
+<div class="right" >
+  <div>
+    <h3>Investor Search</h3>
+    <div style="margin-top:3px;">
+      <input type="text" id="search_investor" value="<%= params[:search_investor] %>" onkeyup="return receive_enter_key(event);" >
+      <INPUT type="button" onclick="go_to_investor_search();" name="search" value="search"/> <img style="visibility: hidden;" src="/images/spinner.gif" id="investor_search_spinner" class="loading-indicator" alt="loading indicator"/>
+    </div>
+  </div>
+
+<div style="display:none;" id="lightbox_inv_msg_contents">Lightbox</div>
+    <h3 style="margin-top:20px; position: relative;">Recent Activity
+                    <%=link_to_remote("Refresh",{:url => {:action => :get_feeds, :controller=>:account}, :method => :get, :update => "feeds", :loading => "$('feeds_spinner').style.visibility = 'visible'", :loaded => "$('feeds_spinner').style.visibility = 'hidden'"},{ :title=>"Refresh Feeds",:style=>"padding-left:25%;" }) %>
+        <img style="position: absolute; left: 245px; top: 2px; visibility: hidden;" src="/images/spinner.gif" id="feeds_spinner" class="loading-indicator" alt="loading indicator" /></h3>
+    <div class="right_articles legend">
+        <table id="feeds" width="100%">
+          11<%= render :partial=>"feed", :collection=>@feeds %>
+        </table>
+	<% if @feeds.blank? %><p style="font: 0.9em/1.5em Tahoma,sans-serif; text-color: #414141; font-weight: bold;padding-left: 5px;">No recent activity to display</p><% end %>
+    </div>
+</div>
+
+<script type="text/javascript">
+  setTimeout("new Effect.Fade('notice');", 10000)
+
+  $('country_country').observe('change', function(){
+      country_id = $('country_country').value
+      new Ajax.Request('/account/update_investor_territory/',
+      {
+          method:'get',
+           parameters: {country_id: country_id},
+          onSuccess: function(transport){
+             var response = transport.responseText || "no response text";
+             $('territory_block').innerHTML = response
+          },
+          onFailure: function(){ alert('Something went wrong...') }
+      });
+   });
+
+  function get_us_territories_for_investors(){
+      state_id = $('state_code_state_code').value
+      new Ajax.Request('/account/get_investor_territories?state_id='+state_id,
+      {
+          method:'get',
+          onSuccess: function(transport){
+             var response = transport.responseText || "no response text";
+             $('ajax_update_div').innerHTML = response
+          },
+          onFailure: function(){ alert('Something went wrong...') }
+      });
+   }
+
+    function get_investors_by_territory(){
+      $('submit_states_territory').click();
+  }
+</script>

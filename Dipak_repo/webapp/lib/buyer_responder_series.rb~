@@ -1,0 +1,7 @@
+class BuyerResponderSeries
+  def self.get_responder_description(user_id,summary_type)
+debugger
+    buyer_notification = BuyerNotification.find(:first,:conditions => ["user_id = ? and summary_type LIKE ?",user_id,summary_type])
+    return buyer_notification
+  end
+end

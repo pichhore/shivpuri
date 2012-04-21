@@ -1,0 +1,5 @@
+<h1>Approve</h1>
+<% @properties.each do |t| %>
+  <%= link_to t.title, {:controller => :properties, :action => :show, :id => t.id} %> by <%= t.owner.firstname %> <%= t.owner.lastname %><br>
+<% end %> 
+

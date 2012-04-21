@@ -1,0 +1,155 @@
+<head>
+  <!--[if IE 7]>
+   <style type="text/css">
+    .ie7_td_prop{width: 290px !important;}
+    .ie7_prop_des{width: 182px !important;float:left;}
+    .description{position:relative;width:180px !important; margin-left: 0px !important;}
+    .location_ie7{position:relative;width:180px !important; margin-left: 0px !important;}
+    table {
+    border: 1px solid #CCCCCC!important;
+    margin-bottom: 16px!important;
+    width: 100%!important;
+    }
+    table tbody td{ border-bottom :1px solid #CCCCCC!important;}
+   </style>
+  <![endif]-->
+</head>
+<div id="content">
+        <div class="container">
+        <%= flash_message %>
+                <div class="primary">
+
+                        <table cellspacing="0" class="listings">
+                                <caption>My Applications To Rent</caption>
+                                <colgroup>
+                                        <col class="description" />
+                                        <col class="amount" />
+                                        <col class="status" />
+                                        <col class="actions" />
+                                </colgroup>
+                                <thead>
+                                        <tr>
+                                                <th>Description</th>
+                                                <th>Amount</th>
+                                                <th class="centralign">Status</th>
+                                                <th></th>
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                <%if !@applications.empty?%>
+                                <%- @applications.each do |application| %>
+                                  <%# can_display_in_dashboard(application.property) do %>
+                                        <tr>
+                                                <td width="260px" class="ie7_td_prop">
+                                                        <a class="link" href="/my/applications/<%= application.id %>">
+                                                                <div class="thumbnail">
+                                                                  <%- if application.property.pictures.empty? %>
+                                                                    <%= image_tag("/images/missing/missing_properties_thumb.png") %>
+                                                                  <%- else %>
+                                                                    <%= image_tag(application.property.pictures.first.image.url(:thumb)) %>
+                                                                  <%- end %>
+                                                                </div>
+                                                                <div class="ie7_prop_des">
+                                                                  <p class="description" style="margin-left: 82px;"><%=application.property.title.slice(0..50)%><%= "..." if application.property.title.size>50%><div style="margin-top: 2px;margin-left: 82px;" class="location_ie7"><strong class="location"  ><%= truncate application.property.address.location %></strong></div></p>
+                                                                </div>
+                                                        </a>
+                                                </td>
+                                                <td id="amount_field" width="150px"><%= return_currency_abbrebiation(application.property.currency_type.nil? ? 'USD' : application.property.currency_type)%><%= ISO4217::Currency.from_code(application.property.currency_type.nil? ? 'USD' : application.property.currency_type).symbol%><%=application.property.monthly_rental.to_i%></td>
+                                                <%if application.approved?%>
+                                                  <td class="status_icon_td" width="150px"><span class="green status approved"></span></td>
+                                                <%elsif application.pending?%>
+                                                   <td class="status_icon_td" width="150px"><span class="orange status pending"></span></td>
+                                                <%elsif application.rejected?%>
+                                                    <td class="status_icon_td" width="150px"><span class="red status rejected"></span></td>
+                                                <%elsif application.cancelled?%>
+                                                    <td class="status_icon_td" width="150px"><span class="red status cancelled"></span></td>
+                                                <%elsif application.paid?%>
+                                                    <td class="status_icon_td" width="150px"><span class="blue status paid"></span></td>
+                                                <%elsif application.moved_in?%>
+                                                    <td class="status_icon_td" width="150px"><span class="red status moved_in"></span></td>
+                                                <% end %>
+                                                <td width="150px">
+                                                        <div class="manage">
+                                                                <strong></strong>
+                                                                <ul class="menu">
+                                                                  <li><%= link_to "View Application", my_application_path(application) %></li>
+                                                                  <%- if application.can_pay? %>
+                                                                    <li><%= link_to "Make Payment", make_payment_my_application_path(application) %></li>
+                                                                  <%- elsif application.can_edit?%>
+                                                                    <li><%= link_to "Edit Application", edit_my_application_path(application) %></li>
+                                                                  <%- end %>
+                                                                  <%- if application.can_cancel? %>
+                                                                    <li><%= link_to "Cancel Application", my_application_path(application), :confirm => "Are you sure you want to cancel your application?", :method => :delete %></li>
+                                                                  <%- end %>
+                                                                  <li><%= link_to "View Property", property_path(application.property) %></li>
+                                                                  <li><%= link_to "Contact Landlord", new_my_message_path(:to => application.property.owner.id) %></li>
+                                                                  <%- if application.can_resend? %>
+                                                                    <li><%= link_to "Resend Application", resend_my_application_path(application), :method => :put %></li>
+                                                                  <%- end %>
+                                                                  <%- if can_write_review(application) %>
+                                                                    <li><%= link_to "Write Review",     write_review_my_application_path(application.id) %></li>
+                                                                  <%- end %>
+                                                                </ul>
+                                                        </div>
+							<div class="stats">
+							    <ul style="display: block;top: 33px">
+								<li class="likes"><%= property_likes_count(application.property) %> likes</li>
+								<li class="reviews"><%= property_review_count(application.property) %> reviews</li>
+								<%if verified_property(application.property)%>
+								  <li class="verified last-child">Verified</li>
+								<% end %>
+							    </ul>
+							</div>
+                                                </td>
+                                        </tr>
+                                        <%# end %>
+                                <%- end %>
+                                <%else%>
+                                  <tr><td>Nothing to show you.</td><td></td><td></td><td></td></tr>
+                                <%end%>
+                                </tbody>
+                                <tfoot>
+                                        <tr>
+                                                <td colspan="4">
+                                                        <%= will_paginate @applications, :previous_label => "Previous", :next_label => "Next"%></li>
+                                                </td>
+                                        </tr>
+                                </tfoot>
+                        </table>
+
+                </div>
+               <div class="secondary" >
+                    <div class="section" id="section_height">
+                         <h3 class="yellow">Summary</h3>
+                    </div>
+                </div>
+                <%@user.applications.each do |application| %>
+                  <%if application.approved?%>
+                      <div class="secondary">
+                            <div class="section1 ahead" > 
+                                    <p class="amount_field" style="color: #FF0000;"><%=duration_left_to_pay(application.approved_at) %><span style="font-size: 25px;">HOURS</span></p>
+                                    <p class="my_app_red">TIME LEFT TO PAY ADVANCE RENT <span style="font-size: 23px;">!</span></p>
+                                    <p class="my_app_red"><a href="/my/applications/<%=application.id%>/make_payment" class="red_link" >Click to secure your rental property now</a></p>
+                            </div>
+                      </div>
+                    <% end %>
+                 <% end %>
+                <div class="secondary">
+                  <div class="section1 ahead" >
+                    <p class="amount_field"><%= @user.applications.approved.count%></p>
+                    <p class="notification_under_records">APPLICATIONS APPROVED</p>
+                  </div>
+                </div>
+                <%if @user.applications.cancelled.count > 0%>
+                  <div class="secondary">
+                    <div class="section1 ahead">
+                      <p class="amount_field"><%= @user.applications.cancelled.count%></p>
+                      <p class="notification_under_records">APPLICATIONS TIMED OUT</p>
+                    </div>
+                  </div>
+                <% end %>
+        </div>
+</div>
+
+
+

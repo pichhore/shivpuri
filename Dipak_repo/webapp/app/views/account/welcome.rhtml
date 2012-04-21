@@ -1,0 +1,14 @@
+
+<%- @page_title = "Welcome, #{@user.first_name}!" -%>
+<% if @user.is_user_comes_from_reim_home_page %>
+  <center><div id="evp-8a7e0e274fd0e4253614d8d0c1f14986-wrap" class="evp-video-wrap"></div><script type="text/javascript" src="http://www.damonflowers.com/evp/framework.php?div_id=evp-8a7e0e274fd0e4253614d8d0c1f14986&id=bmV3LXdlbGNvbWUtdmlkZW8tMS5tb3Y%3D&v=1329313726&profile=default"></script><script type="text/javascript"><!--
+_evpInit('bmV3LXdlbGNvbWUtdmlkZW8tMS5tb3Y=[evp-8a7e0e274fd0e4253614d8d0c1f14986]');//--></script></center>
+<% else %>
+  <center><div id="evp-d160395f4f83d652ad16184362c4e3b0-wrap" class="evp-video-wrap"></div><script type="text/javascript" src="http://www.damonflowers.com/evp/framework.php?div_id=evp-d160395f4f83d652ad16184362c4e3b0&id=ZGFtb24tcGhpbGwtd2VsY29tZS0xLm00dg%3D%3D&v=1306991720&profile=welcome"></script><script type="text/javascript"><!--
+_evpInit('ZGFtb24tcGhpbGwtd2VsY29tZS0xLm00dg==[evp-d160395f4f83d652ad16184362c4e3b0]');//--></script></center>
+<% end %>
+
+<br/>
+<center><%= button_to "Next", {:action => "step1"}, :class=>'submit' %></center>
+
+

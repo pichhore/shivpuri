@@ -1,0 +1,18 @@
+<h2>Define New Email Alert</h2>
+<div style="margin: 20px 40px 20px 40px">An User Email Alert Definition describes the message that will be send to the user in the form of email alert and the conditions required for the Alert to be created.</div> 
+
+
+
+
+<% form_for(@user_email_alert_definition, :url => admin_user_email_alert_definitions_path, :html => { :method => 'post' } ) do |f| %>
+
+<div class="formError"><%= error_messages_on :user_email_alert_definition %></div>  
+<%= render :partial => "user_email_alert_form", :locals => {:f=>f}%>
+
+  <p>
+    <%= f.submit "Create", :style=>"float: left; margin-right: 10px;" %>
+    <%= button_to_function 'Cancel', "document.location='#{admin_user_email_alert_definitions_path}';" %>
+  </p>
+<% end %>
+
+

@@ -1,0 +1,37 @@
+
+    <% if !@seller_profiles.blank? && !current_user.blank?%>
+
+    <table  border="0" cellspacing="0" class="investor_inbox_grid">
+    <tr>
+      <th class="lead_space" style="padding-right:20px;"></th>
+      <th class="lead_space" style="padding-right:65px;">Date</th>
+      <th class="lead_space">Name</th>
+      <th class="lead_space">Address</th>
+      <th style="padding-right:0px;" class="lead_space">Sequence</th>
+    </tr>
+      <% @seller_profiles.each do |seller_profile| %>
+
+        <tr class="hover_change" style="<%= get_style_for_new_property(seller_profile)%>">
+            <td class="investor_inbox_seperator">
+              <%= radio_button_tag 'seller', seller_profile.id %>
+            </td>
+            <td class="investor_inbox_seperator" onclick="go_to_seller_full_page_view('<%=seller_lead_full_page_view_seller_website_path(seller_profile.id)%>');" >
+              <%= seller_profile.created_at.strftime("%m/%d/%y") unless seller_profile.created_at.blank?%>
+            </td>
+            <td class="investor_inbox_seperator" onclick="go_to_seller_full_page_view('<%=seller_lead_full_page_view_seller_website_path(seller_profile.id)%>');">
+                <%= seller_profile.first_name.to_s + " " + seller_profile.last_name.to_s %>
+            </td>
+            <td class="investor_inbox_seperator" onclick="go_to_seller_full_page_view('<%=seller_lead_full_page_view_seller_website_path(seller_profile.id)%>');">
+               <% if !seller_profile.seller_property_profile.blank? %>
+                  <%=seller_profile.seller_property_profile[0].property_address.to_s%> &nbsp;
+               <%end%>
+            </td>
+            <td class="investor_inbox_seperator" onclick="go_to_seller_full_page_view('<%=seller_lead_full_page_view_seller_website_path(seller_profile.id)%>');"><%= get_responder_sequence_name(seller_profile) %></td>
+         </tr>
+      <%end%>
+    </table>
+    <div align="right"><%= will_paginate @seller_profiles, :params=>{:sequence_type => "#{params[:sequence_type]}"} %></div>
+    <div align="left"><input type="submit" value="Assign Seller Lead"></div>
+  <%else%>
+    No Seller Leads Found
+  <%end%>

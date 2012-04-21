@@ -1,0 +1,23 @@
+<h1>Listing Contracts</h1>
+
+<table>
+  <tr>
+		<th style="text-align:left;">State</th>
+		<th></th>
+		<th></th>
+		<th></th>
+  </tr>
+
+<% @super_contract_integrations.each do |super_contract_integration| %>
+  <tr>
+		<td style="padding-right:40px;"><%= super_contract_integration.state.name %></td>
+    <td><%= link_to 'Show', admin_super_contract_integration_path(super_contract_integration) %></td>
+    <td><%= link_to 'Edit', edit_admin_super_contract_integration_path(super_contract_integration) %></td>
+    <td><%= link_to 'Destroy', admin_super_contract_integration_path(super_contract_integration), :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Add New Contract', new_admin_super_contract_integration_path %>

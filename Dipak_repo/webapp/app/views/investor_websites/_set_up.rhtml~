@@ -1,0 +1,176 @@
+  <% form_for(@investor_website, :html => { :multipart => true}) do |f| %>
+      <%= f.hidden_field :user_id,:value => current_user.id %>
+      <table>
+        <tr>
+          <th class="seller_page_header">Header</th>
+          <td>
+            <%= f.text_field :header,:size => 83%>
+             <%=error_message_on :investor_website,:header%>
+          </td>
+        </tr>
+        <tr>
+          <th class="seller_page_header">Tagline</th>
+          <td>
+            <%= f.text_field :tagline,:size => 83%>
+             <%=error_message_on :investor_website,:tagline%>
+          </td>
+        </tr>
+
+        <tr>
+          <th class="seller_page_header">Homepage Text</th>
+          <td >
+               <%= f.text_area :home_page_text ,:class=>"rich_text_editor", :size => "70x4",:style=>'margin-left:0px;' %><%=error_message_on :investor_website,:home_page_text%>
+           </td>
+        </tr>
+
+        <tr>
+          <th class="seller_page_header">Phone</th>
+          <td>
+            <%= f.text_field :phone,:size => 20%>
+             <%=error_message_on :investor_website,:phone%>
+          </td>
+        </tr>       
+        <tr>
+          <th class="seller_page_header">About Us Page Text</th>
+          <td>
+            <%if button_name != "Update Settings"%>
+                <% about_us_text =  InvestorWebsite::ABOUT_TEXT.to_s%>
+                <%= f.text_area :about_us_page_text,:style=>'margin-left:0px;',:class=>"rich_text_editor", :size => "70x4",:value=>about_us_text %>
+            <%else%>
+                 <% about_us_text =  @investor_website.about_us_page_text.to_s%>
+                 <%= f.text_area :about_us_page_text,:style=>'margin-left:0px;',:class=>"rich_text_editor", :size => "70x4",:value=>about_us_text %>
+             <%end%>
+              <%=error_message_on :investor_website,:about_us_page_text%>
+              <%if !params[:my_website_form].blank?%>  
+                  <%=hidden_field_tag "domain_name", @domain_name%>
+                  <%=hidden_field "investor_website","domain_type",:value=> params[:my_website_form][:domain]%>
+                  <%=hidden_field "investor_website", "permalink_text"%>
+              <%end%>
+          </td>
+        </tr> 
+    <%if button_name == "Update Settings"%>
+        <%if @investor_website.domain_type== MyWebsiteForm::DOMAIN_TYPE[:reim]%>
+            <tr>
+              <th class="seller_page_header">Perma Link</th>
+              <td>
+                    <%= f.text_field :permalink_text,:size => 10 %>
+                      <div style="width:500px;">
+                        <%=error_message_on :investor_website,:permalink_text%>
+                      </div>
+              </td>
+            </tr>
+        <%elsif @investor_website.domain_type== MyWebsiteForm::DOMAIN_TYPE[:having]%>
+             <tr>
+              <th class="seller_page_header">Domain Name</th>
+              <td>
+                   <%f.fields_for :my_website ,@investor_website.my_website do |my_website_form| %>
+                      <%= my_website_form.text_field :domain_name, :value=>@investor_website.my_website.domain_name.to_s.downcase %>
+                       <div style="width:500px;">
+                        <%=my_website_form.error_message_on :domain_name%>
+                      </div>
+                    <% end %>
+                    
+              </td>
+            </tr>
+        <%end%>
+   <%end%>      
+
+        <tr>
+        <th>Website Logo:</th>
+          <td>
+            <div>
+				      <%- if !@investor_website_image.blank? && @investor_website_image.size.to_i > 0 && !@investor_website_image.find_profile_thumbnail.nil? -%>
+				      <%=image_tag @investor_website_image.public_filename(:profile), :class=>"thumbnail"%>
+				      <br />
+				      <%- end -%>
+            </div>
+            <div>
+              <input type="file" size="30" name="investor_website_image[uploaded_data]" id="investor_website_image_uploaded_data"/>
+             </div>
+             <div>
+                  <p>Note: Only .png, .jpg, and .gif image types are accepted and images are limited to 3MB in size.</p>
+             </div>
+	       </td>
+	       </tr>
+	       
+        <tr>
+          <th class="seller_page_header">Choose Layout</th>
+          <td>
+            <%= f.radio_button "layout", "professional" %> Professional <%= f.radio_button "layout", "modern" %> Modern
+          </td>
+        </tr>
+
+        <tr>
+          <th class="seller_page_header">Design Color</th>
+          <td>
+           <div class="inner_right_div">
+            <% current_object_css=@investor_website.dynamic_css %>
+            <table class="table_class">
+              <TR class="fix_height_tr" align="center"> 
+                    <TD class="fix_width_td"> <div id="div3"  onclick="set_css_color(this)" class="select_css <% if current_object_css == "rgb(20, 149, 215)"%><%="set_class_css"%> <%end%>" style="background-color:rgb(20 ,149 ,215);"></div></TD> 
+                    <TD class="fix_width_td"><div id="div2"  onclick="set_css_color(this)" class="select_css <% if current_object_css == "rgb(75, 183, 108)"%><%="set_class_css"%> <%end%>" style="background-color:rgb(75 ,183 ,108);"></div></TD> 
+                    <TD class="fix_width_td" ><div id="div1" onclick="set_css_color(this)" class="select_css <% if current_object_css == "rgb(190, 103, 60)"%><%="set_class_css"%> <%end%>" style="background-color:rgb(190 ,103 ,60);"></div></TD> 
+              </TR>
+            </table>
+            <%=hidden_field "investor_website", "dynamic_css"%>
+           </div>
+          </td>
+        </tr>
+
+        <tr>
+          <th class="seller_page_header">Banner Image</th>
+          <td>
+           <div class="inner_right_div">
+            <table class="banner_image_div_class">
+            <% current_banner_image_path = @investor_website.banner_image_path %>
+              <TR align="center"> 
+                    <TD><img width="60" src="<%= REIMATCHER_URL + InvestorWebsite::BANNER_IMAGE_PATH[1] %>" class="set_class_image <% if current_banner_image_path == REIMATCHER_URL + InvestorWebsite::BANNER_IMAGE_PATH[1] %><%="set_class_image_css"%> <%end%>" alt="Banner" onclick="set_banner_image_css(this)" ></TD> 
+                    <TD><img width="60" src="<%= REIMATCHER_URL + InvestorWebsite::BANNER_IMAGE_PATH[2] %>" class="set_class_image <% if current_banner_image_path == REIMATCHER_URL + InvestorWebsite::BANNER_IMAGE_PATH[2] %><%="set_class_image_css"%> <%end%>" alt="option2" onclick="set_banner_image_css(this)"></TD> 
+                    <TD><img width="60" src="<%= REIMATCHER_URL + InvestorWebsite::BANNER_IMAGE_PATH[3] %>" class="set_class_image <% if current_banner_image_path == REIMATCHER_URL + InvestorWebsite::BANNER_IMAGE_PATH[3] %><%="set_class_image_css"%> <%end%> " alt="option3" onclick="set_banner_image_css(this)"></TD>
+                    <TD><img width="60" src="<%= REIMATCHER_URL + InvestorWebsite::BANNER_IMAGE_PATH[4] %>" class="set_class_image <% if current_banner_image_path == REIMATCHER_URL + InvestorWebsite::BANNER_IMAGE_PATH[4] %><%="set_class_image_css"%> <%end%> " alt="option4" onclick="set_banner_image_css(this)"></TD>
+                    <TD><img width="60" src="<%= REIMATCHER_URL + InvestorWebsite::BANNER_IMAGE_PATH[5] %>" class="set_class_image <% if current_banner_image_path == REIMATCHER_URL + InvestorWebsite::BANNER_IMAGE_PATH[5] %><%="set_class_image_css"%> <%end%> " alt="option5" onclick="set_banner_image_css(this)"></TD>    
+              </TR>
+            </table>
+            <%= hidden_field "investor_website", "banner_image_path" %>
+           </div>
+          </td>
+        </tr>
+
+
+         <tr>
+          <th class="seller_page_header">Our Philosophy Page</th>
+          <td><%= f.check_box :display_our_philosophy_page %> ( Check this checkbox if you want to display this page ) <%=error_message_on :investor_website,:display_our_philosophy_page%></td>
+        </tr>
+
+        <tr>
+          <th class="seller_page_header">Our Philosophy Page Text</th>
+          <td >
+               <%= f.text_area :our_philosophy_page_text ,:class=>"rich_text_editor", :size => "70x4",:style=>'margin-left:0px;' %><%=error_message_on :investor_website,:our_philosophy_page_text%>
+           </td>
+        </tr>
+
+         <tr>
+          <th class="seller_page_header">Why Invest With Us Page</th>
+          <td><%= f.check_box :display_why_invest_with_us_page %> ( Check this checkbox if you want to display this page ) <%=error_message_on :investor_website,:display_why_invest_with_us_page%></td>
+        </tr>
+
+        <tr>
+          <th class="seller_page_header">Why Invest With Us Text</th>
+          <td >
+               <%= f.text_area :why_invest_with_us_page_text ,:class=>"rich_text_editor", :size => "70x4",:style=>'margin-left:0px;' %><%=error_message_on :investor_website,:why_invest_with_us_page_text%>
+           </td>
+        </tr>
+
+         <tr>
+          <th class="seller_page_header">Activate</th>
+          <td><%= f.check_box :active %><%=error_message_on :investor_website,:active%></td>
+        </tr>
+
+        <tr>
+          <%css_class_name = button_name == "Update Settings" ? "submit_xl" : "submit_s"%>
+          <td colspan="2" align="center">
+               <%= f.submit button_name, :class=>css_class_name %></td>
+        </tr>
+
+      </table>
+  <% end %>

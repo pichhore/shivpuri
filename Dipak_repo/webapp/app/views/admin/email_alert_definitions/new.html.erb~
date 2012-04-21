@@ -1,0 +1,61 @@
+<h2>Define New Email Alert</h2>
+<div style="margin: 20px 40px 20px 40px">An Email Alert Definition describes the message that will be send to the user in the form of email alert and the conditions required for the Alert to be created.</div> 
+
+<div class="formError"><%= error_messages_for :email_alert_definition %></div>
+
+
+<% form_for(@email_alert_definition, :url => admin_email_alert_definitions_path, :html => { :method => 'post' } ) do |f| %>
+  
+  <div style="margin-bottom: 15px;">
+    <b>Title: </b>
+    <div class="admin_tip">The title is displayed as the header of the alert message.</div>
+    <%= f.text_field :title, :size=> 40 %>
+  </div>
+  
+  <div style="margin-bottom: 15px;">
+    <b>Disabled: </b>
+    <div class="admin_tip">Disable the alert until you are ready to release it.
+      <%= f.check_box :disabled %>
+    </div>
+  </div>  
+
+  <div style="margin-bottom: 15px;">
+    <b>Alert Trigger</b>
+    <div class="admin_tip">The Alert Trigger Type that will determine under what conditions the Alert will be created.</div>
+    <%= f.collection_select(:alert_trigger_type_id, @alert_trigger_types, :id, :name, options={:prompt=>"-Select a Trigger Type-"},
+        :onchange=>"if (this.value) { $('parameter_description').innerHTML = $('parm_'+this.value).innerHTML } else { $('parameter_description').innerHTML = '' }") %>
+  </div>
+
+
+  <div style="margin-bottom: 15px;">
+    <b>Parameter(s): </b>
+    <div class="admin_tip">Some triggers require a parameter, for example, the on_event trigger requires the name of a date field on the User.</div>
+    <div id="parameter_description"></div>
+    <%= f.text_field :trigger_parameter_value %>
+  </div>
+  
+  <div style="margin-bottom: 15px;">
+    <b>Trigger Delay Days: </b>
+    <div class="admin_tip">For time-based triggers, indicate how many days before the event to create the Alert.</div>
+    <div><%= f.text_field :trigger_delay_days, :size=>6 %></div>
+  </div>
+  
+  <div style="margin-bottom: 15px;">
+    <b>Email Subject: </b>
+	<div class="admin_tip"></div>
+    <%= f.text_field :email_subject, :size=>80 %>
+  </div>
+  
+  <div style="margin-bottom: 15px;">
+    <b>Message Body: </b>
+	<div class="admin_tip"></div>
+    <%= f.text_area :message_body, :class=>"rich_text_editor", :size=> "80x4" %>
+  </div>
+
+  <p>
+    <%= f.submit "Create", :style=>"float: left; margin-right: 10px;" %>
+    <%= button_to_function 'Cancel', "document.location='#{admin_email_alert_definitions_path}';" %>
+  </p>
+<% end %>
+
+

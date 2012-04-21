@@ -1,0 +1,298 @@
+<fieldset>
+  <table>
+     <%- if !@profile -%>
+        <% if @fields.country == "US" %>
+          <% if @wholesale_flag %>
+            <tr>
+              <th class="label expand_label" >County(s):</th>
+              <td><%=display_zips(@fields.county)%><%=f.hidden_field "county"%><%=f.hidden_field "state"%></td>
+            </tr>
+          <% else %>
+            <tr>
+              <th class="label expand_label" >Zip Code(s):</th>
+              <td><%=display_zips(@fields.zip_code)%><%=f.hidden_field "zip_code"%><br/><span class="note">Note: Zip code(s) can be added or removed from your 'Dashboard' page</span></td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <th class="label expand_label" >Province:</th>
+            <td><%=display_state(@fields.state)%><%=f.hidden_field "state"%><%=f.hidden_field "zip_code"%></td>
+        </tr>
+        <tr>
+            <th class="label expand_label" >City:</th>
+            <td><%=@fields.city%><%=f.hidden_field "city"%></td>
+        </tr>
+        <% end %>
+        <%=f.hidden_field "country"%>
+        <tr>
+          <th class="label_required expand_label" >First Name:</th>
+          <td><%=f.text_field :first_name%><%=error_message_on :fields,:first_name%></td>
+        </tr>
+        <tr>
+          <th class="label_required expand_label" >Last Name:</th>
+          <td><%=f.text_field :last_name%><%=error_message_on :fields,:last_name%></td>
+        </tr>
+
+        <!--tr>
+          <th class="label expand_label" >
+            Profile Nickname:
+		  <%# @title = "Nicknames help you better organize your Buyer Profiles. If you're setting up this profile to find property for someone else, you could add their name here. The Profile Nickname will only be seen by you. If you're unsure, just leave blank...you can always change later" %>
+		  <%#= image_tag "/images/reimatcher_images/help_icon.png", {:id => "trigger_nickname", :style => "vertical-align:text-top", :title => @title} %>
+           </th>
+           <td><%#= text_field_tag "nickname" %> </td>
+        </tr-->
+        <tr style="display:none;">
+          <th class="label_required expand_label">
+                         Investment Type:<img alt="Help_icon" src="/images/reimatcher_images/help_icon.png" title="The Investment Type determines the types of properties that will get matched to the buyer profile...You can select one or both choices">
+          </th>
+          <td>
+            <%=check_box_tag 'wholesale', InvestmentType.find_by_code('WS').id, @wholesale_flag, :onclick=>"get_wholesale_owner_finance_value();" %>Wholesale &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=check_box_tag 'owner_finance', InvestmentType.find_by_code('OF').id, @owner_finance_flag, :onclick=>"get_wholesale_owner_finance_value();"%>Owner Finance
+          </td>
+         </tr>
+         <tr>
+           <th class="label_required">Property Type:</th>
+           <td align="left"><%=f.select("property_type", [["--- Select Property Type ---", ""], ["Single Family", "single_family"], ["Multi Family", "multi_family"], ["Condo/Townhome/Garden Home", "condo_townhome"], ["Vacant Lot", "vacant_lot"], ["Acreage", "acreage"], ["Other", "other"]], {}, :onchange => 'get_property_value(this.id);')%><%=error_message_on :fields, :property_type%></td>
+         </tr>
+      <%- end -%>
+
+      <% if @profile %>
+         <tr style="display:none;">
+         <th class="label_required expand_label">
+                Investment Type:<img alt="Help_icon" src="/images/reimatcher_images/help_icon.png" title="The Investment Type determines the types of properties that will get matched to the buyer profile...You can select one or both choices">
+         </th>
+         <% prop_type = @profile.property_type %>
+          <td <% if @uncheck_flag %> class="formError"<% end %>>
+            <%=check_box_tag 'wholesale', InvestmentType.find_by_code('WS').id, @wholesale_flag, :onclick=>"edit_wholesale_owner_finance_value('#{prop_type}');"%>Wholesale &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=check_box_tag 'owner_finance', InvestmentType.find_by_code('OF').id, @owner_finance_flag, :onclick=>"edit_wholesale_owner_finance_value('#{prop_type}');"%>Owner Finance<% if @uncheck_flag %><div class="formError">can't be empty</div><% end %>
+          </td>
+          </tr>
+      <% end %>
+      <% if @investmant_type_flag %>
+        <input type="hidden" name="investmant_type_flag" value="<%= @investmant_type_flag %>">
+        <input type="hidden" name="state_flag" value="<%= @state_flag %>">
+        <input type="hidden" name="county_flag" value="<%= @county_flag %>">
+        <input type="hidden" name="city_flag" value="<%= @city_flag %>">
+        <input type="hidden" name="zipcode_flag" value="<%= @zipcode_flag %>">
+        <input type="hidden" name="country_flag" value="<%= @country_flag %>">
+      <% end %>
+      <tr include_sf="n" include_ct="n" include_mf="y" include_vl="n" include_ac="n" include_ot="n" style="display:none;">
+        <th class="label_required"># of Units:</th>
+        <td>At least <%=f.text_field "units_min", :size=> 7 %> but no more than <%=f.text_field "units_max", :size=> 7 %><%=error_message_on :fields, :units_min%><%=error_message_on :fields, :units_max%></td>
+      </tr>
+
+      <tr include_sf="y" include_ct="y" include_mf="n" include_vl="n" include_ac="n" include_ot="n" style="display:none;">
+        <th class="label_required"># of Bedrooms:</th>
+        <td><%=f.select("beds", [["--- Select Bedrooms ---", ""], ["Any", "any"], ["1+", "1"], ["2+", "2"], ["3+", "3"], ["4+", "4"], ["5+", "5"]])%><%=error_message_on :fields,:beds%></td>
+      </tr>
+
+      <tr include_sf="y" include_ct="y" include_mf="n" include_vl="n" include_ac="n" include_ot="n" style="display:none;">
+        <th class="label_required"># of Bathrooms:</th>
+        <td><%=f.select("baths", [["--- Select Bathrooms ---", ""], ["Any", "any"], ["1+", "1"], ["2+", "3"], ["3+", "5"], ["4+", "7"]])%><%=error_message_on :fields,:baths%></td>
+      </tr>
+
+      <tr include_sf="y" include_ct="y" include_mf="y" include_vl="n" include_ac="n" include_ot="n" style="display:none;">
+        <th class="label_required">Sq Ft:</th>
+        <td>Min <%=f.text_field "square_feet_min", :size=>6 %> &nbsp;Max <%=f.text_field "square_feet_max", :size=>6 %> <%=error_message_on :fields,:square_feet_min%><%=error_message_on :fields,:square_feet_max%></td>
+      </tr>
+
+      <% if !@profile %>
+
+         <tr id="maxpv" <% unless @wholesale_flag %>style="display:none"<% end %>>
+           <th class="label_required">
+            Maximum Purchase Price:
+          </th>
+          <td>
+            $<%=f.text_field "max_purchase_value", {:class=>"mpv-input", :size=>"20", :maxlength=>"10"}%><%=error_message_on :fields,:max_purchase_value%>
+          </td>
+        </tr>
+
+        <tr id="arvr" <% unless @wholesale_flag %>style="display:none"<% end %>>
+         <th class="label_required">
+            % ARV - Repairs:
+         </th>
+         <td>
+           <%=f.text_field "arv_repairs_value", {:value => "70", :class=>"arp-input", :size=>"4", :maxlength=>"2"}  %>%
+           <%=error_message_on :fields,:arv_repairs_value%>
+          </td>
+        </tr>
+
+       <tr id="maxmp" <% if !@owner_finance_flag %>style="display:none;"<% end %>>
+        <th class="label_required">Maximum Monthly Payment:</th>
+        <td>$ <%=f.text_field "max_mon_pay", {:class=>"price", :size=>"20", :maxlength=>"10"} %><%=error_message_on :fields,:max_mon_pay%></td>
+      </tr>
+      <tr id="maxdp" <% if !@owner_finance_flag %>style="display:none;"<% end %>>
+        <th class="label_required">Maximum Down Payment:</th>
+        <td>$ <%=f.text_field "max_dow_pay", {:class=>"price", :size=>"20", :maxlength=>"10"} %><%=error_message_on :fields,:max_dow_pay %></td>
+      </tr>
+     <% end %>
+     
+      <tr include_sf="n" include_ct="n" include_mf="n" include_vl="n" include_ac="y" include_ot="n">
+        <th class="label_required"># of Acres:</th>
+          <td>At least <%=f.text_field "acres_min", :size=>11 %> but no more than <%=f.text_field "acres_max", :size=>11 %><%=error_message_on :fields,:acres_min%><%=error_message_on :fields,:acres_max%></td>
+      </tr>
+
+      <tr include_sf="n" include_ct="n" include_mf="n" include_vl="n" include_ac="y" include_ot="n">
+        <th class="label">County:</th>
+        <td><%=f.text_field "county", :size=>35 %><%=error_message_on :fields,:county%></td>
+      </tr>
+
+   <% if @profile %> 
+      <% if (@profile.investment_type.id == 2 or @profile.investment_type.id == 3) or @profile %>
+        <tr id="maxpv">
+           <th class="label_required">
+            Maximum Purchase Price:
+          </th>
+          <td>
+            $<%=f.text_field "max_purchase_value", {:class=>"mpv-input", :size=>"20", :maxlength=>"10"}%><%=error_message_on :fields,:max_purchase_value%>
+          </td>
+        </tr>
+
+        <tr id="arvr">
+         <th class="label_required">
+            % ARV - Repairs:
+         </th>
+         <td>
+           <% profile_repairs_value = (@profile.arv_repairs_value.blank? or params[:fields][:arv_repairs_value]) ? "70" : @profile.arv_repairs_value %>
+           <%=f.text_field "arv_repairs_value", {:value => profile_repairs_value, :class=>"arp-input", :size=>"2", :maxlength=>"2"}  %>%
+           <%=error_message_on :fields,:arv_repairs_value%>
+          </td>
+        </tr>
+      <% end %>
+
+      <% if(@profile.investment_type.id == 1 or @profile.investment_type.id == 3) or @profile %>
+       <tr id="maxmp">
+         <th class="label_required">Maximum Monthly Payment:</th>
+         <td>$ <%=f.text_field "max_mon_pay", {:class=>"price", :size=>"20", :maxlength=>"10"} %><%=error_message_on :fields,:max_mon_pay%></td>
+       </tr>
+       <tr id="maxdp">
+         <th class="label_required">Maximum Down Payment:</th>
+         <td>$ <%=f.text_field "max_dow_pay", {:class=>"price", :size=>"20", :maxlength=>"10"} %><%=error_message_on :fields,:max_dow_pay %></td>
+       </tr>
+     <% end %>
+   <% end %>
+
+
+      <tr include_sf="y" include_ct="y" include_mf="y" include_vl="y" include_ac="y" include_ot="y">
+        <th class="label" colspan="2">What are you looking for?</th>
+      </tr>
+      <tr include_sf="y" include_ct="y" include_mf="y" include_vl="y" include_ac="y" include_ot="y">
+        <td colspan="2"><%=f.text_area "description", :class=>"rich_text_editor", :size => "70x4", :size => "70x4" %><%=error_message_on :fields,:description%></td>
+      </tr>
+      <tr include_sf="y" include_ct="y" include_mf="y" include_vl="y" include_ac="y" include_ot="y">
+        <td class="description" colspan="2">Unsure what to write? <%=link_to "Click here for examples", {:controller=>"help", :action=>"comments_to_property_owners"}, :target=>"_new"%></td>
+      </tr>
+
+    </table>
+
+
+<%- if !@profile -%>
+    <div id="optional">
+
+      <h3 id="optional_heading" class="collapsed">Optional Criteria</h3>
+
+      <div class="optional_content" style="display:none">
+<%- else-%>
+      <div class="optional_content">
+<%- end -%>
+
+      <table>
+
+        <tr include_sf="y" include_ct="y" include_mf="y" include_vl="n" include_ac="n" include_ot="n">
+          <th class="label"># of Stories:</th>
+          <td><%=f.select("stories", [["--- Select Stories ---", ""], ["Any", "any"], ["1", "1"], ["2+", "2"]])%><%=error_message_on :fields,:stories%></td>
+        </tr>
+
+        <tr include_sf="y" include_ct="y" include_mf="y" include_vl="n" include_ac="n" include_ot="n">
+          <th class="label">Garage Type:</th>
+          <td><%=f.select("garage", [["--- Select Garage Type ---", ""], ["Any", "any"], ["1", "1"], ["2", "2"], ["3+", "3"], ["Carport", "carport"], ["Converted", "converted"]])%><%=error_message_on :fields,:garage%></td>
+        </tr>
+
+        <tr include_sf="y" include_ct="y" include_mf="y" include_vl="n" include_ac="n" include_ot="n">
+          <th class="label"># of Living Areas:</th>
+          <td><%=f.select("livingrooms", [["--- Select Living Areas ---", ""], ["Any", "any"], ["1", "1"], ["2", "2"], ["3+", "3"]])%></td>
+        </tr>
+
+        <tr include_sf="n" include_ct="n" include_mf="n" include_vl="n" include_ac="n" include_ot="n">
+          <th class="label">Formal Dining:</th>
+          <td>
+            <%=f.radio_button "formal_dining", "no"%> No <%=f.radio_button "formal_dining", "yes"%> Yes <%=f.radio_button "formal_dining", "any"%> No Preference<br/>
+          </td>
+        </tr>
+
+        <tr include_sf="n" include_ct="n" include_mf="n" include_vl="n" include_ac="n" include_ot="n">
+          <th class="label">Breakfast Area:</th>
+          <td>
+            <%=f.radio_button "breakfast_area", "no"%> No <%=f.radio_button "breakfast_area", "yes"%> Yes <%=f.radio_button "breakfast_area", "any"%> No Preference<br/>
+          </td>
+        </tr>
+
+        <tr include_sf="y" include_ct="y" include_mf="n" include_vl="n" include_ac="n" include_ot="n">
+          <th colspan="2">&nbsp;</th>
+        </tr>
+
+        <tr include_sf="y" include_ct="y" include_mf="n" include_vl="n" include_ac="n" include_ot="n">
+          <th class="label">Waterfront:</th>
+          <td>
+            <%=f.radio_button "waterfront", "no"%> No <%=f.radio_button "waterfront", "yes"%> Yes <%=f.radio_button "waterfront", "any"%> No Preference<br/>
+          </td>
+        </tr>
+
+        <tr include_sf="y" include_ct="y" include_mf="n" include_vl="n" include_ac="n" include_ot="n">
+          <th class="label" id="pool_label">Pool:</th>
+          <td>
+            <%=f.radio_button "pool", "no"%> No <%=f.radio_button "pool", "yes"%> Yes <%=f.radio_button "pool", "any"%> No Preference<br/>
+          </td>
+        </tr>
+
+        <tr include_sf="n" include_ct="n" include_mf="n" include_vl="n" include_ac="n" include_ot="n">
+          <th colspan="2">&nbsp;</th>
+        </tr>
+
+        <tr include_sf="n" include_ct="n" include_mf="n" include_vl="y" include_ac="n" include_ot="n">
+          <th class="label">Water:</th>
+          <td><%=f.select("water", [["--- Select Water ---", ""], ["City", "city"], ["Well", "well"], ["Municipal Utility District (MUD)", "mud"], ["No Preference", "none"]])%></td>
+        </tr>
+
+        <tr include_sf="n" include_ct="n" include_mf="n" include_vl="y" include_ac="n" include_ot="n">
+          <th class="label">Sewer:</th>
+          <td><%=f.select("sewer", [["--- Select Sewer ---", ""], ["City", "city"], ["Septic", "septic"], ["Municipal Utility District (MUD)", "mud"], ["No Preference", "none"]])%></td>
+        </tr>
+
+        <tr include_sf="n" include_ct="n" include_mf="n" include_vl="y" include_ac="n" include_ot="n">
+          <th class="label">Electricity:</th>
+          <td>
+            <%=f.radio_button "electricity", "no"%> No <%=f.radio_button "electricity", "yes"%> Yes <%=f.radio_button "electricity", "any"%> No Preference<br/>
+          </td>
+        </tr>
+
+        <tr include_sf="n" include_ct="n" include_mf="n" include_vl="y" include_ac="n" include_ot="n">
+          <th class="label">Natural Gas:</th>
+          <td>
+            <%=f.radio_button "natural_gas", "no"%> No <%=f.radio_button "natural_gas", "yes"%> Yes <%=f.radio_button "natural_gas", "any"%> No Preference<br/>
+          </td>
+        </tr>
+
+        <tr include_sf="n" include_ct="n" include_mf="n" include_vl="y" include_ac="n" include_ot="n">
+          <th class="label">Trees:</th>
+          <td>
+            <%=f.radio_button "trees", "no"%> No <%=f.radio_button "trees", "yes"%> Yes<br/>
+          </td>
+        </tr>
+
+        <!--
+        <tr include_sf="y" include_ct="y" include_mf="y" include_vl="y" include_ac="n" include_ot="n">
+          <th colspan="2">&nbsp;</th>
+        </tr>
+
+        <tr include_sf="y" include_ct="y" include_mf="y" include_vl="y" include_ac="y" include_ot="n">
+          <th class="label" colspan="2">Desired Property Keywords (separated by comma):</th>
+        </tr>
+        <tr include_sf="y" include_ct="y" include_mf="y" include_vl="y" include_ac="y" include_ot="n">
+          <td colspan="2"><%=f.text_area "feature_tags", :size => "70x2" %><%=error_message_on :fields,:feature_tags%><div class="example">Ex. fixer, needs repair, sell quickly, ... </div></td>
+        </tr>
+        -->
+
+      </table>
+
+    </div>
+
+  </fieldset>

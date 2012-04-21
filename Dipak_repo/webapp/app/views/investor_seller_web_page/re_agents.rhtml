@@ -1,0 +1,66 @@
+<%- @page_title = "REIMatcher-RE Agents" -%>
+<%- @meta_title = @seller_website.meta_title -%>
+<%- @meta_description = @seller_website.meta_description -%>
+
+<%= render :partial => "show_navigation_link" %>
+<div id="notice" class="notice" <%="style=\"display:none\"" if !flash[:notice]%>><%=flash[:notice]%></div>
+<div id="seller_page_main_div">
+    <h1 style="text-align:center;color:#B10000;"><b>Calling All Real Estate Agents!!</b></h1><br>
+    <div>
+    Below is a presentation that was recently given by Phill Grove, the creator of the AMPS Training Program to illustrate how Owner Financing can help both Sellers and Buyers in this economy..  Whether you've stumbled upon this video or was sent an invitation, I hope you'll check it out and let me know what you think.  After watching, please leave a comment for me below the video...
+</div>
+<div class="re_agent_video_tour">
+<center><div id="evp-cdc3309612bf8f0f9123d625543128ea-wrap" class="evp-video-wrap"></div><script type="text/javascript" src="http://www.damonflowers.com/evp/framework.php?div_id=evp-cdc3309612bf8f0f9123d625543128ea&id=cmVhbHRvcl9wcmVzZW50YXRpb24ubTR2&v=1312821647&profile=default"></script><script type="text/javascript"><!--
+_evpInit('cmVhbHRvcl9wcmVzZW50YXRpb24ubTR2[evp-cdc3309612bf8f0f9123d625543128ea]');//--></script></center>
+  <h4 style="color:#B10000;margin-left:160px;padding-top:30px;">Comment below and let me know what you think...</h4>
+<% form_for(:seller_investor_comment, :url => {:controller=>"investor_seller_web_page", :action=>"submit_investor_comments",:seller_website_id=>params[:permalink_text]}) do |f| %>
+      <table  style="margin-left:85px;">
+        <tr>
+          <td class="label_required">Name:*</td>
+          <td><%=text_field "seller_investor_comment", "name" , :size=>21 %><%=error_message_on :seller_investor_comment,:name%></td>
+        </tr>
+
+        <tr>
+          <td class="label_required">Email:*</td>
+          <td><%=text_field "seller_investor_comment", "email" , :size=>21%><%=error_message_on :seller_investor_comment,:email%></td>
+        </tr>
+
+        <tr>
+          <td class="label_required">Comment:</td>
+          <td><%=text_area "seller_investor_comment", "comment" , :rows=>8%><%=error_message_on :seller_investor_comments,:comment%></td>
+        </tr>
+        
+        <tr class="label_required">
+          <td class="label_required"></td>
+          <td><input type="submit" value="Submit" class="submit"></td>
+  
+        </tr>
+</table>
+ <% end %>
+</div>
+
+
+  </div>
+
+<style>
+.re_agent_video_tour {
+/*margin-right:114px;
+margin-top:2px;*/
+width:660px;
+margin-left:135px;
+padding:10px;
+}
+.notice {
+   margin-left: 50px;
+   margin-right: 50px;
+   margin-bottom: 5px;
+   margin-top: 15px;
+   padding: 5px;
+   text-align: center;
+   color: #008800;
+   background: #ccffcc;
+   border-top: 1px solid #008800;
+   border-bottom: 1px solid #008800;
+   font-size: 1.2em;
+}
+</style>

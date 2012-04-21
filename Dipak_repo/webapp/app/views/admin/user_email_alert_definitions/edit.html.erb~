@@ -1,0 +1,14 @@
+<h3>Editing Alert: <strong><%= truncate(@user_email_alert_definition.title, :length => 80) %></strong></h3>
+
+<%= error_messages_for :user_email_alert_definition %>
+
+<% form_for(@user_email_alert_definition, :url => admin_user_email_alert_definition_path(@user_email_alert_definition), :html => { :method => 'put' }) do |f| %>
+
+<%= render :partial => "user_email_alert_form", :locals => {:f=>f}%>
+
+  <p>
+    <%= f.submit "Update", :style=>"float: left; margin-right: 10px;" %>
+    <%= button_to_function 'Cancel', "document.location='#{admin_user_email_alert_definitions_path}';", :style=>"margin-right: 10px;"  %>
+    <%= button_to_function 'Show', "document.location='#{admin_user_email_alert_definition_path(@user_email_alert_definition)}';" %>
+  </p>
+<% end %>

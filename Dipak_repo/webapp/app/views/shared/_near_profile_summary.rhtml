@@ -1,0 +1,118 @@
+<%- 
+  action = (near_profile_summary.owner? or near_profile_summary.seller_agent?) ? 'preview_owner' : 'preview_buyer'
+  if @controller.controller_name == 'search'
+    preview_link = url_for(:controller=>'search', :action=>action, 
+                    :id=>near_profile_summary.id)+"?ref=search&#{encode_return_dashboard_variables}"
+  elsif @profile
+      if( params[:controller] == "buyer_websites" || (params[:from] && params[:from] == "buyer_leads"))
+           preview_link = profile_profile_view_path(@profile, near_profile_summary) + "?own_buyer=#{@own_buyer}&retail_buyer_profile=#{@profile.id}&#{encode_return_dashboard_variables}"
+      else
+           preview_link = profile_profile_view_path(@profile, near_profile_summary) + "?own_buyer=#{@own_buyer}&#{encode_return_dashboard_variables}"
+      end
+  else
+    preview_link = url_for(:controller=>'home', :action=>action, :id=>near_profile_summary.id,
+                    :type=>@profile_type.permalink, :zip_code=>@zip_code) + "&#{encode_return_dashboard_variables}"
+  end
+-%>
+
+<%- if near_profile_summary.owner? or near_profile_summary.seller_agent? -%>
+  <div class="profile near_profile_summary_property position_realtive" profile_id="<%=near_profile_summary.id%>">
+	  <div class="column1" field_name="image">
+            <div class="image_tag_div" style="width:60px;heght:60px;">
+	        <% if(!near_profile_summary.profile_images.find_by_default_photo(1).blank?) %>
+            	<% near_profile_summary.profile_images.each_with_index do |photo,index| %>
+                <%= render_thumbnail(near_profile_summary, { :id=>"#{near_profile_summary.id}_thumb", :class=>"image details_link", :uri=>preview_link, :title=>"View Full Description" }, (index/4)+1) if photo.default_photo %>
+				<% end %>
+			<% else %>
+				<%= render_thumbnail(near_profile_summary, { :id=>"#{near_profile_summary.id}_thumb", :class=>"image details_link", :uri=>preview_link, :title=>"View Full Description" }) %>
+			<% end %>
+              </div>
+			<%#=render_thumbnail(near_profile_summary, { :id=>"#{near_profile_summary.id}_thumb", :class=>"image details_link", :uri=>preview_link, :title=>"View Full Description" }) %>
+			<%=image_tag "favorite_star_unselected.gif", :class=>"image favorite_icon unselected", :alt=>"Add/Remove as Favorite", :title=>"Add/Remove as Favorite", :is_near=>true , :profile_id=>near_profile_summary.id if @profile && !@profile.is_favorite?(near_profile_summary)%>
+			<%=image_tag "favorite_star_selected.gif", :class=>"image favorite_icon selected", :alt=>"Add/Remove as Favorite", :title=>"Add/Remove as Favorite", :is_near=>true, :profile_id=>near_profile_summary.id if @profile && @profile.is_favorite?(near_profile_summary)%>
+			<%- if @profile && near_profile_summary.id != @profile.id -%>
+			  <br/>
+						<div style="" class="icon_contact_list" id="<%= near_profile_summary.id %>">
+						 <%=image_tag "icons/icon_mail.gif", :mouseover=>"icons/icon_mail_hover.jpg", :alt=>"Send a private message to the owner", :title=>"Send a private message to the owner", :class=>"image" %>
+						</div>
+                                                <%if( params[:controller] == "buyer_websites" || (params[:from] && params[:from] == "buyer_leads"))%>
+					        	<script>
+						           new NL.PublicProfileController("<%=url_for new_profile_profile_message_path(@profile)%>?profile_message_form[send_to][]=indiv&profile_message_form[indiv_profile_id]=<%=near_profile_summary.id%>&retail_buyer_profile=<%=@profile.id%>&<%=encode_return_dashboard_params%>&ref=list", "<%= near_profile_summary.id %>");
+						        </script>
+                                               <%else%>
+                                                        <script>
+						           new NL.PublicProfileController("<%=url_for new_profile_profile_message_path(@profile)%>?profile_message_form[send_to][]=indiv&profile_message_form[indiv_profile_id]=<%=near_profile_summary.id%>&<%=encode_return_dashboard_params%>&ref=list", "<%= near_profile_summary.id %>");
+						        </script>
+
+                                               <%end%>
+			<%- end -%>
+                      <div class="image_arrow_div" style="margin-left:70px;">
+			<%=image_tag "arrow-collapsed.gif", :class=>"collapsed_indicator", :style=>"margin-top: 2.4em; margin-left: 5px;" if @profile%>
+			<%=image_tag "arrow-collapsed.gif", :class=>"collapsed_indicator", :style=>"margin-top: 5.2em; margin-left: 5px;" if !@profile%>
+                      </div>
+                      <DIV style="float:left; margin-top:-22px; color:blue; font-size:10px; font-weight:bold; margin-left:8px;" title="Near Matches are properties that may also be of interest.  They include homes within an expanded geographical area, size, and price range."><img border="0" alt="Near Match" src="/images/near-match-2F.png" height="19" width="45"></DIV>
+	  </div>
+	  <div class="columns">
+		<div class="column2"><b><span style="font-size: 1.2em;" field_name="display_name" class="details_link" uri="<%= preview_link %>"><%=truncate(near_profile_summary.display_name, 20)%></span></b></div>
+		<div class="column3"><b><span field_name="display_type"><%=near_profile_summary.display_type%></span></b></div>
+		<div class="column4"><b><span field_name="display_price"><%=near_profile_summary.display_price%></span></b></div>
+		<div class="column5"><b><span field_name="display_privacy"><%=use_numbered_icons == true ? render_detail_privacy_icon(near_profile_summary, near_profile_summary.display_privacy, (near_profile_summary_counter+1)) : render_privacy_icon_zoomed(near_profile_summary, near_profile_summary.display_privacy)%></span></b></div>
+	  </div>
+	  <%- if near_profile_summary.property_type_single_family? -%>
+	   <div class="description"><div class="feature_label">Beds:</div><div class="feature_value"><%=near_profile_summary.display_bedrooms%></div> <div class="feature_label">Baths:</div><div class="feature_value_medium"><%=near_profile_summary.display_bathrooms%></div> <div class="feature_label">Sq Ft:</div><div class="feature_value"><%=near_profile_summary.display_square_feet%></div></div>
+	  <%- elsif near_profile_summary.property_type_multi_family? -%>
+	   <div class="description"><div class="feature_label">Units:</div><div class="feature_value"><%=near_profile_summary.display_units%></div> <div class="feature_label">Sq Ft:</div><div class="feature_value"><%=near_profile_summary.display_square_feet%></div></div>
+	  <%- elsif near_profile_summary.property_type_condo_townhome? -%>
+	   <div class="description"><div class="feature_label">Beds:</div><div class="feature_value"><%=near_profile_summary.display_bedrooms%></div> <div class="feature_label">Baths:</div><div class="feature_value_medium"><%=near_profile_summary.display_bathrooms%></div> <div class="feature_label">Sq Ft:</div><div class="feature_value"><%=near_profile_summary.display_square_feet%></div></div>
+	  <%- elsif near_profile_summary.property_type_vacant_lot? -%>
+	   <div class="description"><div class="feature_label_large">Neighborhood: </div><div class="feature_value_xlarge"><%=truncate(near_profile_summary.display_neighborhood,40)%></div></div>
+	  <%- elsif near_profile_summary.property_type_acreage? -%>
+	   <div class="description"><div class="feature_label">Acres:</div><div class="feature_value"><%=truncate(near_profile_summary.display_acreage,3,"")%></div> <div class="feature_label_medium">County: </div><div class="feature_value_large"><%=near_profile_summary.display_county%></div></div>
+	  <%- end -%>
+	  <div class="features_short"><b>Features:</b> <span class="features_text" field_name="display_features"><%=truncate(near_profile_summary.display_features,60)%></span></div>
+	  <div class="clear description_full" style="display:none;"><b>Description:</b> <div class="description_full_text" field_name="display_description"><%=near_profile_summary.display_description_longer%></div></div>
+       <%- if !near_profile_summary.ten_days_deleted_at.blank? %>
+      <div class="deleted_profile"><IMG src="/images/sold.png"></div>
+       <%end%>
+  </div>
+
+<%- else -%>
+
+  <div class="profile near_profile_summary_buyer" profile_id="<%=near_profile_summary.id%>">
+	  <div class="column1" field_name="image">
+      <%=render_thumbnail(near_profile_summary, { :class=>"image details_link", :uri=>preview_link, :title=>"View Full Description" }) %>
+			<%- if @profile and (@profile.buyer? or @profile.buyer_agent?) -%>
+                         <%=image_tag "favorite_star_unselected.gif", :class=>"image favorite_icon unselected", :profile_id=>near_profile_summary.id if @profile && !@profile.is_favorite?(near_profile_summary)%>
+                         <%=image_tag "favorite_star_selected.gif", :class=>"image favorite_icon selected", :profile_id=>near_profile_summary.id if @profile && @profile.is_favorite?(near_profile_summary)%>
+              <%- end -%>
+			<%=image_tag "arrow-collapsed.gif", :class=>"collapsed_indicator", :style=>"margin-top: 2.2em; margin-left: 5px;" %>
+                      <DIV style="float:left; margin-top:5px; color:blue; font-size:10px; font-weight:bold; margin-left:8px;" title="Near Matches are properties that may also be of interest.  They include homes within an expanded geographical area, size, and price range."><img border="0" alt="Near Match" src="/images/near-match-2F.png" height="19" width="45"></DIV>
+	  </div>
+	  <div class="columns">
+		<div class="column2"><b><span field_name="display_name" class="details_link" style="font-size: 1.2em;" uri="<%= preview_link %>">
+            <% if @own_buyer and is_your_own_buyer_profile?(near_profile_summary.user_id) %>
+              My Buyer: <%=truncate(near_profile_summary.private_display_name, 20)%>
+            <% else %>
+              <%=truncate(near_profile_summary.display_name, 20)%>
+            <% end %>
+          </span></b></div>
+		<div class="column3"><b><span field_name="display_financing">&nbsp;</span></b></div>
+		<div class="column4"><b><span field_name="display_type" style="white-space: nowrap;"><%=near_profile_summary.display_type%></span></b></div>
+	  </div>
+	  <div class="description_short">
+	  	<b class="features_labels">Monthly (Max):</b> <span class="features_text">$<%= number_with_delimiter(ProfileFieldEngineIndex.max_mon_payment(near_profile_summary.id),",") %></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<b class="features_labels">Downpaymt (Max):</b> <span class="features_text">$<%= number_with_delimiter(ProfileFieldEngineIndex.max_down_payment(near_profile_summary.id),",") %></span>
+		<br />
+		<b class="features_labels">Comments:</b> <span class="features_text" field_name="display_description_short"><%=near_profile_summary.display_description_short%></span>
+	  </div>
+	  
+	  <div class="clear description_full" style="display:none;">
+	  <b class="features_labels">Monthly (Max):</b> <span class="features_text">$<%= number_with_delimiter(ProfileFieldEngineIndex.max_mon_payment(near_profile_summary.id),",") %></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <b class="features_labels">Downpaymt (Max):</b> <span class="features_text">$<%= number_with_delimiter(ProfileFieldEngineIndex.max_down_payment(near_profile_summary.id),",") %></span>
+	  <br />
+	  <b class="features_labels">Comments:</b> 
+	  <div class="description_full_text features_text" field_name="display_description"><%=near_profile_summary.display_description_longer%></div>
+	  </div>
+  </div>
+
+<%- end -%>

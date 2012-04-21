@@ -1,0 +1,137 @@
+# Logfile created on Mon Jan 30 14:10:56 +0530 2012 by logger.rb/22283
+ email delivered to: akataria@systematixtechnocrates.com 
+
+=========== 
+
+ something went wrong 
+
+ Error 1 : (NameError) "undefined local variable or method `alert_defination' for UserEmailAlertEngine:Class" 
+ email delivered to: akataria@systematixtechnocrates.com 
+
+=========== 
+
+ something went wrong 
+
+ Error 1 : (NoMethodError) "undefined method `email_subject' for nil:NilClass" 
+ email delivered to: akataria@systematixtechnocrates.com 
+
+=========== 
+
+ something went wrong 
+
+ Error 1 : (NoMethodError) "undefined method `email_subject' for nil:NilClass" 
+ email delivered to: akataria@systematixtechnocrates.com 
+
+=========== 
+
+ something went wrong 
+
+ Error 1 : (NameError) "undefined local variable or method `user_id' for UserEmailAlertEngine:Class" 
+=========== 
+
+ something went wrong 
+
+ Error 1 : (NameError) "undefined local variable or method `alert_definition' for UserEmailAlertEngine:Class" 
+=========== 
+
+ something went wrong 
+
+ Error 1 : (NameError) "undefined local variable or method `alert_definition' for UserEmailAlertEngine:Class" 
+=========== 
+
+ something went wrong 
+
+ Error 1 : (NameError) "undefined local variable or method `alert_definition' for UserEmailAlertEngine:Class" 
+=========== 
+
+ something went wrong 
+
+ Error 1 : (NameError) "undefined local variable or method `alert_definition' for UserEmailAlertEngine:Class" 
+ email delivered to: akataria@systematixtechnocrates.com 
+
+=========== 
+
+ something went wrong 
+
+ Error 1 : (NameError) "undefined local variable or method `alert_definition' for UserEmailAlertEngine:Class" 
+=========== 
+
+ something went wrong 
+
+ Error 1 : (NameError) "undefined local variable or method `alert_definition' for UserEmailAlertEngine:Class" 
+=========== 
+
+ something went wrong 
+
+ Error 1 : (NameError) "undefined local variable or method `alert_definition' for UserEmailAlertEngine:Class" 
+=========== 
+
+ something went wrong 
+
+ Error 1 : (NameError) "undefined local variable or method `alert_definition' for UserEmailAlertEngine:Class" 
+ email delivered to: akataria@systematixtechnocrates.com 
+
+=========== 
+
+ something went wrong 
+
+ Error 1 : (NameError) "undefined local variable or method `product_id' for UserEmailAlertEngine:Class" 
+=========== 
+
+ something went wrong 
+
+ Error 1 : (NameError) "undefined local variable or method `product_id' for UserEmailAlertEngine:Class" 
+=========== 
+
+ something went wrong 
+
+ Error 1 : (NameError) "undefined local variable or method `product_id' for UserEmailAlertEngine:Class" 
+=========== 
+
+ something went wrong 
+
+ Error 1 : (NameError) "undefined local variable or method `product_id' for UserEmailAlertEngine:Class" 
+ email delivered to: akataria@systematixtechnocrates.com 
+
+ email delivered to: akataria@systematixtechnocrates.com 
+
+=========== 
+
+ something went wrong 
+
+ Error 1 : (NameError) "undefined local variable or method `alert_definition' for UserEmailAlertEngine:Class" 
+ email delivered to existing user: akataria@systematixtechnocrates.com 
+
+ email delivered to existing user: akataria@systematixtechnocrates.com 
+
+ email delivered to: akataria@systematixtechnocrates.com 
+
+ email delivered to: akataria@systematixtechnocrates.com 
+
+ email delivered to: akataria@systematixtechnocrates.com 
+
+ email delivered to existing user: akataria@systematixtechnocrates.com 
+
+User ID: 77584d76-5197-11e1-b946-002618c30c0a and User Login: test5555@mailinator.com
+
+ email delivered to: test5555@mailinator.com 
+
+ User ID: 26873ca6-53d0-11e0-9c77-002618c30c0a and User Login: rajiv224@mailinator.com
+
+ email delivered to existing user: rajiv224@mailinator.com 
+
+ User ID: b2043dee-587d-11e1-9f19-002618c30c0a and User Login: test1233333@mailinator.com
+
+=========== 
+
+ something went wrong 
+
+ Error 1 : (NoMethodError) "undefined method `email' for nil:NilClass" 
+ User ID: 101d52f2-587f-11e1-bc2b-002618c30c0a and User Login: test5656565656@mailinator.com
+
+ email delivered to: test5656565656@mailinator.com 
+
+ User ID: 7be5fd8e-5890-11e1-96c9-002618c30c0a and User Login: test99963264@mailinator.com
+
+ email delivered to: test99963264@mailinator.com 
+

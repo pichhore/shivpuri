@@ -1,0 +1,20 @@
+<div id="topnavlink" style="background-color:<%= @investor_website.dynamic_css%>;" >
+
+      <ul id="menu">
+        <li><%=link_to 'Home',:controller=>"investor_web_page", :action=>"investor_web_page"%></li>
+        <li>&middot;</li>
+        <li><%=link_to 'About Us',:controller=>"investor_web_page", :action=>"about_us", :permalink_text => params[:permalink_text] %></li>
+				<% if @investor_website.display_our_philosophy_page %>
+        <li>&middot;</li>
+        <li><%=link_to 'Our Philosophy',:controller=>"investor_web_page", :action=>"our_philosophy", :permalink_text => params[:permalink_text] %></li>
+				<% end %>
+				<% if @investor_website.display_why_invest_with_us_page %>
+        <li>&middot;</li>
+        <li><%=link_to 'Why Invest With Us',:controller=>"investor_web_page", :action=>"why_invest_with_us", :permalink_text => params[:permalink_text] %></li>
+				<% end %>
+      </ul>
+
+  </div>
+<style type="text/css">
+ul#menu li:hover li a { background: <%= @investor_website.dynamic_css %>;}
+</style>

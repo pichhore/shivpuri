@@ -1,0 +1,49 @@
+<%- @page_title = "REIMatcher-Lease/Option Sale" -%>
+<%- @meta_title = @seller_website.meta_title -%>
+<%- @meta_description = @seller_website.meta_description -%>
+ <%= render :partial => "show_navigation_link" %>
+<div id="seller_page_main_div">
+  <h1><b>Lease/Option Sale</b></h1>
+  <div style="margin-right:390px;"><%= render :partial => "fb_like_twitter_tweet" %></div><div style="clear:both"></div>
+  <%= render :partial => "lead_magnet" %>
+
+  <div class="subpage_content_div_1">  
+  <p class="top_style_para_seller_website">The best alternative to selling a property right away may be to lease it with an option to buy. </p>
+  <p class="style_para_seller_website">A Lease/Option involves leasing a property to an investor or tenant who agrees to buy the property at a future date and at a pre-determined price.</p>
+  <p class="style_para_seller_website">NOTE: This option may not be legal in all states. We would be glad to discuss this with you. <%=link_to 'Contact Us',:controller=>"investor_seller_web_page", :action=>"new_seller"%></p>
+  
+  <p class="style_para_seller_website"><b>Lease-Option Example</b></p>
+  <p class="style_para_seller_website">-	Current Appraised Property Value: $220,000</p>
+  <p class="style_para_seller_website">-	Existing loan(s) payoff: $205,000</p>
+  <p class="style_para_seller_website">-	Monthly Loan Payment (PITI): $1900</p>
+  <p class="style_para_seller_website">-	Lease Payment:  $1900</p>
+  <p class="style_para_seller_website">-	3-Year Option Sales price: $225,000 </p>
+  <p class="style_para_seller_website">In this example, the property is leased for the loan payment of $1900/month, to an investor, who has an option to buy the property, within 3 years, at the premium price of $225,000.  </p></div>
+  <div class="subpage_content_div_2">
+  <p class="style_para_seller_website">The investor will then offer the property on a rent-to-own plan to one of many pre-qualified tenants that are looking to buy a home within the next 3 years. </p>
+  <p class="style_para_seller_website"><b><%= company_name %></b> can manage this entire process for you by contracting to lease your property from you (with an option to buy), and then reselling the property to a buyer that would like to buy a property on a rent-to-own plan. </p>
+  
+  <p class="style_para_seller_website"><b>Lease-Option Advantages and Disadvantages</b></p>
+  <p class="style_para_seller_website">The advantage to a lease-option is that the owner can quickly have someone take over the responsibility for making their mortgage payments without having to transfer title or provide financing. The property may also sell for a premium price because the seller can set the price at the home’s estimated future value and not just the present value.</p>
+  <p class="style_para_seller_website">The disadvantages to a lease option are that the owner is not selling, but instead they are a landlord and thus still have some maintenance responsibilities. Additionally, there is no guarantee that the buyer will ever exercise their option to buy or will be able to qualify for a loan when the time comes for them to buy. In fact there is no guarantee that the property will be worth the option price in the future and/or that a lender would provide a loan at that price to a qualified buyer. Finally, because the tenant is a renter and not an owner, they may not maintain the property as well as a buyer would, in which case maintenance expenses could be significant.  </p>
+  <p class="style_para_seller_website">Historically, the vast majority of lease-option tenants never become buyers. </p>
+  <p class="style_para_seller_website">Obviously, for most people they would prefer to sell FAST and at a PREMIUM PRICE and get any or ALL OF THE MONEY up front. Unfortunately, no such options exist, so you have to choose between the tradeoffs of selling using the various options listed in on this website. If you want to SELL and not just LEASE, than the mortgage payment assignment program or wrap-around mortgage sale program may be better alternatives. </p>
+  
+  <p class="style_para_seller_website"><b>Common Questions about Lease-Options</b></p>
+  <p class="style_para_seller_website"><b>Questions:</b> Are Lease-Options Legal?</p>
+  <p class="style_para_seller_website"><b>Answers:</b> In some states, such as Texas and Illinois there are specific laws making lease-options functionally illegal. In other states such as California, there are various legal hazards associated with structuring lease options. Please consult with an attorney before structuring such a transaction.</p>
+  <p class="style_para_seller_website">We have seen many property owners offer their properties on “Rent To Own” plans, in which they are totally unaware that they are breaking laws. The penalties for structuring one of these transactions incorrectly can be quite severe – in some cases resulting in the seller having to DEED THE PROPERTY to the tenant/buyer AND reimbursing all monies collected during the lease.</p>
+  <p class="style_para_seller_website"><b><%= company_name %></b> can manage this entire process legally for you by contracting to lease your property from you (with an option to buy), and then reselling the property to a buyer that would like to buy a property on a rent-to-own plan in states where it’s legal. </p>
+  <p class="style_para_seller_website"><b>Questions:</b> What are good alternatives? </p>
+  <p class="style_para_seller_website"><b>Answers:</b> If you do not have significant equity, than the mortgage payment assignment program or wrap-around mortgage sale program may be better alternatives. If you have significant equity, there are many options listed on this website.</p>
+  <p class="style_para_seller_website"><b>Questions:</b> What if the tenant/buyer stops making the payments? </p>
+  <p class="style_para_seller_website"><b>Answers:</b> If payments are missed, you have the right to evict and start over with a new tenant buyer.</p>
+  <p class="style_para_seller_website"><b>Questions:</b> What if the tenant/buyer trashes the property? </p>
+  <p class="style_para_seller_website"><b>Answers:</b> The disadvantage of leasing is that the tenant/buyer may not treat the property as well as an owner would treat their own homestead in which case you would have to evict them, clean and repair the property, and then find a new tenant/buyer. </p>
+  <p class="style_para_seller_website"><b>Questions:</b> What about the interest deduction and other tax ramifications? </p>
+  <p class="style_para_seller_website"><b>Answers:</b> As a landlord all rent received is treated as ordinary income, while all expenses (mortgage, taxes, interest, repairs, insurance) are deductible. If the rent is about the same as the PITI payment, then your tax ramifications should be minimal. </p>
+  <p class="style_para_seller_website"><b>Questions:</b> Can I buy or rent another property after doing a lease-option? </p>
+  <p class="style_para_seller_website"><b>Answers:</b> There is no rule that says you can’t have more than one mortgage, and, for example, most landlords have many mortgages. </p>
+  <p class="style_para_seller_website">You may have to explain to your new lender (when asked about the old loan still on your credit report) that you are leasing your property. Note: in some cases, although someone is effectively making the payments on the loan, and the amount of the payment covers the expense of the payment, having the loan will affect your debt to income ratios. This can push some buyers below the current lending thresholds.  Each individual is treated differently and getting another loan on a new property is certainly not guaranteed.  So you’ll need to check with a mortgage banker to find out how your individual situation will be treated.</p>
+  <p class="style_para_seller_website">Another option, if you would like to buy another property, is allowing us, <b><%= company_name %></b>, to find you a property that is available through the Mortgage Payment Assignment Program or one of the other forms of owner financing. </p><br>
+</div>

@@ -1,0 +1,22 @@
+<%- @page_title = "Welcome #{@user.first_name}" -%>
+
+<fieldset>
+	<% form_for(:profiles, :url => {:action => :dashboard}) do |f| %>
+        <table>
+          <tr>
+            <td></td>
+            <td align="center">
+              <img border="0" height="50px" alt="dwellgo - You are done." src="/images/your-done-image.png">
+            </td></tr>
+          <tr>
+            <td></td>
+            <td>To complete your setup and begin using REIMatcher, you gotta agree to the terms of use...ya know, stuff like, be cool to other members, don't post offensive stuff, etc...
+            </td>
+          </tr>
+        </table>
+        <br/>
+	<center>I agree to the <%=link_to "Terms of Use", {:controller=>"home", :action=>"terms_of_use"}, :target=>"_new", :tabindex=>99%> 
+	<%=check_box "user", "terms_of_use" %><br /><span style="color:red;"><%= flash[:terms] %></span></center><br />
+	<center><%=submit_tag "Next", :class=>"submit"%></center>
+	<% end %>
+</fieldset>

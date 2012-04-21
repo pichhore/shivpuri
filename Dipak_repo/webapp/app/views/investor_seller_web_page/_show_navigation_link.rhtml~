@@ -1,0 +1,57 @@
+<div id="topnavlink" >
+
+      <ul id="menu">
+        <li><%=link_to 'Sell House Now',:controller=>"investor_seller_web_page", :action=>"new_seller"%></li>
+        <li>&middot;</li>
+        <li><%=link_to 'Behind on Payments',:controller=>"investor_seller_web_page", :action=>"behind_on_payments", :permalink_text => params[:permalink_text] %>
+          <ul>
+            <LI><%=link_to 'Bankruptcy',{:controller=>"investor_seller_web_page", :action=>"bankruptcy", :permalink_text => params[:permalink_text]} ,:class=>"top_link_menu" %></LI>
+
+            <LI><%=link_to 'Temporary Restraining Orders',{:controller=>"investor_seller_web_page", :action=>"temporary_restraning_orders", :permalink_text => params[:permalink_text]} ,:class=>"top_link_menu" %></LI>
+
+            <LI><%=link_to 'Deed-in-lieu',{:controller=>"investor_seller_web_page", :action=>"deed_in_lieu", :permalink_text => params[:permalink_text]} ,:class=>"top_link_menu" %></LI>
+
+            <LI><%=link_to 'Forbearance Plans',{:controller=>"investor_seller_web_page", :action=>"forbearence_plans", :permalink_text => params[:permalink_text]} ,:class=>"top_link_menu" %></LI>
+
+            <LI><%=link_to 'Loan Modification',{:controller=>"investor_seller_web_page", :action=>"loan_modification", :permalink_text => params[:permalink_text]} ,:class=>"top_link_menu" %></LI>
+
+            <LI><%=link_to 'Foreclosure',{:controller=>"investor_seller_web_page", :action=>"foreclosure", :permalink_text => params[:permalink_text]} ,:class=>"top_link_menu" %></LI>
+          </ul></li>
+        <li>&middot;</li>
+        <li><%=link_to 'Options For Selling',:controller=>"investor_seller_web_page", :action=>"option_for_sell", :permalink_text => params[:permalink_text] %>
+          <ul>
+            <LI ><%=link_to 'Fast Cash Sale',{:controller=>"investor_seller_web_page", :action=>"fast_cash_sale", :permalink_text => params[:permalink_text]} ,:class=>"top_link_menu" %></LI>
+
+            <LI ><%=link_to 'Short Sale',{:controller=>"investor_seller_web_page", :action=>"short_sale", :permalink_text => params[:permalink_text]},:class=>"top_link_menu" %></LI>
+
+            <LI><%=link_to 'Mortgage Payment Assignment',{:controller=>"investor_seller_web_page", :action=>"mortgage_payment", :permalink_text => params[:permalink_text]},:class=>"top_link_menu" %></LI>
+
+            <LI><%=link_to 'Owner Financing',{:controller=>"investor_seller_web_page", :action=>"owner_financing", :permalink_text => params[:permalink_text]} ,:class=>"top_link_menu" %></LI>
+
+            <LI><%=link_to 'Wrap-Around Mortgage Sale',{:controller=>"investor_seller_web_page", :action=>"wrap_around_mortgage_sale", :permalink_text => params[:permalink_text]} ,:class=>"top_link_menu" %></LI>
+
+            <LI><%=link_to 'Auction Sale',{:controller=>"investor_seller_web_page", :action=>"auction_sale", :permalink_text => params[:permalink_text]} ,:class=>"top_link_menu" %></LI>
+
+            <LI><%=link_to 'Equity Partnering Sale',{:controller=>"investor_seller_web_page", :action=>"equity_partnering", :permalink_text => params[:permalink_text]} ,:class=>"top_link_menu" %></LI>
+
+            <LI><%=link_to 'Property Swapping Sale',{:controller=>"investor_seller_web_page", :action=>"property_swap", :permalink_text => params[:permalink_text]} ,:class=>"top_link_menu" %></LI>
+
+            <LI><%=link_to 'Lease/Option Sale',{:controller=>"investor_seller_web_page", :action=>"lease_option_sale", :permalink_text => params[:permalink_text]} ,:class=>"top_link_menu" %></LI>
+
+            <LI><%=link_to 'Traditional Listing Sale',{:controller=>"investor_seller_web_page", :action=>"traditional_listing", :permalink_text => params[:permalink_text]} ,:class=>"top_link_menu" %></LI>
+
+            <LI><%=link_to 'Combination Plans',{:controller=>"investor_seller_web_page", :action=>"combination_plan", :permalink_text => params[:permalink_text]} ,:class=>"top_link_menu" %></LI>
+          </ul></li>
+
+        <li>&middot;</li>
+        <li><%=link_to 'About Us',:controller=>"investor_seller_web_page", :action=>"about_us", :permalink_text => params[:permalink_text] %></li>
+
+        <li>&middot;</li>
+        <li><%=link_to 'Selling FAQ',:controller=>"investor_seller_web_page", :action=>"selling_faq", :permalink_text => params[:permalink_text] %></li>
+
+        <li>&middot;</li>
+        <li><%=link_to 'Sellingnfghgfhfgh FAQ',:controller=>"investor_seller_web_page", :action=>"selling_faq", :permalink_text => params[:permalink_text] %></li>
+
+      </ul>
+
+  </div>

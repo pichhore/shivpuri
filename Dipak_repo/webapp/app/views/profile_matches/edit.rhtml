@@ -1,0 +1,27 @@
+<h1>Editing profile_match</h1>
+
+<%= error_messages_for :profile_match %>
+
+<% form_for(:profile_match, :url => profile_profile_match_path(@profile_match), :html => { :method => :put }) do |f| %>
+  <p>
+    <b>Source profile</b><br />
+    <%= f.text_field :source_profile_id %>
+  </p>
+
+  <p>
+    <b>Target profile</b><br />
+    <%= f.text_field :target_profile_id %>
+  </p>
+
+  <p>
+    <b>Created at</b><br />
+    <%= f.datetime_select :created_at %>
+  </p>
+
+  <p>
+    <%= submit_tag "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', profile_profile_match_path(@profile_match) %> |
+<%= link_to 'Back', profile_profile_matches_path %>

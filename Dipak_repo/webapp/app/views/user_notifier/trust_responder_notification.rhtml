@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title><%= @subject %></title>
+</head>
+
+<body style="background: #FFFFFF; color: #000000; ">
+<%= display_email_with_assign_values(@investor, @email_body, @buyer_first_name) %>
+<br />
+<% url = REIMATCHER_URL %>
+<br><br>
+  <table border="0" cellspacing="0" cellpadding="0" width="100%">
+      <tr>
+          <td width="100%" bgcolor="#ffffff">
+            <p style="font-family:arial,helvetica,sans-serif; font-size:12px; line-height:20px; color:#5e5e5e; margin: 0px 0px 5px;">This message was sent to <%= @recipients%> from:</p>
+            <p style="font-family:arial,helvetica,sans-serif; font-size:12px; line-height:20px; color:#5e5e5e; margin: 0px 0px 5px;">REI Technologies | 5114 Balcones Woods Ste 307 | Austin, TX 78759</p>
+          </td>
+       </tr>
+  </table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td bgcolor="#FFFFFF">
+              <% 
+                      if @is_squeeze_buyer
+                        email_type = RetailBuyerProfile::EMAIL_TYPE[:squeeze_trust_responder]
+                      else
+                        email_type = RetailBuyerProfile::EMAIL_TYPE[:retail_trust_responder]
+                      end
+                      url_for_subscription = url + "manage_subscriptions/" + @buyer_id.to_s + "/subscription_management?email_type=#{email_type}" %>
+      	 	<a href="<%=url_for_subscription%>" style="font-family: Arial, Helvetica, san-serif; font-size: 12px; line-height: 20px; color: #115880; font-weight: bold; text-decoration: none;">
+					Manage Your Subscription
+			</a>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

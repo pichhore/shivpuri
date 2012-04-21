@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Sell Your House Fast, Even With Little or No Equity</title>
+  <%= stylesheet_link_tag "amps_sp2", "amps_commons_#{@color}" %>
+  <%= javascript_include_tag :defaults %>
+</head>
+
+<body>
+<div id="wrap">
+<script type="text/javascript">
+Event.observe(window, 'load', function() {
+  Event.observe('hot_lead_form', 'submit', checkForm);
+
+  function checkForm(e){
+    alert_message = "";
+    if($('seller_property_property_address').value == ""){
+      alert_message += "Address can't be blank\n";
+    }
+
+    if($('seller_property_square_feet').value == ""){
+      alert_message += "Sqft can't be blank\n";
+    }
+
+    month_pay = $('seller_property_min_mon_pay').value;
+    if(month_pay == ""){
+      alert_message += "Enter Minimum Monthly Pay\n";
+    }
+    else {
+      var reg = /^\d+$/;
+      if(reg.test(month_pay) == false) {
+        alert_message += "Invalid montly pay. Only digits allowed\n";
+      }
+    }
+
+    if($('seller_profile_phone').value == ""){
+      alert_message += "Phone can't be blank\n";
+    }
+
+    if(alert_message != ""){
+      alert(alert_message);
+      Event.stop(e);
+    }
+  }
+});
+</script>
+
+<style>
+ .nice label{
+  width: 123px;
+ }
+</style>
+
+	<div id="header">
+		<div id="wrap-top">
+			<h1>You are Matched to <span class="orange"><%= @matches %> Buyers!</span></h1>
+		</div>
+	</div>
+	
+	<div id="content">
+		<p class="special-text" style="padding: 0px; margin: 0 80px 0 90px; font-size: 17px;"><strong><%= strip_tags(@seller_magnet.results_page_copy) %></strong></p>
+		
+		<div id="screen">
+		  <div id="screen-inner">
+<center><div id="evp-85605c3c0de5660ca9e9f39d6571bf6c-wrap" class="evp-video-wrap"></div><script type="text/javascript" src="http://www.damonflowers.com/evp/framework.php?div_id=evp-85605c3c0de5660ca9e9f39d6571bf6c&id=QU1QUy1tYWduZXQtMS1waGlsbGV4cGxhaW5zYW1wcy5tb3Y%3D&v=1320770714&profile=default"></script><script type="text/javascript"><!--
+_evpInit('QU1QUy1tYWduZXQtMS1waGlsbGV4cGxhaW5zYW1wcy5tb3Y=[evp-85605c3c0de5660ca9e9f39d6571bf6c]');//--></script></center>
+                  </div>
+		</div>
+		
+		<div id="left">
+                        <%= @seller_magnet.results_page_content %>
+		</div>
+		
+		<div id="right">
+			<%- form_for(:seller_profile, :url => {:controller=>"amps_magnet", :action=>"create_hot_lead",:permalink_text=>params[:permalink_text]}, :html => { :method => :post, :class => "nice", :id => "hot_lead_form" }) do |f| -%>
+			<input type="hidden" id="seller_profile_id" name="seller_profile_id" value="<%= @seller_profile.id %>"/>
+				<div id="bluebox" style="padding-right: 29px; width: 350px;">
+					<div class="corner"></div><div class="tag"></div>
+					<div class="text-with-tag"><strong>Fill out the information below to submit your property to our network of investors and their buyers</strong></div>
+
+					<div class="form-row">
+						<label for="address">Address:<span style="color:red"> *</span></label>
+						<%=text_field "seller_property", "property_address", :class => "nice-field" %>
+					</div>
+					
+					<div class="form-row">
+						<label for="sqft">Sqft:<span style="color:red"> *</span></label>
+						<%=text_field "seller_property", "square_feet", :class => "nice-field" %>
+					</div>
+
+			                <%= hidden_field_tag "seller_profile[amps_cold]", false, :class => "nice-field" %>
+					
+					<div class="form-row">
+						<label for="monthly">Monthly Payment:<span style="color:red"> *</span></label>
+						<%=text_field "seller_property", "min_mon_pay", :class => "nice-field" %>
+					</div>
+					
+					<div class="form-row">
+						<label for="phone">Phone:<span style="color:red"> *</span></label>
+						<%=text_field "seller_profile", "phone", :class => "nice-field" %>
+					</div>
+					
+					<div class="form-row">
+						<label for="phone2">Alt Phone:</label>
+						<%=text_field "seller_profile", "alternate_phone", :class => "nice-field" %>
+					</div>
+					
+					<div class="form-row">
+						<input type="checkbox" name="marketing_release" /> <span style="padding-right: 10px;"><strong>By checking this box, I give you permission to submit my house to your buyers network to see how many offers I receive.  I understand I am Not obligated to sell my house under this program.</strong></span>
+					</div>
+				
+				</div>
+				
+				<input type="image" src="/images/amps_magnet/btn-go.png" class="go" />
+				
+			<%- end -%>
+			
+		</div>
+		
+		<div class="clear"></div>
+		
+	</div>
+	
+	<div id="wrap-bottom"><%= render :partial => "/shared/amps_footer" %></div>
+</div>
+</body>
+</html>

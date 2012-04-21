@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+  <head>
+    <title>Boxyroom</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="title" content="Boxyroom" />
+    <meta name="language" content="en" />
+    <meta name="description" content="A new way to find and book your rental property overseas from home" />
+    <link rel="image_src" href="http://" />
+    <%= stylesheet_link_tag 'new/template' %>
+    <%= stylesheet_link_tag 'new/application' %>
+    <%= stylesheet_link_tag 'new/apply' %>
+    <%= javascript_include_tag 'new/jquery-1.4.2.min' %>
+    <%= javascript_include_tag 'new/jquery.infieldlabel.min' %>
+    <%= javascript_include_tag 'new/jquery-ui-1.8.2.custom.min' %>
+    <%= javascript_include_tag 'new/jquery-ui.selectmenu' %>
+    <%= javascript_include_tag 'new/template' %>
+     <%= javascript_include_tag 'nested_form' %>
+  </head>
+
+  <body>
+    <div id="wrapper">
+
+      <div id="header">
+        <%= render "shared/new_header" %>
+      </div>
+
+      <div id="content">
+          <%= yield %>
+      </div>
+
+      <div id="footer">
+        <%= render "shared/new_footer" %>
+      </div>
+    </div>
+
+    <%= render "shared/google_analytics" %>
+  </body>
+
+</html>

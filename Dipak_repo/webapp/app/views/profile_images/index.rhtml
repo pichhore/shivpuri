@@ -1,0 +1,131 @@
+<%- @page_title = "Property Photos <span style=\"color: #666\">#{ (@profile.buyer? or @profile.buyer_agent?) ? @profile.private_display_name : @profile.display_name}</span>"-%>
+<%- is_new = params[:new] == 'true'%>
+<%- if is_new -%>
+    <div class="page_title " ><h2>Almost Done!</h2></div>
+    <div style="margin-bottom: 40px;">Now that you've added a property, why not add some photos to show it off!</div>
+<%- end -%>
+<% require_js_controllers :tab, :profile_update -%>
+
+<%- content_for :page_scripts do -%>
+Event.observe(window, 'load', function() {
+<%- if flash[:notice] -%>
+new Effect.Fade($('notice'), { duration: 4.0,queue: 'end'} );
+<%- end -%>
+  profile_update_controller = new NL.ProfileUpdateController("<%=@profile.property_type%>");
+});
+<%- end -%>
+
+
+<input type="hidden" id="refreshed" value="no">
+<div class="full">
+
+  <div class="profile_images">
+
+  <div class="form">
+
+    <div class="tabset larger">
+      <ul>
+        <%- if @profile.buyer? or @profile.buyer_agent? -%>
+        <li uri="<%=url_for edit_profile_path(@profile)%>">Buying Criteria</li>
+        <li uri="<%=url_for edit_zipcodes_profile_path(@profile)%>">Buying Areas</li>
+        <li class="active" uri="<%=url_for profile_profile_images_path(@profile)%>">Photos</li>
+		<li uri="<%=url_for edit_notification_profile_path(@profile)%>">Notification</li>
+        <%- else -%>
+        <li uri="<%=url_for edit_profile_path(@profile)%>">Property Information</li>
+        <li class="active" uri="<%=url_for profile_profile_images_path(@profile)%>">Photos</li>
+        <li uri="<%=url_for profile_contact_profile_path(@profile)%>">Contact</li>
+        <%- end -%>
+      </ul>
+    </div>
+    
+    <fieldset>
+
+      <%- if @profile_images.empty? -%>
+      <p>No profile images uploaded yet</p>
+      <%- end -%>
+
+      <%- if !@profile.reached_profile_images_limit?(@profile_images.length) -%>
+
+      <%- if @profile.owner? or @profile.seller_agent? -%>
+      <p>You may add up to <%= Profile::MAX_PROFILE_IMAGE-@profile.profile_images.size/ProfileImage::NO_OF_IMAGE_GENERATED %> photos of your property.</p>
+      <%- else -%>
+      <p>You may upload 1 photo to be used for this Buyer Profile.  Keep in mind you may have different photos for each buyer profile.  Why do I need a buyer photo? <%=link_to "Here's Why", :controller=>"home", :action=>"faq", :anchor=>"why_post_picture"%></p>
+      <%- end -%>
+
+
+      <% form_for :profile_image, :url => profile_profile_images_url, :html => { :multipart => true } do |f| -%>
+	    <% (Profile::MAX_PROFILE_IMAGE-@profile.profile_images.size/ProfileImage::NO_OF_IMAGE_GENERATED).times do %>
+        <p><%= file_field_tag 'uploaded_data[]', :size => 40 %></p>
+		<% end %>
+
+		<p><%= submit_tag "Upload All Images", :onclick=>"$('uploading').show(); return true;" %></p>
+
+        <p><b>Note: Only .png, .jpg, and .gif image types are accepted and images are limited to 3MB in size.</b></p>
+        <p><div style="text-align: right; margin-top: 15px;">
+          <%- if @profile_images.empty? %>
+              <%=button_to_function "OK","if (confirm('Hmm, did you want to upload photos now? If Yes, click Cancel to return to Photo Upload.  If you\\'d rather do it later, click Ok to Finish.')) document.location='#{profile_path(@profile)}';", :class=>"submit_l"%>
+          <%- else -%>
+              <%=button_to_function "OK","document.location='#{profile_path(@profile)}';", :class=>"submit_l"%>
+          <%- end -%>
+              <%=button_to_function is_new ? "I'll do it later" : "Cancel","document.location='#{profile_path(@profile)}';", :class=>"submit_l"%>
+           </div>
+        </p>
+      <% end -%>
+
+      <%- else -%>
+
+      <p>You have reached your maximum upload limit of <%=pluralize(@profile.profile_image_limit, "image")%>. You may delete one or more images to make more room.</p>
+
+        <p>
+          <% form_tag profile_path(@profile), :method=>:get, :onSubmit=>"document.location='#{profile_path(@profile)}'; return false;" do %>
+          <%=submit_tag "Return to Dashboard", :class=>"submit_xl"%>
+          <% end -%>
+        </p>
+
+      <%- end -%>
+
+      <%- @profile_images.each_with_index do |profile_image, index| -%>
+
+      <div class="profile_image">
+
+        <h3>Photo #<%=(index+1)%> <%="(default)" if profile_image.default_photo%></h3>
+
+        <div class="button_bar">
+          <%=link_to "Delete Photo ##{(index+1)}", profile_profile_image_path(@profile, profile_image), :method=>:delete, :confirm=>"Are you sure you want to delete this image?"%>
+        </div>
+
+        <%- if profile_image.find_profile_thumbnail -%>
+        <%=image_tag profile_image.public_filename(:profile), :class=>"thumbnail"%>
+        <%- end -%>
+        <%- if profile_image.find_medium_thumbnail -%>
+        <%#=image_tag profile_image.public_filename(:medium), :class=>"thumbnail"%>
+        <%- end -%>
+        <%- if profile_image.find_tiny_thumbnail -%>
+        <%#=image_tag profile_image.public_filename(:tiny), :class=>"thumbnail"%>
+        <%- end -%>
+		
+		<div style="padding-left:25px; float:left;">
+		<% form_for :profile_image, :url => {:action => :default_photo, :id => profile_image} do |f| -%>
+			<div style="float:left;"><%= f.radio_button "default_photo", "", {:checked => profile_image.default_photo, :onclick => "$('#{profile_image.id}').show(); this.form.submit();"} %></div>
+                        <div id="<%=profile_image.id%>" class="loading" style="display:none;"><span class="text">Uploading...</span></div>
+                                                
+			<div style="padding: 0px 0px 2px 5px; float:left;">Make this as default photo</div>
+		<% end %>
+        </div>
+
+        <div class="clear"></div>
+
+      </div>
+
+      <%- end -%>
+
+    </fieldset>
+
+  </div>
+
+
+  </div>
+
+</div>
+
+<div id="uploading" class="loading" style="display:none"><span class="text">Uploading...</span></div>

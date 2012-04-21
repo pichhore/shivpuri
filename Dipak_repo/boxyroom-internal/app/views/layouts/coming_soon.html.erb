@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="title" content="Boxyroom" />
+    <meta name="language" content="en" />
+    <meta name="description" content="...." />
+    <link rel="image_src" href="http://" />
+    <title>Boxyroom</title>
+    <link type="text/css" rel="stylesheet" media="screen" href="/stylesheets/style.css" />
+
+    <script type="text/javascript" src="/javascripts/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" src="/javascripts/jquery.inputlabel.js"></script>
+    <script type="text/javascript" src="/javascripts/general-page-behaviours.js"></script>
+    <script type="text/javascript" src="/javascripts/cufon-yui.js"></script>
+    <script type="text/javascript" src="/javascripts/Helvetica_Neue_900.font.js"></script>
+    <script type="text/javascript">
+      Cufon.replace('h1');
+    </script>
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $("#search-t").inputLabel(false,{color:"#038FC4"});
+      });
+    </script>
+
+  </head>
+  <body id="home">
+    <div id="wrapper">
+      <div id="hd-wp">
+        <div id="hd">
+          <%= link_to "Boxyroom - secure online property rental", root_path, :id => "logo" %>
+        </div>
+      </div>
+      <div id="ct">
+        <%= yield %>
+      </div>
+      <div class="push"></div>
+
+      <div id="footer">
+        <div id="ft-ct">
+          <p>&copy; 2012 Boxyroom</p>
+
+          <ul>
+            <li><a href="http://twitter.com/boxyroomrocks">Twitter</a></li>
+            <li><a href="http://www.facebook.com/pages/Boxyroom/280933772469">Facebook</a></li>
+            <li><a href="http://boxyroom.tumblr.com/">Blog</a></li>
+          </ul>
+          <!--<a id="v-sign" href="#">Verisign Secured</a>-->
+        </div>
+      </div>
+    </div>
+  </body>
+  
+</html>

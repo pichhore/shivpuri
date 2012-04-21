@@ -1,0 +1,76 @@
+<p class="badge_bottom_margin">
+  <b>Badge name:</b>
+  <%=h @badge.name %>
+</p>
+<p class="badge_bottom_margin">
+  <b>Buyer Profiles added:</b>
+  <%=h @badge.profiles_added %>
+</p>
+
+<p class="badge_bottom_margin">
+  <b>Properties added:</b>
+  <%=h @badge.properties_added %>
+</p>
+
+<p class="badge_bottom_margin">
+  <b>Profile completeness:</b>
+  <%=h @badge.profile_completeness %>
+</p>
+
+<p class="badge_bottom_margin">
+  <b>Properties sold:</b>
+  <%=h @badge.properties_sold %>
+</p>
+
+<p class="badge_bottom_margin">
+  <b>Sellers added:</b>
+  <%=h @badge.sellers_added %>
+</p>
+
+<p class="badge_bottom_margin">
+  <b>Deals completed:</b>
+  <%=h @badge.deals_completed %>
+</p>
+
+<p class="badge_bottom_margin">
+  <b>Investor messages sent:</b>
+  <%=h @badge.investor_messages_sent %>
+</p>
+
+<p class="badge_bottom_margin">
+  <b>Certification:</b>
+  <%=h @badge.certification %>
+</p>
+
+<p class="badge_bottom_margin">
+  <b>Email subject:</b>
+  <%=h @badge.email_subject %>
+</p>
+
+<p class="badge_bottom_margin">
+  <b>Email header:</b>
+  <%=h @badge.email_header %>
+</p>
+
+<p class="badge_bottom_margin">
+  <b>Email body:</b>
+  <%=h @badge.email_body %>
+</p>
+
+<p class="badge_bottom_margin">
+  <b>Email footer:</b>
+  <%=h @badge.email_footer %>
+</p>
+
+<p class="badge_bottom_margin">
+  <b>Membership time:</b>
+  <%=h @badge.membership_time %>
+</p>
+<p class="badge_bottom_margin">
+<b>Badge image:</b><br />
+<% if @user_badge %>
+<%= image_tag @user_badge.public_filename, :width => "50px" %>
+<% end %>
+</p>
+<%= link_to 'Edit', edit_admin_badge_path(@badge) %> |
+<%= link_to 'Back', admin_badges_path %>

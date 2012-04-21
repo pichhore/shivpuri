@@ -1,0 +1,38 @@
+version: '2.5.2'
+selector: rich_text_editor
+simple_editor: true
+body_class: yui-skin-sam
+editor_extension_callbacks: "// MyExtension.install(editor);"
+javascript_base_uri: "yui"
+editor_extension_javascripts:
+  # - extension1.js
+  # - extension2.js
+additional_yui_javascripts:
+  # - connection/connection
+editor_config_javascript: "
+{
+  handleSubmit: true,
+  autoHeight: true,
+  dompath: false,
+  collapse: true,
+  height: '100px',   
+  width: '530px',   
+  markup: 'default',
+  toolbar: {
+    collapse: true,
+    draggable: false,
+    buttonType: 'advanced',
+    buttons: [
+        { group: 'textstyle', label: ' ',
+            buttons: [
+                { type: 'push', label: 'Bold CTRL + SHIFT + B', value: 'bold' },
+                { type: 'push', label: 'Italic CTRL + SHIFT + I', value: 'italic' },
+                { type: 'push', label: 'Underline CTRL + SHIFT + U', value: 'underline' },
+                { type: 'separator' },
+                { type: 'push', label: 'Create an Unordered List', value: 'insertunorderedlist' },
+                { type: 'separator' }
+            ]
+        }
+    ]
+  }
+}"

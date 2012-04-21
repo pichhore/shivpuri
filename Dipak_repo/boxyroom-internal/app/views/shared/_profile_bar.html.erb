@@ -1,0 +1,27 @@
+<ul id="user-nv">
+  <%- if current_user != nil %>
+    <li>Logged in as <%= current_user.full_name %></li>
+    <li class="admin">
+      <span>Admin</span>
+      <ul>
+        <%- if permitted_to? :index, :admin_properties %>
+          <li><%= link_to "Listings", admin_properties_path %></li>
+        <%- end %>
+
+        <%- if permitted_to? :index, :admin_users %>
+          <li><%= link_to "Users", admin_users_path %></li>
+        <%- end %>
+
+        <%- if permitted_to? :index, :admin_transactions %>
+          <li><%= link_to "Transactions", admin_transactions_path %></li>
+        <%- end %>
+      </ul>
+    </li>
+    <li><%= link_to "Dashboard", my_dashboard_my_account_path%></li>
+    <li><%= link_to "Messages", my_messages_path %></li>
+    <li><%= link_to "Logout", logout_path, :id => "login" %></li>
+  <%- else %>
+    <li><%= link_to "Sign Up", register_path, :id => "sign-up" %></li>
+    <li><%= link_to "Login", login_path, :id => "login" %></li>
+  <%- end %>
+</ul>

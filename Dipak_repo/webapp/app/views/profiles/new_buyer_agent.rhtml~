@@ -1,0 +1,123 @@
+<%- @page_title = "Buyer Agent Profile Setup - Step 2 of 2" -%>
+
+<% require_js_controllers :profile_setup, :expand_collapse -%>
+<% require_js_helpers :currency_field, :integer_field -%>
+<%= javascript_include_tag "owner_finance" %>
+
+<%- content_for :page_scripts do -%>
+
+Event.observe(window, 'load', function() {
+  profile_setup_controller = new NL.ProfileSetupController($('fields_property_type'),$('fields_privacy_public'),$('fields_privacy_private'));
+  optional_expand_collapse = new NL.ExpandCollapseController($$('#optional h3')[0],$$('#optional div.optional_content')[0]);
+  currency_field_helper_min = new NL.CurrencyFieldHelper($('fields_price_min'));
+  currency_field_helper_max = new NL.CurrencyFieldHelper($('fields_price_max'));
+  integer_field_helper_sqft_min = new NL.IntegerFieldHelper($('fields_square_feet_min'));
+  integer_field_helper_sqft_max = new NL.IntegerFieldHelper($('fields_square_feet_max'));
+  integer_field_helper_units_min = new NL.IntegerFieldHelper($('fields_units_min'));
+  integer_field_helper_units_max = new NL.IntegerFieldHelper($('fields_units_max'));
+  integer_field_helper_acres_min = new NL.IntegerFieldHelper($('fields_acres_min'));
+  integer_field_helper_acres_max = new NL.IntegerFieldHelper($('fields_acres_max'));
+});
+
+<%- end -%>
+
+<div class="form">
+
+<%= error_messages_for :criteria %>
+
+</div>
+
+<% form_for(:fields, :url => profiles_path) do |f| %>
+
+<%=hidden_field_tag "id",@profile_type.permalink%>
+<%=f.hidden_field "privacy" %>
+
+<div class="form">
+
+  <h3>Step 2: Describe what your buyer is looking for</h3>
+
+  <%=render :partial=>"/shared/buyer_fields", :locals=> {:f=>f}%>
+
+</div>
+
+<div class="form">
+
+  <%- if !logged_in? -%>
+
+  <h3>Step 2: Create an Account</h3>
+
+  <fieldset>
+
+    <table>
+
+      <tr>
+        <th class="label_required">First Name:</th>
+        <td><%=text_field "user", "first_name" %><%=error_message_on :user,:first_name%></td>
+      </tr>
+
+      <tr>
+        <th class="label_required">Last Name:</th>
+        <td><%=text_field "user", "last_name" %> (Never revealed to dwellgo members)<br/><%=error_message_on :user,:last_name%></td>
+      </tr>
+
+      <tr>
+        <th class="label_required">Real Estate License #:</th>
+        <td><%=text_field "user", "license_number" %><br/><%=error_message_on :user,:license_number%></td>
+      </tr>
+      
+      <tr>
+        <th class="label">Phone Number:</th>
+        <td><%=text_field "user", "business_phone" %><br/><%=error_message_on :user,:business_phone%></td>
+      </tr>
+      
+      
+      <tr>
+        <th class="label_required">Email:</th>
+        <td><%=text_field "user", "email" %> (Never revealed to dwellgo members)<br/><%=error_message_on :user,:email%></td>
+      </tr>
+<!--
+      <tr>
+        <th class="label">Home Phone:</th>
+        <td><%=text_field "user", "home_phone" %><%=error_message_on :user,:home_phone%></td>
+      </tr>
+
+      <tr>
+        <th class="label">Business Phone:</th>
+        <td><%=text_field "user", "business_phone" %><%=error_message_on :user,:business_phone%></td>
+      </tr>
+
+      <tr>
+        <th class="label">Mobile Phone:</th>
+        <td><%=text_field "user", "mobile_phone" %><%=error_message_on :user,:mobile_phone%></td>
+      </tr>
+-->
+      <tr>
+        <th class="label_required">Password:</th>
+        <td><%=password_field "user", "password" %> (See <%=link_to "Privacy Policy", {:controller=>"home", :action=>"privacy"}, :target=>"_new", :tabindex=>99%>)<br/><%=error_message_on :user,:password%></td>
+      </tr>
+
+      <tr>
+        <th class="label_required">Password (verify):</th>
+        <td><%=password_field "user", "password_confirmation" %><%=error_message_on :user,:password_confirmation%></td>
+      </tr>
+      
+      <tr>
+        <td colspan="2" align="center">I agree to the <%=link_to "Terms of Use", {:controller=>"home", :action=>"terms_of_use"}, :target=>"_new", :tabindex=>99%> <%=check_box "user", "terms_of_use" %><%=error_message_on :user,:terms_of_use%></td>
+      </tr>
+      
+    </table>
+
+  </fieldset>
+
+  <%- end -%>
+
+  <p> <%=image_tag "required.gif"%> Required Field </p>
+
+  <p style="text-align: center">
+    <%=submit_tag "Create", :class=>"submit"%>
+  </p>
+
+</div>
+
+<% end %>
+

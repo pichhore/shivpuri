@@ -1,0 +1,60 @@
+quentin:
+  id: 1
+  login: quentin
+  first_name: quentin
+  last_name: quentin
+  email: quentin@example.com
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  created_at: <%= 5.days.ago.to_s :db %>
+  # null means active activation_code: 8f24789ae988411ccf33ab0c30fe9106fab32e9b
+  activated_at: <%= 5.days.ago.to_s :db %>
+  digest_frequency: D
+aaron:
+  id: 2
+  login: aaron
+  first_name: aaron
+  last_name: aaron
+  email: aaron@example.com
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  created_at: <%= 1.days.ago.to_s :db %>
+  # null means active activation_code: 8f24789ae988411ccf33ab0c30fe9106fab32e9a
+  activated_at: <%= 5.days.ago.to_s :db %>
+  digest_frequency: D
+inactive1:
+  id: 3
+  login: inactive1
+  first_name: inactive1
+  last_name: inactive1
+  email: active1@example.com
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  created_at: <%= 1.days.ago.to_s :db %>
+  digest_frequency: D
+  activation_code: 8f24789ae988411ccf33ab0c30fe9106fab32e9a
+activated_50_days_ago:
+  id: 4
+  login: skippy
+  first_name: skippy
+  last_name: skippy
+  email: skippy@example.com
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  created_at: <%= 50.days.ago.to_s :db %>
+  # null means active activation_code: 8f24789ae988411ccf33ab0c30fe9106fab32e9a
+  activated_at: <%= 50.days.ago.to_s :db %>
+  digest_frequency: W
+admin:
+  id: 5
+  login: admin_guy
+  first_name: admin
+  last_name: guy
+  email: admin_guy@example.com
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  created_at: <%= 5.days.ago.to_s :db %>
+  # null means active activation_code: 8f24789ae988411ccf33ab0c30fe9106fab32e9a
+  activated_at: <%= 5.days.ago.to_s :db %>
+  digest_frequency: W
+  admin_flag: true

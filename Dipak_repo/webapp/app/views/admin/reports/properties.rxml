@@ -1,0 +1,14 @@
+xml.instruct! :xml, :version => "1.0"
+xml.rss :version => "2.0" do
+  xml.channel do
+    xml.title "REIMATCHER"
+    xml.description "REIMATCHER - PROPERTIES"
+        for profile in @profiles
+        xml.item do
+	    xml.title profile.name
+        xml.description profile.display_description
+		xml.link "http://#{request.host_with_port}/home/preview_owner/#{profile.permalink}"
+	  end
+    end
+  end
+end

@@ -1,0 +1,31 @@
+class CreateSellerWebsites < ActiveRecord::Migration
+  def self.up
+    exists = SellerWebsite.table_exists? rescue false
+    if !exists
+      transaction do
+        puts "Adding table seller_websites..."
+        create_table :seller_websites, :id => false do |t|
+          t.column :id, :string, :limit => 36, :null => false
+          t.column :user_id, :string, :limit => 36, :null => false, :references => :users
+          t.column :header,                    :string
+          t.column :opening_text,              :string
+          t.column :permalink_text,            :string
+          t.column :dynamic_css,               :string
+          t.column :video_tour,                :string
+          t.column :embed_video,               :string
+          t.column :active,                    :boolean
+          t.timestamps
+        end
+        puts "Setting primary key"
+        execute "ALTER TABLE seller_websites ADD PRIMARY KEY (id)"
+      end
+    end
+  end
+
+  def self.down
+    exists = SellerWebsite.table_exists? rescue false
+    if exists
+      drop_table :seller_websites
+    end
+  end
+end

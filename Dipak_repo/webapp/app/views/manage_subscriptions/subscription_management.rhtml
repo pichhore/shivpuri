@@ -1,0 +1,51 @@
+<%- @page_title = "Manage Your Subscriptions" -%>
+<%if !@retail_buyer.blank? %>
+<div>
+	<form method="post" action="/manage_subscriptions/update_subscription">
+          <input type="hidden" name="email_type" value="<%= params[:email_type].to_s%>"/>
+          <input type="hidden" name="id" value="<%= params[:id].to_s%>"/>
+		<label >
+				<b>Email Address</b> <span>(required)</span>
+		</label><br/>
+		<input type="text" style="width:250px;" value="<% if params[:email_type] == RetailBuyerProfile::EMAIL_TYPE[:squeeze_trust_responder]%><%= @retail_buyer.retail_buyer_email%><%else%><%= @retail_buyer.email_address%><%end%>" name="buyer_email" />
+        <br/><br/>
+          <% if params[:email_type] != RetailBuyerProfile::EMAIL_TYPE[:squeeze_trust_responder]%>
+                <%profile = @retail_buyer.profile%>
+               <label ><b>Profile Details</b></label>
+              <div>
+                  <%property_type = profile.display_property_type%>
+                  <div>Property Type : <%= property_type%></div>
+                   <div>Zip Code: <%= profile.display_zip_code%></div>
+                   <% if property_type == RetailBuyerProfile::PROPERTY_TYPE[:single_family_home] || property_type == RetailBuyerProfile::PROPERTY_TYPE[:multi_family] ||  property_type == RetailBuyerProfile::PROPERTY_TYPE[:condo_town_home]%>
+                     <%if property_type != RetailBuyerProfile::PROPERTY_TYPE[:multi_family]%>
+                      <div># Beds: <%= profile.display_bedrooms%></div>
+                      <div># Baths: <%= profile.display_bathrooms%></div>
+                      <%else%>
+                       <div>Units Range: <%= profile.display_retail_buyer_units_range%></div>
+                      <%end%>
+                    <div>Sqft Range: <%= profile.display_square_feet_range %></div>
+                    <%end%>
+                    <% if property_type == RetailBuyerProfile::PROPERTY_TYPE[:acreage]%>
+                    <div>Acres Range:<%= profile.display_retail_buyer_acres_range%></div>
+                     <div>County:<%= profile.display_county%></div>
+                    <%end%>
+                   <div>Max Monthly Payment: <%= profile.display_max_mon_pay%></div>
+                   <div>Max Down Payment:   <%= profile.display_max_dow_pay%></div>
+              </div><br/>
+           <%end%>
+		<label ><b>Do Not Contact</b></label>
+          <div>
+                <% check_subscription_value = check_subscription(@retail_buyer,params[:email_type])%>
+                <input type="checkbox" <% if !check_subscription_value%>checked="checked"<%end%>  value="1" name="remove_subscription"/>
+                <label>
+                    Add me to your "Do Not Contact" list <br/><span> This will stop all emails from this sender, regardless of your subscription status above.</span>
+                </label>
+          </div>
+          <br/>
+          <input type="submit" value="Submit" id="submit" name="submit"/>		
+		<!--Manage-->
+	</form>
+</div><!--/outer-->
+<%else%>
+  Please check the link.
+<%end%>

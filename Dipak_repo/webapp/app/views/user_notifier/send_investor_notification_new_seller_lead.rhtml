@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title><%= @subject %></title>
+</head>
+
+<body style="background: #FFFFFF; color: #000000; ">
+<br>
+Hey <%= @investor.first_name %>,<br><br>
+
+The following Seller Lead was just received from<br><br>
+
+<%= display_seller_website_link %>
+<br><br><br>
+First Name: <%= @seller_profile.first_name %><br>
+Last Name: <%= @seller_profile.last_name %><br>
+Phone: <%= @seller_profile.phone %><br>
+Email: <%= @seller_profile.email %><br>
+<br><br>
+Seller Details<br>
+Address: <%= display_address_with_city_and_zipcode %><br>
+# Beds: <%= @seller_property_profile.beds %><br>
+# Baths: <%= set_baths_value(@seller_property_profile) %><br>
+Seller Home Value: <%= @seller_property_profile.estimated_home_value %><br>
+Property Condition: <%= @seller_property_profile.property_conditions %><br>
+Mortgage Current: <%= @seller_property_profile.mortgage_current %><br>
+How much does seller want: <%= @seller_property_profile.asking_home_price %><br>
+Home Listed: <%= @seller_property_profile.home_listed %><br><br><br>
+
+Thanks,<br><br>
+
+REIMatcher<br>
+</body>
+</html>

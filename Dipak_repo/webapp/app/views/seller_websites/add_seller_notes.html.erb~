@@ -1,0 +1,48 @@
+<%= render :partial => "partial_for_meta_tag"%>
+<%- content_for :page_scripts do -%>
+
+Event.observe(window, 'load', function() {
+  account_settings_controller = new NL.AccountSettingsController();
+});
+<%- end -%>
+
+  <div class="tabset larger">
+      <%=render :partial=>"seller_lead_full_page_tab", :locals=>{:active_class_seller_note=>"active"}%>
+  </div><br><br>
+    <% form_for(:seller_engagement_note, :url =>"/seller_websites/create_seller_engagement_note") do |f| %>
+     <%= hidden_field "seller_profile", "id" %>
+      <div class="form">
+          <h3>Add Seller Note</h3>
+        <fieldset>
+          <table>
+            <tr>
+                <th class="rapair_table_row">
+                    Note Type:
+                </th>
+                <td>
+                  <%=f.select("note_type", [["Phone", "phone"]]) %><%=error_message_on :seller_engagement_note, :note_type %>
+                </td>
+            </tr>
+            <tr>
+              <th class="rapair_table_row">
+                Subject:
+              </th>
+              <td>
+                <%=f.text_field "subject", :size => "50" %>
+              </td>
+            </tr>
+            <tr>
+              <th class="rapair_table_row">
+                Description:
+              </th>
+              <td>
+                <%= f.text_area "description", :cols => 50, :rows => 10, :style => "margin:0px;" %>
+              </td>
+            </tr>
+         </table>
+        <p style="text-align: center">
+          <div style="margin-left:300px;"><%=submit_tag "Save", :class=>"submit_xl"%></div>
+        </p>
+        </fieldset>
+    </div>
+    <% end %>

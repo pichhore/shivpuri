@@ -1,0 +1,15 @@
+<h1>Edit Contract</h1>
+
+<% form_for(@super_contract_integration, :url => admin_super_contract_integration_path(@super_contract_integration), :html => { :method => 'put' }) do |f| %>
+  <%= f.error_messages %>
+<div>
+<%= render :partial => "super_contract_form", :locals => {:f=>f}%>
+</div>
+  <div class="widecontent">
+    <%= f.submit 'Update' %>
+  </div>
+<% end %>
+<div  class="widecontent">
+<%= link_to 'Show', admin_super_contract_integration_path(@super_contract_integration) %> |
+<%= link_to 'Back', admin_super_contract_integrations_path %>
+</div>

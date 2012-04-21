@@ -1,0 +1,2 @@
+class PendingIcontactUserList < ActiveRecord::Base
+end

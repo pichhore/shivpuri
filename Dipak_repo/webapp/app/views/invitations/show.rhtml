@@ -1,0 +1,38 @@
+<p>
+  <b>User:</b>
+  <%=h @invitation.user_id %>
+</p>
+
+<p>
+  <b>To email:</b>
+  <%=h @invitation.to_email %>
+</p>
+
+<p>
+  <b>To first name:</b>
+  <%=h @invitation.to_first_name %>
+</p>
+
+<p>
+  <b>To last name:</b>
+  <%=h @invitation.to_last_name %>
+</p>
+
+<p>
+  <b>Invitation message:</b>
+  <%=h @invitation.invitation_message %>
+</p>
+
+<p>
+  <b>Created at:</b>
+  <%=h @invitation.created_at %>
+</p>
+
+<p>
+  <b>Accepted at:</b>
+  <%=h @invitation.accepted_at %>
+</p>
+
+
+<%= link_to 'Edit', edit_invitation_path(@invitation) %> |
+<%= link_to 'Back', invitations_path %>

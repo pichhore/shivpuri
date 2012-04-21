@@ -1,0 +1,98 @@
+<%= render :partial => "partial_for_meta_tag"%>
+<%- content_for :page_scripts do -%>
+
+Event.observe(window, 'load', function() {
+  account_settings_controller = new NL.AccountSettingsController();
+});
+<%- end -%>
+
+<div class="full">
+    <div class="tabset larger">
+        <ul>
+            <li onclick="navigate_buyer_tab('<%=url_for(:action => 'buyer_lead_full_page_view', :controller => 'buyer_websites', :id => @profile.id) %>')">
+                Buyer Profile
+            </li>
+            <li onclick="navigate_buyer_tab('<%=url_for(:action => 'edit_buying_areas', :controller => 'buyer_websites', :id => @profile.id)%>')">
+                Buying Areas
+            </li>
+            <li onclick="navigate_buyer_tab('<%=url_for(:action => 'edit_buying_criteria', :controller => 'buyer_websites', :id => @profile.id) %>')">
+                Buying Criteria
+            </li>
+            <li onclick="navigate_buyer_tab('<%=url_for(:action => 'buyer_lead_match', :controller => 'buyer_websites', :id => @profile.id) %>')">
+                Matches
+            </li>
+            <li class="active" onclick="navigate_buyer_tab('<%=url_for(:action => 'buyer_lead_engagement', :controller => 'buyer_websites', :id => @profile.id) %>')">
+                Engagement
+            </li>
+        </ul>
+    </div>
+    <div class="clear">
+    </div>
+<br/>
+
+<div class="form">
+  <h3><%= @buyer_engagement_note.note_type == "Email" ? "Email Conversation" : "Phone Conversation"%></h3>
+  <fieldset>
+    <a href='#' style="margin-left:700px;" title="Delete Note" onclick="show_confirm();"><img src="/images/icons/delete.png" alt="Delete"></a>
+    <table>
+    <% if @buyer_engagement_note.note_type == "Email" %>
+      <tr>
+        <th class="rapair_table_row">
+          From:
+        </th>
+        <td>
+          <%= investor_business_name %>
+        </td>
+      </tr>
+      <tr>
+        <th class="rapair_table_row">
+          To:
+        </th>
+        <td>
+          <%= @profile.profile_field_engine_index.notification_email %>
+        </td>
+      </tr>
+      <tr>
+        <th class="rapair_table_row">
+          Date:
+        </th>
+        <td>
+          <%= @buyer_engagement_note.created_at.strftime('%m/%d/%y') %>
+        </td>
+      </tr>
+    <% end %>
+      <tr>
+        <th class="rapair_table_row">
+          Subject:
+        </th>
+        <td>
+          <%= @buyer_engagement_note.subject %>
+        </td>
+      </tr>
+      <tr>
+        <th class="rapair_table_row" style="width:30px;">
+          Description:
+        </th>
+        <td>
+          <%= display_email_with_assign_values_for_buyer_responder(@buyer_engagement_note.description,@profile, @buyer_engagement_note.note_type)%>
+        </td>
+      </tr>
+    </table>
+    <%=link_to "« Back<br/><br/>", {:controller=>'buyer_websites', :action=>'buyer_lead_engagement', :id=>params[:id]} %>
+  </fieldset>
+</div>
+</div>
+<script type="text/javascript">
+function show_confirm()
+{
+var r=confirm("Are you sure, you want to delete your note");
+if (r==true)
+  {
+    window.location = "<%= REIMATCHER_URL %>buyer_websites/delete_buyer_note?id=<%= params[:id]%>&buyer_note_id=<%= @buyer_engagement_note.id %>";
+  }
+else
+  {
+    window.close
+  }
+}
+</script>

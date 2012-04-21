@@ -1,0 +1,12 @@
+<h1>Editing user_company_image</h1>
+
+<%= error_messages_for :user_company_image %>
+
+<% form_for(@user_company_image) do |f| %>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @user_company_image %> |
+<%= link_to 'Back', user_company_images_path %>

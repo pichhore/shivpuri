@@ -1,0 +1,152 @@
+<%- @page_title = "Buyer Webpage" -%>
+<% require_js_controllers :tab, :account_settings -%>
+
+<%- content_for :page_scripts do -%>
+
+Event.observe(window, 'load', function() {
+  account_settings_controller = new NL.AccountSettingsController();
+
+        $('state_name_state_name').observe('change', function(){
+         	var state_id = $('state_name_state_name').value;
+	if (state_id != "") {
+        new Ajax.Request('/account/get_counties?state_id='+state_id,
+          {
+          method:'get',
+          onSuccess: function(transport){
+          var response = transport.responseText || "no response text";
+          $('county_update_div').update(response);
+          },
+        onFailure: function(){ alert('Something went wrong...') }
+        });
+	}
+        }); 
+});
+
+  function full_territory(this_id)
+  {
+      var children = this_id.getElementsByTagName('div');
+            for (var i=0; i < children.length; i++) { 
+                children[i].classNames().remove("span_display_none");
+                children[i].classNames().add("span_display_block");
+            }
+  }
+  function short_territory(this_id)
+  {
+      var children = this_id.getElementsByTagName('div');
+            for (var i=0; i < children.length; i++) { 
+                children[i].classNames().remove("span_display_block");
+                children[i].classNames().add("span_display_none");
+            }
+   }
+
+<%- end -%>
+<div class="full">
+
+  <div class="tabset larger">
+    <ul>
+      <li  uri="<%=url_for({:controller=>'account', :action=>'settings'})%>">Investor Profile</li>
+      <li uri="<%=url_for({:controller=>'account', :action=>'company_info'})%>">Company Info</li>
+      <li  class="active" uri="<%=url_for({:controller=>'account', :action=>'buyer_webpage'})%>">Buyer Websites</li>
+      <li uri="<%=url_for({:controller=>'account', :action=>'marketing'})%>">Buyer Responder</li>
+      <li uri="<%=url_for({:controller=>'account', :action=>'digest_frequency'})%>">Alerts</li>
+    </ul>
+  </div>
+<%= stylesheet_link_tag "investor_buyer_page" %>
+ <fieldset>
+    <table>
+      <tr>
+        <td colspan="2">
+          My territory(s)
+        </td>
+      </tr>
+      <tr>
+        <td width="23%"  valign="top">
+           <div>
+            <% index = 0 %>
+           <% @user_territories.each do |user_territory| %>
+               <span>
+                  <% if !user_territory.territory.nil? && !user_territory.territory.territory_name.blank? %>
+                          <% span_territory_name = user_territory.territory.territory_name %>
+                          <% index = index + 1 %>
+                      <span class="half">
+                          <a href="/account/buyer_webpage?territory_name=<%=span_territory_name%>" onmouseover="full_territory(this)" onmouseout="short_territory(this)">
+                              <%=index.to_s + ". " +  span_territory_name.split("(")[0] %><div class="span_display_none" style="text-decoration:underline;"><%=span_territory_name.gsub(span_territory_name.split("(")[0], "") %></div>
+                          </a>
+                        </span>
+                      <br/>
+                  <% end%>
+               </span>
+            <%end%>
+            </div>
+            <%="None Selected" if @user_territories.size == 0%>
+	    </td>
+	    <td align="center" valign="top">
+            <div class="right_row_div">
+            	 <div class="left_float_left">
+              	 <span style="font-weight:bold;" >Territory Selection</span>
+            	 </div>
+	    </div>
+          <div class="right_row_div">
+            <div class="left_float_left" style="text-align:left;">
+         You have (<%= @max_no_of_territories %>) Territories</b> available. To add or change a territory, you must first delete one..
+            </div>
+
+           </div>
+<br/>  <div class="right_row_div" >
+            	 <div class="left_float_left">
+	<div>
+	<b>Want More Territories?</b>  <i>Coming Soon</i>...
+	</div>
+	</div>
+</div><br/> 
+	    <div class="right_row_div">
+            	 <div class="left_float_left">
+          <div >
+              <span style="font-weight:bold;" >Territory Helper</span>
+            </div>
+        </div>
+</div>
+	    <div class="right_row_div">
+            	 <div class="left_float_left" style="text-align:left;">
+          <div>
+              Enter a State and County to find out which Territory it belongs to:
+          </div>
+</div>
+</div>
+	    <div class="right_row_div">
+            	 <div class="left_float_left">
+
+             <div >
+              <select name="state_name[state_name]" id="state_name_state_name">
+                <option value="">--- Select State --- </option>
+                   <% @states.each do |state|%>
+                      <option value="<%=state.id%>" ><%=state.name%></option>
+                    <%end%>
+              </select>
+              </div>
+	      </div>
+</div>
+	      
+	   <br/>
+<div class="right_row_div">
+            	 <div class="left_float_left">
+             <div id="county_update_div" >
+               <%=select("county","id",@counties.map { |county| [county.name, county.id]  },{ :include_blank => "--- Select County --- " })%>          
+	      </div>
+	     </div>
+	     </div>
+          <div class="right_row_div">
+            <div class="left_float_left" style="text-align:left;">
+	      <div id="ajax_update_terr_div" >
+
+	      </div>
+</div>
+</div>
+
+
+<br/><br/>
+	  
+	</td></tr>
+</table>
+</fieldset>
+</div>

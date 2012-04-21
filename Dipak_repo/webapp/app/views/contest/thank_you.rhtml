@@ -1,0 +1,12 @@
+<%- @page_title = "Your Friends Have Been Invited!" -%>
+<%- @page_heading = "Your Friends Have Been Invited!" -%>
+<%- @meta_description = "" -%>
+<%- @meta_keywords = "" -%>
+
+<p>Each friend has received an email with information on dwellgo and a link to create their profile.</p>
+
+<p>You can come back to the contest and invite more friends by going to <%=link_to(url_for(:action=>"index", :only_path=>false), :action=>"index")%>.  But hurry, time is running out.</p>
+
+<p>Good luck!  We hope to be sending you to Coronado Island!</p>
+
+<%=link_to "Check out the progress of the contest on our Blog", "http://dwellgo.wordpress.com/referral-contest/"%>

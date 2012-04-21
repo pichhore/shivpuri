@@ -1,0 +1,15 @@
+<%- @page_title = "Marketing Settings" -%>
+<% require_js_controllers :tab, :account_settings, :lightbox, :profile_update -%>
+<%- content_for :page_scripts do -%>
+Event.observe(window, 'load', function() {
+account_settings_controller = new NL.AccountSettingsController();
+lightbox_controller = new NL.LightboxController();
+});
+<%- end -%>
+
+<% content_for :page_styles do -%>
+<%=stylesheet_link_tag "lightbox"%>
+<% end -%>
+
+<div class="full">
+<%= render :partial=>"/shared/marketing_tabs"%>

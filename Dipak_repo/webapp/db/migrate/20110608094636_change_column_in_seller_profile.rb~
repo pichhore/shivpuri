@@ -1,0 +1,9 @@
+class ChangeColumnInSellerProfile < ActiveRecord::Migration
+  def self.up
+    change_column :seller_profiles, :seller_website_id, :string, :null => true
+  end
+
+  def self.down
+    change_column :seller_profiles, :seller_website_id, :string, :null => false
+  end
+end

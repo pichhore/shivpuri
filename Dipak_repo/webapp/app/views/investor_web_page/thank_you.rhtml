@@ -1,0 +1,73 @@
+<%=stylesheet_link_tag "#{@investor_website.layout=="modern" ? 'investorwebsitetemp2' : 'investorwebsite'}" %>
+<%=stylesheet_link_tag "investorwebcommoncss" %>
+<title>Investor Website</title>
+
+<% if @investor_website.layout=="modern" %>
+    <div id="wrap">
+      <%= render :partial => "inv_web_temp2_header"%>
+      <div class="clear"></div>
+      <div>&nbsp;</div>
+      <div class="menu_wrap_inside">
+        <div id="sitecontent" style="padding: 5px 6px 0; width: 960px;background:none;">
+            <fieldset>
+            <div class="wide">
+
+            <p>
+              <h1>We're Locating a Home For You NOW!</h1>
+              <br/> <br/>
+              We have received your home buying criteria and made your Buyer Profile anonymously available to our network of Realtors and real estate investors.  
+              <br/> <br/>
+              Thanks for creating your own private Buyer Profile with us...
+              <br/> <br/>
+              We will be in contact with you soon!
+              <br/> <br/>
+              If you have any questions , please feel free to contact us
+              <br/> <br/>
+              Thanks,
+              <br/> <br/>
+              <%=@user.first_name %>&nbsp;<%=@user.last_name %><br/>
+              <%=@user_company_info.business_name unless @user_company_info.nil?  %><br/>
+              <%=@user_company_info.business_phone unless @user_company_info.nil?  %><br/>
+            </p>
+
+            </div>
+            </fieldset>
+          <div style="width:945px; margin-left:10px;">
+            <%= render :partial => "inv_web_temp2_footer"%>
+          </div>
+        </div>
+      </div>
+    </div>
+<% else %>
+    <%= render :partial => "inv_web_template1_header" %>
+    <div id="back_div" style="background-color:#E6EBEC;">
+	
+	    <div id="content" style="padding: 4px 6px 16px;background:none;">
+        <fieldset>
+        <div class="wide">
+
+        <p>
+          <h1>We're Locating a Home For You NOW!</h1>
+          <br/> <br/>
+          We have received your home buying criteria and made your Buyer Profile anonymously available to our network of Realtors and real estate investors.  
+          <br/> <br/>
+          Thanks for creating your own private Buyer Profile with us...
+          <br/> <br/>
+          We will be in contact with you soon!
+          <br/> <br/>
+          If you have any questions , please feel free to contact us
+          <br/> <br/>
+          Thanks,
+          <br/> <br/>
+          <%=@user.first_name %>&nbsp;<%=@user.last_name %><br/>
+          <%=@user_company_info.business_name unless @user_company_info.nil?  %><br/>
+          <%=@user_company_info.business_phone unless @user_company_info.nil?  %><br/>
+        </p>
+
+        </div>
+        </fieldset>
+      </div>
+      <%= render :partial => "inv_web_temp1_footer" %>
+    </div>
+<% end %>
+

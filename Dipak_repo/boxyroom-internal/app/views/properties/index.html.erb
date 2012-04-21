@@ -1,0 +1,88 @@
+<head>
+  <!--[if IE]>
+    <style type="text/css">
+      
+    </style>
+  <![endif]-->
+</head>
+<div id="content" style="padding: 2px 0;">
+  <div class="container">
+    <%#= render_crumbs %>
+    <%- if @properties.nil? %>
+      <div align="center" style="margin-top: 30px">
+        <%- form_tag properties_path, :method => :get do %>
+          <%= text_field_tag 'input', 'Enter your search query here', :size => 50 %>
+          <%= submit_tag 'Are you feeling lucky today?' %>
+        <%- end %>
+      </div>
+    <%- else %>
+      <%- if !@properties.empty? %>
+        <div class="search_page" style="margin-bottom: 32px;margin-top: 12px;">
+          <%- form_tag properties_path, :method => :get, :id=>"search_form" do %>
+            <%= text_field_tag 'input', params[:input].capitalize , :id => "search-t", :onclick=>"nilkey();" %>
+            <%= submit_tag "" %>
+            <div class="drop">
+              <select name="searchby" id="album__genre" style="width: 180px;" onchange="changeUrl();">
+                <option value="all"          <%=selected_search_by("all")%> >Sort by</option>
+                <option value="mostreviewed" <%=selected_search_by("mostreviewed")%> >Most Reviewed</option>
+                <option value="highestrent"  <%=selected_search_by("highestrent")%> >Highest Rent</option>
+                <option value="lowestrent"   <%=selected_search_by("lowestrent")%> >Lowest Rent</option>
+              </select>
+            </div>
+          <%- end %>
+        </div>
+        <table cellspacing="0" class="listings full">
+          <caption>Properties in <%= params[:input].capitalize %></caption>
+          <colgroup>
+            <col class="description" />
+            <col class="type" />
+            <col class="amount" />
+            <col class="style" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Type</th>
+              <th>Style</th>
+              <th>Monthly Rent</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%- @properties.each_with_index do |property, index| %>
+              <%= render :partial => 'property', :locals => {:property => property,:index=>index} %>
+            <% end %>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="4">
+                <li> <%= will_paginate @properties, :previous_label => "Previous", :next_label => "Next"%></li>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      <%else%>
+          <p>Sorry, we couldn't find anything.</p>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+<script type="text/javascript">
+  function changeUrl() {
+    document.getElementById('search_form').submit();
+  }
+  function nilkey(){
+   var v1 = document.getElementById("search-t")
+   if (v1.value === "Where are you moving to?"){
+    v1.value = ""
+   }
+  }
+  $('#search_form').submit(function() {
+   if ( $('#search-t').val().length === 0 || $('#search-t').val() === "Where are you moving to?"){return false;
+   }
+   return true;
+  });
+  $('#search-t').blur(function(){
+   if ( this.value.length === 0 ){
+    this.value = 'Where are you moving to?'}
+  });
+</script>

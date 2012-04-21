@@ -1,0 +1,56 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+<% for i in 1..6 %> owner_<%= i %>_image_full:
+  id: owner<%= i %>_image_full
+  profile_id: owner<%= i %>
+  content_type: fixme
+  filename: /images/example_property_images/house_<%=i%>.jpg
+  size: 0
+  width: 240
+  height: 180
+<% end %>
+<% for i in 1..6 %> owner_<%= i %>_image_large:
+  id: owner<%= i %>_image_large
+  profile_id: owner<%= i %>
+  content_type: fixme
+  filename: /images/example_property_images/170x170/house_<%=i%>.jpg
+  size: 0
+  width: 170
+  height: 170
+<% end %>
+<% for i in 1..6 %> owner_<%= i %>_image_medium:
+  id: owner<%= i %>_image_medium
+  profile_id: owner<%= i %>
+  content_type: fixme
+  filename: /images/example_property_images/60x60/house_<%=i%>.jpg
+  size: 0
+  width: 60
+  height: 60
+<% end %>
+<% for i in 1..4 %> owner_<%=i%>_image_micro_1:
+  id: owner<%=i%>_image_micro_1
+  profile_id: owner<%=i%>
+  content_type: fixme
+  filename: /images/example_property_images/60x60/bath_<%=i%>.jpg
+  size: 0
+  width: 50
+  height: 50
+<% end %>
+<% for i in 1..4 %> owner_<%=i%>_image_micro_2:
+  id: owner<%=i%>_image_micro_2
+  profile_id: owner<%=i%>
+  content_type: fixme
+  filename: /images/example_property_images/60x60/kitchen_<%=i%>.jpg
+  size: 0
+  width: 50
+  height: 50
+<% end %>
+<% for i in 1..4 %> owner_<%=i%>_image_micro_3:
+  id: owner<%=i%>_image_micro_3
+  profile_id: owner<%=i%>
+  content_type: fixme
+  filename: /images/example_property_images/60x60/room_<%=i%>.jpg
+  size: 0
+  width: 50
+  height: 50
+<% end %>

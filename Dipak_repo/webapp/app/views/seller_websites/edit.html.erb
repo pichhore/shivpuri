@@ -1,0 +1,11 @@
+<%- @page_title = "My Websites – #{@seller_website.my_website.domain_name}" -%>
+<%= stylesheet_link_tag "investor_buyer_page" %>
+<fieldset>
+  <% form_for(@seller_website) do |f| %>
+      <table>  
+	  <%= render :partial => (@seller_website.seller_magnet? ? "setup_magnet" :  "set_up"), :locals => { :f => f, :button_name  => "Update Settings" } %>
+      </table>
+  <% end %>
+</fieldset>
+
+

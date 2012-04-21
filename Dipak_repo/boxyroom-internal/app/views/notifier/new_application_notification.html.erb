@@ -1,0 +1,11 @@
+Transaction ID: <%= @application.transaction_id.upcase %>
+
+Hi <%= @application.property.owner.first_name %>,
+
+<%= @application.user.full_name_profile %> has applied for your property.
+
+What to do next:
+1. View your Dashboard for more details: <%= @my_dashboard_my_account_url %>
+2. Approve or reject her/his application
+
+The Boxyroom Team

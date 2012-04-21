@@ -1,0 +1,88 @@
+NL.AccountSettingsController = Class.create();
+NL.AccountSettingsController.prototype = {
+
+    onTabChange: function(old_tab, new_tab) {
+        uri = new_tab.getAttribute("uri");
+        if(uri) {
+            document.location = uri;
+        }
+    },
+
+    initialize: function() {
+        this.tab_controller = new NL.TabController(1, $$('div.tabset')[0]);
+        this.tab_controller.model.observe("tab.change", this.onTabChange.bind(this));
+    }
+}
+
+function show_confirmation()
+{
+if(business_name_bc==business_name_ac && business_address_bc==business_address_ac && business_phone_bc==business_phone_ac && business_email_bc==business_email_ac)
+ return true;
+else     		
+ return !confirm("Your settings have not been saved. Are you sure you want to exit this page? To save your changes, click OK, then click \"Update Settings\".");	 
+}
+
+function values_after_change()
+{
+	business_name_ac = $('user_company_info_business_name').value;
+	business_address_ac = $('user_company_info_business_address').value;
+	business_phone_ac = $('user_company_info_business_phone').value;
+	business_email_ac = $('user_company_info_business_email').value;
+}
+
+function toggel_personalized_list(editor){
+  var link = document.getElementById(editor)
+  var list = document.getElementById('personalized_list')
+  if (link.rel=='true' && list.style.display!='none'){
+    list.style.display='none';
+    link.setAttribute('rel', false);
+  }else{
+    list.style.display='block';
+    link.setAttribute('rel', true);
+  }
+  var personalized_items = document.getElementsByClassName('personalized_item');
+  for (var i = 0; i < personalized_items.length; i++) {
+      personalized_items[i].setAttribute('value', editor);
+    }
+}
+
+function getIFrameDocument(aID){
+  if (document.getElementById(aID).contentDocument){
+    return document.getElementById(aID).contentDocument;
+  } else {
+    return document.frames[aID].document;
+  }
+}
+
+function doRichEditCommand(frame, personalize, index, flag){
+    if (flag==1)
+      { oframe = 'buyer_notification_' + frame; }
+    else if (flag==0)
+      { oframe = 'trust_responder_notification_' + frame; }
+    else
+      { oframe = 'seller_responder_notification_' + frame; }
+    var pattr = /\{\w+[(\s|\-)\w+]+\}/g;
+    var personalize_array = personalize.match(pattr);
+    text = personalize_array[index];
+    var browser = sendToClipboard(text);
+    if (browser != "Not IE"){
+	document.getElementById(oframe).contentWindow.focus();
+	var temp = getIFrameDocument(oframe).execCommand('paste');
+	document.getElementById(oframe).contentWindow.focus();
+	document.getElementById('personalized_list').style.display='none';
+    }
+    if (browser == "Not IE"){
+	var temp = getIFrameDocument(oframe).execCommand('InsertHTML', false, text);
+	document.getElementById(oframe).contentWindow.focus();
+	document.getElementById('personalized_list').style.display='none';
+    }
+}
+
+function sendToClipboard(s){
+    if (window.clipboardData && clipboardData.setData){
+	clipboardData.setData("text", s);
+    }
+    else{
+	return "Not IE";
+    }
+}

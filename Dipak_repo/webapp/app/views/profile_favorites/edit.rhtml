@@ -1,0 +1,27 @@
+<h1>Editing profile_favorite</h1>
+
+<%= error_messages_for :profile_favorite %>
+
+<% form_for(:profile_favorite, :url => profile_profile_favorite_path(@profile_favorite), :html => { :method => :put }) do |f| %>
+  <p>
+    <b>Profile</b><br />
+    <%= f.text_field :profile_id %>
+  </p>
+
+  <p>
+    <b>Target profile</b><br />
+    <%= f.text_field :target_profile_id %>
+  </p>
+
+  <p>
+    <b>Created at</b><br />
+    <%= f.datetime_select :created_at %>
+  </p>
+
+  <p>
+    <%= submit_tag "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', profile_profile_favorite_path(@profile_favorite) %> |
+<%= link_to 'Back', profile_profile_favorites_path %>

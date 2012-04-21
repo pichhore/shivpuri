@@ -1,0 +1,96 @@
+
+<div class="form">
+  <%-if @has_selected_send_to -%>
+  <h3>Enter Your Message</h3>
+  <%-else-%>
+  <h3>Select Recipient(s) and Enter Your Message</h3>
+  <%-end-%>
+  <fieldset>
+
+    <table>
+
+      <%-if !@profile_message_form.message_for_indiv? -%>
+       <tr>
+        <th>Send To:</th>
+        <td>
+          <input type="hidden" name="profile_message_form['send_to']" value="<%= params['profile_message_form']['send_to'] %>"/>
+          <%=error_message_on :profile_message_form, :send_to%>
+          <%= @send_to_description %>
+         </td>
+      </tr>
+      <tr><th></th><td id="profile_message_match_text"><%= "Your message will be sent to #{@profile.match_count_text(@match_count, @listing_type)}" %></td></tr>
+      <%-else-%>
+      <tr>
+        <th>Send To:</th>
+        <td><%=@profile_message_form.message_for_indiv? ? @indiv_profile.display_name : @profile_message_form.send_to.collect {|value| value+" matches"}.join(",")%></td>
+      </tr>
+      <%-end-%>
+      <%- if @profile.nil?-%>
+        <input type="hidden" name="target_profile_type" value="<%= params[:target_profile_type] %>"/>
+        <tr>
+          <th style="white-space: nowrap;">From Profile:</th>
+          <td>
+            <span style="white-space: nowrap;">
+              <%= select_tag("profile_message_form[from_profile_id]", options_for_select(@my_profiles)) %>
+              <%= link_to "What's This?", {:href=>"#"}, :onclick=>"$('choose_profile_help').show(); return false;" %>
+              <%=error_message_on :profile_message_form,:from_profile_id%>
+            </span>
+            <div id="choose_profile_help" class="tooltip" style="display: none; background-color: #fff; border: 1px solid black;">
+            <%= image_tag "active_scaffold/default/close.gif", :onclick=>"$('choose_profile_help').hide();", :style=>"float: right;" %>
+            Messages are associated with a profile to help you better organize your conversations.  Choose the profile you want to be associated with this message.
+            </div>
+          </td>
+        </tr>
+       <%- end -%>
+    </table>
+
+    <table>
+      <tr>
+        <th>Subject:</th>
+        <td><%= text_field "profile_message_form","subject", :size => "40" %><%=error_message_on :profile_message_form,:subject%></td>
+      </tr>
+
+      <tr>
+        <th colspan="2">Your Message:</th>
+      </tr>
+
+      <tr>
+        <td colspan="2"><%= text_area "profile_message_form","body", :size => "40x6" %><%=error_message_on :profile_message_form,:body%></td>
+      </tr>
+<%= hidden_field_tag "req_uri_for_mp", @req_uri_for_mp %> 
+    </table>
+
+  </fieldset>
+
+</div>
+
+<p style="text-align: center">
+  <%=submit_tag "Send Message", :class=>"submit_l"%>
+  <% unless params[:investor_full_page].blank? %>
+    <%=button_to_function "Cancel", "document.location = '#{@return_path}?investor_full_page=#{params[:investor_full_page]}&state_code=#{params[:state_code]}&user_territory_id=#{params[:user_territory_id]}&search_investor=#{params[:search_investor]}&page_number=#{params[:page_number]}'", :class=>"submit_l cancel_button"%>
+  <% else %>
+   <%=button_to_function "Cancel", "document.location = '#{@return_path}?#{encode_return_dashboard_params}&ref=#{params[:ref]}'", :class=>"submit_l cancel_button"%>
+  <% end %>
+</p>
+
+<%-if @has_selected_send_to -%>
+  <% @profile_message_form.send_to.each do |send_to| -%>
+  <%=hidden_field_tag "profile_message_form[send_to][]",send_to%>
+  <%-end-%>
+<%-end-%>
+<%-if @profile_message_form.message_for_indiv? -%>
+  <%=hidden_field_tag "profile_message_form[indiv_profile_id]",@profile_message_form.indiv_profile_id%>
+<%-end-%>
+
+<%=hidden_field_tag "profile_message_form[reply_to_profile_message_id]", @profile_message_form.reply_to_profile_message_id%>
+<%=encode_return_dashboard_params_hidden%>
+<%=hidden_field_tag "ref", params[:ref] %>
+
+<%- if !@profile.nil? -%>
+  <%= hidden_field_tag "profile_message_form[from_profile_id]", @profile.id %>
+<%- end -%>
+
+<%=hidden_field_tag "investor_full_page", params[:investor_full_page]%>
+<%=hidden_field_tag "state_code", params[:state_code]%>
+<%=hidden_field_tag "user_territory_id", params[:user_territory_id]%>
+<%=hidden_field_tag "search_investor", params[:search_investor]%>

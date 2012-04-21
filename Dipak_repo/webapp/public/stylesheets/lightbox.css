@@ -1,0 +1,294 @@
+        #overlay_Lightbox
+        {
+                position:absolute;
+                top:0;
+                left:0;
+                width:110%;
+                height:100%;
+                z-index:1000;
+
+                background-color: activeborder;
+
+/*                 -moz-opacity: 0.9; */
+                opacity: -1.9;
+/*                 filter: alpha(opacity=90); */
+        }
+        #overlay_Lightbox[id]
+        {
+                position: fixed;
+        }
+        #overlayBackground_Lightbox
+        {
+                display:none;
+                position:absolute;
+                top:0;
+                left:0;
+                width:110%;
+                height:100%;
+                z-index:1000;
+                background-color: transparent;
+                
+                filter: alpha(opacity=0);
+        }
+        #overlayBackground_Lightbox[id]
+        {
+                position: fixed;
+        }
+        .lightboxDiv_Lightbox
+        {
+                display: none;
+                position: absolute;
+
+                padding: 0px;
+                border: 0px solid ;
+
+                background-color: #FFFFFF;
+
+                z-index:1001;
+                overflow: none;
+                
+                
+                
+        }
+
+        .lightboxDiv_Lightbox[id]
+        {
+                position: fixed;
+        }
+
+		#lightbox_contents {
+                display: block;
+                margin: 0;
+                position:absolute;
+                top:25%;
+                left:25%;
+                width:50%;
+                height:60%;
+                background: white;
+                z-index:1001;
+                overflow: none;
+                border: 8px solid #088fc9;
+                -moz-opacity: 1.0;
+                opacity: 1.0;
+                filter: alpha(opacity=100);
+                font-family: helvetica, arial, sans-serif;
+                color: #535353;
+                text-align: center;
+                
+                
+				-moz-border-radius-topleft: 10px; /* Firefox */
+				-moz-border-radius-topright: 10px; /* Firefox */
+				-moz-border-radius-bottomleft: 10px; /* Firefox */
+				-moz-border-radius-bottomright: 10px; /* Firefox */
+			
+				-webkit-border-top-left-radius: 10px; /* Safari/WebKit */
+				-webkit-border-top-right-radius: 10px; /* Safari/WebKit */
+				-webkit-border-bottom-left-radius: 10px; /* Safari/WebKit */
+				-webkit-border-bottom-right-radius: 10px; /* Safari/WebKit */
+			
+				border-top-left-radius: 10px; /* future browsers with CSS3 support */
+				border-top-right-radius: 10px; /* future browsers with CSS3 support */
+				border-bottom-left-radius: 10px; /* future browsers with CSS3 support */
+				border-bottom-right-radius: 10px; /* future browsers with CSS3 support */
+
+				}
+
+
+#lightbox_contents #lightboxHeader {
+	text-align: left;
+	background-color: #088fc9;
+	padding: 8px 4px 8px 12px;
+	margin: 0;
+	font-size: 18px; font-weight: bold;
+	border-bottom: solid 1px #088fc9;
+	color: #fff;
+	}
+#lightbox_contents p {
+	text-align: left;
+	margin: 12px 12px 12px 12px;
+	font-size: 12px; line-height: 16px;
+	}
+#lightbox_contents #lightboxFooter {
+	text-align: right;
+	background-color: #f7f7f7;
+	padding: 8px 14px 8px 12px;
+	margin: 0;
+	}
+
+#lightbox_contents #lightboxFooter_thank {
+	text-align: right;
+	background-color: #f7f7f7;
+	padding: 8px 14px 8px 12px;
+	margin: 64px 0px 0px;
+        height: 17px;
+	}	
+	
+	
+/* Streetview is Flash and the opacity settings above don't work well under FireFox */	
+		#overlay_Streetview {
+	            position:absolute;
+	            top:0;
+	            left:0;
+	            width:110%;
+	            height:100%;
+	            z-index:1000;
+				background-color: transparent;
+		}
+		#overlay_Streetview1, #overlay_Streetview2 {
+	            top:15%;
+	            width:600px;
+	            height:100%;
+	            z-index:1000;
+				background-color: transparent;
+		}
+		#overlay_Streetview[id]
+        {
+                position: fixed;
+        }
+		#lightbox_Streetview 
+		{
+                display: block;
+                padding: 5px;
+                margin: 0;
+                position:absolute;
+                top:25%;
+                left:25%;
+                background: white;
+                z-index:1001;
+                overflow: none;
+                border: 2px solid black;
+                -moz-opacity: 1.0;
+                opacity: 1.0;
+                filter: alpha(opacity=100);
+				text-align: center;
+		}
+		#lightbox_Streetview1 
+		{
+                display: block;
+                padding: 5px;
+                margin: 0;
+                position:absolute;
+                top:25%;
+                left:25%;
+                background: white;
+                z-index:1001;
+                overflow: none;
+                border: 2px solid black;
+                -moz-opacity: 1.0;
+                opacity: 1.0;
+                filter: alpha(opacity=100);
+				text-align: center;
+		}
+		#streetview_header 
+		{
+				text-align: right;
+				width: 650px;
+		}
+		#streetview_header1, #streetview_header2 
+		{
+				text-align: right;
+				width: 650px;
+		}
+		#streetview_contents 
+		{
+				width: 650px;
+				height: 375px;
+		}
+		#streetview_contents1 
+		{
+				width: 650px;
+				height: 375px;
+		}
+		#contract_end_date_contents 
+		{
+				width: 650px;	
+				padding: 5px;
+				font-size: 16px;
+				color: blue;			
+		}
+		#contract_end_date_contents1, #contract_end_date_contents2
+		{
+				width: 650px;	
+				padding: 5px;
+				font-size: 16px;
+				color: blue;
+		}
+		#lightbox_contract_end_date 
+		{
+                display: block;
+                padding: 5px;
+                margin: 0;
+                position:absolute;
+		width:650px;
+                top:25%;
+                left:18%;
+                background: white;
+                z-index:1001;
+                overflow: none;
+                border: 2px solid black;
+                -moz-opacity: 1.0;
+                opacity: 1.0;
+                filter: alpha(opacity=100);
+				text-align: left;
+		}
+		#lightbox_contract_end_date1 
+		{
+                display: block;
+                padding: 5px;
+                margin: 0;
+                position:absolute;
+		width:650px;
+                top:25%;
+                left:20%;
+                background: white;
+                z-index:1001;
+                overflow: none;
+                border: 2px solid black;
+                -moz-opacity: 1.0;
+                opacity: 1.0;
+                filter: alpha(opacity=100);
+				text-align: left;
+		}
+		.trust_responder_mail {
+	            top:15%;
+	            width:600px;
+	            height:100%;
+	            z-index:1000;
+				background-color: transparent;
+		}
+
+		#lightbox_inv_msg_contents {
+                display: block;
+                padding: 5px;
+                margin: 0;
+                position:absolute;
+                top:400px;
+                left:25%;
+                width:50%;
+                height:60%;
+                background: white;
+                z-index:1001;
+                overflow: none;
+                border: 2px solid black;
+                -moz-opacity: 1.0;
+                opacity: 1.0;
+                filter: alpha(opacity=100);
+		}
+	 .light_box_seller_webpage {
+        margin-top:35px !important;
+        height:22px;
+      }
+
+    input.submit_l {
+        background: url(..//images/submit-l.gif) no-repeat;
+        border: 0;
+        padding: 4px 0;
+        width: 120px;
+        height: 24px;
+        margin: 0 15px 1px 0;
+        color: #FFF;
+        font: bold 1em Arial, Sans-Serif;
+        cursor: pointer;
+    }
+    
+    

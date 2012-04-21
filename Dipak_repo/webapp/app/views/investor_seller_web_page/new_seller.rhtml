@@ -1,0 +1,132 @@
+<%= render :partial => "not_show_navigation_link" %>
+<META NAME="robots" CONTENT="noindex,nofollow">
+<%- @page_title = "Post a Property For Sale - "+company_name -%>
+<%- @page_heading = "Post a Property For Sale" -%>
+<%- @meta_title = @seller_website.meta_title -%>
+<%- @meta_description = @seller_website.meta_description -%>
+
+<% require_js_controllers :profile_setup, :expand_collapse -%>
+<% require_js_helpers :currency_field, :integer_field , :date_field -%>
+
+<%- content_for :page_scripts do -%>
+
+Event.observe(window, 'load', function() {
+  profile_setup_controller = new NL.ProfileSetupController($('fields_property_type'),$('fields_privacy_public'),$('fields_privacy_private'));
+  optional_expand_collapse = new NL.ExpandCollapseController($$('#optional h3')[0],$$('#optional div.optional_content')[0]);
+  currency_field_helper = new NL.CurrencyFieldHelper($('fields_price'));
+  date_field_helper_expiry_date = new NL.DateFieldHelper($('fields_contract_end_date]'));
+  integer_field_helper_min_mon_pay = new NL.IntegerFieldHelper($('fields_min_mon_pay'));
+  integer_field_helper_min_dow_pay = new NL.IntegerFieldHelper($('fields_min_dow_pay'));
+  integer_field_helper_sqft = new NL.IntegerFieldHelper($('fields_square_feet'));
+  integer_field_helper_units = new NL.IntegerFieldHelper($('fields_units'));
+  integer_field_helper_acres = new NL.IntegerFieldHelper($('fields_acres'));
+});
+
+<%- end -%>
+
+<script type="text/javascript">
+/*<![CDATA[*/
+/*You can also place this code in a separate file and link to it like epoch_classes.js*/
+	var dp_cal;
+window.onload = function () {
+	dp_cal  = new EpochSellerWebsite('epoch_popup','popup',document.getElementById('fields_contract_end_date'));
+};
+/*]]>*/
+</script>
+
+<div class="form" style="margin-top: -30px;">
+
+<%= error_messages_for :criteria %>
+
+</div>
+
+<% form_for(:fields, :url => {:controller=>"investor_seller_web_page", :action=>"create_new_seller_profile",:permalink_text=>params[:permalink_text]}) do |f| %>
+
+<div class="form">
+
+  <h3><SPAN id="seller_cap_text">Step 1: How Do We Contact You?</SPAN></h3>
+
+  <fieldset class="seller_lead_process">
+    <div class="lead_capture_content_div">
+    <table class="first_table">
+
+      <tr>
+        <th class="label_required">First Name:</th>
+        <td><%=text_field "seller_profile", "first_name" %><%=error_message_on :seller_profile,:first_name%></td>
+      </tr>
+
+      <tr>
+        <th class="label">Last Name:</th>
+        <td><%=text_field "seller_profile", "last_name" %><%=error_message_on :seller_profile,:last_name%></td>
+      </tr>
+
+      <tr>
+        <th class="label">Phone:</th>
+        <td><%=text_field "seller_profile", "phone" %><%=error_message_on :seller_profile,:phone%></td>
+      </tr>
+
+      <tr>
+        <th class="label">Alternate Phone:</th>
+        <td><%=text_field "seller_profile", "alternate_phone" %><%=error_message_on :seller_profile,:alternate_phone%></td>
+      </tr>
+
+      <tr>
+        <th class="label_required">Email:</th>
+        <td><%=text_field "seller_profile", "email" %><%=error_message_on :seller_profile,:email%></td>
+      </tr>
+        <tr>
+            <th id="property_address_label" class="label">
+              Address:
+            </th>
+            <td>
+                <%=f.text_field "property_address", :size=>30 %><%=error_message_on :fields, :property_address %>
+            </td>
+        </tr>
+        <tr>
+            <th class="label">
+                Zip Code:
+            </th>
+            <td>
+                <%=f.text_field "zip_code"%><%=error_message_on :fields,:zip_code %>
+            </td>
+            </th>
+       </tr>
+
+       <tr>
+          <th class="label">
+              # Beds:
+          </th>
+          <td>
+              <%=f.select("beds", [["--- Select Bedrooms ---", ""], ["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"], ["8", "8"], ["9", "9"], ["10+", "10"]]) %><%=error_message_on :fields,:beds %>
+          </td>
+        </tr>
+        <tr>
+          <th class="label">
+              # Baths:
+          </th>
+          <td>
+              <%=f.select("baths", [["--- Select Bathrooms ---", ""], ["1", "1"], ["1 1/2", "2"], ["2", "3"], ["2 1/2", "4"], ["3", "5"], ["4", "7"], ["5", "9"], ["6+", "11"]]) %><%=error_message_on :fields,:baths %>
+          </td>
+      </tr>
+
+ </table><br />
+</div>
+    <div class="welcome_video_tour_div">
+      <% if(!@seller_website.lead_funnel_embed_video.blank?) %>
+	    <%= customize_embedcode(@seller_website.home_page_embed_video) %>
+	  <% elsif(!@seller_website.lead_funnel_video_tour.blank?) %>
+      <% video_id = @seller_website.lead_funnel_video_tour.split('=')[-1] %>
+	    <object width="268px" height="202px"><param name="movie" value="http://www.youtube.com/v/<%=video_id%>&amp;hl=en_US&amp;fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/<%=video_id%>&amp;hl=en_US&amp;fs=1;&autoplay=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="268px" height="202px" wmode="opaque"></embed></object>
+	  <% else %>
+	    <center><div id="evp-1c1d07ca6a65ee015c337dd8eefaa9bb-wrap" class="evp-video-wrap"></div><script type="text/javascript"  src="http://www.damonflowers.com/evp/framework.php?div_id=evp-1c1d07ca6a65ee015c337dd8eefaa9bb&id=c2VsbGVyLXdlYnNpdGUtbGVhZC12MS5tNHY%3D&v=1307140003&profile=default"></script><script type="text/javascript"><!--
+ _evpInit('c2VsbGVyLXdlYnNpdGUtbGVhZC12MS5tNHY=[evp-1c1d07ca6a65ee015c337dd8eefaa9bb]');//--></script></center>
+	  <% end %>
+    </div>
+ 
+    </fieldset>
+
+
+<!--    <div id="no_thnks_div"><a href="#" style="color:red;">No thanks just send<br>me your free request</a></div>-->
+    <div class="lead_capture_button_div" style="margin:20px;"><%=submit_tag "Next", :class=>"submit", :style=>"margin-bottom:15px"%></div>
+</div>
+<% end %>

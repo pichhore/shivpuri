@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: MyString
+  message: MyString
+  details: MyText
+  trigger_delay_days: 1
+  trigger_cutoff_days: 1
+  auto_expire_days: 1
+  alert_trigger_type_id: 1
+
+two:
+  title: MyString
+  message: MyString
+  details: MyText
+  trigger_delay_days: 1
+  trigger_cutoff_days: 1
+  auto_expire_days: 1
+  alert_trigger_type_id: 2

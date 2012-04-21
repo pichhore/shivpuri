@@ -1,0 +1,16 @@
+class AddTerritoryidInZipTable < ActiveRecord::Migration
+  def self.up
+    zips = ["84096", "23608", "23692"]
+    territories = { "84096" => "Salt_Lake_City", "23608" => "Peninsulas", "23692" => "South_New_York" }
+    counties = { "84096" => "SALT LAKE", "23608" => "NEWPORT NEWS CITY", "23692" => "YORK" }
+    zips.each do |zip|
+      zip_entry = Zip.find_by_zip(zip)
+      territory = Territory.find_by_reim_name(territories[zip])
+      county = County.find_by_name(counties[zip])
+      zip_entry.update_attributes(:territory_id=>territory.id, :county_id => county.id )
+    end
+  end
+
+  def self.down
+  end
+end

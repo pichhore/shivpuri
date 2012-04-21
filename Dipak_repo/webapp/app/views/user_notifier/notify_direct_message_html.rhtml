@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>You have a direct message</title>
+</head>
+<body style="background: #FFFFFF; color: #000000;">
+
+<div>
+
+<%=image_tag "#{@env.to_s}images/logoSub.gif", :alt=>"REIMatcher"%>
+
+<p style="clear:both;">&nbsp;</p>
+
+<%# In the conversation link the parent (:profile_id) is the recipient and the child (:id) is the sender: /profiles/recipient/conversations/sender %>
+<%- if @to_profile.owner? -%>
+
+<strong><%=@from_profile.display_name%></strong> has sent a message to your <strong><%=@to_profile.display_property_address_without_zip%></strong> profile
+
+<p><%=@from_profile.display_name%> says...</p>
+
+<p>Subject: <strong><%=@profile_message_recipient.profile_message.subject%></strong><br/>
+"<%= @profile_message_recipient.profile_message.body.gsub("\r\n\r\n","<br />")%>"</p>
+
+<p>To see the message and respond, click the link below:<br/>
+<a href="<%=@env.to_s + "profiles/" + @to_profile.id.to_s + "/conversations/" + @from_profile.id.to_s %>"><%=@env.to_s + "profiles/" + @to_profile.id.to_s + "/conversations/" + @from_profile.id.to_s%></a>
+
+<%- else -%>
+
+The owner of <strong><%=@from_profile.display_property_address_with_zip%></strong> has sent a message to your buyer profile:
+
+<p>The owner says...</p>
+
+<p>Subject: <strong><%=@profile_message_recipient.profile_message.subject%></strong><br/>
+"<%=@profile_message_recipient.profile_message.body.gsub("\r\n\r\n","<br />")%>"</p>
+
+<p><b>To respond</b> to this message, click the link below:<br/>
+<a href="<%=@env.to_s + "profiles/" + @to_profile.id.to_s + "/conversations/" + @from_profile.id.to_s %>"><%=@env.to_s + "profiles/" + @to_profile.id.to_s + "/conversations/" + @from_profile.id.to_s%></a>
+</p>
+
+<%- end -%>
+
+<p>
+Thanks,<br/>
+The REIMatcher Community</p>
+
+<hr/>
+<p>Want to change how you receive emails from REIMatcher? Go to:<br/>
+<a href="<%=@env.to_s + "account/digest_frequency"%>"><%=@env.to_s + "account/digest_frequency"%></a>
+</p>
+</div>
+
+</body>

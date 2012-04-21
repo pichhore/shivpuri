@@ -1,0 +1,5 @@
+<%- if !@state.nil? && !@county.nil? && !@territories.empty? %>
+<b><%= @county.name %></b>, <b><%= @state.name %></b> belongs in the <b><%= @territories.first.territory_name unless @territories.empty? %></b> Territory
+<%- else %>
+<b>No Match Found. Please select again</b>
+<%- end %>

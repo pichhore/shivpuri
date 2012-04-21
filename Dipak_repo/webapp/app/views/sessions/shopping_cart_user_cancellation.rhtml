@@ -1,0 +1,36 @@
+<div style="margin-top:162px;">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <%=stylesheet_link_tag "lightbox"%>
+        <%=javascript_include_tag "lightbox_controller"%>
+<title>REIMatcher</title>
+  <SCRIPT type="text/javascript" language="JavaScript">
+
+        window.onload = function window_onload()
+        {
+        lightbox_controller = new NL.LightboxController();
+        }
+
+  </SCRIPT>
+<style type="text/css">
+.lightbx_div{text-align:left; margin:15px; font-size: 15px; font-family: serif; }
+</style>  
+</head>
+
+<body style="font-family: helvetica, arial, sanserif">
+
+  <div id="overlay_Lightbox"></div>
+  <div id="lightbox_contents" style="height:400px; width: 500px;"  >
+  <div style="margin-top:20px;" class="lightbx_div">Hey <%= current_user.first_name%>! </div>
+  <div class="lightbx_div">Hmm, it looks like your account is past due... This might just be an error on our part, and if so, we're very sorry for the inconvenience..  Can you contact our Billing Department at 512-853-9522 x112?  I bet we can get this buttoned up real quick and get you on your way...</div>
+  <div class="lightbx_div"><b>Billing Department:</b> (512)-853-9522 x112</div>
+  <div class="lightbx_div">Thanks!</div>
+  <div class="lightbx_div">The REIMatcher Team</div>
+  <%= button_to "Ok", {:controller => 'sessions', :action => "user_proceed_to_login" }, {:class => "submit" } %>
+  <div id="lightboxFooter_thank" style="margin-top:30px;"></div>
+  </div>
+</body>
+</html>

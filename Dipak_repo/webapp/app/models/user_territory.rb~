@@ -1,0 +1,19 @@
+class UserTerritory < ActiveRecord::Base
+  uses_guid
+  belongs_to :territory
+  belongs_to :user
+  has_one :buyer_web_page, :dependent => :destroy
+  has_many :squeeze_page_opt_ins, :dependent => :destroy
+  has_many :retail_buyer_profiles , :dependent => :destroy
+
+  validates_uniqueness_of :territory_id ,:scope=>:user_id
+  validates_presence_of :territory_id
+  validates_presence_of :user_id ,:message=>"User can't be blank"
+#have to set anather validation three territory for each user 
+
+  named_scope :find_all_user_terrirory_for_trust_res_mail, :include=>[{:user => :buyer_notification} , :squeeze_page_opt_ins, :retail_buyer_profiles], :conditions=>[" buyer_notifications.summary_type = 'trust_resp_series' and buyer_notifications.trust_responder_series = ? ",true]
+
+  def reim_name
+    territory.reim_name
+  end
+end

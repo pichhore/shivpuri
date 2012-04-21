@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Investor Website</title>
+<%=stylesheet_link_tag "investorwebsitetemp2" %>
+<%=stylesheet_link_tag "lightbox" %>
+<%= javascript_include_tag :defaults %>
+<%= include_yui_editor_if_used %>
+<%= include_yui_lightbox_if_used %>
+<%=javascript_include_tag "base_controller"%>
+<%=javascript_include_tag "lightbox_controller"%>
+<%=add_js_requires%>
+<script type="text/javascript">
+  /** Controller setup **/
+  Event.observe(window, 'load', function() {
+  lightbox_controller = new NL.LightboxController();
+  lightbox_image_controller = new NL.LightboxImageController();
+  });
+</script>
+</head>
+
+<body>
+<div id="wrap">
+
+      <%= render :partial => 'inv_web_temp2_header' %>
+		  <div class="clear"></div>
+	  	<div>&nbsp;</div>
+<div class= "menu_wrap_inside">
+	<div id="menu_wrap" style="background:<%= set_css_for_header_footer_in_temp2 %>">
+	<div class="menu_wrap_l"></div>
+		<ul>
+      <li><%=link_to '<span class="l"></span>Home<span class="r"></span>',{:controller=>"investor_web_page", :action=>"investor_web_page"}, :class=>"#{ 'active' if @controller.action_name == 'investor_web_page'}" %></li>
+      <li><%=link_to '<span class="l"></span> About Us <span class="r"></span>',{:controller=>"investor_web_page", :action=>"about_us"}, :class=>"#{ 'active' if @controller.action_name == 'about_us'}"%></li>
+      <% if @investor_website.display_our_philosophy_page %>
+      <li><%=link_to '<span class="l"></span>Our Philosophy <span class="r"></span>',{:controller=>"investor_web_page", :action=>"our_philosophy"}, :class=>"#{ 'active' if @controller.action_name == 'our_philosophy'}" %></li>
+      <% end %>
+      <% if @investor_website.display_why_invest_with_us_page %>
+      <li><%=link_to '<span class="l"></span>Why Invest With Us<span class="r"></span>',{:controller=>"investor_web_page", :action=>"why_invest_with_us"}, :class=>"#{ 'active' if @controller.action_name == 'why_invest_with_us'}" %></li>
+      <% end %>
+      <li class="last"><%=link_to_remote("<span class='l'></span>Contact Us<span class='r'></span>",{:url => {:action => 'contact_us'},
+                                                   :method => :get,
+                                                   :update         => "lightbox_contents",
+                                                   :loading        => "lightbox_controller.loading()",
+                                                   :loaded         => "lightbox_controller.loaded()"},{
+                                                   :title=>"Contact to Investor" }) %></li>
+		</ul>
+		<div class="menu_wrap_r"></div>
+	</div>
+	
+	<div id="sitecontent">
+		<div class="sitecontent_top"></div>
+		
+		<div id="content">
+      <%= yield  %>
+    <div class="clear"></div>
+<div id="blueform" style="background-color:<%= @investor_website.dynamic_css%>;" >
+	
+	<div class="form">
+	  <h2>We'd Love To Chat With You!</h2>
+				      <div class="image_n_text_div"><div class="div_sidebox_image" style="line-height:18px"><img class="icon" src="/images/emailtemp2.png" width="31" height="30" />
+				      </div>
+				      <div class="div_side_text" style=margin-top:10px;><%=link_to_remote("Contact Us",{:url => {:action => 'contact_us'},
+                                                               :method => :get,
+                                                               :update         => "lightbox_contents",
+                                                               :loading        => "lightbox_controller.loading()",
+                                                               :loaded         => "lightbox_controller.loaded()"},{
+                                                               :title=>"Contact to Investor" }) %> <br />
+				      </div></div>
+				      
+				      <div class="clear"></div>
+					  <div class="image_n_text_div"><div class="div_sidebox_image" style="line-height:18px" ><img class="icon" src="/images/phone-2.png" width="31" height="30" />
+					  </div>
+					  <div class="div_side_text">Call us at:<br />
+              <%= !@investor_website.phone.blank? ? @investor_website.phone : (@user_company_info.nil? ? "" : @user_company_info.business_phone) %>
+              <br / >
+            </div></div>
+            
+            <div class="clear"></div>
+					  <div class="image_n_text_div"><div class="div_sidebox_image" style="line-height:18px"><img  class="icon" src="/images/home1.png" width="31" height="30" />
+					  </div>
+					  <div class="div_side_text"><%= business_name_and_address %>
+          </div></div>
+	</div>
+	<div class="form-info">
+		<p>Call or Email us now to chat further about investment opportunities!<br />
+		  <br />
+		  <br />
+		  <br />
+		  <br />
+		</p>
+	</div>
+	
+	<div class="clear"></div>
+</div>
+		</div>
+
+		<div id="sidebar">
+          <div id="signup_wrap">
+			      <div class="signup">
+				      <img src="/images/signup_arrow.png" class="signup_arrow" />
+				      <h1 class="darkgreen"><strong>Sign Up Below</strong></h1>
+				      <p class="blue"><strong>Get Notified of Wholesale Properties!<br />
+				      </strong></p>
+				      <span class="center"><img src="/images/signup_head_shadow.png" /></span>
+				
+		          <% form_for(:squeeze_page_opt_in, :url=>{ :controller => "investor_web_page", :action => "create_buyer_profile", :permalink_text => params["permalink_text"] }, :html => { :method => :post }) do |f| -%>
+                <span class="inv_web_optin_field">First Name: </span><%=f.text_field "retail_buyer_first_name",  :class=>"field" %>
+                <%=error_message_on :squeeze_page_opt_in, :retail_buyer_first_name%>
+
+                <span class="inv_web_optin_field">Email: </span><%=f.text_field "retail_buyer_email",  :class=>"field" %>
+                <%=error_message_on :squeeze_page_opt_in, :retail_buyer_email%>
+					
+					      <input type="submit" name="submit_signup" class="btn_signup" value="Submit" />
+				      <% end %>
+			      </div>
+		      </div>
+
+			<div class="box1" style="margin-top:28px;">
+				<div class="box1_top"></div>
+				<h1 style="background:<%= set_css_for_header_footer_in_temp2 %>">About Us</h1>
+				<div class="box1-content">
+	            <% image_path = return_investor_image_path %>
+         
+                <%=image_tag(image_path , :class=>"thumbnail", :style=>"float:left; padding-right:10px;width:80px;" )%> <%= return_about_us_text %> <em> <%=link_to "Read More...",:controller=>"investor_web_page", :action=>"about_us", :permalink_text => params[:permalink_text] %></em>
+          <div class="clear"></div>
+			  </div>
+			  <div class="box1_bottom_about_us"></div>
+		  </div>
+	  </div>
+
+	  	<div style="display:none;" id="overlay_Lightbox"></div>
+<div style="display:none; height:330px; top:2% " id="lightbox_contents">Lightbox</div>			
+
+    <%= render :partial => "inv_web_temp2_footer"%>		
+		<div class="sitecontent_bottom"></div>
+	</div>
+</div>
+</body>
+</html>

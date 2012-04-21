@@ -1,0 +1,129 @@
+<%- @page_title = @profile.display_name + ' dwellgo Public Profile' -%>
+<%- @page_icon_style = 'icon_seller_profile' -%>
+<%- @tip = render_tip("show_owner") -%>
+
+<%- content_for :title_ad do -%>
+<%- end -%>
+
+<div class="left">
+
+  <div class="full" style="margin-bottom: 10px">
+
+    <h3 class="large"><%=@profile.display_name%></h3>
+
+    <div style="float:left; width: 150px; font-size: 0.9em;">[ ] Add to Favorites</div>
+
+    <div style="float:left; width: 150px; font-size: 0.9em;">[ ] Map Property</div>
+
+    <div style="float:left; width: 150px; font-size: 0.9em;">[ ] Contact Owner</div>
+
+  </div>
+
+  <div class="public">
+
+        <div class="thumbnail">
+          <%=image_tag "missing.gif", :height=>170%>
+        </div>
+
+        <div class="thumbnail_selector">
+          <%=image_tag "missing.gif", :class=>"micro"%>
+          <%=image_tag "missing.gif", :class=>"micro"%>
+          <%=image_tag "missing.gif", :class=>"micro"%>
+
+          <%=image_tag "missing.gif", :class=>"micro"%>
+          <%=image_tag "missing.gif", :class=>"micro"%>
+          <%=image_tag "missing.gif", :class=>"micro"%>
+
+          <%=image_tag "missing.gif", :class=>"micro"%>
+          <%=image_tag "missing.gif", :class=>"micro"%>
+          <%=image_tag "missing.gif", :class=>"micro"%>
+        </div>
+
+  </div>
+
+
+</div>
+
+<div class="right">
+
+  <div class="details">
+
+    <h3 class="large"><%=@profile.display_price%></h3>
+
+    <b><%=@profile.display_property_type%></b>
+
+    <table width="100%" cellspacing="0" cellpadding="0" style="margin-top: 5px;">
+
+      <tr>
+
+        <td width="40%">Bedrooms: </td>
+        <td><%=@profile.display_bedrooms%></td>
+
+      </tr>
+
+      <tr>
+
+        <td>Bathrooms: </td>
+        <td><%=@profile.display_bathrooms%></td>
+
+      </tr>
+
+      <tr>
+
+        <td>Approx Sq Ft: </td>
+        <td><%=@profile.display_square_feet%></td>
+
+      </tr>
+
+      <tr>
+
+        <td>Neighborhood: </td>
+        <td><%=@profile.display_neighborhood%></td>
+
+      </tr>
+
+      <tr>
+
+        <td>Price/Sqft: </td>
+        <td><%=@profile.display_price_per_square_foot%></td>
+
+      </tr>
+
+      <tr>
+
+        <td colspan="2">&nbsp;</td>
+
+      </tr>
+
+    </table>
+
+
+    <p><%=link_to image_tag("rss-feed-icon-16.png", :border=>0)+ "  Subscribe using RSS", :action=>'subscribe'%></p>
+
+
+  </div>
+
+</div>
+
+<div class="left public" style="width: 420px">
+
+  <h3 class="normal">Property Features</h3>
+  <p><%=@profile.display_features%></p>
+
+</div>
+
+<div class="right">
+
+</div>
+
+<div class="left" style="width: 420px">
+
+  <h3 class="normal">Property Description</h3>
+
+  <div class="description">
+
+    <p><%=@profile.display_description%></p>
+
+  </div>
+
+</div>

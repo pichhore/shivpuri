@@ -1,0 +1,32 @@
+<h3>Errors Reported (Last 5 Days)</h3>
+
+<div class="report_results">
+
+<table>
+
+  <thead>
+  	
+    <th>Request</th>
+    <th>Message</th>
+	<th>Created On</th>
+    
+
+  </thead>
+
+  <tbody>
+
+    <%-@errors.each_with_index do |error, index| -%>
+    <tr <%="class='odd'" if index % 2 == 1%>>
+      <td><%= error.request %></td>    	
+      <td><%= error.message %></td>
+	  <td><%= error.created_at.to_date.strftime("%m-%d-%Y") %></td>       
+    </tr>
+    <%-end -%>
+
+  </tbody>
+
+</table>
+
+<p>Total Errors: <%=@errors.length%></p>
+
+</div>
